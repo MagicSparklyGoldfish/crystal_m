@@ -1,0 +1,19 @@
+name: crystal_meth
+version: 0.1.0
+
+authors:
+  - MagicSparklyGoldfish <whydeargodwhy@yahoo.com~>
+
+targets:
+  crystal_meth:
+    main: src/crystal_meth.cr
+
+
+dependencies:
+  crsfml:
+    github: oprypin/crsfml
+    version: ~> 2.5.2
+
+crystal: '>= 1.10.1'
+
+license: MIT
