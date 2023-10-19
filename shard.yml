@@ -7,12 +7,14 @@ authors:
 targets:
   crystal_meth:
     main: src/crystal_meth.cr
+    menus: src/Menus.cr
 
 
 dependencies:
   crsfml:
     github: oprypin/crsfml
     version: ~> 2.5.2
+
 
 crystal: '>= 1.10.1'
 
