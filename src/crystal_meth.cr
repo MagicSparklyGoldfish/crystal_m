@@ -43,15 +43,27 @@ GL.enable(GL::TEXTURE_2D)
     rectangle_opt1.fill_color = SF.color(100, 50, 50)
     rectangle_opt1.outline_thickness = 5
     rectangle_opt1.outline_color = SF.color(150, 150, 150)
-    rectangle_opt1.position = SF.vector2(700, 600)
+    rectangle_opt1.position = SF.vector2(700, 590)
     text_opt1 = SF::Text.new
     text_opt1.font = FONT_TITLE
     text_opt1.string = "Play"
     text_opt1.character_size = 50
     text_opt1.color = SF::Color::White
     text_opt1.style = (SF::Text::Bold)
-    text_opt1.position = SF.vector2(880, 620)
-
+    text_opt1.position = SF.vector2(880, 610)
+    #create menu option 2
+    rectangle_opt2= SF::RectangleShape.new(SF.vector2(500, 100))
+    rectangle_opt2.fill_color = SF.color(100, 50, 50)
+    rectangle_opt2.outline_thickness = 5
+    rectangle_opt2.outline_color = SF.color(150, 150, 150)
+    rectangle_opt2.position = SF.vector2(700, 710)
+    text_opt2 = SF::Text.new
+    text_opt2.font = FONT_TITLE
+    text_opt2.string = "Quit"
+    text_opt2.character_size = 50
+    text_opt2.color = SF::Color::White
+    text_opt2.style = (SF::Text::Bold)
+    text_opt2.position = SF.vector2(880, 730)
  
 
     # Main loop: run the program as long as the window is open
@@ -78,6 +90,8 @@ window.draw(text_title)
 window.draw(rectangle_menu)
 window.draw(rectangle_opt1)
 window.draw(text_opt1)
+window.draw(rectangle_opt2)
+window.draw(text_opt2)
 
       window.display
     end
