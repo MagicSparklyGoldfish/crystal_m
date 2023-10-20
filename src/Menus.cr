@@ -1,3 +1,7 @@
+require "crsfml"
+require "../src/crystal_meth.cr"
+
+
 FONT_TITLE = SF::Font.from_file("fonts/PermanentMarker-Regular.ttf")
 FONT_COMMON = SF::Font.from_file("fonts/Changa/Changa-VariableFont_wght.ttf")
 FONT_FUTURE = SF::Font.from_file("fonts/Orbitron/Orbitron-VariableFont_wght.ttf")
@@ -56,5 +60,37 @@ this.draw(rectangle_opt2)
 this.draw(text_opt2)
         end
     end
+    class Menucontrols
+        def Menucontrols.arrows
+            event = @@window.poll_event
+
+if event.is_a? SF::Event::KeyPressed
+    puts "ice ice baby"
+    Menucontrols.arrows2 
+end           
 end
 
+def Menucontrols.arrows2 
+    puts "woooot"
+            if event.code SF::Keyboard::Up
+                up = true
+                puts up
+            
+            while up = true
+                rectangle_opt2.outline_color = SF.color(140, 140, 140)
+               if event.code SF::Keyboard::Down
+                Menucontrols.arrows2
+               end
+                end
+            end
+        if event.code  SF::Keyboard::Down
+            while !SF::Keyboard::Down
+                rectangle_opt2.outline_color = SF.color(140, 140, 140)
+                if SF::Keyboard::Up
+                    Menucontrols.arrows2
+                   end
+                    end
+end
+end
+end
+end
