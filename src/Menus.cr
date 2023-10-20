@@ -9,9 +9,9 @@ FONT_FUTURE = SF::Font.from_file("fonts/Orbitron/Orbitron-VariableFont_wght.ttf"
 #Main Menu Gui.Menus.drawmainmenu(window)
 module Gui
 class Menus
+ 
         def Menus.drawmainmenu(this)
-            #`public`
-            #create title text
+        
     text_title = SF::Text.new
     text_title.font = FONT_TITLE
     text_title.string = "Crystal Meth!"
@@ -26,7 +26,7 @@ class Menus
     rectangle_menu.outline_color = SF.color(150, 150, 150)
     rectangle_menu.position = SF.vector2(625, 550)
     #create menu option 1
-    rectangle_opt1= SF::RectangleShape.new(SF.vector2(500, 100))
+    rectangle_opt1 = SF::RectangleShape.new(SF.vector2(500, 100))
     rectangle_opt1.fill_color = SF.color(100, 50, 50)
     rectangle_opt1.outline_thickness = 5
     rectangle_opt1.outline_color = SF.color(150, 150, 150)
@@ -59,38 +59,64 @@ this.draw(text_opt1)
 this.draw(rectangle_opt2)
 this.draw(text_opt2)
         end
-    end
+        end
+        end
+class Menuopt1 
+            
+    Rectangle_opt1 = SF::RectangleShape.new(SF.vector2(500, 100))
+    Rectangle_opt1.fill_color = SF.color(100, 50, 50)
+    Rectangle_opt1.outline_thickness = 5
+    Rectangle_opt1.outline_color = SF.color(150, 150, 150)
+    Rectangle_opt1.position = SF.vector2(700, 590)
+    text_opt1 = SF::Text.new
+    text_opt1.font = FONT_TITLE
+    text_opt1.string = "Play"
+    text_opt1.character_size = 50
+    text_opt1.color = SF::Color::White
+    text_opt1.style = (SF::Text::Bold)
+    text_opt1.position = SF.vector2(880, 610)
+        def Menuopt1.blinkopt1 (rectangle_opt1)
+            rectangle_opt1 = SF::RectangleShape
+           
+            Rectangle_opt1.outline_color = SF.color(100, 100, 100)
+            sleep 3.seconds
+            Rectangle_opt1.outline_color = SF.color(130, 130, 130)
+        end
+end   
+
+       
+            
+
+
+   module CONTROLS
     class Menucontrols
-        def Menucontrols.arrows
-            event = @@window.poll_event
 
-if event.is_a? SF::Event::KeyPressed
-    puts "ice ice baby"
-    Menucontrols.arrows2 
-end           
-end
-
-def Menucontrols.arrows2 
+    
+   def Menucontrols.arrows (this, this2)
+    if this2.is_a? SF::Event::KeyPressed
+        puts "ice ice baby"
     puts "woooot"
-            if event.code SF::Keyboard::Up
+            if this2.code SF::Keyboard::Up
                 up = true
                 puts up
             
             while up = true
-                rectangle_opt2.outline_color = SF.color(140, 140, 140)
-               if event.code SF::Keyboard::Down
-                Menucontrols.arrows2
+                Menuopt1.blinkopt1(this)
+               if this2.code SF::Keyboard::Down
+                Menucontrols.arrows this, this2
                end
                 end
             end
-        if event.code  SF::Keyboard::Down
+        if this2.code  SF::Keyboard::Down
             while !SF::Keyboard::Down
-                rectangle_opt2.outline_color = SF.color(140, 140, 140)
+                #rectangle_opt2.outline_color = SF.color(140, 140, 140)
                 if SF::Keyboard::Up
-                    Menucontrols.arrows2
+                    Menucontrols.arrows this, this2
                    end
                     end
 end
 end
 end
 end
+end
+
