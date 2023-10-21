@@ -8,7 +8,8 @@ require "crsfml/system"
 FONT_TITLE = SF::Font.from_file("fonts/PermanentMarker-Regular.ttf")
 FONT_COMMON = SF::Font.from_file("fonts/Changa/Changa-VariableFont_wght.ttf")
 FONT_FUTURE = SF::Font.from_file("fonts/Orbitron/Orbitron-VariableFont_wght.ttf")
-CURSOR_TEXTURE_1 = SF::Texture.from_file("graphics/Cursor.png", SF.int_rect(10, 10, 32, 32))
+CURSOR_TEXTURE_1 = SF::Texture.from_file("graphics/Cursor.png", SF.int_rect(0, 0, 70, 70))
+Cursor_opt1.position = SF.vector2(750, 610)
 Cursor_opt1  = SF::Sprite.new(CURSOR_TEXTURE_1) 
 
 
@@ -18,11 +19,11 @@ module Gui
 class Menus
  
         def Menus.drawmainmenu(this)
-    #cursor
+   
     
     
     
-    Cursor_opt1.position = SF.vector2(750, 625)
+    
      #text
     text_title = SF::Text.new
     text_title.font = FONT_TITLE
@@ -103,33 +104,39 @@ end
 
    module CONTROLS
     class Menucontrols
-
-    
+        thread = SF::Thread.new(->cursorfunc)
+        
    def Menucontrols.arrowup (this)
-    Cursor_opt1.position = SF.vector2(750, 625)
-    this.clear(SF::Color::Black)
-    Gui::Menus.drawmainmenu(this)
-    puts "test"
-    
-    thread = SF::Thread.new(->threadFunc)
-    thread.launch() # start the thread (internally calls threadFunc(5))
-    
+    Cursor_opt1.position = SF.vector2(750, 610)
+    this.draw(Cursor_opt1)
+    thread.launch
+   end
+
+   def Menucontrols.arrowdown (this)
+    Cursor_opt1.position = SF.vector2(750,730)
+    this.draw(Cursor_opt1)
+    thread.launch
 end
     
  
 end
 end
 
-def threadFunc
-    i = 1
+def cursorFunc
+    clock = SF::Clock.new 
+    elapsed_1 = clock.elapsed_time
+    p elapsed_1.as_seconds
          [loop do 
-            
-            Cursor_opt1.color = SF.color(255, 255, 255, 128)
-            sleep 30.seconds
-            Cursor_opt1.color = SF.color(155, 155, 155, 155)
-            sleep 30.seconds
-               break if SF::Keyboard.key_pressed?(SF::Keyboard::Down)
+            break if SF::Keyboard.key_pressed?(SF::Keyboard::Down)
                break if SF::Keyboard.key_pressed?(SF::Keyboard::Escape)
+         case (elapsed_1) 
+         when 5
+            Cursor_opt1.color = SF.color(255, 255, 255, 128)
+         when 10 
+            Cursor_opt1.color = SF.color(155, 155, 155, 155)
+         when 15
+            clock.restart
                
+         end      
         end]
     end 

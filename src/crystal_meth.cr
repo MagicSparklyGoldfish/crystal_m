@@ -36,7 +36,12 @@ GL.enable(GL::TEXTURE_2D)
     while window.open?
       # Check all the window's events that were triggered since the last iteration of the loop
       while event = window.poll_event
-
+        this = window
+        this2 = event
+        Gui::Menus.drawmainmenu(window)
+        
+  
+        window.display
         
 
         if event.is_a? SF::Event::KeyPressed
@@ -53,22 +58,23 @@ GL.enable(GL::TEXTURE_2D)
             
           end
         end
+        if event.is_a? SF::Event::KeyPressed
+          if event.code == SF::Keyboard::Down
+            All_Audio::SFX.cursor1
+            this = window
+            CONTROLS::Menucontrols.arrowdown(this)
         # "close requested" event: we close the window
         if event.is_a? SF::Event::Closed
           window.close
         end
       end
-      #draw stuff under here v
-      this = window
-      this2 = event
-      Gui::Menus.drawmainmenu(window)
       
-
-      window.display
+     
     end
   end
 end
-
+end
+end
 # Run the program
 CrystalMeth.run
 
