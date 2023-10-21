@@ -1,6 +1,8 @@
 require "crsfml"
 require "crsfml/audio"
+require "crsfml/system"
 require "../src/Menus.cr"
+require "../src/Audio.cr"
 
 module CrystalMeth
   VERSION = "0.1.0"
@@ -18,9 +20,7 @@ FONT_TITLE = SF::Font.from_file("fonts/PermanentMarker-Regular.ttf")
 FONT_COMMON = SF::Font.from_file("fonts/Changa/Changa-VariableFont_wght.ttf")
 FONT_FUTURE = SF::Font.from_file("fonts/Orbitron/Orbitron-VariableFont_wght.ttf")
 FONT_PIXEL = SF::Font.from_file("fonts/VT323-Regular.ttf")
-CURSOR_1 = SF::SoundBuffer.from_file("audio/Cursor1.wav")
-SOUND_1 = SF::Sound.new
-SOUND_1.buffer = CURSOR_1
+
 
 # it works out of the box
 GL.enable(GL::TEXTURE_2D)
@@ -47,7 +47,9 @@ GL.enable(GL::TEXTURE_2D)
         end
         if event.is_a? SF::Event::KeyPressed
           if event.code == SF::Keyboard::Up
-            SOUND_1.play
+            All_Audio::SFX.cursor1
+            this = window
+            CONTROLS::Menucontrols.arrowup (this)
             
           end
         end
@@ -60,7 +62,7 @@ GL.enable(GL::TEXTURE_2D)
       this = window
       this2 = event
       Gui::Menus.drawmainmenu(window)
-      CONTROLS::Menucontrols.arrows(window, event)
+      
 
       window.display
     end

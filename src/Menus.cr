@@ -1,17 +1,29 @@
 require "crsfml"
 require "../src/crystal_meth.cr"
+require "../src/Audio.cr"
+require "crsfml/system"
+
 
 
 FONT_TITLE = SF::Font.from_file("fonts/PermanentMarker-Regular.ttf")
 FONT_COMMON = SF::Font.from_file("fonts/Changa/Changa-VariableFont_wght.ttf")
 FONT_FUTURE = SF::Font.from_file("fonts/Orbitron/Orbitron-VariableFont_wght.ttf")
+CURSOR_TEXTURE_1 = SF::Texture.from_file("graphics/Cursor.png", SF.int_rect(10, 10, 32, 32))
+Cursor_opt1  = SF::Sprite.new(CURSOR_TEXTURE_1) 
+
+
 
 #Main Menu Gui.Menus.drawmainmenu(window)
 module Gui
 class Menus
  
         def Menus.drawmainmenu(this)
-        
+    #cursor
+    
+    
+    
+    Cursor_opt1.position = SF.vector2(750, 625)
+     #text
     text_title = SF::Text.new
     text_title.font = FONT_TITLE
     text_title.string = "Crystal Meth!"
@@ -58,6 +70,7 @@ this.draw(rectangle_opt1)
 this.draw(text_opt1)
 this.draw(rectangle_opt2)
 this.draw(text_opt2)
+this.draw(Cursor_opt1)
         end
         end
         end
@@ -92,31 +105,31 @@ end
     class Menucontrols
 
     
-   def Menucontrols.arrows (this, this2)
-    if this2.is_a? SF::Event::KeyPressed
-        puts "ice ice baby"
-    puts "woooot"
-            if this2.code SF::Keyboard::Up
-                up = true
-                puts up
-            
-            while up = true
-                Menuopt1.blinkopt1(this)
-               if this2.code SF::Keyboard::Down
-                Menucontrols.arrows this, this2
-               end
-                end
-            end
-        if this2.code  SF::Keyboard::Down
-            while !SF::Keyboard::Down
-                #rectangle_opt2.outline_color = SF.color(140, 140, 140)
-                if SF::Keyboard::Up
-                    Menucontrols.arrows this, this2
-                   end
-                    end
+   def Menucontrols.arrowup (this)
+    Cursor_opt1.position = SF.vector2(750, 625)
+    this.clear(SF::Color::Black)
+    Gui::Menus.drawmainmenu(this)
+    puts "test"
+    
+    thread = SF::Thread.new(->threadFunc)
+    thread.launch() # start the thread (internally calls threadFunc(5))
+    
 end
-end
-end
+    
+ 
 end
 end
 
+def threadFunc
+    i = 1
+         [loop do 
+            
+            Cursor_opt1.color = SF.color(255, 255, 255, 128)
+            sleep 30.seconds
+            Cursor_opt1.color = SF.color(155, 155, 155, 155)
+            sleep 30.seconds
+               break if SF::Keyboard.key_pressed?(SF::Keyboard::Down)
+               break if SF::Keyboard.key_pressed?(SF::Keyboard::Escape)
+               
+        end]
+    end 

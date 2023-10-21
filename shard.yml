@@ -8,6 +8,7 @@ targets:
   crystal_meth:
     main: src/crystal_meth.cr
     menus: src/Menus.cr
+    audio: src/Audio.cr
 
 
 dependencies:
