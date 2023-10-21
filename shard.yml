@@ -20,6 +20,14 @@ dependencies:
        github: hugopl/gtk4.cr
 
 
+  x11:
+    github: TamasSzekeres/x11-cr
+
+  timer:
+    github: vladfaust/timer.cr
+    version: ~> 0.1.0
+
+
 crystal: '>= 1.10.1'
 
 license: MIT

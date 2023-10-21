@@ -3,6 +3,8 @@ require "crsfml/audio"
 require "crsfml/system"
 require "../src/Menus.cr"
 require "../src/Audio.cr"
+require "x11"
+require "timer"
 
 module CrystalMeth
   VERSION = "0.1.0"
@@ -24,7 +26,7 @@ FONT_PIXEL = SF::Font.from_file("fonts/VT323-Regular.ttf")
 
 # it works out of the box
 GL.enable(GL::TEXTURE_2D)
-
+include X11
 
   def self.run
     # Create a window
@@ -42,7 +44,7 @@ GL.enable(GL::TEXTURE_2D)
         
   
         window.display
-        
+        CONTROLS::Menucontrols.cursorFunc (this) 
 
         if event.is_a? SF::Event::KeyPressed
           if event.code == SF::Keyboard::Escape
@@ -56,6 +58,7 @@ GL.enable(GL::TEXTURE_2D)
             this = window
             CONTROLS::Menucontrols.arrowup (this)
             
+            
           end
         end
         if event.is_a? SF::Event::KeyPressed
@@ -63,6 +66,7 @@ GL.enable(GL::TEXTURE_2D)
             All_Audio::SFX.cursor1
             this = window
             CONTROLS::Menucontrols.arrowdown(this)
+          
         # "close requested" event: we close the window
         if event.is_a? SF::Event::Closed
           window.close

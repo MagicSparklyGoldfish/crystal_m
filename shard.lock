@@ -24,3 +24,11 @@ shards:
     git: https://github.com/hugopl/pango.cr.git
     version: 0.3.0
 
+  timer:
+    git: https://github.com/vladfaust/timer.cr.git
+    version: 0.1.1
+
+  x11:
+    git: https://github.com/tamasszekeres/x11-cr.git
+    version: 1.1.1
+
