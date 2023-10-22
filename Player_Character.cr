@@ -1,7 +1,7 @@
 PLAYER_CHAR_TEXTURE_01 = SF::Texture.from_file("graphics/Cursor.png")
-Cursor_opt1.texture_rect = SF.int_rect(0, 0, 62, 65)
-Cursor_opt1.position = SF.vector2(750, 610)
-Cursor_opt1 = SF::Sprite.new(CURSOR_TEXTURE_1) 
+PLAYER_CHAR.texture_rect = SF.int_rect(0, 0, 64, 32)
+PLAYER_CHAR.position = SF.vector2(750, 610)
+PLAYER_CHAR = SF::Sprite.new(PLAYER_CHAR_TEXTURE_01) 
 
 #TO DO: Replce undefined local variables with class variables, implement this shard
 

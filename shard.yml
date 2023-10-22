@@ -9,6 +9,7 @@ targets:
     main: src/crystal_meth.cr
     menus: src/Menus.cr
     audio: src/Audio.cr
+    clothing_data: scr/Clothing.yml
 
 
 dependencies:
@@ -26,6 +27,10 @@ dependencies:
   timer:
     github: vladfaust/timer.cr
     version: ~> 0.1.0
+    
+  #yaml:
+    #github: will/crystal-yaml
+
 
 
 crystal: '>= 1.10.1'

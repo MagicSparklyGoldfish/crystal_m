@@ -2,6 +2,7 @@ require "crsfml"
 require "../src/crystal_meth.cr"
 require "../src/Audio.cr"
 require "crsfml/system"
+require "yaml"
 #require "timer"
 
 
@@ -115,28 +116,55 @@ module CONTROLS
     #this.draw(Cursor_opt1)
      
 end
+
+
 def Menucontrols.cursorFunc (this)
-   
     spawn do
-        clock = SF::Clock.new
-   
-    loop do
-        sleep 2.seconds
-        Cursor_opt1.texture_rect = SF.int_rect(62, 0, 70, 70)
-        Fiber.yield
-        sleep 2.seconds
-        Fiber.yield
-        Cursor_opt1.texture_rect = SF.int_rect(0, 0, 70, 70)
-        sleep 2.seconds
-        Fiber.yield
-        break if 
-                 SF::Keyboard.key_pressed?(SF::Keyboard::Escape)
-                 
+        loop do
+            start_time = Time.epoch(Time::Clock::MONOTONIC)
+        current_time = Time.epoch(Time::Clock::MONOTONIC)
+        elapsed_seconds = current_time - start_time
+        ts = elapsed_seconds.to_i % 2
+  
+          if ts % 2 == 0
+            puts "0"
+            Cursor_opt1.texture_rect = SF.int_rect(62, 0, 70, 70)
+          else
+            puts "1"
+            Cursor_opt1.texture_rect = SF.int_rect(0, 0, 70, 70)
+          end
+  
+          break if SF::Keyboard.key_pressed?(SF::Keyboard::Escape) || SF::Keyboard.key_pressed?(SF::Keyboard::Enter)
         end
       end
+      Fiber.yield
+    end
+  end
+end
+
+
+  
+
+#  def Menucontrols.cursorFunc (this)
+   
+#     spawn do
+#         time = Time.utc
+#         ts = time.second
+#     loop do
+     
+#         if ts % 2 == 0
+#             puts "0"
+#         Cursor_opt1.texture_rect = SF.int_rect(62, 0, 70, 70)
+#         else
+#             puts "1"
+#         Cursor_opt1.texture_rect = SF.int_rect(0, 0, 70, 70)
+        
+#         break if 
+#                  SF::Keyboard.key_pressed?(SF::Keyboard::Escape) || SF::Keyboard.key_pressed?(SF::Keyboard::Enter)
+                 
+#         end
+#       end
       
-    Fiber.yield
-end
-end
-end
+#     Fiber.yield
+# end
 
