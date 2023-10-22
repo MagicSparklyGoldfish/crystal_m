@@ -2,7 +2,7 @@ require "crsfml"
 require "../src/crystal_meth.cr"
 require "../src/Audio.cr"
 require "crsfml/system"
-require "timer"
+#require "timer"
 
 
 
@@ -10,7 +10,7 @@ FONT_TITLE = SF::Font.from_file("fonts/PermanentMarker-Regular.ttf")
 FONT_COMMON = SF::Font.from_file("fonts/Changa/Changa-VariableFont_wght.ttf")
 FONT_FUTURE = SF::Font.from_file("fonts/Orbitron/Orbitron-VariableFont_wght.ttf")
 CURSOR_TEXTURE_1 = SF::Texture.from_file("graphics/Cursor.png")
-Cursor_opt1.texture_rect = SF.int_rect(0, 0, 70, 70)
+Cursor_opt1.texture_rect = SF.int_rect(0, 0, 62, 65)
 Cursor_opt1.position = SF.vector2(750, 610)
 Cursor_opt1 = SF::Sprite.new(CURSOR_TEXTURE_1) 
 
@@ -122,11 +122,11 @@ def Menucontrols.cursorFunc (this)
    
     loop do
         sleep 2.seconds
-        Cursor_opt1.color = SF.color(255, 255, 255, 255)
+        Cursor_opt1.texture_rect = SF.int_rect(62, 0, 70, 70)
         Fiber.yield
         sleep 2.seconds
         Fiber.yield
-        Cursor_opt1.color = SF.color(255, 255, 255, 128)
+        Cursor_opt1.texture_rect = SF.int_rect(0, 0, 70, 70)
         sleep 2.seconds
         Fiber.yield
         break if 
@@ -139,83 +139,4 @@ def Menucontrols.cursorFunc (this)
 end
 end
 end
-/#module CONTROLS
-    class Menucontrols
-      def self.arrowup (this)
-        thread = SF::Thread.new(-> {
-          cursorFunc
-          Cursor_opt1.position = SF.vector2(750, 610)
-        })
-        thread.launch
-      end
-  
-      def self.arrowdown (this)
-        thread = SF::Thread.new(-> {
-          cursorFunc
-          Cursor_opt1.position = SF.vector2(750, 730)
-        })
-        thread.launch
-      end
-  
-      def self.cursorFunc
-        clock = SF::Clock.new
-  
-        loop do
-          break if SF::Keyboard.key_pressed?(SF::Keyboard::Down) ||
-                   SF::Keyboard.key_pressed?(SF::Keyboard::Escape)
-  
-          elapsed = clock.elapsed_time.as_seconds
-          case elapsed
-          when 5
-            Cursor_opt1.color = SF.color(255, 255, 255, 128)
-          when 10
-            Cursor_opt1.color = SF.color(155, 155, 155, 155)
-          when 15
-            clock.restart
-          end
-        end
-      end
-    end
-  end
-  
-        
-   module CONTROLS
-    class Menucontrols
-        
-        
-   def Menucontrols.arrowup (this)
-    thread = SF::Thread.new(->Menucontrols.cursorFunc)
-    Cursor_opt1.position = SF.vector2(750, 610)
-    this.draw(Cursor_opt1)
-    thread.launch
-   end
-
-   def Menucontrols.arrowdown (this)
-    thread = SF::Thread.new(->Menucontrols.cursorFunc)
-    Cursor_opt1.position = SF.vector2(750,730)
-    this.draw(Cursor_opt1)
-    thread.launch
-end
-def Menucontrols.cursorFunc
-    clock = SF::Clock.new 
-    elapsed_1 = clock.elapsed_time
-    p elapsed_1.as_seconds
-         [loop do 
-            break if SF::Keyboard.key_pressed?(SF::Keyboard::Down)
-               break if SF::Keyboard.key_pressed?(SF::Keyboard::Escape)
-         case (elapsed_1) 
-         when 5
-            Cursor_opt1.color = SF.color(255, 255, 255, 128)
-         when 10 
-            Cursor_opt1.color = SF.color(155, 155, 155, 155)
-         when 15
-            clock.restart
-               
-         end      
-        end]
-    end 
-
- 
-end
-end#/
 

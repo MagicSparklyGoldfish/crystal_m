@@ -4,7 +4,7 @@ require "crsfml/system"
 require "../src/Menus.cr"
 require "../src/Audio.cr"
 require "x11"
-require "timer"
+#require "timer"
 
 module CrystalMeth
   VERSION = "0.1.0"
