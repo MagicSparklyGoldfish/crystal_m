@@ -23,6 +23,9 @@ Cursor_opt1 = SF::Sprite.new(CURSOR_TEXTURE_1)
 #                                                  ===Char Select
 
 
+def fuckyourselfintheass
+  Fuck::Fuckyou.refresh 
+end
 
 #Main Menu Gui.Menus.drawmainmenu(window)
 module Gui
@@ -157,14 +160,22 @@ def Menus.character_select(this)
   this.display
         end
         end
-      end
- 
+def Menus.slot_1_highlight(this,this2)
+    @@rectangle_char_inner_1.position = SF.vector2(150, 490)
+    Menus.character_select(this); this.draw(@@rectangle_char_inner_1); this.display
+    sleep 0.2.seconds
+    @@rectangle_char_inner_1.position = SF.vector2(150, 500)
+          end
+        end
+         
 
-#controls for main menu 
+
+#######################################################################################################################################################
+
 module CONTROLS
     class Menucontrols
-        
-        
+     
+        #controls for main menu 
    def Menucontrols.arrowup (this)
     Cursor_opt1.position = SF.vector2(750, 610)
     this.draw(Cursor_opt1)
@@ -200,6 +211,17 @@ def Menucontrols.cursorFunc(this)
   end
   Fiber.yield
 end
+def Menucontrols.charselectright(this)
+      case (this)
+      when 1
+        
+        puts 1
+        
+      when 2
+        puts 2
+        
+      end
+end  
 end
 end
 

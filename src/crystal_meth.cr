@@ -29,6 +29,25 @@ FONT_PIXEL = SF::Font.from_file("fonts/VT323-Regular.ttf")
 GL.enable(GL::TEXTURE_2D)
 include X11
 
+module Fuck
+class Fuckyou
+  @@char_select_pointer_position : Int32 = 0
+
+  def refresh
+    this = window
+    this2 = event
+    case (@@menu)
+    when "main"
+    Gui::Menus.drawmainmenu(window)
+    break
+    when "charselect"
+      Gui::Menus.character_select(window)
+    break
+    else
+      puts "something is very wrong"
+    end
+  end
+
   def self.run
     # Create a window
     window = SF::RenderWindow.new(SF::VideoMode.new(1920, 1080), "Crystal Meth!", SF::Style::Fullscreen)
@@ -36,6 +55,7 @@ include X11
     CONTROLS::Menucontrols.cursorFunc(window) 
     @@menu = "main"
     @@cursorposition = "up"
+    @@char_select_pointer_position = 0
 
     # Main loop: run the program as long as the window is open
     while window.open?
@@ -59,13 +79,16 @@ include X11
         end
 
         if event.is_a? SF::Event::KeyPressed
-          
+            #escape
           case (event.code)
+
+            #escape
           when SF::Keyboard::Escape
             SF::Event::Closed
             window.close
-          when SF::Keyboard::Up
 
+            #up
+          when SF::Keyboard::Up
             case (@@menu)
             when "main"
               All_Audio::SFX.cursor1
@@ -73,7 +96,8 @@ include X11
               CONTROLS::Menucontrols.arrowup (this)
               @@cursorposition = "up"
             end
-           
+
+             #down
           when SF::Keyboard::Down
             case (@@menu)
             when "main"
@@ -82,20 +106,56 @@ include X11
             CONTROLS::Menucontrols.arrowdown(this)
             @@cursorposition = "down"
             end
-            
+
+             #left
+          when SF::Keyboard::Left
+            case (@@menu)
+            when "main"
+
+            when "charselect"
+              if @@char_select_pointer_position > 0
+             All_Audio::SFX.cursor1
+             this = window
+             @@char_select_pointer_position = @@char_select_pointer_position - 1
+             this2 = @@char_select_pointer_position 
+             CONTROLS::Menucontrols.charselectright(this2)
+             Gui::Menus.slot_1_highlight(this, this2)
+              end
+            end
+          when SF::Keyboard::Right
+            case (@@menu)
+            when "main"
+
+            when "charselect"
+              if @@char_select_pointer_position < 8
+             All_Audio::SFX.cursor1
+             this = window
+             @@char_select_pointer_position = @@char_select_pointer_position + 1
+             this2 = @@char_select_pointer_position 
+             CONTROLS::Menucontrols.charselectright(this)
+             Gui::Menus.slot_1_highlight(this, this2)
+              end
+            end
+
+             #enter
           when SF::Keyboard::Enter
             case (@@menu)
+
             when "main"
             All_Audio::SFX.select1
             this = window
-            case (@@cursorposition)
-            when "up"
-            @@menu = "charselect"
-            Gui::Menus.character_select(this)
-            when "down"
-            SF::Event::Closed
-            window.close 
+
+              case (@@cursorposition)
+
+              when "up"
+              @@menu = "charselect"
+              Gui::Menus.character_select(this)
+              when "down"
+              SF::Event::Closed
+              window.close 
             end
+          when "charselect"
+            
           end
         end
       end
@@ -109,9 +169,10 @@ include X11
      
     end
   end
-
-
+end
+Fuck::Fuckyou.run
+end
 
 # Run the program
-CrystalMeth.run
+
 
