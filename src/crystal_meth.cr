@@ -4,6 +4,7 @@ require "crsfml/system"
 require "../src/Menus.cr"
 require "../src/Audio.cr"
 require "x11"
+require "crystal/system/time"
 #require "timer"
 
 module CrystalMeth
@@ -30,9 +31,11 @@ include X11
 
   def self.run
     # Create a window
-    window = SF::RenderWindow.new(SF::VideoMode.new(1100, 900), "Crystal Meth!", SF::Style::Fullscreen)
+    window = SF::RenderWindow.new(SF::VideoMode.new(1920, 1080), "Crystal Meth!", SF::Style::Fullscreen)
     window.vertical_sync_enabled = true 
-
+    CONTROLS::Menucontrols.cursorFunc(window) 
+    @@menu = "main"
+    @@cursorposition = "up"
 
     # Main loop: run the program as long as the window is open
     while window.open?
@@ -40,33 +43,63 @@ include X11
       while event = window.poll_event
         this = window
         this2 = event
+        case (@@menu)
+        when "main"
         Gui::Menus.drawmainmenu(window)
-        
-  
+        break
+        when "charselect"
+          Gui::Menus.character_select(window)
+        break
+        else
+          puts "something is very wrong"
+        end
+
         window.display
-        CONTROLS::Menucontrols.cursorFunc (this) 
+        this = window
+        end
 
         if event.is_a? SF::Event::KeyPressed
-          if event.code == SF::Keyboard::Escape
+          
+          case (event.code)
+          when SF::Keyboard::Escape
             SF::Event::Closed
             window.close
-          end
-        end
-        if event.is_a? SF::Event::KeyPressed
-          if event.code == SF::Keyboard::Up
-            All_Audio::SFX.cursor1
-            this = window
-            CONTROLS::Menucontrols.arrowup (this)
-            
-            
-          end
-        end
-        if event.is_a? SF::Event::KeyPressed
-          if event.code == SF::Keyboard::Down
-            All_Audio::SFX.cursor1
+          when SF::Keyboard::Up
+
+            case (@@menu)
+            when "main"
+              All_Audio::SFX.cursor1
+              this = window
+              CONTROLS::Menucontrols.arrowup (this)
+              @@cursorposition = "up"
+            end
+           
+          when SF::Keyboard::Down
+            case (@@menu)
+            when "main"
+              All_Audio::SFX.cursor1
             this = window
             CONTROLS::Menucontrols.arrowdown(this)
-          
+            @@cursorposition = "down"
+            end
+            
+          when SF::Keyboard::Enter
+            case (@@menu)
+            when "main"
+            All_Audio::SFX.select1
+            this = window
+            case (@@cursorposition)
+            when "up"
+            @@menu = "charselect"
+            Gui::Menus.character_select(this)
+            when "down"
+            SF::Event::Closed
+            window.close 
+            end
+          end
+        end
+      end
+
         # "close requested" event: we close the window
         if event.is_a? SF::Event::Closed
           window.close
@@ -76,9 +109,9 @@ include X11
      
     end
   end
-end
-end
-end
+
+
+
 # Run the program
 CrystalMeth.run
 

@@ -1,5 +1,13 @@
 version: 2.0
 shards:
+  ameba:
+    git: https://github.com/crystal-ameba/ameba.git
+    version: 1.5.0
+
+  chipmunk:
+    git: https://github.com/oprypin/crystal-chipmunk.git
+    version: 0.1.0+git.commit.dfb7582eef95642e0ee125197aacce42a4d6ea25
+
   crsfml:
     git: https://github.com/oprypin/crsfml.git
     version: 2.5.3

@@ -1,3 +1,4 @@
+require "chipmunk_crsfml"
 PLAYER_CHAR_TEXTURE_01 = SF::Texture.from_file("graphics/Cursor.png")
 PLAYER_CHAR.texture_rect = SF.int_rect(0, 0, 64, 32)
 PLAYER_CHAR.position = SF.vector2(750, 610)

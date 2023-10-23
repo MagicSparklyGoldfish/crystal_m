@@ -4,6 +4,7 @@ require "../src/Audio.cr"
 require "../src/Clothing.yml"
 require "crsfml/system"
 require "yaml"
+require "crystal/system/time"
 
 # Load the YAML data from the file
 yaml_data = YAML.parse_file("Clothing.yml")
