@@ -23,9 +23,6 @@ Cursor_opt1 = SF::Sprite.new(CURSOR_TEXTURE_1)
 #                                                  ===Char Select
 
 
-def fuckyourselfintheass
-  Fuck::Fuckyou.refresh 
-end
 
 #Main Menu Gui.Menus.drawmainmenu(window)
 module Gui
@@ -160,13 +157,41 @@ def Menus.character_select(this)
   this.display
         end
         end
-def Menus.slot_1_highlight(this,this2)
-    @@rectangle_char_inner_1.position = SF.vector2(150, 490)
-    Menus.character_select(this); this.draw(@@rectangle_char_inner_1); this.display
-    sleep 0.2.seconds
-    @@rectangle_char_inner_1.position = SF.vector2(150, 500)
+
+def Menus.slot_highlight_2(this,this3)
+  this3.move(SF.vector2(0, -10))
+  Menus.character_select(this); this.draw(this3); this.display
+  sleep 0.2.seconds
+  this3.move(SF.vector2(0, 10))
+end
+
+def Menus.slot_highlight(this,this2)
+    case this2
+    when 1
+      this3 = @@rectangle_char_inner_1
+      Menus.slot_highlight_2(this,this3)
+    when 2
+      this3 = @@rectangle_char_inner_2
+      Menus.slot_highlight_2(this,this3)
+    when 3
+      this3 = @@rectangle_char_inner_3
+      Menus.slot_highlight_2(this,this3)
+    when 4
+      this3 = @@rectangle_char_inner_4
+      Menus.slot_highlight_2(this,this3)
+    when 5
+      this3 = @@rectangle_char_inner_5
+      Menus.slot_highlight_2(this,this3)
+    when 6
+      this3 = @@rectangle_char_inner_6
+      Menus.slot_highlight_2(this,this3)
+    when 7
+      this3 = @@rectangle_char_inner_7
+      Menus.slot_highlight_2(this,this3)
           end
         end
+      end
+
          
 
 

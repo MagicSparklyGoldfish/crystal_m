@@ -29,8 +29,8 @@ FONT_PIXEL = SF::Font.from_file("fonts/VT323-Regular.ttf")
 GL.enable(GL::TEXTURE_2D)
 include X11
 
-module Fuck
-class Fuckyou
+module Main
+class Main_routine
   @@char_select_pointer_position : Int32 = 0
 
   def refresh
@@ -119,7 +119,7 @@ class Fuckyou
              @@char_select_pointer_position = @@char_select_pointer_position - 1
              this2 = @@char_select_pointer_position 
              CONTROLS::Menucontrols.charselectright(this2)
-             Gui::Menus.slot_1_highlight(this, this2)
+             Gui::Menus.slot_highlight(this, this2)
               end
             end
           when SF::Keyboard::Right
@@ -133,7 +133,7 @@ class Fuckyou
              @@char_select_pointer_position = @@char_select_pointer_position + 1
              this2 = @@char_select_pointer_position 
              CONTROLS::Menucontrols.charselectright(this)
-             Gui::Menus.slot_1_highlight(this, this2)
+             Gui::Menus.slot_highlight(this, this2)
               end
             end
 
@@ -170,7 +170,7 @@ class Fuckyou
     end
   end
 end
-Fuck::Fuckyou.run
+Main::Main_routine.run
 end
 
 # Run the program
