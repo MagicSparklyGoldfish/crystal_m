@@ -32,6 +32,7 @@ module Save_System
         @level = 0
         @exp = 0
         @char_appearance = "appearance"
+        @@save_number = 0 
     end
     slot_1 = Save_Slots.new
     slot_1.slot_number = 1
@@ -39,14 +40,31 @@ module Save_System
     slot_1.location = "none"
     slot_1.level = 0
     def determine_file_slot
-        
+        Main_routine.determine_menu(menu, pointer)
+        case menu
+        when "main"
+            raise "something screwed up!"
+        when "charselect"
+        this.slotnumber = pointer
+        end
     end
     
     def save (slotnumber, time_played, location, level, exp, char_appearance)
-        @@save_number = 0 
+        determine_file_slot
+        case this.slot_number
+        when 1
         @@save_number = @@save_number + 1
         @@save_number_file = "File" + @@save_number
         @@save_number_file = File.new("crystal_meth/Saves/Slot1")
         end
-        end
     end
+
+    def now_or_load (slotnumber, time_played, location, level, exp, char_appearance)
+        determine_file_slot
+        case this.slot_number
+        when 1    
+        
+    end
+end
+end
+end

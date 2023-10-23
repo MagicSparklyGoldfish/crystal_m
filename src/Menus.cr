@@ -29,7 +29,7 @@ Cursor_opt1 = SF::Sprite.new(CURSOR_TEXTURE_1)
 module Gui
 class Menus
 
-#init main menu
+#init main menu #todo add textures
 
     #text
     @@text_title = SF::Text.new; @@text_title.font = FONT_TITLE; @@text_title.string = "Crystal Meth!"; @@text_title.character_size = 80
@@ -68,12 +68,12 @@ class Menus
     @@text_opt2.position = SF.vector2(880, 730)
    
 #draw main menu
- def Menus.drawmainmenu(this)
+ def Menus.drawmainmenu(this, cursorposition, menu, char_select_pointer_position)
 this.clear(SF::Color::Black); this.draw(@@text_title); this.draw(@@rectangle_menu); this.draw(@@rectangle_opt1); this.draw(@@text_opt1)
 this.draw(@@rectangle_opt2); this.draw(@@text_opt2); this.draw(Cursor_opt1); this.display
   end
 
-#init char menu
+#init char menu #todo add textures
 
 #ground
 @@rectangle_charmenu_ground = SF::RectangleShape.new(SF.vector2(8000, 700)); @@rectangle_charmenu_ground.fill_color = SF.color(50, 150, 50)
@@ -146,7 +146,7 @@ this.draw(@@rectangle_opt2); this.draw(@@text_opt2); this.draw(Cursor_opt1); thi
 @@info_block_7.position = SF.vector2(1340, 880); @@info_block_7.outline_thickness = 3.5; @@info_block_7.outline_color = SF.color(150, 150, 150)
 
 
-def Menus.character_select(this)
+def Menus.character_select(this, cursorposition, menu, char_select_pointer_position)
  
   this.clear(SF::Color::Blue)
   this.draw(@@rectangle_charmenu_ground); this.draw(@@rectangle_char_outer_1); this.draw(@@rectangle_char_outer_2); this.draw(@@rectangle_char_outer_3)
@@ -159,36 +159,36 @@ def Menus.character_select(this)
         end
         end
 
-def Menus.slot_highlight_2(this,this3)
+def Menus.slot_highlight_2(this,this3, char_select_pointer_position, window, cursorposition, menu)
   this3.move(SF.vector2(0, -10))
-  Menus.character_select(this); this.draw(this3); this.display
+  Menus.character_select(window, cursorposition, menu, char_select_pointer_position); this.draw(this3); this.display
   sleep 0.2.seconds
   this3.move(SF.vector2(0, 10))
 end
 
-def Menus.slot_highlight(this,this2)
+def Menus.slot_highlight(this,this2, char_select_pointer_position, window, cursorposition, menu)
     case this2
     when 1
       this3 = @@rectangle_char_inner_1
-      Menus.slot_highlight_2(this,this3)
+      Menus.slot_highlight_2(this,this3, char_select_pointer_position, window, cursorposition, menu)
     when 2
       this3 = @@rectangle_char_inner_2
-      Menus.slot_highlight_2(this,this3)
+      Menus.slot_highlight_2(this,this3, char_select_pointer_position, window, cursorposition, menu)
     when 3
       this3 = @@rectangle_char_inner_3
-      Menus.slot_highlight_2(this,this3)
+      Menus.slot_highlight_2(this,this3, char_select_pointer_position, window, cursorposition, menu)
     when 4
       this3 = @@rectangle_char_inner_4
-      Menus.slot_highlight_2(this,this3)
+      Menus.slot_highlight_2(this,this3, char_select_pointer_position, window, cursorposition, menu)
     when 5
       this3 = @@rectangle_char_inner_5
-      Menus.slot_highlight_2(this,this3)
+      Menus.slot_highlight_2(this,this3, char_select_pointer_position, window, cursorposition, menu)
     when 6
       this3 = @@rectangle_char_inner_6
-      Menus.slot_highlight_2(this,this3)
+      Menus.slot_highlight_2(this,this3, char_select_pointer_position, window, cursorposition, menu)
     when 7
       this3 = @@rectangle_char_inner_7
-      Menus.slot_highlight_2(this,this3)
+      Menus.slot_highlight_2(this,this3, char_select_pointer_position, window, cursorposition, menu)
           end
         end
 def Menus.select_character(this,this2)
@@ -207,20 +207,20 @@ module CONTROLS
     class Menucontrols
      
         #controls for main menu 
-   def Menucontrols.arrowup (this)
+   def Menucontrols.arrowup (this, cursorposition, menu, char_select_pointer_position)
     Cursor_opt1.position = SF.vector2(750, 610)
     this.draw(Cursor_opt1)
     this.display
    end
 
-   def Menucontrols.arrowdown (this)
+   def Menucontrols.arrowdown (this, cursorposition, menu, char_select_pointer_position)
     Cursor_opt1.position = SF.vector2(750,730)
     this.draw(Cursor_opt1)
     this.display
 end
 
 
-def Menucontrols.cursorFunc(this)
+def Menucontrols.cursorFunc #todo fix this stupid method
   spawn do
     blinking = true
     loop do
@@ -232,9 +232,7 @@ def Menucontrols.cursorFunc(this)
         
       end
       blinking = !blinking
-      if this.open?
-        Cursor_opt1.scale = SF.vector2(1, 1) 
-      #CURSOR_TEXTURE_1.update(this)
+
 
       sleep 2.seconds 
       end
@@ -242,19 +240,9 @@ def Menucontrols.cursorFunc(this)
   end
   Fiber.yield
 end
-def Menucontrols.charselectright(this)
-      case (this)
-      when 1
-        
-        puts 1
-        
-      when 2
-        puts 2
-        
-      end
-end  
+
 end
-end
+
 
 
 
