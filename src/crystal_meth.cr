@@ -3,6 +3,7 @@ require "crsfml/audio"
 require "crsfml/system"
 require "../src/Menus.cr"
 require "../src/Audio.cr"
+require "../src/Saves.cr"
 require "x11"
 require "crystal/system/time"
 #require "timer"
@@ -159,8 +160,11 @@ class Main_routine
           end
         end
       end
+    end
+  end
+          def determine_menu
+      
 
-        # "close requested" event: we close the window
         if event.is_a? SF::Event::Closed
           window.close
         end
@@ -169,10 +173,9 @@ class Main_routine
      
     end
   end
-end
+
 Main::Main_routine.run
 end
 
-# Run the program
 
 

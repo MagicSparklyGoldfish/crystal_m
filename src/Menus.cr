@@ -1,6 +1,7 @@
 require "crsfml"
 require "../src/crystal_meth.cr"
 require "../src/Audio.cr"
+require "../src/Saves.cr"
 require "crsfml/system"
 require "yaml"
 require "crystal/system/time"
@@ -190,8 +191,13 @@ def Menus.slot_highlight(this,this2)
       Menus.slot_highlight_2(this,this3)
           end
         end
+def Menus.select_character(this,this2)
+    case this2
+    when 1
+      
+        end
       end
-
+    end
          
 
 
