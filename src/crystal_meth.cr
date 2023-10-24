@@ -4,6 +4,7 @@ require "crsfml/system"
 require "../src/Menus.cr"
 require "../src/Audio.cr"
 require "../src/Saves.cr"
+require "../src/controls.cr"
 require "x11"
 require "crystal/system/time"
 #require "timer"
@@ -80,7 +81,6 @@ class Main_routine
         end
 
         if event.is_a? SF::Event::KeyPressed
-            #escape
           case (event.code)
 
             #escape
