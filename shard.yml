@@ -10,6 +10,8 @@ targets:
     menus: src/Menus.cr
     audio: src/Audio.cr
     clothing_data: scr/Clothing.yml
+    controls: scr/controls.cr
+    saves: scr/Saves.cr
 
 dependencies:
   crsfml:
@@ -33,10 +35,6 @@ dependencies:
     github: crystal-ameba/ameba
     version: ~> 1.5.0
     
-  #yaml:
-    #github: will/crystal-yaml
-
-
 
 crystal: '>= 1.10.1'
 
