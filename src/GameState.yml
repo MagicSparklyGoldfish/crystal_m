@@ -1,0 +1,14 @@
+require "yaml"
+
+class Gamestate
+YAML.mapping(
+  menu: String.
+
+  maincursor: String.
+)
+
+end
+
+Gamestate.menu = "main"
+
+Gamestate.maincursor = "up"
