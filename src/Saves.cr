@@ -31,7 +31,7 @@ module Save_System
         @location = "location"
         @level = 0
         @exp = 0
-        @char_appearance = "appearance"
+        @char_appearance = "@@CharAppearanceArray"
     end
     slot_1 = Save_Slots.new
     slot_1.slot_number = 1

@@ -9,6 +9,7 @@ targets:
     main: src/crystal_meth.cr
     menus: src/Menus.cr
     audio: src/Audio.cr
+    character: src/Player_Character.cr
     clothing_data: scr/Clothing.yml
 
 dependencies:

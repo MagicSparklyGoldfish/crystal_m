@@ -15,6 +15,10 @@ CURSOR_TEXTURE_1 = SF::Texture.from_file("graphics/Cursor.png")
 Cursor_opt1.texture_rect = SF.int_rect(0, 0, 62, 65)
 Cursor_opt1.position = SF.vector2(750, 610)
 Cursor_opt1 = SF::Sprite.new(CURSOR_TEXTURE_1) 
+CHAR_SKIN = SF::Texture.from_file("graphics/Char_Skin.png")
+Char_Skin01.texture_rect = SF.int_rect(0, 0, 96, 128)
+Char_Skin01 = SF::Sprite.new(CHAR_SKIN)
+
 
 #--------------------------------------------------table of contents----------------------------------------------------------------------------------
 #                                                  _Gui Module
@@ -102,8 +106,8 @@ this.draw(@@rectangle_opt2); this.draw(@@text_opt2); this.draw(Cursor_opt1); thi
 @@rectangle_char_outer_7.position = SF.vector2(1350, 600)
 
 #char blocks inner
-@@rectangle_char_inner_1 = SF::RectangleShape.new(SF.vector2(100, 150)); @@rectangle_char_inner_1.fill_color = SF.color(150, 250, 50)
-@@rectangle_char_inner_1.position = SF.vector2(150, 500)
+#@@rectangle_char_inner_1 = SF::RectangleShape.new(SF.vector2(96, 128)); @@rectangle_char_inner_1.fill_color = SF.color(150, 250, 50)
+Char_Skin01.position = SF.vector2(150, 515)
 
 @@rectangle_char_inner_2 = SF::RectangleShape.new(SF.vector2(100, 150)); @@rectangle_char_inner_2.fill_color = SF.color(150, 250, 50)
 @@rectangle_char_inner_2.position = SF.vector2(650, 500)
@@ -151,7 +155,7 @@ def Menus.character_select(this)
   this.clear(SF::Color::Blue)
   this.draw(@@rectangle_charmenu_ground); this.draw(@@rectangle_char_outer_1); this.draw(@@rectangle_char_outer_2); this.draw(@@rectangle_char_outer_3)
   this.draw(@@rectangle_char_outer_4); this.draw(@@rectangle_char_outer_5); this.draw(@@rectangle_char_outer_6); this.draw(@@rectangle_char_outer_7)
-  this.draw(@@rectangle_char_inner_1); this.draw(@@rectangle_char_inner_2); this.draw(@@rectangle_char_inner_3); this.draw(@@rectangle_char_inner_4)
+  this.draw(Char_Skin01); this.draw(@@rectangle_char_inner_2); this.draw(@@rectangle_char_inner_3); this.draw(@@rectangle_char_inner_4)
   this.draw(@@rectangle_char_inner_5); this.draw(@@rectangle_char_inner_6); this.draw(@@rectangle_char_inner_7)
   this.draw(@@info_block_1); this.draw(@@info_block_2); this.draw(@@info_block_3); this.draw(@@info_block_4); this.draw(@@info_block_5)
   this.draw(@@info_block_6); this.draw(@@info_block_7)
@@ -159,36 +163,60 @@ def Menus.character_select(this)
         end
         end
 
-def Menus.slot_highlight_2(this,this3)
-  this3.move(SF.vector2(0, -10))
+def Menus.slot_highlight_2(this,this2, this3)
+  #this3.move(SF.vector2(0, -5))
+  Char_Skin01.texture_rect = SF.int_rect(96, 0, 96, 128)
   Menus.character_select(this); this.draw(this3); this.display
-  sleep 0.2.seconds
-  this3.move(SF.vector2(0, 10))
+  sleep 0.05.seconds
+  #this3.move(SF.vector2(0, -5))
+  Char_Skin01.texture_rect = SF.int_rect(192, 0, 96, 128)
+  Menus.character_select(this); this.draw(this3); this.display
+  sleep 0.05.seconds
+  #this3.move(SF.vector2(0, 5))
+  Char_Skin01.texture_rect = SF.int_rect(288, 0, 96, 128)
+  Menus.character_select(this); this.draw(this3); this.display
+  sleep 0.05.seconds
+  Char_Skin01.texture_rect = SF.int_rect(384, 0, 96, 128)
+  #this3.move(SF.vector2(0, 5))
+  Menus.character_select(this); this.draw(this3); this.display
+  sleep 0.05.seconds
+  Char_Skin01.texture_rect = SF.int_rect(480, 0, 96, 128)
+  #this3.move(SF.vector2(0, 5))
+  Menus.character_select(this); this.draw(this3); this.display
+  sleep 0.05.seconds
+  Char_Skin01.texture_rect = SF.int_rect(576, 0, 96, 128)
+  #this3.move(SF.vector2(0, 5))
+  Menus.character_select(this); this.draw(this3); this.display
+  sleep 0.05.seconds
+  Char_Skin01.texture_rect = SF.int_rect(0, 0, 96, 128)
+  #this3.move(SF.vector2(0, 5))
+  Menus.character_select(this); this.draw(this3); this.display 
+  sleep 0.05.seconds
 end
 
 def Menus.slot_highlight(this,this2)
     case this2
     when 1
-      this3 = @@rectangle_char_inner_1
-      Menus.slot_highlight_2(this,this3)
+      this3 = Char_Skin01
+      Menus.slot_highlight_2(this,this2, this3)
     when 2
       this3 = @@rectangle_char_inner_2
-      Menus.slot_highlight_2(this,this3)
+      Menus.slot_highlight_2(this,this2, this3)
     when 3
       this3 = @@rectangle_char_inner_3
-      Menus.slot_highlight_2(this,this3)
+      Menus.slot_highlight_2(this,this2, this3)
     when 4
       this3 = @@rectangle_char_inner_4
-      Menus.slot_highlight_2(this,this3)
+      Menus.slot_highlight_2(this,this2, this3)
     when 5
       this3 = @@rectangle_char_inner_5
-      Menus.slot_highlight_2(this,this3)
+      Menus.slot_highlight_2(this,this2, this3)
     when 6
       this3 = @@rectangle_char_inner_6
-      Menus.slot_highlight_2(this,this3)
+      Menus.slot_highlight_2(this,this2, this3)
     when 7
       this3 = @@rectangle_char_inner_7
-      Menus.slot_highlight_2(this,this3)
+      Menus.slot_highlight_2(this,this2, this3)
           end
         end
 def Menus.select_character(this,this2)
