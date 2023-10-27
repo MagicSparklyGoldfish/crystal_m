@@ -41,7 +41,11 @@ module Save_System
     def determine_file_slot
         
     end
-    
+    class Save_Processes
+
+    @@rectangle_option_box = SF::RectangleShape.new(SF.vector2(200, 300)); @@rectangle_option_box.fill_color = SF.color(50, 50, 150)
+    @@rectangle_option_box.position = SF.vector2(1600, 400)
+
     def save (slotnumber, time_played, location, level, exp, char_appearance)
         @@save_number = 0 
         @@save_number = @@save_number + 1
@@ -50,3 +54,8 @@ module Save_System
         end
         end
     end
+
+    def new_game (window)
+        
+    end
+end

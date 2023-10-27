@@ -59,17 +59,65 @@ class Main_routine < Char_Value_variable
     CONTROLS::Menucontrols.cursorFunc(window) 
     when "charselect"
     Gui::Menus.character_select(window)
+    
     # CONFUSION.game_environment(window, debug_draw)
      else
       puts "something is very wrong"
      end
   end
+  def Main_routine.create_model(window)
+    player_character_model = SF::RenderTexture.new(672, 512)   
+    player_character_model.draw(PLAYER_CHAR)
+    player_character_model.draw(T_SHIRT)
+    player_character_model.display
+    player_character_model.create(672, 512, false)
+    player_char_rendered_model = SF::Sprite.new(player_character_model.texture)
+    player_char_rendered_model.texture_rect = SF.int_rect(0, 0, 96, 128)
+    player_char_rendered_model.position = SF.vector2(150, 515)
+
+    end
+    def Main_routine.display_model(window, player_char_rendered_model)
+      if @@menu == "charselect"
+        spawn do
+           player_character_model = SF::RenderTexture.new(672, 512)   
+    player_character_model.draw(PLAYER_CHAR)
+    player_character_model.draw(T_SHIRT)
+    player_character_model.create(672, 512, false)
+    player_character_model.display
+    player_char_rendered_model = SF::Sprite.new(player_character_model.texture)
+    player_char_rendered_model.texture_rect = SF.int_rect(0, 257, 96, 128)
+    player_char_rendered_model.position = SF.vector2(150, 515)
+          loop do
+            player_char_rendered_model.texture_rect = SF.int_rect(0, 257, 96, 128)
+            window.draw(player_char_rendered_model)
+            sleep 0.5.seconds
+            player_char_rendered_model.texture_rect = SF.int_rect(96, 257, 96, 128)
+            window.draw(player_char_rendered_model)
+            sleep 0.5.seconds
+            break if @@menu != "charselect"
+          end
+          Fiber.yield
+        end
+      end
+      Fiber.yield
+    end
+
+ 
 
   def self.run
     # Create a window
     window = SF::RenderWindow.new(SF::VideoMode.new(1920, 1080), "Crystal Meth!", SF::Style::Fullscreen)
     window.vertical_sync_enabled = true 
     CONTROLS::Menucontrols.cursorFunc(window) 
+
+    player_character_model = SF::RenderTexture.new(672, 512)   
+    player_character_model.draw(PLAYER_CHAR)
+    player_character_model.draw(T_SHIRT)
+    player_character_model.create(672, 512, false)
+    player_character_model.display
+    player_char_rendered_model = SF::Sprite.new(player_character_model.texture)
+    player_char_rendered_model.texture_rect = SF.int_rect(0, 257, 96, 128)
+    player_char_rendered_model.position = SF.vector2(150, 515)
 
     debug_draw = SFMLDebugDraw.new(window, SF::RenderStates.new(
     SF::Transform.new.translate(window.size / 2).scale(1, -1).scale(5, 5)
@@ -80,42 +128,58 @@ class Main_routine < Char_Value_variable
     @@cursorposition = "up"
     @@char_select_pointer_position = 0
     
-    # Main loop: run the program as long as the window is open
-    while window.open?
+#---------------------------------------------------------------
+#                 This runs every frame
+#---------------------------------------------------------------
+      while window.open?
       Main_routine.refresh(window, debug_draw)
+    
       window.display
-      # Check all the window's events that were triggered since the last iteration of the loop
+#_______________________________________________________________
+     
+#---------------------------------------------------------------
+#               This runs every key press 
+#---------------------------------------------------------------
       while event = window.poll_event
         this = window
         this2 = event
+       
+#________________________________________________+
+#----------------------------main menu processing+
         case (@@menu)
         when "main"
         Gui::Menus.drawmainmenu(window)
        
         break
+#________________________________________________+
+#---------------------char select menu processing+
         when "charselect"
         Gui::Menus.character_select(window)
+        window.draw(player_char_rendered_model)
         # CONFUSION.game_environment(window, debug_draw)
         #Model.create_PC 
         break
+#________________________________________________+
+#-----------------------------------error catcher+
         else
           puts "something is very wrong"
         end
-
+#________________________________________________+
         window.display
         this = window
         end
-
+#________________________________________________+
+#             keyboard controls
+#________________________________________________+
         if event.is_a? SF::Event::KeyPressed
-            #escape
           case (event.code)
-
-            #escape
+#________________________________________________+
+#------------------------------------------escape+
           when SF::Keyboard::Escape
             SF::Event::Closed
             window.close
-
-            #up
+#________________________________________________+
+#----------------------------------------------up+
           when SF::Keyboard::Up
             case (@@menu)
             when "main"
@@ -124,8 +188,8 @@ class Main_routine < Char_Value_variable
               CONTROLS::Menucontrols.arrowup (this)
               @@cursorposition = "up"
             end
-
-             #down
+#________________________________________________+
+#--------------------------------------------down+
           when SF::Keyboard::Down
             case (@@menu)
             when "main"
@@ -134,13 +198,13 @@ class Main_routine < Char_Value_variable
             CONTROLS::Menucontrols.arrowdown(this)
             @@cursorposition = "down"
             end
-
-             #left
+#_________________________________________________+
+#---------------------------------------------left+  
           when SF::Keyboard::Left
             case (@@menu)
-            when "main"
+            when "main"   #=============main menu
 
-            when "charselect"
+            when "charselect"  #==charselect menu
               if @@char_select_pointer_position > 0
              All_Audio::SFX.cursor1
              this = window
@@ -150,11 +214,13 @@ class Main_routine < Char_Value_variable
              Gui::Menus.slot_highlight(this, this2)
               end
             end
+#__________________________________________________+
+#---------------------------------------------right+
           when SF::Keyboard::Right
             case (@@menu)
-            when "main"
+            when "main"   #=============main menu
 
-            when "charselect"
+            when "charselect"  #==charselect menu
               if @@char_select_pointer_position < 8
              All_Audio::SFX.cursor1
              this = window
@@ -164,32 +230,36 @@ class Main_routine < Char_Value_variable
              Gui::Menus.slot_highlight(this, this2)
               end
             end
-
-             #enter
+#__________________________________________________+
+#---------------------------------------------enter+
           when SF::Keyboard::Enter
             case (@@menu)
 
-            when "main"
+            when "main"  #==============main menu
             All_Audio::SFX.select1
             this = window
 
               case (@@cursorposition)
 
-              when "up"
+              when "up" #----------------up
               @@menu = "charselect"
               Gui::Menus.character_select(this)
-              when "down"
+              Main_routine.display_model(window, player_char_rendered_model)
+
+              when "down" #------------down
               SF::Event::Closed
               window.close 
             end
-          when "charselect"
-            
+          when "charselect"  #===charselect menu
+             this = window
+             this2 = @@char_select_pointer_position
+            Gui::Menus.select_character(this,this2)
           end
         end
       end
     end
   end
-          def determine_menu
+          def determine_menu #TODO: find out if this does anything
       
 
         if event.is_a? SF::Event::Closed
@@ -203,6 +273,21 @@ class Main_routine < Char_Value_variable
 
 Main::Main_routine.run
 end
+
+def select_character(this,this2)
+  case this2
+  when 1 
+    if File.exists?("crystal_meth/Saves/Slot1")
+     true
+puts true
+    else false
+puts false  
+Menus.create_character(this, this2)
+
+      end
+    end
+  end    
+
 # TEST = SF::Texture.from_file("graphics/Cursor.png")
 # class CONFUSION
 

@@ -2,8 +2,10 @@ require "crsfml"
 require "../src/crystal_meth.cr"
 require "../src/Audio.cr"
 require "../src/Saves.cr"
+require "../src/Player_Character.cr"
 require "crsfml/system"
 require "yaml"
+require "file_utils"
 require "crystal/system/time"
 require "chipmunk"
 #require "timer"
@@ -33,6 +35,7 @@ Char_Skin01 = SF::Sprite.new(CHAR_SKIN)
 module Gui
 class Menus
 
+#==============================================Main Menu=====================================================
 #init main menu
 
     #text
@@ -76,6 +79,8 @@ class Menus
 this.clear(SF::Color::Black); this.draw(@@text_title); this.draw(@@rectangle_menu); this.draw(@@rectangle_opt1); this.draw(@@text_opt1)
 this.draw(@@rectangle_opt2); this.draw(@@text_opt2); this.draw(Cursor_opt1); this.display
   end
+
+#=========================================charselect menu====================================================================
 
 #init char menu
 
@@ -155,7 +160,8 @@ def Menus.character_select(this)
   this.clear(SF::Color::Blue)
   this.draw(@@rectangle_charmenu_ground); this.draw(@@rectangle_char_outer_1); this.draw(@@rectangle_char_outer_2); this.draw(@@rectangle_char_outer_3)
   this.draw(@@rectangle_char_outer_4); this.draw(@@rectangle_char_outer_5); this.draw(@@rectangle_char_outer_6); this.draw(@@rectangle_char_outer_7)
-  this.draw(Char_Skin01); this.draw(@@rectangle_char_inner_2); this.draw(@@rectangle_char_inner_3); this.draw(@@rectangle_char_inner_4)
+  #this.draw(PLAYER_CHAR_RENDERED_MODEL); 
+  this.draw(@@rectangle_char_inner_2); this.draw(@@rectangle_char_inner_3); this.draw(@@rectangle_char_inner_4)
   this.draw(@@rectangle_char_inner_5); this.draw(@@rectangle_char_inner_6); this.draw(@@rectangle_char_inner_7)
   this.draw(@@info_block_1); this.draw(@@info_block_2); this.draw(@@info_block_3); this.draw(@@info_block_4); this.draw(@@info_block_5)
   this.draw(@@info_block_6); this.draw(@@info_block_7)
@@ -165,39 +171,49 @@ def Menus.character_select(this)
 
 def Menus.slot_highlight_2(this,this2, this3)
   #this3.move(SF.vector2(0, -5))
-  Char_Skin01.texture_rect = SF.int_rect(96, 0, 96, 128)
+  this3.texture_rect = SF.int_rect(96, 0, 96, 128)
   Menus.character_select(this); this.draw(this3); this.display
   sleep 0.05.seconds
   #this3.move(SF.vector2(0, -5))
-  Char_Skin01.texture_rect = SF.int_rect(192, 0, 96, 128)
+  this3.texture_rect = SF.int_rect(192, 0, 96, 128)
   Menus.character_select(this); this.draw(this3); this.display
   sleep 0.05.seconds
   #this3.move(SF.vector2(0, 5))
-  Char_Skin01.texture_rect = SF.int_rect(288, 0, 96, 128)
+  this3.texture_rect = SF.int_rect(288, 0, 96, 128)
   Menus.character_select(this); this.draw(this3); this.display
   sleep 0.05.seconds
-  Char_Skin01.texture_rect = SF.int_rect(384, 0, 96, 128)
+  this3.texture_rect = SF.int_rect(384, 0, 96, 128)
   #this3.move(SF.vector2(0, 5))
   Menus.character_select(this); this.draw(this3); this.display
   sleep 0.05.seconds
-  Char_Skin01.texture_rect = SF.int_rect(480, 0, 96, 128)
+  this3.texture_rect = SF.int_rect(480, 0, 96, 128)
   #this3.move(SF.vector2(0, 5))
   Menus.character_select(this); this.draw(this3); this.display
   sleep 0.05.seconds
-  Char_Skin01.texture_rect = SF.int_rect(576, 0, 96, 128)
+  this3.texture_rect = SF.int_rect(576, 0, 96, 128)
   #this3.move(SF.vector2(0, 5))
   Menus.character_select(this); this.draw(this3); this.display
   sleep 0.05.seconds
-  Char_Skin01.texture_rect = SF.int_rect(0, 0, 96, 128)
+  this3texture_rect = SF.int_rect(0, 0, 96, 128)
   #this3.move(SF.vector2(0, 5))
   Menus.character_select(this); this.draw(this3); this.display 
   sleep 0.05.seconds
 end
 
+
 def Menus.slot_highlight(this,this2)
+  player_character_model = SF::RenderTexture.new(672, 512)   
+  player_character_model.draw(PLAYER_CHAR)
+  player_character_model.draw(T_SHIRT)
+  player_character_model.create(672, 512, false)
+  player_character_model.display
+  player_char_rendered_model = SF::Sprite.new(player_character_model.texture)
+  player_char_rendered_model.texture_rect = SF.int_rect(0, 0, 96, 128)
+  player_char_rendered_model.position = SF.vector2(150, 515)
+
     case this2
     when 1
-      this3 = Char_Skin01
+      this3 = player_char_rendered_model #Char_Skin01 
       Menus.slot_highlight_2(this,this2, this3)
     when 2
       this3 = @@rectangle_char_inner_2
@@ -219,16 +235,22 @@ def Menus.slot_highlight(this,this2)
       Menus.slot_highlight_2(this,this2, this3)
           end
         end
-def Menus.select_character(this,this2)
-    case this2
-    when 1
-      
-        end
-      end
-    end
-         
 
 
+#====================================================Char Creation Menu============================================================================
+def Menus.create_character(this, this2)
+  this3 = "createcharacter"
+  player_character_model = SF::RenderTexture.new(672, 512)   
+  player_character_model.draw(PLAYER_CHAR)
+  player_character_model.draw(T_SHIRT)
+  player_character_model.create(672, 512, false)
+  player_character_model.display
+  player_char_rendered_model = SF::Sprite.new(player_character_model.texture)
+  player_char_rendered_model.texture_rect = SF.int_rect(0, 0, 96, 128)
+  player_char_rendered_model.position = SF.vector2(150, 515)
+  this.clear(SF::Color::Black); this.draw(player_char_rendered_model); this.display
+end
+end
 #######################################################################################################################################################
 
 module CONTROLS

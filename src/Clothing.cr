@@ -16,6 +16,9 @@ white_tee_shirt = shirts["White_Tee_Shirt"]
 TEE_SHIRT_TEXTURE_01 = SF::Texture.from_file("graphics/Cursor.png")
 
 module Body
+    struct Skins
+        property name
+    end
     class Skins
     include YAML::Clothing
         def pale

@@ -1,17 +1,39 @@
+require "crsfml"
+require "../src/crystal_meth.cr"
+require "../src/Audio.cr"
+require "../src/Saves.cr"
+require "crsfml/system"
+require "yaml"
+require "crystal/system/time"
 require "chipmunk"
-PLAYER_CHAR_TEXTURE_01 = SF::Texture.from_file("graphics/Cursor.png")
-PLAYER_CHAR.texture_rect = SF.int_rect(0, 0, 64, 32)
-PLAYER_CHAR.position = SF.vector2(750, 610)
-PLAYER_CHAR = SF::Sprite.new(PLAYER_CHAR_TEXTURE_01) 
 
-#TO DO: Replce undefined local variables with class variables, implement this shard
+#--------------------------------------------------------------------
+#                           Base
+#--------------------------------------------------------------------
+PLAYER_CHAR_TEXTURE_01 = SF::Texture.from_file("graphics/Char_Skin.png")
+#PLAYER_CHAR.texture_rect = SF.int_rect(0, 0, 96, 128)
+#PLAYER_CHAR.position = SF.vector2(750, 610)
+PLAYER_CHAR = SF::Sprite.new(PLAYER_CHAR_TEXTURE_01) 
+#--------------------------------------------------------------------
+#                          Shirt Textures
+#--------------------------------------------------------------------
+T_SHIRT_TEXTURE_01 = SF::Texture.from_file("graphics/T-Shirt_01.png")
+#T_SHIRT.texture_rect = SF.int_rect(0, 0, 96, 128)
+#T_SHIRT.position = SF.vector2(750, 610)
+T_SHIRT = SF::Sprite.new(T_SHIRT_TEXTURE_01) 
+
+
+
+
+
+#TO DO: Replace undefined local variables with class variables, implement this shard
 
 module Player_character
     extend self
     
 ###################################@
     class Model
-       
+
 
 
 #func Model.Animations
