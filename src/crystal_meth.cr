@@ -68,6 +68,7 @@ SF::Transform.new.translate(window.size / 2).scale(1, -1).scale(5, 5)
 
 @@menu = "main"; @@cursorposition = "up"  #---------------------------------------------------initializes variables
 
+
 #---------------------------------------------------------------
 #                 This runs every frame
 #---------------------------------------------------------------
@@ -80,6 +81,7 @@ while window.open?
     window.draw(Cursor_opt1); MenuElements.cursorFunc(window, @@menu)
     window.display
   if @@menu == "charselect"
+    puts @@menu
     window.clear(SF::Color::Blue)
     window.draw(Rectangle_Charmenu_Ground); window.draw(Rectangle_CharOuter_1); window.draw(Rectangle_CharOuter_2)
     window.draw(Rectangle_CharOuter_3); window.draw(Rectangle_CharOuter_4); window.draw(Rectangle_CharOuter_5)
@@ -125,16 +127,22 @@ while window.open?
     end
   when SF::Keyboard::Enter
     puts "enter"
-    # if @@menu == "main"
+     if @@menu == "main"
       All_Audio::SFX.select1
      case (@@cursorposition)
 
      when "up" #----------------up
-    #   @@menu = "charselect"
-       @@cursorposition = "File1"
-       window.clear(SF::Color::Blue)
-       window.draw(Rectangle_Charmenu_Ground)
-    #   GC.collect
+      window.clear(SF::Color::Blue)
+      window.draw(Rectangle_Charmenu_Ground); window.draw(Rectangle_CharOuter_1); window.draw(Rectangle_CharOuter_2)
+      window.draw(Rectangle_CharOuter_3); window.draw(Rectangle_CharOuter_4); window.draw(Rectangle_CharOuter_5)
+      window.draw(Rectangle_CharOuter_6); window.draw(Rectangle_CharOuter_7)
+      window.draw(Rectangle_CharInner_1); window.draw(Rectangle_CharInner_2); window.draw(Rectangle_CharInner_3)
+      window.draw(Rectangle_CharInner_4); window.draw(Rectangle_CharInner_5); window.draw(Rectangle_CharInner_6)
+      window.draw(Rectangle_CharInner_7); window.draw(Info_Block_1); window.draw(Info_Block_2); window.draw(Info_Block_3)
+      window.draw(Info_Block_4); window.draw(Info_Block_5); window.draw(Info_Block_6); window.draw(Info_Block_7)
+       @@menu = "charselect"
+       #@@cursorposition = "File1"
+       GC.collect
      when "down" #------------down
       SF::Event::Closed
       window.close 
@@ -145,7 +153,7 @@ end
 end
 end
 end
-
+end
   class MenuElements <Window
     def MenuElements.cursorFunc(window, @@menu)
       spawn do
@@ -183,30 +191,3 @@ end
 
 
 
-
-# ... (previous code)
-
-# while window.open?
-#   case (@@menu)
-#   when "main"
-#     window.draw(Text_Title)
-#     window.draw(Rectangle_Menu)
-#     # You should have more code here to update the game state based on user input.
-#   end
-
-#   window.display
-
-#   while (event = window.poll_event)
-#     case event
-#     when SF::Event::Closed
-#       window.close
-#     when SF::Event::KeyPressed
-#       case event.code
-#       when SF::Keyboard::Escape
-#         window.close
-#       end
-#     end
-#   end
-# end
-
-# ... (rest of your code)
