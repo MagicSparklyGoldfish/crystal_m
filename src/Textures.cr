@@ -57,7 +57,7 @@ Rectangle_CharInner_2.position = SF.vector2(650, 500)
 
 Rectangle_CharInner_3 = SF::RectangleShape.new(SF.vector2(100, 150)); Rectangle_CharInner_3.fill_color = SF.color(150, 250, 50)
 Rectangle_CharInner_3.position = SF.vector2(1150, 500)
-
+window.draw(Rectangle_CharOuter_1)
 Rectangle_CharInner_4 = SF::RectangleShape.new(SF.vector2(100, 150)); Rectangle_CharInner_4.fill_color = SF.color(150, 250, 50)
 Rectangle_CharInner_4.position = SF.vector2(1650, 500)
 

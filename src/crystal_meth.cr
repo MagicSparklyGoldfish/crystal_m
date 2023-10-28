@@ -81,7 +81,13 @@ while window.open?
     window.display
   if @@menu == "charselect"
     window.clear(SF::Color::Blue)
-    window.draw(Rectangle_Charmenu_Ground)
+    window.draw(Rectangle_Charmenu_Ground); window.draw(Rectangle_CharOuter_1); window.draw(Rectangle_CharOuter_2)
+    window.draw(Rectangle_CharOuter_3); window.draw(Rectangle_CharOuter_4); window.draw(Rectangle_CharOuter_5)
+    window.draw(Rectangle_CharOuter_6); window.draw(Rectangle_CharOuter_7)
+    window.draw(Rectangle_CharInner_1); window.draw(Rectangle_CharInner_2); window.draw(Rectangle_CharInner_3)
+    window.draw(Rectangle_CharInner_4); window.draw(Rectangle_CharInner_5); window.draw(Rectangle_CharInner_6)
+    window.draw(Rectangle_CharInner_7); window.draw(Info_Block_1); window.draw(Info_Block_2); window.draw(Info_Block_3)
+    window.draw(Info_Block_4); window.draw(Info_Block_5); window.draw(Info_Block_6); window.draw(Info_Block_7)
   else begin 
     raise "ERROR! Invalid value for '@@menu'!"
   rescue
