@@ -1,9 +1,10 @@
 require "crsfml"
 require "crsfml/audio"
 require "crsfml/system"
-require "../src/Menus.cr"
+require "../src/Textures.cr"
 require "../src/Audio.cr"
 require "../src/Saves.cr"
+require "../src/Fonts.cr"
 require "../src/Player_Character.cr"
 require "x11"
 require "crystal/system/time"
@@ -27,288 +28,179 @@ lib GL
 end
 
 
-FONT_TITLE = SF::Font.from_file("fonts/PermanentMarker-Regular.ttf")
-FONT_COMMON = SF::Font.from_file("fonts/Changa/Changa-VariableFont_wght.ttf")
-FONT_FUTURE = SF::Font.from_file("fonts/Orbitron/Orbitron-VariableFont_wght.ttf")
-FONT_PIXEL = SF::Font.from_file("fonts/VT323-Regular.ttf")
+CURSOR_TEXTURE_1 = SF::Texture.from_file("graphics/Cursor.png")
+Cursor_opt1.texture_rect = SF.int_rect(0, 0, 62, 65)
+Cursor_opt1.position = SF.vector2(750, 610)
+Cursor_opt1 = SF::Sprite.new(CURSOR_TEXTURE_1) 
 
+CHAR_SKIN = SF::Texture.from_file("graphics/Char_Skin.png")
+Char_Skin01.texture_rect = SF.int_rect(0, 0, 96, 128)
+Char_Skin01 = SF::Sprite.new(CHAR_SKIN)
 
-
-
+Player_Character_Model = SF::RenderTexture.new(672, 512)  
+Player_Character_Model.draw(PLAYER_CHAR)
+Player_Character_Model.draw(T_SHIRT)
+Player_Character_Model.display
+Player_Character_Model.create(672, 512, false)
+Player_Char_Rendered_Model = SF::Sprite.new(Player_Character_Model.texture)
+Player_Char_Rendered_Model.texture_rect = SF.int_rect(0, 0, 96, 128)
+Player_Char_Rendered_Model.position = SF.vector2(150, 515)
 
 # it works out of the box
 GL.enable(GL::TEXTURE_2D)
 include X11
 
-module Main
-include Player_character
-extend self
-class Char_Value_variable #Nils are placeholders
-  @@health_to_restore : Nil; @@health_to_remove : Nil; @@char_hp = Nil; @@char_Max_hp = Nil; @@Char_Model = SF::RectangleShape.new(SF.vector2(64, 32))
-  @@Hair = SF::RectangleShape.new(SF.vector2(64, 32)); @@Skin = Nil; @@Face = SF::RectangleShape.new(SF.vector2(64, 32))
-  @@Shirt = SF::RectangleShape.new(SF.vector2(64, 32)); @@Pants = SF::RectangleShape.new(SF.vector2(64, 32)); @@Shoes = SF::RectangleShape.new(SF.vector2(64, 32));
-  @@CharAppearanceArray : Array(Nil.class | SF::RectangleShape); @@CharAppearanceArray = [@@Hair , @@Skin, @@Face, @@Shirt, @@Pants, @@Shoes]
-end
-class Main_routine < Char_Value_variable
-  @@char_select_pointer_position : Int32 = 0
+module Gui
+  extend self
+  @@menu : String | Nil; @@cursorposition : String | Nil
+  class Window
+    def Window.run
+#---------------------------------------------------------------
+#                       Initialization
+#---------------------------------------------------------------
+window = SF::RenderWindow.new(SF::VideoMode.new(1920, 1080), "Crystal Meth!", SF::Style::Fullscreen) #initializes window
+window.vertical_sync_enabled = true 
+CONTROLS::Menucontrols.cursorFunc(window) 
 
-   def Main_routine.refresh(window, debug_draw) 
-     case (@@menu)
-    when "main"
-    Gui::Menus.drawmainmenu(window)
-    CONTROLS::Menucontrols.cursorFunc(window) 
-    when "charselect"
-    Gui::Menus.character_select(window)
-    
-    # CONFUSION.game_environment(window, debug_draw)
-     else
-      puts "something is very wrong"
-     end
+debug_draw = SFMLDebugDraw.new(window, SF::RenderStates.new( #--------------------------------initializes crystal chipmunk draw area
+SF::Transform.new.translate(window.size / 2).scale(1, -1).scale(5, 5)
+))
+
+@@menu = "main"; @@cursorposition = "up"  #---------------------------------------------------initializes variables
+
+#---------------------------------------------------------------
+#                 This runs every frame
+#---------------------------------------------------------------
+while window.open?
+  if @@menu == "main"
+    window.clear(SF::Color::Black);
+    window.draw(Text_Title); window.draw(Rectangle_Menu)
+    window.draw(Rectangle_Opt1); window.draw(Text_Opt1)
+    window.draw(Rectangle_Opt2); window.draw(Text_Opt2)
+    window.draw(Cursor_opt1); MenuElements.cursorFunc(window, @@menu)
+    window.display
+  if @@menu == "charselect"
+    window.clear(SF::Color::Blue)
+    window.draw(Rectangle_Charmenu_Ground)
+  else begin 
+    raise "ERROR! Invalid value for '@@menu'!"
+  rescue
+    @@menu == "main"
   end
-  def Main_routine.create_model(window)
-    player_character_model = SF::RenderTexture.new(672, 512)   
-    player_character_model.draw(PLAYER_CHAR)
-    player_character_model.draw(T_SHIRT)
-    player_character_model.display
-    player_character_model.create(672, 512, false)
-    player_char_rendered_model = SF::Sprite.new(player_character_model.texture)
-    player_char_rendered_model.texture_rect = SF.int_rect(0, 0, 96, 128)
-    player_char_rendered_model.position = SF.vector2(150, 515)
-
+  end
+#_______________________________________________________________
+ 
+#---------------------------------------------------------------
+#               This runs every key press 
+#---------------------------------------------------------------
+  while (event = window.poll_event)
+  case event
+  when SF::Event::Closed
+    window.close
+  when SF::Event::KeyPressed
+    case event.code
+  when SF::Keyboard::Escape
+      window.close
+  when SF::Keyboard::Up
+    if @@menu == "main"
+      All_Audio::SFX.cursor1
+      Cursor_opt1.position = SF.vector2(750, 610)
+      window.draw(Cursor_opt1)
+      window.display
+      @@cursorposition = "up"
     end
-    def Main_routine.display_model(window, player_char_rendered_model)
-      if @@menu == "charselect"
-        spawn do
-           player_character_model = SF::RenderTexture.new(672, 512)   
-    player_character_model.draw(PLAYER_CHAR)
-    player_character_model.draw(T_SHIRT)
-    player_character_model.create(672, 512, false)
-    player_character_model.display
-    player_char_rendered_model = SF::Sprite.new(player_character_model.texture)
-    player_char_rendered_model.texture_rect = SF.int_rect(0, 257, 96, 128)
-    player_char_rendered_model.position = SF.vector2(150, 515)
-          loop do
-            player_char_rendered_model.texture_rect = SF.int_rect(0, 257, 96, 128)
-            window.draw(player_char_rendered_model)
-            sleep 0.5.seconds
-            player_char_rendered_model.texture_rect = SF.int_rect(96, 257, 96, 128)
-            window.draw(player_char_rendered_model)
-            sleep 0.5.seconds
-            break if @@menu != "charselect"
+  when SF::Keyboard::Down
+    if @@menu == "main"
+      All_Audio::SFX.cursor1
+      Cursor_opt1.position = SF.vector2(750,730)
+      window.draw(Cursor_opt1)
+      @@cursorposition = "down"
+      window.display
+    end
+  when SF::Keyboard::Enter
+    puts "enter"
+    # if @@menu == "main"
+      All_Audio::SFX.select1
+     case (@@cursorposition)
+
+     when "up" #----------------up
+    #   @@menu = "charselect"
+       @@cursorposition = "File1"
+       window.clear(SF::Color::Blue)
+       window.draw(Rectangle_Charmenu_Ground)
+    #   GC.collect
+     when "down" #------------down
+      SF::Event::Closed
+      window.close 
+      end
+    end
+  end
+end
+end
+end
+end
+
+  class MenuElements <Window
+    def MenuElements.cursorFunc(window, @@menu)
+      spawn do
+        blinking = true
+        loop do
+          if blinking
+            Cursor_opt1.texture_rect = SF.int_rect(62, 0, 62, 65)
+        
+          else
+            Cursor_opt1.texture_rect = SF.int_rect(0, 0, 62, 65)
+            if @@menu != "main"
+              break
+            end
           end
-          Fiber.yield
+          blinking = !blinking
+          if window.open?
+            Cursor_opt1.scale = SF.vector2(1, 1) 
+          #CURSOR_TEXTURE_1.update(this)
+           
+          sleep 2.seconds 
+          end
         end
       end
       Fiber.yield
     end
-
- 
-
-  def self.run
-    # Create a window
-    window = SF::RenderWindow.new(SF::VideoMode.new(1920, 1080), "Crystal Meth!", SF::Style::Fullscreen)
-    window.vertical_sync_enabled = true 
-    CONTROLS::Menucontrols.cursorFunc(window) 
-
-    player_character_model = SF::RenderTexture.new(672, 512)   
-    player_character_model.draw(PLAYER_CHAR)
-    player_character_model.draw(T_SHIRT)
-    player_character_model.create(672, 512, false)
-    player_character_model.display
-    player_char_rendered_model = SF::Sprite.new(player_character_model.texture)
-    player_char_rendered_model.texture_rect = SF.int_rect(0, 257, 96, 128)
-    player_char_rendered_model.position = SF.vector2(150, 515)
-
-    debug_draw = SFMLDebugDraw.new(window, SF::RenderStates.new(
-    SF::Transform.new.translate(window.size / 2).scale(1, -1).scale(5, 5)
-    ))
-    # CONFUSION.game_environment(window, debug_draw)
-    
-    @@menu = "main"
-    @@cursorposition = "up"
-    @@char_select_pointer_position = 0
-    
-#---------------------------------------------------------------
-#                 This runs every frame
-#---------------------------------------------------------------
-      while window.open?
-      Main_routine.refresh(window, debug_draw)
-    
-      window.display
+end
 #_______________________________________________________________
-     
 #---------------------------------------------------------------
-#               This runs every key press 
+#                         Runs the program
 #---------------------------------------------------------------
-      while event = window.poll_event
-        this = window
-        this2 = event
-       
-#________________________________________________+
-#----------------------------main menu processing+
-        case (@@menu)
-        when "main"
-        Gui::Menus.drawmainmenu(window)
-       
-        break
-#________________________________________________+
-#---------------------char select menu processing+
-        when "charselect"
-        Gui::Menus.character_select(window)
-        window.draw(player_char_rendered_model)
-        # CONFUSION.game_environment(window, debug_draw)
-        #Model.create_PC 
-        break
-#________________________________________________+
-#-----------------------------------error catcher+
-        else
-          puts "something is very wrong"
-        end
-#________________________________________________+
-        window.display
-        this = window
-        end
-#________________________________________________+
-#             keyboard controls
-#________________________________________________+
-        if event.is_a? SF::Event::KeyPressed
-          case (event.code)
-#________________________________________________+
-#------------------------------------------escape+
-          when SF::Keyboard::Escape
-            SF::Event::Closed
-            window.close
-#________________________________________________+
-#----------------------------------------------up+
-          when SF::Keyboard::Up
-            case (@@menu)
-            when "main"
-              All_Audio::SFX.cursor1
-              this = window
-              CONTROLS::Menucontrols.arrowup (this)
-              @@cursorposition = "up"
-            end
-#________________________________________________+
-#--------------------------------------------down+
-          when SF::Keyboard::Down
-            case (@@menu)
-            when "main"
-              All_Audio::SFX.cursor1
-            this = window
-            CONTROLS::Menucontrols.arrowdown(this)
-            @@cursorposition = "down"
-            end
-#_________________________________________________+
-#---------------------------------------------left+  
-          when SF::Keyboard::Left
-            case (@@menu)
-            when "main"   #=============main menu
-
-            when "charselect"  #==charselect menu
-              if @@char_select_pointer_position > 0
-             All_Audio::SFX.cursor1
-             this = window
-             @@char_select_pointer_position = @@char_select_pointer_position - 1
-             this2 = @@char_select_pointer_position 
-             CONTROLS::Menucontrols.charselectright(this2)
-             Gui::Menus.slot_highlight(this, this2)
-              end
-            end
-#__________________________________________________+
-#---------------------------------------------right+
-          when SF::Keyboard::Right
-            case (@@menu)
-            when "main"   #=============main menu
-
-            when "charselect"  #==charselect menu
-              if @@char_select_pointer_position < 8
-             All_Audio::SFX.cursor1
-             this = window
-             @@char_select_pointer_position = @@char_select_pointer_position + 1
-             this2 = @@char_select_pointer_position 
-             CONTROLS::Menucontrols.charselectright(this)
-             Gui::Menus.slot_highlight(this, this2)
-              end
-            end
-#__________________________________________________+
-#---------------------------------------------enter+
-          when SF::Keyboard::Enter
-            case (@@menu)
-
-            when "main"  #==============main menu
-            All_Audio::SFX.select1
-            this = window
-
-              case (@@cursorposition)
-
-              when "up" #----------------up
-              @@menu = "charselect"
-              Gui::Menus.character_select(this)
-              Main_routine.display_model(window, player_char_rendered_model)
-
-              when "down" #------------down
-              SF::Event::Closed
-              window.close 
-            end
-          when "charselect"  #===charselect menu
-             this = window
-             this2 = @@char_select_pointer_position
-            Gui::Menus.select_character(this,this2)
-          end
-        end
-      end
-    end
-  end
-          def determine_menu #TODO: find out if this does anything
-      
-
-        if event.is_a? SF::Event::Closed
-          window.close
-        end
-      end
-      
-     
-    end
-  end
-
-Main::Main_routine.run
+Gui::Window.run
+end
+end
 end
 
-def select_character(this,this2)
-  case this2
-  when 1 
-    if File.exists?("crystal_meth/Saves/Slot1")
-     true
-puts true
-    else false
-puts false  
-Menus.create_character(this, this2)
 
-      end
-    end
-  end    
 
-# TEST = SF::Texture.from_file("graphics/Cursor.png")
-# class CONFUSION
 
-# def CONFUSION.game_environment(window, debug_draw) 
-#   space = CP::Space.new
-#   space.iterations = 30
-#   space.gravity = CP.v(0, -500)
-#   space.sleep_time_threshold = 0.5
-#   space.collision_slop = 0.5
-#   # ground = CP::Segment.new(space.static_body, CP.v(-20, 5), CP.v(20, -5), 0.0)
-#   # ground.friction = 1.0
-#   # space.add(ground)
-#   pc_body = CP::Body.new(32, 64)
-#   pc_skin = CP::Box.new(pc_body, 16, 32,)
-#   #SF::Texture.bind TEST
-#   pc_chest = CP::Box.new(pc_body, 16, 32)
-#   pc_head = CP::Box.new(pc_body, 16, 16)
-#   pc_legs = CP::Box.new(pc_body, 16, 16)
-#   pc_body.position = CP.v(-150, -10)
-#   space.add(pc_body, pc_head, pc_chest, pc_skin, pc_legs) 
-#   debug_draw.draw space
+# ... (previous code)
+
+# while window.open?
+#   case (@@menu)
+#   when "main"
+#     window.draw(Text_Title)
+#     window.draw(Rectangle_Menu)
+#     # You should have more code here to update the game state based on user input.
+#   end
+
+#   window.display
+
+#   while (event = window.poll_event)
+#     case event
+#     when SF::Event::Closed
+#       window.close
+#     when SF::Event::KeyPressed
+#       case event.code
+#       when SF::Keyboard::Escape
+#         window.close
+#       end
+#     end
+#   end
 # end
 
-# end
+# ... (rest of your code)
