@@ -60,7 +60,7 @@ module Gui
 #---------------------------------------------------------------
 window = SF::RenderWindow.new(SF::VideoMode.new(1920, 1080), "Crystal Meth!", SF::Style::Fullscreen) #initializes window
 window.vertical_sync_enabled = true 
-CONTROLS::Menucontrols.cursorFunc(window) 
+MenuElements.cursorFunc(window, @@menu)
 
 debug_draw = SFMLDebugDraw.new(window, SF::RenderStates.new( #--------------------------------initializes crystal chipmunk draw area
 SF::Transform.new.translate(window.size / 2).scale(1, -1).scale(5, 5)
