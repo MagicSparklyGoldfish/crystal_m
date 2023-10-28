@@ -3,7 +3,7 @@ require "crsfml/audio"
 require "crsfml/system"
 require "../src/Textures.cr"
 require "../src/Audio.cr"
-require "../src/Saves.cr"
+#require "../src/Saves.cr"
 require "../src/Fonts.cr"
 require "../src/Player_Character.cr"
 require "x11"
@@ -51,56 +51,90 @@ GL.enable(GL::TEXTURE_2D)
 include X11
 
 module Gui
-  extend self
-  @@menu : String | Nil; @@cursorposition : String | Nil
-  class Window
-    def Window.run
+extend self
+
+ class Window_Class
+#--------------------------------------------------------+
+#========Window_Class Variables==========================+
+
+  @@menu = "main"
+  @@cursorposition = "up"
+  @@char_select_pointer_position = 0
+
+#========================================================+
+#--------------------------------------------------------+
+#=============Menu Renderers=============================+
+ 
+#//////////////Main Menu/////////////////////////////////+
+  def Window_Class.main_menu(window)
+      window.clear(SF::Color::Black);
+      window.draw(Text_Title); window.draw(Rectangle_Menu)
+      window.draw(Rectangle_Opt1); window.draw(Text_Opt1)
+      window.draw(Rectangle_Opt2); window.draw(Text_Opt2)
+      window.draw(Cursor_opt1)
+  end
+#////////////Character Menu//////////////////////////////+
+  def Window_Class.character_menu(window)
+      window.clear(SF::Color::Blue)
+      window.draw(Rectangle_Charmenu_Ground); window.draw(Rectangle_CharOuter_1); window.draw(Rectangle_CharOuter_2)
+      window.draw(Rectangle_CharOuter_3); window.draw(Rectangle_CharOuter_4); window.draw(Rectangle_CharOuter_5)
+      window.draw(Rectangle_CharOuter_6); window.draw(Rectangle_CharOuter_7)
+      window.draw(Rectangle_CharInner_1); window.draw(Rectangle_CharInner_2); window.draw(Rectangle_CharInner_3)
+      window.draw(Rectangle_CharInner_4); window.draw(Rectangle_CharInner_5); window.draw(Rectangle_CharInner_6)
+      window.draw(Rectangle_CharInner_7); window.draw(Info_Block_1); window.draw(Info_Block_2); window.draw(Info_Block_3)
+      window.draw(Info_Block_4); window.draw(Info_Block_5); window.draw(Info_Block_6); window.draw(Info_Block_7)
+  end
+#========================================================+
+#--------------------------------------------------------+
+#=========Window Functions===============================+
+  def Window_Class.draw(window)
+    case @@menu
+   when "main"
+     MenuElements.cursorFunc(window, @@menu)
+     Window_Class.main_menu(window)
+   when "charselect"
+     Window_Class.character_menu(window)
+     this = @@char_select_pointer_position 
+     MenuElements.char_select_cursor(this)
+   else begin 
+     raise "ERROR! Invalid value for '@@menu'!"
+   rescue
+     @@menu == "main"
+   end; end; end
+   def Window_Class.keypresses(window)
+    case @@menu
+    when "main"
+      Window_Class.main_menu_keypresses(window)
+    when "charselect"
+      Window_Class.char_select_menu_keypresses(window)
+    end
+   end
+    def Window_Class.run
 #---------------------------------------------------------------
 #                       Initialization
 #---------------------------------------------------------------
 window = SF::RenderWindow.new(SF::VideoMode.new(1920, 1080), "Crystal Meth!", SF::Style::Fullscreen) #initializes window
-window.vertical_sync_enabled = true 
-MenuElements.cursorFunc(window, @@menu)
+window.vertical_sync_enabled = false 
 
 debug_draw = SFMLDebugDraw.new(window, SF::RenderStates.new( #--------------------------------initializes crystal chipmunk draw area
 SF::Transform.new.translate(window.size / 2).scale(1, -1).scale(5, 5)
 ))
 
-@@menu = "main"; @@cursorposition = "up"  #---------------------------------------------------initializes variables
-
-
 #---------------------------------------------------------------
 #                 This runs every frame
 #---------------------------------------------------------------
 while window.open?
-  if @@menu == "main"
-    window.clear(SF::Color::Black);
-    window.draw(Text_Title); window.draw(Rectangle_Menu)
-    window.draw(Rectangle_Opt1); window.draw(Text_Opt1)
-    window.draw(Rectangle_Opt2); window.draw(Text_Opt2)
-    window.draw(Cursor_opt1); MenuElements.cursorFunc(window, @@menu)
-    window.display
-  if @@menu == "charselect"
-    puts @@menu
-    window.clear(SF::Color::Blue)
-    window.draw(Rectangle_Charmenu_Ground); window.draw(Rectangle_CharOuter_1); window.draw(Rectangle_CharOuter_2)
-    window.draw(Rectangle_CharOuter_3); window.draw(Rectangle_CharOuter_4); window.draw(Rectangle_CharOuter_5)
-    window.draw(Rectangle_CharOuter_6); window.draw(Rectangle_CharOuter_7)
-    window.draw(Rectangle_CharInner_1); window.draw(Rectangle_CharInner_2); window.draw(Rectangle_CharInner_3)
-    window.draw(Rectangle_CharInner_4); window.draw(Rectangle_CharInner_5); window.draw(Rectangle_CharInner_6)
-    window.draw(Rectangle_CharInner_7); window.draw(Info_Block_1); window.draw(Info_Block_2); window.draw(Info_Block_3)
-    window.draw(Info_Block_4); window.draw(Info_Block_5); window.draw(Info_Block_6); window.draw(Info_Block_7)
-  else begin 
-    raise "ERROR! Invalid value for '@@menu'!"
-  rescue
-    @@menu == "main"
+  Window_Class.keypresses(window)
+  Window_Class.draw(window)
+  window.display
   end
-  end
+end
 #_______________________________________________________________
  
 #---------------------------------------------------------------
-#               This runs every key press 
+#               Main Menu Keypresses
 #---------------------------------------------------------------
+def Window_Class.main_menu_keypresses(window)
   while (event = window.poll_event)
   case event
   when SF::Event::Closed
@@ -132,62 +166,127 @@ while window.open?
      case (@@cursorposition)
 
      when "up" #----------------up
-      window.clear(SF::Color::Blue)
-      window.draw(Rectangle_Charmenu_Ground); window.draw(Rectangle_CharOuter_1); window.draw(Rectangle_CharOuter_2)
-      window.draw(Rectangle_CharOuter_3); window.draw(Rectangle_CharOuter_4); window.draw(Rectangle_CharOuter_5)
-      window.draw(Rectangle_CharOuter_6); window.draw(Rectangle_CharOuter_7)
-      window.draw(Rectangle_CharInner_1); window.draw(Rectangle_CharInner_2); window.draw(Rectangle_CharInner_3)
-      window.draw(Rectangle_CharInner_4); window.draw(Rectangle_CharInner_5); window.draw(Rectangle_CharInner_6)
-      window.draw(Rectangle_CharInner_7); window.draw(Info_Block_1); window.draw(Info_Block_2); window.draw(Info_Block_3)
-      window.draw(Info_Block_4); window.draw(Info_Block_5); window.draw(Info_Block_6); window.draw(Info_Block_7)
        @@menu = "charselect"
        #@@cursorposition = "File1"
        GC.collect
      when "down" #------------down
       SF::Event::Closed
       window.close 
-      end
+      end; end; end; end; end; end
+#_______________________________________________________________
+ 
+#---------------------------------------------------------------
+#               Char Select Keypresses
+#---------------------------------------------------------------
+
+def Window_Class.char_select_menu_keypresses(window)
+  while (event = window.poll_event)
+  case event
+  when SF::Event::Closed
+    window.close
+  when SF::Event::KeyPressed
+    case event.code
+  when SF::Keyboard::Escape
+      window.close
+  when SF::Keyboard::Left
+    if @@char_select_pointer_position > 0
+      All_Audio::SFX.cursor1
+      @@char_select_pointer_position = @@char_select_pointer_position - 1
+      this = @@char_select_pointer_position 
+      MenuElements.char_select_cursor(this)
+      #CONTROLS::Menucontrols.charselectright(this2)
+      #Gui::Menus.slot_highlight(this, this2)
+       end
+  when SF::Keyboard::Right
+    if @@char_select_pointer_position < 8
+   All_Audio::SFX.cursor1
+   @@char_select_pointer_position = @@char_select_pointer_position + 1
+   this = @@char_select_pointer_position 
+   MenuElements.char_select_cursor(this)
+   #CONTROLS::Menucontrols.charselectright(this)
+   #Gui::Menus.slot_highlight(this, this2, event)
     end
+  when SF::Keyboard::Enter
+      All_Audio::SFX.select1
+
+      SF::Event::Closed
+      window.close 
+      end; end; end; end;
   end
 end
-end
-end
-end
-end
-  class MenuElements <Window
-    def MenuElements.cursorFunc(window, @@menu)
-      spawn do
-        blinking = true
-        loop do
-          if blinking
-            Cursor_opt1.texture_rect = SF.int_rect(62, 0, 62, 65)
-        
-          else
-            Cursor_opt1.texture_rect = SF.int_rect(0, 0, 62, 65)
-            if @@menu != "main"
-              break
-            end
-          end
-          blinking = !blinking
-          if window.open?
-            Cursor_opt1.scale = SF.vector2(1, 1) 
-          #CURSOR_TEXTURE_1.update(this)
-           
-          sleep 2.seconds 
-          end
-        end
+
+
+  class MenuElements < Gui::Window_Class
+    @@cursorframe = 1
+    @@char_select_blink = 1
+     def MenuElements.cursorFunc(window, @@menu)
+
+      if @@cursorframe == 1
+        Cursor_opt1.texture_rect = SF.int_rect(62, 0, 62, 65); @@cursorframe = @@cursorframe + 1
+
+      else if @@cursorframe == 2  
+        Cursor_opt1.texture_rect = SF.int_rect(0, 0, 62, 65); @@cursorframe = @@cursorframe + 1
+  
+      else if @@cursorframe == 3 
+        @@cursorframe = 1
       end
-      Fiber.yield
-    end
-end
+      window.draw(Cursor_opt1)
+      Cursor_opt1.scale = SF.vector2(1, 1) 
+      end; end; end  
+    
+     def MenuElements.char_select_cursor(this)
+
+         case this
+      when 1
+           this2 = Rectangle_CharInner_1
+      when 2
+           this2 = Rectangle_CharInner_2
+         end
+         if this2.nil? 
+          this2 = Rectangle_CharInner_1
+          puts this
+       if @@char_select_blink == 1
+        this2.fill_color = SF.color(150, 250, 50, 155); @@char_select_blink = @@char_select_blink + 1
+       else if @@char_select_blink == 5
+        this2.fill_color = SF.color(150, 250, 50, 255); @@char_select_blink = @@char_select_blink + 1
+       else if @@char_select_blink > 9
+        @@char_select_blink = 1
+       else @@char_select_blink = @@char_select_blink + 1
+       end; end; end; end
+     end
+  end
 #_______________________________________________________________
 #---------------------------------------------------------------
 #                         Runs the program
 #---------------------------------------------------------------
-Gui::Window.run
-end
-end
+Gui::Window_Class.run
 end
 
 
 
+
+
+
+# def run
+#   while @window.open?
+#     handle_events
+#     update
+#     draw
+#   end
+# end
+
+# def handle_events
+#   # Check events here, don't draw anything here
+# end
+
+# def update
+#   # Put your logic here, also no drawing here
+# end
+
+# def draw
+#   # Draw your stuff here - and nothing more
+#   @window.display # Render the window as the last thing to do
+# end
+# end
+
+# Game.new.run
