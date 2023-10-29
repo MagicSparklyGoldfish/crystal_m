@@ -3,7 +3,7 @@ require "crsfml/audio"
 require "crsfml/system"
 require "../src/Textures.cr"
 require "../src/Audio.cr"
-#require "../src/Saves.cr"
+require "../src/Saves.cr"
 require "../src/Fonts.cr"
 require "../src/Player_Character.cr"
 require "x11"
@@ -60,6 +60,7 @@ extend self
   @@menu = "main"
   @@cursorposition = "up"
   @@char_select_pointer_position = 0
+  @@save_file_slot : Int32 = 0
 
 #========================================================+
 #--------------------------------------------------------+
@@ -95,7 +96,7 @@ extend self
    when "charselect"
      Window_Class.character_menu(window)
      this = @@char_select_pointer_position 
-     MenuElements.char_select_cursor(this)
+     MenuElements.char_select_cursor(this, window)
    else begin 
      raise "ERROR! Invalid value for '@@menu'!"
    rescue
@@ -193,7 +194,7 @@ def Window_Class.char_select_menu_keypresses(window)
       All_Audio::SFX.cursor1
       @@char_select_pointer_position = @@char_select_pointer_position - 1
       this = @@char_select_pointer_position 
-      MenuElements.char_select_cursor(this)
+      MenuElements.char_select_cursor(this, window)
       #CONTROLS::Menucontrols.charselectright(this2)
       #Gui::Menus.slot_highlight(this, this2)
        end
@@ -202,15 +203,16 @@ def Window_Class.char_select_menu_keypresses(window)
    All_Audio::SFX.cursor1
    @@char_select_pointer_position = @@char_select_pointer_position + 1
    this = @@char_select_pointer_position 
-   MenuElements.char_select_cursor(this)
+   MenuElements.char_select_cursor(this, window)
    #CONTROLS::Menucontrols.charselectright(this)
    #Gui::Menus.slot_highlight(this, this2, event)
     end
   when SF::Keyboard::Enter
       All_Audio::SFX.select1
-
-      SF::Event::Closed
-      window.close 
+      save_file_slot = @@char_select_pointer_position
+      SaveData.create_new_savegame (save_file_slot)
+      # SF::Event::Closed
+      # window.close 
       end; end; end; end;
   end
 end
@@ -234,25 +236,26 @@ end
       Cursor_opt1.scale = SF.vector2(1, 1) 
       end; end; end  
     
-     def MenuElements.char_select_cursor(this)
+     def MenuElements.char_select_cursor(this, window)
 
          case this
       when 1
            this2 = Rectangle_CharInner_1
       when 2
            this2 = Rectangle_CharInner_2
-         end
-         if this2.nil? 
-          this2 = Rectangle_CharInner_1
-          puts this
-       if @@char_select_blink == 1
-        this2.fill_color = SF.color(150, 250, 50, 155); @@char_select_blink = @@char_select_blink + 1
-       else if @@char_select_blink == 5
-        this2.fill_color = SF.color(150, 250, 50, 255); @@char_select_blink = @@char_select_blink + 1
-       else if @@char_select_blink > 9
-        @@char_select_blink = 1
-       else @@char_select_blink = @@char_select_blink + 1
-       end; end; end; end
+      #    end
+      #    if this2.nil? 
+      #     this2 = Rectangle_CharInner_0
+      #  if @@char_select_blink == 1
+      #   this2.move(SF.vector2(0, -5)); @@char_select_blink = @@char_select_blink + 1
+      #  else if @@char_select_blink == 5
+      #   this2.move(SF.vector2(0, 5)); @@char_select_blink = @@char_select_blink + 1
+      #  else if @@char_select_blink > 9
+      #   @@char_select_blink = 1
+      #  else @@char_select_blink = @@char_select_blink + 1
+      #   window.draw(this2)
+      #  end; end; end; 
+    end
      end
   end
 #_______________________________________________________________

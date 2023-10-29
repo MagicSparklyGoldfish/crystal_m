@@ -48,6 +48,8 @@ Rectangle_CharOuter_6.position = SF.vector2(850, 600)
 Rectangle_CharOuter_7 = SF::RectangleShape.new(SF.vector2(200, 300)); Rectangle_CharOuter_7.fill_color = SF.color(50, 50, 150)
 Rectangle_CharOuter_7.position = SF.vector2(1350, 600)
 #_________________________________Char Blocks Inner____________________________________________________
+Rectangle_CharInner_0 = SF::RectangleShape.new(SF.vector2(96, 128));
+
 Rectangle_CharInner_1 = SF::RectangleShape.new(SF.vector2(96, 128)); Rectangle_CharInner_1.fill_color = SF.color(150, 250, 50)
 Rectangle_CharInner_1.position = SF.vector2(150, 500)
 #Char_Skin01.position = SF.vector2(150, 515)
