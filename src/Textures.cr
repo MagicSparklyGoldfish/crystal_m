@@ -1,4 +1,9 @@
 #-----------------------------------------------------------------------------------------------------
+#                                    Menu Textures
+#-----------------------------------------------------------------------------------------------------
+WOOD_TEXTURE_1 = SF::Texture.from_file("graphics/Wood01.png")
+
+#-----------------------------------------------------------------------------------------------------
 #                                     Main Menu
 #-----------------------------------------------------------------------------------------------------
 #_______________________________________Title_________________________________________________________
@@ -92,3 +97,31 @@ Info_Block_6.position = SF.vector2(840, 880); Info_Block_6.outline_thickness = 3
 
 Info_Block_7 = SF::RectangleShape.new(SF.vector2(220, 150)); Info_Block_7.fill_color = SF.color(150, 250, 150)
 Info_Block_7.position = SF.vector2(1340, 880); Info_Block_7.outline_thickness = 3.5; Info_Block_7.outline_color = SF.color(150, 150, 150)
+#------------------------------------------------------------------------------------------------------
+#                                  Character Creation Menu
+#------------------------------------------------------------------------------------------------------
+#______________________________________Ground__________________________________________________________
+#Rectangle_Charcreation_Ground = SF::RectangleShape.new(SF.vector2(8000, 700)); 
+#Rectangle_Charcreation_Ground.fill_color = SF.color(50, 25, 0)
+Rectangle_Charcreation_Ground.position = SF.vector2(0, 500); Rectangle_Charcreation_Ground = SF::Sprite.new(WOOD_TEXTURE_1)
+#______________________________________Cubby 1_________________________________________________________
+Rectangle_Cubby_01 = SF::RectangleShape.new(SF.vector2(250, 250)); Rectangle_Cubby_01.fill_color = SF.color(50, 25, 0)
+Rectangle_Cubby_01.position = SF.vector2(250, 50);
+#______________________________________Cubby 2_________________________________________________________
+Rectangle_Cubby_02 = SF::RectangleShape.new(SF.vector2(250, 250)); Rectangle_Cubby_02.fill_color = SF.color(50, 25, 0)
+Rectangle_Cubby_02.position = SF.vector2(250, 330);
+#______________________________________Cubby 3_________________________________________________________
+Rectangle_Cubby_03 = SF::RectangleShape.new(SF.vector2(250, 250)); Rectangle_Cubby_03.fill_color = SF.color(50, 25, 0)
+Rectangle_Cubby_03.position = SF.vector2(250, 610);
+#______________________________________Cubby 4_________________________________________________________
+Rectangle_Cubby_04 = SF::RectangleShape.new(SF.vector2(250, 250)); Rectangle_Cubby_04.fill_color = SF.color(50, 25, 0)
+Rectangle_Cubby_04.position = SF.vector2(1450, 50);
+#______________________________________Cubby 5_________________________________________________________
+Rectangle_Cubby_05 = SF::RectangleShape.new(SF.vector2(250, 250)); Rectangle_Cubby_05.fill_color = SF.color(50, 25, 0)
+Rectangle_Cubby_05.position = SF.vector2(1450, 330);
+#______________________________________Cubby 6_________________________________________________________
+Rectangle_Cubby_06 = SF::RectangleShape.new(SF.vector2(250, 250)); Rectangle_Cubby_06.fill_color = SF.color(50, 25, 0)
+Rectangle_Cubby_06.position = SF.vector2(1450, 610);
+#______________________________________Cubby 7_________________________________________________________
+Rectangle_Cubby_07 = SF::RectangleShape.new(SF.vector2(250, 250)); Rectangle_Cubby_07.fill_color = SF.color(50, 25, 0)
+Rectangle_Cubby_07.position = SF.vector2(1170, 610);

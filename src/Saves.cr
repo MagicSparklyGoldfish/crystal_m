@@ -16,7 +16,6 @@ require "file_utils"
 #UPDATE! finally made the window stop fucking closing. "window.close" was in the goddamn method for some fucking reason goddammit
 struct SaveData
     include YAML::Serializable
-property slot : Int64
 property name : String
 property level : Int64
 property location : String
@@ -32,7 +31,6 @@ property luck : Int64
 property questdata : Array(String)
 
 def SaveData.initialize_save_data
- @@slot = 5
  @@name = "some rando"
  @@level = 1
  @@location = "start"
@@ -48,10 +46,13 @@ def SaveData.initialize_save_data
  @@questdata = ["incomplete", "incomplete", "incomplete"]
 end
 end
-def SaveData.create_new_savegame (save_file_slot)
+def SaveData.savegame
+    
+end
+def SaveData.create_new_savegame
     SaveData.initialize_save_data
-yaml = YAML.dump({@@slot, @@name}) 
-File.open("Saves/Slot1/save01.yml", "w") { |f| YAML.dump({@@slot, @@name}, f) }
+yaml = YAML.dump({@@name, @@level, @@location, @@playtime, @@appearance, @@exp, @@hp, @@mp, @@strength, @@dexterity, @@intelligence, @@luck, @@questdata}) 
+File.open("Saves/Slot1/save01.yml", "w") { |f| YAML.dump({@@name, @@level, @@location, @@playtime, @@appearance, @@exp, @@hp, @@mp, @@strength, @@dexterity, @@intelligence, @@luck, @@questdata}, f) }
 
 end
 

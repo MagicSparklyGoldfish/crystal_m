@@ -9,6 +9,7 @@ require "../src/Player_Character.cr"
 require "x11"
 require "crystal/system/time"
 require "chipmunk/chipmunk_crsfml"
+require "file_utils"
 #require "timer"
 
 
@@ -85,6 +86,12 @@ extend self
       window.draw(Rectangle_CharInner_7); window.draw(Info_Block_1); window.draw(Info_Block_2); window.draw(Info_Block_3)
       window.draw(Info_Block_4); window.draw(Info_Block_5); window.draw(Info_Block_6); window.draw(Info_Block_7)
   end
+#//////////Character Creation////////////////////////////+
+def Window_Class.character_creation_menu(window)
+    window.clear(SF::Color::White); window.draw(Rectangle_Charcreation_Ground); window.draw(Rectangle_Cubby_01)
+    window.draw(Rectangle_Cubby_02); window.draw(Rectangle_Cubby_03); window.draw(Rectangle_Cubby_04); window.draw(Rectangle_Cubby_05)
+    window.draw(Rectangle_Cubby_06); window.draw(Rectangle_Cubby_07)
+end
 #========================================================+
 #--------------------------------------------------------+
 #=========Window Functions===============================+
@@ -97,6 +104,8 @@ extend self
      Window_Class.character_menu(window)
      this = @@char_select_pointer_position 
      MenuElements.char_select_cursor(this, window)
+   when "charcreate"
+    Window_Class.character_creation_menu(window)
    else begin 
      raise "ERROR! Invalid value for '@@menu'!"
    rescue
@@ -108,6 +117,8 @@ extend self
       Window_Class.main_menu_keypresses(window)
     when "charselect"
       Window_Class.char_select_menu_keypresses(window)
+    when "charcreate"
+      Window_Class.char_creation_menu_keypresses(window)
     end
    end
     def Window_Class.run
@@ -160,6 +171,8 @@ def Window_Class.main_menu_keypresses(window)
       @@cursorposition = "down"
       window.display
     end
+  when SF::Keyboard::C #---------------for testing purposes, remove when testing done
+    @@menu = "charcreate"
   when SF::Keyboard::Enter
     puts "enter"
      if @@menu == "main"
@@ -210,13 +223,32 @@ def Window_Class.char_select_menu_keypresses(window)
   when SF::Keyboard::Enter
       All_Audio::SFX.select1
       save_file_slot = @@char_select_pointer_position
-      SaveData.create_new_savegame (save_file_slot)
+      case @@char_select_pointer_position
+
+      when 1
+      if File.exists?("Saves/Slot1/save01.yml") == false
+        SaveData.create_new_savegame
+        @@menu = "charcreate"
+      else puts "loadgame"
       # SF::Event::Closed
       # window.close 
-      end; end; end; end;
-  end
+      end; end; end; end; end; end;
+#______________________________________________________________
+#---------------------------------------------------------------
+#               Main Menu Keypresses
+#---------------------------------------------------------------
+def Window_Class.char_creation_menu_keypresses(window)
+  while (event = window.poll_event)
+    case event
+    when SF::Event::Closed
+      window.close
+    when SF::Event::KeyPressed
+      case event.code
+    when SF::Keyboard::Escape
+        window.close
+    end; end; end; end
 end
-
+end
 
   class MenuElements < Gui::Window_Class
     @@cursorframe = 1
