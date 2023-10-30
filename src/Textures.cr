@@ -1,12 +1,22 @@
+#||||||||||||||||||||||||||||||||||||||Textures|||||||||||||||||||||||||||||||||||||||||||||||||||||||
 #-----------------------------------------------------------------------------------------------------
 #                                    Menu Textures
 #-----------------------------------------------------------------------------------------------------
 WOOD_TEXTURE_1 = SF::Texture.from_file("graphics/Wood01.png"); WALLPAPER_1 = SF::Texture.from_file("graphics/Wallpaper_01.png")
-CUBBY_TEXTURE = SF::Texture.from_file("graphics/Cubbies.png");
-
+CABINET_01_TEXTURE = SF::Texture.from_file("graphics/Cabinet01.png"); CURSOR_TEXTURE_1 = SF::Texture.from_file("graphics/Cursor.png")
+CHAR_CREATE_CURSOR_TEXTURE_1 = SF::Texture.from_file("graphics/Char_Create_Cursor.png")
+#-----------------------------------------------------------------------------------------------------
+#                                  Character Textures
+#-----------------------------------------------------------------------------------------------------
+CHAR_SKIN = SF::Texture.from_file("graphics/Char_Skin.png")
+#_____________________________________________________________________________________________________
+#||||||||||||||||||||||||||||||||||Shapes and Sprites|||||||||||||||||||||||||||||||||||||||||||||||||
 #-----------------------------------------------------------------------------------------------------
 #                                     Main Menu
 #-----------------------------------------------------------------------------------------------------
+#______________________________________Cursor_________________________________________________________
+Cursor_opt1.texture_rect = SF.int_rect(0, 0, 62, 65); Cursor_opt1.position = SF.vector2(750, 610)
+Cursor_opt1 = SF::Sprite.new(CURSOR_TEXTURE_1) 
 #_______________________________________Title_________________________________________________________
 Text_Title = SF::Text.new; Text_Title.font = FONT_TITLE; Text_Title.string = "Crystal Meth!"; Text_Title.character_size = 80
 Text_Title.color = SF::Color::White; Text_Title.style = (SF::Text::Bold); Text_Title.position = SF.vector2(650, 50)
@@ -150,8 +160,8 @@ Rectangle_Cubby_07.position = SF.vector2(1170, 610); Rectangle_Cubby_07.set_text
 Rectangle_Cubby_07.texture_rect = SF.int_rect(700, 900, 600, 600); Rectangle_Cubby_07.outline_thickness = 1 
 Rectangle_Cubby_07.outline_color = SF.color(30, 15, 0)
 #______________________________________Cabinet_________________________________________________________
-Cabinet_01 = SF::RectangleShape.new(SF.vector2(250, 530)); Cabinet_01.fill_color = SF.color(50, 25, 0)
-Cabinet_01.position = SF.vector2(1170, 50);
+Cabinet_01 = SF::RectangleShape.new(SF.vector2(250, 530)); Cabinet_01.fill_color = SF.color(205, 205, 205)
+Cabinet_01.position = SF.vector2(1170, 50); Cabinet_01.set_texture(CABINET_01_TEXTURE, reset_rect: false)
 #___________________________________Left Black Bar_____________________________________________________
 Left_Black_Bar = SF::RectangleShape.new(SF.vector2(150, 1080)); Left_Black_Bar.fill_color = SF.color(0, 0, 0)
 Left_Black_Bar.position = SF.vector2(0, 0);
@@ -161,3 +171,16 @@ Right_Black_Bar.position = SF.vector2(1800, 0);
 #___________________________________Bottom Black Bar___________________________________________________
 Bottom_Black_Bar = SF::RectangleShape.new(SF.vector2(2000, 140)); Bottom_Black_Bar.fill_color = SF.color(0, 0, 0)
 Bottom_Black_Bar.position = SF.vector2(0, 960);
+#__________________________________Char Create Cursor__________________________________________________
+Char_Creat_Cursor = SF::RectangleShape.new(SF.vector2(295, 25)); #Char_Creat_Cursor.fill_color = SF.color(150, 150, 255)
+Char_Creat_Cursor.position = SF.vector2(225, 285); Char_Creat_Cursor.set_texture(CHAR_CREATE_CURSOR_TEXTURE_1, reset_rect: false)
+Char_Creat_Cursor.texture_rect = SF.int_rect(0, 0, 295, 25)
+
+#------------------------------------------------------------------------------------------------------
+#                                  Character Model
+#------------------------------------------------------------------------------------------------------
+#___________________________________Character Skin_____________________________________________________
+Char_Skin01.texture_rect = SF.int_rect(0, 0, 96, 128); Char_Skin01 = SF::Sprite.new(CHAR_SKIN)
+#_________________________________Character Creation___________________________________________________
+
+

@@ -15,14 +15,41 @@ PLAYER_CHAR_TEXTURE_01 = SF::Texture.from_file("graphics/Char_Skin.png")
 #PLAYER_CHAR.position = SF.vector2(750, 610)
 PLAYER_CHAR = SF::Sprite.new(PLAYER_CHAR_TEXTURE_01) 
 #--------------------------------------------------------------------
+#                          Hair Textures
+#--------------------------------------------------------------------
+#.......................Shounen Hair Black...........................
+SHOUNEN_HAIR_TEXTURE_01 = SF::Texture.from_file("graphics/Shounen_Hair.png")
+SHOUNEN_HAIR_01 = SF::Sprite.new(SHOUNEN_HAIR_TEXTURE_01) 
+#.......................Shounen Hair Green............................
+SHOUNEN_HAIR_02 = SF::Sprite.new(SHOUNEN_HAIR_TEXTURE_01) 
+SHOUNEN_HAIR_02.color = SF.color(50, 255, 50) 
+#.......................Shounen Hair Blue.............................
+SHOUNEN_HAIR_03 = SF::Sprite.new(SHOUNEN_HAIR_TEXTURE_01) 
+SHOUNEN_HAIR_03.color = SF.color(50, 50, 255) 
+#.......................Shounen Hair Red.............................
+SHOUNEN_HAIR_04 = SF::Sprite.new(SHOUNEN_HAIR_TEXTURE_01) 
+SHOUNEN_HAIR_04.color = SF.color(255, 0, 0) 
+#.......................Shounen Hair Yellow..........................
+SHOUNEN_HAIR_05 = SF::Sprite.new(SHOUNEN_HAIR_TEXTURE_01) 
+SHOUNEN_HAIR_05.color = SF.color(255, 240, 80)
+#.......................Shounen Hair White..........................
+SHOUNEN_HAIR_06 = SF::Sprite.new(SHOUNEN_HAIR_TEXTURE_01) 
+SHOUNEN_HAIR_06.color = SF.color(255, 255, 255)
+#--------------------------------------------------------------------
+#                          Face Textures
+#--------------------------------------------------------------------
+BUTTON_FACE_TEXTURE_01 = SF::Texture.from_file("graphics/Butto_Eyes.png")
+BUTTON_FACE_01 = SF::Sprite.new(BUTTON_FACE_TEXTURE_01) 
+#--------------------------------------------------------------------
 #                          Shirt Textures
 #--------------------------------------------------------------------
 T_SHIRT_TEXTURE_01 = SF::Texture.from_file("graphics/T-Shirt_01.png")
-#T_SHIRT.texture_rect = SF.int_rect(0, 0, 96, 128)
-#T_SHIRT.position = SF.vector2(750, 610)
 T_SHIRT = SF::Sprite.new(T_SHIRT_TEXTURE_01) 
-
-
+#--------------------------------------------------------------------
+#                          Pants Textures
+#--------------------------------------------------------------------
+SHORTS_TEXTURE_01 = SF::Texture.from_file("graphics/Shorts.png")
+SHORTS_01 = SF::Sprite.new(SHORTS_TEXTURE_01) 
 
 
 

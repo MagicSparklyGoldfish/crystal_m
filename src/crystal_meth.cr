@@ -29,23 +29,7 @@ lib GL
 end
 
 
-CURSOR_TEXTURE_1 = SF::Texture.from_file("graphics/Cursor.png")
-Cursor_opt1.texture_rect = SF.int_rect(0, 0, 62, 65)
-Cursor_opt1.position = SF.vector2(750, 610)
-Cursor_opt1 = SF::Sprite.new(CURSOR_TEXTURE_1) 
 
-CHAR_SKIN = SF::Texture.from_file("graphics/Char_Skin.png")
-Char_Skin01.texture_rect = SF.int_rect(0, 0, 96, 128)
-Char_Skin01 = SF::Sprite.new(CHAR_SKIN)
-
-Player_Character_Model = SF::RenderTexture.new(672, 512)  
-Player_Character_Model.draw(PLAYER_CHAR)
-Player_Character_Model.draw(T_SHIRT)
-Player_Character_Model.display
-Player_Character_Model.create(672, 512, false)
-Player_Char_Rendered_Model = SF::Sprite.new(Player_Character_Model.texture)
-Player_Char_Rendered_Model.texture_rect = SF.int_rect(0, 0, 96, 128)
-Player_Char_Rendered_Model.position = SF.vector2(150, 515)
 
 # it works out of the box
 GL.enable(GL::TEXTURE_2D)
@@ -62,7 +46,33 @@ extend self
   @@cursorposition = "up"
   @@char_select_pointer_position = 0
   @@save_file_slot : Int32 = 0
+  @@char_create_pointer_position = [1, 1]
+  @@player_character_model = SF::RenderTexture.new(672, 512)
+  @@player_character_rendered_model = SF::Sprite.new(@@player_character_model.texture)
+  @@hair_array : Array(SF::Sprite)
+  @@hair_array = [SHOUNEN_HAIR_01, SHOUNEN_HAIR_02, SHOUNEN_HAIR_03, SHOUNEN_HAIR_04, SHOUNEN_HAIR_05, SHOUNEN_HAIR_06] 
+  #@@current_hair = @@hair_Array
 
+#========================================================+
+#--------------------------------------------------------+
+#=============Character Model============================+
+
+def Window_Class.player_model_initialize  
+  @@player_character_model.draw(PLAYER_CHAR)
+  @@player_character_model.draw(BUTTON_FACE_01)
+  @@player_character_model.draw(@@hair_array[0])
+  @@player_character_model.draw(SHORTS_01)
+  @@player_character_model.draw(T_SHIRT)
+  @@player_character_model.create(672, 512, false)
+  @@player_character_model.display
+  @@player_character_rendered_model.texture_rect = SF.int_rect(0, 0, 96, 128)
+  @@player_character_rendered_model.position = SF.vector2(660, 515)
+  @@player_character_rendered_model.scale = SF.vector2(3.0, 3.0)
+  end
+def Window_Class.customize_hair(window)
+  a = 2
+  @@hair_array[a]; window.draw(@@hair_array[a])
+end
 #========================================================+
 #--------------------------------------------------------+
 #=============Menu Renderers=============================+
@@ -92,11 +102,12 @@ def Window_Class.character_creation_menu(window)
     window.draw(Rectangle_Dresser_01); window.draw(Rectangle_Dresser_02); window.draw(Rectangle_Cubby_01)
     window.draw(Rectangle_Cubby_02); window.draw(Rectangle_Cubby_03); window.draw(Rectangle_Cubby_04); window.draw(Rectangle_Cubby_05)
     window.draw(Rectangle_Cubby_06); window.draw(Rectangle_Cubby_07); window.draw(Cabinet_01); window.draw(Left_Black_Bar)
-    window.draw(Right_Black_Bar); window.draw(Bottom_Black_Bar)
+    window.draw(Right_Black_Bar); window.draw(Bottom_Black_Bar); window.draw(Char_Creat_Cursor); window.draw(@@player_character_rendered_model)
 end
 #========================================================+
 #--------------------------------------------------------+
 #=========Window Functions===============================+
+#//////////////Draw//////////////////////////////////////+
   def Window_Class.draw(window)
     case @@menu
    when "main"
@@ -107,12 +118,15 @@ end
      this = @@char_select_pointer_position 
      MenuElements.char_select_cursor(this, window)
    when "charcreate"
+    MenuElements.charcreatecursorFunc(window, @@menu)
+    MenuElements.charcreatecursorMoveFunc(window, @@char_create_pointer_position)
     Window_Class.character_creation_menu(window)
    else begin 
      raise "ERROR! Invalid value for '@@menu'!"
    rescue
      @@menu == "main"
    end; end; end
+#///////Keypresses///////////////////////////////////////+
    def Window_Class.keypresses(window)
     case @@menu
     when "main"
@@ -123,6 +137,10 @@ end
       Window_Class.char_creation_menu_keypresses(window)
     end
    end
+#//////Character Creation///////////////////////////////+
+    def Window_Class.character_creation_logic
+
+    end
     def Window_Class.run
 #---------------------------------------------------------------
 #                       Initialization
@@ -174,6 +192,7 @@ def Window_Class.main_menu_keypresses(window)
       window.display
     end
   when SF::Keyboard::C #---------------for testing purposes, remove when testing done
+    Window_Class.player_model_initialize
     @@menu = "charcreate"
   when SF::Keyboard::Enter
     puts "enter"
@@ -230,15 +249,16 @@ def Window_Class.char_select_menu_keypresses(window)
       when 1
       if File.exists?("Saves/Slot1/save01.yml") == false
         SaveData.create_new_savegame
+        Window_Class.player_model_initialize
         @@menu = "charcreate"
       else puts "loadgame"
       # SF::Event::Closed
       # window.close 
       end; end; end; end; end; end;
-#______________________________________________________________
-#---------------------------------------------------------------
-#               Main Menu Keypresses
-#---------------------------------------------------------------
+#________________________________________________________________
+#----------------------------------------------------------------
+#               Char Creation Keypresses
+#----------------------------------------------------------------
 def Window_Class.char_creation_menu_keypresses(window)
   while (event = window.poll_event)
     case event
@@ -246,11 +266,41 @@ def Window_Class.char_creation_menu_keypresses(window)
       window.close
     when SF::Event::KeyPressed
       case event.code
+
+#*********************Escape************************************
     when SF::Keyboard::Escape
         window.close
-    end; end; end; end
+    
+#*********************Down**************************************        
+    when SF::Keyboard::Down
+      All_Audio::SFX.char_create_down
+      if @@char_create_pointer_position[0] != 8
+      @@char_create_pointer_position[0] = @@char_create_pointer_position[0] + 1
+      else if @@char_create_pointer_position[0] = 8
+        @@char_create_pointer_position[0] = 1
+      end; end
+#**********************Up***************************************
+    when SF::Keyboard::Up
+      All_Audio::SFX.char_create_up
+      if @@char_create_pointer_position[0] != 0
+         @@char_create_pointer_position[0] = @@char_create_pointer_position[0] - 1
+      else if @@char_create_pointer_position[0] = 0
+         @@char_create_pointer_position[0] = 7
+    end; end;
+#********************Enter**************************************  
+    when SF::Keyboard::Enter
+#********************Left***************************************  
+    when SF::Keyboard::Left
+      All_Audio::SFX.char_create_sideways
+      Window_Class.customize_hair(window)
+#********************Right***************************************  
+    when SF::Keyboard::Right
+      All_Audio::SFX.char_create_sideways
+  end; end; end; end; end
 end
-end
+
+
+#----------------Menu Elements___________________________________
 
   class MenuElements < Gui::Window_Class
     @@cursorframe = 1
@@ -291,6 +341,67 @@ end
       #  end; end; end; 
     end
      end
+     def MenuElements.charcreatecursorFunc(window, @@menu)
+
+      if @@cursorframe > 0 && @@cursorframe < 101
+        Char_Creat_Cursor.texture_rect = SF.int_rect(0, 0, 295, 25); @@cursorframe = @@cursorframe + 1
+
+      else if  @@cursorframe > 100 && @@cursorframe <201
+        Char_Creat_Cursor.texture_rect = SF.int_rect(0, 25, 295, 25); @@cursorframe = @@cursorframe + 1
+  
+       else if @@cursorframe > 200 && @@cursorframe < 201
+         Char_Creat_Cursor.texture_rect = SF.int_rect(0, 50, 295, 25); @@cursorframe = @@cursorframe + 1
+
+       else if  @@cursorframe > 200 && @@cursorframe < 301
+         Char_Creat_Cursor.texture_rect = SF.int_rect(0, 75, 295, 25); @@cursorframe = @@cursorframe + 1
+
+       else if @@cursorframe > 300 && @@cursorframe < 401
+        Char_Creat_Cursor.texture_rect = SF.int_rect(0, 100, 295, 25); @@cursorframe = @@cursorframe + 1
+
+       else if @@cursorframe > 400 && @@cursorframe < 501
+        Char_Creat_Cursor.texture_rect = SF.int_rect(0, 125, 295, 25); @@cursorframe = @@cursorframe + 1
+
+       else if @@cursorframe > 500 && @@cursorframe < 601
+        Char_Creat_Cursor.texture_rect = SF.int_rect(0, 100, 295, 25); @@cursorframe = @@cursorframe + 1
+
+       else if  @@cursorframe > 600 && @@cursorframe < 701
+        Char_Creat_Cursor.texture_rect = SF.int_rect(0, 75, 295, 25); @@cursorframe = @@cursorframe + 1
+
+       else if @@cursorframe > 700 && @@cursorframe < 801
+        Char_Creat_Cursor.texture_rect = SF.int_rect(0, 50, 295, 25); @@cursorframe = @@cursorframe + 1
+
+       else if  @@cursorframe > 800 && @@cursorframe < 901
+        Char_Creat_Cursor.texture_rect = SF.int_rect(0, 25, 295, 25); @@cursorframe = @@cursorframe + 1
+
+       else if  @@cursorframe > 900 && @@cursorframe < 1001
+        Char_Creat_Cursor.texture_rect = SF.int_rect(0, 25, 295, 25); @@cursorframe = @@cursorframe + 1
+  
+      else if @@cursorframe == 1001 
+        @@cursorframe = 1
+      end
+      window.draw(Cursor_opt1)
+      Cursor_opt1.scale = SF.vector2(1, 1) 
+      end; end; end; end; end; end; end; end; end; end; end; end  
+
+      def MenuElements.charcreatecursorMoveFunc(window, @@char_create_pointer_position)
+        
+        case @@char_create_pointer_position[0]
+        when 1 
+          Char_Creat_Cursor.position = SF.vector2(225, 285) 
+        when 2
+          Char_Creat_Cursor.position = SF.vector2(225, 565) 
+        when 3
+          Char_Creat_Cursor.position = SF.vector2(225, 845) 
+        when 4
+          Char_Creat_Cursor.position = SF.vector2(1145, 845)
+        when 5
+          Char_Creat_Cursor.position = SF.vector2(1425, 285)
+        when 6
+          Char_Creat_Cursor.position = SF.vector2(1425, 565) 
+        when 7
+          Char_Creat_Cursor.position = SF.vector2(1425, 845) 
+
+      end; end
   end
 #_______________________________________________________________
 #---------------------------------------------------------------
