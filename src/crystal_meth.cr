@@ -88,9 +88,11 @@ extend self
   end
 #//////////Character Creation////////////////////////////+
 def Window_Class.character_creation_menu(window)
-    window.clear(SF::Color::White); window.draw(Rectangle_Charcreation_Ground); window.draw(Rectangle_Cubby_01)
+    window.clear(SF::Color::White); window.draw(Rectangle_Charcreation_Backwall); window.draw(Rectangle_Charcreation_Ground) 
+    window.draw(Rectangle_Dresser_01); window.draw(Rectangle_Dresser_02); window.draw(Rectangle_Cubby_01)
     window.draw(Rectangle_Cubby_02); window.draw(Rectangle_Cubby_03); window.draw(Rectangle_Cubby_04); window.draw(Rectangle_Cubby_05)
-    window.draw(Rectangle_Cubby_06); window.draw(Rectangle_Cubby_07)
+    window.draw(Rectangle_Cubby_06); window.draw(Rectangle_Cubby_07); window.draw(Cabinet_01); window.draw(Left_Black_Bar)
+    window.draw(Right_Black_Bar); window.draw(Bottom_Black_Bar)
 end
 #========================================================+
 #--------------------------------------------------------+

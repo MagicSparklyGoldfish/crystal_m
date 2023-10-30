@@ -1,7 +1,8 @@
 #-----------------------------------------------------------------------------------------------------
 #                                    Menu Textures
 #-----------------------------------------------------------------------------------------------------
-WOOD_TEXTURE_1 = SF::Texture.from_file("graphics/Wood01.png")
+WOOD_TEXTURE_1 = SF::Texture.from_file("graphics/Wood01.png"); WALLPAPER_1 = SF::Texture.from_file("graphics/Wallpaper_01.png")
+CUBBY_TEXTURE = SF::Texture.from_file("graphics/Cubbies.png");
 
 #-----------------------------------------------------------------------------------------------------
 #                                     Main Menu
@@ -100,28 +101,63 @@ Info_Block_7.position = SF.vector2(1340, 880); Info_Block_7.outline_thickness = 
 #------------------------------------------------------------------------------------------------------
 #                                  Character Creation Menu
 #------------------------------------------------------------------------------------------------------
+#_____________________________________Backwall_________________________________________________________
+Rectangle_Charcreation_Backwall = SF::RectangleShape.new(SF.vector2(8000, 600)); Rectangle_Charcreation_Backwall.position = SF.vector2(0, 0);
+Rectangle_Charcreation_Backwall.set_texture(WALLPAPER_1, reset_rect: false)
 #______________________________________Ground__________________________________________________________
-#Rectangle_Charcreation_Ground = SF::RectangleShape.new(SF.vector2(8000, 700)); 
-#Rectangle_Charcreation_Ground.fill_color = SF.color(50, 25, 0)
-Rectangle_Charcreation_Ground.position = SF.vector2(0, 500); Rectangle_Charcreation_Ground = SF::Sprite.new(WOOD_TEXTURE_1)
+Rectangle_Charcreation_Ground.position = SF.vector2(0, 600); Rectangle_Charcreation_Ground = SF::Sprite.new(WOOD_TEXTURE_1)
+#_____________________________________Dresser 1________________________________________________________
+Rectangle_Dresser_01 = SF::RectangleShape.new(SF.vector2(330, 900)); Rectangle_Dresser_01.fill_color = SF.color(210, 210, 255)
+Rectangle_Dresser_01.position = SF.vector2(210, 10); Rectangle_Dresser_01.set_texture(WOOD_TEXTURE_1, reset_rect: false)
+Rectangle_Dresser_01.outline_thickness = 1; Rectangle_Dresser_01.outline_color = SF.color(30, 15, 0)
+#_____________________________________Dresser 2________________________________________________________
+Rectangle_Dresser_02 = SF::RectangleShape.new(SF.vector2(610, 900)); Rectangle_Dresser_02.fill_color = SF.color(210, 210, 255)
+Rectangle_Dresser_02.position = SF.vector2(1130, 10); Rectangle_Dresser_02.set_texture(WOOD_TEXTURE_1, reset_rect: false)
+Rectangle_Dresser_02.outline_thickness = 1; Rectangle_Dresser_02.outline_color = SF.color(30, 15, 0)
 #______________________________________Cubby 1_________________________________________________________
-Rectangle_Cubby_01 = SF::RectangleShape.new(SF.vector2(250, 250)); Rectangle_Cubby_01.fill_color = SF.color(50, 25, 0)
-Rectangle_Cubby_01.position = SF.vector2(250, 50);
+Rectangle_Cubby_01 = SF::RectangleShape.new(SF.vector2(250, 250)); Rectangle_Cubby_01.fill_color = SF.color(150, 150, 200)
+Rectangle_Cubby_01.position = SF.vector2(250, 50); Rectangle_Cubby_01.set_texture(WOOD_TEXTURE_1, reset_rect: false)
+Rectangle_Cubby_01.texture_rect = SF.int_rect(0, 250, 250, 150); Rectangle_Cubby_01.outline_thickness = 1 
+Rectangle_Cubby_01.outline_color = SF.color(30, 15, 0)
 #______________________________________Cubby 2_________________________________________________________
-Rectangle_Cubby_02 = SF::RectangleShape.new(SF.vector2(250, 250)); Rectangle_Cubby_02.fill_color = SF.color(50, 25, 0)
-Rectangle_Cubby_02.position = SF.vector2(250, 330);
+Rectangle_Cubby_02 = SF::RectangleShape.new(SF.vector2(250, 250)); Rectangle_Cubby_02.fill_color = SF.color(150, 150, 200)
+Rectangle_Cubby_02.position = SF.vector2(250, 330); Rectangle_Cubby_02.set_texture(WOOD_TEXTURE_1, reset_rect: false)
+Rectangle_Cubby_02.texture_rect = SF.int_rect(0, 250, 600, 600); Rectangle_Cubby_02.outline_thickness = 1 
+Rectangle_Cubby_02.outline_color = SF.color(30, 15, 0)
 #______________________________________Cubby 3_________________________________________________________
-Rectangle_Cubby_03 = SF::RectangleShape.new(SF.vector2(250, 250)); Rectangle_Cubby_03.fill_color = SF.color(50, 25, 0)
-Rectangle_Cubby_03.position = SF.vector2(250, 610);
+Rectangle_Cubby_03 = SF::RectangleShape.new(SF.vector2(250, 250)); Rectangle_Cubby_03.fill_color = SF.color(150, 150, 200)
+Rectangle_Cubby_03.position = SF.vector2(250, 610); Rectangle_Cubby_03.set_texture(WOOD_TEXTURE_1, reset_rect: false)
+Rectangle_Cubby_03.texture_rect = SF.int_rect(800, 0, 600, 600); Rectangle_Cubby_03.outline_thickness = 1 
+Rectangle_Cubby_03.outline_color = SF.color(30, 15, 0)
 #______________________________________Cubby 4_________________________________________________________
-Rectangle_Cubby_04 = SF::RectangleShape.new(SF.vector2(250, 250)); Rectangle_Cubby_04.fill_color = SF.color(50, 25, 0)
-Rectangle_Cubby_04.position = SF.vector2(1450, 50);
+Rectangle_Cubby_04 = SF::RectangleShape.new(SF.vector2(250, 250)); Rectangle_Cubby_04.fill_color = SF.color(150, 150, 200)
+Rectangle_Cubby_04.position = SF.vector2(1450, 50); Rectangle_Cubby_04.set_texture(WOOD_TEXTURE_1, reset_rect: false)
+Rectangle_Cubby_04.texture_rect = SF.int_rect(0, 700, 600, 600); Rectangle_Cubby_04.outline_thickness = 1 
+Rectangle_Cubby_04.outline_color = SF.color(30, 15, 0)
 #______________________________________Cubby 5_________________________________________________________
-Rectangle_Cubby_05 = SF::RectangleShape.new(SF.vector2(250, 250)); Rectangle_Cubby_05.fill_color = SF.color(50, 25, 0)
-Rectangle_Cubby_05.position = SF.vector2(1450, 330);
+Rectangle_Cubby_05 = SF::RectangleShape.new(SF.vector2(250, 250)); Rectangle_Cubby_05.fill_color = SF.color(150, 150, 200)
+Rectangle_Cubby_05.position = SF.vector2(1450, 330); Rectangle_Cubby_05.set_texture(WOOD_TEXTURE_1, reset_rect: false)
+Rectangle_Cubby_05.texture_rect = SF.int_rect(700, 700, 600, 600); Rectangle_Cubby_05.outline_thickness = 1 
+Rectangle_Cubby_05.outline_color = SF.color(30, 15, 0)
 #______________________________________Cubby 6_________________________________________________________
-Rectangle_Cubby_06 = SF::RectangleShape.new(SF.vector2(250, 250)); Rectangle_Cubby_06.fill_color = SF.color(50, 25, 0)
-Rectangle_Cubby_06.position = SF.vector2(1450, 610);
+Rectangle_Cubby_06 = SF::RectangleShape.new(SF.vector2(250, 250)); Rectangle_Cubby_06.fill_color = SF.color(150, 150, 200)
+Rectangle_Cubby_06.position = SF.vector2(1450, 610); Rectangle_Cubby_06.set_texture(WOOD_TEXTURE_1, reset_rect: false)
+Rectangle_Cubby_06.texture_rect = SF.int_rect(700, 800, 600, 600); Rectangle_Cubby_06.outline_thickness = 1 
+Rectangle_Cubby_06.outline_color = SF.color(30, 15, 0)
 #______________________________________Cubby 7_________________________________________________________
-Rectangle_Cubby_07 = SF::RectangleShape.new(SF.vector2(250, 250)); Rectangle_Cubby_07.fill_color = SF.color(50, 25, 0)
-Rectangle_Cubby_07.position = SF.vector2(1170, 610);
+Rectangle_Cubby_07 = SF::RectangleShape.new(SF.vector2(250, 250)); Rectangle_Cubby_07.fill_color = SF.color(150, 150, 200)
+Rectangle_Cubby_07.position = SF.vector2(1170, 610); Rectangle_Cubby_07.set_texture(WOOD_TEXTURE_1, reset_rect: false)
+Rectangle_Cubby_07.texture_rect = SF.int_rect(700, 900, 600, 600); Rectangle_Cubby_07.outline_thickness = 1 
+Rectangle_Cubby_07.outline_color = SF.color(30, 15, 0)
+#______________________________________Cabinet_________________________________________________________
+Cabinet_01 = SF::RectangleShape.new(SF.vector2(250, 530)); Cabinet_01.fill_color = SF.color(50, 25, 0)
+Cabinet_01.position = SF.vector2(1170, 50);
+#___________________________________Left Black Bar_____________________________________________________
+Left_Black_Bar = SF::RectangleShape.new(SF.vector2(150, 1080)); Left_Black_Bar.fill_color = SF.color(0, 0, 0)
+Left_Black_Bar.position = SF.vector2(0, 0);
+#___________________________________Right Black Bar____________________________________________________
+Right_Black_Bar = SF::RectangleShape.new(SF.vector2(150, 1080)); Right_Black_Bar.fill_color = SF.color(0, 0, 0)
+Right_Black_Bar.position = SF.vector2(1800, 0);
+#___________________________________Bottom Black Bar___________________________________________________
+Bottom_Black_Bar = SF::RectangleShape.new(SF.vector2(2000, 140)); Bottom_Black_Bar.fill_color = SF.color(0, 0, 0)
+Bottom_Black_Bar.position = SF.vector2(0, 960);
