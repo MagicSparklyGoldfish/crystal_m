@@ -54,7 +54,7 @@ extend self
   @@hair_display_array = [SHOUNEN_DISPLAY_HAIR_01, SHOUNEN_DISPLAY_HAIR_02, SHOUNEN_DISPLAY_HAIR_03, SHOUNEN_DISPLAY_HAIR_04, 
   SHOUNEN_DISPLAY_HAIR_05, SHOUNEN_DISPLAY_HAIR_06] 
   @@current_hair = 0; @@current_display_hair = 0; @@current_display_hair_string = 0
-  @@current_skin = 0
+  @@current_skin = 0; @@current_display_skin_string = 0
 
 #========================================================+
 #--------------------------------------------------------+
@@ -64,7 +64,7 @@ extend self
 def Window_Class.player_model_initialize 
   @@player_character_model.draw(SKIN_ARRAY[@@current_skin])
   @@player_character_model.draw(RAIN_BOOTS_01)
-  @@player_character_model.draw(BUTTON_FACE_01)
+  @@player_character_model.draw(FACE_ARRAY[2])
   @@player_character_model.draw(@@hair_array[@@current_hair])
   @@player_character_model.draw(SHORTS_01)
   @@player_character_model.draw(T_SHIRT)
@@ -85,16 +85,19 @@ def Window_Class.customize_hair(window, direction)
   @@current_display_hair_string = @@current_hair
   end; end
   Hair_Desc.string = HAIR_DESC_ARRAY[@@current_display_hair_string]
-  @@player_character_model.draw(@@hair_array[@@current_hair])
+  Window_Class.player_model_initialize 
   window.draw(@@hair_array[@@current_hair])
 end
-def Window_Class.customize_skin
+def Window_Class.customize_skin(window, direction)
   if direction == "right"
-    @@current_skin += 1
+    @@current_skin = @@current_skin + 1
   else if direction == "left"
-    @@current_skin -= 1
+    @@current_skin = @@current_skin - 1
+  end; end
     Skin_Desc.string = SKIN_DESC_ARRAY[@@current_skin]
-end; end; end
+    Window_Class.player_model_initialize 
+    window.draw(SKIN_ARRAY[@@current_skin])
+end
 #========================================================+
 #--------------------------------------------------------+
 #=============Menu Renderers=============================+
@@ -324,12 +327,22 @@ def Window_Class.char_creation_menu_keypresses(window)
 
       when 1
         direction = "left"
-      if @@current_hair != -1
-      Window_Class.customize_hair(window, direction)
-      @@char_create_pointer_position[1] -= 1
-      else @@current_hair = 5; @@char_create_pointer_position[1] = 5
-      Window_Class.customize_hair(window, direction)
-      end; end
+       if @@current_hair != -1
+          Window_Class.customize_hair(window, direction)
+          @@char_create_pointer_position[1] -= 1
+       else @@current_hair = 5; @@char_create_pointer_position[1] = 5
+          Window_Class.customize_hair(window, direction)
+      end
+      when 2
+        direction = "left"
+        if @@current_skin != -1
+        Window_Class.customize_skin(window, direction)
+        @@char_create_pointer_position[1] -= 1
+        else 
+        @@current_skin = 6; @@char_create_pointer_position[1] = 6
+        Window_Class.customize_skin(window, direction)
+      end
+      end
 #********************Right***************************************  
     when SF::Keyboard::Right
       All_Audio::SFX.char_create_sideways
@@ -342,7 +355,16 @@ def Window_Class.char_creation_menu_keypresses(window)
       @@char_create_pointer_position[1] += 1
       else @@current_hair = -1; @@char_create_pointer_position[1] = 0
       Window_Class.customize_hair(window, direction)
-  end; end; end; end; end; end; end
+      end
+      when 2
+      direction = "right"
+      if @@current_skin != 6
+      Window_Class.customize_skin(window, direction) 
+      else
+      @@current_skin = -1; @@char_create_pointer_position[1] = 0
+      Window_Class.customize_skin(window, direction)  
+      end
+end; end; end; end; end; end
 end
 
 

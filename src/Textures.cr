@@ -191,9 +191,10 @@ DISPLAY_SKIN_ARRAY = [PLAYER_CHAR_DISPLAY, PLAYER_CHAR_DISPLAY_2, PLAYER_CHAR_DI
 PLAYER_CHAR_DISPLAY_5, PLAYER_CHAR_DISPLAY_6, PLAYER_CHAR_DISPLAY_7]
 
 SKIN_DESC_ARRAY = ["Light", "Tan", "Dark", "Ghostly", "Blue", "Purple", "Jaundiced"]
+
 Skin_Desc = SF::Text.new; Skin_Desc.font = FONT_FANCY_BOLD
 Skin_Desc.string = SKIN_DESC_ARRAY[0]; Skin_Desc.character_size = 40; Skin_Desc.color = SF::Color::White
-Skin_Desc.position = SF.vector2(535, 240)
+Skin_Desc.position = SF.vector2(305, 530)
 #.........................................Light..........................................
 #\\\\\\\Character Model
 PLAYER_CHAR_TEXTURE_01 = SF::Texture.from_file("graphics/Char_Skin.png")
@@ -201,7 +202,8 @@ PLAYER_CHAR = SF::Sprite.new(PLAYER_CHAR_TEXTURE_01)
 #\\\\\\\Display Model
 PLAYER_CHAR_DISPLAY = SF::Sprite.new(PLAYER_CHAR_TEXTURE_01)
 PLAYER_CHAR_DISPLAY.texture_rect = SF.int_rect(0, 0, 96, 128)
-PLAYER_CHAR_DISPLAY.position = SF.vector2(235, 610)
+PLAYER_CHAR_DISPLAY.position = SF.vector2(265, 300)
+PLAYER_CHAR_DISPLAY.scale = SF.vector2(2.0, 2.0)
 #..........................................Tan............................................
 #\\\\\\\Character Model
 PLAYER_CHAR_2 = SF::Sprite.new(PLAYER_CHAR_TEXTURE_01) 
@@ -209,8 +211,9 @@ PLAYER_CHAR_2.color = SF.color(230, 230, 230)
 #\\\\\\\Display Model
 PLAYER_CHAR_DISPLAY_2 = SF::Sprite.new(PLAYER_CHAR_TEXTURE_01)
 PLAYER_CHAR_DISPLAY_2.texture_rect = SF.int_rect(0, 0, 96, 128)
-PLAYER_CHAR_DISPLAY_2.position = SF.vector2(235, 610)
+PLAYER_CHAR_DISPLAY_2.position = SF.vector2(265, 300)
 PLAYER_CHAR_DISPLAY_2.color = SF.color(230, 230, 230)
+PLAYER_CHAR_DISPLAY_2.scale = SF.vector2(2.0, 2.0)
 #..........................................Dark...........................................
 #\\\\\\\Character Model
 PLAYER_CHAR_3 = SF::Sprite.new(PLAYER_CHAR_TEXTURE_01) 
@@ -218,8 +221,9 @@ PLAYER_CHAR_3.color = SF.color(100, 100, 100)
 #\\\\\\\Display Model
 PLAYER_CHAR_DISPLAY_3 = SF::Sprite.new(PLAYER_CHAR_TEXTURE_01)
 PLAYER_CHAR_DISPLAY_3.texture_rect = SF.int_rect(0, 0, 96, 128)
-PLAYER_CHAR_DISPLAY_3.position = SF.vector2(235, 610)
+PLAYER_CHAR_DISPLAY_3.position = SF.vector2(265, 300)
 PLAYER_CHAR_DISPLAY_3.color = SF.color(100, 100, 100)
+PLAYER_CHAR_DISPLAY_3.scale = SF.vector2(2.0, 2.0)
 #.......................................Ghostly...........................................
 #\\\\\\\Character Model
 PLAYER_CHAR_4 = SF::Sprite.new(PLAYER_CHAR_TEXTURE_01) 
@@ -227,8 +231,9 @@ PLAYER_CHAR_4.color = SF.color(255, 255, 255, 128)
 #\\\\\\\Display Model
 PLAYER_CHAR_DISPLAY_4 = SF::Sprite.new(PLAYER_CHAR_TEXTURE_01)
 PLAYER_CHAR_DISPLAY_4.texture_rect = SF.int_rect(0, 0, 96, 128)
-PLAYER_CHAR_DISPLAY_4.position = SF.vector2(235, 610)
+PLAYER_CHAR_DISPLAY_4.position = SF.vector2(265, 300)
 PLAYER_CHAR_DISPLAY_4.color = SF.color(255, 255, 255, 128)
+PLAYER_CHAR_DISPLAY_4.scale = SF.vector2(2.0, 2.0)
 #.........................................Blue...........................................
 #\\\\\\\Character Model
 PLAYER_CHAR_5 = SF::Sprite.new(PLAYER_CHAR_TEXTURE_01) 
@@ -236,8 +241,9 @@ PLAYER_CHAR_5.color = SF.color(0, 0, 255)
 #\\\\\\\Display Model
 PLAYER_CHAR_DISPLAY_5 = SF::Sprite.new(PLAYER_CHAR_TEXTURE_01)
 PLAYER_CHAR_DISPLAY_5.texture_rect = SF.int_rect(0, 0, 96, 128)
-PLAYER_CHAR_DISPLAY_5.position = SF.vector2(235, 610)
+PLAYER_CHAR_DISPLAY_5.position = SF.vector2(265, 300)
 PLAYER_CHAR_DISPLAY_5.color = SF.color(0, 0, 255)
+PLAYER_CHAR_DISPLAY_5.scale = SF.vector2(2.0, 2.0)
 #........................................Purple...........................................
 #\\\\\\\Character Model
 PLAYER_CHAR_6 = SF::Sprite.new(PLAYER_CHAR_TEXTURE_01) 
@@ -245,8 +251,9 @@ PLAYER_CHAR_6.color = SF.color(100, 0, 255)
 #\\\\\\\Display Model
 PLAYER_CHAR_DISPLAY_6 = SF::Sprite.new(PLAYER_CHAR_TEXTURE_01)
 PLAYER_CHAR_DISPLAY_6.texture_rect = SF.int_rect(0, 0, 96, 128)
-PLAYER_CHAR_DISPLAY_6.position = SF.vector2(235, 610)
+PLAYER_CHAR_DISPLAY_6.position = SF.vector2(265, 300)
 PLAYER_CHAR_DISPLAY_6.color = SF.color(100, 0, 255)
+PLAYER_CHAR_DISPLAY_6.scale = SF.vector2(2.0, 2.0)
 #......................................Jaundiced..........................................
 #\\\\\\\Character Model
 PLAYER_CHAR_7 = SF::Sprite.new(PLAYER_CHAR_TEXTURE_01) 
@@ -254,8 +261,9 @@ PLAYER_CHAR_7.color = SF.color(220, 255, 0)
 #\\\\\\\Display Model
 PLAYER_CHAR_DISPLAY_7 = SF::Sprite.new(PLAYER_CHAR_TEXTURE_01)
 PLAYER_CHAR_DISPLAY_7.texture_rect = SF.int_rect(0, 0, 96, 128)
-PLAYER_CHAR_DISPLAY_7.position = SF.vector2(235, 610)
+PLAYER_CHAR_DISPLAY_7.position = SF.vector2(265, 300)
 PLAYER_CHAR_DISPLAY_7.color = SF.color(220, 255, 0)
+PLAYER_CHAR_DISPLAY_7.scale = SF.vector2(2.0, 2.0)
 #----------------------------------------------------------------------------------------
 #                                      Hair Textures
 #----------------------------------------------------------------------------------------
@@ -326,8 +334,52 @@ SHOUNEN_DISPLAY_HAIR_06.color = SF.color(255, 0, 255)
 #----------------------------------------------------------------------------------------
 #                                    Face Textures
 #----------------------------------------------------------------------------------------
+FACE_ARRAY = [BUTTON_FACE_01, BUTTON_FACE_02, BUTTON_FACE_03] #BUTTON_FACE_04, BUTTON_FACE_05, BUTTON_FACE_06, BUTTON_FACE_07]
+
+DISPLAY_FACE_ARRAY = [BUTTON_DISPLAY_FACE_01, BUTTON_DISPLAY_FACE_02] #BUTTON_DISPLAY_FACE_03, BUTTON_DISPLAY_FACE_04,
+#BUTTON_DISPLAY_FACE_05, BUTTON_DISPLAY_FACE_06, BUTTON_DISPLAY_FACE_07]
+FACE_DESC_ARRAY = ["Blue Button Eyes", "Red Button Eyes", "Purple Button Eyes", "Green Button Eyes",
+"Yellow Button Eyes", "Brown Button Eyes"]
+Face_Desc = SF::Text.new; Hair_Desc.font = FONT_FANCY_BOLD
+Face_Desc.string = FACE_DESC_ARRAY[0]; Hair_Desc.character_size = 40; Hair_Desc.color = SF::Color::White
+Face_Desc.position = SF.vector2(235, 240)
+#..................................Blue Button Eyes......................................
+#\\\\\\\Character Model
 BUTTON_FACE_TEXTURE_01 = SF::Texture.from_file("graphics/Butto_Eyes.png")
 BUTTON_FACE_01 = SF::Sprite.new(BUTTON_FACE_TEXTURE_01) 
+#\\\\\\\Display Model
+BUTTON_DISPLAY_FACE_01 = SF::Sprite.new(BUTTON_FACE_TEXTURE_01)
+BUTTON_DISPLAY_FACE_01.texture_rect = SF.int_rect(0, 0, 96, 128)
+BUTTON_DISPLAY_FACE_01.position = SF.vector2(250, 50)
+BUTTON_DISPLAY_FACE_01.scale = SF.vector2(3.0, 3.0)
+#.................................Red Button Eyes........................................
+#\\\\\\\Character Model
+BUTTON_FACE_02 = SF::Sprite.new(BUTTON_FACE_TEXTURE_01) 
+BUTTON_FACE_02.color = SF.color(255, 0, 0)
+#\\\\\\\Display Model
+BUTTON_DISPLAY_FACE_02 = SF::Sprite.new(BUTTON_FACE_TEXTURE_01)
+BUTTON_DISPLAY_FACE_02.texture_rect = SF.int_rect(0, 0, 96, 128)
+BUTTON_DISPLAY_FACE_02.position = SF.vector2(250, 50)
+BUTTON_DISPLAY_FACE_02.scale = SF.vector2(3.0, 3.0)
+BUTTON_DISPLAY_FACE_02.color = SF.color(255, 0, 0)
+#.................................Purple Button Eyes......................................
+#\\\\\\\Character Model
+BUTTON_FACE_TEXTURE_02 = SF::Texture.from_file("graphics/Button_Eyes_2.png")
+BUTTON_FACE_03 = SF::Sprite.new(BUTTON_FACE_TEXTURE_02) 
+#\\\\\\\Display Model
+BUTTON_DISPLAY_FACE_03 = SF::Sprite.new(BUTTON_FACE_TEXTURE_02)
+BUTTON_DISPLAY_FACE_03.texture_rect = SF.int_rect(0, 0, 96, 128)
+BUTTON_DISPLAY_FACE_03.position = SF.vector2(250, 50)
+BUTTON_DISPLAY_FACE_03.scale = SF.vector2(3.0, 3.0)
+#.................................Green Button Eyes......................................
+#\\\\\\\Character Model
+BUTTON_FACE_TEXTURE_02 = SF::Texture.from_file("graphics/Button_Eyes_2.png")
+BUTTON_FACE_03 = SF::Sprite.new(BUTTON_FACE_TEXTURE_02) 
+#\\\\\\\Display Model
+BUTTON_DISPLAY_FACE_03 = SF::Sprite.new(BUTTON_FACE_TEXTURE_02)
+BUTTON_DISPLAY_FACE_03.texture_rect = SF.int_rect(0, 0, 96, 128)
+BUTTON_DISPLAY_FACE_03.position = SF.vector2(250, 50)
+BUTTON_DISPLAY_FACE_03.scale = SF.vector2(3.0, 3.0)
 #----------------------------------------------------------------------------------------
 #                                   Glove Textures
 #----------------------------------------------------------------------------------------
