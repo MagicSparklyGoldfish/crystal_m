@@ -334,15 +334,15 @@ SHOUNEN_DISPLAY_HAIR_06.color = SF.color(255, 0, 255)
 #----------------------------------------------------------------------------------------
 #                                    Face Textures
 #----------------------------------------------------------------------------------------
-FACE_ARRAY = [BUTTON_FACE_01, BUTTON_FACE_02, BUTTON_FACE_03] #BUTTON_FACE_04, BUTTON_FACE_05, BUTTON_FACE_06, BUTTON_FACE_07]
+FACE_ARRAY = [BUTTON_FACE_01, BUTTON_FACE_02, BUTTON_FACE_03, BUTTON_FACE_04, BUTTON_FACE_05, BUTTON_FACE_06]
 
-DISPLAY_FACE_ARRAY = [BUTTON_DISPLAY_FACE_01, BUTTON_DISPLAY_FACE_02] #BUTTON_DISPLAY_FACE_03, BUTTON_DISPLAY_FACE_04,
-#BUTTON_DISPLAY_FACE_05, BUTTON_DISPLAY_FACE_06, BUTTON_DISPLAY_FACE_07]
+DISPLAY_FACE_ARRAY = [BUTTON_DISPLAY_FACE_01, BUTTON_DISPLAY_FACE_02, BUTTON_DISPLAY_FACE_03, BUTTON_DISPLAY_FACE_04,
+BUTTON_DISPLAY_FACE_05, BUTTON_DISPLAY_FACE_06]
 FACE_DESC_ARRAY = ["Blue Button Eyes", "Red Button Eyes", "Purple Button Eyes", "Green Button Eyes",
 "Yellow Button Eyes", "Brown Button Eyes"]
-Face_Desc = SF::Text.new; Hair_Desc.font = FONT_FANCY_BOLD
-Face_Desc.string = FACE_DESC_ARRAY[0]; Hair_Desc.character_size = 40; Hair_Desc.color = SF::Color::White
-Face_Desc.position = SF.vector2(235, 240)
+Face_Desc = SF::Text.new; Face_Desc.font = FONT_FANCY_BOLD
+Face_Desc.string = FACE_DESC_ARRAY[0]; Face_Desc.character_size = 40; Face_Desc.color = SF::Color::White
+Face_Desc.position = SF.vector2(235, 640)
 #..................................Blue Button Eyes......................................
 #\\\\\\\Character Model
 BUTTON_FACE_TEXTURE_01 = SF::Texture.from_file("graphics/Butto_Eyes.png")
@@ -350,8 +350,8 @@ BUTTON_FACE_01 = SF::Sprite.new(BUTTON_FACE_TEXTURE_01)
 #\\\\\\\Display Model
 BUTTON_DISPLAY_FACE_01 = SF::Sprite.new(BUTTON_FACE_TEXTURE_01)
 BUTTON_DISPLAY_FACE_01.texture_rect = SF.int_rect(0, 0, 96, 128)
-BUTTON_DISPLAY_FACE_01.position = SF.vector2(250, 50)
-BUTTON_DISPLAY_FACE_01.scale = SF.vector2(3.0, 3.0)
+BUTTON_DISPLAY_FACE_01.position = SF.vector2(190, 600)
+BUTTON_DISPLAY_FACE_01.scale = SF.vector2(3.5, 3.5)
 #.................................Red Button Eyes........................................
 #\\\\\\\Character Model
 BUTTON_FACE_02 = SF::Sprite.new(BUTTON_FACE_TEXTURE_01) 
@@ -359,8 +359,8 @@ BUTTON_FACE_02.color = SF.color(255, 0, 0)
 #\\\\\\\Display Model
 BUTTON_DISPLAY_FACE_02 = SF::Sprite.new(BUTTON_FACE_TEXTURE_01)
 BUTTON_DISPLAY_FACE_02.texture_rect = SF.int_rect(0, 0, 96, 128)
-BUTTON_DISPLAY_FACE_02.position = SF.vector2(250, 50)
-BUTTON_DISPLAY_FACE_02.scale = SF.vector2(3.0, 3.0)
+BUTTON_DISPLAY_FACE_02.position = SF.vector2(190, 600)
+BUTTON_DISPLAY_FACE_02.scale = SF.vector2(3.5, 3.5)
 BUTTON_DISPLAY_FACE_02.color = SF.color(255, 0, 0)
 #.................................Purple Button Eyes......................................
 #\\\\\\\Character Model
@@ -369,17 +369,35 @@ BUTTON_FACE_03 = SF::Sprite.new(BUTTON_FACE_TEXTURE_02)
 #\\\\\\\Display Model
 BUTTON_DISPLAY_FACE_03 = SF::Sprite.new(BUTTON_FACE_TEXTURE_02)
 BUTTON_DISPLAY_FACE_03.texture_rect = SF.int_rect(0, 0, 96, 128)
-BUTTON_DISPLAY_FACE_03.position = SF.vector2(250, 50)
-BUTTON_DISPLAY_FACE_03.scale = SF.vector2(3.0, 3.0)
+BUTTON_DISPLAY_FACE_03.position = SF.vector2(190, 600)
+BUTTON_DISPLAY_FACE_03.scale = SF.vector2(3.5, 3.5)
 #.................................Green Button Eyes......................................
 #\\\\\\\Character Model
-BUTTON_FACE_TEXTURE_02 = SF::Texture.from_file("graphics/Button_Eyes_2.png")
-BUTTON_FACE_03 = SF::Sprite.new(BUTTON_FACE_TEXTURE_02) 
+BUTTON_FACE_TEXTURE_03 = SF::Texture.from_file("graphics/Button_Eyes_3.png")
+BUTTON_FACE_04 = SF::Sprite.new(BUTTON_FACE_TEXTURE_03) 
 #\\\\\\\Display Model
-BUTTON_DISPLAY_FACE_03 = SF::Sprite.new(BUTTON_FACE_TEXTURE_02)
-BUTTON_DISPLAY_FACE_03.texture_rect = SF.int_rect(0, 0, 96, 128)
-BUTTON_DISPLAY_FACE_03.position = SF.vector2(250, 50)
-BUTTON_DISPLAY_FACE_03.scale = SF.vector2(3.0, 3.0)
+BUTTON_DISPLAY_FACE_04 = SF::Sprite.new(BUTTON_FACE_TEXTURE_03)
+BUTTON_DISPLAY_FACE_04.texture_rect = SF.int_rect(0, 0, 96, 128)
+BUTTON_DISPLAY_FACE_04.position = SF.vector2(190, 600)
+BUTTON_DISPLAY_FACE_04.scale = SF.vector2(3.5, 3.5)
+#.................................Yellow Button Eyes......................................
+#\\\\\\\Character Model
+BUTTON_FACE_TEXTURE_04 = SF::Texture.from_file("graphics/Button_Eyes_4.png")
+BUTTON_FACE_05 = SF::Sprite.new(BUTTON_FACE_TEXTURE_04) 
+#\\\\\\\Display Model
+BUTTON_DISPLAY_FACE_05 = SF::Sprite.new(BUTTON_FACE_TEXTURE_04)
+BUTTON_DISPLAY_FACE_05.texture_rect = SF.int_rect(0, 0, 96, 128)
+BUTTON_DISPLAY_FACE_05.position = SF.vector2(190, 600)
+BUTTON_DISPLAY_FACE_05.scale = SF.vector2(3.5, 3.5)
+#.................................Brown Button Eyes.......................................
+#\\\\\\\Character Model
+BUTTON_FACE_TEXTURE_05 = SF::Texture.from_file("graphics/Button_Eyes_5.png")
+BUTTON_FACE_06 = SF::Sprite.new(BUTTON_FACE_TEXTURE_05) 
+#\\\\\\\Display Model
+BUTTON_DISPLAY_FACE_06 = SF::Sprite.new(BUTTON_FACE_TEXTURE_05)
+BUTTON_DISPLAY_FACE_06.texture_rect = SF.int_rect(0, 0, 96, 128)
+BUTTON_DISPLAY_FACE_06.position = SF.vector2(190, 600)
+BUTTON_DISPLAY_FACE_06.scale = SF.vector2(3.5, 3.5)
 #----------------------------------------------------------------------------------------
 #                                   Glove Textures
 #----------------------------------------------------------------------------------------

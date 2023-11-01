@@ -54,7 +54,7 @@ extend self
   @@hair_display_array = [SHOUNEN_DISPLAY_HAIR_01, SHOUNEN_DISPLAY_HAIR_02, SHOUNEN_DISPLAY_HAIR_03, SHOUNEN_DISPLAY_HAIR_04, 
   SHOUNEN_DISPLAY_HAIR_05, SHOUNEN_DISPLAY_HAIR_06] 
   @@current_hair = 0; @@current_display_hair = 0; @@current_display_hair_string = 0
-  @@current_skin = 0; @@current_display_skin_string = 0
+  @@current_skin = 0; @@current_display_skin_string = 0; @@current_face = 0
 
 #========================================================+
 #--------------------------------------------------------+
@@ -64,7 +64,7 @@ extend self
 def Window_Class.player_model_initialize 
   @@player_character_model.draw(SKIN_ARRAY[@@current_skin])
   @@player_character_model.draw(RAIN_BOOTS_01)
-  @@player_character_model.draw(FACE_ARRAY[2])
+  @@player_character_model.draw(FACE_ARRAY[@@current_face])
   @@player_character_model.draw(@@hair_array[@@current_hair])
   @@player_character_model.draw(SHORTS_01)
   @@player_character_model.draw(T_SHIRT)
@@ -98,6 +98,16 @@ def Window_Class.customize_skin(window, direction)
     Window_Class.player_model_initialize 
     window.draw(SKIN_ARRAY[@@current_skin])
 end
+def Window_Class.customize_face(window, direction)
+  if direction == "right"
+    @@current_face = @@current_face + 1
+  else if direction == "left"
+    @@current_face = @@current_face - 1
+  end; end
+    Face_Desc.string = FACE_DESC_ARRAY[@@current_face]
+    Window_Class.player_model_initialize 
+    window.draw(FACE_ARRAY[@@current_face])
+end
 #========================================================+
 #--------------------------------------------------------+
 #=============Menu Renderers=============================+
@@ -129,7 +139,7 @@ def Window_Class.character_creation_menu(window)
     window.draw(Rectangle_Cubby_06); window.draw(Rectangle_Cubby_07); window.draw(Cabinet_01); window.draw(Left_Black_Bar)
     window.draw(Right_Black_Bar); window.draw(Bottom_Black_Bar); window.draw(Char_Creat_Cursor); window.draw(@@player_character_rendered_model)
     window.draw(@@hair_display_array[@@current_display_hair]); window.draw(Hair_Desc); window.draw(DISPLAY_SKIN_ARRAY[@@current_skin])
-    window.draw(Skin_Desc)
+    window.draw(Skin_Desc); window.draw(DISPLAY_FACE_ARRAY[@@current_face]); window.draw(Face_Desc)
 end
 #========================================================+
 #--------------------------------------------------------+
@@ -342,6 +352,15 @@ def Window_Class.char_creation_menu_keypresses(window)
         @@current_skin = 6; @@char_create_pointer_position[1] = 6
         Window_Class.customize_skin(window, direction)
       end
+    when 3
+      direction = "left"
+      if @@current_face != -1
+      Window_Class.customize_face(window, direction)
+      @@char_create_pointer_position[1] -= 1
+      else 
+      @@current_face = 5; @@char_create_pointer_position[1] = 6
+      Window_Class.customize_face(window, direction)
+      end
       end
 #********************Right***************************************  
     when SF::Keyboard::Right
@@ -363,6 +382,14 @@ def Window_Class.char_creation_menu_keypresses(window)
       else
       @@current_skin = -1; @@char_create_pointer_position[1] = 0
       Window_Class.customize_skin(window, direction)  
+      end
+    when 3
+      direction = "right"
+      if @@current_face != 5
+      Window_Class.customize_face(window, direction)
+      else
+      @@current_face = -1; @@char_create_pointer_position[1] = 0
+      Window_Class.customize_face(window, direction)
       end
 end; end; end; end; end; end
 end
