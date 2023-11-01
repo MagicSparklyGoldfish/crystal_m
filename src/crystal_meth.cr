@@ -50,11 +50,14 @@ extend self
   @@player_character_model = SF::RenderTexture.new(672, 512)
   @@player_character_rendered_model = SF::Sprite.new(@@player_character_model.texture)
   @@hair_array : Array(SF::Sprite)
-  @@hair_array = [SHOUNEN_HAIR_01, SHOUNEN_HAIR_02, SHOUNEN_HAIR_03, SHOUNEN_HAIR_04, SHOUNEN_HAIR_05, SHOUNEN_HAIR_06]
+  @@hair_array = [SHOUNEN_HAIR_01, SHOUNEN_HAIR_02, SHOUNEN_HAIR_03, SHOUNEN_HAIR_04, SHOUNEN_HAIR_05, SHOUNEN_HAIR_06,
+  PONYTAIL_01, PONYTAIL_02, PONYTAIL_03, PONYTAIL_04, PONYTAIL_05, PONYTAIL_06]
   @@hair_display_array = [SHOUNEN_DISPLAY_HAIR_01, SHOUNEN_DISPLAY_HAIR_02, SHOUNEN_DISPLAY_HAIR_03, SHOUNEN_DISPLAY_HAIR_04, 
-  SHOUNEN_DISPLAY_HAIR_05, SHOUNEN_DISPLAY_HAIR_06] 
+  SHOUNEN_DISPLAY_HAIR_05, SHOUNEN_DISPLAY_HAIR_06, DISPLAY_PONYTAIL_HAIR_01, DISPLAY_PONYTAIL_HAIR_02, DISPLAY_PONYTAIL_HAIR_03,
+  DISPLAY_PONYTAIL_HAIR_04, DISPLAY_PONYTAIL_HAIR_05, DISPLAY_PONYTAIL_HAIR_06] 
   @@current_hair = 0; @@current_display_hair = 0; @@current_display_hair_string = 0
-  @@current_skin = 0; @@current_display_skin_string = 0; @@current_face = 0
+  @@current_skin = 0; @@current_display_skin_string = 0; @@current_face = 0; @@current_shirt = 0; @@current_gloves = 0
+  @@current_pants = 0; @@current_shoes = 0
 
 #========================================================+
 #--------------------------------------------------------+
@@ -62,13 +65,14 @@ extend self
 
 #-------------initialize models--------------------------+
 def Window_Class.player_model_initialize 
+  @@player_character_model.clear(SF::Color::Transparent)
   @@player_character_model.draw(SKIN_ARRAY[@@current_skin])
-  @@player_character_model.draw(RAIN_BOOTS_01)
+  @@player_character_model.draw(SHOES_ARRAY[@@current_shoes])
   @@player_character_model.draw(FACE_ARRAY[@@current_face])
   @@player_character_model.draw(@@hair_array[@@current_hair])
-  @@player_character_model.draw(SHORTS_01)
-  @@player_character_model.draw(T_SHIRT)
-  @@player_character_model.draw(FINGERLESS_GLOVE_01)
+  @@player_character_model.draw(PANTS_ARRAY[@@current_pants])
+  @@player_character_model.draw(SHIRT_ARRAY[@@current_shirt])
+  @@player_character_model.draw(GLOVE_ARRAY[@@current_gloves])
   @@player_character_model.create(672, 512, false)
   @@player_character_model.display
   @@player_character_rendered_model.texture_rect = SF.int_rect(0, 0, 96, 128)
@@ -108,6 +112,46 @@ def Window_Class.customize_face(window, direction)
     Window_Class.player_model_initialize 
     window.draw(FACE_ARRAY[@@current_face])
 end
+def Window_Class.customize_shirt(window, direction)
+  if direction == "right"
+    @@current_shirt = @@current_shirt + 1
+  else if direction == "left"
+    @@current_shirt = @@current_shirt - 1
+  end; end
+    Shirt_Desc.string = SHIRT_DESC_ARRAY[@@current_shirt]
+    Window_Class.player_model_initialize 
+    window.draw(SHIRT_ARRAY[@@current_shirt])
+end
+def Window_Class.customize_gloves(window, direction)
+  if direction == "right"
+    @@current_gloves = @@current_gloves + 1
+  else if direction == "left"
+    @@current_gloves = @@current_gloves - 1
+  end; end
+  Glove_Desc.string = GLOVE_DESC_ARRAY[@@current_gloves]
+    Window_Class.player_model_initialize 
+    window.draw(GLOVE_ARRAY[@@current_gloves])
+end
+def Window_Class.customize_pants(window, direction)
+  if direction == "right"
+    @@current_pants = @@current_pants + 1
+  else if direction == "left"
+    @@current_pants = @@current_pants - 1
+  end; end
+  Pants_Desc.string = PANTS_DESC_ARRAY[@@current_pants]
+    Window_Class.player_model_initialize 
+    window.draw(PANTS_ARRAY[@@current_pants])
+end
+def Window_Class.customize_shoes(window, direction)
+  if direction == "right"
+    @@current_shoes = @@current_shoes + 1
+  else if direction == "left"
+    @@current_shoes = @@current_shoes - 1
+  end; end
+  Shoes_Desc.string = SHOES_DESC_ARRAY[@@current_shoes]
+    Window_Class.player_model_initialize 
+    window.draw(SHOES_ARRAY[@@current_shoes])
+end
 #========================================================+
 #--------------------------------------------------------+
 #=============Menu Renderers=============================+
@@ -139,7 +183,10 @@ def Window_Class.character_creation_menu(window)
     window.draw(Rectangle_Cubby_06); window.draw(Rectangle_Cubby_07); window.draw(Cabinet_01); window.draw(Left_Black_Bar)
     window.draw(Right_Black_Bar); window.draw(Bottom_Black_Bar); window.draw(Char_Creat_Cursor); window.draw(@@player_character_rendered_model)
     window.draw(@@hair_display_array[@@current_display_hair]); window.draw(Hair_Desc); window.draw(DISPLAY_SKIN_ARRAY[@@current_skin])
-    window.draw(Skin_Desc); window.draw(DISPLAY_FACE_ARRAY[@@current_face]); window.draw(Face_Desc)
+    window.draw(Skin_Desc); window.draw(DISPLAY_FACE_ARRAY[@@current_face]); window.draw(Face_Desc); window.draw(DISPLAY_SHIRT_ARRAY[@@current_shirt])
+    window.draw(Shirt_Desc); window.draw(DISPLAY_GLOVE_ARRAY[@@current_gloves]); window.draw(Glove_Desc) 
+    window.draw(DISPLAY_PANTS_ARRAY[@@current_pants]); window.draw(Pants_Desc); window.draw(DISPLAY_SHOES_ARRAY[@@current_shoes]); 
+    window.draw(Shoes_Desc)
 end
 #========================================================+
 #--------------------------------------------------------+
@@ -340,7 +387,7 @@ def Window_Class.char_creation_menu_keypresses(window)
        if @@current_hair != -1
           Window_Class.customize_hair(window, direction)
           @@char_create_pointer_position[1] -= 1
-       else @@current_hair = 5; @@char_create_pointer_position[1] = 5
+       else @@current_hair = 11; @@char_create_pointer_position[1] = 11
           Window_Class.customize_hair(window, direction)
       end
       when 2
@@ -358,8 +405,44 @@ def Window_Class.char_creation_menu_keypresses(window)
       Window_Class.customize_face(window, direction)
       @@char_create_pointer_position[1] -= 1
       else 
-      @@current_face = 5; @@char_create_pointer_position[1] = 6
+      @@current_face = 18; @@char_create_pointer_position[1] = 18
       Window_Class.customize_face(window, direction)
+      end
+    when 4
+      direction = "left"
+      if @@current_shirt != -1
+      Window_Class.customize_shirt(window, direction)
+      @@char_create_pointer_position[1] -= 1
+      else 
+      @@current_shirt = 5; @@char_create_pointer_position[1] = 5
+      Window_Class.customize_shirt(window, direction)
+      end
+    when 5
+      direction = "left"
+      if @@current_gloves != -1
+        Window_Class.customize_gloves(window, direction)
+      @@char_create_pointer_position[1] -= 1
+      else 
+        @@current_gloves = 2; @@char_create_pointer_position[1] = 2
+      Window_Class.customize_gloves(window, direction)
+      end
+    when 6
+      direction = "left"
+      if @@current_pants != -1
+        Window_Class.customize_pants(window, direction)
+      @@char_create_pointer_position[1] -= 1
+      else 
+        @@current_pants = 2; @@char_create_pointer_position[1] = 2
+        Window_Class.customize_pants(window, direction)
+      end
+    when 7
+      direction = "left"
+      if @@current_shoes != -1
+        Window_Class.customize_shoes(window, direction)
+      @@char_create_pointer_position[1] -= 1
+      else 
+        @@current_shoes = 2; @@char_create_pointer_position[1] = 2
+        Window_Class.customize_shoes(window, direction)
       end
       end
 #********************Right***************************************  
@@ -369,7 +452,7 @@ def Window_Class.char_creation_menu_keypresses(window)
 
       when 1
         direction = "right"
-      if @@current_hair != 5
+      if @@current_hair != 11
       Window_Class.customize_hair(window, direction) 
       @@char_create_pointer_position[1] += 1
       else @@current_hair = -1; @@char_create_pointer_position[1] = 0
@@ -385,13 +468,45 @@ def Window_Class.char_creation_menu_keypresses(window)
       end
     when 3
       direction = "right"
-      if @@current_face != 5
+      if @@current_shirt != 18
       Window_Class.customize_face(window, direction)
       else
       @@current_face = -1; @@char_create_pointer_position[1] = 0
       Window_Class.customize_face(window, direction)
       end
-end; end; end; end; end; end
+    when 4
+      direction = "right"
+      if @@current_shirt != 5
+      Window_Class.customize_shirt(window, direction)
+      else
+      @@current_shirt = -1; @@char_create_pointer_position[1] = 0
+      Window_Class.customize_shirt(window, direction)
+      end
+    when 5
+      direction = "right"
+      if @@current_gloves != 2
+        Window_Class.customize_gloves(window, direction)
+      else
+        @@current_gloves = -1; @@char_create_pointer_position[1] = 0
+      Window_Class.customize_gloves(window, direction)
+      end
+    when 6
+      direction = "right"
+      if @@current_pants != 2
+        Window_Class.customize_pants(window, direction)
+      else
+        @@current_pants = -1; @@char_create_pointer_position[1] = 0
+        Window_Class.customize_pants(window, direction)
+      end
+    when 7
+      direction = "right"
+      if @@current_shoes != 2
+        Window_Class.customize_shoes(window, direction)
+      else
+        @@current_shoes = -1; @@char_create_pointer_position[1] = 0
+        Window_Class.customize_shoes(window, direction)
+      end
+end; end; end; end; end; end 
 end
 
 

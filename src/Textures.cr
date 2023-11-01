@@ -190,7 +190,7 @@ SKIN_ARRAY = [PLAYER_CHAR, PLAYER_CHAR_2, PLAYER_CHAR_3, PLAYER_CHAR_4, PLAYER_C
 DISPLAY_SKIN_ARRAY = [PLAYER_CHAR_DISPLAY, PLAYER_CHAR_DISPLAY_2, PLAYER_CHAR_DISPLAY_3, PLAYER_CHAR_DISPLAY_4,
 PLAYER_CHAR_DISPLAY_5, PLAYER_CHAR_DISPLAY_6, PLAYER_CHAR_DISPLAY_7]
 
-SKIN_DESC_ARRAY = ["Light", "Tan", "Dark", "Ghostly", "Blue", "Purple", "Jaundiced"]
+SKIN_DESC_ARRAY = ["  Light", "   Tan", "  Dark", "Ghostly", "  Blue", "Purple", "Jaundiced"]
 
 Skin_Desc = SF::Text.new; Skin_Desc.font = FONT_FANCY_BOLD
 Skin_Desc.string = SKIN_DESC_ARRAY[0]; Skin_Desc.character_size = 40; Skin_Desc.color = SF::Color::White
@@ -264,11 +264,14 @@ PLAYER_CHAR_DISPLAY_7.texture_rect = SF.int_rect(0, 0, 96, 128)
 PLAYER_CHAR_DISPLAY_7.position = SF.vector2(265, 300)
 PLAYER_CHAR_DISPLAY_7.color = SF.color(220, 255, 0)
 PLAYER_CHAR_DISPLAY_7.scale = SF.vector2(2.0, 2.0)
+
+
 #----------------------------------------------------------------------------------------
 #                                      Hair Textures
 #----------------------------------------------------------------------------------------
 HAIR_DESC_ARRAY = ["Shounen Hair Black", "Shounen Hair Green", "Shounen Hair Blue", "Shounen Hair Red",
-"Shounen Hair Yellow", "Shounen Hair Purple"]
+"Shounen Hair Yellow", "Shounen Hair Purple", "   Ponytail Grey", "Ponytail Blonde", "Ponytail Red", "Ponytail Brown",
+"Ponytail Pink", "Ponytail Blue"]
 Hair_Desc = SF::Text.new; Hair_Desc.font = FONT_FANCY_BOLD
 Hair_Desc.string = HAIR_DESC_ARRAY[0]; Hair_Desc.character_size = 40; Hair_Desc.color = SF::Color::White
 Hair_Desc.position = SF.vector2(235, 240)
@@ -331,18 +334,87 @@ SHOUNEN_DISPLAY_HAIR_06.texture_rect = SF.int_rect(0, 0, 96, 128)
 SHOUNEN_DISPLAY_HAIR_06.position = SF.vector2(250, 50)
 SHOUNEN_DISPLAY_HAIR_06.scale = SF.vector2(3.0, 3.0)
 SHOUNEN_DISPLAY_HAIR_06.color = SF.color(255, 0, 255)
+#....................................Grey Ponytail.......................................
+#\\\\\\\Character Model
+PONYTAIL_TEXTURE_01 = SF::Texture.from_file("graphics/Ponytail.png")
+PONYTAIL_01 = SF::Sprite.new(PONYTAIL_TEXTURE_01)
+#\\\\\\\Display Model
+DISPLAY_PONYTAIL_HAIR_01 = SF::Sprite.new(PONYTAIL_TEXTURE_01)
+DISPLAY_PONYTAIL_HAIR_01.texture_rect = SF.int_rect(0, 0, 96, 128)
+DISPLAY_PONYTAIL_HAIR_01.position = SF.vector2(250, 50)
+DISPLAY_PONYTAIL_HAIR_01.scale = SF.vector2(3.0, 3.0)
+#....................................Blonde Ponytail.......................................
+#\\\\\\\Character Model
+PONYTAIL_02 = SF::Sprite.new(PONYTAIL_TEXTURE_01)
+PONYTAIL_02.color = SF.color(255, 255, 0)
+#\\\\\\\Display Model
+DISPLAY_PONYTAIL_HAIR_02 = SF::Sprite.new(PONYTAIL_TEXTURE_01)
+DISPLAY_PONYTAIL_HAIR_02.texture_rect = SF.int_rect(0, 0, 96, 128)
+DISPLAY_PONYTAIL_HAIR_02.position = SF.vector2(250, 50)
+DISPLAY_PONYTAIL_HAIR_02.scale = SF.vector2(3.0, 3.0)
+DISPLAY_PONYTAIL_HAIR_02.color = SF.color(255, 255, 0)
+#.....................................Red Ponytail........................................
+#\\\\\\\Character Model
+PONYTAIL_03 = SF::Sprite.new(PONYTAIL_TEXTURE_01)
+PONYTAIL_03.color = SF.color(255, 0, 0)
+#\\\\\\\Display Model
+DISPLAY_PONYTAIL_HAIR_03 = SF::Sprite.new(PONYTAIL_TEXTURE_01)
+DISPLAY_PONYTAIL_HAIR_03.texture_rect = SF.int_rect(0, 0, 96, 128)
+DISPLAY_PONYTAIL_HAIR_03.position = SF.vector2(250, 50)
+DISPLAY_PONYTAIL_HAIR_03.scale = SF.vector2(3.0, 3.0)
+DISPLAY_PONYTAIL_HAIR_03.color = SF.color(255, 0, 0)
+#.....................................Brown Ponytail.......................................
+#\\\\\\\Character Model
+PONYTAIL_04 = SF::Sprite.new(PONYTAIL_TEXTURE_01)
+PONYTAIL_04.color = SF.color(75, 55, 0)
+#\\\\\\\Display Model
+DISPLAY_PONYTAIL_HAIR_04 = SF::Sprite.new(PONYTAIL_TEXTURE_01)
+DISPLAY_PONYTAIL_HAIR_04.texture_rect = SF.int_rect(0, 0, 96, 128)
+DISPLAY_PONYTAIL_HAIR_04.position = SF.vector2(250, 50)
+DISPLAY_PONYTAIL_HAIR_04.scale = SF.vector2(3.0, 3.0)
+DISPLAY_PONYTAIL_HAIR_04.color = SF.color(75, 55, 0)
+#.....................................Pink Ponytail........................................
+#\\\\\\\Character Model
+PONYTAIL_05 = SF::Sprite.new(PONYTAIL_TEXTURE_01)
+PONYTAIL_05.color = SF.color(255, 0, 175)
+#\\\\\\\Display Model
+DISPLAY_PONYTAIL_HAIR_05 = SF::Sprite.new(PONYTAIL_TEXTURE_01)
+DISPLAY_PONYTAIL_HAIR_05.texture_rect = SF.int_rect(0, 0, 96, 128)
+DISPLAY_PONYTAIL_HAIR_05.position = SF.vector2(250, 50)
+DISPLAY_PONYTAIL_HAIR_05.scale = SF.vector2(3.0, 3.0)
+DISPLAY_PONYTAIL_HAIR_05.color = SF.color(255, 0, 175)
+#....................................Blue Ponytail........................................
+#\\\\\\\Character Model
+PONYTAIL_06 = SF::Sprite.new(PONYTAIL_TEXTURE_01)
+PONYTAIL_06.color = SF.color(0, 0, 255)
+#\\\\\\\Display Model
+DISPLAY_PONYTAIL_HAIR_06 = SF::Sprite.new(PONYTAIL_TEXTURE_01)
+DISPLAY_PONYTAIL_HAIR_06.texture_rect = SF.int_rect(0, 0, 96, 128)
+DISPLAY_PONYTAIL_HAIR_06.position = SF.vector2(250, 50)
+DISPLAY_PONYTAIL_HAIR_06.scale = SF.vector2(3.0, 3.0)
+DISPLAY_PONYTAIL_HAIR_06.color = SF.color(0, 0, 255)
+
+
 #----------------------------------------------------------------------------------------
 #                                    Face Textures
 #----------------------------------------------------------------------------------------
-FACE_ARRAY = [BUTTON_FACE_01, BUTTON_FACE_02, BUTTON_FACE_03, BUTTON_FACE_04, BUTTON_FACE_05, BUTTON_FACE_06]
+
+FACE_ARRAY = [BUTTON_FACE_01, BUTTON_FACE_02, BUTTON_FACE_03, BUTTON_FACE_04, BUTTON_FACE_05, BUTTON_FACE_06,
+SHOUNEN_FACE_01, SHOUNEN_FACE_02, SHOUNEN_FACE_03, SHOUNEN_FACE_04, SHOUNEN_FACE_05, SHOUNEN_FACE_06, TIRED_FACE_01,
+TIRED_FACE_02, TIRED_FACE_03, TIRED_FACE_04, TIRED_FACE_05, TIRED_FACE_06, SMILEY_FACE_01]
 
 DISPLAY_FACE_ARRAY = [BUTTON_DISPLAY_FACE_01, BUTTON_DISPLAY_FACE_02, BUTTON_DISPLAY_FACE_03, BUTTON_DISPLAY_FACE_04,
-BUTTON_DISPLAY_FACE_05, BUTTON_DISPLAY_FACE_06]
+BUTTON_DISPLAY_FACE_05, BUTTON_DISPLAY_FACE_06, SHOUNEN_DISPLAY_FACE_01, SHOUNEN_DISPLAY_FACE_02, SHOUNEN_DISPLAY_FACE_03,
+SHOUNEN_DISPLAY_FACE_04, SHOUNEN_DISPLAY_FACE_05, SHOUNEN_DISPLAY_FACE_06, TIRED_DISPLAY_FACE_01, TIRED_DISPLAY_FACE_02,
+TIRED_DISPLAY_FACE_03, TIRED_DISPLAY_FACE_04, TIRED_DISPLAY_FACE_05, TIRED_DISPLAY_FACE_06, SMILEY_DISPLAY_FACE_01]
+
 FACE_DESC_ARRAY = ["Blue Button Eyes", "Red Button Eyes", "Purple Button Eyes", "Green Button Eyes",
-"Yellow Button Eyes", "Brown Button Eyes"]
+"Yellow Button Eyes", "Brown Button Eyes", "Grey Shounen Face", "Blue Shounen Face", "Green Shounen Face",
+"Brown Shounen Face", "Purple Shounen Face", "Yellow Shounen Face", "Tired Face Grey", "Tired Face Blue", "Tired Face Brown",
+"Tired Face Green", "Tired Face Red", "Tired Face Yellow", "Smiley Face"]
 Face_Desc = SF::Text.new; Face_Desc.font = FONT_FANCY_BOLD
 Face_Desc.string = FACE_DESC_ARRAY[0]; Face_Desc.character_size = 40; Face_Desc.color = SF::Color::White
-Face_Desc.position = SF.vector2(235, 640)
+Face_Desc.position = SF.vector2(235, 800)
 #..................................Blue Button Eyes......................................
 #\\\\\\\Character Model
 BUTTON_FACE_TEXTURE_01 = SF::Texture.from_file("graphics/Butto_Eyes.png")
@@ -398,26 +470,321 @@ BUTTON_DISPLAY_FACE_06 = SF::Sprite.new(BUTTON_FACE_TEXTURE_05)
 BUTTON_DISPLAY_FACE_06.texture_rect = SF.int_rect(0, 0, 96, 128)
 BUTTON_DISPLAY_FACE_06.position = SF.vector2(190, 600)
 BUTTON_DISPLAY_FACE_06.scale = SF.vector2(3.5, 3.5)
+#.................................Grey Shounen Face.......................................
+#\\\\\\\Character Model
+SHOUNEN_FACE_TEXTURE_01 = SF::Texture.from_file("graphics/Shounen_Face.png")
+SHOUNEN_FACE_01 = SF::Sprite.new(SHOUNEN_FACE_TEXTURE_01) 
+#\\\\\\\Display Model
+SHOUNEN_DISPLAY_FACE_01 = SF::Sprite.new(SHOUNEN_FACE_TEXTURE_01)
+SHOUNEN_DISPLAY_FACE_01.texture_rect = SF.int_rect(0, 0, 96, 128)
+SHOUNEN_DISPLAY_FACE_01.position = SF.vector2(190, 600)
+SHOUNEN_DISPLAY_FACE_01.scale = SF.vector2(3.5, 3.5)
+#.................................Blue Shounen Face.......................................
+#\\\\\\\Character Model
+SHOUNEN_FACE_TEXTURE_02 = SF::Texture.from_file("graphics/Shounen_Face_Blue.png")
+SHOUNEN_FACE_02 = SF::Sprite.new(SHOUNEN_FACE_TEXTURE_02) 
+#\\\\\\\Display Model
+SHOUNEN_DISPLAY_FACE_02 = SF::Sprite.new(SHOUNEN_FACE_TEXTURE_02)
+SHOUNEN_DISPLAY_FACE_02.texture_rect = SF.int_rect(0, 0, 96, 128)
+SHOUNEN_DISPLAY_FACE_02.position = SF.vector2(190, 600)
+SHOUNEN_DISPLAY_FACE_02.scale = SF.vector2(3.5, 3.5)
+#.................................Green Shounen Face.......................................
+#\\\\\\\Character Model
+SHOUNEN_FACE_TEXTURE_03 = SF::Texture.from_file("graphics/Shounen_Face_Green.png")
+SHOUNEN_FACE_03 = SF::Sprite.new(SHOUNEN_FACE_TEXTURE_03) 
+#\\\\\\\Display Model
+SHOUNEN_DISPLAY_FACE_03 = SF::Sprite.new(SHOUNEN_FACE_TEXTURE_03)
+SHOUNEN_DISPLAY_FACE_03.texture_rect = SF.int_rect(0, 0, 96, 128)
+SHOUNEN_DISPLAY_FACE_03.position = SF.vector2(190, 600)
+SHOUNEN_DISPLAY_FACE_03.scale = SF.vector2(3.5, 3.5)
+#.................................Brown Shounen Face.......................................
+#\\\\\\\Character Model
+SHOUNEN_FACE_TEXTURE_04 = SF::Texture.from_file("graphics/Shounen_Face_Brown.png")
+SHOUNEN_FACE_04 = SF::Sprite.new(SHOUNEN_FACE_TEXTURE_04) 
+#\\\\\\\Display Model
+SHOUNEN_DISPLAY_FACE_04 = SF::Sprite.new(SHOUNEN_FACE_TEXTURE_04)
+SHOUNEN_DISPLAY_FACE_04.texture_rect = SF.int_rect(0, 0, 96, 128)
+SHOUNEN_DISPLAY_FACE_04.position = SF.vector2(190, 600)
+SHOUNEN_DISPLAY_FACE_04.scale = SF.vector2(3.5, 3.5)
+#.................................Purple Shounen Face.......................................
+#\\\\\\\Character Model
+SHOUNEN_FACE_TEXTURE_05 = SF::Texture.from_file("graphics/Shounen_Face_Purple.png")
+SHOUNEN_FACE_05 = SF::Sprite.new(SHOUNEN_FACE_TEXTURE_05) 
+#\\\\\\\Display Model
+SHOUNEN_DISPLAY_FACE_05 = SF::Sprite.new(SHOUNEN_FACE_TEXTURE_05)
+SHOUNEN_DISPLAY_FACE_05.texture_rect = SF.int_rect(0, 0, 96, 128)
+SHOUNEN_DISPLAY_FACE_05.position = SF.vector2(190, 600)
+SHOUNEN_DISPLAY_FACE_05.scale = SF.vector2(3.5, 3.5)
+#.................................Yellow Shounen Face........................................
+#\\\\\\\Character Model
+SHOUNEN_FACE_TEXTURE_06 = SF::Texture.from_file("graphics/Shounen_Face_Yellow.png")
+SHOUNEN_FACE_06 = SF::Sprite.new(SHOUNEN_FACE_TEXTURE_06) 
+#\\\\\\\Display Model
+SHOUNEN_DISPLAY_FACE_06 = SF::Sprite.new(SHOUNEN_FACE_TEXTURE_06)
+SHOUNEN_DISPLAY_FACE_06.texture_rect = SF.int_rect(0, 0, 96, 128)
+SHOUNEN_DISPLAY_FACE_06.position = SF.vector2(190, 600)
+SHOUNEN_DISPLAY_FACE_06.scale = SF.vector2(3.5, 3.5)
+#.................................Grey Tired Face............................................
+#\\\\\\\Character Model
+TIRED_FACE_TEXTURE_01 = SF::Texture.from_file("graphics/Tired_Face.png")
+TIRED_FACE_01 = SF::Sprite.new(TIRED_FACE_TEXTURE_01) 
+#\\\\\\\Display Model
+TIRED_DISPLAY_FACE_01 = SF::Sprite.new(TIRED_FACE_TEXTURE_01)
+TIRED_DISPLAY_FACE_01.texture_rect = SF.int_rect(0, 0, 96, 128)
+TIRED_DISPLAY_FACE_01.position = SF.vector2(190, 600)
+TIRED_DISPLAY_FACE_01.scale = SF.vector2(3.5, 3.5)
+#.................................Blue Tired Face............................................
+#\\\\\\\Character Model
+TIRED_FACE_TEXTURE_02 = SF::Texture.from_file("graphics/Tired_Face_Blue.png")
+TIRED_FACE_02 = SF::Sprite.new(TIRED_FACE_TEXTURE_02) 
+#\\\\\\\Display Model
+TIRED_DISPLAY_FACE_02 = SF::Sprite.new(TIRED_FACE_TEXTURE_02)
+TIRED_DISPLAY_FACE_02.texture_rect = SF.int_rect(0, 0, 96, 128)
+TIRED_DISPLAY_FACE_02.position = SF.vector2(190, 600)
+TIRED_DISPLAY_FACE_02.scale = SF.vector2(3.5, 3.5)
+#.................................Brown Tired Face............................................
+#\\\\\\\Character Model
+TIRED_FACE_TEXTURE_03 = SF::Texture.from_file("graphics/Tired_Face_Brown.png")
+TIRED_FACE_03 = SF::Sprite.new(TIRED_FACE_TEXTURE_03) 
+#\\\\\\\Display Model
+TIRED_DISPLAY_FACE_03 = SF::Sprite.new(TIRED_FACE_TEXTURE_03)
+TIRED_DISPLAY_FACE_03.texture_rect = SF.int_rect(0, 0, 96, 128)
+TIRED_DISPLAY_FACE_03.position = SF.vector2(190, 600)
+TIRED_DISPLAY_FACE_03.scale = SF.vector2(3.5, 3.5)
+#.................................Green Tired Face............................................
+#\\\\\\\Character Model
+TIRED_FACE_TEXTURE_04 = SF::Texture.from_file("graphics/Tired_Face_Green.png")
+TIRED_FACE_04 = SF::Sprite.new(TIRED_FACE_TEXTURE_04) 
+#\\\\\\\Display Model
+TIRED_DISPLAY_FACE_04 = SF::Sprite.new(TIRED_FACE_TEXTURE_04)
+TIRED_DISPLAY_FACE_04.texture_rect = SF.int_rect(0, 0, 96, 128)
+TIRED_DISPLAY_FACE_04.position = SF.vector2(190, 600)
+TIRED_DISPLAY_FACE_04.scale = SF.vector2(3.5, 3.5)
+#.................................Red Tired Face..............................................
+#\\\\\\\Character Model
+TIRED_FACE_TEXTURE_05 = SF::Texture.from_file("graphics/Tired_Face_Red.png")
+TIRED_FACE_05 = SF::Sprite.new(TIRED_FACE_TEXTURE_05) 
+#\\\\\\\Display Model
+TIRED_DISPLAY_FACE_05 = SF::Sprite.new(TIRED_FACE_TEXTURE_05)
+TIRED_DISPLAY_FACE_05.texture_rect = SF.int_rect(0, 0, 96, 128)
+TIRED_DISPLAY_FACE_05.position = SF.vector2(190, 600)
+TIRED_DISPLAY_FACE_05.scale = SF.vector2(3.5, 3.5)
+#................................Yellow Tired Face.............................................
+#\\\\\\\Character Model
+TIRED_FACE_TEXTURE_06 = SF::Texture.from_file("graphics/Tired_Face_Yellow.png")
+TIRED_FACE_06 = SF::Sprite.new(TIRED_FACE_TEXTURE_06) 
+#\\\\\\\Display Model
+TIRED_DISPLAY_FACE_06 = SF::Sprite.new(TIRED_FACE_TEXTURE_06)
+TIRED_DISPLAY_FACE_06.texture_rect = SF.int_rect(0, 0, 96, 128)
+TIRED_DISPLAY_FACE_06.position = SF.vector2(190, 600)
+TIRED_DISPLAY_FACE_06.scale = SF.vector2(3.5, 3.5)
+#...................................Smiley Face................................................
+#\\\\\\\Character Model
+SMILEY_FACE_TEXTURE_01 = SF::Texture.from_file("graphics/Smiley_Face.png")
+SMILEY_FACE_01 = SF::Sprite.new(SMILEY_FACE_TEXTURE_01) 
+#\\\\\\\Display Model
+SMILEY_DISPLAY_FACE_01 = SF::Sprite.new(SMILEY_FACE_TEXTURE_01)
+SMILEY_DISPLAY_FACE_01.texture_rect = SF.int_rect(0, 0, 96, 128)
+SMILEY_DISPLAY_FACE_01.position = SF.vector2(190, 600)
+SMILEY_DISPLAY_FACE_01.scale = SF.vector2(3.5, 3.5)
+
+
 #----------------------------------------------------------------------------------------
 #                                   Glove Textures
 #----------------------------------------------------------------------------------------
+GLOVE_ARRAY = [FINGERLESS_GLOVE_01, FINGERLESS_GLOVE_02, FINGERLESS_GLOVE_03]
+
+DISPLAY_GLOVE_ARRAY = [DISPLAY_FINGERLESS_GLOVE_01, DISPLAY_FINGERLESS_GLOVE_02, DISPLAY_FINGERLESS_GLOVE_03]
+
+GLOVE_DESC_ARRAY = ["Black Fingerless Gloves", "Red Fingerless Gloves", "Blue Fingerless Gloves"]
+
+Glove_Desc = SF::Text.new; Glove_Desc.font = FONT_FANCY_BOLD
+Glove_Desc.string = GLOVE_DESC_ARRAY[0]; Glove_Desc.character_size = 40; Glove_Desc.color = SF::Color::White
+Glove_Desc.position = SF.vector2(1400, 250)
 #...............................Fingerless Gloves Black..................................
+#\\\\\\\Character Model
 FINGERLESS_GLOVE_TEXTURE_01 = SF::Texture.from_file("graphics/Fingerless_Gloves_01.png")
 FINGERLESS_GLOVE_01 = SF::Sprite.new(FINGERLESS_GLOVE_TEXTURE_01) 
+#\\\\\\\Display Model
+DISPLAY_FINGERLESS_GLOVE_01 = SF::Sprite.new(FINGERLESS_GLOVE_TEXTURE_01)
+DISPLAY_FINGERLESS_GLOVE_01.texture_rect = SF.int_rect(0, 0, 96, 128)
+DISPLAY_FINGERLESS_GLOVE_01.position = SF.vector2(1350, -250)
+DISPLAY_FINGERLESS_GLOVE_01.scale = SF.vector2(5.0, 5.0)
+#...............................Fingerless Gloves Red....................................
+#\\\\\\\Character Model
+FINGERLESS_GLOVE_02 = SF::Sprite.new(FINGERLESS_GLOVE_TEXTURE_01) 
+FINGERLESS_GLOVE_02.color = SF.color(255, 50, 50)
+#\\\\\\\Display Model
+DISPLAY_FINGERLESS_GLOVE_02 = SF::Sprite.new(FINGERLESS_GLOVE_TEXTURE_01)
+DISPLAY_FINGERLESS_GLOVE_02.texture_rect = SF.int_rect(0, 0, 96, 128)
+DISPLAY_FINGERLESS_GLOVE_02.position = SF.vector2(1350, -250)
+DISPLAY_FINGERLESS_GLOVE_02.scale = SF.vector2(5.0, 5.0)
+DISPLAY_FINGERLESS_GLOVE_02.color = SF.color(255, 50, 50)
+#.............................Fingerless Gloves Blue.....................................
+#\\\\\\\Character Model
+FINGERLESS_GLOVE_03 = SF::Sprite.new(FINGERLESS_GLOVE_TEXTURE_01) 
+FINGERLESS_GLOVE_03.color = SF.color(50, 50, 255)
+#\\\\\\\Display Model
+DISPLAY_FINGERLESS_GLOVE_03 = SF::Sprite.new(FINGERLESS_GLOVE_TEXTURE_01)
+DISPLAY_FINGERLESS_GLOVE_03.texture_rect = SF.int_rect(0, 0, 96, 128)
+DISPLAY_FINGERLESS_GLOVE_03.position = SF.vector2(1350, -250)
+DISPLAY_FINGERLESS_GLOVE_03.scale = SF.vector2(5.0, 5.0)
+DISPLAY_FINGERLESS_GLOVE_03.color = SF.color(50, 50, 255)
 #----------------------------------------------------------------------------------------
 #                                   Shirt Textures
 #----------------------------------------------------------------------------------------
+
+SHIRT_ARRAY = [T_SHIRT_01, T_SHIRT_02, T_SHIRT_03, T_SHIRT_04, T_SHIRT_05, T_SHIRT_06]
+
+DISPLAY_SHIRT_ARRAY = [DISPLAY_T_SHIRT_01, DISPLAY_T_SHIRT_02, DISPLAY_T_SHIRT_03, DISPLAY_T_SHIRT_04,
+DISPLAY_T_SHIRT_05, DISPLAY_T_SHIRT_06]
+
+SHIRT_DESC_ARRAY = ["White T-Shirt", "Blue T-Shirt", "Red T-Shirt", "Green T-Shirt", "Purple T-Shirt", 
+"Black T-Shirt"]
+
+Shirt_Desc = SF::Text.new; Shirt_Desc.font = FONT_FANCY_BOLD
+Shirt_Desc.string = SHIRT_DESC_ARRAY[0]; Shirt_Desc.character_size = 40; Shirt_Desc.color = SF::Color::White
+Shirt_Desc.position = SF.vector2(1200, 800)
+#...................................White T-Shirt........................................
+#\\\\\\\Character Model
 T_SHIRT_TEXTURE_01 = SF::Texture.from_file("graphics/T-Shirt_01.png")
-T_SHIRT = SF::Sprite.new(T_SHIRT_TEXTURE_01) 
+T_SHIRT_01 = SF::Sprite.new(T_SHIRT_TEXTURE_01)
+#\\\\\\\Display Model
+DISPLAY_T_SHIRT_01 = SF::Sprite.new(T_SHIRT_TEXTURE_01)
+DISPLAY_T_SHIRT_01.texture_rect = SF.int_rect(0, 0, 96, 128)
+DISPLAY_T_SHIRT_01.position = SF.vector2(1125, 475)
+DISPLAY_T_SHIRT_01.scale = SF.vector2(3.5, 3.5)
+#...................................Blue T-Shirt........................................
+#\\\\\\\Character Model
+T_SHIRT_02 = SF::Sprite.new(T_SHIRT_TEXTURE_01)
+T_SHIRT_02.color = SF.color(0, 0, 255)
+ #\\\\\\\Display Model
+DISPLAY_T_SHIRT_02 = SF::Sprite.new(T_SHIRT_TEXTURE_01)
+DISPLAY_T_SHIRT_02.texture_rect = SF.int_rect(0, 0, 96, 128)
+DISPLAY_T_SHIRT_02.position = SF.vector2(1125, 475)
+DISPLAY_T_SHIRT_02.scale = SF.vector2(3.5, 3.5)
+DISPLAY_T_SHIRT_02.color = SF.color(0, 0, 255)
+#....................................Red T-Shirt.........................................
+#\\\\\\\Character Model
+T_SHIRT_03 = SF::Sprite.new(T_SHIRT_TEXTURE_01)
+T_SHIRT_03.color = SF.color(255, 50, 50)
+ #\\\\\\\Display Model
+DISPLAY_T_SHIRT_03 = SF::Sprite.new(T_SHIRT_TEXTURE_01)
+DISPLAY_T_SHIRT_03.texture_rect = SF.int_rect(0, 0, 96, 128)
+DISPLAY_T_SHIRT_03.position = SF.vector2(1125, 475)
+DISPLAY_T_SHIRT_03.scale = SF.vector2(3.5, 3.5)
+DISPLAY_T_SHIRT_03.color = SF.color(255, 50, 50)
+#...................................Green T-Shirt.........................................
+#\\\\\\\Character Model
+T_SHIRT_04 = SF::Sprite.new(T_SHIRT_TEXTURE_01)
+T_SHIRT_04.color = SF.color(50, 255, 50)
+ #\\\\\\\Display Model
+DISPLAY_T_SHIRT_04 = SF::Sprite.new(T_SHIRT_TEXTURE_01)
+DISPLAY_T_SHIRT_04.texture_rect = SF.int_rect(0, 0, 96, 128)
+DISPLAY_T_SHIRT_04.position = SF.vector2(1125, 475)
+DISPLAY_T_SHIRT_04.scale = SF.vector2(3.5, 3.5)
+DISPLAY_T_SHIRT_04.color = SF.color(50, 255, 50)
+#..................................Purple T-Shirt.........................................
+#\\\\\\\Character Model
+T_SHIRT_05 = SF::Sprite.new(T_SHIRT_TEXTURE_01)
+T_SHIRT_05.color = SF.color(100, 0, 200)
+ #\\\\\\\Display Model
+DISPLAY_T_SHIRT_05 = SF::Sprite.new(T_SHIRT_TEXTURE_01)
+DISPLAY_T_SHIRT_05.texture_rect = SF.int_rect(0, 0, 96, 128)
+DISPLAY_T_SHIRT_05.position = SF.vector2(1125, 475)
+DISPLAY_T_SHIRT_05.scale = SF.vector2(3.5, 3.5)
+DISPLAY_T_SHIRT_05.color = SF.color(100, 0, 200)
+#...................................Black T-Shirt.........................................
+#\\\\\\\Character Model
+T_SHIRT_06 = SF::Sprite.new(T_SHIRT_TEXTURE_01)
+T_SHIRT_06.color = SF.color(10, 10, 10)
+ #\\\\\\\Display Model
+DISPLAY_T_SHIRT_06 = SF::Sprite.new(T_SHIRT_TEXTURE_01)
+DISPLAY_T_SHIRT_06.texture_rect = SF.int_rect(0, 0, 96, 128)
+DISPLAY_T_SHIRT_06.position = SF.vector2(1125, 475)
+DISPLAY_T_SHIRT_06.scale = SF.vector2(3.5, 3.5)
+DISPLAY_T_SHIRT_06.color = SF.color(10, 10, 10)
 #----------------------------------------------------------------------------------------
 #                                   Pants Textures
 #----------------------------------------------------------------------------------------
-SHORTS_TEXTURE_01 = SF::Texture.from_file("graphics/Shorts.png")
-SHORTS_01 = SF::Sprite.new(SHORTS_TEXTURE_01) 
+PANTS_ARRAY = [SHORTS_01, SHORTS_02, SHORTS_03]
+
+DISPLAY_PANTS_ARRAY = [DISPLAY_SHORTS_01, DISPLAY_SHORTS_02, DISPLAY_SHORTS_03]
+
+PANTS_DESC_ARRAY = ["Blue Shorts", "Brown Shorts", "Black Shorts"]
+
+Pants_Desc = SF::Text.new; Pants_Desc.font = FONT_FANCY_BOLD
+Pants_Desc.string = PANTS_DESC_ARRAY[0]; Pants_Desc.character_size = 40; Pants_Desc.color = SF::Color::White
+Pants_Desc.position = SF.vector2(1500, 530)
+#....................................Blue Shorts.........................................
+ #\\\\\\\Character Model
+ SHORTS_TEXTURE_01 = SF::Texture.from_file("graphics/Shorts.png")
+ SHORTS_01 = SF::Sprite.new(SHORTS_TEXTURE_01) 
+ #\\\\\\\Display Model
+ DISPLAY_SHORTS_01 = SF::Sprite.new(SHORTS_TEXTURE_01)
+ DISPLAY_SHORTS_01.texture_rect = SF.int_rect(0, 0, 96, 128)
+ DISPLAY_SHORTS_01.position = SF.vector2(1415, 120)
+ DISPLAY_SHORTS_01.scale = SF.vector2(3.5, 3.5)
+ #DISPLAY_SHORTS_01.color = SF.color(10, 10, 10)
+#....................................Brown Shorts.........................................
+#\\\\\\\Character Model
+ SHORTS_02 = SF::Sprite.new(SHORTS_TEXTURE_01) 
+ SHORTS_02.color = SF.color(255, 130, 80)
+ #\\\\\\\Display Model
+ DISPLAY_SHORTS_02 = SF::Sprite.new(SHORTS_TEXTURE_01)
+ DISPLAY_SHORTS_02.texture_rect = SF.int_rect(0, 0, 96, 128)
+ DISPLAY_SHORTS_02.position = SF.vector2(1415, 120)
+ DISPLAY_SHORTS_02.scale = SF.vector2(3.5, 3.5)
+ DISPLAY_SHORTS_02.color = SF.color(255, 130, 80)
+#....................................Black Shorts.........................................
+#\\\\\\\Character Model
+SHORTS_03 = SF::Sprite.new(SHORTS_TEXTURE_01) 
+SHORTS_03.color = SF.color(70, 70, 70)
+#\\\\\\\Display Model
+DISPLAY_SHORTS_03 = SF::Sprite.new(SHORTS_TEXTURE_01)
+DISPLAY_SHORTS_03.texture_rect = SF.int_rect(0, 0, 96, 128)
+DISPLAY_SHORTS_03.position = SF.vector2(1415, 120)
+DISPLAY_SHORTS_03.scale = SF.vector2(3.5, 3.5)
+DISPLAY_SHORTS_03.color = SF.color(70, 70, 70)
 #----------------------------------------------------------------------------------------
 #                                   Shoes Textures
 #----------------------------------------------------------------------------------------
-RAIN_BOOTS_TEXTURE_01 = SF::Texture.from_file("graphics/Rain_Boots_01.png")
-RAIN_BOOTS_01 = SF::Sprite.new(RAIN_BOOTS_TEXTURE_01) 
+ SHOES_ARRAY = [RAIN_BOOTS_01, RAIN_BOOTS_02, RAIN_BOOTS_03]
 
+ DISPLAY_SHOES_ARRAY = [DISPLAY_RAIN_BOOTS_01, DISPLAY_RAIN_BOOTS_02, DISPLAY_RAIN_BOOTS_03]
+
+ SHOES_DESC_ARRAY = ["Black Rain Boots", "Red Rain Boots", "Blue Rain Boots"]
+
+ Shoes_Desc = SF::Text.new; Shoes_Desc.font = FONT_FANCY_BOLD
+ Shoes_Desc.string = SHOES_DESC_ARRAY[0]; Shoes_Desc.character_size = 40; Shoes_Desc.color = SF::Color::White
+ Shoes_Desc.position = SF.vector2(1450, 800)
+ #...............................Black Rain Boots.........................................
+  #\\\\\\\Character Model
+  RAIN_BOOTS_TEXTURE_01 = SF::Texture.from_file("graphics/Rain_Boots_01.png")
+  RAIN_BOOTS_01 = SF::Sprite.new(RAIN_BOOTS_TEXTURE_01) 
+  #\\\\\\\Display Model
+  DISPLAY_RAIN_BOOTS_01 = SF::Sprite.new(RAIN_BOOTS_TEXTURE_01)
+  DISPLAY_RAIN_BOOTS_01.texture_rect = SF.int_rect(0, 0, 96, 128)
+  DISPLAY_RAIN_BOOTS_01.position = SF.vector2(1400, 350)
+  DISPLAY_RAIN_BOOTS_01.scale = SF.vector2(3.5, 3.5)
+ #................................Red Rain Boots............................................
+  #\\\\\\\Character Model
+  RAIN_BOOTS_02 = SF::Sprite.new(RAIN_BOOTS_TEXTURE_01) 
+  RAIN_BOOTS_02.color = SF.color(255, 100, 100)
+  #\\\\\\\Display Model
+  DISPLAY_RAIN_BOOTS_02 = SF::Sprite.new(RAIN_BOOTS_TEXTURE_01)
+  DISPLAY_RAIN_BOOTS_02.texture_rect = SF.int_rect(0, 0, 96, 128)
+  DISPLAY_RAIN_BOOTS_02.position = SF.vector2(1400, 350)
+  DISPLAY_RAIN_BOOTS_02.scale = SF.vector2(3.5, 3.5)
+  DISPLAY_RAIN_BOOTS_02.color = SF.color(255, 100, 100)
+ #................................Blue Rain Boots...........................................
+  #\\\\\\\Character Model
+  RAIN_BOOTS_03 = SF::Sprite.new(RAIN_BOOTS_TEXTURE_01) 
+  RAIN_BOOTS_03.color = SF.color(100, 100, 255)
+  #\\\\\\\Display Model
+  DISPLAY_RAIN_BOOTS_03 = SF::Sprite.new(RAIN_BOOTS_TEXTURE_01)
+  DISPLAY_RAIN_BOOTS_03.texture_rect = SF.int_rect(0, 0, 96, 128)
+  DISPLAY_RAIN_BOOTS_03.position = SF.vector2(1400, 350)
+  DISPLAY_RAIN_BOOTS_03.scale = SF.vector2(3.5, 3.5)
+  DISPLAY_RAIN_BOOTS_03.color = SF.color(100, 100, 255)
 
