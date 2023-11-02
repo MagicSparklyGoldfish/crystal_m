@@ -155,39 +155,39 @@ end
 #========================================================+
 #--------------------------------------------------------+
 #=============Menu Renderers=============================+
- 
-#//////////////Main Menu/////////////////////////////////+
-  def Window_Class.main_menu(window)
-      window.clear(SF::Color::Black);
-      window.draw(Text_Title); window.draw(Rectangle_Menu)
-      window.draw(Rectangle_Opt1); window.draw(Text_Opt1)
-      window.draw(Rectangle_Opt2); window.draw(Text_Opt2)
-      window.draw(Cursor_opt1)
+  
+ #//////////////Main Menu/////////////////////////////////+
+   def Window_Class.main_menu(window)
+       window.clear(SF::Color::Black);
+       window.draw(Text_Title); window.draw(Rectangle_Menu)
+       window.draw(Rectangle_Opt1); window.draw(Text_Opt1)
+       window.draw(Rectangle_Opt2); window.draw(Text_Opt2)
+       window.draw(Cursor_opt1)
+   end
+ #////////////Character Menu//////////////////////////////+
+   def Window_Class.character_menu(window)
+       window.clear(SF::Color::Blue)
+       window.draw(Rectangle_Charmenu_Ground); window.draw(Rectangle_CharOuter_1); window.draw(Rectangle_CharOuter_2)
+       window.draw(Rectangle_CharOuter_3); window.draw(Rectangle_CharOuter_4); window.draw(Rectangle_CharOuter_5)
+       window.draw(Rectangle_CharOuter_6); window.draw(Rectangle_CharOuter_7)
+       window.draw(Rectangle_CharInner_1); window.draw(Rectangle_CharInner_2); window.draw(Rectangle_CharInner_3)
+       window.draw(Rectangle_CharInner_4); window.draw(Rectangle_CharInner_5); window.draw(Rectangle_CharInner_6)
+       window.draw(Rectangle_CharInner_7); window.draw(Info_Block_1); window.draw(Info_Block_2); window.draw(Info_Block_3)
+       window.draw(Info_Block_4); window.draw(Info_Block_5); window.draw(Info_Block_6); window.draw(Info_Block_7)
+   end
+ #//////////Character Creation////////////////////////////+
+  def Window_Class.character_creation_menu(window)
+     window.clear(SF::Color::White); window.draw(Rectangle_Charcreation_Backwall); window.draw(Rectangle_Charcreation_Ground) 
+     window.draw(Rectangle_Dresser_01); window.draw(Rectangle_Dresser_02); window.draw(Rectangle_Cubby_01)
+     window.draw(Rectangle_Cubby_02); window.draw(Rectangle_Cubby_03); window.draw(Rectangle_Cubby_04); window.draw(Rectangle_Cubby_05)
+     window.draw(Rectangle_Cubby_06); window.draw(Rectangle_Cubby_07); window.draw(Cabinet_01); window.draw(Left_Black_Bar)
+     window.draw(Right_Black_Bar); window.draw(Bottom_Black_Bar); window.draw(Char_Creat_Cursor); window.draw(@@player_character_rendered_model)
+     window.draw(@@hair_display_array[@@current_display_hair]); window.draw(Hair_Desc); window.draw(DISPLAY_SKIN_ARRAY[@@current_skin])
+     window.draw(Skin_Desc); window.draw(DISPLAY_FACE_ARRAY[@@current_face]); window.draw(Face_Desc); window.draw(DISPLAY_SHIRT_ARRAY[@@current_shirt])
+     window.draw(Shirt_Desc); window.draw(DISPLAY_GLOVE_ARRAY[@@current_gloves]); window.draw(Glove_Desc) 
+     window.draw(DISPLAY_PANTS_ARRAY[@@current_pants]); window.draw(Pants_Desc); window.draw(DISPLAY_SHOES_ARRAY[@@current_shoes]); 
+     window.draw(Shoes_Desc)
   end
-#////////////Character Menu//////////////////////////////+
-  def Window_Class.character_menu(window)
-      window.clear(SF::Color::Blue)
-      window.draw(Rectangle_Charmenu_Ground); window.draw(Rectangle_CharOuter_1); window.draw(Rectangle_CharOuter_2)
-      window.draw(Rectangle_CharOuter_3); window.draw(Rectangle_CharOuter_4); window.draw(Rectangle_CharOuter_5)
-      window.draw(Rectangle_CharOuter_6); window.draw(Rectangle_CharOuter_7)
-      window.draw(Rectangle_CharInner_1); window.draw(Rectangle_CharInner_2); window.draw(Rectangle_CharInner_3)
-      window.draw(Rectangle_CharInner_4); window.draw(Rectangle_CharInner_5); window.draw(Rectangle_CharInner_6)
-      window.draw(Rectangle_CharInner_7); window.draw(Info_Block_1); window.draw(Info_Block_2); window.draw(Info_Block_3)
-      window.draw(Info_Block_4); window.draw(Info_Block_5); window.draw(Info_Block_6); window.draw(Info_Block_7)
-  end
-#//////////Character Creation////////////////////////////+
-def Window_Class.character_creation_menu(window)
-    window.clear(SF::Color::White); window.draw(Rectangle_Charcreation_Backwall); window.draw(Rectangle_Charcreation_Ground) 
-    window.draw(Rectangle_Dresser_01); window.draw(Rectangle_Dresser_02); window.draw(Rectangle_Cubby_01)
-    window.draw(Rectangle_Cubby_02); window.draw(Rectangle_Cubby_03); window.draw(Rectangle_Cubby_04); window.draw(Rectangle_Cubby_05)
-    window.draw(Rectangle_Cubby_06); window.draw(Rectangle_Cubby_07); window.draw(Cabinet_01); window.draw(Left_Black_Bar)
-    window.draw(Right_Black_Bar); window.draw(Bottom_Black_Bar); window.draw(Char_Creat_Cursor); window.draw(@@player_character_rendered_model)
-    window.draw(@@hair_display_array[@@current_display_hair]); window.draw(Hair_Desc); window.draw(DISPLAY_SKIN_ARRAY[@@current_skin])
-    window.draw(Skin_Desc); window.draw(DISPLAY_FACE_ARRAY[@@current_face]); window.draw(Face_Desc); window.draw(DISPLAY_SHIRT_ARRAY[@@current_shirt])
-    window.draw(Shirt_Desc); window.draw(DISPLAY_GLOVE_ARRAY[@@current_gloves]); window.draw(Glove_Desc) 
-    window.draw(DISPLAY_PANTS_ARRAY[@@current_pants]); window.draw(Pants_Desc); window.draw(DISPLAY_SHOES_ARRAY[@@current_shoes]); 
-    window.draw(Shoes_Desc)
-end
 #========================================================+
 #--------------------------------------------------------+
 #=========Window Functions===============================+
@@ -382,7 +382,7 @@ def Window_Class.char_creation_menu_keypresses(window)
       All_Audio::SFX.char_create_sideways
       case @@char_create_pointer_position[0]
 
-      when 1
+    when 1 #hair
         direction = "left"
        if @@current_hair != -1
           Window_Class.customize_hair(window, direction)
@@ -390,7 +390,7 @@ def Window_Class.char_creation_menu_keypresses(window)
        else @@current_hair = 11; @@char_create_pointer_position[1] = 11
           Window_Class.customize_hair(window, direction)
       end
-      when 2
+    when 2 #skin
         direction = "left"
         if @@current_skin != -1
         Window_Class.customize_skin(window, direction)
@@ -398,8 +398,8 @@ def Window_Class.char_creation_menu_keypresses(window)
         else 
         @@current_skin = 6; @@char_create_pointer_position[1] = 6
         Window_Class.customize_skin(window, direction)
-      end
-    when 3
+       end
+    when 3 #face
       direction = "left"
       if @@current_face != -1
       Window_Class.customize_face(window, direction)
@@ -408,7 +408,7 @@ def Window_Class.char_creation_menu_keypresses(window)
       @@current_face = 18; @@char_create_pointer_position[1] = 18
       Window_Class.customize_face(window, direction)
       end
-    when 4
+    when 4 #shirt
       direction = "left"
       if @@current_shirt != -1
       Window_Class.customize_shirt(window, direction)
@@ -417,7 +417,7 @@ def Window_Class.char_creation_menu_keypresses(window)
       @@current_shirt = 5; @@char_create_pointer_position[1] = 5
       Window_Class.customize_shirt(window, direction)
       end
-    when 5
+    when 5 #gloves
       direction = "left"
       if @@current_gloves != -1
         Window_Class.customize_gloves(window, direction)
@@ -426,7 +426,7 @@ def Window_Class.char_creation_menu_keypresses(window)
         @@current_gloves = 2; @@char_create_pointer_position[1] = 2
       Window_Class.customize_gloves(window, direction)
       end
-    when 6
+    when 6 #pants
       direction = "left"
       if @@current_pants != -1
         Window_Class.customize_pants(window, direction)
@@ -435,7 +435,7 @@ def Window_Class.char_creation_menu_keypresses(window)
         @@current_pants = 2; @@char_create_pointer_position[1] = 2
         Window_Class.customize_pants(window, direction)
       end
-    when 7
+    when 7 #shoes
       direction = "left"
       if @@current_shoes != -1
         Window_Class.customize_shoes(window, direction)
@@ -450,7 +450,7 @@ def Window_Class.char_creation_menu_keypresses(window)
       All_Audio::SFX.char_create_sideways
       case @@char_create_pointer_position[0]
 
-      when 1
+    when 1 #hair
         direction = "right"
       if @@current_hair != 11
       Window_Class.customize_hair(window, direction) 
@@ -458,7 +458,7 @@ def Window_Class.char_creation_menu_keypresses(window)
       else @@current_hair = -1; @@char_create_pointer_position[1] = 0
       Window_Class.customize_hair(window, direction)
       end
-      when 2
+    when 2 #skin
       direction = "right"
       if @@current_skin != 6
       Window_Class.customize_skin(window, direction) 
@@ -466,15 +466,15 @@ def Window_Class.char_creation_menu_keypresses(window)
       @@current_skin = -1; @@char_create_pointer_position[1] = 0
       Window_Class.customize_skin(window, direction)  
       end
-    when 3
+    when 3 #face
       direction = "right"
-      if @@current_shirt != 18
+      if @@current_face != 18
       Window_Class.customize_face(window, direction)
       else
       @@current_face = -1; @@char_create_pointer_position[1] = 0
       Window_Class.customize_face(window, direction)
       end
-    when 4
+    when 4 #shirt
       direction = "right"
       if @@current_shirt != 5
       Window_Class.customize_shirt(window, direction)
@@ -482,7 +482,7 @@ def Window_Class.char_creation_menu_keypresses(window)
       @@current_shirt = -1; @@char_create_pointer_position[1] = 0
       Window_Class.customize_shirt(window, direction)
       end
-    when 5
+    when 5 #gloves
       direction = "right"
       if @@current_gloves != 2
         Window_Class.customize_gloves(window, direction)
@@ -490,7 +490,7 @@ def Window_Class.char_creation_menu_keypresses(window)
         @@current_gloves = -1; @@char_create_pointer_position[1] = 0
       Window_Class.customize_gloves(window, direction)
       end
-    when 6
+    when 6 #pants
       direction = "right"
       if @@current_pants != 2
         Window_Class.customize_pants(window, direction)
@@ -498,7 +498,7 @@ def Window_Class.char_creation_menu_keypresses(window)
         @@current_pants = -1; @@char_create_pointer_position[1] = 0
         Window_Class.customize_pants(window, direction)
       end
-    when 7
+    when 7 #shoes
       direction = "right"
       if @@current_shoes != 2
         Window_Class.customize_shoes(window, direction)
@@ -516,7 +516,7 @@ end
     @@cursorframe = 1
     @@char_select_blink = 1
     @@char_create_breathe = 1
-     def MenuElements.cursorFunc(window, @@menu)
+    def MenuElements.cursorFunc(window, @@menu)
 
       if @@cursorframe == 1
         Cursor_opt1.texture_rect = SF.int_rect(62, 0, 62, 65); @@cursorframe = @@cursorframe + 1
@@ -550,9 +550,8 @@ end
       #  else @@char_select_blink = @@char_select_blink + 1
       #   window.draw(this2)
       #  end; end; end; 
-    end
-     end
-     def MenuElements.charcreatecursorFunc(window, @@menu)
+      end; end
+    def MenuElements.charcreatecursorFunc(window, @@menu)
 
       if @@cursorframe > 0 && @@cursorframe < 101
         Char_Creat_Cursor.texture_rect = SF.int_rect(0, 0, 295, 25); @@cursorframe = @@cursorframe + 1
@@ -594,7 +593,7 @@ end
       Cursor_opt1.scale = SF.vector2(1, 1) 
       end; end; end; end; end; end; end; end; end; end; end; end  
 
-      def MenuElements.charcreatecursorMoveFunc(window, @@char_create_pointer_position)
+    def MenuElements.charcreatecursorMoveFunc(window, @@char_create_pointer_position)
         
         case @@char_create_pointer_position[0]
         when 1 
@@ -614,7 +613,7 @@ end
 
       end; end
 
-      def MenuElements.charcreatebreatheFunc(window, @@menu, @@player_character_rendered_model)
+    def MenuElements.charcreatebreatheFunc(window, @@menu, @@player_character_rendered_model)
 
         if @@char_create_breathe  > 0 && @@char_create_breathe  < 1001
           @@player_character_rendered_model.texture_rect = SF.int_rect(0, 256, 96, 128); @@char_create_breathe  = @@char_create_breathe  + 1
