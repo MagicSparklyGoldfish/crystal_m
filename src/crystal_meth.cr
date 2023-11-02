@@ -2,6 +2,7 @@ require "crsfml"
 require "crsfml/audio"
 require "crsfml/system"
 require "../src/Textures.cr"
+require "../src/Clothing.cr"
 require "../src/Audio.cr"
 require "../src/Saves.cr"
 require "../src/Fonts.cr"
@@ -43,6 +44,7 @@ extend self
 #========Window_Class Variables==========================+
 
   @@menu = "main"
+  @@popup = "none"
   @@cursorposition = "up"
   @@char_select_pointer_position = 0
   @@save_file_slot : Int32 = 0
@@ -176,6 +178,7 @@ end
        window.draw(Info_Block_4); window.draw(Info_Block_5); window.draw(Info_Block_6); window.draw(Info_Block_7)
    end
  #//////////Character Creation////////////////////////////+
+
   def Window_Class.character_creation_menu(window)
      window.clear(SF::Color::White); window.draw(Rectangle_Charcreation_Backwall); window.draw(Rectangle_Charcreation_Ground) 
      window.draw(Rectangle_Dresser_01); window.draw(Rectangle_Dresser_02); window.draw(Rectangle_Cubby_01)
@@ -187,7 +190,11 @@ end
      window.draw(Shirt_Desc); window.draw(DISPLAY_GLOVE_ARRAY[@@current_gloves]); window.draw(Glove_Desc) 
      window.draw(DISPLAY_PANTS_ARRAY[@@current_pants]); window.draw(Pants_Desc); window.draw(DISPLAY_SHOES_ARRAY[@@current_shoes]); 
      window.draw(Shoes_Desc)
-  end
+   end
+  def Window_Class.character_creation_popup(window)
+    window.draw(Char_Create_Popup_Box); window.draw(Char_Create_Popup_Option_01); window.draw(Char_Create_Popup_Option_02)
+    window.draw(Text_Popup_01); window.draw(Text_Popup_01_Opt_01); window.draw(Text_Popup_01_Opt_02); window.draw(Cursor_opt1)
+   end  
 #========================================================+
 #--------------------------------------------------------+
 #=========Window Functions===============================+
@@ -206,6 +213,12 @@ end
     MenuElements.charcreatecursorFunc(window, @@menu)
     MenuElements.charcreatecursorMoveFunc(window, @@char_create_pointer_position)
     Window_Class.character_creation_menu(window)
+     if @@popup == "Char_Popup_01"
+      MenuElements.cursorFunc(window, @@menu)
+      Window_Class.character_creation_popup(window)
+     end
+   when "HUD"
+    puts "placeholder"
    else begin 
      raise "ERROR! Invalid value for '@@menu'!"
    rescue
@@ -220,33 +233,33 @@ end
       Window_Class.char_select_menu_keypresses(window)
     when "charcreate"
       Window_Class.char_creation_menu_keypresses(window)
+    when "HUD"
+      puts "placeholder"
     end
    end
 #//////Character Creation///////////////////////////////+
-    def Window_Class.character_creation_logic
 
-    end
     def Window_Class.run
 #---------------------------------------------------------------
 #                       Initialization
 #---------------------------------------------------------------
-window = SF::RenderWindow.new(SF::VideoMode.new(1920, 1080), "Crystal Meth!", SF::Style::Fullscreen) #initializes window
-window.vertical_sync_enabled = false 
+ window = SF::RenderWindow.new(SF::VideoMode.new(1920, 1080), "Crystal Meth!", SF::Style::Fullscreen) #initializes window
+ window.vertical_sync_enabled = false 
 
 
-debug_draw = SFMLDebugDraw.new(window, SF::RenderStates.new( #--------------------------------initializes crystal chipmunk draw area
-SF::Transform.new.translate(window.size / 2).scale(1, -1).scale(5, 5)
-))
+ debug_draw = SFMLDebugDraw.new(window, SF::RenderStates.new( #--------------------------------initializes crystal chipmunk draw area
+ SF::Transform.new.translate(window.size / 2).scale(1, -1).scale(5, 5)
+ ))
 
 #---------------------------------------------------------------
 #                 This runs every frame
 #---------------------------------------------------------------
-while window.open?
-  Window_Class.keypresses(window)
-  Window_Class.draw(window)
-  window.display
-  end
-end
+ while window.open?
+   Window_Class.keypresses(window)
+   Window_Class.draw(window)
+   window.display
+   end
+ end
 #_______________________________________________________________
  
 #---------------------------------------------------------------
@@ -377,78 +390,100 @@ def Window_Class.char_creation_menu_keypresses(window)
     end; end;
 #********************Enter**************************************  
     when SF::Keyboard::Enter
-#********************Left***************************************  
-    when SF::Keyboard::Left
-      All_Audio::SFX.char_create_sideways
-      case @@char_create_pointer_position[0]
-
-    when 1 #hair
-        direction = "left"
-       if @@current_hair != -1
-          Window_Class.customize_hair(window, direction)
-          @@char_create_pointer_position[1] -= 1
-       else @@current_hair = 11; @@char_create_pointer_position[1] = 11
-          Window_Class.customize_hair(window, direction)
+      if @@popup == "none"
+        Cursor_opt1.position = SF.vector2(600, 405)
+        @@popup = "Char_Popup_01"
+        @@cursorposition = "left"
+      else if @@popup == "Char_Popup_01" && @@cursorposition == "left"
+        @@menu = "HUD"
+      else if @@popup == "Char_Popup_01" && @@cursorposition == "right"
+        @@popup = "None"
+      end  
       end
-    when 2 #skin
+      end
+#********************Left***************************************  
+  when SF::Keyboard::Left
+   All_Audio::SFX.char_create_sideways
+   if @@popup == "Char_Popup_01"
+    Cursor_opt1.position = SF.vector2(600, 405)
+    @@cursorposition = "left"
+   end
+   if @@popup != "Char_Popup_01" 
+     case @@char_create_pointer_position[0]
+   
+       when 1 #hair
+           direction = "left"
+          if @@current_hair != -1
+             Window_Class.customize_hair(window, direction)
+             @@char_create_pointer_position[1] -= 1
+          else @@current_hair = 11; @@char_create_pointer_position[1] = 11
+             Window_Class.customize_hair(window, direction)
+         end
+       when 2 #skin
+           direction = "left"
+           if @@current_skin != -1
+           Window_Class.customize_skin(window, direction)
+           @@char_create_pointer_position[1] -= 1
+           else 
+           @@current_skin = 6; @@char_create_pointer_position[1] = 6
+           Window_Class.customize_skin(window, direction)
+          end
+       when 3 #face
+         direction = "left"
+         if @@current_face != -1
+         Window_Class.customize_face(window, direction)
+         @@char_create_pointer_position[1] -= 1
+         else 
+         @@current_face = 18; @@char_create_pointer_position[1] = 18
+         Window_Class.customize_face(window, direction)
+         end
+       when 4 #shirt
+         direction = "left"
+         if @@current_shirt != -1
+         Window_Class.customize_shirt(window, direction)
+         @@char_create_pointer_position[1] -= 1
+         else 
+         @@current_shirt = 5; @@char_create_pointer_position[1] = 5
+         Window_Class.customize_shirt(window, direction)
+         end
+       when 5 #gloves
+         direction = "left"
+         if @@current_gloves != -1
+           Window_Class.customize_gloves(window, direction)
+         @@char_create_pointer_position[1] -= 1
+         else 
+           @@current_gloves = 2; @@char_create_pointer_position[1] = 2
+         Window_Class.customize_gloves(window, direction)
+         end
+       when 6 #pants
+         direction = "left"
+         if @@current_pants != -1
+           Window_Class.customize_pants(window, direction)
+         @@char_create_pointer_position[1] -= 1
+         else 
+           @@current_pants = 2; @@char_create_pointer_position[1] = 2
+           Window_Class.customize_pants(window, direction)
+         end
+       when 7 #shoes
         direction = "left"
-        if @@current_skin != -1
-        Window_Class.customize_skin(window, direction)
+        if @@current_shoes != -1
+        Window_Class.customize_shoes(window, direction)
         @@char_create_pointer_position[1] -= 1
         else 
-        @@current_skin = 6; @@char_create_pointer_position[1] = 6
-        Window_Class.customize_skin(window, direction)
-       end
-    when 3 #face
-      direction = "left"
-      if @@current_face != -1
-      Window_Class.customize_face(window, direction)
-      @@char_create_pointer_position[1] -= 1
-      else 
-      @@current_face = 18; @@char_create_pointer_position[1] = 18
-      Window_Class.customize_face(window, direction)
-      end
-    when 4 #shirt
-      direction = "left"
-      if @@current_shirt != -1
-      Window_Class.customize_shirt(window, direction)
-      @@char_create_pointer_position[1] -= 1
-      else 
-      @@current_shirt = 5; @@char_create_pointer_position[1] = 5
-      Window_Class.customize_shirt(window, direction)
-      end
-    when 5 #gloves
-      direction = "left"
-      if @@current_gloves != -1
-        Window_Class.customize_gloves(window, direction)
-      @@char_create_pointer_position[1] -= 1
-      else 
-        @@current_gloves = 2; @@char_create_pointer_position[1] = 2
-      Window_Class.customize_gloves(window, direction)
-      end
-    when 6 #pants
-      direction = "left"
-      if @@current_pants != -1
-        Window_Class.customize_pants(window, direction)
-      @@char_create_pointer_position[1] -= 1
-      else 
-        @@current_pants = 2; @@char_create_pointer_position[1] = 2
-        Window_Class.customize_pants(window, direction)
-      end
-    when 7 #shoes
-      direction = "left"
-      if @@current_shoes != -1
-        Window_Class.customize_shoes(window, direction)
-      @@char_create_pointer_position[1] -= 1
-      else 
         @@current_shoes = 2; @@char_create_pointer_position[1] = 2
         Window_Class.customize_shoes(window, direction)
       end
       end
+      end
 #********************Right***************************************  
-    when SF::Keyboard::Right
-      All_Audio::SFX.char_create_sideways
-      case @@char_create_pointer_position[0]
+  when SF::Keyboard::Right
+   All_Audio::SFX.char_create_sideways
+   if @@popup == "Char_Popup_01"
+    Cursor_opt1.position = SF.vector2(870, 405)
+    @@cursorposition = "right"
+    end
+   if @@popup != "Char_Popup_01" 
+   case @@char_create_pointer_position[0]
 
     when 1 #hair
         direction = "right"
@@ -506,7 +541,7 @@ def Window_Class.char_creation_menu_keypresses(window)
         @@current_shoes = -1; @@char_create_pointer_position[1] = 0
         Window_Class.customize_shoes(window, direction)
       end
-end; end; end; end; end; end 
+end; end; end; end; end; end; end 
 end
 
 
