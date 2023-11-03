@@ -201,6 +201,11 @@
    Text_Popup_01_Opt_02.character_size = 30; Text_Popup_01_Opt_02.color = SF::Color::White
    Text_Popup_01_Opt_02.position = SF.vector2(960, 410) 
 #-----------------------------------------------------------------------------------------------------------------------------------
+#                                                         HUD
+#-----------------------------------------------------------------------------------------------------------------------------------  
+Bottom_HUD = SF::RectangleShape.new(SF.vector2(2000, 140)); Bottom_HUD.fill_color = SF.color(100, 100, 255)
+Bottom_HUD.position = SF.vector2(0, 960);
+#-----------------------------------------------------------------------------------------------------------------------------------
 #                                                    Character Model
 #-----------------------------------------------------------------------------------------------------------------------------------
 #____________________________________________________Character Skin_________________________________________________________________
@@ -293,9 +298,17 @@
 #------------------------------------------------------------------------------------------------------------------------------------
 #                                                     Hair Textures
 #------------------------------------------------------------------------------------------------------------------------------------
+ HAIR_ARRAY = [SHOUNEN_HAIR_01, SHOUNEN_HAIR_02, SHOUNEN_HAIR_03, SHOUNEN_HAIR_04, SHOUNEN_HAIR_05, SHOUNEN_HAIR_06,
+ PONYTAIL_01, PONYTAIL_02, PONYTAIL_03, PONYTAIL_04, PONYTAIL_05, PONYTAIL_06]
+
+ HAIR_DISPLAY_ARRAY = [SHOUNEN_DISPLAY_HAIR_01, SHOUNEN_DISPLAY_HAIR_02, SHOUNEN_DISPLAY_HAIR_03, SHOUNEN_DISPLAY_HAIR_04, 
+ SHOUNEN_DISPLAY_HAIR_05, SHOUNEN_DISPLAY_HAIR_06, DISPLAY_PONYTAIL_HAIR_01, DISPLAY_PONYTAIL_HAIR_02, DISPLAY_PONYTAIL_HAIR_03,
+ DISPLAY_PONYTAIL_HAIR_04, DISPLAY_PONYTAIL_HAIR_05, DISPLAY_PONYTAIL_HAIR_06]
+
  HAIR_DESC_ARRAY = ["Shounen Hair Black", "Shounen Hair Green", "Shounen Hair Blue", "Shounen Hair Red",
  "Shounen Hair Yellow", "Shounen Hair Purple", "   Ponytail Grey", "Ponytail Blonde", "Ponytail Red", "Ponytail Brown",
  "Ponytail Pink", "Ponytail Blue"]
+
  Hair_Desc = SF::Text.new; Hair_Desc.font = FONT_FANCY_BOLD
  Hair_Desc.string = HAIR_DESC_ARRAY[0]; Hair_Desc.character_size = 40; Hair_Desc.color = SF::Color::White
  Hair_Desc.position = SF.vector2(235, 240)

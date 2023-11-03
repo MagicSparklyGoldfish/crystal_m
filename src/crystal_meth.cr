@@ -2,7 +2,7 @@ require "crsfml"
 require "crsfml/audio"
 require "crsfml/system"
 require "../src/Textures.cr"
-require "../src/Clothing.cr"
+require "../src/Items.cr"
 require "../src/Audio.cr"
 require "../src/Saves.cr"
 require "../src/Fonts.cr"
@@ -30,19 +30,17 @@ lib GL
 end
 
 
-
-
 # it works out of the box
 GL.enable(GL::TEXTURE_2D)
 include X11
 
-module Gui
+module Gui  
 extend self
 
  class Window_Class
 #--------------------------------------------------------+
 #========Window_Class Variables==========================+
-
+  @@item_type = "Consumable"
   @@menu = "main"
   @@popup = "none"
   @@cursorposition = "up"
@@ -51,12 +49,8 @@ extend self
   @@char_create_pointer_position = [1, 1]
   @@player_character_model = SF::RenderTexture.new(672, 512)
   @@player_character_rendered_model = SF::Sprite.new(@@player_character_model.texture)
-  @@hair_array : Array(SF::Sprite)
-  @@hair_array = [SHOUNEN_HAIR_01, SHOUNEN_HAIR_02, SHOUNEN_HAIR_03, SHOUNEN_HAIR_04, SHOUNEN_HAIR_05, SHOUNEN_HAIR_06,
-  PONYTAIL_01, PONYTAIL_02, PONYTAIL_03, PONYTAIL_04, PONYTAIL_05, PONYTAIL_06]
-  @@hair_display_array = [SHOUNEN_DISPLAY_HAIR_01, SHOUNEN_DISPLAY_HAIR_02, SHOUNEN_DISPLAY_HAIR_03, SHOUNEN_DISPLAY_HAIR_04, 
-  SHOUNEN_DISPLAY_HAIR_05, SHOUNEN_DISPLAY_HAIR_06, DISPLAY_PONYTAIL_HAIR_01, DISPLAY_PONYTAIL_HAIR_02, DISPLAY_PONYTAIL_HAIR_03,
-  DISPLAY_PONYTAIL_HAIR_04, DISPLAY_PONYTAIL_HAIR_05, DISPLAY_PONYTAIL_HAIR_06] 
+  #HAIR_ARRAY : Array(SF::Sprite)
+
   @@current_hair = 0; @@current_display_hair = 0; @@current_display_hair_string = 0
   @@current_skin = 0; @@current_display_skin_string = 0; @@current_face = 0; @@current_shirt = 0; @@current_gloves = 0
   @@current_pants = 0; @@current_shoes = 0
@@ -66,21 +60,37 @@ extend self
 #=============Character Model============================+
 
 #-------------initialize models--------------------------+
-def Window_Class.player_model_initialize 
-  @@player_character_model.clear(SF::Color::Transparent)
-  @@player_character_model.draw(SKIN_ARRAY[@@current_skin])
-  @@player_character_model.draw(SHOES_ARRAY[@@current_shoes])
-  @@player_character_model.draw(FACE_ARRAY[@@current_face])
-  @@player_character_model.draw(@@hair_array[@@current_hair])
-  @@player_character_model.draw(PANTS_ARRAY[@@current_pants])
-  @@player_character_model.draw(SHIRT_ARRAY[@@current_shirt])
-  @@player_character_model.draw(GLOVE_ARRAY[@@current_gloves])
-  @@player_character_model.create(672, 512, false)
-  @@player_character_model.display
-  @@player_character_rendered_model.texture_rect = SF.int_rect(0, 0, 96, 128)
-  @@player_character_rendered_model.position = SF.vector2(660, 515)
-  @@player_character_rendered_model.scale = SF.vector2(3.0, 3.0)
-  end
+ def Window_Class.player_model_initialize 
+   @@player_character_model.clear(SF::Color::Transparent)
+   @@player_character_model.draw(SKIN_ARRAY[@@current_skin])
+   @@player_character_model.draw(SHOES_ARRAY[@@current_shoes])
+   @@player_character_model.draw(FACE_ARRAY[@@current_face])
+   @@player_character_model.draw(HAIR_ARRAY[@@current_hair])
+   @@player_character_model.draw(PANTS_ARRAY[@@current_pants])
+   @@player_character_model.draw(SHIRT_ARRAY[@@current_shirt])
+   @@player_character_model.draw(GLOVE_ARRAY[@@current_gloves])
+   @@player_character_model.create(672, 512, false)
+   @@player_character_model.display
+   @@player_character_rendered_model.texture_rect = SF.int_rect(0, 0, 96, 128)
+   @@player_character_rendered_model.position = SF.vector2(660, 515)
+   @@player_character_rendered_model.scale = SF.vector2(3.0, 3.0)
+   end
+#------------------draw models---------------------------+
+ def Window_Class.player_model_draw
+   @@player_character_model.clear(SF::Color::Transparent)
+   @@player_character_model.draw(SKIN_ARRAY[@@skin_slot])
+   @@player_character_model.draw(SHOES_ARRAY[@@shoes_slot])
+   @@player_character_model.draw(FACE_ARRAY[@@face_slot])
+   @@player_character_model.draw(HAIR_ARRAY[@@hair_slot])
+   @@player_character_model.draw(PANTS_ARRAY[@@pants_slot])
+   @@player_character_model.draw(SHIRT_ARRAY[@@shirt_slot])
+   @@player_character_model.draw(GLOVE_ARRAY[@@gloves_slot])
+   @@player_character_model.create(672, 512, false)
+   @@player_character_model.display
+   @@player_character_rendered_model.texture_rect = SF.int_rect(0, 0, 96, 128)
+   @@player_character_rendered_model.position = SF.vector2(660, 515)
+   @@player_character_rendered_model.scale = SF.vector2(3.0, 3.0)
+   end
 #---------customization functions------------------------+
 def Window_Class.customize_hair(window, direction)
   if direction == "right"
@@ -92,7 +102,7 @@ def Window_Class.customize_hair(window, direction)
   end; end
   Hair_Desc.string = HAIR_DESC_ARRAY[@@current_display_hair_string]
   Window_Class.player_model_initialize 
-  window.draw(@@hair_array[@@current_hair])
+  window.draw(HAIR_ARRAY[@@current_hair])
 end
 def Window_Class.customize_skin(window, direction)
   if direction == "right"
@@ -185,7 +195,7 @@ end
      window.draw(Rectangle_Cubby_02); window.draw(Rectangle_Cubby_03); window.draw(Rectangle_Cubby_04); window.draw(Rectangle_Cubby_05)
      window.draw(Rectangle_Cubby_06); window.draw(Rectangle_Cubby_07); window.draw(Cabinet_01); window.draw(Left_Black_Bar)
      window.draw(Right_Black_Bar); window.draw(Bottom_Black_Bar); window.draw(Char_Creat_Cursor); window.draw(@@player_character_rendered_model)
-     window.draw(@@hair_display_array[@@current_display_hair]); window.draw(Hair_Desc); window.draw(DISPLAY_SKIN_ARRAY[@@current_skin])
+     window.draw(HAIR_DISPLAY_ARRAY[@@current_display_hair]); window.draw(Hair_Desc); window.draw(DISPLAY_SKIN_ARRAY[@@current_skin])
      window.draw(Skin_Desc); window.draw(DISPLAY_FACE_ARRAY[@@current_face]); window.draw(Face_Desc); window.draw(DISPLAY_SHIRT_ARRAY[@@current_shirt])
      window.draw(Shirt_Desc); window.draw(DISPLAY_GLOVE_ARRAY[@@current_gloves]); window.draw(Glove_Desc) 
      window.draw(DISPLAY_PANTS_ARRAY[@@current_pants]); window.draw(Pants_Desc); window.draw(DISPLAY_SHOES_ARRAY[@@current_shoes]); 
@@ -195,6 +205,11 @@ end
     window.draw(Char_Create_Popup_Box); window.draw(Char_Create_Popup_Option_01); window.draw(Char_Create_Popup_Option_02)
     window.draw(Text_Popup_01); window.draw(Text_Popup_01_Opt_01); window.draw(Text_Popup_01_Opt_02); window.draw(Cursor_opt1)
    end  
+#////////////////////////////////////////////////////////////HUD////////////////////////////////////////////////////////////////////////
+  
+  def Window_Class.hud(window)
+   window.clear(SF::Color::Black); window.draw(Bottom_HUD)
+   end
 #========================================================+
 #--------------------------------------------------------+
 #=========Window Functions===============================+
@@ -218,7 +233,7 @@ end
       Window_Class.character_creation_popup(window)
      end
    when "HUD"
-    puts "placeholder"
+    Window_Class.hud(window)
    else begin 
      raise "ERROR! Invalid value for '@@menu'!"
    rescue
@@ -234,7 +249,7 @@ end
     when "charcreate"
       Window_Class.char_creation_menu_keypresses(window)
     when "HUD"
-      puts "placeholder"
+      Window_Class.hud_keypresses(window)
     end
    end
 #//////Character Creation///////////////////////////////+
@@ -290,6 +305,8 @@ def Window_Class.main_menu_keypresses(window)
       @@cursorposition = "down"
       window.display
     end
+  when SF::Keyboard::W #---------------for testing purposes, remove when testing done
+    Data_Manager.load_savegame
   when SF::Keyboard::C #---------------for testing purposes, remove when testing done
     Window_Class.player_model_initialize
     @@menu = "charcreate"
@@ -395,12 +412,14 @@ def Window_Class.char_creation_menu_keypresses(window)
         @@popup = "Char_Popup_01"
         @@cursorposition = "left"
       else if @@popup == "Char_Popup_01" && @@cursorposition == "left"
+        Player_Inventory::Clothing_Outfit_Slot.save_outfit(@@current_hair, @@current_skin, @@current_face, @@current_shirt, @@current_gloves, @@current_pants, @@current_shoes)
         @@menu = "HUD"
+        #Data_Manager.create_new_savegame
       else if @@popup == "Char_Popup_01" && @@cursorposition == "right"
         @@popup = "None"
       end  
       end
-      end
+ end
 #********************Left***************************************  
   when SF::Keyboard::Left
    All_Audio::SFX.char_create_sideways
@@ -540,9 +559,24 @@ def Window_Class.char_creation_menu_keypresses(window)
       else
         @@current_shoes = -1; @@char_create_pointer_position[1] = 0
         Window_Class.customize_shoes(window, direction)
-      end
-end; end; end; end; end; end; end 
-end
+      end; end; end; end; end; end; end
+
+#----------------------------------------------------------------------------------------------------------------------------------
+#                                               HUD Keypresses
+#----------------------------------------------------------------------------------------------------------------------------------
+def Window_Class.hud_keypresses(window)
+  while (event = window.poll_event)
+    case event
+    when SF::Event::Closed
+      window.close
+    when SF::Event::KeyPressed
+      case event.code
+
+#********************************************************Escape********************************************************************
+  when SF::Keyboard::Escape
+    window.close
+end; end; end; end; end; end
+
 
 
 #----------------Menu Elements___________________________________
@@ -697,15 +731,332 @@ end
         end; end; end; end; end; end; end; end; end; end; end; end; end; end
   end
 #_______________________________________________________________
+#-------------------------------------------------------------------------------------------------------------------------------------
+#                                                       Character Inventory                                                          #
+#-------------------------------------------------------------------------------------------------------------------------------------
+
+ module Player_Inventory  
+ include Gui; 
+ @@hair_slot : (Int32 | Nil ); @@skin_slot : (Int32 | Nil ); @@face_slot : (Int32 | Nil )
+ @@shirt_slot : (Int32 | Nil ); @@gloves_slot : (Int32 | Nil ); @@pants_slot : (Int32 | Nil )
+ @@shoes_slot : (Int32 | Nil ); @@outfit_array : Array(Int32 | Nil) = [@@hair_slot, @@skin_slot, @@face_slot, @@shirt_slot, @@gloves_slot, @@pants_slot, @@shoes_slot]
+
+   def add_item(@@item_type, item)
+     if item.is_owned == false 
+     case @@item_type
+     when "Clothing" || "Quest"
+       item.is_owned = true
+     when "Consumable" || "Equipment"
+     end; end; end
+  class Clothing_Wardrobe_Slot
+   end
+  class Clothing_Outfit_Slot < Window_Class
+    include Player_Inventory  
+
+    def Clothing_Outfit_Slot.save_outfit(@@current_hair, @@current_skin, @@current_face, @@current_shirt, @@current_gloves, @@current_pants, @@current_shoes)
+     @@hair_slot = @@current_hair
+     @@skin_slot = @@current_skin
+     @@face_slot = @@current_face
+     @@shirt_slot = @@current_shirt
+     @@gloves_slot = @@current_gloves
+     @@pants_slot = @@current_pants
+     @@shoes_slot = @@current_shoes
+     @@outfit_array = [@@hair_slot, @@skin_slot, @@face_slot, @@shirt_slot, @@gloves_slot, @@pants_slot, @@shoes_slot]
+     puts @@hair_slot; puts @@current_hair; puts @@outfit_array
+     Data_Manager.create_new_savegame(@@outfit_array) 
+      end
+    def import_outfit
+
+    end
+  end
+   end
+  class Consumables_Slot
+  end
+  class Equipment_Slop
+  end
+  class Quest_Item_Slot
+  end                  
+
+
+module Data_Manager 
+extend self
+include Player_Inventory
+
+
+def Data_Manager.create_new_savegame(@@outfit_array) 
+
+   puts @@outfit_array; puts @@hair_slot
+
+    File.open("Saves/Slot1/save01.yml", "w") { |f| YAML.dump({Is_Owned_Hair_Array, @@outfit_array}, f) }
+    YAML.dump({Is_Owned_Hair_Array, @@outfit_array})
+
+ end 
+ def Data_Manager.load_savegame
+    data = File.read ("Saves/Slot1/save01.yml")
+    parsed_data = YAML.parse(data)
+    puts parsed_data[1]
+ end
+end
+
+  #  data = File.read ("Saves/Slot1/save01.yml")
+  #  parsed_data = YAML.parse(data)
+  #  puts parsed_data
 #---------------------------------------------------------------
 #                         Runs the program
 #---------------------------------------------------------------
 Gui::Window_Class.run
+
+
+
+
+#================================================================================================================================================
+#                                                           Player Inventory                                                                    #
+#================================================================================================================================================
+
+
+
+
+#=================================================================================================================================================
+#                                                              Clothing                                                                          #
+#=================================================================================================================================================
+ 
+ module Skin
+  #properties
+   property is_owned : Bool
+   property char_sprite : SF::Sprite
+   property display_sprite : SF::Sprite
+   property id : String
+   property name : String
+  class Human
+     Light = new.Human(false, PLAYER_CHAR, PLAYER_CHAR_DISPLAY, "SH001", "Light") 
+     Tan = new.Human(false, PLAYER_CHAR_2, PLAYER_CHAR_DISPLAY_2, "SH002", "Tan")
+     Dark = new.Human(false, PLAYER_CHAR_3, PLAYER_CHAR_DISPLAY_3, "SH003", "Dark")
+     Jaundiced = new.Human(false, PLAYER_CHAR_7, PLAYER_CHAR_DISPLAY_7, "SH004", "Jaundiced")
+   end
+  class Spooky
+    Ghostly = new.Spooky(false, PLAYER_CHAR_4, PLAYER_CHAR_DISPLAY_4, "SS001", "Ghostly")
+    Blue = new.Spooky(false, PLAYER_CHAR_5, PLAYER_CHAR_DISPLAY_5, "SS002", "Blue")
+    Purple = new.Spooky(false, PLAYER_CHAR_6, PLAYER_CHAR_DISPLAY_6, "SS003", "Purple")
+   end
+   end
+#HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH 
+#H                                                           Hair                                                                            H
+#HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH
+  #Key: [0]: isOwned?; [1]: character sprite; [2]: display sprite; [3]: ID; [4]: name; [5]: color; [6]: length
+ #*******************************************************Shounen Hair************************************************************************* 
+   Shounen_Hair_Black = [false, "SHOUNEN_HAIR_01", "SHOUNEN_DISPLAY_HAIR_01", "HSH001", "Black Shounen Hair", "black", "medium"]
+   Shounen_Hair_Green = [false, "SHOUNEN_HAIR_02", "SHOUNEN_DISPLAY_HAIR_02", "HSH002", "Green Shounen Hair", "green", "medium"]
+   Shounen_Hair_Blue = [false, "SHOUNEN_HAIR_03", "SHOUNEN_DISPLAY_HAIR_03", "HSH003", "Blue Shounen Hair", "blue", "medium"]
+   Shounen_Hair_Red = [false, "SHOUNEN_HAIR_04", "SHOUNEN_DISPLAY_HAIR_04", "HSH004", "Red Shounen Hair", "red", "medium"]
+   Shounen_Hair_Yellow = [false, "SHOUNEN_HAIR_05", "SHOUNEN_DISPLAY_HAIR_05", "HSH005", "Yellow Shounen Hair", "yellow", "medium"]
+   Shounen_Hair_Purple = [false, "SHOUNEN_HAIR_06", "SHOUNEN_DISPLAY_HAIR_06", "HSH006", "Purple Shounen Hair", "purple", "medium"]
+ #*********************************************************Ponytail***************************************************************************
+   Grey_Ponytail = [false, "PONYTAIL_01", "DISPLAY_PONYTAIL_HAIR_01", "HPT001", "Grey Ponytail", "grey", "long"]
+   Blonde_Ponytail = [false, "PONYTAIL_02", "DISPLAY_PONYTAIL_HAIR_02", "HPT002", "Blonde Ponytail", "yellow", "long"]
+   Red_Ponytail = [false, "PONYTAIL_03", "DISPLAY_PONYTAIL_HAIR_03", "HPT003", "Red Ponytail", "red", "long"]
+   Brown_Ponytail = [false, "PONYTAIL_04", "DISPLAY_PONYTAIL_HAIR_04", "HPT004", "Brown Ponytail", "brown", "long"]
+   Pink_Ponytail = [false, "PONYTAIL_05", "DISPLAY_PONYTAIL_HAIR_05", "HPT005", "Pink Ponytail", "pink", "long"]
+   Blue_Ponytail = [false, "PONYTAIL_06", "DISPLAY_PONYTAIL_HAIR_06", "HPT006", "Blue Ponytail", "blue", "long"]
+ #***********************************************************Array****************************************************************************
+    @[YAML::Field(key: 0)]
+    
+    Is_Owned_Hair_Array = [Shounen_Hair_Black[0], Shounen_Hair_Green[0], Shounen_Hair_Blue[0], Shounen_Hair_Red[0], Shounen_Hair_Yellow[0], 
+    Shounen_Hair_Purple[0], Grey_Ponytail[0], Blonde_Ponytail[0], Red_Ponytail[0], Brown_Ponytail[0], Pink_Ponytail[0], Blue_Ponytail[0]]
+
+    
+  
+ module Face
+   #properties
+    property is_owned : Bool
+    property char_sprite : SF::Sprite
+    property display_sprite : SF::Sprite
+    property id : String
+    property name : String
+    property eye_color : String
+    property does_blink : Bool
+   class Button_Face
+    Blue_Button_Eyes = new.Button_Face(false, BUTTON_FACE_01, BUTTON_DISPLAY_FACE_01, "FFBE001", "Blue Button Eyes", "blue", false)
+    Red_Button_Eyes = new.Button_Face(false, BUTTON_FACE_02, BUTTON_DISPLAY_FACE_02, "FFBE002", "Red Button Eyes", "red", false)
+    Purple_Button_Eyes = new.Button_Face(false, BUTTON_FACE_03, BUTTON_DISPLAY_FACE_03, "FFBE003", "Purple Button Eyes", "purple", false)
+    Green_Button_Eyes = new.Button_Face(false, BUTTON_FACE_04, BUTTON_DISPLAY_FACE_04, "FFBE004", "Green Button Eyes", "green", false)
+    Yellow_Button_Eyes = new.Button_Face(false, BUTTON_FACE_05, BUTTON_DISPLAY_FACE_05, "FFBE005", "Yellow Button Eyes", "yellow", false)
+    Brown_Button_Eyes = new.Button_Face(false, BUTTON_FACE_06, BUTTON_DISPLAY_FACE_06, "FFBE006", "Brown Button Eyes", "brown", false)
+    end
+   class Shounen_Face
+    Grey_Shounen_Face = new.Shounen_Face(false, SHOUNEN_FACE_01, SHOUNEN_DISPLAY_FACE_01, "FSF001", "Grey Shounen Face", "grey", true)
+    Blue_Shounen_Face = new.Shounen_Face(false, SHOUNEN_FACE_02, SHOUNEN_DISPLAY_FACE_02, "FSF002", "Blue Shounen Face", "blue", true)
+    Green_Shounen_Face = new.Shounen_Face(false, SHOUNEN_FACE_03, SHOUNEN_DISPLAY_FACE_03, "FSF003", "Green Shounen Face", "green", true)
+    Brown_Shounen_Face = new.Shounen_Face(false, SHOUNEN_FACE_04, SHOUNEN_DISPLAY_FACE_04, "FSF004", "Brown Shounen Face", "brown", true)
+    Purple_Shounen_Face = new.Shounen_Face(false, SHOUNEN_FACE_05, SHOUNEN_DISPLAY_FACE_05, "FSF005", "Purple Shounen Face", "purple", true)
+    Yellow_Shounen_Face = new.Shounen_Face(false, SHOUNEN_FACE_06, SHOUNEN_DISPLAY_FACE_06, "FSF006", "Yellow Shounen Face", "yellow", true)
+    end
+   class Tired_Face
+    Grey_Tired_Face = new.Tired_Face(false, TIRED_FACE_01, TIRED_DISPLAY_FACE_01, "FTF001", "Grey Tired Face", "grey", true)
+    Blue_Tired_Face = new.Tired_Face(false, TIRED_FACE_02, TIRED_DISPLAY_FACE_02, "FTF002", "Blue Tired Face", "blue", true)
+    Brown_Tired_Face = new.Tired_Face(false, TIRED_FACE_03, TIRED_DISPLAY_FACE_03, "FTF003", "Brown Tired Face", "brown", true)
+    Green_Tired_Face = new.Tired_Face(false, TIRED_FACE_04, TIRED_DISPLAY_FACE_04, "FTF004", "Green Tired Face", "green", true)
+    Red_Tired_Face = new.Tired_Face(false, TIRED_FACE_05, TIRED_DISPLAY_FACE_05, "FTF005", "Red Tired Face", "red", true)
+    Yellow_Tired_Face = new.Tired_Face(false, TIRED_FACE_06, TIRED_DISPLAY_FACE_06, "FTF006", "Yellow Tired Face", "yellow", true)
+    end
+   class Smiley_Face
+     Smiley_Face = new.Smiley_Face(false, SMILEY_FACE_01, SMILEY_DISPLAY_FACE_01, "FSFL001", "Smiley Face", "black", false)
+   end
+  end
+  
+ module Gloves
+  #properties
+   property is_owned : Bool
+   property char_sprite : SF::Sprite
+   property display_sprite : SF::Sprite
+   property id : String
+   property name : String
+   property color : String
+  class Fingerless_Gloves
+   Black_Fingerless_Gloves = new.Fingerless_Gloves(false, FINGERLESS_GLOVE_01, DISPLAY_FINGERLESS_GLOVE_01, "GFG001", "Black Fingerless Gloves", "black")
+   Red_Fingerless_Gloves = new.Fingerless_Gloves(false, FINGERLESS_GLOVE_02, DISPLAY_FINGERLESS_GLOVE_02, "GFG002", "Red Fingerless Gloves", "red")
+   Blue_Fingerless_Gloves = new.Fingerless_Gloves(false, FINGERLESS_GLOVE_03, DISPLAY_FINGERLESS_GLOVE_03, "GFG003", "Blue Fingerless Gloves", "blue")  
+   end
+  end
+ module Shirts
+  #properties
+   property is_owned : Bool
+   property char_sprite : SF::Sprite
+   property display_sprite : SF::Sprite
+   property id : String
+   property name : String
+   property color : String
+   property sleeve_length : String
+   property midriff_exposed : Bool
+  class T_Shirts
+   White_T_Shirt = new.T_Shirts(false, T_SHIRT_01, DISPLAY_T_SHIRT_01, "STS001", "White T-Shirt", "white", "short", false)  
+   Blue_T_Shirt = new.T_Shirts(false, T_SHIRT_02, DISPLAY_T_SHIRT_02, "STS002", "Blue T-Shirt", "blue", "short", false)
+   Red_T_Shirt = new.T_Shirts(false, T_SHIRT_03, DISPLAY_T_SHIRT_03, "STS003", "Red T-Shirt", "red", "short", false)
+   Green_T_Shirt = new.T_Shirts(false, T_SHIRT_04, DISPLAY_T_SHIRT_04, "STS004", "Green T-Shirt", "green", "short", false)
+   Purple_T_Shirt = new.T_Shirts(false, T_SHIRT_05, DISPLAY_T_SHIRT_05, "STS005", "Purple T-Shirt", "purple", "short", false) 
+   Black_T_Shirt = new.T_Shirts(false, T_SHIRT_06, DISPLAY_T_SHIRT_06, "STS006", "Black T-Shirt", "black", "short", false) 
+   end 
+  end
+ module Pants
+  #properties
+   property is_owned : Bool
+   property char_sprite : SF::Sprite
+   property display_sprite : SF::Sprite
+   property id : String
+   property name : String
+   property color : String
+   property length : String
+  class Shorts
+   Blue_Shorts = new.Shorts(false, SHORTS_01, DISPLAY_SHORTS_01, "PS001", "Blue_Shorts", "blue", "short")
+   Brown_Shorts = new.Shorts(false, SHORTS_02, DISPLAY_SHORTS_02, "PS002", "Brown_Shorts", "brown", "short")
+   Black_Shorts = new.Shorts(false, SHORTS_03, DISPLAY_SHORTS_03, "PS003", "Black_Shorts", "black", "short")
+   end
+  end
+ module Shoes
+  #properties  
+   property is_owned : Bool
+   property char_sprite : SF::Sprite
+   property display_sprite : SF::Sprite
+   property id : String
+   property name : String
+   property color : String
+   property is_waterproof : Bool
+  class Boots
+   Black_Rain_Boots = new.Boots(false, RAIN_BOOTS_01, DISPLAY_RAIN_BOOTS_01, "SRB001", "Black Rain Boots", "black", true)
+   Red_Rain_Boots = new.Boots(false, RAIN_BOOTS_02, DISPLAY_RAIN_BOOTS_02, "SRB002", "Red Rain Boots", "red", true)
+   Blue_Rain_Boots = new.Boots(false, RAIN_BOOTS_03, DISPLAY_RAIN_BOOTS_03, "SRB003", "Blue Rain Boots", "blue", true)
+   end
+  end
+  
+
+  
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 end
 
 
 
 
+
+
+# class SpriteInfo
+ #   property position : {Float64, Float64}
+ #   property texture_filename : String
+ 
+ #   def initialize(@position : {Float64, Float64}, @texture_filename : String)
+ #   end
+ 
+ #   # Define a custom to_json method for serialization
+ #   def to_json(io : IO)
+ #     JSON.build do
+ #       io.write "{\"position\": #{@position.to_json}, \"texture_filename\": #{@texture_filename.to_json}}"
+ #     end
+ #   end
+ # end
+ 
+ # # Create a SpriteInfo object
+ # sprite_info = SpriteInfo.new({10.0, 20.0}, "sprite.png")
+ 
+ # # Serialize the SpriteInfo object to JSON
+ # json_data = sprite_info.to_json(STDOUT)
+
+# #initialize
+  #  def initialize(@slot_name : String, @clothing_item : Hash(String, Shounen_Hair))
+  #   @slot_name = ""
+  #  end
+  #  def self.hair_slot
+  #   new("Hair", Shounen_Hair_Hash)
+  #   end
+  #   shounen_Hair_Hash = Hash(String, Shounen_Hair).new
+  #   shounen_Hair_Hash["Black"] = Shounen_Hair.shounen_hair_black
+  # #properties
+  #  (property slot_name : String
+  #  property clothing_item : Hash(String, Shounen_Hair))
+  # #slots
+  #  hair_slot = Clothing_Outfit_Slot.new("Hair", shounen_Hair_Hash("Black" : Shounen_Hair.shounen_hair_black))
+  #  #skin_slot = Clothing_Outfit_Slot.new("skin", "PLAYER_CHAR")
+# require "yaml"
+
+ # # Replace "your_file.yaml" with the path to your YAML file.
+ # yaml_data = File.read("your_file.yaml")
+ 
+ # # Parse the YAML data into a Crystal data structure.
+ # parsed_data = YAML.parse(yaml_data)
+ 
+ # # Access data from the parsed YAML structure.
+ # puts parsed_data["key_name"] # Replace "key_name" with the key you want to access.
+
+# io = File.open("output.txt", "w")
+ # MyModule.write_data_to_io(io)
+ # io.close
+# class Person
+ #   def initialize(@name : String)
+ #     @age = 0
+ #   end
+ 
+ #   def age
+ #     @age
+ #   end
+ # end
 
 
 # def run
