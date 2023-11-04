@@ -208,8 +208,11 @@ end
 #////////////////////////////////////////////////////////////HUD////////////////////////////////////////////////////////////////////////
   
   def Window_Class.hud(window)
-   window.clear(SF::Color::Black); window.draw(Bottom_HUD)
+   window.clear(SF::Color::Black); window.draw(Bottom_HUD); window.draw(System_Menu); window.draw(Text_System_Menu)
    end
+  def Window_Class.system_popup(window)
+    window.draw(System_Menu_Extended)
+  end
 #========================================================+
 #--------------------------------------------------------+
 #=========Window Functions===============================+
@@ -234,6 +237,9 @@ end
      end
    when "HUD"
     Window_Class.hud(window)
+    if @@popup == "System_Popup_Menu"
+      Window_Class.system_popup(window)
+    end
    else begin 
      raise "ERROR! Invalid value for '@@menu'!"
    rescue
@@ -305,6 +311,8 @@ def Window_Class.main_menu_keypresses(window)
       @@cursorposition = "down"
       window.display
     end
+  when SF::Keyboard::H #---------------for testing purposes, remove when testing done
+    @@menu = "HUD"
   when SF::Keyboard::W #---------------for testing purposes, remove when testing done
     Data_Manager.load_savegame
   when SF::Keyboard::C #---------------for testing purposes, remove when testing done
@@ -566,6 +574,28 @@ def Window_Class.char_creation_menu_keypresses(window)
 #----------------------------------------------------------------------------------------------------------------------------------
 def Window_Class.hud_keypresses(window)
   while (event = window.poll_event)
+    if SF::Mouse.button_pressed?(SF::Mouse::Left)
+      mouse_position = SF::Mouse.position
+      x = mouse_position.x
+      y = mouse_position.y
+      puts y
+      if (x >= 1700 && x <= 1850) && (y >= 960 && y <= 1010)
+        case @@popup
+         when "none" 
+           All_Audio::SFX.char_create_down; @@popup = "System_Popup_Menu"
+         when "System_Popup_Menu" 
+           @@popup = "none"
+        end
+        end
+      if (x >= 1700 && x <= 2850) && (y >= 815 && y <= 970)
+         case @@popup
+         when "System_Popup_Menu" 
+          All_Audio::SFX.char_create_sideways
+         when "none"
+          puts "lol, there's no popup"
+       end    
+       end
+    end
     case event
     when SF::Event::Closed
       window.close

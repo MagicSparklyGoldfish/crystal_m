@@ -4,7 +4,7 @@
 #-----------------------------------------------------------------------------------------------------------------------------------
  WOOD_TEXTURE_1 = SF::Texture.from_file("graphics/Wood01.png"); WALLPAPER_1 = SF::Texture.from_file("graphics/Wallpaper_01.png")
  CABINET_01_TEXTURE = SF::Texture.from_file("graphics/Cabinet01.png"); CURSOR_TEXTURE_1 = SF::Texture.from_file("graphics/Cursor.png")
- CHAR_CREATE_CURSOR_TEXTURE_1 = SF::Texture.from_file("graphics/Char_Create_Cursor.png")
+ CHAR_CREATE_CURSOR_TEXTURE_1 = SF::Texture.from_file("graphics/Char_Create_Cursor.png"); MENU_TEXTURE_1 = SF::Texture.from_file("graphics/sys_menu.png")
 #------------------------------------------------------------------------------------------------------------------------------------
 #                                                  Character Textures
 #------------------------------------------------------------------------------------------------------------------------------------
@@ -203,8 +203,19 @@
 #-----------------------------------------------------------------------------------------------------------------------------------
 #                                                         HUD
 #-----------------------------------------------------------------------------------------------------------------------------------  
-Bottom_HUD = SF::RectangleShape.new(SF.vector2(2000, 140)); Bottom_HUD.fill_color = SF.color(100, 100, 255)
-Bottom_HUD.position = SF.vector2(0, 960);
+ #______________________________________________________Bottom______________________________________________________________________
+  Bottom_HUD = SF::RectangleShape.new(SF.vector2(2500, 140)); Bottom_HUD.fill_color = SF.color(50, 150, 255)
+  Bottom_HUD.position = SF.vector2(0, 950);
+ #____________________________________________________System Menu___________________________________________________________________
+  System_Menu = SF::RectangleShape.new(SF.vector2(150, 50)); #System_Menu.fill_color = SF.color(50, 50, 255)
+  System_Menu.position = SF.vector2(1700, 960); System_Menu.set_texture(MENU_TEXTURE_1, reset_rect: false)
+  System_Menu.texture_rect = SF.int_rect(0, 0, 150, 50)
+  Text_System_Menu = SF::Text.new; Text_System_Menu.font = FONT_COMMON; Text_System_Menu.string = "Menu"; 
+  Text_System_Menu.character_size = 30; Text_System_Menu.color = SF::Color::White; #Text_System_Menu.style = (SF::Text::Bold); 
+  Text_System_Menu.position = SF.vector2(1735, 965) 
+ #________________________________________________Extended System Menu______________________________________________________________
+  System_Menu_Extended = SF::RectangleShape.new(SF.vector2(150, 150)); #System_Menu_Extended.fill_color = SF.color(50, 50, 255)
+  System_Menu_Extended.position = SF.vector2(1700, 810); System_Menu_Extended.set_texture(MENU_TEXTURE_1, reset_rect: false)
 #-----------------------------------------------------------------------------------------------------------------------------------
 #                                                    Character Model
 #-----------------------------------------------------------------------------------------------------------------------------------
