@@ -204,21 +204,29 @@ end
   def Window_Class.character_creation_popup(window)
     window.draw(Char_Create_Popup_Box); window.draw(Char_Create_Popup_Option_01); window.draw(Char_Create_Popup_Option_02)
     window.draw(Text_Popup_01); window.draw(Text_Popup_01_Opt_01); window.draw(Text_Popup_01_Opt_02); window.draw(Cursor_opt1)
+    
    end  
  #////////////////////////////////////////////////////////////HUD///////////////////////////////////////////////////////////////////////+
   
   def Window_Class.hud(window)
+   Stats.bars
    window.clear(SF::Color::Black); window.draw(Bottom_HUD); window.draw(System_Menu); window.draw(Text_System_Menu)
    window.draw(LVL_Box); window.draw(LVL_Bar); window.draw(LVL_Bar_Color); window.draw(EXP_Label); window.draw(MP_Bar) 
-   window.draw(MP_Bar_Color); window.draw(MP_Label); window.draw(HP_Bar); window.draw(HP_Bar_Color); window.draw(HP_Label)
-   window.draw(LVL_Label)
+   window.draw(MP_Bar_Color); window.draw(MP_Label); window.draw(HP_Bar); 
+   window.draw(HP_Bar_Color); window.draw(HP_Label); window.draw(LVL_Label)
    end
   def Window_Class.system_popup(window)
     window.draw(System_Menu_Extended); window.draw(Text_System_Menu_Opt_01); window.draw(Text_System_Menu_Opt_02)
     window.draw(Text_System_Menu_Opt_03)
   end
   def Window_Class.quit_window(window)
-    window.draw(Quit_Window); window.draw(Quit_Menu_Text)
+    window.draw(Quit_Window); window.draw(Quit_Menu_Text); window.draw(Quit_Window_Opt_01); window.draw(Quit_Menu_Opt_01_Text)
+    window.draw(Quit_Window_Opt_02); window.draw(Quit_Menu_Opt_02_Text)
+  end
+  def Window_Class.stat_window(window)
+   Stats.stat_menu 
+   window.draw(Stats_Window); window.draw(Stats_Window_Char_Box); window.draw(@@player_character_rendered_model); 
+   window.draw(Stats_Window_Exit_Box)
   end
 #=======================================================================================================================================+
 #---------------------------------------------------------------------------------------------------------------------------------------+
@@ -249,6 +257,9 @@ end
      end
     if @@popup == "Quit_Menu"
       Window_Class.quit_window(window)
+    end
+    if @@popup == "Stats_Menu"
+      Window_Class.stat_window(window)
     end
    else begin 
      raise "ERROR! Invalid value for '@@menu'!"
@@ -430,7 +441,7 @@ def Window_Class.char_creation_menu_keypresses(window)
         @@popup = "Char_Popup_01"
         @@cursorposition = "left"
       else if @@popup == "Char_Popup_01" && @@cursorposition == "left"
-        Player_Inventory::Clothing_Outfit_Slot.save_outfit(@@current_hair, @@current_skin, @@current_face, @@current_shirt, @@current_gloves, @@current_pants, @@current_shoes)
+        Player_Data::Clothing_Outfit_Slot.save_outfit(@@current_hair, @@current_skin, @@current_face, @@current_shirt, @@current_gloves, @@current_pants, @@current_shoes)
         @@menu = "HUD"
         #Data_Manager.create_new_savegame
       else if @@popup == "Char_Popup_01" && @@cursorposition == "right"
@@ -588,7 +599,8 @@ def Window_Class.hud_keypresses(window)
       mouse_position = SF::Mouse.position
       x = mouse_position.x
       y = mouse_position.y
-      puts y
+      puts "x", x
+      puts "y", y
       if (x >= 1700 && x <= 1850) && (y >= 960 && y <= 1010)
         case @@popup
          when "none" 
@@ -608,7 +620,10 @@ def Window_Class.hud_keypresses(window)
       if (x >= 1700 && x <= 1850) && (y >= 860 && y <= 910)
         case @@popup
         when "System_Popup_Menu" 
-          All_Audio::SFX.cursor1
+          Gui::Window_Class.player_model_initialize 
+          @@player_character_rendered_model.position = SF.vector2(690, 200)
+          @@player_character_rendered_model.scale = SF.vector2(1.5, 1.5)
+          @@popup = "Stats_Menu"
         when "none"
          end
          end
@@ -616,9 +631,27 @@ def Window_Class.hud_keypresses(window)
           case @@popup
           when "System_Popup_Menu" 
             All_Audio::SFX.select1
+            puts "system"
         when "none"
           end
           end
+      if (x >= 710 && x <= 880) && (y >= 490 && y <= 590)
+        case @@popup
+          when "Quit_Menu" 
+            window.close
+          when "none"
+            end
+            end
+      if (x >= 1020 && x <= 1200) && (y >= 490 && y <= 590)
+        case @@popup
+          when "Quit_Menu" 
+            @@popup = "none"
+          when "none"
+            end
+            end
+      if (x >= 1240 && x <= 1290) && (y >= 210 && y <= 260) && @@popup == "Stats_Menu"
+        @@popup = "none"
+      end
         end
     case event
     when SF::Event::Closed
@@ -789,11 +822,12 @@ end; end; end; end; end; end
 #                                                   Character Inventory                                                             #+
 #------------------------------------------------------------------------------------------------------------------------------------+
 
- module Player_Inventory  
+ module Player_Data  
  include Gui; 
  @@hair_slot : (Int32 | Nil ); @@skin_slot : (Int32 | Nil ); @@face_slot : (Int32 | Nil )
  @@shirt_slot : (Int32 | Nil ); @@gloves_slot : (Int32 | Nil ); @@pants_slot : (Int32 | Nil )
  @@shoes_slot : (Int32 | Nil ); @@outfit_array : Array(Int32 | Nil) = [@@hair_slot, @@skin_slot, @@face_slot, @@shirt_slot, @@gloves_slot, @@pants_slot, @@shoes_slot]
+ 
 
    def add_item(@@item_type, item)
      if item.is_owned == false 
@@ -805,7 +839,7 @@ end; end; end; end; end; end
   class Clothing_Wardrobe_Slot
    end
   class Clothing_Outfit_Slot < Window_Class
-    include Player_Inventory  
+    include Player_Data  
 
     def Clothing_Outfit_Slot.save_outfit(@@current_hair, @@current_skin, @@current_face, @@current_shirt, @@current_gloves, @@current_pants, @@current_shoes)
      @@hair_slot = @@current_hair
@@ -821,21 +855,50 @@ end; end; end; end; end; end
       end
     def import_outfit
 
-    end
-  end
+     end
+     end
    end
   class Consumables_Slot
-  end
+   end
   class Equipment_Slop
-  end
+   end
   class Quest_Item_Slot
-  end                  
+   end                  
+  class Stats
+   @@lvl : (Int32); @@exp : (Int32); @@exp_scale : (Int32 | Float64); @@exp_cap : (Int32 | Float64); @@lvl_points : (Int32)
+   @@lvl_hp : (Int32); @@equip_hp : (Int32); @@current_max_hp : (Int32); @@current_hp : (Int32)
+   @@lvl_mp : (Int32); @@equip_mp : (Int32); @@current_max_mp : (Int32); @@current_mp : (Int32)
+   @@lvl_str : (Int32); @@equip_str : (Int32); @@current_str : (Int32); @@lvl_dex : (Int32); @@equip_dex : (Int32); @@current_dex : (Int32)
+   @@lvl_luk : (Int32); @@equip_luk : (Int32); @@current_luk : (Int32); @@lvl_int : (Int32); @@equip_int : (Int32); @@current_int : (Int32)
+   Base_HP = 100; Base_MP = 100; Base_Str = 1; Base_Dex = 1; Base_Luk = 1; Base_Int = 1
+   @@lvl_hp = @@lvl; @@lvl_mp = @@lvl; @@lvl_str = 0; @@lvl_dex = 0; @@lvl_luk = 0; @@lvl_int = 0; @@lvl_points = 0
+   @@equip_hp = 0; @@equip_mp = 0; @@equip_str = 0; @@equip_dex = 0; @@equip_luk = 0; @@equip_int = 0
+   @@current_max_hp = Base_HP + @@lvl_hp + @@equip_hp; @@current_hp = 100
+   @@current_max_mp = Base_MP + @@lvl_mp + @@equip_mp; @@current_mp = 100
+   @@current_str = Base_Str + @@lvl_str + @@equip_str; @@current_dex = Base_Dex + @@lvl_dex + @@equip_dex 
+   @@current_luk = Base_Luk + @@lvl_luk + @@equip_luk; @@current_int = Base_Int + @@lvl_int + @@equip_int
+   @@lvl = 1; @@exp = 0; @@exp_cap = @@lvl * Math.sqrt(5) ; @@exp_scale = @@exp / @@exp_cap
+
+   def Stats.bars
+    HP_Bar_Color.scale = SF.vector2(@@current_hp * 0.005, 1); HP_Bar.scale = SF.vector2(@@current_max_hp * 0.005, 1)
+    LVL_Bar_Color.scale = SF.vector2(@@exp_scale * 0.01, 1); 
+    MP_Bar_Color.scale = SF.vector2(@@current_mp * 0.005, 1); MP_Bar.scale = SF.vector2(@@current_max_mp * 0.005, 1)
+    if @@exp >= @@exp_scale
+     @@lvl += 1; @@exp = 0; @@lvl_points + 5
+    end
+  end
+    def Stats.stat_menu
+
+   end
+  end
 
 
+
+
+   
 module Data_Manager 
 extend self
-include Player_Inventory
-
+include Player_Data
 
 def Data_Manager.create_new_savegame(@@outfit_array) 
 

@@ -259,7 +259,7 @@
   HP_Bar_Color = SF::RectangleShape.new(SF.vector2(996, 16)); HP_Bar_Color.fill_color = SF.color(255, 0, 0)
   HP_Bar_Color.position = SF.vector2(157, 991.5);
 
-  HP_Label = SF::Text.new; HP_Label.font = FONT_FANCY_BOLD; HP_Label.string = "MP"; HP_Label.character_size = 20; 
+  HP_Label = SF::Text.new; HP_Label.font = FONT_FANCY_BOLD; HP_Label.string = "HP"; HP_Label.character_size = 20; 
   HP_Label.color = SF::Color::White; HP_Label.position = SF.vector2(127, 986) 
  #_____________________________________________________Quit Window__________________________________________________________________
   Quit_Window = SF::RectangleShape.new(SF.vector2(500, 300)); Quit_Window.fill_color = SF.color(50, 50, 255)
@@ -267,6 +267,27 @@
   
   Quit_Menu_Text = SF::Text.new; Quit_Menu_Text.font = FONT_COMMON; Quit_Menu_Text.string = "Do you want to quit?"; 
   Quit_Menu_Text.character_size = 50; Quit_Menu_Text.color = SF::Color::White; Quit_Menu_Text.position = SF.vector2(720, 320)
+
+  Quit_Window_Opt_01 = SF::RectangleShape.new(SF.vector2(170, 100)); Quit_Window_Opt_01.fill_color = SF.color(0, 0, 205)
+  Quit_Window_Opt_01.position = SF.vector2(710, 490);
+
+  Quit_Menu_Opt_01_Text = SF::Text.new; Quit_Menu_Opt_01_Text.font = FONT_COMMON; Quit_Menu_Opt_01_Text.string = "Yes"; 
+  Quit_Menu_Opt_01_Text.character_size = 50; Quit_Menu_Opt_01_Text.color = SF::Color::White; Quit_Menu_Opt_01_Text.position = SF.vector2(750, 510);
+
+  Quit_Window_Opt_02 = SF::RectangleShape.new(SF.vector2(170, 100)); Quit_Window_Opt_02.fill_color = SF.color(0, 0, 205)
+  Quit_Window_Opt_02.position = SF.vector2(1020, 490);
+
+  Quit_Menu_Opt_02_Text = SF::Text.new; Quit_Menu_Opt_02_Text.font = FONT_COMMON; Quit_Menu_Opt_02_Text.string = "No"; 
+  Quit_Menu_Opt_02_Text.character_size = 50; Quit_Menu_Opt_02_Text.color = SF::Color::White; Quit_Menu_Opt_02_Text.position = SF.vector2(1070, 510);
+ #_____________________________________________________Stats Window__________________________________________________________________
+  Stats_Window = SF::RectangleShape.new(SF.vector2(600, 600)); Stats_Window.fill_color = SF.color(50, 50, 255)
+  Stats_Window.position = SF.vector2(700, 200);
+
+  Stats_Window_Char_Box = SF::RectangleShape.new(SF.vector2(100, 190)); Stats_Window_Char_Box.fill_color = SF.color(100, 100, 255)
+  Stats_Window_Char_Box.position = SF.vector2(710, 210);
+
+  Stats_Window_Exit_Box = SF::RectangleShape.new(SF.vector2(50, 50)); Stats_Window_Exit_Box.fill_color = SF.color(255, 0, 0)
+  Stats_Window_Exit_Box.position = SF.vector2(1240, 210);
 #-----------------------------------------------------------------------------------------------------------------------------------
 #                                                    Character Model
 #-----------------------------------------------------------------------------------------------------------------------------------
