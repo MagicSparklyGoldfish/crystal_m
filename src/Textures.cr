@@ -14,23 +14,23 @@
 #------------------------------------------------------------------------------------------------------------------------------------
 #                                                      Main Menu
 #------------------------------------------------------------------------------------------------------------------------------------
- #______________________________________Cursor_________________________________________________________
+ #______________________________________________________Cursor_______________________________________________________________________
   Cursor_opt1.texture_rect = SF.int_rect(0, 0, 62, 65); Cursor_opt1.position = SF.vector2(750, 610)
   Cursor_opt1 = SF::Sprite.new(CURSOR_TEXTURE_1) 
- #_______________________________________Title_________________________________________________________
+ #______________________________________________________Title________________________________________________________________________
   Text_Title = SF::Text.new; Text_Title.font = FONT_TITLE; Text_Title.string = "Crystal Meth!"; Text_Title.character_size = 80
   Text_Title.color = SF::Color::White; Text_Title.style = (SF::Text::Bold); Text_Title.position = SF.vector2(650, 50)
- #_________________________________Main Menu Body_______________________________________________________
+ #__________________________________________________Main Menu Body___________________________________________________________________
   Rectangle_Menu = SF::RectangleShape.new(SF.vector2(650, 300)); Rectangle_Menu.fill_color = SF.color(150, 50, 50)
   Rectangle_Menu.outline_thickness = 7; Rectangle_Menu.outline_color = SF.color(150, 150, 150)
   Rectangle_Menu.position = SF.vector2(625, 550)
- #________________________________Main Menu Option 1____________________________________________________
+ #________________________________________________Main Menu Option 1_________________________________________________________________
   Rectangle_Opt1 = SF::RectangleShape.new(SF.vector2(500, 100)); Rectangle_Opt1.fill_color = SF.color(100, 50, 50)
   Rectangle_Opt1.outline_thickness = 5; Rectangle_Opt1.outline_color = SF.color(150, 150, 150)
   Rectangle_Opt1.position = SF.vector2(700, 590); Text_Opt1 = SF::Text.new; Text_Opt1.font = FONT_TITLE
   Text_Opt1.string = "Play"; Text_Opt1.character_size = 50; Text_Opt1.color = SF::Color::White
   Text_Opt1.style = (SF::Text::Bold); Text_Opt1.position = SF.vector2(880, 610)
- #________________________________Main Menu Option 2_____________________________________________________
+ #________________________________________________Main Menu Option 2_________________________________________________________________
   Rectangle_Opt2 = SF::RectangleShape.new(SF.vector2(500, 100)); Rectangle_Opt2.fill_color = SF.color(100, 50, 50)
   Rectangle_Opt2.outline_thickness = 5; Rectangle_Opt2.outline_color = SF.color(150, 150, 150)
   Rectangle_Opt2.position = SF.vector2(700, 710); Text_Opt2 = SF::Text.new; Text_Opt2.font = FONT_TITLE
@@ -272,8 +272,8 @@
 #-----------------------------------------------------------------------------------------------------------------------------------
 #____________________________________________________Character Skin_________________________________________________________________
  Char_Skin01.texture_rect = SF.int_rect(0, 0, 96, 128); Char_Skin01 = SF::Sprite.new(CHAR_SKIN)
-#__________________________________________________Character Creation_______________________________________________________________
-#-----------------------------------------------------------------------------------------------------------------------------------
+#__________________________________________________Character Creation________________________________________________________________
+#------------------------------------------------------------------------------------------------------------------------------------
 #                                                         Skin
 #-----------------------------------------------------------------------------------------------------------------------------------
  SKIN_ARRAY = [PLAYER_CHAR, PLAYER_CHAR_2, PLAYER_CHAR_3, PLAYER_CHAR_4, PLAYER_CHAR_5, PLAYER_CHAR_6, PLAYER_CHAR_7]
