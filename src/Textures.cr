@@ -210,12 +210,63 @@
   System_Menu = SF::RectangleShape.new(SF.vector2(150, 50)); #System_Menu.fill_color = SF.color(50, 50, 255)
   System_Menu.position = SF.vector2(1700, 960); System_Menu.set_texture(MENU_TEXTURE_1, reset_rect: false)
   System_Menu.texture_rect = SF.int_rect(0, 0, 150, 50)
+
   Text_System_Menu = SF::Text.new; Text_System_Menu.font = FONT_COMMON; Text_System_Menu.string = "Menu"; 
-  Text_System_Menu.character_size = 30; Text_System_Menu.color = SF::Color::White; #Text_System_Menu.style = (SF::Text::Bold); 
-  Text_System_Menu.position = SF.vector2(1735, 965) 
+  Text_System_Menu.character_size = 30; Text_System_Menu.color = SF::Color::White; Text_System_Menu.position = SF.vector2(1735, 965) 
  #________________________________________________Extended System Menu______________________________________________________________
   System_Menu_Extended = SF::RectangleShape.new(SF.vector2(150, 150)); #System_Menu_Extended.fill_color = SF.color(50, 50, 255)
   System_Menu_Extended.position = SF.vector2(1700, 810); System_Menu_Extended.set_texture(MENU_TEXTURE_1, reset_rect: false)
+
+  Text_System_Menu_Opt_01 = SF::Text.new; Text_System_Menu_Opt_01.font = FONT_COMMON; Text_System_Menu_Opt_01.string = "Quit"; 
+  Text_System_Menu_Opt_01.character_size = 30; Text_System_Menu_Opt_01.color = SF::Color::White; 
+  Text_System_Menu_Opt_01.position = SF.vector2(1745, 915) 
+
+  Text_System_Menu_Opt_02 = SF::Text.new; Text_System_Menu_Opt_02.font = FONT_COMMON; Text_System_Menu_Opt_02.string = "Stats"; 
+  Text_System_Menu_Opt_02.character_size = 30; Text_System_Menu_Opt_02.color = SF::Color::White; 
+  Text_System_Menu_Opt_02.position = SF.vector2(1740, 865) 
+
+  Text_System_Menu_Opt_03 = SF::Text.new; Text_System_Menu_Opt_03.font = FONT_COMMON; Text_System_Menu_Opt_03.string = "System"; 
+  Text_System_Menu_Opt_03.character_size = 30; Text_System_Menu_Opt_03.color = SF::Color::White; 
+  Text_System_Menu_Opt_03.position = SF.vector2(1725, 815) 
+ #_________________________________________________________EXP______________________________________________________________________
+  LVL_Box = SF::RectangleShape.new(SF.vector2(115, 115)); LVL_Box.fill_color = SF.color(30, 130, 235)
+  LVL_Box.position = SF.vector2(10, 959.5);
+
+  LVL_Bar = SF::RectangleShape.new(SF.vector2(1000, 20)); LVL_Bar.fill_color = SF.color(255, 255, 255)
+  LVL_Bar.position = SF.vector2(155, 1049.5);
+
+  LVL_Bar_Color = SF::RectangleShape.new(SF.vector2(996, 16)); LVL_Bar_Color.fill_color = SF.color(255, 255, 0)
+  LVL_Bar_Color.position = SF.vector2(157, 1051.5);
+
+  EXP_Label = SF::Text.new; EXP_Label.font = FONT_FANCY_BOLD; EXP_Label.string = "EXP"; EXP_Label.character_size = 20; 
+  EXP_Label.color = SF::Color::White; EXP_Label.position = SF.vector2(125, 1048) 
+
+  LVL_Label = SF::Text.new; LVL_Label.font = FONT_FANCY_BOLD; LVL_Label.string = "1"; LVL_Label.character_size = 50; 
+  LVL_Label.color = SF::Color::White; LVL_Label.position = SF.vector2(60, 988) 
+ #_________________________________________________________MP_______________________________________________________________________
+  MP_Bar = SF::RectangleShape.new(SF.vector2(1000, 20)); MP_Bar.fill_color = SF.color(255, 255, 255)
+  MP_Bar.position = SF.vector2(155, 1019.5);
+
+  MP_Bar_Color = SF::RectangleShape.new(SF.vector2(996, 16)); MP_Bar_Color.fill_color = SF.color(0, 0, 255)
+  MP_Bar_Color.position = SF.vector2(157, 1021.5);
+
+  MP_Label = SF::Text.new; MP_Label.font = FONT_FANCY_BOLD; MP_Label.string = "MP"; MP_Label.character_size = 20; 
+  MP_Label.color = SF::Color::White; MP_Label.position = SF.vector2(127, 1016) 
+ #_________________________________________________________HP_______________________________________________________________________
+  HP_Bar = SF::RectangleShape.new(SF.vector2(1000, 20)); HP_Bar.fill_color = SF.color(255, 255, 255)
+  HP_Bar.position = SF.vector2(155, 989.5);
+
+  HP_Bar_Color = SF::RectangleShape.new(SF.vector2(996, 16)); HP_Bar_Color.fill_color = SF.color(255, 0, 0)
+  HP_Bar_Color.position = SF.vector2(157, 991.5);
+
+  HP_Label = SF::Text.new; HP_Label.font = FONT_FANCY_BOLD; HP_Label.string = "MP"; HP_Label.character_size = 20; 
+  HP_Label.color = SF::Color::White; HP_Label.position = SF.vector2(127, 986) 
+ #_____________________________________________________Quit Window__________________________________________________________________
+  Quit_Window = SF::RectangleShape.new(SF.vector2(500, 300)); Quit_Window.fill_color = SF.color(50, 50, 255)
+  Quit_Window.position = SF.vector2(700, 300);
+  
+  Quit_Menu_Text = SF::Text.new; Quit_Menu_Text.font = FONT_COMMON; Quit_Menu_Text.string = "Do you want to quit?"; 
+  Quit_Menu_Text.character_size = 50; Quit_Menu_Text.color = SF::Color::White; Quit_Menu_Text.position = SF.vector2(720, 320)
 #-----------------------------------------------------------------------------------------------------------------------------------
 #                                                    Character Model
 #-----------------------------------------------------------------------------------------------------------------------------------

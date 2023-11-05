@@ -164,11 +164,11 @@ def Window_Class.customize_shoes(window, direction)
     Window_Class.player_model_initialize 
     window.draw(SHOES_ARRAY[@@current_shoes])
 end
-#========================================================+
-#--------------------------------------------------------+
-#=============Menu Renderers=============================+
+#=======================================================================================================================================+
+#---------------------------------------------------------------------------------------------------------------------------------------+
+#=======================================================Menu Renderers==================================================================+
   
- #//////////////Main Menu/////////////////////////////////+
+ #/////////////////////////////////////////////////////////Main Menu////////////////////////////////////////////////////////////////////+
    def Window_Class.main_menu(window)
        window.clear(SF::Color::Black);
        window.draw(Text_Title); window.draw(Rectangle_Menu)
@@ -176,7 +176,7 @@ end
        window.draw(Rectangle_Opt2); window.draw(Text_Opt2)
        window.draw(Cursor_opt1)
    end
- #////////////Character Menu//////////////////////////////+
+ #//////////////////////////////////////////////////////Character Menu//////////////////////////////////////////////////////////////////+
    def Window_Class.character_menu(window)
        window.clear(SF::Color::Blue)
        window.draw(Rectangle_Charmenu_Ground); window.draw(Rectangle_CharOuter_1); window.draw(Rectangle_CharOuter_2)
@@ -187,7 +187,7 @@ end
        window.draw(Rectangle_CharInner_7); window.draw(Info_Block_1); window.draw(Info_Block_2); window.draw(Info_Block_3)
        window.draw(Info_Block_4); window.draw(Info_Block_5); window.draw(Info_Block_6); window.draw(Info_Block_7)
    end
- #//////////Character Creation////////////////////////////+
+ #////////////////////////////////////////////////////Character Creation////////////////////////////////////////////////////////////////+
 
   def Window_Class.character_creation_menu(window)
      window.clear(SF::Color::White); window.draw(Rectangle_Charcreation_Backwall); window.draw(Rectangle_Charcreation_Ground) 
@@ -205,13 +205,20 @@ end
     window.draw(Char_Create_Popup_Box); window.draw(Char_Create_Popup_Option_01); window.draw(Char_Create_Popup_Option_02)
     window.draw(Text_Popup_01); window.draw(Text_Popup_01_Opt_01); window.draw(Text_Popup_01_Opt_02); window.draw(Cursor_opt1)
    end  
-#////////////////////////////////////////////////////////////HUD////////////////////////////////////////////////////////////////////////
+ #////////////////////////////////////////////////////////////HUD///////////////////////////////////////////////////////////////////////+
   
   def Window_Class.hud(window)
    window.clear(SF::Color::Black); window.draw(Bottom_HUD); window.draw(System_Menu); window.draw(Text_System_Menu)
+   window.draw(LVL_Box); window.draw(LVL_Bar); window.draw(LVL_Bar_Color); window.draw(EXP_Label); window.draw(MP_Bar) 
+   window.draw(MP_Bar_Color); window.draw(MP_Label); window.draw(HP_Bar); window.draw(HP_Bar_Color); window.draw(HP_Label)
+   window.draw(LVL_Label)
    end
   def Window_Class.system_popup(window)
-    window.draw(System_Menu_Extended)
+    window.draw(System_Menu_Extended); window.draw(Text_System_Menu_Opt_01); window.draw(Text_System_Menu_Opt_02)
+    window.draw(Text_System_Menu_Opt_03)
+  end
+  def Window_Class.quit_window(window)
+    window.draw(Quit_Window); window.draw(Quit_Menu_Text)
   end
 #========================================================+
 #--------------------------------------------------------+
@@ -239,6 +246,9 @@ end
     Window_Class.hud(window)
     if @@popup == "System_Popup_Menu"
       Window_Class.system_popup(window)
+     end
+    if @@popup == "Quit_Menu"
+      Window_Class.quit_window(window)
     end
    else begin 
      raise "ERROR! Invalid value for '@@menu'!"
@@ -587,15 +597,29 @@ def Window_Class.hud_keypresses(window)
            @@popup = "none"
         end
         end
-      if (x >= 1700 && x <= 2850) && (y >= 815 && y <= 970)
+      if (x >= 1700 && x <= 1850) && (y >= 910 && y <= 960)
          case @@popup
          when "System_Popup_Menu" 
           All_Audio::SFX.char_create_sideways
+          @@popup = "Quit_Menu"
          when "none"
-          puts "lol, there's no popup"
-       end    
-       end
-    end
+         end
+         end  
+      if (x >= 1700 && x <= 1850) && (y >= 860 && y <= 910)
+        case @@popup
+        when "System_Popup_Menu" 
+          All_Audio::SFX.cursor1
+        when "none"
+         end
+         end
+         if (x >= 1700 && x <= 1850) && (y >= 810 && y <= 860)
+          case @@popup
+          when "System_Popup_Menu" 
+            All_Audio::SFX.select1
+        when "none"
+          end
+          end
+        end
     case event
     when SF::Event::Closed
       window.close
