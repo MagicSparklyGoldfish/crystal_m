@@ -288,6 +288,24 @@
 
   Stats_Window_Exit_Box = SF::RectangleShape.new(SF.vector2(50, 50)); Stats_Window_Exit_Box.fill_color = SF.color(255, 0, 0)
   Stats_Window_Exit_Box.position = SF.vector2(1240, 210);
+
+  Stats_Window_LVL_Text = SF::Text.new; Stats_Window_LVL_Text.font = FONT_COMMON; Stats_Window_LVL_Text.character_size = 30; 
+  Stats_Window_LVL_Text.color = SF::Color::White; Stats_Window_LVL_Text.position = SF.vector2(840, 250);
+
+  Stats_Window_LVL_Text_02 = SF::Text.new; Stats_Window_LVL_Text_02.font = FONT_COMMON; Stats_Window_LVL_Text_02.character_size = 30; 
+  Stats_Window_LVL_Text_02.color = SF::Color::White; Stats_Window_LVL_Text_02.position = SF.vector2(840, 220);
+
+  Stats_Window_Str_Text = SF::Text.new; Stats_Window_Str_Text.font = FONT_COMMON; Stats_Window_Str_Text.character_size = 30; 
+  Stats_Window_Str_Text.color = SF::Color::White; Stats_Window_Str_Text.position = SF.vector2(840, 280);
+
+  Stats_Window_Dex_Text = SF::Text.new; Stats_Window_Dex_Text.font = FONT_COMMON; Stats_Window_Dex_Text.character_size = 30; 
+  Stats_Window_Dex_Text.color = SF::Color::White; Stats_Window_Dex_Text.position = SF.vector2(940, 280);
+
+  Stats_Window_Luk_Text = SF::Text.new; Stats_Window_Luk_Text.font = FONT_COMMON; Stats_Window_Luk_Text.character_size = 30; 
+  Stats_Window_Luk_Text.color = SF::Color::White; Stats_Window_Luk_Text.position = SF.vector2(1040, 280);
+
+  Stats_Window_Int_Text = SF::Text.new; Stats_Window_Int_Text.font = FONT_COMMON; Stats_Window_Int_Text.character_size = 30; 
+  Stats_Window_Int_Text.color = SF::Color::White; Stats_Window_Int_Text.position = SF.vector2(1140, 280);
 #-----------------------------------------------------------------------------------------------------------------------------------
 #                                                    Character Model
 #-----------------------------------------------------------------------------------------------------------------------------------

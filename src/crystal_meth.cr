@@ -226,7 +226,9 @@ end
   def Window_Class.stat_window(window)
    Stats.stat_menu 
    window.draw(Stats_Window); window.draw(Stats_Window_Char_Box); window.draw(@@player_character_rendered_model); 
-   window.draw(Stats_Window_Exit_Box)
+   window.draw(Stats_Window_Exit_Box); window.draw(Stats_Window_LVL_Text); window.draw(Stats_Window_LVL_Text_02);
+   window.draw(Stats_Window_Str_Text); window.draw(Stats_Window_Dex_Text); window.draw(Stats_Window_Luk_Text)
+   window.draw(Stats_Window_Int_Text)
   end
 #=======================================================================================================================================+
 #---------------------------------------------------------------------------------------------------------------------------------------+
@@ -865,6 +867,7 @@ end; end; end; end; end; end
   class Quest_Item_Slot
    end                  
   class Stats
+   @@name : (String); @@name = "Some Rando"
    @@lvl : (Int32); @@exp : (Int32); @@exp_scale : (Int32 | Float64); @@exp_cap : (Int32 | Float64); @@lvl_points : (Int32)
    @@lvl_hp : (Int32); @@equip_hp : (Int32); @@current_max_hp : (Int32); @@current_hp : (Int32)
    @@lvl_mp : (Int32); @@equip_mp : (Int32); @@current_max_mp : (Int32); @@current_mp : (Int32)
@@ -877,18 +880,23 @@ end; end; end; end; end; end
    @@current_max_mp = Base_MP + @@lvl_mp + @@equip_mp; @@current_mp = 100
    @@current_str = Base_Str + @@lvl_str + @@equip_str; @@current_dex = Base_Dex + @@lvl_dex + @@equip_dex 
    @@current_luk = Base_Luk + @@lvl_luk + @@equip_luk; @@current_int = Base_Int + @@lvl_int + @@equip_int
-   @@lvl = 1; @@exp = 0; @@exp_cap = @@lvl * Math.sqrt(5) ; @@exp_scale = @@exp / @@exp_cap
+   @@lvl = 1; @@exp = 0; @@exp_cap = @@lvl * Math.sqrt(100) ; @@exp_scale = @@exp / @@exp_cap
 
    def Stats.bars
     HP_Bar_Color.scale = SF.vector2(@@current_hp * 0.005, 1); HP_Bar.scale = SF.vector2(@@current_max_hp * 0.005, 1)
     LVL_Bar_Color.scale = SF.vector2(@@exp_scale * 0.01, 1); 
     MP_Bar_Color.scale = SF.vector2(@@current_mp * 0.005, 1); MP_Bar.scale = SF.vector2(@@current_max_mp * 0.005, 1)
-    if @@exp >= @@exp_scale
-     @@lvl += 1; @@exp = 0; @@lvl_points + 5
-    end
+     if @@exp >= @@exp_cap
+      @@lvl += 1; @@exp = 0; @@lvl_points + 5
+     end
   end
     def Stats.stat_menu
-
+     exp = @@exp.to_s + "/" + @@exp_cap.to_s; lvl = "Lvl: " + @@lvl.to_s;
+     Stats_Window_LVL_Text.string = exp; Stats_Window_LVL_Text_02.string = lvl; 
+     str = "STR: " + @@current_str.to_s; Stats_Window_Str_Text.string = str
+     dex = "DEX: " + @@current_dex.to_s; Stats_Window_Dex_Text.string = dex
+     luk = "LUK: " + @@current_luk.to_s; Stats_Window_Luk_Text.string = luk
+     int = "INT: " + @@current_int.to_s; Stats_Window_Int_Text.string = int
    end
   end
 
