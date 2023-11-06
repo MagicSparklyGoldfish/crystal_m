@@ -224,11 +224,14 @@ end
     window.draw(Quit_Window_Opt_02); window.draw(Quit_Menu_Opt_02_Text)
   end
   def Window_Class.stat_window(window)
-   Stats.stat_menu 
+   Stats.stat_menu; 
    window.draw(Stats_Window); window.draw(Stats_Window_Char_Box); window.draw(@@player_character_rendered_model); 
    window.draw(Stats_Window_Exit_Box); window.draw(Stats_Window_LVL_Text); window.draw(Stats_Window_LVL_Text_02);
    window.draw(Stats_Window_Str_Text); window.draw(Stats_Window_Dex_Text); window.draw(Stats_Window_Luk_Text)
-   window.draw(Stats_Window_Int_Text)
+   window.draw(Stats_Window_Int_Text); window.draw(Stats_Window_HP_Text); window.draw(Stats_Window_MP_Text)
+   window.draw(Inventory_Box); window.draw(Stats_Window_Name_Text); window.draw(Inventory_Tab_01); window.draw(Inventory_Tab_Text_01)
+   window.draw(Inventory_Tab_02); window.draw(Inventory_Tab_Text_02); window.draw(Inventory_Tab_03); window.draw(Inventory_Tab_Text_03)
+   window.draw(Inventory_Tab_04); window.draw(Inventory_Tab_Text_04) 
   end
 #=======================================================================================================================================+
 #---------------------------------------------------------------------------------------------------------------------------------------+
@@ -653,13 +656,15 @@ def Window_Class.hud_keypresses(window)
             end
       if (x >= 1240 && x <= 1290) && (y >= 210 && y <= 260) && @@popup == "Stats_Menu"
         @@popup = "none"
-      end
+        end
         end
     case event
     when SF::Event::Closed
       window.close
     when SF::Event::KeyPressed
       case event.code
+
+
 
 #********************************************************Escape**********************************************************************
   when SF::Keyboard::Escape
@@ -839,6 +844,7 @@ end; end; end; end; end; end
      when "Consumable" || "Equipment"
      end; end; end
   class Clothing_Wardrobe_Slot
+
    end
   class Clothing_Outfit_Slot < Window_Class
     include Player_Data  
@@ -897,6 +903,10 @@ end; end; end; end; end; end
      dex = "DEX: " + @@current_dex.to_s; Stats_Window_Dex_Text.string = dex
      luk = "LUK: " + @@current_luk.to_s; Stats_Window_Luk_Text.string = luk
      int = "INT: " + @@current_int.to_s; Stats_Window_Int_Text.string = int
+     hp = "HP: " + @@current_hp.to_s + "/" + @@current_max_hp.to_s; Stats_Window_HP_Text.string = hp
+     mp = "MP: " + @@current_mp.to_s + "/" + @@current_max_mp.to_s; Stats_Window_MP_Text.string = mp
+     LVL_Label.string = @@lvl.to_s;
+     Stats_Window_Name_Text.string = @@name
    end
   end
 

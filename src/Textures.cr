@@ -5,6 +5,7 @@
  WOOD_TEXTURE_1 = SF::Texture.from_file("graphics/Wood01.png"); WALLPAPER_1 = SF::Texture.from_file("graphics/Wallpaper_01.png")
  CABINET_01_TEXTURE = SF::Texture.from_file("graphics/Cabinet01.png"); CURSOR_TEXTURE_1 = SF::Texture.from_file("graphics/Cursor.png")
  CHAR_CREATE_CURSOR_TEXTURE_1 = SF::Texture.from_file("graphics/Char_Create_Cursor.png"); MENU_TEXTURE_1 = SF::Texture.from_file("graphics/sys_menu.png")
+ INVENTORY_GRID_01 = SF::Texture.from_file("graphics/Inventory.png"); INVENTORY_TAB_01 = SF::Texture.from_file("graphics/Inventory_Tab.png")
 #------------------------------------------------------------------------------------------------------------------------------------
 #                                                  Character Textures
 #------------------------------------------------------------------------------------------------------------------------------------
@@ -241,7 +242,7 @@
   EXP_Label = SF::Text.new; EXP_Label.font = FONT_FANCY_BOLD; EXP_Label.string = "EXP"; EXP_Label.character_size = 20; 
   EXP_Label.color = SF::Color::White; EXP_Label.position = SF.vector2(125, 1048) 
 
-  LVL_Label = SF::Text.new; LVL_Label.font = FONT_FANCY_BOLD; LVL_Label.string = "1"; LVL_Label.character_size = 50; 
+  LVL_Label = SF::Text.new; LVL_Label.font = FONT_FANCY_BOLD; LVL_Label.character_size = 50; 
   LVL_Label.color = SF::Color::White; LVL_Label.position = SF.vector2(60, 988) 
  #_________________________________________________________MP_______________________________________________________________________
   MP_Bar = SF::RectangleShape.new(SF.vector2(1000, 20)); MP_Bar.fill_color = SF.color(255, 255, 255)
@@ -280,32 +281,74 @@
   Quit_Menu_Opt_02_Text = SF::Text.new; Quit_Menu_Opt_02_Text.font = FONT_COMMON; Quit_Menu_Opt_02_Text.string = "No"; 
   Quit_Menu_Opt_02_Text.character_size = 50; Quit_Menu_Opt_02_Text.color = SF::Color::White; Quit_Menu_Opt_02_Text.position = SF.vector2(1070, 510);
  #_____________________________________________________Stats Window__________________________________________________________________
-  Stats_Window = SF::RectangleShape.new(SF.vector2(600, 600)); Stats_Window.fill_color = SF.color(50, 50, 255)
-  Stats_Window.position = SF.vector2(700, 200);
+  #.......................................................Body.......................................................................
+   Stats_Window = SF::RectangleShape.new(SF.vector2(600, 600)); Stats_Window.fill_color = SF.color(50, 50, 255)
+   Stats_Window.position = SF.vector2(700, 200);
+ 
+   Stats_Window_Char_Box = SF::RectangleShape.new(SF.vector2(100, 190)); Stats_Window_Char_Box.fill_color = SF.color(100, 100, 255)
+   Stats_Window_Char_Box.position = SF.vector2(710, 210);
+ 
+   Stats_Window_Exit_Box = SF::RectangleShape.new(SF.vector2(50, 50)); Stats_Window_Exit_Box.fill_color = SF.color(255, 0, 0)
+   Stats_Window_Exit_Box.position = SF.vector2(1240, 210);
+ 
+   Stats_Window_LVL_Text = SF::Text.new; Stats_Window_LVL_Text.font = FONT_COMMON; Stats_Window_LVL_Text.character_size = 30; 
+   Stats_Window_LVL_Text.color = SF::Color::White; Stats_Window_LVL_Text.position = SF.vector2(840, 250);
+ 
+   Stats_Window_LVL_Text_02 = SF::Text.new; Stats_Window_LVL_Text_02.font = FONT_COMMON; Stats_Window_LVL_Text_02.character_size = 30; 
+   Stats_Window_LVL_Text_02.color = SF::Color::White; Stats_Window_LVL_Text_02.position = SF.vector2(840, 220);
+ 
+   Stats_Window_Str_Text = SF::Text.new; Stats_Window_Str_Text.font = FONT_COMMON; Stats_Window_Str_Text.character_size = 25; 
+   Stats_Window_Str_Text.color = SF::Color::White; Stats_Window_Str_Text.position = SF.vector2(840, 280);
+ 
+   Stats_Window_Dex_Text = SF::Text.new; Stats_Window_Dex_Text.font = FONT_COMMON; Stats_Window_Dex_Text.character_size = 25; 
+   Stats_Window_Dex_Text.color = SF::Color::White; Stats_Window_Dex_Text.position = SF.vector2(950, 280);
+ 
+   Stats_Window_Luk_Text = SF::Text.new; Stats_Window_Luk_Text.font = FONT_COMMON; Stats_Window_Luk_Text.character_size = 25; 
+   Stats_Window_Luk_Text.color = SF::Color::White; Stats_Window_Luk_Text.position = SF.vector2(1060, 280);
+ 
+   Stats_Window_Int_Text = SF::Text.new; Stats_Window_Int_Text.font = FONT_COMMON; Stats_Window_Int_Text.character_size = 25; 
+   Stats_Window_Int_Text.color = SF::Color::White; Stats_Window_Int_Text.position = SF.vector2(1170, 280);
+ 
+   Stats_Window_HP_Text = SF::Text.new; Stats_Window_HP_Text.font = FONT_COMMON; Stats_Window_HP_Text.character_size = 30; 
+   Stats_Window_HP_Text.color = SF::Color::White; Stats_Window_HP_Text.position = SF.vector2(840, 340);
+ 
+   Stats_Window_MP_Text = SF::Text.new; Stats_Window_MP_Text.font = FONT_COMMON; Stats_Window_MP_Text.character_size = 30; 
+   Stats_Window_MP_Text.color = SF::Color::White; Stats_Window_MP_Text.position = SF.vector2(1080, 340);
+ 
+   Stats_Window_Name_Text = SF::Text.new; Stats_Window_Name_Text.font = FONT_COMMON; Stats_Window_Name_Text.character_size = 30; 
+   Stats_Window_Name_Text.color = SF::Color::White; Stats_Window_Name_Text.position = SF.vector2(710, 400);
 
-  Stats_Window_Char_Box = SF::RectangleShape.new(SF.vector2(100, 190)); Stats_Window_Char_Box.fill_color = SF.color(100, 100, 255)
-  Stats_Window_Char_Box.position = SF.vector2(710, 210);
+  #....................................................Inventory...................................................................
+   Inventory_Box = SF::RectangleShape.new(SF.vector2(580, 310)); Inventory_Box.fill_color = SF.color(20, 20, 250)
+   Inventory_Box.position = SF.vector2(710, 480); Inventory_Box.set_texture(INVENTORY_GRID_01, reset_rect: false) 
+ 
+   Inventory_Tab_01 = SF::RectangleShape.new(SF.vector2(140, 35)); Inventory_Tab_01.set_texture(INVENTORY_TAB_01, reset_rect: false)
+   Inventory_Tab_01.position = SF.vector2(713, 450); Inventory_Tab_01.texture_rect = SF.int_rect(0, 0, 140, 35)
+ 
+   Inventory_Tab_Text_01 = SF::Text.new; Inventory_Tab_Text_01.font = FONT_COMMON; Inventory_Tab_Text_01.string = "Shirts"
+   Inventory_Tab_Text_01.color = SF::Color::White; Inventory_Tab_Text_01.position = SF.vector2(755, 450); 
+   Inventory_Tab_Text_01.character_size = 20
 
-  Stats_Window_Exit_Box = SF::RectangleShape.new(SF.vector2(50, 50)); Stats_Window_Exit_Box.fill_color = SF.color(255, 0, 0)
-  Stats_Window_Exit_Box.position = SF.vector2(1240, 210);
+   Inventory_Tab_02 = SF::RectangleShape.new(SF.vector2(140, 35)); Inventory_Tab_02.set_texture(INVENTORY_TAB_01, reset_rect: false)
+   Inventory_Tab_02.position = SF.vector2(857, 450); Inventory_Tab_02.texture_rect = SF.int_rect(0, 0, 140, 35)
 
-  Stats_Window_LVL_Text = SF::Text.new; Stats_Window_LVL_Text.font = FONT_COMMON; Stats_Window_LVL_Text.character_size = 30; 
-  Stats_Window_LVL_Text.color = SF::Color::White; Stats_Window_LVL_Text.position = SF.vector2(840, 250);
+   Inventory_Tab_Text_02 = SF::Text.new; Inventory_Tab_Text_02.font = FONT_COMMON; Inventory_Tab_Text_02.string = "Gloves"
+   Inventory_Tab_Text_02.color = SF::Color::White; Inventory_Tab_Text_02.position = SF.vector2(900, 450); 
+   Inventory_Tab_Text_02.character_size = 20
 
-  Stats_Window_LVL_Text_02 = SF::Text.new; Stats_Window_LVL_Text_02.font = FONT_COMMON; Stats_Window_LVL_Text_02.character_size = 30; 
-  Stats_Window_LVL_Text_02.color = SF::Color::White; Stats_Window_LVL_Text_02.position = SF.vector2(840, 220);
+   Inventory_Tab_03 = SF::RectangleShape.new(SF.vector2(140, 35)); Inventory_Tab_03.set_texture(INVENTORY_TAB_01, reset_rect: false)
+   Inventory_Tab_03.position = SF.vector2(1001, 450); Inventory_Tab_03.texture_rect = SF.int_rect(0, 0, 140, 35)
 
-  Stats_Window_Str_Text = SF::Text.new; Stats_Window_Str_Text.font = FONT_COMMON; Stats_Window_Str_Text.character_size = 30; 
-  Stats_Window_Str_Text.color = SF::Color::White; Stats_Window_Str_Text.position = SF.vector2(840, 280);
+   Inventory_Tab_Text_03 = SF::Text.new; Inventory_Tab_Text_03.font = FONT_COMMON; Inventory_Tab_Text_03.string = "Pants"
+   Inventory_Tab_Text_03.color = SF::Color::White; Inventory_Tab_Text_03.position = SF.vector2(1045, 450); 
+   Inventory_Tab_Text_03.character_size = 20
 
-  Stats_Window_Dex_Text = SF::Text.new; Stats_Window_Dex_Text.font = FONT_COMMON; Stats_Window_Dex_Text.character_size = 30; 
-  Stats_Window_Dex_Text.color = SF::Color::White; Stats_Window_Dex_Text.position = SF.vector2(940, 280);
+   Inventory_Tab_04 = SF::RectangleShape.new(SF.vector2(140, 35)); Inventory_Tab_04.set_texture(INVENTORY_TAB_01, reset_rect: false)
+   Inventory_Tab_04.position = SF.vector2(1146, 450); Inventory_Tab_04.texture_rect = SF.int_rect(0, 0, 140, 35)
 
-  Stats_Window_Luk_Text = SF::Text.new; Stats_Window_Luk_Text.font = FONT_COMMON; Stats_Window_Luk_Text.character_size = 30; 
-  Stats_Window_Luk_Text.color = SF::Color::White; Stats_Window_Luk_Text.position = SF.vector2(1040, 280);
-
-  Stats_Window_Int_Text = SF::Text.new; Stats_Window_Int_Text.font = FONT_COMMON; Stats_Window_Int_Text.character_size = 30; 
-  Stats_Window_Int_Text.color = SF::Color::White; Stats_Window_Int_Text.position = SF.vector2(1140, 280);
+   Inventory_Tab_Text_04 = SF::Text.new; Inventory_Tab_Text_04.font = FONT_COMMON; Inventory_Tab_Text_04.string = "Shoes"
+   Inventory_Tab_Text_04.color = SF::Color::White; Inventory_Tab_Text_04.position = SF.vector2(1186, 450); 
+   Inventory_Tab_Text_04.character_size = 20
 #-----------------------------------------------------------------------------------------------------------------------------------
 #                                                    Character Model
 #-----------------------------------------------------------------------------------------------------------------------------------

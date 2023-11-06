@@ -13,6 +13,11 @@ targets:
     clothing_data: scr/Clothing.yml
 
 dependencies:
+
+gtk4:
+  github: hugopl/gtk4.cr
+  version: ~> 0.15.0
+
   crsfml:
     github: oprypin/crsfml
     version: ~> 2.5.2
