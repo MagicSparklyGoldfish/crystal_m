@@ -4,12 +4,15 @@ module Geometry_Test
 #                                                                 Ground
 #..................................................................................................................................................
  #-----------------------------------------------------------------Main----------------------------------------------------------------------------
-   Ground = SF::RectangleShape.new(SF.vector2(10000, 500)); Ground.fill_color = SF.color(0, 0, 255)
-   Ground.position = SF.vector2(0, 0)
-  def Geometry_Test.test(window)
-     gravity = CP.v(0, -100)
-     space = CP::Space.new
-     space.gravity = gravity
+
+  def Geometry_Test.test(window, debug_draw)
+    window.clear(SF::Color::Transparent);
+    space = CP::Space.new
+    space.iterations = 30
+    space.gravity = CP.v(0, -500)
+    space.sleep_time_threshold = 0.5
+    space.collision_slop = 0.5
+
      width = 10000 # Width of the rectangle
      height = 500 # Height of the rectangle
 
@@ -17,7 +20,7 @@ module Geometry_Test
        mass = 1.0 # Mass of the rectangle
        #moment = CP.moment_for_box(mass, width, height) # Calculate the moment of inertia
        body = CP::Body.new(mass)
-       body.position = CP::Vect.new(0, 0) # Set the position of the body
+       body.position = CP::Vect.new(0, 800) # Set the position of the body
       
     #   # Create a rectangle shape
 
@@ -27,9 +30,11 @@ module Geometry_Test
        CP::Vect.new(width / 2, height / 2),
        CP::Vect.new(width / 2, -height / 2)
      ])
-     #platform = CP::Shape::Poly.new(shape, 5)
+     pc_body = CP::Body.new(96, 256)
+     pc_skin = CP::Box.new(pc_body, 96, 256)
+     pc_body.position = CP.v(660, 715)
      shape.friction = 1.0
-     space.add(shape)
+     space.add(shape, pc_body, pc_skin)
      window.draw(Ground)
    end
 

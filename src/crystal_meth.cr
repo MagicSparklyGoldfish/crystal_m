@@ -95,78 +95,78 @@ extend self
    @@player_character_rendered_model.scale = SF.vector2(3.0, 3.0)
    end
 #---------------------------------------------------customization functions-------------------------------------------------------------+
-def Window_Class.customize_hair(window, direction)
-  if direction == "right"
-  @@current_hair = @@current_hair + 1; @@current_display_hair = @@current_hair
-  @@current_display_hair_string = @@current_hair
-  else if direction == "left"
-  @@current_hair = @@current_hair - 1; @@current_display_hair = @@current_hair
-  @@current_display_hair_string = @@current_hair
-  end; end
-  Hair_Desc.string = HAIR_DESC_ARRAY[@@current_display_hair_string]
-  Window_Class.player_model_initialize 
-  window.draw(HAIR_ARRAY[@@current_hair])
-end
-def Window_Class.customize_skin(window, direction)
-  if direction == "right"
-    @@current_skin = @@current_skin + 1
-  else if direction == "left"
-    @@current_skin = @@current_skin - 1
-  end; end
-    Skin_Desc.string = SKIN_DESC_ARRAY[@@current_skin]
-    Window_Class.player_model_initialize 
-    window.draw(SKIN_ARRAY[@@current_skin])
-end
-def Window_Class.customize_face(window, direction)
-  if direction == "right"
-    @@current_face = @@current_face + 1
-  else if direction == "left"
-    @@current_face = @@current_face - 1
-  end; end
-    Face_Desc.string = FACE_DESC_ARRAY[@@current_face]
-    Window_Class.player_model_initialize 
-    window.draw(FACE_ARRAY[@@current_face])
-end
-def Window_Class.customize_shirt(window, direction)
-  if direction == "right"
-    @@current_shirt = @@current_shirt + 1
-  else if direction == "left"
-    @@current_shirt = @@current_shirt - 1
-  end; end
-    Shirt_Desc.string = SHIRT_DESC_ARRAY[@@current_shirt]
-    Window_Class.player_model_initialize 
-    window.draw(SHIRT_ARRAY[@@current_shirt])
-end
-def Window_Class.customize_gloves(window, direction)
-  if direction == "right"
-    @@current_gloves = @@current_gloves + 1
-  else if direction == "left"
-    @@current_gloves = @@current_gloves - 1
-  end; end
-  Glove_Desc.string = GLOVE_DESC_ARRAY[@@current_gloves]
-    Window_Class.player_model_initialize 
-    window.draw(GLOVE_ARRAY[@@current_gloves])
-end
-def Window_Class.customize_pants(window, direction)
-  if direction == "right"
-    @@current_pants = @@current_pants + 1
-  else if direction == "left"
-    @@current_pants = @@current_pants - 1
-  end; end
-  Pants_Desc.string = PANTS_DESC_ARRAY[@@current_pants]
-    Window_Class.player_model_initialize 
-    window.draw(PANTS_ARRAY[@@current_pants])
-end
-def Window_Class.customize_shoes(window, direction)
-  if direction == "right"
-    @@current_shoes = @@current_shoes + 1
-  else if direction == "left"
-    @@current_shoes = @@current_shoes - 1
-  end; end
-  Shoes_Desc.string = SHOES_DESC_ARRAY[@@current_shoes]
-    Window_Class.player_model_initialize 
-    window.draw(SHOES_ARRAY[@@current_shoes])
-end
+ def Window_Class.customize_hair(window, direction)
+   if direction == "right"
+   @@current_hair = @@current_hair + 1; @@current_display_hair = @@current_hair
+   @@current_display_hair_string = @@current_hair
+   else if direction == "left"
+   @@current_hair = @@current_hair - 1; @@current_display_hair = @@current_hair
+   @@current_display_hair_string = @@current_hair
+   end; end
+   Hair_Desc.string = HAIR_DESC_ARRAY[@@current_display_hair_string]
+   Window_Class.player_model_initialize 
+   window.draw(HAIR_ARRAY[@@current_hair])
+ end
+ def Window_Class.customize_skin(window, direction)
+   if direction == "right"
+     @@current_skin = @@current_skin + 1
+   else if direction == "left"
+     @@current_skin = @@current_skin - 1
+   end; end
+     Skin_Desc.string = SKIN_DESC_ARRAY[@@current_skin]
+     Window_Class.player_model_initialize 
+     window.draw(SKIN_ARRAY[@@current_skin])
+ end
+ def Window_Class.customize_face(window, direction)
+   if direction == "right"
+     @@current_face = @@current_face + 1
+   else if direction == "left"
+     @@current_face = @@current_face - 1
+   end; end
+     Face_Desc.string = FACE_DESC_ARRAY[@@current_face]
+     Window_Class.player_model_initialize 
+     window.draw(FACE_ARRAY[@@current_face])
+ end
+ def Window_Class.customize_shirt(window, direction)
+   if direction == "right"
+     @@current_shirt = @@current_shirt + 1
+   else if direction == "left"
+     @@current_shirt = @@current_shirt - 1
+   end; end
+     Shirt_Desc.string = SHIRT_DESC_ARRAY[@@current_shirt]
+     Window_Class.player_model_initialize 
+     window.draw(SHIRT_ARRAY[@@current_shirt])
+ end
+ def Window_Class.customize_gloves(window, direction)
+   if direction == "right"
+     @@current_gloves = @@current_gloves + 1
+   else if direction == "left"
+     @@current_gloves = @@current_gloves - 1
+   end; end
+   Glove_Desc.string = GLOVE_DESC_ARRAY[@@current_gloves]
+     Window_Class.player_model_initialize 
+     window.draw(GLOVE_ARRAY[@@current_gloves])
+ end
+ def Window_Class.customize_pants(window, direction)
+   if direction == "right"
+     @@current_pants = @@current_pants + 1
+   else if direction == "left"
+     @@current_pants = @@current_pants - 1
+   end; end
+   Pants_Desc.string = PANTS_DESC_ARRAY[@@current_pants]
+     Window_Class.player_model_initialize 
+     window.draw(PANTS_ARRAY[@@current_pants])
+ end
+ def Window_Class.customize_shoes(window, direction)
+   if direction == "right"
+     @@current_shoes = @@current_shoes + 1
+   else if direction == "left"
+     @@current_shoes = @@current_shoes - 1
+   end; end
+   Shoes_Desc.string = SHOES_DESC_ARRAY[@@current_shoes]
+     Window_Class.player_model_initialize 
+     window.draw(SHOES_ARRAY[@@current_shoes])
+ end
 #=======================================================================================================================================+
 #---------------------------------------------------------------------------------------------------------------------------------------+
 #=======================================================Menu Renderers==================================================================+
@@ -212,8 +212,8 @@ end
  #////////////////////////////////////////////////////////////HUD///////////////////////////////////////////////////////////////////////+
   
   def Window_Class.hud(window)
-   Stats.bars
-   window.clear(SF::Color::Black); window.draw(Bottom_HUD); window.draw(System_Menu); window.draw(Text_System_Menu)
+   Stats.bars; 
+   window.draw(Bottom_HUD); window.draw(System_Menu); window.draw(Text_System_Menu)
    window.draw(LVL_Box); window.draw(LVL_Bar); window.draw(LVL_Bar_Color); window.draw(EXP_Label); window.draw(MP_Bar) 
    window.draw(MP_Bar_Color); window.draw(MP_Label); window.draw(HP_Bar); 
    window.draw(HP_Bar_Color); window.draw(HP_Label); window.draw(LVL_Label); 
@@ -270,12 +270,54 @@ end
     window.draw(Rectangle_Opt2); window.draw(Text_Opt2)
     window.draw(Cursor_opt1)
   end
+#=======================================================================================================================================+
+#---------------------------------------------------------------------------------------------------------------------------------------+
+#========================================================Map Renderers==================================================================+
+ def Window_Class.test_map(debug_draw, window)
+  window.clear(SF::Color::Transparent);
+  space = CP::Space.new
+  space.iterations = 30
+  space.gravity = CP.v(0, -500)
+  space.sleep_time_threshold = 0.5
+  space.collision_slop = 0.5
 
+   width = 10000 # Width of the rectangle
+   height = 500 # Height of the rectangle
+
+         # Create a body
+     mass = 1.0 # Mass of the rectangle
+     #moment = CP.moment_for_box(mass, width, height) # Calculate the moment of inertia
+     body = CP::Body.new(mass)
+     body.position = CP::Vect.new(0, 800) # Set the position of the body
+    
+  #   # Create a rectangle shape
+
+     shape = CP::Shape::Poly.new(body, [
+     CP::Vect.new(-width / 2, -height / 2),
+     CP::Vect.new(-width / 2, height / 2),
+     CP::Vect.new(width / 2, height / 2),
+     CP::Vect.new(width / 2, -height / 2)
+   ])
+   pc_body = CP::Body.new(8, 24)
+   pc_skin = CP::Box.new(pc_body, 8, 24)
+   pc_body.position = CP.v(-53, -40)
+   #pc_body.bind(@@player_character_rendered_model)
+   shape.friction = 1.0
+   space.add(shape, pc_body, pc_skin)
+   @@player_character_rendered_model.position = SF.vector2(650, 670)
+   debug_draw.draw space
+   window.draw(Ground); window.draw(@@player_character_rendered_model)
+ end
 #=======================================================================================================================================+
 #---------------------------------------------------------------------------------------------------------------------------------------+
 #========================================================Window Functions===============================================================+
 #/////////////////////////////////////////////////////////////Draw//////////////////////////////////////////////////////////////////////+
-
+  def Window_Class.map(debug_draw, window)
+   case @@map
+    when "test"
+      Window_Class.test_map(debug_draw, window)
+    end
+   end
   def Window_Class.draw(window)
     case @@menu
    when "main"
@@ -297,7 +339,9 @@ end
    when "HUD"
     Window_Class.hud(window)
     if @@map == "test"
-      Geometry_Test.test(window)
+      #Geometry_Test.test(window, debug_draw)
+      Window_Class.hud(window)
+      #window.draw(@@player_character_rendered_model)
     end
     if @@popup == "System_Popup_Menu"
       Window_Class.system_popup(window)
@@ -350,21 +394,22 @@ end
  debug_draw = SFMLDebugDraw.new(window, SF::RenderStates.new( #--------------------------------initializes crystal chipmunk draw area
  SF::Transform.new.translate(window.size / 2).scale(1, -1).scale(5, 5)
  ))
-
+  Window_Class.player_model_initialize 
 #----------------------------------------------------------------------------------------------------------------------------------------+
-#                                                    This runs every frame
+#                                                        This runs every frame
 #----------------------------------------------------------------------------------------------------------------------------------------+
  while window.open?
    Window_Class.keypresses(window)
+   Window_Class.map(debug_draw, window)
    Window_Class.draw(window)
    window.display
    end
  end
-#________________________________________________________________________________________________________________________________________+
+#__________________________________________________________________________________________________________________________________________+
  
-#----------------------------------------------------------------------------------------------------------------------------------------+
-#                                                     Main Menu Keypresses
-#----------------------------------------------------------------------------------------------------------------------------------------+
+#------------------------------------------------------------------------------------------------------------------------------------------+
+#                                                        Main Menu Keypresses
+#------------------------------------------------------------------------------------------------------------------------------------------+
 def Window_Class.main_menu_keypresses(window)
   while (event = window.poll_event)
   case event
@@ -393,6 +438,8 @@ def Window_Class.main_menu_keypresses(window)
   when SF::Keyboard::H #---------------for testing purposes, remove when testing done
     @@menu = "HUD"
     @@map = "test"
+    @@player_character_rendered_model.scale = SF.vector2(1.0, 1.0)
+    @@player_character_rendered_model.position = SF.vector2(660, 715)
   when SF::Keyboard::W #---------------for testing purposes, remove when testing done
     Data_Manager.load_savegame
   when SF::Keyboard::C #---------------for testing purposes, remove when testing done
