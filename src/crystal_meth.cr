@@ -6,6 +6,7 @@ require "../src/Items.cr"
 require "../src/Audio.cr"
 require "../src/Saves.cr"
 require "../src/Fonts.cr"
+require "../src/level_test.cr"
 require "../src/Player_Character.cr"
 require "x11"
 require "crystal/system/time"
@@ -37,12 +38,14 @@ include X11
 module Gui  
 extend self
 
- class Window_Class
+ class Window_Class 
 #----------------------------------------------------------------------------------------------------------------------------------------+
 #====================================================Window_Class Variables==============================================================+
   @@item_type = "Consumable"
   @@menu = "main"
   @@popup = "none"
+  @@tab = "none"
+  @@map = "none"
   @@cursorposition = "up"
   @@char_select_pointer_position = 0
   @@save_file_slot : Int32 = 0
@@ -213,16 +216,16 @@ end
    window.clear(SF::Color::Black); window.draw(Bottom_HUD); window.draw(System_Menu); window.draw(Text_System_Menu)
    window.draw(LVL_Box); window.draw(LVL_Bar); window.draw(LVL_Bar_Color); window.draw(EXP_Label); window.draw(MP_Bar) 
    window.draw(MP_Bar_Color); window.draw(MP_Label); window.draw(HP_Bar); 
-   window.draw(HP_Bar_Color); window.draw(HP_Label); window.draw(LVL_Label)
+   window.draw(HP_Bar_Color); window.draw(HP_Label); window.draw(LVL_Label); 
    end
   def Window_Class.system_popup(window)
     window.draw(System_Menu_Extended); window.draw(Text_System_Menu_Opt_01); window.draw(Text_System_Menu_Opt_02)
     window.draw(Text_System_Menu_Opt_03)
-  end
+   end
   def Window_Class.quit_window(window)
     window.draw(Quit_Window); window.draw(Quit_Menu_Text); window.draw(Quit_Window_Opt_01); window.draw(Quit_Menu_Opt_01_Text)
     window.draw(Quit_Window_Opt_02); window.draw(Quit_Menu_Opt_02_Text)
-  end
+   end
   def Window_Class.stat_window(window)
    Stats.stat_menu; 
    window.draw(Stats_Window); window.draw(Stats_Window_Char_Box); window.draw(@@player_character_rendered_model); 
@@ -232,11 +235,47 @@ end
    window.draw(Inventory_Box); window.draw(Stats_Window_Name_Text); window.draw(Inventory_Tab_01); window.draw(Inventory_Tab_Text_01)
    window.draw(Inventory_Tab_02); window.draw(Inventory_Tab_Text_02); window.draw(Inventory_Tab_03); window.draw(Inventory_Tab_Text_03)
    window.draw(Inventory_Tab_04); window.draw(Inventory_Tab_Text_04) 
+   end
+  def Window_Class.shirt_tab(window)
+    Inventory_Tab_01.texture_rect = SF.int_rect(0, 35, 140, 35)
+    Inventory_Tab_02.texture_rect = SF.int_rect(0, 0, 140, 35)
+    Inventory_Tab_03.texture_rect = SF.int_rect(0, 0, 140, 35)
+    Window_Class.stat_window(window)
+   end
+  def Window_Class.gloves_tab(window)
+    Inventory_Tab_01.texture_rect = SF.int_rect(0, 0, 140, 35)
+    Inventory_Tab_02.texture_rect = SF.int_rect(0, 35, 140, 35)
+    Inventory_Tab_03.texture_rect = SF.int_rect(0, 0, 140, 35)
+    Inventory_Tab_04.texture_rect = SF.int_rect(0, 0, 140, 35)
+    Window_Class.stat_window(window)
+   end
+  def Window_Class.pants_tab(window)
+    Inventory_Tab_01.texture_rect = SF.int_rect(0, 0, 140, 35)
+    Inventory_Tab_02.texture_rect = SF.int_rect(0, 0, 140, 35)
+    Inventory_Tab_03.texture_rect = SF.int_rect(0, 35, 140, 35)
+    Inventory_Tab_04.texture_rect = SF.int_rect(0, 0, 140, 35)
+    Window_Class.stat_window(window)
+   end
+  def Window_Class.shoes_tab(window)
+    Inventory_Tab_01.texture_rect = SF.int_rect(0, 0, 140, 35)
+    Inventory_Tab_02.texture_rect = SF.int_rect(0, 0, 140, 35)
+    Inventory_Tab_03.texture_rect = SF.int_rect(0, 0, 140, 35)
+    Inventory_Tab_04.texture_rect = SF.int_rect(0, 35, 140, 35)
+    Window_Class.stat_window(window)
+   end
+  def Window_Class.test(window)
+    window.clear(SF::Color::Black);
+    window.draw(Text_Title); window.draw(Rectangle_Menu)
+    window.draw(Rectangle_Opt1); window.draw(Text_Opt1)
+    window.draw(Rectangle_Opt2); window.draw(Text_Opt2)
+    window.draw(Cursor_opt1)
   end
+
 #=======================================================================================================================================+
 #---------------------------------------------------------------------------------------------------------------------------------------+
 #========================================================Window Functions===============================================================+
 #/////////////////////////////////////////////////////////////Draw//////////////////////////////////////////////////////////////////////+
+
   def Window_Class.draw(window)
     case @@menu
    when "main"
@@ -257,15 +296,29 @@ end
      end
    when "HUD"
     Window_Class.hud(window)
+    if @@map == "test"
+      Geometry_Test.test(window)
+    end
     if @@popup == "System_Popup_Menu"
       Window_Class.system_popup(window)
      end
     if @@popup == "Quit_Menu"
       Window_Class.quit_window(window)
-    end
+     end
     if @@popup == "Stats_Menu"
       Window_Class.stat_window(window)
-    end
+      case @@tab
+       when "shirt"
+        Window_Class.shirt_tab(window)
+       when "gloves"
+        Window_Class.gloves_tab(window)
+       when "pants"
+        Window_Class.pants_tab(window)
+       when "shoes"
+        Window_Class.shoes_tab(window)
+       end
+       end
+    
    else begin 
      raise "ERROR! Invalid value for '@@menu'!"
    rescue
@@ -339,6 +392,7 @@ def Window_Class.main_menu_keypresses(window)
     end
   when SF::Keyboard::H #---------------for testing purposes, remove when testing done
     @@menu = "HUD"
+    @@map = "test"
   when SF::Keyboard::W #---------------for testing purposes, remove when testing done
     Data_Manager.load_savegame
   when SF::Keyboard::C #---------------for testing purposes, remove when testing done
@@ -629,6 +683,7 @@ def Window_Class.hud_keypresses(window)
           @@player_character_rendered_model.position = SF.vector2(690, 200)
           @@player_character_rendered_model.scale = SF.vector2(1.5, 1.5)
           @@popup = "Stats_Menu"
+          @@tab = "shirt"
         when "none"
          end
          end
@@ -655,16 +710,32 @@ def Window_Class.hud_keypresses(window)
             end
             end
       if (x >= 1240 && x <= 1290) && (y >= 210 && y <= 260) && @@popup == "Stats_Menu"
-        @@popup = "none"
+         @@popup = "none"
+         @@tab = "none"
         end
+      if (x >= 713 && x <= 853) && (y >= 450 && y <= 485) && @@popup == "Stats_Menu"
+         All_Audio::SFX.select1
+         @@tab = "shirt"
         end
+      if (x >= 857 && x <= 993) && (y >= 450 && y <= 485) && @@popup == "Stats_Menu"
+         All_Audio::SFX.select1
+         @@tab = "gloves"
+        end
+      if (x >= 1001 && x <= 1141) && (y >= 450 && y <= 485) && @@popup == "Stats_Menu"
+         All_Audio::SFX.select1
+         @@tab = "pants"
+        end
+      if (x >= 1146 && x <= 1286) && (y >= 450 && y <= 485) && @@popup == "Stats_Menu"
+         All_Audio::SFX.select1
+         @@tab = "shoes"         
+        end
+        
+      end
     case event
     when SF::Event::Closed
       window.close
     when SF::Event::KeyPressed
       case event.code
-
-
 
 #********************************************************Escape**********************************************************************
   when SF::Keyboard::Escape
