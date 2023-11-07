@@ -53,6 +53,7 @@ extend self
   @@player_character_model = SF::RenderTexture.new(672, 512)
   @@player_character_rendered_model = SF::Sprite.new(@@player_character_model.texture)
   #HAIR_ARRAY : Array(SF::Sprite)
+  @@view1 = SF::View.new(SF.float_rect(0, 0, 2000, 1080))
 
   @@current_hair = 0; @@current_display_hair = 0; @@current_display_hair_string = 0
   @@current_skin = 0; @@current_display_skin_string = 0; @@current_face = 0; @@current_shirt = 0; @@current_gloves = 0
@@ -212,7 +213,7 @@ extend self
  #////////////////////////////////////////////////////////////HUD///////////////////////////////////////////////////////////////////////+
   
   def Window_Class.hud(window)
-   Stats.bars; 
+    Player_Data::Stats.bars; 
    window.draw(Bottom_HUD); window.draw(System_Menu); window.draw(Text_System_Menu)
    window.draw(LVL_Box); window.draw(LVL_Bar); window.draw(LVL_Bar_Color); window.draw(EXP_Label); window.draw(MP_Bar) 
    window.draw(MP_Bar_Color); window.draw(MP_Label); window.draw(HP_Bar); 
@@ -227,7 +228,7 @@ extend self
     window.draw(Quit_Window_Opt_02); window.draw(Quit_Menu_Opt_02_Text)
    end
   def Window_Class.stat_window(window)
-   Stats.stat_menu; 
+    Player_Data::Stats.stat_menu; 
    window.draw(Stats_Window); window.draw(Stats_Window_Char_Box); window.draw(@@player_character_rendered_model); 
    window.draw(Stats_Window_Exit_Box); window.draw(Stats_Window_LVL_Text); window.draw(Stats_Window_LVL_Text_02);
    window.draw(Stats_Window_Str_Text); window.draw(Stats_Window_Dex_Text); window.draw(Stats_Window_Luk_Text)
@@ -282,7 +283,7 @@ extend self
     CP::Vect.new(-Width / 2, -Height / 2), CP::Vect.new(-Width / 2, Height / 2), CP::Vect.new(Width / 2, Height / 2),
     CP::Vect.new(Width / 2, -Height / 2)
   ])
-  def Window_Class.initialize_test_map(debug_draw, window, @@space) 
+  def Window_Class.initialize_test_map(debug_draw, window, @@space) #<----does not seem to work right
     @@space.iterations = 30
     @@space.gravity = CP.v(0, -500)
     @@space.sleep_time_threshold = 0.5
@@ -294,7 +295,6 @@ extend self
       CP::Vect.new(Width / 2, -Height / 2)
     ])
     @@body.position = CP.v(-5300, -40000)
-     
     @@pc_body.position = CP.v(-63, -40)
     @@shape.friction = 1.0
     @@space.add(@@shape, @@pc_body, @@pc_skin)
@@ -303,7 +303,7 @@ extend self
 
   def Window_Class.test_map(debug_draw, window, @@space)
     window.clear(SF::Color::Transparent);
-    if @@space.contains?(@@shape) == false
+    if @@space.contains?(@@shape) == false #<----This is proabably a really fucking stupid way to do this, but it works and I'm tired of fucking with it
       @@space.add(@@shape)
     end
     if @@space.contains?(@@pc_body) == false
@@ -347,6 +347,9 @@ extend self
    when "HUD"
     Window_Class.hud(window)
     if @@map == "test"
+      Player_Data::Player_Physics.gravity(@@player_character_rendered_model)
+      @@view1.viewport = SF.float_rect(0, 0, 1, 1)
+      window.view = @@view1
       Window_Class.hud(window)
     end
     if @@popup == "System_Popup_Menu"
@@ -449,6 +452,7 @@ def Window_Class.main_menu_keypresses(window)
     @@menu = "HUD"
     @@map = "test"
     @@player_character_rendered_model.scale = SF.vector2(1.0, 1.0)
+    #view2 = SF::View.new(SF.vector2(350, 300), SF.vector2(300, 200))
   when SF::Keyboard::W #---------------for testing purposes, remove when testing done
     Data_Manager.load_savegame
   when SF::Keyboard::C #---------------for testing purposes, remove when testing done
@@ -796,8 +800,17 @@ def Window_Class.hud_keypresses(window)
       case event.code
 
       when SF::Keyboard::D
-        @@player_character_rendered_model.position += SF.vector2(2, 0)
-        @@player_character_rendered_model.texture_rect = SF.int_rect(192, 0, 96, 128)
+        Player_Data::Player_Physics.wasd_right(@@player_character_rendered_model)
+        window.draw(@@player_character_rendered_model)
+        
+      when SF::Keyboard::A
+        Player_Data::Player_Physics.wasd_left(@@player_character_rendered_model)
+        window.draw(@@player_character_rendered_model)
+      when SF::Keyboard::W
+        Player_Data::Player_Physics.wasd_up(@@player_character_rendered_model)
+        window.draw(@@player_character_rendered_model)
+      when SF::Keyboard::W && SF::Keyboard::D
+        Player_Data::Player_Physics.wasd_up(@@player_character_rendered_model)
         window.draw(@@player_character_rendered_model)
 
 #********************************************************Escape**********************************************************************
@@ -998,39 +1011,39 @@ end; end; end; end; end; end
     def import_outfit
 
      end
-     end
-   end
+    end
   class Consumables_Slot
    end
-  class Equipment_Slop
+  class Equipment_Slot
    end
   class Quest_Item_Slot
    end                  
   class Stats
-   @@name : (String); @@name = "Some Rando"
-   @@lvl : (Int32); @@exp : (Int32); @@exp_scale : (Int32 | Float64); @@exp_cap : (Int32 | Float64); @@lvl_points : (Int32)
-   @@lvl_hp : (Int32); @@equip_hp : (Int32); @@current_max_hp : (Int32); @@current_hp : (Int32)
-   @@lvl_mp : (Int32); @@equip_mp : (Int32); @@current_max_mp : (Int32); @@current_mp : (Int32)
-   @@lvl_str : (Int32); @@equip_str : (Int32); @@current_str : (Int32); @@lvl_dex : (Int32); @@equip_dex : (Int32); @@current_dex : (Int32)
-   @@lvl_luk : (Int32); @@equip_luk : (Int32); @@current_luk : (Int32); @@lvl_int : (Int32); @@equip_int : (Int32); @@current_int : (Int32)
-   Base_HP = 100; Base_MP = 100; Base_Str = 1; Base_Dex = 1; Base_Luk = 1; Base_Int = 1
-   @@lvl_hp = @@lvl; @@lvl_mp = @@lvl; @@lvl_str = 0; @@lvl_dex = 0; @@lvl_luk = 0; @@lvl_int = 0; @@lvl_points = 0
-   @@equip_hp = 0; @@equip_mp = 0; @@equip_str = 0; @@equip_dex = 0; @@equip_luk = 0; @@equip_int = 0
-   @@current_max_hp = Base_HP + @@lvl_hp + @@equip_hp; @@current_hp = 100
-   @@current_max_mp = Base_MP + @@lvl_mp + @@equip_mp; @@current_mp = 100
-   @@current_str = Base_Str + @@lvl_str + @@equip_str; @@current_dex = Base_Dex + @@lvl_dex + @@equip_dex 
-   @@current_luk = Base_Luk + @@lvl_luk + @@equip_luk; @@current_int = Base_Int + @@lvl_int + @@equip_int
-   @@lvl = 1; @@exp = 0; @@exp_cap = @@lvl * Math.sqrt(100) ; @@exp_scale = @@exp / @@exp_cap
+   #----------------------------------------------Class Variables------------------------------------------------------------------------- 
+    @@name : (String); @@name = "Some Rando"
+    @@lvl : (Int32); @@exp : (Int32); @@exp_scale : (Int32 | Float64); @@exp_cap : (Int32 | Float64); @@lvl_points : (Int32)
+    @@lvl_hp : (Int32); @@equip_hp : (Int32); @@current_max_hp : (Int32); @@current_hp : (Int32)
+    @@lvl_mp : (Int32); @@equip_mp : (Int32); @@current_max_mp : (Int32); @@current_mp : (Int32)
+    @@lvl_str : (Int32); @@equip_str : (Int32); @@current_str : (Int32); @@lvl_dex : (Int32); @@equip_dex : (Int32); @@current_dex : (Int32)
+    @@lvl_luk : (Int32); @@equip_luk : (Int32); @@current_luk : (Int32); @@lvl_int : (Int32); @@equip_int : (Int32); @@current_int : (Int32)
+    Base_HP = 100; Base_MP = 100; Base_Str = 1; Base_Dex = 1; Base_Luk = 1; Base_Int = 1
+    @@lvl_hp = @@lvl; @@lvl_mp = @@lvl; @@lvl_str = 0; @@lvl_dex = 0; @@lvl_luk = 0; @@lvl_int = 0; @@lvl_points = 0
+    @@equip_hp = 0; @@equip_mp = 0; @@equip_str = 0; @@equip_dex = 0; @@equip_luk = 0; @@equip_int = 0
+    @@current_max_hp = Base_HP + @@lvl_hp + @@equip_hp; @@current_hp = 100
+    @@current_max_mp = Base_MP + @@lvl_mp + @@equip_mp; @@current_mp = 100
+    @@current_str = Base_Str + @@lvl_str + @@equip_str; @@current_dex = Base_Dex + @@lvl_dex + @@equip_dex 
+    @@current_luk = Base_Luk + @@lvl_luk + @@equip_luk; @@current_int = Base_Int + @@lvl_int + @@equip_int
+    @@lvl = 1; @@exp = 0; @@exp_cap = @@lvl * Math.sqrt(100) ; @@exp_scale = @@exp / @@exp_cap
 
    def Stats.bars
-    HP_Bar_Color.scale = SF.vector2(@@current_hp * 0.005, 1); HP_Bar.scale = SF.vector2(@@current_max_hp * 0.005, 1)
-    LVL_Bar_Color.scale = SF.vector2(@@exp_scale * 0.01, 1); 
-    MP_Bar_Color.scale = SF.vector2(@@current_mp * 0.005, 1); MP_Bar.scale = SF.vector2(@@current_max_mp * 0.005, 1)
+     HP_Bar_Color.scale = SF.vector2(@@current_hp * 0.005, 1); HP_Bar.scale = SF.vector2(@@current_max_hp * 0.005, 1)
+     LVL_Bar_Color.scale = SF.vector2(@@exp_scale * 0.01, 1); 
+     MP_Bar_Color.scale = SF.vector2(@@current_mp * 0.005, 1); MP_Bar.scale = SF.vector2(@@current_max_mp * 0.005, 1)
      if @@exp >= @@exp_cap
-      @@lvl += 1; @@exp = 0; @@lvl_points + 5
+       @@lvl += 1; @@exp = 0; @@lvl_points + 5
+       end
      end
-  end
-    def Stats.stat_menu
+   def Stats.stat_menu
      exp = @@exp.to_s + "/" + @@exp_cap.to_s; lvl = "Lvl: " + @@lvl.to_s;
      Stats_Window_LVL_Text.string = exp; Stats_Window_LVL_Text_02.string = lvl; 
      str = "STR: " + @@current_str.to_s; Stats_Window_Str_Text.string = str
@@ -1041,9 +1054,60 @@ end; end; end; end; end; end
      mp = "MP: " + @@current_mp.to_s + "/" + @@current_max_mp.to_s; Stats_Window_MP_Text.string = mp
      LVL_Label.string = @@lvl.to_s;
      Stats_Window_Name_Text.string = @@name
+    end
    end
+  class Player_Physics < Window_Class
+   @@is_player_airborne : Bool; @@is_player_airborne = false; @@fall_rate : Int32 | Nil; @@fallrate = 0
+   @@player_bounding_box : SF::Rect(Float32); @@player_bounding_box = @@player_character_rendered_model.global_bounds
+   @@player_jumped : Bool; @@player_jumped = false; @@player_direction : String; @@player_direction = "right"
+   def Player_Physics.gravity(@@player_character_rendered_model,)
+    ground_box = Ground.global_bounds
+    @@player_bounding_box = @@player_character_rendered_model.global_bounds
+    if @@player_bounding_box.intersects? ground_box
+      # puts @@fallrate
+      @@player_jumped = false
+      @@is_player_airborne = false
+      @@fallrate = 0  # Reset the fall rate when the player is on the ground
+    else
+      @@is_player_airborne = true
+  
+      if @@fallrate >= 30
+        @@player_character_rendered_model.position += SF.vector2(0, 0.75)
+        @@fallrate = 0  # Reset the fall rate when player is falling
+      else
+        @@fallrate += 1
+      end; end
+     end
+  
+   def Player_Physics.wasd_left(@@player_character_rendered_model)
+      @@player_character_rendered_model.position -= SF.vector2(2.5, 0)
+      @@player_character_rendered_model.texture_rect = SF.int_rect(192, 128, 96, 128)
+      @@player_direction = "left"
+     end
+   def Player_Physics.wasd_right(@@player_character_rendered_model)
+     @@player_character_rendered_model.position += SF.vector2(2.5, 0)
+     @@player_character_rendered_model.texture_rect = SF.int_rect(192, 0, 96, 128)
+     @@player_direction = "right"
+    end
+   def Player_Physics.wasd_up(@@player_character_rendered_model) #f(x) = ax² + bx + c
+      if @@player_jumped == false
+       a = 0
+      while a != 10
+        a += 1
+     @@player_character_rendered_model.position -= SF.vector2(0, 50)
+     @@player_jumped = true
+       if @@player_direction == "left"
+        @@player_character_rendered_model.position -= SF.vector2(5, 0)
+       end
+       if @@player_direction == "right"
+        @@player_character_rendered_model.position += SF.vector2(5, 0)
+       end
+     @@fallrate = -1000 
+      end
+       end
+    end
   end
-
+end
 
 
 
