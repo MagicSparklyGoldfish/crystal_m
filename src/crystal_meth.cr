@@ -273,41 +273,49 @@ extend self
 #=======================================================================================================================================+
 #---------------------------------------------------------------------------------------------------------------------------------------+
 #========================================================Map Renderers==================================================================+
- def Window_Class.test_map(debug_draw, window)
-  window.clear(SF::Color::Transparent);
-  space = CP::Space.new
-  space.iterations = 30
-  space.gravity = CP.v(0, -500)
-  space.sleep_time_threshold = 0.5
-  space.collision_slop = 0.5
+   @@space : CP::Space; @@space = CP::Space.new
+   Mass = 1.0
+   Width = 50
+   Height = 50
+   @@pc_body : CP::Body; @@pc_body = CP::Body.new(8, 24); @@pc_skin : CP::Box; @@pc_skin = CP::Box.new(@@pc_body, 8, 24)
+   @@body : CP::Body; @@body = CP::Body.new(Mass); @@shape : CP::Shape::Poly; @@shape = CP::Shape::Poly.new(@@body, [
+    CP::Vect.new(-Width / 2, -Height / 2), CP::Vect.new(-Width / 2, Height / 2), CP::Vect.new(Width / 2, Height / 2),
+    CP::Vect.new(Width / 2, -Height / 2)
+  ])
+  def Window_Class.initialize_test_map(debug_draw, window, @@space) 
+    @@space.iterations = 30
+    @@space.gravity = CP.v(0, -500)
+    @@space.sleep_time_threshold = 0.5
+    @@space.collision_slop = 0.5
+    @@pc_body = CP::Body.new(8, 24); @@pc_skin = CP::Box.new(@@pc_body, 8, 24)
+    @@body = CP::Body.new(Mass);
+    @@shape = CP::Shape::Poly.new(@@body, [
+      CP::Vect.new(-Width / 2, -Height / 2), CP::Vect.new(-Width / 2, Height / 2), CP::Vect.new(Width / 2, Height / 2),
+      CP::Vect.new(Width / 2, -Height / 2)
+    ])
+    @@body.position = CP.v(-5300, -40000)
+     
+    @@pc_body.position = CP.v(-63, -40)
+    @@shape.friction = 1.0
+    @@space.add(@@shape, @@pc_body, @@pc_skin)
+    debug_draw.draw @@space
+   end
 
-   width = 10000 # Width of the rectangle
-   height = 500 # Height of the rectangle
-
-         # Create a body
-     mass = 1.0 # Mass of the rectangle
-     #moment = CP.moment_for_box(mass, width, height) # Calculate the moment of inertia
-     body = CP::Body.new(mass)
-     body.position = CP::Vect.new(0, 800) # Set the position of the body
-    
-  #   # Create a rectangle shape
-
-     shape = CP::Shape::Poly.new(body, [
-     CP::Vect.new(-width / 2, -height / 2),
-     CP::Vect.new(-width / 2, height / 2),
-     CP::Vect.new(width / 2, height / 2),
-     CP::Vect.new(width / 2, -height / 2)
-   ])
-   pc_body = CP::Body.new(8, 24)
-   pc_skin = CP::Box.new(pc_body, 8, 24)
-   pc_body.position = CP.v(-53, -40)
-   #pc_body.bind(@@player_character_rendered_model)
-   shape.friction = 1.0
-   space.add(shape, pc_body, pc_skin)
-   @@player_character_rendered_model.position = SF.vector2(650, 670)
-   debug_draw.draw space
-   window.draw(Ground); window.draw(@@player_character_rendered_model)
- end
+  def Window_Class.test_map(debug_draw, window, @@space)
+    window.clear(SF::Color::Transparent);
+    if @@space.contains?(@@shape) == false
+      @@space.add(@@shape)
+    end
+    if @@space.contains?(@@pc_body) == false
+      @@pc_body.position = CP.v(-60, -40)
+      @@space.add(@@pc_body)
+    end
+    if @@space.contains?(@@pc_skin) == false
+      @@space.add(@@pc_skin)
+    end
+    debug_draw.draw @@space
+    window.draw(Ground); window.draw(@@player_character_rendered_model)
+   end
 #=======================================================================================================================================+
 #---------------------------------------------------------------------------------------------------------------------------------------+
 #========================================================Window Functions===============================================================+
@@ -315,7 +323,7 @@ extend self
   def Window_Class.map(debug_draw, window)
    case @@map
     when "test"
-      Window_Class.test_map(debug_draw, window)
+      Window_Class.test_map(debug_draw, window, @@space)
     end
    end
   def Window_Class.draw(window)
@@ -339,9 +347,7 @@ extend self
    when "HUD"
     Window_Class.hud(window)
     if @@map == "test"
-      #Geometry_Test.test(window, debug_draw)
       Window_Class.hud(window)
-      #window.draw(@@player_character_rendered_model)
     end
     if @@popup == "System_Popup_Menu"
       Window_Class.system_popup(window)
@@ -395,6 +401,10 @@ extend self
  SF::Transform.new.translate(window.size / 2).scale(1, -1).scale(5, 5)
  ))
   Window_Class.player_model_initialize 
+  case @@map
+  when "test"
+    Window_Class.initialize_test_map(debug_draw, window, @@space)
+  end
 #----------------------------------------------------------------------------------------------------------------------------------------+
 #                                                        This runs every frame
 #----------------------------------------------------------------------------------------------------------------------------------------+
@@ -402,7 +412,7 @@ extend self
    Window_Class.keypresses(window)
    Window_Class.map(debug_draw, window)
    Window_Class.draw(window)
-   window.display
+   window.display()
    end
  end
 #__________________________________________________________________________________________________________________________________________+
@@ -439,7 +449,6 @@ def Window_Class.main_menu_keypresses(window)
     @@menu = "HUD"
     @@map = "test"
     @@player_character_rendered_model.scale = SF.vector2(1.0, 1.0)
-    @@player_character_rendered_model.position = SF.vector2(660, 715)
   when SF::Keyboard::W #---------------for testing purposes, remove when testing done
     Data_Manager.load_savegame
   when SF::Keyboard::C #---------------for testing purposes, remove when testing done
@@ -759,6 +768,8 @@ def Window_Class.hud_keypresses(window)
       if (x >= 1240 && x <= 1290) && (y >= 210 && y <= 260) && @@popup == "Stats_Menu"
          @@popup = "none"
          @@tab = "none"
+         @@player_character_rendered_model.scale = SF.vector2(1.0, 1.0)
+         @@player_character_rendered_model.position = SF.vector2(450, 670)
         end
       if (x >= 713 && x <= 853) && (y >= 450 && y <= 485) && @@popup == "Stats_Menu"
          All_Audio::SFX.select1
@@ -783,6 +794,11 @@ def Window_Class.hud_keypresses(window)
       window.close
     when SF::Event::KeyPressed
       case event.code
+
+      when SF::Keyboard::D
+        @@player_character_rendered_model.position += SF.vector2(2, 0)
+        @@player_character_rendered_model.texture_rect = SF.int_rect(192, 0, 96, 128)
+        window.draw(@@player_character_rendered_model)
 
 #********************************************************Escape**********************************************************************
   when SF::Keyboard::Escape
