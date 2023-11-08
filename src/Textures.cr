@@ -987,3 +987,14 @@
   DISPLAY_RAIN_BOOTS_03.scale = SF.vector2(3.5, 3.5)
   DISPLAY_RAIN_BOOTS_03.color = SF.color(100, 100, 255)
 
+
+#--------------------------------------------------------------------------------------------------------------------------------------
+#                                                    Enemy Textures
+#--------------------------------------------------------------------------------------------------------------------------------------
+#--------------------------------------------------------------------------------------------------------------------------------------
+#                                                     Name Boxes
+#--------------------------------------------------------------------------------------------------------------------------------------
+  Name_Box = SF::RectangleShape.new(SF.vector2(110, 20)); Name_Box.fill_color = SF.color(255, 255, 255)
+  Name_Box.outline_thickness = 2; Name_Box.outline_color = SF.color(150, 0, 0); Name_Box_Text = SF::Text.new;
+  Name_Box_Text.font = FONT_PIXEL; Name_Box_Text.character_size = 20; Name_Box_Text.color = SF::Color::Black
+  Health_Bar = SF::RectangleShape.new(SF.vector2(100, 10)); Health_Bar.fill_color = SF.color(255, 0, 0) 
