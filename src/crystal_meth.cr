@@ -769,6 +769,7 @@ def Window_Class.hud_keypresses(window)
            window.draw(player)
            @@popup = "Stats_Menu"
            @@tab = "shirt"
+           Player_Data::Clothing_Wardrobe_Slot.pull_arrays
          when "none"
           end
           end
@@ -1020,12 +1021,17 @@ end; end; end; end; end; end
      end; end; end
   class Clothing_Wardrobe_Slot
    #-------------------------------------------------properties---------------------------------------------------------------------------------
-    property tab : Int32 | Nil
-    property isowned : Bool | Nil
-    property texture : Int32 | Nil
-    property display_texture : Int32 | Nil
-    WHITE_T_SHIRT = new Clothing_Wardrobe_Slot(1, False, 1, 1)
 
+      #[0] = tab, [1] = isowned, [2] = texture, [3] = display_texture, [4] = worn
+
+    White_T_Shirt = [1, false, 1, 1, false]; Blue_T_Shirt = [1, false, 1, 1, false]
+    SHIRT_ARRAY_WARDROBE = [White_T_Shirt, Blue_T_Shirt]
+    def Clothing_Wardrobe_Slot.pull_arrays
+      if SHIRT_ARRAY_WARDROBE[0][1] == false
+       puts SHIRT_ARRAY_WARDROBE[0][1]
+      end
+      puts SHIRT_ARRAY_WARDROBE
+    end
    end
   class Clothing_Outfit_Slot < Window_Class
     include Player_Data  
@@ -1254,15 +1260,6 @@ end
 #                         Runs the program
 #-----------------------------------------------------------------------------------------------------------------------------------------------+
 Gui::Window_Class.run
-
-
-
-
-#================================================================================================================================================
-#                                                           Player Inventory                                                                    #
-#================================================================================================================================================
-
-
 
 
 #=================================================================================================================================================
