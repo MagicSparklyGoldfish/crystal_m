@@ -324,6 +324,7 @@ extend self
     window.view = view1
     if @@space.contains?(@@shape) == false #<----This is proabably a really fucking stupid way to do this, but it works and I'm tired of fucking with it
       @@space.add(@@shape)
+      Enemy_Data::Test_Enemy.draw
     end
     if @@space.contains?(@@pc_body) == false
       @@pc_body.position = CP.v(-60, -40)
@@ -333,7 +334,7 @@ extend self
       @@space.add(@@pc_skin)
     end
     debug_draw.draw @@space
-    window.draw(Ground); window.draw(@@player_character_rendered_model)
+    window.draw(Ground); window.draw(@@player_character_rendered_model); Enemy_Data::Test_Enemy.maintain(window)
    end
 #=======================================================================================================================================+
 #---------------------------------------------------------------------------------------------------------------------------------------+
@@ -1002,7 +1003,7 @@ end; end; end; end; end; end
   end
 #____________________________________________________________________________________________________________________________________+
 #------------------------------------------------------------------------------------------------------------------------------------+
-#                                                   Character Inventory                                                             #+
+#                                                   Character Data                                                                   +
 #------------------------------------------------------------------------------------------------------------------------------------+
 
  module Player_Data  
@@ -1108,7 +1109,6 @@ end; end; end; end; end; end
      @@frame = 0
      def Player_Physics.walk_cycle_left(@@player_character_rendered_model)
      @@frame += 1
-     puts @@frame
       if @@frame  > 0 && @@frame  < 11
        @@player_character_rendered_model.texture_rect = SF.int_rect(96, 128, 96, 128)
       else if @@frame  > 11 && @@frame  < 21
@@ -1128,7 +1128,6 @@ end; end; end; end; end; end
     #----------------------------------------------Right------------------------------------------------------------------------------+
      def Player_Physics.walk_cycle_right(@@player_character_rendered_model)
        @@frame += 1
-       puts @@frame
         if @@frame  > 0 && @@frame  < 11
          @@player_character_rendered_model.texture_rect = SF.int_rect(96, 0, 96, 128)
         else if @@frame  > 11 && @@frame  < 21
@@ -1231,7 +1230,60 @@ end; end; end; end; end; end
  end
 end
 
+#------------------------------------------------------------------------------------------------------------------------------------+
+#                                                   Enemy Data                                                                       +
+#------------------------------------------------------------------------------------------------------------------------------------+
 
+module Enemy_Data
+  class Test_Enemy
+     
+    def Test_Enemy.initialize(name : String, sprite : SF::Sprite)
+      @@name = name
+      @@sprite = sprite
+      
+    end
+    def Test_Enemy.name
+      @@name = "test enemy"
+    end
+    @@test_enemy_model : SF::RenderTexture 
+    @@test_enemy_model = SF::RenderTexture.new(672, 512)
+    @@test_enemy_rendered_model = SF::Sprite.new
+    def Test_Enemy.sprite
+      skin_size = SKIN_ARRAY.size - 1; shoe_size = SHOES_ARRAY.size - 1; face_size = FACE_ARRAY.size - 1 #<-- .size counts the amount of entities in the array, not the highest index. Thus the -1
+      hair_size = HAIR_ARRAY.size - 1; pants_size = PANTS_ARRAY.size - 1; shirt_size = SHIRT_ARRAY.size - 1    
+      glove_size = GLOVE_ARRAY.size - 1    
+
+      skin_random = rand(0..skin_size); shoe_random = rand(0..shoe_size); face_random = rand(0..face_size)
+      hair_random = rand(0..hair_size); pants_random = rand(0..pants_size); shirt_random = rand(0..shirt_size)
+      glove_random = rand(0..glove_size)
+
+      @@test_enemy_model.clear(SF::Color::Transparent)
+      @@test_enemy_model.draw(SKIN_ARRAY[skin_random])
+      @@test_enemy_model.draw(SHOES_ARRAY[shoe_random])
+      @@test_enemy_model.draw(FACE_ARRAY[face_random])
+      @@test_enemy_model.draw(HAIR_ARRAY[hair_random])
+      @@test_enemy_model.draw(PANTS_ARRAY[pants_random])
+      @@test_enemy_model.draw(SHIRT_ARRAY[shirt_random])
+      @@test_enemy_model.draw(GLOVE_ARRAY[glove_random])
+      @@test_enemy_model.create(672, 512, false)
+      @@test_enemy_model.display
+      @@test_enemy_rendered_model.texture = @@test_enemy_model.texture
+      @@test_enemy_rendered_model.texture_rect = SF.int_rect(0, 0, 96, 128)
+      @@test_enemy_rendered_model.position = SF.vector2(660, 515)
+      @@test_enemy_rendered_model.scale = SF.vector2(1.0, 1.0)
+    end
+    def Test_Enemy.draw
+      a = 1
+      Test_Enemy.name
+      Test_Enemy.sprite
+      @@test_humanoid = Test_Enemy.new
+      puts @@test_humanoid
+    end
+    def Test_Enemy.maintain(window)
+      window.draw(@@test_enemy_rendered_model)
+    end  
+  end
+end
 
    
 module Data_Manager 
@@ -1263,7 +1315,7 @@ Gui::Window_Class.run
 
 
 #=================================================================================================================================================
-#                                                              Clothing                                                                          #
+#                                                           Clothing                                                                          #
 #=================================================================================================================================================
  
  module Skin
