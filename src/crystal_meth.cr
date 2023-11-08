@@ -53,7 +53,7 @@ extend self
   @@player_character_model = SF::RenderTexture.new(672, 512)
   @@player_character_rendered_model = SF::Sprite.new(@@player_character_model.texture)
   #HAIR_ARRAY : Array(SF::Sprite)
-  @@view1 = SF::View.new(SF.float_rect(0, 0, 2000, 1080))
+  #@@view1 = SF::View.new(SF.float_rect(0, 0, 2000, 1080))
 
   @@current_hair = 0; @@current_display_hair = 0; @@current_display_hair_string = 0
   @@current_skin = 0; @@current_display_skin_string = 0; @@current_face = 0; @@current_shirt = 0; @@current_gloves = 0
@@ -319,6 +319,8 @@ extend self
 #=======================================================================================================================================+
 #---------------------------------------------------------------------------------------------------------------------------------------+
 #========================================================Window Functions===============================================================+
+#///////////////////////////////////////////////////////////Viewport////////////////////////////////////////////////////////////////////+
+
 #/////////////////////////////////////////////////////////////Draw//////////////////////////////////////////////////////////////////////+
   def Window_Class.map(debug_draw, window)
    case @@map
@@ -347,9 +349,8 @@ extend self
    when "HUD"
     Window_Class.hud(window)
     if @@map == "test"
-      Player_Data::Player_Physics.gravity(@@player_character_rendered_model)
-      @@view1.viewport = SF.float_rect(0, 0, 1, 1)
-      window.view = @@view1
+      Player_Data::Player_Physics.gravity(@@player_character_rendered_model, window)
+      this = 0
       Window_Class.hud(window)
     end
     if @@popup == "System_Popup_Menu"
@@ -800,17 +801,21 @@ def Window_Class.hud_keypresses(window)
       case event.code
 
       when SF::Keyboard::D
+view1 = SF::View.new(SF.float_rect(0, 0, 2000, 1080))
+window.view = view1
         Player_Data::Player_Physics.wasd_right(@@player_character_rendered_model)
+        this = 1
         window.draw(@@player_character_rendered_model)
         
       when SF::Keyboard::A
         Player_Data::Player_Physics.wasd_left(@@player_character_rendered_model)
         window.draw(@@player_character_rendered_model)
       when SF::Keyboard::W
-        Player_Data::Player_Physics.wasd_up(@@player_character_rendered_model)
+        Player_Data::Player_Physics.wasd_up(@@player_character_rendered_model, window)
         window.draw(@@player_character_rendered_model)
+        
       when SF::Keyboard::W && SF::Keyboard::D
-        Player_Data::Player_Physics.wasd_up(@@player_character_rendered_model)
+        Player_Data::Player_Physics.wasd_up(@@player_character_rendered_model, window)
         window.draw(@@player_character_rendered_model)
 
 #********************************************************Escape**********************************************************************
@@ -1060,53 +1065,93 @@ end; end; end; end; end; end
    @@is_player_airborne : Bool; @@is_player_airborne = false; @@fall_rate : Int32 | Nil; @@fallrate = 0
    @@player_bounding_box : SF::Rect(Float32); @@player_bounding_box = @@player_character_rendered_model.global_bounds
    @@player_jumped : Bool; @@player_jumped = false; @@player_direction : String; @@player_direction = "right"
-   def Player_Physics.gravity(@@player_character_rendered_model,)
+   def Player_Physics.gravity(@@player_character_rendered_model, window)
     ground_box = Ground.global_bounds
     @@player_bounding_box = @@player_character_rendered_model.global_bounds
     if @@player_bounding_box.intersects? ground_box
-      # puts @@fallrate
+       # if @@player_jumped == true
+        #   while SF::Keyboard.key_pressed?(SF::Keyboard::A)
+        #     @@player_character_rendered_model.position -= SF.vector2(0.0005, 0)
+        #     @@player_character_rendered_model.texture_rect = SF.int_rect(192, 128, 96, 128)
+        #     window.draw(@@player_character_rendered_model)
+        #     @@player_jumped = false
+        #   end
+        #   while SF::Keyboard.key_pressed?(SF::Keyboard::D)
+        #     @@player_character_rendered_model.position += SF.vector2(0.0005, 0)
+        #     @@player_character_rendered_model.texture_rect = SF.int_rect(192, 0, 96, 128)
+        #     window.draw(@@player_character_rendered_model)
+        #     @@player_jumped = false
+        #   end
+        #   @@player_jumped = false
+        # end
       @@player_jumped = false
       @@is_player_airborne = false
-      @@fallrate = 0  # Reset the fall rate when the player is on the ground
+      @@fallrate = 0
+
+      
+       if SF::Keyboard.key_pressed?(SF::Keyboard::A) #-------------------turbo mode motherfucker! So much glitch, so little time!
+         #Player_Physics.wasd_left(@@player_character_rendered_model)
+       end
+       if SF::Keyboard.key_pressed?(SF::Keyboard::D)
+        SF::Event::KeyPressed
+         #Player_Physics.wasd_right(@@player_character_rendered_model)
+       end
     else
       @@is_player_airborne = true
   
       if @@fallrate >= 30
-        @@player_character_rendered_model.position += SF.vector2(0, 0.75)
-        @@fallrate = 0  # Reset the fall rate when player is falling
+        @@player_character_rendered_model.position += SF.vector2(0, 0.95)
+        if SF::Keyboard.key_pressed?(SF::Keyboard::A)
+          @@player_character_rendered_model.position -= SF.vector2(1, 0)
+        end
+        if SF::Keyboard.key_pressed?(SF::Keyboard::D)
+          @@player_character_rendered_model.position += SF.vector2(1, 0)
+        end
+        @@fallrate = 0  
       else
         @@fallrate += 1
       end; end
      end
   
    def Player_Physics.wasd_left(@@player_character_rendered_model)
-      @@player_character_rendered_model.position -= SF.vector2(2.5, 0)
+      @@player_character_rendered_model.position -= SF.vector2(3.5, 0)
       @@player_character_rendered_model.texture_rect = SF.int_rect(192, 128, 96, 128)
       @@player_direction = "left"
      end
    def Player_Physics.wasd_right(@@player_character_rendered_model)
-     @@player_character_rendered_model.position += SF.vector2(2.5, 0)
+     @@player_character_rendered_model.position += SF.vector2(3.5, 0)
      @@player_character_rendered_model.texture_rect = SF.int_rect(192, 0, 96, 128)
      @@player_direction = "right"
     end
-   def Player_Physics.wasd_up(@@player_character_rendered_model) #f(x) = ax² + bx + c
+   def Player_Physics.wasd_up(@@player_character_rendered_model, window) #f(x) = ax² + bx + c
       if @@player_jumped == false
-       a = 0
-      while a != 10
-        a += 1
-     @@player_character_rendered_model.position -= SF.vector2(0, 50)
+       a = 0; b = 100000
+      while a != 900000
+        a += 1; b += 1
+        if b >= 100000
+     @@player_character_rendered_model.position -= SF.vector2(0, 10)
      @@player_jumped = true
-       if @@player_direction == "left"
+       if SF::Keyboard.key_pressed?(SF::Keyboard::A)
         @@player_character_rendered_model.position -= SF.vector2(5, 0)
        end
-       if @@player_direction == "right"
+       if SF::Keyboard.key_pressed?(SF::Keyboard::D)
         @@player_character_rendered_model.position += SF.vector2(5, 0)
        end
+       b = 0
      @@fallrate = -1000 
+     window.draw(@@player_character_rendered_model)
+      end
       end
        end
     end
+    if SF::Keyboard.key_pressed?(SF::Keyboard::A)
+      Player_Physics.wasd_left(@@player_character_rendered_model)
+    end
+    if SF::Keyboard.key_pressed?(SF::Keyboard::D)
+     SF::Event::KeyPressed
+      Player_Physics.wasd_right(@@player_character_rendered_model)
   end
+end
 end
 
 
