@@ -211,36 +211,49 @@ extend self
     
    end  
  #////////////////////////////////////////////////////////////HUD///////////////////////////////////////////////////////////////////////+
-  
   def Window_Class.hud(window)
-    Player_Data::Stats.bars; 
+   view2 = SF::View.new(SF.float_rect(0, 950, 1890, 140))
+   view2.viewport = SF.float_rect(0, 0.85, 1, 0.15)
+   window.view = view2
+   Player_Data::Stats.bars; 
    window.draw(Bottom_HUD); window.draw(System_Menu); window.draw(Text_System_Menu)
    window.draw(LVL_Box); window.draw(LVL_Bar); window.draw(LVL_Bar_Color); window.draw(EXP_Label); window.draw(MP_Bar) 
    window.draw(MP_Bar_Color); window.draw(MP_Label); window.draw(HP_Bar); 
    window.draw(HP_Bar_Color); window.draw(HP_Label); window.draw(LVL_Label); 
    end
   def Window_Class.system_popup(window)
+    view4 = SF::View.new(SF.float_rect(1700, 810, 150, 150))
+    view4.viewport = SF.float_rect(0.899, 0.771, 0.08, 0.09)
+    window.view = view4
     window.draw(System_Menu_Extended); window.draw(Text_System_Menu_Opt_01); window.draw(Text_System_Menu_Opt_02)
     window.draw(Text_System_Menu_Opt_03)
    end
   def Window_Class.quit_window(window)
+    view5 = SF::View.new(SF.float_rect(0, 0, 1920, 1080))
+    view5.viewport = SF.float_rect(0, 0, 1, 1)
+    window.view = view5
     window.draw(Quit_Window); window.draw(Quit_Menu_Text); window.draw(Quit_Window_Opt_01); window.draw(Quit_Menu_Opt_01_Text)
     window.draw(Quit_Window_Opt_02); window.draw(Quit_Menu_Opt_02_Text)
    end
   def Window_Class.stat_window(window)
+    view5 = SF::View.new(SF.float_rect(0, 0, 1920, 1080))
+    view5.viewport = SF.float_rect(0, 0, 1, 1)
+    window.view = view5
     Player_Data::Stats.stat_menu; 
-   window.draw(Stats_Window); window.draw(Stats_Window_Char_Box); window.draw(@@player_character_rendered_model); 
+   window.draw(Stats_Window); window.draw(Stats_Window_Char_Box); #window.draw(@@player_character_rendered_model); 
    window.draw(Stats_Window_Exit_Box); window.draw(Stats_Window_LVL_Text); window.draw(Stats_Window_LVL_Text_02);
    window.draw(Stats_Window_Str_Text); window.draw(Stats_Window_Dex_Text); window.draw(Stats_Window_Luk_Text)
    window.draw(Stats_Window_Int_Text); window.draw(Stats_Window_HP_Text); window.draw(Stats_Window_MP_Text)
    window.draw(Inventory_Box); window.draw(Stats_Window_Name_Text); window.draw(Inventory_Tab_01); window.draw(Inventory_Tab_Text_01)
    window.draw(Inventory_Tab_02); window.draw(Inventory_Tab_Text_02); window.draw(Inventory_Tab_03); window.draw(Inventory_Tab_Text_03)
-   window.draw(Inventory_Tab_04); window.draw(Inventory_Tab_Text_04) 
+   window.draw(Inventory_Tab_04); window.draw(Inventory_Tab_Text_04); player = SF::Sprite.new(@@player_character_rendered_model)
+   player.position = SF.vector2(690, 200); player.scale = SF.vector2(1.5, 1.5); window.draw(player) 
    end
   def Window_Class.shirt_tab(window)
     Inventory_Tab_01.texture_rect = SF.int_rect(0, 35, 140, 35)
     Inventory_Tab_02.texture_rect = SF.int_rect(0, 0, 140, 35)
     Inventory_Tab_03.texture_rect = SF.int_rect(0, 0, 140, 35)
+    Inventory_Tab_04.texture_rect = SF.int_rect(0, 0, 140, 35)
     Window_Class.stat_window(window)
    end
   def Window_Class.gloves_tab(window)
@@ -303,6 +316,12 @@ extend self
 
   def Window_Class.test_map(debug_draw, window, @@space)
     window.clear(SF::Color::Transparent);
+    b = @@player_character_rendered_model.position
+    x = b[0]; y = b[1]
+    view1 = SF::View.new(SF.float_rect(0, 0, 1900, 700))
+    view1.center = SF.vector2(x, y)
+    view1.viewport = SF.float_rect(0, 0, 1, 0.85)
+    window.view = view1
     if @@space.contains?(@@shape) == false #<----This is proabably a really fucking stupid way to do this, but it works and I'm tired of fucking with it
       @@space.add(@@shape)
     end
@@ -319,9 +338,9 @@ extend self
 #=======================================================================================================================================+
 #---------------------------------------------------------------------------------------------------------------------------------------+
 #========================================================Window Functions===============================================================+
-#///////////////////////////////////////////////////////////Viewport////////////////////////////////////////////////////////////////////+
 
 #/////////////////////////////////////////////////////////////Draw//////////////////////////////////////////////////////////////////////+
+
   def Window_Class.map(debug_draw, window)
    case @@map
     when "test"
@@ -350,7 +369,6 @@ extend self
     Window_Class.hud(window)
     if @@map == "test"
       Player_Data::Player_Physics.gravity(@@player_character_rendered_model, window)
-      this = 0
       Window_Class.hud(window)
     end
     if @@popup == "System_Popup_Menu"
@@ -416,6 +434,7 @@ extend self
    Window_Class.keypresses(window)
    Window_Class.map(debug_draw, window)
    Window_Class.draw(window)
+   
    window.display()
    end
  end
@@ -721,7 +740,8 @@ def Window_Class.hud_keypresses(window)
       y = mouse_position.y
       puts "x", x
       puts "y", y
-      if (x >= 1700 && x <= 1850) && (y >= 960 && y <= 1010)
+      if (x >= 1730 && x <= 1880) && (y >= 930 && y <= 990)
+      #if (x >= 1700 && x <= 1850) && (y >= 960 && y <= 1010)
         case @@popup
          when "none" 
            All_Audio::SFX.char_create_down; @@popup = "System_Popup_Menu"
@@ -729,7 +749,8 @@ def Window_Class.hud_keypresses(window)
            @@popup = "none"
         end
         end
-      if (x >= 1700 && x <= 1850) && (y >= 910 && y <= 960)
+       if (x >= 1730 && x <= 1880) && (y >= 900 && y <= 940)
+      #if (x >= 1700 && x <= 1850) && (y >= 910 && y <= 960)
          case @@popup
          when "System_Popup_Menu" 
           All_Audio::SFX.char_create_sideways
@@ -737,17 +758,20 @@ def Window_Class.hud_keypresses(window)
          when "none"
          end
          end  
-      if (x >= 1700 && x <= 1850) && (y >= 860 && y <= 910)
-        case @@popup
-        when "System_Popup_Menu" 
-          Gui::Window_Class.player_model_initialize 
-          @@player_character_rendered_model.position = SF.vector2(690, 200)
-          @@player_character_rendered_model.scale = SF.vector2(1.5, 1.5)
-          @@popup = "Stats_Menu"
-          @@tab = "shirt"
-        when "none"
-         end
-         end
+     # if (x >= 1700 && x <= 1850) && (y >= 860 && y <= 910)
+      if (x >= 1730 && x <= 1850) && (y >= 870 && y <= 900)
+         case @@popup
+         when "System_Popup_Menu" 
+           #Gui::Window_Class.player_model_initialize 
+           player = SF::Sprite.new(@@player_character_rendered_model)
+           player.position = SF.vector2(790, 200)
+           player.scale = SF.vector2(1.5, 1.5)
+           window.draw(player)
+           @@popup = "Stats_Menu"
+           @@tab = "shirt"
+         when "none"
+          end
+          end
       if (x >= 1700 && x <= 1850) && (y >= 810 && y <= 860)
           case @@popup
           when "System_Popup_Menu" 
@@ -763,7 +787,7 @@ def Window_Class.hud_keypresses(window)
           when "none"
             end
             end
-      if (x >= 1020 && x <= 1200) && (y >= 490 && y <= 590)
+      if (x >= 1020 && x <= 1190) && (y >= 490 && y <= 590)
         case @@popup
           when "Quit_Menu" 
             @@popup = "none"
@@ -774,7 +798,7 @@ def Window_Class.hud_keypresses(window)
          @@popup = "none"
          @@tab = "none"
          @@player_character_rendered_model.scale = SF.vector2(1.0, 1.0)
-         @@player_character_rendered_model.position = SF.vector2(450, 670)
+         #@@player_character_rendered_model.position = SF.vector2(450, 670)
         end
       if (x >= 713 && x <= 853) && (y >= 450 && y <= 485) && @@popup == "Stats_Menu"
          All_Audio::SFX.select1
@@ -799,12 +823,11 @@ def Window_Class.hud_keypresses(window)
       window.close
     when SF::Event::KeyPressed
       case event.code
+      when SF::Keyboard::Backspace
+       @@popup = "none"
 
       when SF::Keyboard::D
-view1 = SF::View.new(SF.float_rect(0, 0, 2000, 1080))
-window.view = view1
         Player_Data::Player_Physics.wasd_right(@@player_character_rendered_model)
-        this = 1
         window.draw(@@player_character_rendered_model)
         
       when SF::Keyboard::A
@@ -996,6 +1019,12 @@ end; end; end; end; end; end
      when "Consumable" || "Equipment"
      end; end; end
   class Clothing_Wardrobe_Slot
+   #-------------------------------------------------properties---------------------------------------------------------------------------------
+    property tab : Int32 | Nil
+    property isowned : Bool | Nil
+    property texture : Int32 | Nil
+    property display_texture : Int32 | Nil
+    WHITE_T_SHIRT = new Clothing_Wardrobe_Slot(1, False, 1, 1)
 
    end
   class Clothing_Outfit_Slot < Window_Class
@@ -1062,96 +1091,138 @@ end; end; end; end; end; end
     end
    end
   class Player_Physics < Window_Class
-   @@is_player_airborne : Bool; @@is_player_airborne = false; @@fall_rate : Int32 | Nil; @@fallrate = 0
-   @@player_bounding_box : SF::Rect(Float32); @@player_bounding_box = @@player_character_rendered_model.global_bounds
-   @@player_jumped : Bool; @@player_jumped = false; @@player_direction : String; @@player_direction = "right"
-   def Player_Physics.gravity(@@player_character_rendered_model, window)
-    ground_box = Ground.global_bounds
-    @@player_bounding_box = @@player_character_rendered_model.global_bounds
-    if @@player_bounding_box.intersects? ground_box
-       # if @@player_jumped == true
-        #   while SF::Keyboard.key_pressed?(SF::Keyboard::A)
-        #     @@player_character_rendered_model.position -= SF.vector2(0.0005, 0)
-        #     @@player_character_rendered_model.texture_rect = SF.int_rect(192, 128, 96, 128)
-        #     window.draw(@@player_character_rendered_model)
-        #     @@player_jumped = false
-        #   end
-        #   while SF::Keyboard.key_pressed?(SF::Keyboard::D)
-        #     @@player_character_rendered_model.position += SF.vector2(0.0005, 0)
-        #     @@player_character_rendered_model.texture_rect = SF.int_rect(192, 0, 96, 128)
-        #     window.draw(@@player_character_rendered_model)
-        #     @@player_jumped = false
-        #   end
-        #   @@player_jumped = false
-        # end
-      @@player_jumped = false
-      @@is_player_airborne = false
-      @@fallrate = 0
+   #==========================================Class Variables=========================================================================+
+    @@is_player_airborne : Bool; @@is_player_airborne = false; @@fall_rate : Int32 | Nil; @@fallrate = 0
+    @@player_bounding_box : SF::Rect(Float32); @@player_bounding_box = @@player_character_rendered_model.global_bounds
+    @@player_jumped : Bool; @@player_jumped = false; @@player_direction : String; @@player_direction = "right"
+   #==================================================================================================================================+
 
+   #============================================Walk Cycle============================================================================+
+    #----------------------------------------------Left-------------------------------------------------------------------------------+
+     @@frame = 0
+     def Player_Physics.walk_cycle_left(@@player_character_rendered_model)
+     @@frame += 1
+     puts @@frame
+      if @@frame  > 0 && @@frame  < 11
+       @@player_character_rendered_model.texture_rect = SF.int_rect(96, 128, 96, 128)
+      else if @@frame  > 11 && @@frame  < 21
+       @@player_character_rendered_model.texture_rect = SF.int_rect(192, 128, 96, 128)
+      else if @@frame  > 21 && @@frame  < 31
+        @@player_character_rendered_model.texture_rect = SF.int_rect(288, 128, 96, 128)
+      else if @@frame  > 31 && @@frame  < 41
+        @@player_character_rendered_model.texture_rect = SF.int_rect(384, 128, 96, 128)
+      else if @@frame  > 41 && @@frame  < 51
+        @@player_character_rendered_model.texture_rect = SF.int_rect(480, 128, 96, 128)
+      else if @@frame  > 51 && @@frame  < 61
+        @@player_character_rendered_model.texture_rect = SF.int_rect(576, 128, 96, 128)
+       @@frame = 0
+      end; end; end; end; end; end
+     end
+    #---------------------------------------------------------------------------------------------------------------------------------+
+    #----------------------------------------------Right------------------------------------------------------------------------------+
+     def Player_Physics.walk_cycle_right(@@player_character_rendered_model)
+       @@frame += 1
+       puts @@frame
+        if @@frame  > 0 && @@frame  < 11
+         @@player_character_rendered_model.texture_rect = SF.int_rect(96, 0, 96, 128)
+        else if @@frame  > 11 && @@frame  < 21
+         @@player_character_rendered_model.texture_rect = SF.int_rect(192, 0, 96, 128)
+        else if @@frame  > 21 && @@frame  < 31
+          @@player_character_rendered_model.texture_rect = SF.int_rect(288, 0, 96, 128)
+        else if @@frame  > 31 && @@frame  < 41
+          @@player_character_rendered_model.texture_rect = SF.int_rect(384, 0, 96, 128)
+        else if @@frame  > 41 && @@frame  < 51
+          @@player_character_rendered_model.texture_rect = SF.int_rect(480, 0, 96, 128)
+        else if @@frame  > 51 && @@frame  < 61
+          @@player_character_rendered_model.texture_rect = SF.int_rect(576, 0, 96, 128)
+         @@frame = 0
+        end; end; end; end; end; end
+       end
+    #---------------------------------------------------------------------------------------------------------------------------------+
+   #==================================================================================================================================+
+
+   #=============================================Gravity==============================================================================+
+    def Player_Physics.gravity(@@player_character_rendered_model, window)
+     #-------------------------------------------Variables-----------------------------------------------------------------------------+  
+      ground_box = Ground.global_bounds
+      @@player_bounding_box = @@player_character_rendered_model.global_bounds
+     #---------------------------------------------------------------------------------------------------------------------------------+
+
+     if @@player_bounding_box.intersects? ground_box
+       @@player_jumped = false
+       @@is_player_airborne = false
+       @@fallrate = 0
       
-       if SF::Keyboard.key_pressed?(SF::Keyboard::A) #-------------------turbo mode motherfucker! So much glitch, so little time!
-         #Player_Physics.wasd_left(@@player_character_rendered_model)
-       end
-       if SF::Keyboard.key_pressed?(SF::Keyboard::D)
-        SF::Event::KeyPressed
-         #Player_Physics.wasd_right(@@player_character_rendered_model)
-       end
-    else
-      @@is_player_airborne = true
-  
-      if @@fallrate >= 30
-        @@player_character_rendered_model.position += SF.vector2(0, 0.95)
-        if SF::Keyboard.key_pressed?(SF::Keyboard::A)
-          @@player_character_rendered_model.position -= SF.vector2(1, 0)
+        if SF::Keyboard.key_pressed?(SF::Keyboard::A) #-------------------turbo mode motherfucker! So much glitch, so little time!
+          #Player_Physics.wasd_left(@@player_character_rendered_model)
         end
         if SF::Keyboard.key_pressed?(SF::Keyboard::D)
-          @@player_character_rendered_model.position += SF.vector2(1, 0)
+         SF::Event::KeyPressed
+          #Player_Physics.wasd_right(@@player_character_rendered_model)
         end
-        @@fallrate = 0  
-      else
-        @@fallrate += 1
-      end; end
+     else
+       @@is_player_airborne = true
+   
+       if @@fallrate >= 30
+         @@player_character_rendered_model.position += SF.vector2(0, 0.95)
+         if SF::Keyboard.key_pressed?(SF::Keyboard::A)
+           @@player_character_rendered_model.position -= SF.vector2(1, 0)
+         end
+         if SF::Keyboard.key_pressed?(SF::Keyboard::D)
+           @@player_character_rendered_model.position += SF.vector2(1, 0)
+         end
+         @@fallrate = 0  
+       else
+         @@fallrate += 1
+       end; end
+      end
+   #==================================================================================================================================+
+
+   #=============================================Movement=============================================================================+
+    #----------------------------------------------Left-------------------------------------------------------------------------------+
+     def Player_Physics.wasd_left(@@player_character_rendered_model)
+     @@player_character_rendered_model.position -= SF.vector2(3.5, 0)
+     Player_Physics.walk_cycle_left(@@player_character_rendered_model)
+     #@@player_character_rendered_model.texture_rect = SF.int_rect(192, 128, 96, 128)
+     @@player_direction = "left"
      end
-  
-   def Player_Physics.wasd_left(@@player_character_rendered_model)
-      @@player_character_rendered_model.position -= SF.vector2(3.5, 0)
-      @@player_character_rendered_model.texture_rect = SF.int_rect(192, 128, 96, 128)
-      @@player_direction = "left"
-     end
-   def Player_Physics.wasd_right(@@player_character_rendered_model)
+    #---------------------------------------------------------------------------------------------------------------------------------+   
+    #---------------------------------------------Right-------------------------------------------------------------------------------+
+     def Player_Physics.wasd_right(@@player_character_rendered_model)
      @@player_character_rendered_model.position += SF.vector2(3.5, 0)
-     @@player_character_rendered_model.texture_rect = SF.int_rect(192, 0, 96, 128)
+     Player_Physics.walk_cycle_right(@@player_character_rendered_model)
+     #@@player_character_rendered_model.texture_rect = SF.int_rect(192, 0, 96, 128)
      @@player_direction = "right"
-    end
-   def Player_Physics.wasd_up(@@player_character_rendered_model, window) #f(x) = ax² + bx + c
-      if @@player_jumped == false
-       a = 0; b = 100000
-      while a != 900000
-        a += 1; b += 1
-        if b >= 100000
-     @@player_character_rendered_model.position -= SF.vector2(0, 10)
-     @@player_jumped = true
-       if SF::Keyboard.key_pressed?(SF::Keyboard::A)
-        @@player_character_rendered_model.position -= SF.vector2(5, 0)
-       end
-       if SF::Keyboard.key_pressed?(SF::Keyboard::D)
-        @@player_character_rendered_model.position += SF.vector2(5, 0)
-       end
-       b = 0
-     @@fallrate = -1000 
-     window.draw(@@player_character_rendered_model)
+     end
+    #---------------------------------------------------------------------------------------------------------------------------------+ 
+    #----------------------------------------------Up---------------------------------------------------------------------------------+
+     def Player_Physics.wasd_up(@@player_character_rendered_model, window) #f(x) = ax² + bx + c
+        if @@player_jumped == false
+         a = 0; b = 100000
+        while a != 900000
+          a += 1; b += 1
+          if b >= 100000
+       @@player_character_rendered_model.position -= SF.vector2(0, 10)
+       @@player_jumped = true
+         if SF::Keyboard.key_pressed?(SF::Keyboard::A)
+          @@player_character_rendered_model.position -= SF.vector2(5, 0)
+         end
+         if SF::Keyboard.key_pressed?(SF::Keyboard::D)
+          @@player_character_rendered_model.position += SF.vector2(5, 0)
+         end
+         b = 0
+       @@fallrate = -1000 
+       window.draw(@@player_character_rendered_model)
+        end; end; end; end
+      if SF::Keyboard.key_pressed?(SF::Keyboard::A)
+        Player_Physics.wasd_left(@@player_character_rendered_model)
       end
-      end
-       end
-    end
-    if SF::Keyboard.key_pressed?(SF::Keyboard::A)
-      Player_Physics.wasd_left(@@player_character_rendered_model)
-    end
-    if SF::Keyboard.key_pressed?(SF::Keyboard::D)
-     SF::Event::KeyPressed
-      Player_Physics.wasd_right(@@player_character_rendered_model)
-  end
-end
+      if SF::Keyboard.key_pressed?(SF::Keyboard::D)
+       SF::Event::KeyPressed
+        Player_Physics.wasd_right(@@player_character_rendered_model)
+     end
+    #---------------------------------------------------------------------------------------------------------------------------------+ 
+ end
 end
 
 

@@ -288,7 +288,7 @@
    Stats_Window.position = SF.vector2(700, 200);
  
    Stats_Window_Char_Box = SF::RectangleShape.new(SF.vector2(100, 190)); Stats_Window_Char_Box.fill_color = SF.color(100, 100, 255)
-   Stats_Window_Char_Box.position = SF.vector2(710, 210);
+   Stats_Window_Char_Box.position = SF.vector2(710, 210); 
  
    Stats_Window_Exit_Box = SF::RectangleShape.new(SF.vector2(50, 50)); Stats_Window_Exit_Box.fill_color = SF.color(255, 0, 0)
    Stats_Window_Exit_Box.position = SF.vector2(1240, 210);
