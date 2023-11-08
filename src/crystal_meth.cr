@@ -1234,21 +1234,35 @@ end
 #                                                   Enemy Data                                                                       +
 #------------------------------------------------------------------------------------------------------------------------------------+
 
-module Enemy_Data
+module Enemy_Data # @note Enemy data is stored here 
   class Test_Enemy
-     
-    def Test_Enemy.initialize(name : String, sprite : SF::Sprite)
-      @@name = name
-      @@sprite = sprite
-      
+     def initialize(name : String, sprite : SF::Sprite, max_hp : Int32, current_hp : Int32)
+       @name = name
+       @sprite = sprite   
+       @max_hp = max_hp
+       @current_hp = max_hp
+     end
+    def name
+      @name
     end
-    def Test_Enemy.name
-      @@name = "test enemy"
+    def sprite
+      @sprite
+    end
+    def max_hp
+      @max_hp
+    end
+    def current_hp
+      @current_hp
     end
     @@test_enemy_model : SF::RenderTexture 
     @@test_enemy_model = SF::RenderTexture.new(672, 512)
     @@test_enemy_rendered_model = SF::Sprite.new
+    @@test_humanoid : Test_Enemy
+    @@test_humanoid = Test_Enemy.new("test enemy", @@test_enemy_rendered_model, 100, 100)
+
+    
     def Test_Enemy.sprite
+      name = "test enemy"
       skin_size = SKIN_ARRAY.size - 1; shoe_size = SHOES_ARRAY.size - 1; face_size = FACE_ARRAY.size - 1 #<-- .size counts the amount of entities in the array, not the highest index. Thus the -1
       hair_size = HAIR_ARRAY.size - 1; pants_size = PANTS_ARRAY.size - 1; shirt_size = SHIRT_ARRAY.size - 1    
       glove_size = GLOVE_ARRAY.size - 1    
@@ -1269,19 +1283,20 @@ module Enemy_Data
       @@test_enemy_model.display
       @@test_enemy_rendered_model.texture = @@test_enemy_model.texture
       @@test_enemy_rendered_model.texture_rect = SF.int_rect(0, 0, 96, 128)
-      @@test_enemy_rendered_model.position = SF.vector2(660, 515)
+      @@test_enemy_rendered_model.position = SF.vector2(560, 655)
       @@test_enemy_rendered_model.scale = SF.vector2(1.0, 1.0)
+      @@test_humanoid = Test_Enemy.new("test enemy", @@test_enemy_rendered_model, 100, 100)
     end
     def Test_Enemy.draw
       a = 1
-      Test_Enemy.name
       Test_Enemy.sprite
-      @@test_humanoid = Test_Enemy.new
+      puts Test_Enemy.name
       puts @@test_humanoid
+      puts @@test_humanoid.max_hp
     end
     def Test_Enemy.maintain(window)
       window.draw(@@test_enemy_rendered_model)
-    end  
+    end     
   end
 end
 
@@ -1558,25 +1573,46 @@ end
 
 
 # def run
-#   while @window.open?
-#     handle_events
-#     update
-#     draw
-#   end
-# end
+  #   while @window.open?
+  #     handle_events
+  #     update
+  #     draw
+  #   end
+  # end
+  
+  # def handle_events
+  #   # Check events here, don't draw anything here
+  # end
+  
+  # def update
+  #   # Put your logic here, also no drawing here
+  # end
+  
+  # def draw
+  #   # Draw your stuff here - and nothing more
+  #   @window.display # Render the window as the last thing to do
+  # end
+  # end
+  
+  # Game.new.run
 
-# def handle_events
-#   # Check events here, don't draw anything here
-# end
 
-# def update
-#   # Put your logic here, also no drawing here
-# end
 
-# def draw
-#   # Draw your stuff here - and nothing more
-#   @window.display # Render the window as the last thing to do
-# end
-# end
 
-# Game.new.run
+class Person
+  def initialize(name : String)
+    @name = name
+    @age = 0
+  end
+
+  def name
+    @name
+  end
+
+  def age
+    @age
+  end
+end
+
+john = Person.new "John"
+john.name
