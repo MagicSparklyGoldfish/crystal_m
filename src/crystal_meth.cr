@@ -1524,37 +1524,18 @@ Gui::Window_Class.run
    Red_Rain_Boots = new.Boots(false, RAIN_BOOTS_02, DISPLAY_RAIN_BOOTS_02, "SRB002", "Red Rain Boots", "red", true)
    Blue_Rain_Boots = new.Boots(false, RAIN_BOOTS_03, DISPLAY_RAIN_BOOTS_03, "SRB003", "Blue Rain Boots", "blue", true)
    end
-  end
-  
-
-  
-
- 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+   end
 end
 
 
 
-
+# class Test_Enemy < Enemy_Physics
+#   def initialize(name : String, sprite : SF::Sprite, max_hp : Int32, current_hp : Int32)
+#     @name = name
+#     @sprite = sprite   
+#     @max_hp = max_hp
+#     @current_hp = max_hp
+#   end
 
 
 # class SpriteInfo
