@@ -957,6 +957,8 @@
  Shoes_Desc = SF::Text.new; Shoes_Desc.font = FONT_FANCY_BOLD
  Shoes_Desc.string = SHOES_DESC_ARRAY[0]; Shoes_Desc.character_size = 40; Shoes_Desc.color = SF::Color::White
  Shoes_Desc.position = SF.vector2(1450, 800)
+
+ NIL_SHOE_TEXTURE = SF::Sprite.new(RAIN_BOOTS_TEXTURE_01)
  #....................................................Black Rain Boots.................................................................
   #\\\\\\\Character Model
   RAIN_BOOTS_TEXTURE_01 = SF::Texture.from_file("graphics/Rain_Boots_01.png")

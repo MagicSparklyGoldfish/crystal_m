@@ -65,7 +65,7 @@ extend self
 
 #-----------------------------------------------------initialize models-----------------------------------------------------------------+
  def Window_Class.player_model_initialize 
-   @@player_character_model.clear(SF::Color::Transparent)
+   @@player_character_model.clear(SF::Color::Transparent) #@note player customization happens here
    @@player_character_model.draw(SKIN_ARRAY[@@current_skin])
    @@player_character_model.draw(SHOES_ARRAY[@@current_shoes])
    @@player_character_model.draw(FACE_ARRAY[@@current_face])
@@ -80,21 +80,7 @@ extend self
    @@player_character_rendered_model.scale = SF.vector2(3.0, 3.0)
    end
 #--------------------------------------------------------draw models--------------------------------------------------------------------+
- def Window_Class.player_model_draw
-   @@player_character_model.clear(SF::Color::Transparent)
-   @@player_character_model.draw(SKIN_ARRAY[@@skin_slot])
-   @@player_character_model.draw(SHOES_ARRAY[@@shoes_slot])
-   @@player_character_model.draw(FACE_ARRAY[@@face_slot])
-   @@player_character_model.draw(HAIR_ARRAY[@@hair_slot])
-   @@player_character_model.draw(PANTS_ARRAY[@@pants_slot])
-   @@player_character_model.draw(SHIRT_ARRAY[@@shirt_slot])
-   @@player_character_model.draw(GLOVE_ARRAY[@@gloves_slot])
-   @@player_character_model.create(672, 512, false)
-   @@player_character_model.display
-   @@player_character_rendered_model.texture_rect = SF.int_rect(0, 0, 96, 128)
-   @@player_character_rendered_model.position = SF.vector2(660, 515)
-   @@player_character_rendered_model.scale = SF.vector2(3.0, 3.0)
-   end
+
 #---------------------------------------------------customization functions-------------------------------------------------------------+
  def Window_Class.customize_hair(window, direction)
    if direction == "right"
@@ -346,6 +332,8 @@ extend self
    case @@map
     when "test"
       Window_Class.test_map(debug_draw, window, @@space)
+      Player_Data::Player_Physics.gravity(@@player_character_rendered_model, window)
+      Window_Class.hud(window)
     end
    end
   def Window_Class.draw(window)
@@ -368,10 +356,6 @@ extend self
      end
    when "HUD"
     Window_Class.hud(window)
-    if @@map == "test"
-      Player_Data::Player_Physics.gravity(@@player_character_rendered_model, window)
-      Window_Class.hud(window)
-    end
     if @@popup == "System_Popup_Menu"
       Window_Class.system_popup(window)
      end
@@ -389,6 +373,7 @@ extend self
         Window_Class.pants_tab(window)
        when "shoes"
         Window_Class.shoes_tab(window)
+        Clothing::Shoes.draw(window)
        end
        end
     
@@ -814,11 +799,22 @@ def Window_Class.hud_keypresses(window)
          All_Audio::SFX.select1
          @@tab = "pants"
         end
+#|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+#|                                                             shoes tab                                                                   |
+#|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
       if (x >= 1146 && x <= 1286) && (y >= 450 && y <= 485) && @@popup == "Stats_Menu"
          All_Audio::SFX.select1
          @@tab = "shoes"  
-         Wardrobe.gather_shoes       
-        end
+         Clothing::Shoes.gather_owned(window) #Shoes.select(window, @@player_character_model, selected_shoe)
+      end
+      if (x >= 710 && x <= 825) && (y >= 470 && y <= 590) && @@tab == "shoes"
+        All_Audio::SFX.char_create_sideways
+        @@player_character_rendered_model
+        selected_shoe = 0
+        Clothing::Shoes.select(window, selected_shoe)
+      end
+#___________________________________________________________________________________________________________________________________________
+
         
       end
     case event
@@ -1009,11 +1005,11 @@ end; end; end; end; end; end
 
  module Player_Data #@note Player data is stored here 
  include Gui;       #@todo fix all the classes
- @@hair_slot : (Int32 | Nil ); @@skin_slot : (Int32 | Nil ); @@face_slot : (Int32 | Nil )
+ @@hair_slot = 0 #@todo finish assigning these fucking things to fucking 0 god fucking damn it
+ @@hair_slot : (Int32); @@skin_slot : (Int32); @@face_slot : (Int32)
  @@shirt_slot : (Int32 | Nil ); @@gloves_slot : (Int32 | Nil ); @@pants_slot : (Int32 | Nil )
  @@shoes_slot : (Int32 | Nil ); @@outfit_array : Array(Int32 | Nil) = [@@hair_slot, @@skin_slot, @@face_slot, @@shirt_slot, @@gloves_slot, @@pants_slot, @@shoes_slot]
  
-
    def add_item(@@item_type, item)
      if item.is_owned == false 
      case @@item_type
@@ -1037,7 +1033,43 @@ end; end; end; end; end; end
    end
   class Clothing_Outfit_Slot < Window_Class
     include Player_Data  
-
+    def initialize(hair_slot : Int32, skin_slot : Int32, face_slot : Int32, shirt_slot : Int32, gloves_slot : Int32, pants_slot : Int32, shoes_slot : Int32)
+      @hair_slot = hair_slot 
+      @skin_slot = skin_slot 
+      @face_slot = face_slot 
+      @shirt_slot = shirt_slot 
+      @gloves_slot = gloves_slot 
+      @pants_slot = pants_slot 
+      @shoes_slot = shoes_slot 
+    end
+    property hair_slot : Int32
+    property skin_slot : Int32
+    property face_slot : Int32
+    property shirt_slot : Int32
+    property gloves_slot : Int32
+    property pants_slot : Int32
+    property shoes_slot : Int32
+    def hair_slot 
+      @hair_slot
+     end
+    def skin_slot
+      @skin_slot
+     end
+    def face_slot
+      @face_slot
+     end
+    def shirt_Slot 
+      @shirt_slot
+     end
+    def gloves_slot
+      @gloves_slot
+     end
+    def pants_slot
+      @pants_slot
+     end
+    def shoes_slot
+      @shoes_slot
+     end 
     def Clothing_Outfit_Slot.save_outfit(@@current_hair, @@current_skin, @@current_face, @@current_shirt, @@current_gloves, @@current_pants, @@current_shoes)
      @@hair_slot = @@current_hair
      @@skin_slot = @@current_skin
@@ -1054,6 +1086,24 @@ end; end; end; end; end; end
 
      end
     end
+    def Clothing_Outfit_Slot.player_model_draw 
+      @@player_character_model.clear(SF::Color::Transparent)
+      @@player_character_model.draw(SKIN_ARRAY[@@skin_slot])
+      @@player_character_model.draw(SHOES_ARRAY[@@shoes_slot])
+      @@player_character_model.draw(FACE_ARRAY[@@face_slot])
+      @@player_character_model.draw(HAIR_ARRAY[@@hair_slot])
+      @@player_character_model.draw(PANTS_ARRAY[@@pants_slot])
+      @@player_character_model.draw(SHIRT_ARRAY[@@shirt_slot])
+      @@player_character_model.draw(GLOVE_ARRAY[@@gloves_slot])
+      @@player_character_model.create(672, 512, false)
+      @@player_character_model.display
+      @@player_character_rendered_model.texture_rect = SF.int_rect(0, 0, 96, 128)
+      @@player_character_rendered_model.position = SF.vector2(660, 515)
+      @@player_character_rendered_model.scale = SF.vector2(3.0, 3.0)
+      end
+      def Clothing_Outfit_Slot.change_shoes
+        player_model_draw() 
+     end
   class Consumables_Slot
    end
   class Equipment_Slot
@@ -1422,57 +1472,47 @@ Gui::Window_Class.run
     
     Is_Owned_Hair_Array = [Shounen_Hair_Black[0], Shounen_Hair_Green[0], Shounen_Hair_Blue[0], Shounen_Hair_Red[0], Shounen_Hair_Yellow[0], 
     Shounen_Hair_Purple[0], Grey_Ponytail[0], Blonde_Ponytail[0], Red_Ponytail[0], Brown_Ponytail[0], Pink_Ponytail[0], Blue_Ponytail[0]]
-
+module Clothing
 #WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
 #W                                                               Wardrobe                                                                  W
 #WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
 class Wardrobe #@todo create method to add clothing owned arrays to slots and a method to draw contents of slot to character sprite
-
- # __________________________________________________________________________________________________________________________________________
- #|                                                             initialize                                                                  |
- #|_________________________________________________________________________________________________________________________________________|
-  def initialize(x : Int32, y : Int32, occupant : Nil | Shoes, number : Int32, tab : String)
-    @x = x
-    @y = y
-    @occupant = occupant
-    @number = number
-    @tab = tab
-   end
-   setter occupant
-  def x
-    @x
-   end
-  def y
-    @y
-   end
-  def occupant
-    @occupant
-   end
-  def number
-    @Number
-   end
-  def tab
-    @tab
-   end
- #------------------------------------------------------------------------------------------------------------------------------------------
-  def Wardrobe.gather_shoes
-    Shoes.gather_owned
-    s = @@owned_shoes_array.size - 1
-    case s
-   when 0
-    @@shoe_wardrobe_slot_01.occupant = @@owned_shoes_array[0]
-   when 1
-    @@shoe_wardrobe_slot_02.occupant = @@owned_shoes_array[1]
-   when 2
-    @@shoe_wardrobe_slot_03.occupant = @@owned_shoes_array[2]
-  end
-end
- # __________________________________________________________________________________________________________________________________________
- #|                                                             Shoe Slots                                                                  |
- #|_________________________________________________________________________________________________________________________________________|
-  @@shoe_wardrobe_slot_01 = Wardrobe.new(0, 0, nil, 1, "shoes"); @@shoe_wardrobe_slot_02 = Wardrobe.new(0, 0, nil, 2, "shoes")
-  @@shoe_wardrobe_slot_03 = Wardrobe.new(0, 0, nil, 3, "shoes")
-end
+  @@nil_shoe = Shoes.new(true, NIL_SHOE_TEXTURE, NIL_SHOE_TEXTURE, "Nil", "Nil", -1)
+  # __________________________________________________________________________________________________________________________________________
+  #|                                                             initialize                                                                  |
+  #|_________________________________________________________________________________________________________________________________________|
+   def initialize(x : Int32 | Nil, y : Int32 | Nil, number : Int32 | Nil, tab : String | Nil, occupant : Shoes = @@nil_shoe)
+     @x = x
+     @y = y
+     @number = number
+     @tab = tab
+     @occupant = occupant
+    end
+    property occupant
+   def x
+     @x
+    end
+   def y
+     @y
+    end
+   def occupant
+     @occupant 
+    end
+   def number
+     @number
+    end
+   def tab
+     @tab
+    end
+#  #------------------------------------------------------------------------------------------------------------------------------------------
+   def Wardrobe.gather_shoes(window)
+     Shoes.gather_owned(window)
+     end
+  # __________________________________________________________________________________________________________________________________________
+  #|                                                             Shoe Slots                                                                  |
+  #|_________________________________________________________________________________________________________________________________________|
+   @@shoe_wardrobe_slot_01 = Wardrobe.new(0, 0, 1, "shoes", @@nil_shoe); @@shoe_wardrobe_slot_02 = Wardrobe.new(0, 0, 2, "shoes", @@nil_shoe);
+   @@shoe_wardrobe_slot_03 = Wardrobe.new(0, 0, 3, "shoes", @@nil_shoe);
 end
   
 
@@ -1480,92 +1520,109 @@ end
 #SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
 #S                                                                Shoes                                                                     S
 #SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
- class Shoes #< Wardrobe  #@note Shoes go here
- #@todo figure out why the flying fuck Wardrobe is an 'undefined constant' instead of a fucking class
- # __________________________________________________________________________________________________________________________________________
- #|                                                             initialize                                                                  |
- #|_________________________________________________________________________________________________________________________________________|
-    def initialize(is_owned : Bool, char_sprite : SF::Sprite, display_sprite : SF::Sprite, name : String, color : String) 
-      @is_owned = is_owned
-      @char_sprite = char_sprite
-      @display_sprite = display_sprite
-      @name = name
-      @color = color
-     end
-    def is_owned
-      @is_owned
-     end
-    def charsprite
-      @char_sprite
-     end
-    def display_sprite
-      @display_sprite
-     end 
-    def name
-      @name
-     end
-    def color
-      @color
-     end
- #------------------------------------------------------------------------------------------------------------------------------------------
+ class Shoes  #@note Shoes go here
+  include Gui; include Player_Data
+  # __________________________________________________________________________________________________________________________________________
+  #|                                                             initialize                                                                  |
+  #|_________________________________________________________________________________________________________________________________________|
+     def initialize(is_owned : Bool, char_sprite : SF::Sprite, display_sprite : SF::Sprite, name : String, color : String, number : Int32) 
+       @is_owned = is_owned
+       @char_sprite = char_sprite
+       @display_sprite = display_sprite
+       @name = name
+       @color = color
+       @number = number
+      end
+     def is_owned
+       @is_owned
+      end
+     def charsprite
+       @char_sprite
+      end
+     def display_sprite
+       @display_sprite
+      end 
+     def name
+       @name
+      end
+     def color
+       @color
+      end
+  #------------------------------------------------------------------------------------------------------------------------------------------
  
- # __________________________________________________________________________________________________________________________________________
- #|                                                             ownership                                                                   |
- #|_________________________________________________________________________________________________________________________________________|
-  @@owned_shoes_array = [] of Shoes
-  @shoes_array = [] of Shoes
-  property = @@owned_shoes_array
-  @@shoes_array = [@@black_rain_boots, @@red_rain_boots, @@blue_rain_boots]
-    def Shoes.obtain(this)
-      this.is_owned = true
-     end 
-    def Shoes.gather_owned
-      a = -1; b = @@shoes_array.size
-      while a != b
-      if @@shoes_array[a].is_owned == true
-        @@owned_shoes_array.push(@@shoes_array[a])
-      end
-      a += 1
-      end
-      puts (@@owned_shoes_array)
-      @@owned_shoes_array
+  # __________________________________________________________________________________________________________________________________________
+  #|                                                             ownership                                                                   |
+  #|_________________________________________________________________________________________________________________________________________|
+   @@owned_shoes_array = [] of Shoes
+   @@shoes_array : Array(Shoes)
+   property = @@owned_shoes_array
+   @@shoes_array = [@@black_rain_boots, @@red_rain_boots, @@blue_rain_boots]
+     def Shoes.obtain(this)
+       this.is_owned = true
+      end 
+     def Shoes.gather_owned(window)
+       a = -1; b = @@shoes_array.size
+        while a != b
+        if @@shoes_array[a].is_owned == true
+          @@owned_shoes_array.push(@@shoes_array[a])
+        end
+        a += 1
+        end
     end
- #------------------------------------------------------------------------------------------------------------------------------------------
+      def Shoes.draw(window)
+        @@owned_shoes_array.uniq!
+        s = @@owned_shoes_array.size - 1
+       if s >= 0 && @@owned_shoes_array[0].is_owned == true
+         @@owned_shoes_array[0].display_sprite.position = SF.vector2(595, 135)
+         window.draw(@@owned_shoes_array[0].display_sprite)
+       end
+       if s >= 1 && @@owned_shoes_array[1].is_owned == true
+         @@owned_shoes_array[1].display_sprite.position = SF.vector2(715, 135)
+         window.draw(@@owned_shoes_array[1].display_sprite)
+       end
+       if s >=  2 && @@owned_shoes_array[2].is_owned == true
+         @@owned_shoes_array[2].display_sprite.position = SF.vector2(830, 135)
+         window.draw(@@owned_shoes_array[2].display_sprite)
+       end
+     end
+  #------------------------------------------------------------------------------------------------------------------------------------------
 
- # __________________________________________________________________________________________________________________________________________
- #|                                                             outfit slot                                                                 |
- #|_________________________________________________________________________________________________________________________________________|
-  #..............................................................variables...................................................................
-    @@outfit_shoe_slot : Shoes
-    @@outfit_shoe_slot = @@black_rain_boots
-   #.........................................................................................................................................
-  #...............................................................methods....................................................................
-    def Shoes.draw(window, @@player_character_model)
-     @@player_character_model.draw(@@outfit_shoe_slot.charsprite)
-    end
-   #.........................................................................................................................................
- #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  # __________________________________________________________________________________________________________________________________________
+  #|                                                             outfit slot                                                                 |
+  #|_________________________________________________________________________________________________________________________________________|
+   #..............................................................variables...................................................................
+     @@outfit_shoe_slot : Shoes
+     @@outfit_shoe_slot = @@black_rain_boots
+    #.........................................................................................................................................
+   #...............................................................methods....................................................................
+     def Shoes.select(window, selected_shoe)
+      shoes_slot = @@owned_shoes_array[selected_shoe]
+      Clothing_Outfit_Slot.change_shoes
+     end
+    #.........................................................................................................................................
+  #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
- # __________________________________________________________________________________________________________________________________________
- #|                                                            wardrobe slot                                                                |
- #|_________________________________________________________________________________________________________________________________________|
+  # __________________________________________________________________________________________________________________________________________
+  #|                                                            wardrobe slot                                                                |
+  #|_________________________________________________________________________________________________________________________________________|
      
- # __________________________________________________________________________________________________________________________________________
- #|                                                             Rain Boots                                                                  |
- #|_________________________________________________________________________________________________________________________________________|
+  # __________________________________________________________________________________________________________________________________________
+  #|                                                             Rain Boots                                                                  |
+  #|_________________________________________________________________________________________________________________________________________|
+      @@black_rain_boots = Shoes.new(true, RAIN_BOOTS_01, DISPLAY_RAIN_BOOTS_01, "Black Rain Boots", "black", 0)
+      @@red_rain_boots = Shoes.new(false, RAIN_BOOTS_02, DISPLAY_RAIN_BOOTS_02, "Red Rain Boots", "red", 1)
+      @@blue_rain_boots = Shoes.new(true, RAIN_BOOTS_03, DISPLAY_RAIN_BOOTS_03, "Blue Rain Boots", "blue", 2)
 
-     @@black_rain_boots = Shoes.new(true, RAIN_BOOTS_01, DISPLAY_RAIN_BOOTS_01, "Black Rain Boots", "black")
-     @@red_rain_boots = Shoes.new(false, RAIN_BOOTS_02, DISPLAY_RAIN_BOOTS_02, "Red Rain Boots", "red")
-     @@blue_rain_boots = Shoes.new(true, RAIN_BOOTS_03, DISPLAY_RAIN_BOOTS_03, "Blue Rain Boots", "blue")
- #------------------------------------------------------------------------------------------------------------------------------------------ 
-  end
-
-  class Pie #@todo figure out why this works but wardrobe doesn't
-    @@pie = 5
-  end
-  class Wut < Pie
-    puts @@pie
-  end
+  #------------------------------------------------------------------------------------------------------------------------------------------ 
+   end
+end
+end
+  # class Pie
+  #   @@pie = 5
+  # end
+  # class Wut < Pie
+  #   puts @@pie
+  # end
 
 #  module Face
 #    #properties
