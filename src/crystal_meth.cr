@@ -296,7 +296,7 @@ extend self
     CP::Vect.new(-Width / 2, -Height / 2), CP::Vect.new(-Width / 2, Height / 2), CP::Vect.new(Width / 2, Height / 2),
     CP::Vect.new(Width / 2, -Height / 2)
   ])
-  def Window_Class.initialize_test_map(debug_draw, window, @@space) #<----does not seem to work right
+  def Window_Class.initialize_test_map(debug_draw, window, @@space) #<----does not seem to work right @note test map
     @@space.iterations = 30
     @@space.gravity = CP.v(0, -500)
     @@space.sleep_time_threshold = 0.5
@@ -816,7 +816,8 @@ def Window_Class.hud_keypresses(window)
         end
       if (x >= 1146 && x <= 1286) && (y >= 450 && y <= 485) && @@popup == "Stats_Menu"
          All_Audio::SFX.select1
-         @@tab = "shoes"         
+         @@tab = "shoes"  
+         Wardrobe.gather_shoes       
         end
         
       end
@@ -1007,7 +1008,7 @@ end; end; end; end; end; end
 #------------------------------------------------------------------------------------------------------------------------------------+
 
  module Player_Data #@note Player data is stored here 
- include Gui; 
+ include Gui;       #@todo fix all the classes
  @@hair_slot : (Int32 | Nil ); @@skin_slot : (Int32 | Nil ); @@face_slot : (Int32 | Nil )
  @@shirt_slot : (Int32 | Nil ); @@gloves_slot : (Int32 | Nil ); @@pants_slot : (Int32 | Nil )
  @@shoes_slot : (Int32 | Nil ); @@outfit_array : Array(Int32 | Nil) = [@@hair_slot, @@skin_slot, @@face_slot, @@shirt_slot, @@gloves_slot, @@pants_slot, @@shoes_slot]
@@ -1276,7 +1277,7 @@ module Enemy_Data # @note Enemy data is stored here
     @@test_humanoid2 = Test_Enemy.new("test enemy", @@test_enemy_rendered_model, 100, 100)
 
     
-    def Test_Enemy.sprite
+    def Test_Enemy.sprite #@todo streamline this
       name = "test enemy"
       skin_size = SKIN_ARRAY.size - 1; shoe_size = SHOES_ARRAY.size - 1; face_size = FACE_ARRAY.size - 1 #<-- .size counts the amount of entities in the array, not the highest index. Thus the -1
       hair_size = HAIR_ARRAY.size - 1; pants_size = PANTS_ARRAY.size - 1; shirt_size = SHIRT_ARRAY.size - 1    
@@ -1327,7 +1328,7 @@ module Enemy_Data # @note Enemy data is stored here
       @@test_humanoid.sprite.position = SF.vector2(560, 655)
       @@test_humanoid2.sprite.position = SF.vector2(800, 655)
     end
-    def Test_Enemy.maintain(window)
+    def Test_Enemy.maintain(window) #@todo tidy this shit up
       window.draw(@@test_humanoid.sprite); window.draw(@@test_humanoid2.sprite)
       name01 = Name_Box.dup; name01.position = @@test_humanoid.sprite.position + SF.vector2(-10, 130); window.draw(name01)
       nametext01 = Name_Box_Text.dup; nametext01.string = "Test Humanoid"; nametext01.position = name01.position - SF.vector2(-3, 5)
@@ -1422,111 +1423,237 @@ Gui::Window_Class.run
     Is_Owned_Hair_Array = [Shounen_Hair_Black[0], Shounen_Hair_Green[0], Shounen_Hair_Blue[0], Shounen_Hair_Red[0], Shounen_Hair_Yellow[0], 
     Shounen_Hair_Purple[0], Grey_Ponytail[0], Blonde_Ponytail[0], Red_Ponytail[0], Brown_Ponytail[0], Pink_Ponytail[0], Blue_Ponytail[0]]
 
-    
-  
- module Face
-   #properties
-    property is_owned : Bool
-    property char_sprite : SF::Sprite
-    property display_sprite : SF::Sprite
-    property id : String
-    property name : String
-    property eye_color : String
-    property does_blink : Bool
-   class Button_Face
-    Blue_Button_Eyes = new.Button_Face(false, BUTTON_FACE_01, BUTTON_DISPLAY_FACE_01, "FFBE001", "Blue Button Eyes", "blue", false)
-    Red_Button_Eyes = new.Button_Face(false, BUTTON_FACE_02, BUTTON_DISPLAY_FACE_02, "FFBE002", "Red Button Eyes", "red", false)
-    Purple_Button_Eyes = new.Button_Face(false, BUTTON_FACE_03, BUTTON_DISPLAY_FACE_03, "FFBE003", "Purple Button Eyes", "purple", false)
-    Green_Button_Eyes = new.Button_Face(false, BUTTON_FACE_04, BUTTON_DISPLAY_FACE_04, "FFBE004", "Green Button Eyes", "green", false)
-    Yellow_Button_Eyes = new.Button_Face(false, BUTTON_FACE_05, BUTTON_DISPLAY_FACE_05, "FFBE005", "Yellow Button Eyes", "yellow", false)
-    Brown_Button_Eyes = new.Button_Face(false, BUTTON_FACE_06, BUTTON_DISPLAY_FACE_06, "FFBE006", "Brown Button Eyes", "brown", false)
-    end
-   class Shounen_Face
-    Grey_Shounen_Face = new.Shounen_Face(false, SHOUNEN_FACE_01, SHOUNEN_DISPLAY_FACE_01, "FSF001", "Grey Shounen Face", "grey", true)
-    Blue_Shounen_Face = new.Shounen_Face(false, SHOUNEN_FACE_02, SHOUNEN_DISPLAY_FACE_02, "FSF002", "Blue Shounen Face", "blue", true)
-    Green_Shounen_Face = new.Shounen_Face(false, SHOUNEN_FACE_03, SHOUNEN_DISPLAY_FACE_03, "FSF003", "Green Shounen Face", "green", true)
-    Brown_Shounen_Face = new.Shounen_Face(false, SHOUNEN_FACE_04, SHOUNEN_DISPLAY_FACE_04, "FSF004", "Brown Shounen Face", "brown", true)
-    Purple_Shounen_Face = new.Shounen_Face(false, SHOUNEN_FACE_05, SHOUNEN_DISPLAY_FACE_05, "FSF005", "Purple Shounen Face", "purple", true)
-    Yellow_Shounen_Face = new.Shounen_Face(false, SHOUNEN_FACE_06, SHOUNEN_DISPLAY_FACE_06, "FSF006", "Yellow Shounen Face", "yellow", true)
-    end
-   class Tired_Face
-    Grey_Tired_Face = new.Tired_Face(false, TIRED_FACE_01, TIRED_DISPLAY_FACE_01, "FTF001", "Grey Tired Face", "grey", true)
-    Blue_Tired_Face = new.Tired_Face(false, TIRED_FACE_02, TIRED_DISPLAY_FACE_02, "FTF002", "Blue Tired Face", "blue", true)
-    Brown_Tired_Face = new.Tired_Face(false, TIRED_FACE_03, TIRED_DISPLAY_FACE_03, "FTF003", "Brown Tired Face", "brown", true)
-    Green_Tired_Face = new.Tired_Face(false, TIRED_FACE_04, TIRED_DISPLAY_FACE_04, "FTF004", "Green Tired Face", "green", true)
-    Red_Tired_Face = new.Tired_Face(false, TIRED_FACE_05, TIRED_DISPLAY_FACE_05, "FTF005", "Red Tired Face", "red", true)
-    Yellow_Tired_Face = new.Tired_Face(false, TIRED_FACE_06, TIRED_DISPLAY_FACE_06, "FTF006", "Yellow Tired Face", "yellow", true)
-    end
-   class Smiley_Face
-     Smiley_Face = new.Smiley_Face(false, SMILEY_FACE_01, SMILEY_DISPLAY_FACE_01, "FSFL001", "Smiley Face", "black", false)
-   end
-  end
-  
- module Gloves
-  #properties
-   property is_owned : Bool
-   property char_sprite : SF::Sprite
-   property display_sprite : SF::Sprite
-   property id : String
-   property name : String
-   property color : String
-  class Fingerless_Gloves
-   Black_Fingerless_Gloves = new.Fingerless_Gloves(false, FINGERLESS_GLOVE_01, DISPLAY_FINGERLESS_GLOVE_01, "GFG001", "Black Fingerless Gloves", "black")
-   Red_Fingerless_Gloves = new.Fingerless_Gloves(false, FINGERLESS_GLOVE_02, DISPLAY_FINGERLESS_GLOVE_02, "GFG002", "Red Fingerless Gloves", "red")
-   Blue_Fingerless_Gloves = new.Fingerless_Gloves(false, FINGERLESS_GLOVE_03, DISPLAY_FINGERLESS_GLOVE_03, "GFG003", "Blue Fingerless Gloves", "blue")  
-   end
-  end
- module Shirts
-  #properties
-   property is_owned : Bool
-   property char_sprite : SF::Sprite
-   property display_sprite : SF::Sprite
-   property id : String
-   property name : String
-   property color : String
-   property sleeve_length : String
-   property midriff_exposed : Bool
-  class T_Shirts
-   White_T_Shirt = new.T_Shirts(false, T_SHIRT_01, DISPLAY_T_SHIRT_01, "STS001", "White T-Shirt", "white", "short", false)  
-   Blue_T_Shirt = new.T_Shirts(false, T_SHIRT_02, DISPLAY_T_SHIRT_02, "STS002", "Blue T-Shirt", "blue", "short", false)
-   Red_T_Shirt = new.T_Shirts(false, T_SHIRT_03, DISPLAY_T_SHIRT_03, "STS003", "Red T-Shirt", "red", "short", false)
-   Green_T_Shirt = new.T_Shirts(false, T_SHIRT_04, DISPLAY_T_SHIRT_04, "STS004", "Green T-Shirt", "green", "short", false)
-   Purple_T_Shirt = new.T_Shirts(false, T_SHIRT_05, DISPLAY_T_SHIRT_05, "STS005", "Purple T-Shirt", "purple", "short", false) 
-   Black_T_Shirt = new.T_Shirts(false, T_SHIRT_06, DISPLAY_T_SHIRT_06, "STS006", "Black T-Shirt", "black", "short", false) 
-   end 
-  end
- module Pants
-  #properties
-   property is_owned : Bool
-   property char_sprite : SF::Sprite
-   property display_sprite : SF::Sprite
-   property id : String
-   property name : String
-   property color : String
-   property length : String
-  class Shorts
-   Blue_Shorts = new.Shorts(false, SHORTS_01, DISPLAY_SHORTS_01, "PS001", "Blue_Shorts", "blue", "short")
-   Brown_Shorts = new.Shorts(false, SHORTS_02, DISPLAY_SHORTS_02, "PS002", "Brown_Shorts", "brown", "short")
-   Black_Shorts = new.Shorts(false, SHORTS_03, DISPLAY_SHORTS_03, "PS003", "Black_Shorts", "black", "short")
-   end
-  end
- module Shoes
-  #properties  
-   property is_owned : Bool
-   property char_sprite : SF::Sprite
-   property display_sprite : SF::Sprite
-   property id : String
-   property name : String
-   property color : String
-   property is_waterproof : Bool
-  class Boots
-   Black_Rain_Boots = new.Boots(false, RAIN_BOOTS_01, DISPLAY_RAIN_BOOTS_01, "SRB001", "Black Rain Boots", "black", true)
-   Red_Rain_Boots = new.Boots(false, RAIN_BOOTS_02, DISPLAY_RAIN_BOOTS_02, "SRB002", "Red Rain Boots", "red", true)
-   Blue_Rain_Boots = new.Boots(false, RAIN_BOOTS_03, DISPLAY_RAIN_BOOTS_03, "SRB003", "Blue Rain Boots", "blue", true)
-   end
-   end
-end
+#WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
+#W                                                               Wardrobe                                                                  W
+#WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
+class Wardrobe #@todo create method to add clothing owned arrays to slots and a method to draw contents of slot to character sprite
 
+ # __________________________________________________________________________________________________________________________________________
+ #|                                                             initialize                                                                  |
+ #|_________________________________________________________________________________________________________________________________________|
+  def initialize(x : Int32, y : Int32, occupant : Nil | Shoes, number : Int32, tab : String)
+    @x = x
+    @y = y
+    @occupant = occupant
+    @number = number
+    @tab = tab
+   end
+   setter occupant
+  def x
+    @x
+   end
+  def y
+    @y
+   end
+  def occupant
+    @occupant
+   end
+  def number
+    @Number
+   end
+  def tab
+    @tab
+   end
+ #------------------------------------------------------------------------------------------------------------------------------------------
+  def Wardrobe.gather_shoes
+    Shoes.gather_owned
+    s = @@owned_shoes_array.size - 1
+    case s
+   when 0
+    @@shoe_wardrobe_slot_01.occupant = @@owned_shoes_array[0]
+   when 1
+    @@shoe_wardrobe_slot_02.occupant = @@owned_shoes_array[1]
+   when 2
+    @@shoe_wardrobe_slot_03.occupant = @@owned_shoes_array[2]
+  end
+end
+ # __________________________________________________________________________________________________________________________________________
+ #|                                                             Shoe Slots                                                                  |
+ #|_________________________________________________________________________________________________________________________________________|
+  @@shoe_wardrobe_slot_01 = Wardrobe.new(0, 0, nil, 1, "shoes"); @@shoe_wardrobe_slot_02 = Wardrobe.new(0, 0, nil, 2, "shoes")
+  @@shoe_wardrobe_slot_03 = Wardrobe.new(0, 0, nil, 3, "shoes")
+end
+end
+  
+
+
+#SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
+#S                                                                Shoes                                                                     S
+#SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
+ class Shoes #< Wardrobe  #@note Shoes go here
+ #@todo figure out why the flying fuck Wardrobe is an 'undefined constant' instead of a fucking class
+ # __________________________________________________________________________________________________________________________________________
+ #|                                                             initialize                                                                  |
+ #|_________________________________________________________________________________________________________________________________________|
+    def initialize(is_owned : Bool, char_sprite : SF::Sprite, display_sprite : SF::Sprite, name : String, color : String) 
+      @is_owned = is_owned
+      @char_sprite = char_sprite
+      @display_sprite = display_sprite
+      @name = name
+      @color = color
+     end
+    def is_owned
+      @is_owned
+     end
+    def charsprite
+      @char_sprite
+     end
+    def display_sprite
+      @display_sprite
+     end 
+    def name
+      @name
+     end
+    def color
+      @color
+     end
+ #------------------------------------------------------------------------------------------------------------------------------------------
+ 
+ # __________________________________________________________________________________________________________________________________________
+ #|                                                             ownership                                                                   |
+ #|_________________________________________________________________________________________________________________________________________|
+  @@owned_shoes_array = [] of Shoes
+  @shoes_array = [] of Shoes
+  property = @@owned_shoes_array
+  @@shoes_array = [@@black_rain_boots, @@red_rain_boots, @@blue_rain_boots]
+    def Shoes.obtain(this)
+      this.is_owned = true
+     end 
+    def Shoes.gather_owned
+      a = -1; b = @@shoes_array.size
+      while a != b
+      if @@shoes_array[a].is_owned == true
+        @@owned_shoes_array.push(@@shoes_array[a])
+      end
+      a += 1
+      end
+      puts (@@owned_shoes_array)
+      @@owned_shoes_array
+    end
+ #------------------------------------------------------------------------------------------------------------------------------------------
+
+ # __________________________________________________________________________________________________________________________________________
+ #|                                                             outfit slot                                                                 |
+ #|_________________________________________________________________________________________________________________________________________|
+  #..............................................................variables...................................................................
+    @@outfit_shoe_slot : Shoes
+    @@outfit_shoe_slot = @@black_rain_boots
+   #.........................................................................................................................................
+  #...............................................................methods....................................................................
+    def Shoes.draw(window, @@player_character_model)
+     @@player_character_model.draw(@@outfit_shoe_slot.charsprite)
+    end
+   #.........................................................................................................................................
+ #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+ # __________________________________________________________________________________________________________________________________________
+ #|                                                            wardrobe slot                                                                |
+ #|_________________________________________________________________________________________________________________________________________|
+     
+ # __________________________________________________________________________________________________________________________________________
+ #|                                                             Rain Boots                                                                  |
+ #|_________________________________________________________________________________________________________________________________________|
+
+     @@black_rain_boots = Shoes.new(true, RAIN_BOOTS_01, DISPLAY_RAIN_BOOTS_01, "Black Rain Boots", "black")
+     @@red_rain_boots = Shoes.new(false, RAIN_BOOTS_02, DISPLAY_RAIN_BOOTS_02, "Red Rain Boots", "red")
+     @@blue_rain_boots = Shoes.new(true, RAIN_BOOTS_03, DISPLAY_RAIN_BOOTS_03, "Blue Rain Boots", "blue")
+ #------------------------------------------------------------------------------------------------------------------------------------------ 
+  end
+
+  class Pie #@todo figure out why this works but wardrobe doesn't
+    @@pie = 5
+  end
+  class Wut < Pie
+    puts @@pie
+  end
+
+#  module Face
+#    #properties
+#     property is_owned : Bool
+#     property char_sprite : SF::Sprite
+#     property display_sprite : SF::Sprite
+#     property id : String
+#     property name : String
+#     property eye_color : String
+#     property does_blink : Bool
+#    class Button_Face
+#     Blue_Button_Eyes = new.Button_Face(false, BUTTON_FACE_01, BUTTON_DISPLAY_FACE_01, "FFBE001", "Blue Button Eyes", "blue", false)
+#     Red_Button_Eyes = new.Button_Face(false, BUTTON_FACE_02, BUTTON_DISPLAY_FACE_02, "FFBE002", "Red Button Eyes", "red", false)
+#     Purple_Button_Eyes = new.Button_Face(false, BUTTON_FACE_03, BUTTON_DISPLAY_FACE_03, "FFBE003", "Purple Button Eyes", "purple", false)
+#     Green_Button_Eyes = new.Button_Face(false, BUTTON_FACE_04, BUTTON_DISPLAY_FACE_04, "FFBE004", "Green Button Eyes", "green", false)
+#     Yellow_Button_Eyes = new.Button_Face(false, BUTTON_FACE_05, BUTTON_DISPLAY_FACE_05, "FFBE005", "Yellow Button Eyes", "yellow", false)
+#     Brown_Button_Eyes = new.Button_Face(false, BUTTON_FACE_06, BUTTON_DISPLAY_FACE_06, "FFBE006", "Brown Button Eyes", "brown", false)
+#     end
+#    class Shounen_Face
+#     Grey_Shounen_Face = new.Shounen_Face(false, SHOUNEN_FACE_01, SHOUNEN_DISPLAY_FACE_01, "FSF001", "Grey Shounen Face", "grey", true)
+#     Blue_Shounen_Face = new.Shounen_Face(false, SHOUNEN_FACE_02, SHOUNEN_DISPLAY_FACE_02, "FSF002", "Blue Shounen Face", "blue", true)
+#     Green_Shounen_Face = new.Shounen_Face(false, SHOUNEN_FACE_03, SHOUNEN_DISPLAY_FACE_03, "FSF003", "Green Shounen Face", "green", true)
+#     Brown_Shounen_Face = new.Shounen_Face(false, SHOUNEN_FACE_04, SHOUNEN_DISPLAY_FACE_04, "FSF004", "Brown Shounen Face", "brown", true)
+#     Purple_Shounen_Face = new.Shounen_Face(false, SHOUNEN_FACE_05, SHOUNEN_DISPLAY_FACE_05, "FSF005", "Purple Shounen Face", "purple", true)
+#     Yellow_Shounen_Face = new.Shounen_Face(false, SHOUNEN_FACE_06, SHOUNEN_DISPLAY_FACE_06, "FSF006", "Yellow Shounen Face", "yellow", true)
+#     end
+#    class Tired_Face
+#     Grey_Tired_Face = new.Tired_Face(false, TIRED_FACE_01, TIRED_DISPLAY_FACE_01, "FTF001", "Grey Tired Face", "grey", true)
+#     Blue_Tired_Face = new.Tired_Face(false, TIRED_FACE_02, TIRED_DISPLAY_FACE_02, "FTF002", "Blue Tired Face", "blue", true)
+#     Brown_Tired_Face = new.Tired_Face(false, TIRED_FACE_03, TIRED_DISPLAY_FACE_03, "FTF003", "Brown Tired Face", "brown", true)
+#     Green_Tired_Face = new.Tired_Face(false, TIRED_FACE_04, TIRED_DISPLAY_FACE_04, "FTF004", "Green Tired Face", "green", true)
+#     Red_Tired_Face = new.Tired_Face(false, TIRED_FACE_05, TIRED_DISPLAY_FACE_05, "FTF005", "Red Tired Face", "red", true)
+#     Yellow_Tired_Face = new.Tired_Face(false, TIRED_FACE_06, TIRED_DISPLAY_FACE_06, "FTF006", "Yellow Tired Face", "yellow", true)
+#     end
+#    class Smiley_Face
+#      Smiley_Face = new.Smiley_Face(false, SMILEY_FACE_01, SMILEY_DISPLAY_FACE_01, "FSFL001", "Smiley Face", "black", false)
+#    end
+#   end
+  
+#  module Gloves
+#   #properties
+#    property is_owned : Bool
+#    property char_sprite : SF::Sprite
+#    property display_sprite : SF::Sprite
+#    property id : String
+#    property name : String
+#    property color : String
+#   class Fingerless_Gloves
+#    Black_Fingerless_Gloves = new.Fingerless_Gloves(false, FINGERLESS_GLOVE_01, DISPLAY_FINGERLESS_GLOVE_01, "GFG001", "Black Fingerless Gloves", "black")
+#    Red_Fingerless_Gloves = new.Fingerless_Gloves(false, FINGERLESS_GLOVE_02, DISPLAY_FINGERLESS_GLOVE_02, "GFG002", "Red Fingerless Gloves", "red")
+#    Blue_Fingerless_Gloves = new.Fingerless_Gloves(false, FINGERLESS_GLOVE_03, DISPLAY_FINGERLESS_GLOVE_03, "GFG003", "Blue Fingerless Gloves", "blue")  
+#    end
+#   end
+#  module Shirts
+#   #properties
+#    property is_owned : Bool
+#    property char_sprite : SF::Sprite
+#    property display_sprite : SF::Sprite
+#    property id : String
+#    property name : String
+#    property color : String
+#    property sleeve_length : String
+#    property midriff_exposed : Bool
+#   class T_Shirts
+#    White_T_Shirt = new.T_Shirts(false, T_SHIRT_01, DISPLAY_T_SHIRT_01, "STS001", "White T-Shirt", "white", "short", false)  
+#    Blue_T_Shirt = new.T_Shirts(false, T_SHIRT_02, DISPLAY_T_SHIRT_02, "STS002", "Blue T-Shirt", "blue", "short", false)
+#    Red_T_Shirt = new.T_Shirts(false, T_SHIRT_03, DISPLAY_T_SHIRT_03, "STS003", "Red T-Shirt", "red", "short", false)
+#    Green_T_Shirt = new.T_Shirts(false, T_SHIRT_04, DISPLAY_T_SHIRT_04, "STS004", "Green T-Shirt", "green", "short", false)
+#    Purple_T_Shirt = new.T_Shirts(false, T_SHIRT_05, DISPLAY_T_SHIRT_05, "STS005", "Purple T-Shirt", "purple", "short", false) 
+#    Black_T_Shirt = new.T_Shirts(false, T_SHIRT_06, DISPLAY_T_SHIRT_06, "STS006", "Black T-Shirt", "black", "short", false) 
+#    end 
+#   end
+#  module Pants
+#   #properties
+#    property is_owned : Bool
+#    property char_sprite : SF::Sprite
+#    property display_sprite : SF::Sprite
+#    property id : String
+#    property name : String
+#    property color : String
+#    property length : String
+#   class Shorts
+#    Blue_Shorts = new.Shorts(false, SHORTS_01, DISPLAY_SHORTS_01, "PS001", "Blue_Shorts", "blue", "short")
+#    Brown_Shorts = new.Shorts(false, SHORTS_02, DISPLAY_SHORTS_02, "PS002", "Brown_Shorts", "brown", "short")
+#    Black_Shorts = new.Shorts(false, SHORTS_03, DISPLAY_SHORTS_03, "PS003", "Black_Shorts", "black", "short")
+#    end
+#   end
+# end
 
 
 # class Test_Enemy < Enemy_Physics
@@ -1626,20 +1753,20 @@ end
 
 
 
-class Person
-  def initialize(name : String)
-    @name = name
-    @age = 0
-  end
+# class Person
+#   def initialize(name : String)
+#     @name = name
+#     @age = 0
+#   end
 
-  def name
-    @name
-  end
+#   def name
+#     @name
+#   end
 
-  def age
-    @age
-  end
-end
+#   def age
+#     @age
+#   end
+# end
 
-john = Person.new "John"
-john.name
+# john = Person.new "John"
+# john.name
