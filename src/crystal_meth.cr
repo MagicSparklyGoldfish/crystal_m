@@ -64,7 +64,7 @@ extend self
 #======================================================Character Model==================================================================+
 
 #-----------------------------------------------------initialize models-----------------------------------------------------------------+
- def Window_Class.player_model_initialize 
+ def Window_Class.player_model_initialize(@@current_shoes) 
    @@player_character_model.clear(SF::Color::Transparent) #@note player customization happens here
    @@player_character_model.draw(SKIN_ARRAY[@@current_skin])
    @@player_character_model.draw(SHOES_ARRAY[@@current_shoes])
@@ -91,7 +91,7 @@ extend self
    @@current_display_hair_string = @@current_hair
    end; end
    Hair_Desc.string = HAIR_DESC_ARRAY[@@current_display_hair_string]
-   Window_Class.player_model_initialize 
+   Window_Class.player_model_initialize(@@current_shoes) 
    window.draw(HAIR_ARRAY[@@current_hair])
  end
  def Window_Class.customize_skin(window, direction)
@@ -101,7 +101,7 @@ extend self
      @@current_skin = @@current_skin - 1
    end; end
      Skin_Desc.string = SKIN_DESC_ARRAY[@@current_skin]
-     Window_Class.player_model_initialize 
+     Window_Class.player_model_initialize(@@current_shoes) 
      window.draw(SKIN_ARRAY[@@current_skin])
  end
  def Window_Class.customize_face(window, direction)
@@ -111,7 +111,7 @@ extend self
      @@current_face = @@current_face - 1
    end; end
      Face_Desc.string = FACE_DESC_ARRAY[@@current_face]
-     Window_Class.player_model_initialize 
+     Window_Class.player_model_initialize(@@current_shoes) 
      window.draw(FACE_ARRAY[@@current_face])
  end
  def Window_Class.customize_shirt(window, direction)
@@ -121,7 +121,7 @@ extend self
      @@current_shirt = @@current_shirt - 1
    end; end
      Shirt_Desc.string = SHIRT_DESC_ARRAY[@@current_shirt]
-     Window_Class.player_model_initialize 
+     Window_Class.player_model_initialize(@@current_shoes) 
      window.draw(SHIRT_ARRAY[@@current_shirt])
  end
  def Window_Class.customize_gloves(window, direction)
@@ -131,7 +131,7 @@ extend self
      @@current_gloves = @@current_gloves - 1
    end; end
    Glove_Desc.string = GLOVE_DESC_ARRAY[@@current_gloves]
-     Window_Class.player_model_initialize 
+     Window_Class.player_model_initialize(@@current_shoes) 
      window.draw(GLOVE_ARRAY[@@current_gloves])
  end
  def Window_Class.customize_pants(window, direction)
@@ -141,7 +141,7 @@ extend self
      @@current_pants = @@current_pants - 1
    end; end
    Pants_Desc.string = PANTS_DESC_ARRAY[@@current_pants]
-     Window_Class.player_model_initialize 
+     Window_Class.player_model_initialize(@@current_shoes) 
      window.draw(PANTS_ARRAY[@@current_pants])
  end
  def Window_Class.customize_shoes(window, direction)
@@ -151,7 +151,7 @@ extend self
      @@current_shoes = @@current_shoes - 1
    end; end
    Shoes_Desc.string = SHOES_DESC_ARRAY[@@current_shoes]
-     Window_Class.player_model_initialize 
+     Window_Class.player_model_initialize(@@current_shoes) 
      window.draw(SHOES_ARRAY[@@current_shoes])
  end
 #=======================================================================================================================================+
@@ -408,7 +408,7 @@ extend self
  debug_draw = SFMLDebugDraw.new(window, SF::RenderStates.new( #--------------------------------initializes crystal chipmunk draw area
  SF::Transform.new.translate(window.size / 2).scale(1, -1).scale(5, 5)
  ))
-  Window_Class.player_model_initialize 
+  Window_Class.player_model_initialize(@@current_shoes) 
   case @@map
   when "test"
     Window_Class.initialize_test_map(debug_draw, window, @@space)
@@ -462,7 +462,7 @@ def Window_Class.main_menu_keypresses(window)
   when SF::Keyboard::W #---------------for testing purposes, remove when testing done
     Data_Manager.load_savegame
   when SF::Keyboard::C #---------------for testing purposes, remove when testing done
-    Window_Class.player_model_initialize
+    Window_Class.player_model_initialize(@@current_shoes)
     @@menu = "charcreate"
   when SF::Keyboard::Enter
     puts "enter"
@@ -519,7 +519,7 @@ def Window_Class.char_select_menu_keypresses(window)
       when 1
       if File.exists?("Saves/Slot1/save01.yml") == false
         SaveData.create_new_savegame
-        Window_Class.player_model_initialize
+        Window_Class.player_model_initialize(@@current_shoes)
         @@menu = "charcreate"
       else puts "loadgame"
       # SF::Event::Closed
@@ -808,11 +808,17 @@ def Window_Class.hud_keypresses(window)
          Clothing::Shoes.gather_owned(window) #Shoes.select(window, @@player_character_model, selected_shoe)
       end
       if (x >= 710 && x <= 825) && (y >= 470 && y <= 590) && @@tab == "shoes"
-        All_Audio::SFX.char_create_sideways
-        @@player_character_rendered_model
-        selected_shoe = 0
-        Clothing::Shoes.select(window, selected_shoe)
+        this = 0
+        Clothing::Shoes.determine_array_length(window, this)
       end
+      if (x >= 830 && x <= 950) && (y >= 490 && y <= 590) && @@tab == "shoes"
+        this = 1
+        Clothing::Shoes.determine_array_length(window, this)
+      end
+       if (x >= 940 && x <= 1060) && (y >= 490 && y <= 590) && @@tab == "shoes"
+         this = 2
+         Clothing::Shoes.determine_array_length(window, this)
+       end
 #___________________________________________________________________________________________________________________________________________
 
         
@@ -1005,10 +1011,9 @@ end; end; end; end; end; end
 
  module Player_Data #@note Player data is stored here 
  include Gui;       #@todo fix all the classes
- @@hair_slot = 0 #@todo finish assigning these fucking things to fucking 0 god fucking damn it
- @@hair_slot : (Int32); @@skin_slot : (Int32); @@face_slot : (Int32)
- @@shirt_slot : (Int32 | Nil ); @@gloves_slot : (Int32 | Nil ); @@pants_slot : (Int32 | Nil )
- @@shoes_slot : (Int32 | Nil ); @@outfit_array : Array(Int32 | Nil) = [@@hair_slot, @@skin_slot, @@face_slot, @@shirt_slot, @@gloves_slot, @@pants_slot, @@shoes_slot]
+ @@hair_slot = 0; @@skin_slot = 0; @@face_slot = 0; @@shirt_slot = 0; @@gloves_slot = 0; @@pants_slot = 0; @@shoes_slot = 0
+ @@hair_slot : (Int32); @@skin_slot : (Int32); @@face_slot : (Int32); @@shirt_slot : (Int32); @@gloves_slot : (Int32); @@pants_slot : (Int32)
+ @@shoes_slot : (Int32); @@outfit_array : Array(Int32) = [@@hair_slot, @@skin_slot, @@face_slot, @@shirt_slot, @@gloves_slot, @@pants_slot, @@shoes_slot]
  
    def add_item(@@item_type, item)
      if item.is_owned == false 
@@ -1033,43 +1038,7 @@ end; end; end; end; end; end
    end
   class Clothing_Outfit_Slot < Window_Class
     include Player_Data  
-    def initialize(hair_slot : Int32, skin_slot : Int32, face_slot : Int32, shirt_slot : Int32, gloves_slot : Int32, pants_slot : Int32, shoes_slot : Int32)
-      @hair_slot = hair_slot 
-      @skin_slot = skin_slot 
-      @face_slot = face_slot 
-      @shirt_slot = shirt_slot 
-      @gloves_slot = gloves_slot 
-      @pants_slot = pants_slot 
-      @shoes_slot = shoes_slot 
-    end
-    property hair_slot : Int32
-    property skin_slot : Int32
-    property face_slot : Int32
-    property shirt_slot : Int32
-    property gloves_slot : Int32
-    property pants_slot : Int32
-    property shoes_slot : Int32
-    def hair_slot 
-      @hair_slot
-     end
-    def skin_slot
-      @skin_slot
-     end
-    def face_slot
-      @face_slot
-     end
-    def shirt_Slot 
-      @shirt_slot
-     end
-    def gloves_slot
-      @gloves_slot
-     end
-    def pants_slot
-      @pants_slot
-     end
-    def shoes_slot
-      @shoes_slot
-     end 
+
     def Clothing_Outfit_Slot.save_outfit(@@current_hair, @@current_skin, @@current_face, @@current_shirt, @@current_gloves, @@current_pants, @@current_shoes)
      @@hair_slot = @@current_hair
      @@skin_slot = @@current_skin
@@ -1086,23 +1055,12 @@ end; end; end; end; end; end
 
      end
     end
-    def Clothing_Outfit_Slot.player_model_draw 
-      @@player_character_model.clear(SF::Color::Transparent)
-      @@player_character_model.draw(SKIN_ARRAY[@@skin_slot])
-      @@player_character_model.draw(SHOES_ARRAY[@@shoes_slot])
-      @@player_character_model.draw(FACE_ARRAY[@@face_slot])
-      @@player_character_model.draw(HAIR_ARRAY[@@hair_slot])
-      @@player_character_model.draw(PANTS_ARRAY[@@pants_slot])
-      @@player_character_model.draw(SHIRT_ARRAY[@@shirt_slot])
-      @@player_character_model.draw(GLOVE_ARRAY[@@gloves_slot])
-      @@player_character_model.create(672, 512, false)
-      @@player_character_model.display
-      @@player_character_rendered_model.texture_rect = SF.int_rect(0, 0, 96, 128)
-      @@player_character_rendered_model.position = SF.vector2(660, 515)
-      @@player_character_rendered_model.scale = SF.vector2(3.0, 3.0)
-      end
-      def Clothing_Outfit_Slot.change_shoes
-        player_model_draw() 
+      def Clothing_Outfit_Slot.change_shoes(shoes_slot, window)
+        @@shoes_slot = shoes_slot
+        @@current_shoes = shoes_slot
+        Window_Class.player_model_initialize(@@current_shoes) 
+        @@player_character_model.draw(SHOES_ARRAY[@@shoes_slot])
+        window.draw(SHOES_ARRAY[@@shoes_slot])
      end
   class Consumables_Slot
    end
@@ -1382,11 +1340,12 @@ module Enemy_Data # @note Enemy data is stored here
       window.draw(@@test_humanoid.sprite); window.draw(@@test_humanoid2.sprite)
       name01 = Name_Box.dup; name01.position = @@test_humanoid.sprite.position + SF.vector2(-10, 130); window.draw(name01)
       nametext01 = Name_Box_Text.dup; nametext01.string = "Test Humanoid"; nametext01.position = name01.position - SF.vector2(-3, 5)
-      window.draw(nametext01); health1 = Health_Bar.dup; health1.position = @@test_humanoid.sprite.position + SF.vector2(-10, 130)
+      window.draw(nametext01); health1 = Health_Bar.dup; health1.position = @@test_humanoid.sprite.position + SF.vector2(-5, 160)
       window.draw(health1)
       name02 = Name_Box.dup; name02.position = @@test_humanoid2.sprite.position + SF.vector2(0, 130); window.draw(name02)
       nametext02 = Name_Box_Text.dup; nametext02.string = "Test Humanoid2"; nametext02.position = name02.position - SF.vector2(0, 5)
-      window.draw(nametext02); 
+      window.draw(nametext02); health2 = Health_Bar.dup; health2.position = @@test_humanoid2.sprite.position + SF.vector2(5, 160)
+      window.draw(health2)
       bounding_boxes = [@@test_humanoid.sprite.global_bounds, @@test_humanoid2.sprite.global_bounds]
       sprites = [@@test_humanoid.sprite, @@test_humanoid2.sprite]
       this = bounding_boxes[0]; this2 = sprites[0]
@@ -1476,7 +1435,7 @@ module Clothing
 #WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
 #W                                                               Wardrobe                                                                  W
 #WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
-class Wardrobe #@todo create method to add clothing owned arrays to slots and a method to draw contents of slot to character sprite
+class Wardrobe #@note is this necessary?
   @@nil_shoe = Shoes.new(true, NIL_SHOE_TEXTURE, NIL_SHOE_TEXTURE, "Nil", "Nil", -1)
   # __________________________________________________________________________________________________________________________________________
   #|                                                             initialize                                                                  |
@@ -1548,8 +1507,11 @@ end
      def color
        @color
       end
+     def number
+        @number
+      end
   #------------------------------------------------------------------------------------------------------------------------------------------
- 
+ #@todo maybe merge ownership and shoe methods and variables
   # __________________________________________________________________________________________________________________________________________
   #|                                                             ownership                                                                   |
   #|_________________________________________________________________________________________________________________________________________|
@@ -1584,33 +1546,45 @@ end
          @@owned_shoes_array[2].display_sprite.position = SF.vector2(830, 135)
          window.draw(@@owned_shoes_array[2].display_sprite)
        end
-     end
+      end
+     
   #------------------------------------------------------------------------------------------------------------------------------------------
 
   # __________________________________________________________________________________________________________________________________________
-  #|                                                             outfit slot                                                                 |
+  #|                                                     shoe methods and variables                                                          |
   #|_________________________________________________________________________________________________________________________________________|
    #..............................................................variables...................................................................
      @@outfit_shoe_slot : Shoes
      @@outfit_shoe_slot = @@black_rain_boots
     #.........................................................................................................................................
    #...............................................................methods....................................................................
-     def Shoes.select(window, selected_shoe)
-      shoes_slot = @@owned_shoes_array[selected_shoe]
-      Clothing_Outfit_Slot.change_shoes
+    def Shoes.determine_array_length(window, this)
+     @@owned_shoes_array.uniq!
+     if this <= @@owned_shoes_array.size - 1
+       case this
+       when 0
+         selected_shoe = @@owned_shoes_array[0].number
+         Clothing::Shoes.select(window, selected_shoe)
+       when 1
+         selected_shoe = @@owned_shoes_array[1].number
+         Clothing::Shoes.select(window, selected_shoe)
+         puts @@owned_shoes_array
+       when 2
+         selected_shoe = @@owned_shoes_array[2].number
+         Clothing::Shoes.select(window, selected_shoe)
+       end; end; end
+    def Shoes.select(window, selected_shoe)
+      shoes_slot = selected_shoe
+      Clothing_Outfit_Slot.change_shoes(shoes_slot, window)
      end
     #.........................................................................................................................................
   #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-  # __________________________________________________________________________________________________________________________________________
-  #|                                                            wardrobe slot                                                                |
-  #|_________________________________________________________________________________________________________________________________________|
-     
+    
   # __________________________________________________________________________________________________________________________________________
   #|                                                             Rain Boots                                                                  |
   #|_________________________________________________________________________________________________________________________________________|
       @@black_rain_boots = Shoes.new(true, RAIN_BOOTS_01, DISPLAY_RAIN_BOOTS_01, "Black Rain Boots", "black", 0)
-      @@red_rain_boots = Shoes.new(false, RAIN_BOOTS_02, DISPLAY_RAIN_BOOTS_02, "Red Rain Boots", "red", 1)
+      @@red_rain_boots = Shoes.new(true, RAIN_BOOTS_02, DISPLAY_RAIN_BOOTS_02, "Red Rain Boots", "red", 1)
       @@blue_rain_boots = Shoes.new(true, RAIN_BOOTS_03, DISPLAY_RAIN_BOOTS_03, "Blue Rain Boots", "blue", 2)
 
   #------------------------------------------------------------------------------------------------------------------------------------------ 
