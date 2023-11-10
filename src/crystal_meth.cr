@@ -64,7 +64,7 @@ extend self
 #======================================================Character Model==================================================================+
 
 #-----------------------------------------------------initialize models-----------------------------------------------------------------+
- def Window_Class.player_model_initialize(@@current_shoes) 
+ def Window_Class.player_model_initialize(@@current_shoes, @@current_gloves, @@current_shirt)
    @@player_character_model.clear(SF::Color::Transparent) #@note player customization happens here
    @@player_character_model.draw(SKIN_ARRAY[@@current_skin])
    @@player_character_model.draw(SHOES_ARRAY[@@current_shoes])
@@ -91,7 +91,7 @@ extend self
    @@current_display_hair_string = @@current_hair
    end; end
    Hair_Desc.string = HAIR_DESC_ARRAY[@@current_display_hair_string]
-   Window_Class.player_model_initialize(@@current_shoes) 
+   Window_Class.player_model_initialize(@@current_shoes, @@current_gloves, @@current_shirt)
    window.draw(HAIR_ARRAY[@@current_hair])
  end
  def Window_Class.customize_skin(window, direction)
@@ -101,7 +101,7 @@ extend self
      @@current_skin = @@current_skin - 1
    end; end
      Skin_Desc.string = SKIN_DESC_ARRAY[@@current_skin]
-     Window_Class.player_model_initialize(@@current_shoes) 
+     Window_Class.player_model_initialize(@@current_shoes, @@current_gloves, @@current_shirt)
      window.draw(SKIN_ARRAY[@@current_skin])
  end
  def Window_Class.customize_face(window, direction)
@@ -111,7 +111,7 @@ extend self
      @@current_face = @@current_face - 1
    end; end
      Face_Desc.string = FACE_DESC_ARRAY[@@current_face]
-     Window_Class.player_model_initialize(@@current_shoes) 
+     Window_Class.player_model_initialize(@@current_shoes, @@current_gloves, @@current_shirt)
      window.draw(FACE_ARRAY[@@current_face])
  end
  def Window_Class.customize_shirt(window, direction)
@@ -121,7 +121,7 @@ extend self
      @@current_shirt = @@current_shirt - 1
    end; end
      Shirt_Desc.string = SHIRT_DESC_ARRAY[@@current_shirt]
-     Window_Class.player_model_initialize(@@current_shoes) 
+     Window_Class.player_model_initialize(@@current_shoes, @@current_gloves, @@current_shirt)
      window.draw(SHIRT_ARRAY[@@current_shirt])
  end
  def Window_Class.customize_gloves(window, direction)
@@ -131,7 +131,7 @@ extend self
      @@current_gloves = @@current_gloves - 1
    end; end
    Glove_Desc.string = GLOVE_DESC_ARRAY[@@current_gloves]
-     Window_Class.player_model_initialize(@@current_shoes) 
+     Window_Class.player_model_initialize(@@current_shoes, @@current_gloves, @@current_shirt)
      window.draw(GLOVE_ARRAY[@@current_gloves])
  end
  def Window_Class.customize_pants(window, direction)
@@ -141,7 +141,7 @@ extend self
      @@current_pants = @@current_pants - 1
    end; end
    Pants_Desc.string = PANTS_DESC_ARRAY[@@current_pants]
-     Window_Class.player_model_initialize(@@current_shoes) 
+     Window_Class.player_model_initialize(@@current_shoes, @@current_gloves, @@current_shirt)
      window.draw(PANTS_ARRAY[@@current_pants])
  end
  def Window_Class.customize_shoes(window, direction)
@@ -151,7 +151,7 @@ extend self
      @@current_shoes = @@current_shoes - 1
    end; end
    Shoes_Desc.string = SHOES_DESC_ARRAY[@@current_shoes]
-     Window_Class.player_model_initialize(@@current_shoes) 
+     Window_Class.player_model_initialize(@@current_shoes, @@current_gloves, @@current_shirt)
      window.draw(SHOES_ARRAY[@@current_shoes])
  end
 #=======================================================================================================================================+
@@ -367,8 +367,10 @@ extend self
       case @@tab
        when "shirt"
         Window_Class.shirt_tab(window)
+        Clothing::Shirt.draw(window)
        when "gloves"
         Window_Class.gloves_tab(window)
+        Clothing::Gloves.draw(window)
        when "pants"
         Window_Class.pants_tab(window)
        when "shoes"
@@ -408,7 +410,7 @@ extend self
  debug_draw = SFMLDebugDraw.new(window, SF::RenderStates.new( #--------------------------------initializes crystal chipmunk draw area
  SF::Transform.new.translate(window.size / 2).scale(1, -1).scale(5, 5)
  ))
-  Window_Class.player_model_initialize(@@current_shoes) 
+  Window_Class.player_model_initialize(@@current_shoes, @@current_gloves, @@current_shirt)
   case @@map
   when "test"
     Window_Class.initialize_test_map(debug_draw, window, @@space)
@@ -462,7 +464,7 @@ def Window_Class.main_menu_keypresses(window)
   when SF::Keyboard::W #---------------for testing purposes, remove when testing done
     Data_Manager.load_savegame
   when SF::Keyboard::C #---------------for testing purposes, remove when testing done
-    Window_Class.player_model_initialize(@@current_shoes)
+    Window_Class.player_model_initialize(@@current_shoes, @@current_gloves, @@current_shirt)
     @@menu = "charcreate"
   when SF::Keyboard::Enter
     puts "enter"
@@ -519,7 +521,7 @@ def Window_Class.char_select_menu_keypresses(window)
       when 1
       if File.exists?("Saves/Slot1/save01.yml") == false
         SaveData.create_new_savegame
-        Window_Class.player_model_initialize(@@current_shoes)
+        Window_Class.player_model_initialize(@@current_shoes, @@current_gloves, @@current_shirt)
         @@menu = "charcreate"
       else puts "loadgame"
       # SF::Event::Closed
@@ -748,12 +750,12 @@ def Window_Class.hud_keypresses(window)
       if (x >= 1730 && x <= 1850) && (y >= 870 && y <= 900)
          case @@popup
          when "System_Popup_Menu" 
-           #Gui::Window_Class.player_model_initialize 
            player = SF::Sprite.new(@@player_character_rendered_model)
            player.position = SF.vector2(790, 200)
            player.scale = SF.vector2(1.5, 1.5)
            window.draw(player)
            @@popup = "Stats_Menu"
+           Clothing::Shirt.gather_owned(window)
            @@tab = "shirt"
            Player_Data::Clothing_Wardrobe_Slot.pull_arrays
          when "none"
@@ -786,15 +788,49 @@ def Window_Class.hud_keypresses(window)
          @@tab = "none"
          @@player_character_rendered_model.scale = SF.vector2(1.0, 1.0)
          #@@player_character_rendered_model.position = SF.vector2(450, 670)
+#|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+#|                                                             shirt tab                                                                   |
+#||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| 
         end
       if (x >= 713 && x <= 853) && (y >= 450 && y <= 485) && @@popup == "Stats_Menu"
          All_Audio::SFX.select1
          @@tab = "shirt"
+         Clothing::Shirt.gather_owned(window)
         end
+      if (x >= 710 && x <= 825) && (y >= 470 && y <= 590) && @@tab == "shirt"
+        this = 0
+        Clothing::Shirt.determine_array_length(window, this)
+       end
+      if (x >= 830 && x <= 950) && (y >= 490 && y <= 590) && @@tab == "shirt"
+        this = 1
+        Clothing::Shirt.determine_array_length(window, this)
+       end
+      if (x >= 940 && x <= 1060) && (y >= 490 && y <= 590) && @@tab == "shirt"
+        this = 2
+        Clothing::Shirt.determine_array_length(window, this)
+       end
+#|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+#|                                                            gloves tab                                                                   |
+#|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||        
       if (x >= 857 && x <= 993) && (y >= 450 && y <= 485) && @@popup == "Stats_Menu"
          All_Audio::SFX.select1
          @@tab = "gloves"
-        end
+         Clothing::Gloves.gather_owned(window)
+      end
+      if (x >= 710 && x <= 825) && (y >= 470 && y <= 590) && @@tab == "gloves"
+        this = 0
+        Clothing::Gloves.determine_array_length(window, this)
+      end
+      if (x >= 830 && x <= 950) && (y >= 490 && y <= 590) && @@tab == "gloves"
+        this = 1
+        Clothing::Gloves.determine_array_length(window, this)
+      end
+       if (x >= 940 && x <= 1060) && (y >= 490 && y <= 590) && @@tab == "gloves"
+         this = 2
+         Clothing::Gloves.determine_array_length(window, this)
+      end
+#___________________________________________________________________________________________________________________________________________
+
       if (x >= 1001 && x <= 1141) && (y >= 450 && y <= 485) && @@popup == "Stats_Menu"
          All_Audio::SFX.select1
          @@tab = "pants"
@@ -815,10 +851,10 @@ def Window_Class.hud_keypresses(window)
         this = 1
         Clothing::Shoes.determine_array_length(window, this)
       end
-       if (x >= 940 && x <= 1060) && (y >= 490 && y <= 590) && @@tab == "shoes"
+      if (x >= 940 && x <= 1060) && (y >= 490 && y <= 590) && @@tab == "shoes"
          this = 2
          Clothing::Shoes.determine_array_length(window, this)
-       end
+      end
 #___________________________________________________________________________________________________________________________________________
 
         
@@ -1055,13 +1091,27 @@ end; end; end; end; end; end
 
      end
     end
-      def Clothing_Outfit_Slot.change_shoes(shoes_slot, window)
+    def Clothing_Outfit_Slot.change_shoes(shoes_slot, window)
         @@shoes_slot = shoes_slot
         @@current_shoes = shoes_slot
-        Window_Class.player_model_initialize(@@current_shoes) 
+        Window_Class.player_model_initialize(@@current_shoes, @@current_gloves, @@current_shirt) 
         @@player_character_model.draw(SHOES_ARRAY[@@shoes_slot])
         window.draw(SHOES_ARRAY[@@shoes_slot])
      end
+     def Clothing_Outfit_Slot.change_gloves(gloves_slot, window)
+       @@gloves_slot = gloves_slot
+       @@current_gloves = gloves_slot
+       Window_Class.player_model_initialize(@@current_shoes, @@current_gloves, @@current_shirt) 
+       @@player_character_model.draw(GLOVE_ARRAY[@@gloves_slot])
+       window.draw(GLOVE_ARRAY[@@gloves_slot])
+    end
+    def Clothing_Outfit_Slot.change_shirt(shirt_slot, window)
+      @@shirt_slot = shirt_slot
+      @@current_shirt = shirt_slot
+      Window_Class.player_model_initialize(@@current_shoes, @@current_gloves, @@current_shirt) 
+      @@player_character_model.draw(SHIRT_ARRAY[@@shirt_slot])
+      window.draw(SHIRT_ARRAY[@@shirt_slot])
+   end
   class Consumables_Slot
    end
   class Equipment_Slot
@@ -1331,21 +1381,25 @@ module Enemy_Data # @note Enemy data is stored here
           @@test_humanoid2 = Test_Enemy.new("test enemy", @@test_enemy_rendered_model2, 100, 100)
     end
     def Test_Enemy.draw
-
       Test_Enemy.sprite
       @@test_humanoid.sprite.position = SF.vector2(560, 655)
       @@test_humanoid2.sprite.position = SF.vector2(800, 655)
     end
     def Test_Enemy.maintain(window) #@todo tidy this shit up
-      window.draw(@@test_humanoid.sprite); window.draw(@@test_humanoid2.sprite)
+     #---------------------------------------------test humanoid 1----------------------------------------------------------------------
+      window.draw(@@test_humanoid.sprite); 
       name01 = Name_Box.dup; name01.position = @@test_humanoid.sprite.position + SF.vector2(-10, 130); window.draw(name01)
       nametext01 = Name_Box_Text.dup; nametext01.string = "Test Humanoid"; nametext01.position = name01.position - SF.vector2(-3, 5)
       window.draw(nametext01); health1 = Health_Bar.dup; health1.position = @@test_humanoid.sprite.position + SF.vector2(-5, 160)
       window.draw(health1)
+     #----------------------------------------------------------------------------------------------------------------------------------
+     #---------------------------------------------test humanoid 2----------------------------------------------------------------------
+      window.draw(@@test_humanoid2.sprite)
       name02 = Name_Box.dup; name02.position = @@test_humanoid2.sprite.position + SF.vector2(0, 130); window.draw(name02)
       nametext02 = Name_Box_Text.dup; nametext02.string = "Test Humanoid2"; nametext02.position = name02.position - SF.vector2(0, 5)
       window.draw(nametext02); health2 = Health_Bar.dup; health2.position = @@test_humanoid2.sprite.position + SF.vector2(5, 160)
       window.draw(health2)
+     #----------------------------------------------------------------------------------------------------------------------------------
       bounding_boxes = [@@test_humanoid.sprite.global_bounds, @@test_humanoid2.sprite.global_bounds]
       sprites = [@@test_humanoid.sprite, @@test_humanoid2.sprite]
       this = bounding_boxes[0]; this2 = sprites[0]
@@ -1467,6 +1521,12 @@ class Wardrobe #@note is this necessary?
    def Wardrobe.gather_shoes(window)
      Shoes.gather_owned(window)
      end
+   def Wardrobe.gather_gloves(window)
+     Gloves.gather_owned(window)
+     end
+   def Wardrobe.gather_shirts(window)
+     Shirt.gather_owned(window)
+     end
   # __________________________________________________________________________________________________________________________________________
   #|                                                             Shoe Slots                                                                  |
   #|_________________________________________________________________________________________________________________________________________|
@@ -1511,26 +1571,32 @@ end
         @number
       end
   #------------------------------------------------------------------------------------------------------------------------------------------
- #@todo maybe merge ownership and shoe methods and variables
+
+
   # __________________________________________________________________________________________________________________________________________
-  #|                                                             ownership                                                                   |
+  #|                                                     shoe methods and variables                                                          |
   #|_________________________________________________________________________________________________________________________________________|
-   @@owned_shoes_array = [] of Shoes
-   @@shoes_array : Array(Shoes)
-   property = @@owned_shoes_array
-   @@shoes_array = [@@black_rain_boots, @@red_rain_boots, @@blue_rain_boots]
-     def Shoes.obtain(this)
-       this.is_owned = true
-      end 
-     def Shoes.gather_owned(window)
-       a = -1; b = @@shoes_array.size
-        while a != b
-        if @@shoes_array[a].is_owned == true
-          @@owned_shoes_array.push(@@shoes_array[a])
-        end
-        a += 1
-        end
-    end
+   #..............................................................variables...................................................................
+     @@owned_shoes_array = [] of Shoes
+     @@shoes_array : Array(Shoes)
+     property = @@owned_shoes_array
+     @@outfit_shoe_slot : Shoes
+     @@outfit_shoe_slot = @@black_rain_boots
+     @@shoes_array = [@@black_rain_boots, @@red_rain_boots, @@blue_rain_boots]
+    #.........................................................................................................................................
+   #...............................................................methods....................................................................
+       def Shoes.obtain(this)
+         this.is_owned = true
+        end 
+       def Shoes.gather_owned(window)
+         a = -1; b = @@shoes_array.size
+          while a != b
+          if @@shoes_array[a].is_owned == true
+            @@owned_shoes_array.push(@@shoes_array[a])
+          end
+          a += 1
+          end
+      end
       def Shoes.draw(window)
         @@owned_shoes_array.uniq!
         s = @@owned_shoes_array.size - 1
@@ -1547,17 +1613,6 @@ end
          window.draw(@@owned_shoes_array[2].display_sprite)
        end
       end
-     
-  #------------------------------------------------------------------------------------------------------------------------------------------
-
-  # __________________________________________________________________________________________________________________________________________
-  #|                                                     shoe methods and variables                                                          |
-  #|_________________________________________________________________________________________________________________________________________|
-   #..............................................................variables...................................................................
-     @@outfit_shoe_slot : Shoes
-     @@outfit_shoe_slot = @@black_rain_boots
-    #.........................................................................................................................................
-   #...............................................................methods....................................................................
     def Shoes.determine_array_length(window, this)
      @@owned_shoes_array.uniq!
      if this <= @@owned_shoes_array.size - 1
@@ -1568,7 +1623,6 @@ end
        when 1
          selected_shoe = @@owned_shoes_array[1].number
          Clothing::Shoes.select(window, selected_shoe)
-         puts @@owned_shoes_array
        when 2
          selected_shoe = @@owned_shoes_array[2].number
          Clothing::Shoes.select(window, selected_shoe)
@@ -1587,26 +1641,27 @@ end
       @@red_rain_boots = Shoes.new(true, RAIN_BOOTS_02, DISPLAY_RAIN_BOOTS_02, "Red Rain Boots", "red", 1)
       @@blue_rain_boots = Shoes.new(true, RAIN_BOOTS_03, DISPLAY_RAIN_BOOTS_03, "Blue Rain Boots", "blue", 2)
 
-  #------------------------------------------------------------------------------------------------------------------------------------------ 
+ #------------------------------------------------------------------------------------------------------------------------------------------ 
    end
-end
-end
-  # class Pie
-  #   @@pie = 5
-  # end
-  # class Wut < Pie
-  #   puts @@pie
-  # end
 
-#  module Face
+class Face
+    def initialize(is_owned : Bool, char_sprite : SF::Sprite, display_sprite : SF::Sprite, name : String, eye_color : String, does_blink : Bool, number : Int32)
+    @is_owned = is_owned
+    @char_sprite = char_sprite
+    @display_sprite = display_sprite
+    @name = name
+    @eye_color = eye_color
+    @does_blink = does_blink
+    @number = number 
+    end
 #    #properties
 #     property is_owned : Bool
 #     property char_sprite : SF::Sprite
 #     property display_sprite : SF::Sprite
-#     property id : String
 #     property name : String
 #     property eye_color : String
 #     property does_blink : Bool
+      property number
 #    class Button_Face
 #     Blue_Button_Eyes = new.Button_Face(false, BUTTON_FACE_01, BUTTON_DISPLAY_FACE_01, "FFBE001", "Blue Button Eyes", "blue", false)
 #     Red_Button_Eyes = new.Button_Face(false, BUTTON_FACE_02, BUTTON_DISPLAY_FACE_02, "FFBE002", "Red Button Eyes", "red", false)
@@ -1634,41 +1689,243 @@ end
 #    class Smiley_Face
 #      Smiley_Face = new.Smiley_Face(false, SMILEY_FACE_01, SMILEY_DISPLAY_FACE_01, "FSFL001", "Smiley Face", "black", false)
 #    end
-#   end
+   end
   
-#  module Gloves
-#   #properties
-#    property is_owned : Bool
-#    property char_sprite : SF::Sprite
-#    property display_sprite : SF::Sprite
-#    property id : String
-#    property name : String
-#    property color : String
-#   class Fingerless_Gloves
-#    Black_Fingerless_Gloves = new.Fingerless_Gloves(false, FINGERLESS_GLOVE_01, DISPLAY_FINGERLESS_GLOVE_01, "GFG001", "Black Fingerless Gloves", "black")
-#    Red_Fingerless_Gloves = new.Fingerless_Gloves(false, FINGERLESS_GLOVE_02, DISPLAY_FINGERLESS_GLOVE_02, "GFG002", "Red Fingerless Gloves", "red")
-#    Blue_Fingerless_Gloves = new.Fingerless_Gloves(false, FINGERLESS_GLOVE_03, DISPLAY_FINGERLESS_GLOVE_03, "GFG003", "Blue Fingerless Gloves", "blue")  
-#    end
-#   end
-#  module Shirts
-#   #properties
-#    property is_owned : Bool
-#    property char_sprite : SF::Sprite
-#    property display_sprite : SF::Sprite
-#    property id : String
-#    property name : String
-#    property color : String
-#    property sleeve_length : String
-#    property midriff_exposed : Bool
-#   class T_Shirts
-#    White_T_Shirt = new.T_Shirts(false, T_SHIRT_01, DISPLAY_T_SHIRT_01, "STS001", "White T-Shirt", "white", "short", false)  
-#    Blue_T_Shirt = new.T_Shirts(false, T_SHIRT_02, DISPLAY_T_SHIRT_02, "STS002", "Blue T-Shirt", "blue", "short", false)
-#    Red_T_Shirt = new.T_Shirts(false, T_SHIRT_03, DISPLAY_T_SHIRT_03, "STS003", "Red T-Shirt", "red", "short", false)
-#    Green_T_Shirt = new.T_Shirts(false, T_SHIRT_04, DISPLAY_T_SHIRT_04, "STS004", "Green T-Shirt", "green", "short", false)
+#GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG
+#G                                                               Gloves                                                                     G
+#GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG
+
+  class Gloves
+   include Gui; include Player_Data
+ # __________________________________________________________________________________________________________________________________________
+ #|                                                             initialize                                                                  |
+ #|_________________________________________________________________________________________________________________________________________|
+   def initialize(is_owned : Bool, char_sprite : SF::Sprite, display_sprite : SF::Sprite, name : String, color : String, number : Int32) 
+     @is_owned = is_owned
+     @char_sprite = char_sprite
+     @display_sprite = display_sprite
+     @name = name
+     @color = color
+     @number = number 
+    end
+   def is_owned
+     @is_owned
+    end
+   def char_sprite
+     @char_sprite
+    end
+   def display_sprite
+     @display_sprite
+    end
+   def name
+     @name
+    end
+   def color
+     @color
+    end
+   def number
+     @number
+    end
+ #-------------------------------------------------------------------------------------------------------------------------------------------
+
+ # __________________________________________________________________________________________________________________________________________
+ #|                                                     glove methods and variables                                                         |
+ #|_________________________________________________________________________________________________________________________________________|
+  #..............................................................variables...................................................................
+    @@owned_gloves_array = [] of Gloves
+    @@gloves_array : Array(Gloves)
+    property = @@owned_gloves_array
+    @@outfit_gloves_slot : Gloves
+    @@outfit_gloves_slot = @@black_fingerless_gloves
+    @@gloves_array = [@@black_fingerless_gloves, @@red_fingerless_gloves, @@blue_fingerless_gloves]
+  #******************************************************************************************************************************************
+  #...............................................................methods....................................................................
+   def Gloves.obtain(this)#---------------------------------------obtain
+     this.is_owned = true
+    end 
+
+   def Gloves.gather_owned(window)#----------------------------gather obtained
+     a = -1; b = @@gloves_array.size
+      while a != b
+       if @@gloves_array[a].is_owned == true
+          @@owned_gloves_array.push(@@gloves_array[a])
+       end
+     a += 1
+        end
+    end
+
+   def Gloves.draw(window)#-----------------------------------------draw
+      @@owned_gloves_array.uniq!
+      s = @@owned_gloves_array.size - 1
+    if s >= 0 && @@owned_gloves_array[0].is_owned == true
+       @@owned_gloves_array[0].display_sprite.position = SF.vector2(535, 135)
+       window.draw(@@owned_gloves_array[0].display_sprite)
+    end
+    if s >= 1 && @@owned_gloves_array[1].is_owned == true
+       @@owned_gloves_array[1].display_sprite.position = SF.vector2(655, 135)
+       window.draw(@@owned_gloves_array[1].display_sprite)
+    end
+    if s >=  2 && @@owned_gloves_array[2].is_owned == true
+       @@owned_gloves_array[2].display_sprite.position = SF.vector2(775, 135)
+       window.draw(@@owned_gloves_array[2].display_sprite)
+     end
+    end
+
+   def Gloves.determine_array_length(window, this)#--------------array length
+      @@owned_gloves_array.uniq!
+    if this <= @@owned_gloves_array.size - 1
+     case this
+      when 0
+       selected_gloves = @@owned_gloves_array[0].number
+       Clothing::Gloves.select(window, selected_gloves)
+      when 1
+       selected_gloves = @@owned_gloves_array[1].number
+       Clothing::Gloves.select(window, selected_gloves)
+      when 2
+       selected_gloves = @@owned_gloves_array[2].number
+       Clothing::Gloves.select(window, selected_gloves)
+    end; end; end
+  def Gloves.select(window, selected_gloves)#----------------------select
+    gloves_slot = selected_gloves
+    Clothing_Outfit_Slot.change_gloves(gloves_slot, window)
+   end
+  #******************************************************************************************************************************************
+
+ # __________________________________________________________________________________________________________________________________________
+ #|                                                          Fingerless Gloves                                                              |
+ #|_________________________________________________________________________________________________________________________________________|
+
+   @@black_fingerless_gloves = Gloves.new(true, FINGERLESS_GLOVE_01, DISPLAY_FINGERLESS_GLOVE_01, "Black Fingerless Gloves", "black", 0)
+   @@red_fingerless_gloves = Gloves.new(true, FINGERLESS_GLOVE_02, DISPLAY_FINGERLESS_GLOVE_02, "Red Fingerless Gloves", "red", 1)
+   @@blue_fingerless_gloves = Gloves.new(true, FINGERLESS_GLOVE_03, DISPLAY_FINGERLESS_GLOVE_03, "Blue Fingerless Gloves", "blue", 2)
+
+ #-------------------------------------------------------------------------------------------------------------------------------------------
+ end
+
+#SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
+#S                                                               Shirts                                                                     S
+#SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
+class Shirt
+  include Gui; include Player_Data
+ # __________________________________________________________________________________________________________________________________________
+ #|                                                             initialize                                                                  |
+ #|_________________________________________________________________________________________________________________________________________|
+  def initialize(is_owned : Bool, char_sprite : SF::Sprite, display_sprite : SF::Sprite, name : String, color : String, sleeve_length : String, number : Int32) 
+    @is_owned = is_owned
+    @char_sprite = char_sprite
+    @display_sprite = display_sprite
+    @name = name
+    @color = color
+    @sleeve_length = sleeve_length
+    @number = number 
+   end
+  def is_owned
+    @is_owned
+   end
+  def char_sprite
+    @char_sprite
+   end
+  def display_sprite
+    @display_sprite
+   end
+  def name
+    @name
+   end
+  def color
+    @color
+   end
+  def sleeve_length
+    @sleeve_length
+   end
+  def number
+    @number
+   end
+ # __________________________________________________________________________________________________________________________________________
+ #|                                                     shirt methods and variables                                                         |
+ #|_________________________________________________________________________________________________________________________________________|
+  #..............................................................variables...................................................................
+   @@owned_shirt_array = [] of Shirt
+   @@shirt_array : Array(Shirt)
+   property = @@owned_shirt_array
+   @@outfit_shirt_slot : Shirt
+   @@outfit_shirt_slot = @@white_t_shirt
+   @@shirt_array = [@@white_t_shirt, @@blue_t_shirt, @@red_t_shirt]
+  #******************************************************************************************************************************************
+  #...............................................................methods....................................................................
+   def Shirt.obtain(this)#---------------------------------------obtain
+     this.is_owned = true
+    end
+
+   def Shirt.gather_owned(window)#----------------------------gather obtained
+    a = -1; b = @@shirt_array.size
+     while a != b
+      if @@shirt_array[a].is_owned == true
+        @@owned_shirt_array.push(@@shirt_array[a])
+       end
+    a += 1
+      end; end 
+
+  def Shirt.draw(window)#-----------------------------------------draw
+   @@owned_shirt_array.uniq!
+   s = @@owned_shirt_array.size - 1
+   if s >= 0 && @@owned_shirt_array[0].is_owned == true
+     @@owned_shirt_array[0].display_sprite.scale = SF.vector2(2.5, 2.5)
+     @@owned_shirt_array[0].display_sprite.position = SF.vector2(650, 360)
+     window.draw(@@owned_shirt_array[0].display_sprite)
+    end
+   if s >= 1 && @@owned_shirt_array[1].is_owned == true
+     @@owned_shirt_array[1].display_sprite.scale = SF.vector2(2.5, 2.5)
+     @@owned_shirt_array[1].display_sprite.position = SF.vector2(770, 360)
+     window.draw(@@owned_shirt_array[1].display_sprite)
+    end
+   if s >=  2 && @@owned_shirt_array[2].is_owned == true
+     @@owned_shirt_array[2].display_sprite.scale = SF.vector2(2.5, 2.5)
+     @@owned_shirt_array[2].display_sprite.position = SF.vector2(880, 360)
+     window.draw(@@owned_shirt_array[2].display_sprite)
+    end
+   if s >=  3 && @@owned_shirt_array[3].is_owned == true
+     @@owned_shirt_array[3].display_sprite.scale = SF.vector2(2.5, 2.5)
+     @@owned_shirt_array[3].display_sprite.position = SF.vector2(880, 360)
+     window.draw(@@owned_shirt_array[3].display_sprite)
+   end; end
+  def Shirt.determine_array_length(window, this)#--------------array length
+   @@owned_shirt_array.uniq!
+   if this <= @@owned_shirt_array.size - 1
+    case this
+     when 0
+      selected_shirt = @@owned_shirt_array[0].number
+      Clothing::Shirt.select(window, selected_shirt)
+     when 1
+      selected_shirt = @@owned_shirt_array[1].number
+      Clothing::Shirt.select(window, selected_shirt)
+     when 2
+      selected_shirt = @@owned_shirt_array[2].number
+      Clothing::Shirt.select(window, selected_shirt)
+    when 3
+      selected_shirt = @@owned_shirt_array[3].number
+      Clothing::Shirt.select(window, selected_shirt)
+    end; end; end
+  def Shirt.select(window, selected_shirt)#----------------------select
+   shirt_slot = selected_shirt
+   Clothing_Outfit_Slot.change_shirt(shirt_slot, window)
+     end
+ # __________________________________________________________________________________________________________________________________________
+ #|                                                          T-Shirts                                                                       |
+ #|_________________________________________________________________________________________________________________________________________|
+  @@white_t_shirt = Shirt.new(true, T_SHIRT_01, DISPLAY_T_SHIRT_01, "White T-Shirt", "white", "short", 0)  
+  @@blue_t_shirt = Shirt.new(true, T_SHIRT_02, DISPLAY_T_SHIRT_02, "Blue T-Shirt", "blue", "short", 1)
+  @@red_t_shirt = Shirt.new(true, T_SHIRT_03, DISPLAY_T_SHIRT_03, "Red T-Shirt", "red", "short", 2)
+#    Green_T_Shirt = new.T_Shirts(false, T_SHIRT_04, DISPLAY_T_SHIRT_04, "STS004", "Green T-Shirt", "green", "short", false) @todo implement these
 #    Purple_T_Shirt = new.T_Shirts(false, T_SHIRT_05, DISPLAY_T_SHIRT_05, "STS005", "Purple T-Shirt", "purple", "short", false) 
 #    Black_T_Shirt = new.T_Shirts(false, T_SHIRT_06, DISPLAY_T_SHIRT_06, "STS006", "Black T-Shirt", "black", "short", false) 
-#    end 
-#   end
+  end
+end
+end
+
+
+
+
+
 #  module Pants
 #   #properties
 #    property is_owned : Bool
