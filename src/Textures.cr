@@ -351,6 +351,12 @@
    Inventory_Tab_Text_04 = SF::Text.new; Inventory_Tab_Text_04.font = FONT_COMMON; Inventory_Tab_Text_04.string = "Shoes"
    Inventory_Tab_Text_04.color = SF::Color::White; Inventory_Tab_Text_04.position = SF.vector2(1186, 450); 
    Inventory_Tab_Text_04.character_size = 20
+
+   Inventory_arrow_up = SF::RectangleShape.new(SF.vector2(20, 40)); Inventory_arrow_up.position = SF.vector2(670, 550);
+   Inventory_arrow_up.fill_color = SF.color(255, 100, 100)
+
+   Inventory_arrow_down = SF::RectangleShape.new(SF.vector2(20, 40)); Inventory_arrow_down.position = SF.vector2(670, 650);
+   Inventory_arrow_down.fill_color = SF.color(255, 100, 100)
 #-----------------------------------------------------------------------------------------------------------------------------------
 #                                                    Character Model
 #-----------------------------------------------------------------------------------------------------------------------------------
@@ -834,76 +840,173 @@
 #                                                     Shirt Textures
 #-------------------------------------------------------------------------------------------------------------------------------------
 
- SHIRT_ARRAY = [T_SHIRT_01, T_SHIRT_02, T_SHIRT_03, T_SHIRT_04, T_SHIRT_05, T_SHIRT_06]
+ SHIRT_ARRAY = [T_SHIRT_01, T_SHIRT_02, T_SHIRT_03, T_SHIRT_04, T_SHIRT_05, T_SHIRT_06, TANK_TOP_01, TANK_TOP_02, TANK_TOP_03,
+ TANK_TOP_04, TANK_TOP_05, TANK_TOP_06, TANK_TOP_07, TANK_TOP_08, TANK_TOP_09]
 
  DISPLAY_SHIRT_ARRAY = [DISPLAY_T_SHIRT_01, DISPLAY_T_SHIRT_02, DISPLAY_T_SHIRT_03, DISPLAY_T_SHIRT_04,
- DISPLAY_T_SHIRT_05, DISPLAY_T_SHIRT_06]
+ DISPLAY_T_SHIRT_05, DISPLAY_T_SHIRT_06, DISPLAY_TANK_TOP_01, DISPLAY_TANK_TOP_02, DISPLAY_TANK_TOP_03, DISPLAY_TANK_TOP_04,
+ DISPLAY_TANK_TOP_05, DISPLAY_TANK_TOP_06, DISPLAY_TANK_TOP_07, DISPLAY_TANK_TOP_08, DISPLAY_TANK_TOP_09]
 
  SHIRT_DESC_ARRAY = ["White T-Shirt", "Blue T-Shirt", "Red T-Shirt", "Green T-Shirt", "Purple T-Shirt", 
- "Black T-Shirt"]
+ "Black T-Shirt", "White Tank Top", "Red Tank Top", "Orange Tank Top", "Yellow Tank Top", "Green Tank Top", "Blue Tank Top",
+ "Purple Tank Top", "Pink Tank Top"]
 
  Shirt_Desc = SF::Text.new; Shirt_Desc.font = FONT_FANCY_BOLD
  Shirt_Desc.string = SHIRT_DESC_ARRAY[0]; Shirt_Desc.character_size = 40; Shirt_Desc.color = SF::Color::White
  Shirt_Desc.position = SF.vector2(1200, 800)
- #....................................................White T-Shirt..................................................................
-  #\\\\\\\Character Model
-  T_SHIRT_TEXTURE_01 = SF::Texture.from_file("graphics/T-Shirt_01.png")
-  T_SHIRT_01 = SF::Sprite.new(T_SHIRT_TEXTURE_01)
-  #\\\\\\\Display Model
-  DISPLAY_T_SHIRT_01 = SF::Sprite.new(T_SHIRT_TEXTURE_01)
-  DISPLAY_T_SHIRT_01.texture_rect = SF.int_rect(0, 0, 96, 128)
-  DISPLAY_T_SHIRT_01.position = SF.vector2(1125, 475)
-  DISPLAY_T_SHIRT_01.scale = SF.vector2(3.5, 3.5)
- #....................................................Blue T-Shirt...................................................................
-  #\\\\\\\Character Model
-  T_SHIRT_02 = SF::Sprite.new(T_SHIRT_TEXTURE_01)
-  T_SHIRT_02.color = SF.color(0, 0, 255)
-  #\\\\\\\Display Model
-  DISPLAY_T_SHIRT_02 = SF::Sprite.new(T_SHIRT_TEXTURE_01)
-  DISPLAY_T_SHIRT_02.texture_rect = SF.int_rect(0, 0, 96, 128)
-  DISPLAY_T_SHIRT_02.position = SF.vector2(1125, 475)
-  DISPLAY_T_SHIRT_02.scale = SF.vector2(3.5, 3.5)
-  DISPLAY_T_SHIRT_02.color = SF.color(0, 0, 255)
- #.....................................................Red T-Shirt...................................................................
-  #\\\\\\\Character Model
-  T_SHIRT_03 = SF::Sprite.new(T_SHIRT_TEXTURE_01)
-  T_SHIRT_03.color = SF.color(255, 50, 50)
-  #\\\\\\\Display Model
-  DISPLAY_T_SHIRT_03 = SF::Sprite.new(T_SHIRT_TEXTURE_01)
-  DISPLAY_T_SHIRT_03.texture_rect = SF.int_rect(0, 0, 96, 128)
-  DISPLAY_T_SHIRT_03.position = SF.vector2(1125, 475)
-  DISPLAY_T_SHIRT_03.scale = SF.vector2(3.5, 3.5)
-  DISPLAY_T_SHIRT_03.color = SF.color(255, 50, 50)
- #....................................................Green T-Shirt..................................................................
-  #\\\\\\\Character Model
-  T_SHIRT_04 = SF::Sprite.new(T_SHIRT_TEXTURE_01)
-  T_SHIRT_04.color = SF.color(50, 255, 50)
-  #\\\\\\\Display Model
-  DISPLAY_T_SHIRT_04 = SF::Sprite.new(T_SHIRT_TEXTURE_01)
-  DISPLAY_T_SHIRT_04.texture_rect = SF.int_rect(0, 0, 96, 128)
-  DISPLAY_T_SHIRT_04.position = SF.vector2(1125, 475)
-  DISPLAY_T_SHIRT_04.scale = SF.vector2(3.5, 3.5)
-  DISPLAY_T_SHIRT_04.color = SF.color(50, 255, 50)
- #....................................................Purple T-Shirt.................................................................
-  #\\\\\\\Character Model
-  T_SHIRT_05 = SF::Sprite.new(T_SHIRT_TEXTURE_01)
-  T_SHIRT_05.color = SF.color(100, 0, 200)
-  #\\\\\\\Display Model
-  DISPLAY_T_SHIRT_05 = SF::Sprite.new(T_SHIRT_TEXTURE_01)
-  DISPLAY_T_SHIRT_05.texture_rect = SF.int_rect(0, 0, 96, 128)
-  DISPLAY_T_SHIRT_05.position = SF.vector2(1125, 475)
-  DISPLAY_T_SHIRT_05.scale = SF.vector2(3.5, 3.5)
-  DISPLAY_T_SHIRT_05.color = SF.color(100, 0, 200)
- #....................................................Black T-Shirt..................................................................
-  #\\\\\\\Character Model
-  T_SHIRT_06 = SF::Sprite.new(T_SHIRT_TEXTURE_01)
-  T_SHIRT_06.color = SF.color(10, 10, 10)
-  #\\\\\\\Display Model
-  DISPLAY_T_SHIRT_06 = SF::Sprite.new(T_SHIRT_TEXTURE_01)
-  DISPLAY_T_SHIRT_06.texture_rect = SF.int_rect(0, 0, 96, 128)
-  DISPLAY_T_SHIRT_06.position = SF.vector2(1125, 475)
-  DISPLAY_T_SHIRT_06.scale = SF.vector2(3.5, 3.5)
-  DISPLAY_T_SHIRT_06.color = SF.color(10, 10, 10)
+ #'''''''''''''''''''''''''''''''''''''''''''''''''''''''T-Shirts''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+  #....................................................White T-Shirt..................................................................
+   #\\\\\\\Character Model
+   T_SHIRT_TEXTURE_01 = SF::Texture.from_file("graphics/T-Shirt_01.png")
+   T_SHIRT_01 = SF::Sprite.new(T_SHIRT_TEXTURE_01)
+   #\\\\\\\Display Model
+   DISPLAY_T_SHIRT_01 = SF::Sprite.new(T_SHIRT_TEXTURE_01)
+   DISPLAY_T_SHIRT_01.texture_rect = SF.int_rect(0, 0, 96, 128)
+   DISPLAY_T_SHIRT_01.position = SF.vector2(1125, 475)
+   DISPLAY_T_SHIRT_01.scale = SF.vector2(3.5, 3.5)
+  #....................................................Blue T-Shirt...................................................................
+   #\\\\\\\Character Model
+   T_SHIRT_02 = SF::Sprite.new(T_SHIRT_TEXTURE_01)
+   T_SHIRT_02.color = SF.color(0, 0, 255)
+   #\\\\\\\Display Model
+   DISPLAY_T_SHIRT_02 = SF::Sprite.new(T_SHIRT_TEXTURE_01)
+   DISPLAY_T_SHIRT_02.texture_rect = SF.int_rect(0, 0, 96, 128)
+   DISPLAY_T_SHIRT_02.position = SF.vector2(1125, 475)
+   DISPLAY_T_SHIRT_02.scale = SF.vector2(3.5, 3.5)
+   DISPLAY_T_SHIRT_02.color = SF.color(0, 0, 255)
+  #.....................................................Red T-Shirt...................................................................
+   #\\\\\\\Character Model
+   T_SHIRT_03 = SF::Sprite.new(T_SHIRT_TEXTURE_01)
+   T_SHIRT_03.color = SF.color(255, 50, 50)
+   #\\\\\\\Display Model
+   DISPLAY_T_SHIRT_03 = SF::Sprite.new(T_SHIRT_TEXTURE_01)
+   DISPLAY_T_SHIRT_03.texture_rect = SF.int_rect(0, 0, 96, 128)
+   DISPLAY_T_SHIRT_03.position = SF.vector2(1125, 475)
+   DISPLAY_T_SHIRT_03.scale = SF.vector2(3.5, 3.5)
+   DISPLAY_T_SHIRT_03.color = SF.color(255, 50, 50)
+  #....................................................Green T-Shirt..................................................................
+   #\\\\\\\Character Model
+   T_SHIRT_04 = SF::Sprite.new(T_SHIRT_TEXTURE_01)
+   T_SHIRT_04.color = SF.color(50, 255, 50)
+   #\\\\\\\Display Model
+   DISPLAY_T_SHIRT_04 = SF::Sprite.new(T_SHIRT_TEXTURE_01)
+   DISPLAY_T_SHIRT_04.texture_rect = SF.int_rect(0, 0, 96, 128)
+   DISPLAY_T_SHIRT_04.position = SF.vector2(1125, 475)
+   DISPLAY_T_SHIRT_04.scale = SF.vector2(3.5, 3.5)
+   DISPLAY_T_SHIRT_04.color = SF.color(50, 255, 50)
+  #....................................................Purple T-Shirt.................................................................
+   #\\\\\\\Character Model
+   T_SHIRT_05 = SF::Sprite.new(T_SHIRT_TEXTURE_01)
+   T_SHIRT_05.color = SF.color(100, 0, 200)
+   #\\\\\\\Display Model
+   DISPLAY_T_SHIRT_05 = SF::Sprite.new(T_SHIRT_TEXTURE_01)
+   DISPLAY_T_SHIRT_05.texture_rect = SF.int_rect(0, 0, 96, 128)
+   DISPLAY_T_SHIRT_05.position = SF.vector2(1125, 475)
+   DISPLAY_T_SHIRT_05.scale = SF.vector2(3.5, 3.5)
+   DISPLAY_T_SHIRT_05.color = SF.color(100, 0, 200)
+  #....................................................Black T-Shirt..................................................................
+   #\\\\\\\Character Model
+   T_SHIRT_06 = SF::Sprite.new(T_SHIRT_TEXTURE_01)
+   T_SHIRT_06.color = SF.color(10, 10, 10)
+   #\\\\\\\Display Model
+   DISPLAY_T_SHIRT_06 = SF::Sprite.new(T_SHIRT_TEXTURE_01)
+   DISPLAY_T_SHIRT_06.texture_rect = SF.int_rect(0, 0, 96, 128)
+   DISPLAY_T_SHIRT_06.position = SF.vector2(1125, 475)
+   DISPLAY_T_SHIRT_06.scale = SF.vector2(3.5, 3.5)
+   DISPLAY_T_SHIRT_06.color = SF.color(10, 10, 10)
+ 
+ #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+ #'''''''''''''''''''''''''''''''''''''''''''''''''''''''Tank Tops'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+  #...................................................White Tank Top...................................................................
+   #\\\\\\\Character Model
+   TANK_TOP_TEXTURE_01 = SF::Texture.from_file("graphics/Tank_Top_01.png")
+   TANK_TOP_01 = SF::Sprite.new(TANK_TOP_TEXTURE_01)
+   #\\\\\\\Display Model
+   DISPLAY_TANK_TOP_01 = SF::Sprite.new(TANK_TOP_TEXTURE_01)
+   DISPLAY_TANK_TOP_01.texture_rect = SF.int_rect(0, 0, 96, 128)
+   DISPLAY_TANK_TOP_01.position = SF.vector2(1125, 475)
+   DISPLAY_TANK_TOP_01.scale = SF.vector2(3.5, 3.5)
+  #...................................................Black Tank Top...................................................................
+   #\\\\\\\Character Model
+   TANK_TOP_02 = SF::Sprite.new(TANK_TOP_TEXTURE_01)
+   TANK_TOP_02.color = SF.color(0, 0, 0)
+   #\\\\\\\Display Model
+   DISPLAY_TANK_TOP_02 = SF::Sprite.new(TANK_TOP_TEXTURE_01)
+   DISPLAY_TANK_TOP_02.texture_rect = SF.int_rect(0, 0, 96, 128)
+   DISPLAY_TANK_TOP_02.position = SF.vector2(1125, 475)
+   DISPLAY_TANK_TOP_02.scale = SF.vector2(3.5, 3.5)
+   DISPLAY_TANK_TOP_02.color = SF.color(0, 0, 0)
+  #....................................................Red Tank Top....................................................................
+   #\\\\\\\Character Model
+   TANK_TOP_03 = SF::Sprite.new(TANK_TOP_TEXTURE_01)
+   TANK_TOP_03.color = SF.color(255, 0, 0)
+   #\\\\\\\Display Model
+   DISPLAY_TANK_TOP_03 = SF::Sprite.new(TANK_TOP_TEXTURE_01)
+   DISPLAY_TANK_TOP_03.texture_rect = SF.int_rect(0, 0, 96, 128)
+   DISPLAY_TANK_TOP_03.position = SF.vector2(1125, 475)
+   DISPLAY_TANK_TOP_03.scale = SF.vector2(3.5, 3.5)
+   DISPLAY_TANK_TOP_03.color = SF.color(255, 0, 0)
+  #..................................................Orange Tank Top....................................................................
+   #\\\\\\\Character Model
+   TANK_TOP_04 = SF::Sprite.new(TANK_TOP_TEXTURE_01)
+   TANK_TOP_04.color = SF.color(255, 165, 0)
+   #\\\\\\\Display Model
+   DISPLAY_TANK_TOP_04 = SF::Sprite.new(TANK_TOP_TEXTURE_01)
+   DISPLAY_TANK_TOP_04.texture_rect = SF.int_rect(0, 0, 96, 128)
+   DISPLAY_TANK_TOP_04.position = SF.vector2(1125, 475)
+   DISPLAY_TANK_TOP_04.scale = SF.vector2(3.5, 3.5)
+   DISPLAY_TANK_TOP_04.color = SF.color(255, 165, 0)
+  #..................................................Yellow Tank Top....................................................................
+   #\\\\\\\Character Model
+   TANK_TOP_05 = SF::Sprite.new(TANK_TOP_TEXTURE_01)
+   TANK_TOP_05.color = SF.color(255, 255, 0)
+   #\\\\\\\Display Model
+   DISPLAY_TANK_TOP_05 = SF::Sprite.new(TANK_TOP_TEXTURE_01)
+   DISPLAY_TANK_TOP_05.texture_rect = SF.int_rect(0, 0, 96, 128)
+   DISPLAY_TANK_TOP_05.position = SF.vector2(1125, 475)
+   DISPLAY_TANK_TOP_05.scale = SF.vector2(3.5, 3.5)
+   DISPLAY_TANK_TOP_05.color = SF.color(255, 255, 0)
+  #...................................................Green Tank Top....................................................................
+   #\\\\\\\Character Model
+   TANK_TOP_06 = SF::Sprite.new(TANK_TOP_TEXTURE_01)
+   TANK_TOP_06.color = SF.color(0, 100, 0)
+   #\\\\\\\Display Model
+   DISPLAY_TANK_TOP_06 = SF::Sprite.new(TANK_TOP_TEXTURE_01)
+   DISPLAY_TANK_TOP_06.texture_rect = SF.int_rect(0, 0, 96, 128)
+   DISPLAY_TANK_TOP_06.position = SF.vector2(1125, 475)
+   DISPLAY_TANK_TOP_06.scale = SF.vector2(3.5, 3.5)
+   DISPLAY_TANK_TOP_06.color = SF.color(0, 100, 0)
+  #...................................................Blue Tank Top....................................................................
+   #\\\\\\\Character Model
+   TANK_TOP_07 = SF::Sprite.new(TANK_TOP_TEXTURE_01)
+   TANK_TOP_07.color = SF.color(0, 0, 128)
+   #\\\\\\\Display Model
+   DISPLAY_TANK_TOP_07 = SF::Sprite.new(TANK_TOP_TEXTURE_01)
+   DISPLAY_TANK_TOP_07.texture_rect = SF.int_rect(0, 0, 96, 128)
+   DISPLAY_TANK_TOP_07.position = SF.vector2(1125, 475)
+   DISPLAY_TANK_TOP_07.scale = SF.vector2(3.5, 3.5)
+   DISPLAY_TANK_TOP_07.color = SF.color(0, 0, 128)
+  #.................................................Purple Tank Top....................................................................
+   #\\\\\\\Character Model
+   TANK_TOP_08 = SF::Sprite.new(TANK_TOP_TEXTURE_01)
+   TANK_TOP_08.color = SF.color(147, 112, 219)
+   #\\\\\\\Display Model
+   DISPLAY_TANK_TOP_08 = SF::Sprite.new(TANK_TOP_TEXTURE_01)
+   DISPLAY_TANK_TOP_08.texture_rect = SF.int_rect(0, 0, 96, 128)
+   DISPLAY_TANK_TOP_08.position = SF.vector2(1125, 475)
+   DISPLAY_TANK_TOP_08.scale = SF.vector2(3.5, 3.5)
+   DISPLAY_TANK_TOP_08.color = SF.color(147, 112, 219)
+  #...................................................Pink Tank Top....................................................................
+   #\\\\\\\Character Model
+   TANK_TOP_09 = SF::Sprite.new(TANK_TOP_TEXTURE_01)
+   TANK_TOP_09.color = SF.color(200, 100, 255)
+   #\\\\\\\Display Model
+   DISPLAY_TANK_TOP_09 = SF::Sprite.new(TANK_TOP_TEXTURE_01)
+   DISPLAY_TANK_TOP_09.texture_rect = SF.int_rect(0, 0, 96, 128)
+   DISPLAY_TANK_TOP_09.position = SF.vector2(1125, 475)
+   DISPLAY_TANK_TOP_09.scale = SF.vector2(3.5, 3.5)
+   DISPLAY_TANK_TOP_09.color = SF.color(255, 105, 180)
+ #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 #-------------------------------------------------------------------------------------------------------------------------------------
 #                                                     Pants Textures
 #-------------------------------------------------------------------------------------------------------------------------------------
@@ -989,10 +1092,11 @@
   DISPLAY_RAIN_BOOTS_03.scale = SF.vector2(3.5, 3.5)
   DISPLAY_RAIN_BOOTS_03.color = SF.color(100, 100, 255)
 
-
+#______________________________________________________________________________________________________________________________________
 #--------------------------------------------------------------------------------------------------------------------------------------
 #                                                    Enemy Textures
 #--------------------------------------------------------------------------------------------------------------------------------------
+#______________________________________________________________________________________________________________________________________
 #--------------------------------------------------------------------------------------------------------------------------------------
 #                                                     Name Boxes
 #--------------------------------------------------------------------------------------------------------------------------------------
