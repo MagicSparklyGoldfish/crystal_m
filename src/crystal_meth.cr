@@ -312,7 +312,7 @@ extend self
     window.view = view1
     if @@space.contains?(@@shape) == false #<----This is proabably a really fucking stupid way to do this, but it works and I'm tired of fucking with it
       @@space.add(@@shape)
-      Enemy_Data::Test_Enemy.draw
+      Enemy_Data::Test_Enemy.draw; NPCS::Test_Npcs.test_npc_initialize
     end
     if @@space.contains?(@@pc_body) == false
       @@pc_body.position = CP.v(-60, -40)
@@ -322,7 +322,7 @@ extend self
       @@space.add(@@pc_skin)
     end
     debug_draw.draw @@space
-    window.draw(Ground); window.draw(@@player_character_rendered_model); Enemy_Data::Test_Enemy.maintain(window)
+    window.draw(Ground); window.draw(@@player_character_rendered_model); Enemy_Data::Test_Enemy.maintain(window); NPCS::Test_Npcs.test_npc_maintain(window)
    end
 #=======================================================================================================================================+
 #---------------------------------------------------------------------------------------------------------------------------------------+
@@ -398,6 +398,10 @@ extend self
       Window_Class.char_creation_menu_keypresses(window)
     when "HUD"
       Window_Class.hud_keypresses(window)
+      case @@map
+       when "test"
+        NPCS::Test_Npcs.click(window, @@player_character_rendered_model)
+       end
     end
    end
 #//////////////////////////////////////////////////////Character Creation///////////////////////////////////////////////////////////////+
@@ -963,17 +967,48 @@ def Window_Class.hud_keypresses(window)
          @@tab = "gloves"
          Clothing::Gloves.gather_owned(window)
       end
+ #-------------------------------------------------------------row one---------------------------------------------------------------------
       if (x >= 710 && x <= 825) && (y >= 470 && y <= 590) && @@tab == "gloves"
         this = 0
         Clothing::Gloves.determine_array_length(window, this)
-      end
+       end
       if (x >= 830 && x <= 950) && (y >= 490 && y <= 590) && @@tab == "gloves"
         this = 1
         Clothing::Gloves.determine_array_length(window, this)
-      end
+       end
        if (x >= 940 && x <= 1060) && (y >= 490 && y <= 590) && @@tab == "gloves"
          this = 2
          Clothing::Gloves.determine_array_length(window, this)
+       end
+      if (x >= 1050 && x <= 1180) && (y >= 490 && y <= 590) && @@tab == "gloves"
+        puts "boop"
+        this = 3
+        Clothing::Gloves.determine_array_length(window, this)
+       end
+      if (x >= 1160 && x <= 1300) && (y >= 490 && y <= 590) && @@tab == "gloves"
+        this = 4
+        Clothing::Gloves.determine_array_length(window, this)
+       end
+ #-------------------------------------------------------------row two---------------------------------------------------------------------
+      if (x >= 710 && x <= 825) && (y >= 590 && y <= 690) && @@tab == "gloves"
+       this = 5
+       Clothing::Gloves.determine_array_length(window, this)
+      end
+     if (x >= 830 && x <= 950) && (y >= 590 && y <= 690) && @@tab == "gloves"
+       this = 6
+       Clothing::Gloves.determine_array_length(window, this)
+      end
+      if (x >= 940 && x <= 1060) && (y >= 590 && y <= 690) && @@tab == "gloves"
+        this = 7
+        Clothing::Gloves.determine_array_length(window, this)
+      end
+     if (x >= 1050 && x <= 1180) && (y >= 590 && y <= 690) && @@tab == "gloves"
+       this = 8
+       Clothing::Gloves.determine_array_length(window, this)
+      end
+     if (x >= 1160 && x <= 1300) && (y >= 590 && y <= 690) && @@tab == "gloves"
+       this = 9
+       Clothing::Gloves.determine_array_length(window, this)
       end
 #___________________________________________________________________________________________________________________________________________
 
@@ -1052,151 +1087,151 @@ def Window_Class.hud_keypresses(window)
 #|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 #|                                                       @note pants control tab                                                           |
 #||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| 
-if (x >= 1001 && x <= 1141) && (y >= 450 && y <= 485) && @@popup == "Stats_Menu"
-  All_Audio::SFX.select1
-  @@tab = "pants"
-  Clothing::Pants.gather_owned(window)
- end
-#-------------------------------------------------------------row one---------------------------------------------------------------------
-if (x >= 710 && x <= 825) && (y >= 470 && y <= 590) && @@tab == "pants"
-  puts @@page
- case @@page
-  when 1
-   this = 0
-   Clothing::Pants.determine_array_length(window, this)
-  when 2
-    this = 15
-    Clothing::Pants.determine_array_length(window, this)
+ if (x >= 1001 && x <= 1141) && (y >= 450 && y <= 485) && @@popup == "Stats_Menu"
+   All_Audio::SFX.select1
+   @@tab = "pants"
+   Clothing::Pants.gather_owned(window)
+  end
+ #-------------------------------------------------------------row one---------------------------------------------------------------------
+  if (x >= 710 && x <= 825) && (y >= 470 && y <= 590) && @@tab == "pants"
+    puts @@page
+   case @@page
+    when 1
+     this = 0
+     Clothing::Pants.determine_array_length(window, this)
+    when 2
+      this = 15
+      Clothing::Pants.determine_array_length(window, this)
+    end; end
+  if (x >= 830 && x <= 950) && (y >= 490 && y <= 590) && @@tab == "pants"
+   case @@page
+    when 1
+     this = 1
+     Clothing::Pants.determine_array_length(window, this)
+    when 2
+      this = 16
+      Clothing::Pants.determine_array_length(window, this)
+   end; end
+  if (x >= 940 && x <= 1060) && (y >= 490 && y <= 590) && @@tab == "pants"
+   case @@page
+    when 1
+     this = 2
+     Clothing::Pants.determine_array_length(window, this)
+    when 2
+      this = 17
+      Clothing::Pants.determine_array_length(window, this)
+   end; end
+  if (x >= 1030 && x <= 1180) && (y >= 490 && y <= 590) && @@tab == "pants"
+   case @@page
+    when 1
+     this = 3
+     Clothing::Pants.determine_array_length(window, this)
+    when 2
+      this = 18
+      Clothing::Pants.determine_array_length(window, this)
+   end; end
+  if (x >= 1175 && x <= 1290) && (y >= 490 && y <= 590) && @@tab == "pants"
+   case @@page
+    when 1
+     this = 4
+     Clothing::Pants.determine_array_length(window, this)
+    when 2
+      this = 19
+      Clothing::Pants.determine_array_length(window, this)
+   end; end
+ #-------------------------------------------------------------row two---------------------------------------------------------------------
+  if (x >= 710 && x <= 825) && (y >= 590 && y <= 690) && @@tab == "pants"
+   case @@page
+    when 1
+     this = 5
+     Clothing::Pants.determine_array_length(window, this)
+    when 2
+      this = 20
+      Clothing::Pants.determine_array_length(window, this)
+   end; end
+  if (x >= 830 && x <= 950) && (y >= 590 && y <= 690) && @@tab == "pants"
+   case @@page
+    when 1
+     this = 6
+     Clothing::Pants.determine_array_length(window, this)
+    when 2
+      this = 21
+      Clothing::Pants.determine_array_length(window, this)
+   end; end
+  if (x >= 940 && x <= 1060) && (y >= 590 && y <= 690) && @@tab == "pants"
+   case @@page
+    when 1
+     this = 7
+     Clothing::Pants.determine_array_length(window, this)
+    when 2
+      this = 22
+      Clothing::Pants.determine_array_length(window, this)
+   end; end
+  if (x >= 1030 && x <= 1180) && (y >= 590 && y <= 690) && @@tab == "pants"
+   case @@page
+    when 1
+     this = 8
+     Clothing::Pants.determine_array_length(window, this)
+    when 2
+      this = 23
+      Clothing::Pants.determine_array_length(window, this)
+   end; end
+  if (x >= 1175 && x <= 1290) && (y >= 590 && y <= 690) && @@tab == "pants"
+   case @@page
+    when 1
+     this = 9
+     Clothing::Pants.determine_array_length(window, this)
+    when 2
+      this = 24
+      Clothing::Pants.determine_array_length(window, this)
+   end; end
+ #------------------------------------------------------------row three--------------------------------------------------------------------
+ if (x >= 710 && x <= 825) && (y >= 690 && y <= 790) && @@tab == "pants"
+  case @@page
+    when 1
+     this = 10
+     Clothing::Pants.determine_array_length(window, this)
+   when 2
+     this = 25
+     Clothing::Pants.determine_array_length(window, this)
   end; end
-if (x >= 830 && x <= 950) && (y >= 490 && y <= 590) && @@tab == "pants"
- case @@page
-  when 1
-   this = 1
-   Clothing::Pants.determine_array_length(window, this)
-  when 2
-    this = 16
-    Clothing::Pants.determine_array_length(window, this)
- end; end
-if (x >= 940 && x <= 1060) && (y >= 490 && y <= 590) && @@tab == "pants"
- case @@page
-  when 1
-   this = 2
-   Clothing::Pants.determine_array_length(window, this)
-  when 2
-    this = 17
-    Clothing::Pants.determine_array_length(window, this)
- end; end
-if (x >= 1030 && x <= 1180) && (y >= 490 && y <= 590) && @@tab == "pants"
- case @@page
-  when 1
-   this = 3
-   Clothing::Pants.determine_array_length(window, this)
-  when 2
-    this = 18
-    Clothing::Pants.determine_array_length(window, this)
- end; end
-if (x >= 1175 && x <= 1290) && (y >= 490 && y <= 590) && @@tab == "pants"
- case @@page
-  when 1
-   this = 4
-   Clothing::Pants.determine_array_length(window, this)
-  when 2
-    this = 19
-    Clothing::Pants.determine_array_length(window, this)
- end; end
-#-------------------------------------------------------------row two---------------------------------------------------------------------
-if (x >= 710 && x <= 825) && (y >= 590 && y <= 690) && @@tab == "pants"
- case @@page
-  when 1
-   this = 5
-   Clothing::Pants.determine_array_length(window, this)
-  when 2
-    this = 20
-    Clothing::Pants.determine_array_length(window, this)
- end; end
-if (x >= 830 && x <= 950) && (y >= 590 && y <= 690) && @@tab == "pants"
- case @@page
-  when 1
-   this = 6
-   Clothing::Pants.determine_array_length(window, this)
-  when 2
-    this = 21
-    Clothing::Pants.determine_array_length(window, this)
- end; end
-if (x >= 940 && x <= 1060) && (y >= 590 && y <= 690) && @@tab == "pants"
- case @@page
-  when 1
-   this = 7
-   Clothing::Pants.determine_array_length(window, this)
-  when 2
-    this = 22
-    Clothing::Pants.determine_array_length(window, this)
- end; end
-if (x >= 1030 && x <= 1180) && (y >= 590 && y <= 690) && @@tab == "pants"
- case @@page
-  when 1
-   this = 8
-   Clothing::Pants.determine_array_length(window, this)
-  when 2
-    this = 23
-    Clothing::Pants.determine_array_length(window, this)
- end; end
-if (x >= 1175 && x <= 1290) && (y >= 590 && y <= 690) && @@tab == "pants"
- case @@page
-  when 1
-   this = 9
-   Clothing::Pants.determine_array_length(window, this)
-  when 2
-    this = 24
-    Clothing::Pants.determine_array_length(window, this)
- end; end
-#------------------------------------------------------------row three---------------------------------------------------------------------
-if (x >= 710 && x <= 825) && (y >= 690 && y <= 790) && @@tab == "pants"
- case @@page
+ if (x >= 830 && x <= 950) && (y >= 690 && y <= 790) && @@tab == "pants"
+  case @@page
    when 1
-    this = 10
+    this = 11
     Clothing::Pants.determine_array_length(window, this)
-  when 2
-    this = 25
+   when 2
+     this = 26
+     Clothing::Pants.determine_array_length(window, this)
+  end; end
+ if (x >= 940 && x <= 1060) && (y >= 690 && y <= 790) && @@tab == "pants"
+  case @@page
+   when 1
+    this = 12
     Clothing::Pants.determine_array_length(window, this)
- end; end
-if (x >= 830 && x <= 950) && (y >= 690 && y <= 790) && @@tab == "pants"
- case @@page
-  when 1
-   this = 11
-   Clothing::Pants.determine_array_length(window, this)
-  when 2
-    this = 26
+   when 2
+     this = 27
+     Clothing::Pants.determine_array_length(window, this)
+  end; end
+ if (x >= 1030 && x <= 1180) && (y >= 690 && y <= 790) && @@tab == "pants"
+  case @@page
+   when 1
+    this = 13
     Clothing::Pants.determine_array_length(window, this)
- end; end
-if (x >= 940 && x <= 1060) && (y >= 690 && y <= 790) && @@tab == "pants"
- case @@page
-  when 1
-   this = 12
-   Clothing::Pants.determine_array_length(window, this)
-  when 2
-    this = 27
+   when 2
+     this = 28
+     Clothing::Pants.determine_array_length(window, this)
+  end; end
+ if (x >= 1175 && x <= 1290) && (y >= 690 && y <= 790) && @@tab == "pants"
+  case @@page
+   when 1
+    this = 14
     Clothing::Pants.determine_array_length(window, this)
- end; end
-if (x >= 1030 && x <= 1180) && (y >= 690 && y <= 790) && @@tab == "pants"
- case @@page
-  when 1
-   this = 13
-   Clothing::Pants.determine_array_length(window, this)
-  when 2
-    this = 28
-    Clothing::Pants.determine_array_length(window, this)
- end; end
-if (x >= 1175 && x <= 1290) && (y >= 690 && y <= 790) && @@tab == "pants"
- case @@page
-  when 1
-   this = 14
-   Clothing::Pants.determine_array_length(window, this)
-  when 2
-    this = 29
-    Clothing::Pants.determine_array_length(window, this)
- end; end; end
-#____________________________________________________________________________________________________________________________________
+   when 2
+     this = 29
+     Clothing::Pants.determine_array_length(window, this)
+  end; end; end
+#___________________________________________________________________________________________________________________________________________
         
 
     case event
@@ -1385,11 +1420,11 @@ end; end; end; end; end; end
 #                                                   Character Data                                                                   +
 #------------------------------------------------------------------------------------------------------------------------------------+
 
- module Player_Data #@note Player data is stored here 
- include Gui;       #@todo fix all the classes
- @@hair_slot = 0; @@skin_slot = 0; @@face_slot = 0; @@shirt_slot = 0; @@gloves_slot = 0; @@pants_slot = 0; @@shoes_slot = 0
- @@hair_slot : (Int32); @@skin_slot : (Int32); @@face_slot : (Int32); @@shirt_slot : (Int32); @@gloves_slot : (Int32); @@pants_slot : (Int32)
- @@shoes_slot : (Int32); @@outfit_array : Array(Int32) = [@@hair_slot, @@skin_slot, @@face_slot, @@shirt_slot, @@gloves_slot, @@pants_slot, @@shoes_slot]
+   module Player_Data #@note Player data is stored here 
+   include Gui;       #@todo fix all the classes
+   @@hair_slot = 0; @@skin_slot = 0; @@face_slot = 0; @@shirt_slot = 0; @@gloves_slot = 0; @@pants_slot = 0; @@shoes_slot = 0
+   @@hair_slot : (Int32); @@skin_slot : (Int32); @@face_slot : (Int32); @@shirt_slot : (Int32); @@gloves_slot : (Int32); @@pants_slot : (Int32)
+   @@shoes_slot : (Int32); @@outfit_array : Array(Int32) = [@@hair_slot, @@skin_slot, @@face_slot, @@shirt_slot, @@gloves_slot, @@pants_slot, @@shoes_slot]
  
    def add_item(@@item_type, item)
      if item.is_owned == false 
@@ -1508,6 +1543,7 @@ end; end; end; end; end; end
     @@is_player_airborne : Bool; @@is_player_airborne = false; @@fall_rate : Int32 | Nil; @@fallrate = 0
     @@player_bounding_box : SF::Rect(Float32); @@player_bounding_box = @@player_character_rendered_model.global_bounds
     @@player_jumped : Bool; @@player_jumped = false; @@player_direction : String; @@player_direction = "right"
+    property == @@player_bounding_box
    #==================================================================================================================================+
 
    #============================================Walk Cycle============================================================================+
@@ -1634,7 +1670,64 @@ end; end; end; end; end; end
      end
     #---------------------------------------------------------------------------------------------------------------------------------+ 
  end
-end
+ end
+
+
+#////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+#\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+#|                                                         @note  NPCs                                                                      |
+#\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+#////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+module NPCS 
+  include Player_Data
+  include Gui
+  extend self
+  # -----------------------------------------------------------------------------------------------------------------------------------------
+  #|                                                          Test Npcs                                                                      |
+  # -----------------------------------------------------------------------------------------------------------------------------------------
+   class Test_Npcs < Window_Class; Player_Physics
+    include Player_Data
+    include Gui
+   #**********************************************************Variables***********************************************************************
+   @@test_npcs_model_01 = SF::RenderTexture.new(672, 512)
+   @@test_npc_rendered_model_01 = SF::Sprite.new(@@test_npcs_model_01.texture)
+   #__________________________________________________________________________________________________________________________________________ 
+   #***********************************************************Methods************************************************************************
+    def Test_Npcs.test_npc_initialize
+      @@test_npcs_model_01.clear(SF::Color::Transparent)
+      @@test_npcs_model_01.draw(SKIN_ARRAY[0])
+      @@test_npcs_model_01.draw(SHOES_ARRAY[2])
+      @@test_npcs_model_01.draw(FACE_ARRAY[7])
+      @@test_npcs_model_01.draw(HAIR_ARRAY[7])
+      @@test_npcs_model_01.draw(PANTS_ARRAY[18])
+      @@test_npcs_model_01.draw(SHIRT_ARRAY[8])
+      @@test_npcs_model_01.draw(GLOVE_ARRAY[2])
+      @@test_npcs_model_01.create(672, 512, false)
+      @@test_npcs_model_01.display
+      @@test_npc_rendered_model_01.texture_rect = SF.int_rect(0, 0, 96, 128)
+      @@test_npc_rendered_model_01.position = SF.vector2(702, 648)
+      @@test_npc_rendered_model_01.scale = SF.vector2(1.0, 1.0)
+     end
+    def Test_Npcs.test_npc_maintain(window)
+      npc_bounding_01 = Bounding_Box.dup
+      npc_bounding_01.position = @@test_npc_rendered_model_01.position
+      window.draw(npc_bounding_01)
+     window.draw(@@test_npc_rendered_model_01)
+     end
+    def Test_Npcs.click(window, @@player_character_rendered_model)
+      npc_bounding_01 = Bounding_Box.dup
+      npc_bounding_01.position = @@test_npc_rendered_model_01.position
+      window.draw(npc_bounding_01)
+      bounding_box1 = @@player_character_rendered_model.global_bounds
+      bounding_box2 = @@test_npc_rendered_model_01.global_bounds
+     #while (event = window.poll_event)
+       if bounding_box1.intersects? bounding_box2
+       if SF::Event::KeyPressed?(SF::Keyboard::Space) #@todo figure out how to make this only trigger on keypress
+         All_Audio::SFX.cursor1
+       end; end
+     end
+    end #test npc class end
+  end #module end
 
 #------------------------------------------------------------------------------------------------------------------------------------+
 #                                                   Enemy Data                                                                       +
@@ -1790,25 +1883,25 @@ Gui::Window_Class.run
 #                                                           Clothing                                                                          #
 #=================================================================================================================================================
  
- module Skin
-  #properties
-   property is_owned : Bool
-   property char_sprite : SF::Sprite
-   property display_sprite : SF::Sprite
-   property id : String
-   property name : String
-  class Human
-     Light = new.Human(false, PLAYER_CHAR, PLAYER_CHAR_DISPLAY, "SH001", "Light") 
-     Tan = new.Human(false, PLAYER_CHAR_2, PLAYER_CHAR_DISPLAY_2, "SH002", "Tan")
-     Dark = new.Human(false, PLAYER_CHAR_3, PLAYER_CHAR_DISPLAY_3, "SH003", "Dark")
-     Jaundiced = new.Human(false, PLAYER_CHAR_7, PLAYER_CHAR_DISPLAY_7, "SH004", "Jaundiced")
-   end
-  class Spooky
-    Ghostly = new.Spooky(false, PLAYER_CHAR_4, PLAYER_CHAR_DISPLAY_4, "SS001", "Ghostly")
-    Blue = new.Spooky(false, PLAYER_CHAR_5, PLAYER_CHAR_DISPLAY_5, "SS002", "Blue")
-    Purple = new.Spooky(false, PLAYER_CHAR_6, PLAYER_CHAR_DISPLAY_6, "SS003", "Purple")
-   end
-   end
+#  module Skin
+#   #properties
+#    property is_owned : Bool
+#    property char_sprite : SF::Sprite
+#    property display_sprite : SF::Sprite
+#    property id : String
+#    property name : String
+#   class Human
+#      Light = new.Human(false, PLAYER_CHAR, PLAYER_CHAR_DISPLAY, "SH001", "Light") 
+#      Tan = new.Human(false, PLAYER_CHAR_2, PLAYER_CHAR_DISPLAY_2, "SH002", "Tan")
+#      Dark = new.Human(false, PLAYER_CHAR_3, PLAYER_CHAR_DISPLAY_3, "SH003", "Dark")
+#      Jaundiced = new.Human(false, PLAYER_CHAR_7, PLAYER_CHAR_DISPLAY_7, "SH004", "Jaundiced")
+#    end
+#   class Spooky
+  #   Ghostly = new.Spooky(false, PLAYER_CHAR_4, PLAYER_CHAR_DISPLAY_4, "SS001", "Ghostly")
+  #   Blue = new.Spooky(false, PLAYER_CHAR_5, PLAYER_CHAR_DISPLAY_5, "SS002", "Blue")
+  #   Purple = new.Spooky(false, PLAYER_CHAR_6, PLAYER_CHAR_DISPLAY_6, "SS003", "Purple")
+  #  end
+  #  end
 #HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH 
 #H                                                           Hair                                                                            H
 #HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH
@@ -1832,6 +1925,7 @@ Gui::Window_Class.run
     
     Is_Owned_Hair_Array = [Shounen_Hair_Black[0], Shounen_Hair_Green[0], Shounen_Hair_Blue[0], Shounen_Hair_Red[0], Shounen_Hair_Yellow[0], 
     Shounen_Hair_Purple[0], Grey_Ponytail[0], Blonde_Ponytail[0], Red_Ponytail[0], Brown_Ponytail[0], Pink_Ponytail[0], Blue_Ponytail[0]]
+
 module Clothing
 include Gui
 
@@ -2360,72 +2454,72 @@ include Gui
          @@owned_shoes_array.uniq!
          array = @@owned_shoes_array; array_size = @@owned_shoes_array.size
          Shoes.sort_by_color
-     #_________________________page  one_______________________________________________________________________________________________________
-      #-------------------------Row One--------------------------------------------------------------------------------------------------------
-         s = @@owned_shoes_array.size - 1
-        if s >= 0 && @@owned_shoes_array[0].is_owned == true
-          @@owned_shoes_array[0].display_sprite.position = SF.vector2(595, 135)
-          window.draw(@@owned_shoes_array[0].display_sprite)
+        #_________________________page  one_______________________________________________________________________________________________________
+        #-------------------------Row One--------------------------------------------------------------------------------------------------------
+           s = @@owned_shoes_array.size - 1
+          if s >= 0 && @@owned_shoes_array[0].is_owned == true
+            @@owned_shoes_array[0].display_sprite.position = SF.vector2(595, 135)
+            window.draw(@@owned_shoes_array[0].display_sprite)
+           end
+          if s >= 1 && @@owned_shoes_array[1].is_owned == true
+            @@owned_shoes_array[1].display_sprite.position = SF.vector2(715, 135)
+            window.draw(@@owned_shoes_array[1].display_sprite)
+           end
+          if s >=  2 && @@owned_shoes_array[2].is_owned == true
+            @@owned_shoes_array[2].display_sprite.position = SF.vector2(830, 135)
+            window.draw(@@owned_shoes_array[2].display_sprite)
+           end
+          if s >=  3 && @@owned_shoes_array[3].is_owned == true
+            @@owned_shoes_array[3].display_sprite.position = SF.vector2(945, 135)
+            window.draw(@@owned_shoes_array[3].display_sprite)
+           end
+          if s >=  4 && @@owned_shoes_array[4].is_owned == true
+            @@owned_shoes_array[4].display_sprite.position = SF.vector2(1060, 135)
+            window.draw(@@owned_shoes_array[4].display_sprite)
+           end
+        #-------------------------Row Two--------------------------------------------------------------------------------------------------------
+          if s >= 5 && @@owned_shoes_array[5].is_owned == true
+            @@owned_shoes_array[5].display_sprite.position = SF.vector2(595, 235)
+            window.draw(@@owned_shoes_array[5].display_sprite)
+           end
+          if s >= 6 && @@owned_shoes_array[6].is_owned == true
+            @@owned_shoes_array[6].display_sprite.position = SF.vector2(715, 235)
+            window.draw(@@owned_shoes_array[6].display_sprite)
+           end
+          if s >= 7 && @@owned_shoes_array[7].is_owned == true
+            @@owned_shoes_array[7].display_sprite.position = SF.vector2(830, 235)
+            window.draw(@@owned_shoes_array[7].display_sprite)
+           end
+          if s >= 8 && @@owned_shoes_array[8].is_owned == true
+            @@owned_shoes_array[8].display_sprite.position = SF.vector2(945, 235)
+            window.draw(@@owned_shoes_array[8].display_sprite)
+           end
+          if s >= 9 && @@owned_shoes_array[9].is_owned == true
+            @@owned_shoes_array[9].display_sprite.position = SF.vector2(1060, 235)
+            window.draw(@@owned_shoes_array[9].display_sprite)
+          end
+        #-------------------------Row Three------------------------------------------------------------------------------------------------------
+        if s >= 10 && @@owned_shoes_array[10].is_owned == true
+          @@owned_shoes_array[10].display_sprite.position = SF.vector2(595, 335)
+          window.draw(@@owned_shoes_array[10].display_sprite)
          end
-        if s >= 1 && @@owned_shoes_array[1].is_owned == true
-          @@owned_shoes_array[1].display_sprite.position = SF.vector2(715, 135)
-          window.draw(@@owned_shoes_array[1].display_sprite)
-         end
-        if s >=  2 && @@owned_shoes_array[2].is_owned == true
-          @@owned_shoes_array[2].display_sprite.position = SF.vector2(830, 135)
-          window.draw(@@owned_shoes_array[2].display_sprite)
-         end
-        if s >=  3 && @@owned_shoes_array[3].is_owned == true
-          @@owned_shoes_array[3].display_sprite.position = SF.vector2(945, 135)
-          window.draw(@@owned_shoes_array[3].display_sprite)
-         end
-        if s >=  4 && @@owned_shoes_array[4].is_owned == true
-          @@owned_shoes_array[4].display_sprite.position = SF.vector2(1060, 135)
-          window.draw(@@owned_shoes_array[4].display_sprite)
-         end
-      #-------------------------Row Two--------------------------------------------------------------------------------------------------------
-        if s >= 5 && @@owned_shoes_array[5].is_owned == true
-          @@owned_shoes_array[5].display_sprite.position = SF.vector2(595, 235)
-          window.draw(@@owned_shoes_array[5].display_sprite)
-         end
-        if s >= 6 && @@owned_shoes_array[6].is_owned == true
-          @@owned_shoes_array[6].display_sprite.position = SF.vector2(715, 235)
-          window.draw(@@owned_shoes_array[6].display_sprite)
-         end
-        if s >= 7 && @@owned_shoes_array[7].is_owned == true
-          @@owned_shoes_array[7].display_sprite.position = SF.vector2(830, 235)
-          window.draw(@@owned_shoes_array[7].display_sprite)
-         end
-        if s >= 8 && @@owned_shoes_array[8].is_owned == true
-          @@owned_shoes_array[8].display_sprite.position = SF.vector2(945, 235)
-          window.draw(@@owned_shoes_array[8].display_sprite)
-         end
-        if s >= 9 && @@owned_shoes_array[9].is_owned == true
-          @@owned_shoes_array[9].display_sprite.position = SF.vector2(1060, 235)
-          window.draw(@@owned_shoes_array[9].display_sprite)
-        end
-      #-------------------------Row Three------------------------------------------------------------------------------------------------------
-       if s >= 10 && @@owned_shoes_array[10].is_owned == true
-         @@owned_shoes_array[10].display_sprite.position = SF.vector2(595, 335)
-         window.draw(@@owned_shoes_array[10].display_sprite)
-        end
         if s >= 11 && @@owned_shoes_array[11].is_owned == true
-          @@owned_shoes_array[11].display_sprite.position = SF.vector2(715, 335)
-          window.draw(@@owned_shoes_array[11].display_sprite)
-         end
+           @@owned_shoes_array[11].display_sprite.position = SF.vector2(715, 335)
+           window.draw(@@owned_shoes_array[11].display_sprite)
+          end
         if s >= 12 && @@owned_shoes_array[12].is_owned == true
-          @@owned_shoes_array[12].display_sprite.position = SF.vector2(830, 335)
-          window.draw(@@owned_shoes_array[12].display_sprite)
-         end
+           @@owned_shoes_array[12].display_sprite.position = SF.vector2(830, 335)
+           window.draw(@@owned_shoes_array[12].display_sprite)
+          end
         if s >= 13 && @@owned_shoes_array[13].is_owned == true
-          @@owned_shoes_array[13].display_sprite.position = SF.vector2(945, 335)
-          window.draw(@@owned_shoes_array[13].display_sprite)
-         end
+           @@owned_shoes_array[13].display_sprite.position = SF.vector2(945, 335)
+           window.draw(@@owned_shoes_array[13].display_sprite)
+          end
         if s >= 14 && @@owned_shoes_array[14].is_owned == true
           @@owned_shoes_array[14].display_sprite.position = SF.vector2(1060, 335)
           window.draw(@@owned_shoes_array[14].display_sprite)
          end
-       end
+        end
     def Shoes.determine_array_length(window, this)
      @@owned_shoes_array.uniq!
      if this <= @@owned_shoes_array.size - 1
@@ -2533,7 +2627,7 @@ include Gui
        end
         a += 1
        end
-    end
+     end
     #.........................................................................................................................................
   #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     
@@ -2646,8 +2740,9 @@ class Face
     @@gloves_array : Array(Gloves)
     property = @@owned_gloves_array
     @@outfit_gloves_slot : Gloves
-    @@outfit_gloves_slot = @@black_fingerless_gloves
-    @@gloves_array = [@@black_fingerless_gloves, @@red_fingerless_gloves, @@blue_fingerless_gloves]
+    @@outfit_gloves_slot = @@white_fingerless_gloves
+    @@gloves_array = [@@white_fingerless_gloves, @@red_fingerless_gloves, @@blue_fingerless_gloves, @@black_fingerless_gloves, @@orange_fingerless_gloves,
+    @@yellow_fingerless_gloves, @@green_fingerless_gloves, @@purple_fingerless_gloves, @@pink_fingerless_gloves, @@brown_fingerless_gloves]
   #******************************************************************************************************************************************
   #...............................................................methods....................................................................
    def Gloves.obtain(this)#---------------------------------------obtain
@@ -2666,20 +2761,53 @@ class Face
 
    def Gloves.draw(window)#-----------------------------------------draw
       @@owned_gloves_array.uniq!
+      array = @@owned_gloves_array; array_size = @@owned_gloves_array.size
+      Gloves.sort_by_color
       s = @@owned_gloves_array.size - 1
-    if s >= 0 && @@owned_gloves_array[0].is_owned == true
-       @@owned_gloves_array[0].display_sprite.position = SF.vector2(535, 135)
-       window.draw(@@owned_gloves_array[0].display_sprite)
-    end
-    if s >= 1 && @@owned_gloves_array[1].is_owned == true
-       @@owned_gloves_array[1].display_sprite.position = SF.vector2(655, 135)
-       window.draw(@@owned_gloves_array[1].display_sprite)
-    end
-    if s >=  2 && @@owned_gloves_array[2].is_owned == true
-       @@owned_gloves_array[2].display_sprite.position = SF.vector2(775, 135)
-       window.draw(@@owned_gloves_array[2].display_sprite)
+    #_________________________page  one_______________________________________________________________________________________________________
+    #-------------------------Row One--------------------------------------------------------------------------------------------------------
+     if s >= 0 && @@owned_gloves_array[0].is_owned == true
+        @@owned_gloves_array[0].display_sprite.position = SF.vector2(535, 135)
+        window.draw(@@owned_gloves_array[0].display_sprite)
+      end
+     if s >= 1 && @@owned_gloves_array[1].is_owned == true
+        @@owned_gloves_array[1].display_sprite.position = SF.vector2(655, 135)
+        window.draw(@@owned_gloves_array[1].display_sprite)
+      end
+     if s >=  2 && @@owned_gloves_array[2].is_owned == true
+        @@owned_gloves_array[2].display_sprite.position = SF.vector2(775, 135)
+        window.draw(@@owned_gloves_array[2].display_sprite)
+      end
+     if s >=  3 && @@owned_gloves_array[3].is_owned == true
+       @@owned_gloves_array[3].display_sprite.position = SF.vector2(895, 135)
+       window.draw(@@owned_gloves_array[3].display_sprite)
+      end
+     if s >=  4 && @@owned_gloves_array[4].is_owned == true
+       @@owned_gloves_array[4].display_sprite.position = SF.vector2(1015, 135)
+       window.draw(@@owned_gloves_array[4].display_sprite)
      end
-    end
+    #-------------------------Row Two--------------------------------------------------------------------------------------------------------
+     if s >= 5 && @@owned_gloves_array[5].is_owned == true
+        @@owned_gloves_array[5].display_sprite.position = SF.vector2(535, 235)
+        window.draw(@@owned_gloves_array[5].display_sprite)
+      end
+     if s >= 6 && @@owned_gloves_array[6].is_owned == true
+        @@owned_gloves_array[6].display_sprite.position = SF.vector2(655, 235)
+        window.draw(@@owned_gloves_array[6].display_sprite)
+      end
+     if s >=  7 && @@owned_gloves_array[7].is_owned == true
+        @@owned_gloves_array[7].display_sprite.position = SF.vector2(775, 235)
+        window.draw(@@owned_gloves_array[7].display_sprite)
+      end
+     if s >=  8 && @@owned_gloves_array[8].is_owned == true
+       @@owned_gloves_array[8].display_sprite.position = SF.vector2(895, 235)
+       window.draw(@@owned_gloves_array[8].display_sprite)
+      end
+     if s >=  9 && @@owned_gloves_array[9].is_owned == true
+       @@owned_gloves_array[9].display_sprite.position = SF.vector2(1015, 235)
+       window.draw(@@owned_gloves_array[9].display_sprite)
+     end
+     end
 
    def Gloves.determine_array_length(window, this)#--------------array length
       @@owned_gloves_array.uniq!
@@ -2694,10 +2822,104 @@ class Face
       when 2
        selected_gloves = @@owned_gloves_array[2].number
        Clothing::Gloves.select(window, selected_gloves)
+      when 3
+        selected_gloves = @@owned_gloves_array[3].number
+        Clothing::Gloves.select(window, selected_gloves)
+      when 4
+        selected_gloves = @@owned_gloves_array[4].number
+        Clothing::Gloves.select(window, selected_gloves)
+      when 5
+        selected_gloves = @@owned_gloves_array[5].number
+        Clothing::Gloves.select(window, selected_gloves)
+      when 6
+        selected_gloves = @@owned_gloves_array[6].number
+        Clothing::Gloves.select(window, selected_gloves)
+      when 7
+        selected_gloves = @@owned_gloves_array[7].number
+        Clothing::Gloves.select(window, selected_gloves)
+      when 8
+        selected_gloves = @@owned_gloves_array[8].number
+        Clothing::Gloves.select(window, selected_gloves)
+      when 9
+        selected_gloves = @@owned_gloves_array[9].number
+        Clothing::Gloves.select(window, selected_gloves)
     end; end; end
    def Gloves.select(window, selected_gloves)#----------------------select
     gloves_slot = selected_gloves
     Clothing_Outfit_Slot.change_gloves(gloves_slot, window)
+    end
+   def Gloves.sort_by_color#-----------------------------------sort by color
+      a = 0; sorted_array = @@owned_gloves_array.dup
+      @@owned_gloves_array.clear
+     while a < sorted_array.size
+      if sorted_array[a].color === "white"
+        @@owned_gloves_array.push(sorted_array[a])
+       end
+       a += 1
+      end
+      a = 0
+     while a < sorted_array.size
+      if sorted_array[a].color === "black"
+        @@owned_gloves_array.push(sorted_array[a])
+       end
+        a += 1
+       end
+       a = 0
+     while a < sorted_array.size
+      if sorted_array[a].color === "red"
+        @@owned_gloves_array.push(sorted_array[a])
+       end
+        a += 1
+       end
+       a = 0
+     while a < sorted_array.size
+      if sorted_array[a].color === "orange"
+        @@owned_gloves_array.push(sorted_array[a])
+       end
+        a += 1
+       end
+       a = 0
+     while a < sorted_array.size
+      if sorted_array[a].color === "yellow"
+        @@owned_gloves_array.push(sorted_array[a])
+       end
+        a += 1
+       end
+       a = 0
+     while a < sorted_array.size
+      if sorted_array[a].color === "green"
+        @@owned_gloves_array.push(sorted_array[a])
+       end
+        a += 1
+       end
+       a = 0
+     while a < sorted_array.size
+      if sorted_array[a].color === "blue"
+        @@owned_gloves_array.push(sorted_array[a])
+       end
+        a += 1
+       end
+       a = 0
+     while a < sorted_array.size
+      if sorted_array[a].color === "purple"
+        @@owned_gloves_array.push(sorted_array[a])
+       end
+        a += 1
+       end
+       a = 0
+     while a < sorted_array.size
+      if sorted_array[a].color === "pink"
+        @@owned_gloves_array.push(sorted_array[a])
+       end
+        a += 1
+       end
+       a = 0
+     while a < sorted_array.size
+      if sorted_array[a].color === "brown"
+        @@owned_gloves_array.push(sorted_array[a])
+       end
+       a += 1
+       end
     end
   #******************************************************************************************************************************************
 
@@ -2705,9 +2927,16 @@ class Face
  #|                                                          Fingerless Gloves                                                              |
  #|_________________________________________________________________________________________________________________________________________|
 
-   @@black_fingerless_gloves = Gloves.new(true, FINGERLESS_GLOVE_01, DISPLAY_FINGERLESS_GLOVE_01, "Black Fingerless Gloves", "black", 0)
+   @@white_fingerless_gloves = Gloves.new(true, FINGERLESS_GLOVE_01, DISPLAY_FINGERLESS_GLOVE_01, "Black Fingerless Gloves", "white", 0)
    @@red_fingerless_gloves = Gloves.new(true, FINGERLESS_GLOVE_02, DISPLAY_FINGERLESS_GLOVE_02, "Red Fingerless Gloves", "red", 1)
    @@blue_fingerless_gloves = Gloves.new(true, FINGERLESS_GLOVE_03, DISPLAY_FINGERLESS_GLOVE_03, "Blue Fingerless Gloves", "blue", 2)
+   @@black_fingerless_gloves = Gloves.new(true, FINGERLESS_GLOVE_04, DISPLAY_FINGERLESS_GLOVE_04, "Black Fingerless Gloves", "black", 3)
+   @@orange_fingerless_gloves = Gloves.new(true, FINGERLESS_GLOVE_05, DISPLAY_FINGERLESS_GLOVE_05, "Orange Fingerless Gloves", "orange", 4)
+   @@yellow_fingerless_gloves = Gloves.new(true, FINGERLESS_GLOVE_06, DISPLAY_FINGERLESS_GLOVE_06, "Yellow Fingerless Gloves", "yellow", 5)
+   @@green_fingerless_gloves = Gloves.new(true, FINGERLESS_GLOVE_07, DISPLAY_FINGERLESS_GLOVE_07, "Green Fingerless Gloves", "green", 6)
+   @@purple_fingerless_gloves = Gloves.new(true, FINGERLESS_GLOVE_08, DISPLAY_FINGERLESS_GLOVE_08, "Purple Fingerless Gloves", "purple", 7)
+   @@pink_fingerless_gloves = Gloves.new(true, FINGERLESS_GLOVE_09, DISPLAY_FINGERLESS_GLOVE_09, "Pink Fingerless Gloves", "pink", 8)
+   @@brown_fingerless_gloves = Gloves.new(true, FINGERLESS_GLOVE_10, DISPLAY_FINGERLESS_GLOVE_10, "Brown Fingerless Gloves", "brown", 9)
 
  #-------------------------------------------------------------------------------------------------------------------------------------------
  end
@@ -3151,6 +3380,7 @@ class Face
    end
    end
  end
+#____________________________________________________________________________________________________________________________________________
 
 
 
@@ -3160,7 +3390,7 @@ class Face
 
 
 
-# class SpriteInfo
+ # class SpriteInfo
  #   property position : {Float64, Float64}
  #   property texture_filename : String
  

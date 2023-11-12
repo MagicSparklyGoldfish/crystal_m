@@ -798,16 +798,20 @@
 #-------------------------------------------------------------------------------------------------------------------------------------
 #                                                     Glove Textures
 #-------------------------------------------------------------------------------------------------------------------------------------
- GLOVE_ARRAY = [FINGERLESS_GLOVE_01, FINGERLESS_GLOVE_02, FINGERLESS_GLOVE_03]
+ GLOVE_ARRAY = [FINGERLESS_GLOVE_01, FINGERLESS_GLOVE_02, FINGERLESS_GLOVE_03, FINGERLESS_GLOVE_04, FINGERLESS_GLOVE_05, FINGERLESS_GLOVE_06,
+ FINGERLESS_GLOVE_07, FINGERLESS_GLOVE_08, FINGERLESS_GLOVE_09, FINGERLESS_GLOVE_10]
 
- DISPLAY_GLOVE_ARRAY = [DISPLAY_FINGERLESS_GLOVE_01, DISPLAY_FINGERLESS_GLOVE_02, DISPLAY_FINGERLESS_GLOVE_03]
+ DISPLAY_GLOVE_ARRAY = [DISPLAY_FINGERLESS_GLOVE_01, DISPLAY_FINGERLESS_GLOVE_02, DISPLAY_FINGERLESS_GLOVE_03, DISPLAY_FINGERLESS_GLOVE_04,
+ DISPLAY_FINGERLESS_GLOVE_05, DISPLAY_FINGERLESS_GLOVE_06, DISPLAY_FINGERLESS_GLOVE_07, DISPLAY_FINGERLESS_GLOVE_08, DISPLAY_FINGERLESS_GLOVE_09,
+ DISPLAY_FINGERLESS_GLOVE_10]
 
- GLOVE_DESC_ARRAY = ["Black Fingerless Gloves", "Red Fingerless Gloves", "Blue Fingerless Gloves"]
+ GLOVE_DESC_ARRAY = ["White Fingerless Gloves", "Red Fingerless Gloves", "Blue Fingerless Gloves", "Black Fingerless Gloves", "Orange Fingerless Gloves",
+ "Yellow Fingerless Gloves", "Green Fingerless Gloves", "Purple Fingerless Gloves", "Pink Fingerless Gloves", "Brown Fingerless Gloves"]
 
  Glove_Desc = SF::Text.new; Glove_Desc.font = FONT_FANCY_BOLD
  Glove_Desc.string = GLOVE_DESC_ARRAY[0]; Glove_Desc.character_size = 40; Glove_Desc.color = SF::Color::White
  Glove_Desc.position = SF.vector2(1400, 250)
- #.................................................Fingerless Gloves Black...........................................................
+ #.................................................Fingerless Gloves White...........................................................
   #\\\\\\\Character Model
   FINGERLESS_GLOVE_TEXTURE_01 = SF::Texture.from_file("graphics/Fingerless_Gloves_01.png")
   FINGERLESS_GLOVE_01 = SF::Sprite.new(FINGERLESS_GLOVE_TEXTURE_01) 
@@ -819,23 +823,93 @@
  #.................................................Fingerless Gloves Red.............................................................
   #\\\\\\\Character Model
   FINGERLESS_GLOVE_02 = SF::Sprite.new(FINGERLESS_GLOVE_TEXTURE_01) 
-  FINGERLESS_GLOVE_02.color = SF.color(255, 50, 50)
+  FINGERLESS_GLOVE_02.color = SF.color(128, 0, 0)
   #\\\\\\\Display Model
   DISPLAY_FINGERLESS_GLOVE_02 = SF::Sprite.new(FINGERLESS_GLOVE_TEXTURE_01)
   DISPLAY_FINGERLESS_GLOVE_02.texture_rect = SF.int_rect(0, 0, 96, 128)
   DISPLAY_FINGERLESS_GLOVE_02.position = SF.vector2(1350, -250)
   DISPLAY_FINGERLESS_GLOVE_02.scale = SF.vector2(5.0, 5.0)
-  DISPLAY_FINGERLESS_GLOVE_02.color = SF.color(255, 50, 50)
+  DISPLAY_FINGERLESS_GLOVE_02.color = SF.color(128, 0, 0)
  #.................................................Fingerless Gloves Blue............................................................
   #\\\\\\\Character Model
   FINGERLESS_GLOVE_03 = SF::Sprite.new(FINGERLESS_GLOVE_TEXTURE_01) 
-  FINGERLESS_GLOVE_03.color = SF.color(50, 50, 255)
+  FINGERLESS_GLOVE_03.color = SF.color(70, 130, 180)
   #\\\\\\\Display Model
   DISPLAY_FINGERLESS_GLOVE_03 = SF::Sprite.new(FINGERLESS_GLOVE_TEXTURE_01)
   DISPLAY_FINGERLESS_GLOVE_03.texture_rect = SF.int_rect(0, 0, 96, 128)
   DISPLAY_FINGERLESS_GLOVE_03.position = SF.vector2(1350, -250)
   DISPLAY_FINGERLESS_GLOVE_03.scale = SF.vector2(5.0, 5.0)
-  DISPLAY_FINGERLESS_GLOVE_03.color = SF.color(50, 50, 255)
+  DISPLAY_FINGERLESS_GLOVE_03.color = SF.color(70, 130, 180)
+ #.................................................Fingerless Gloves Black...........................................................
+  #\\\\\\\Character Model
+  FINGERLESS_GLOVE_04 = SF::Sprite.new(FINGERLESS_GLOVE_TEXTURE_01) 
+  FINGERLESS_GLOVE_04.color = SF.color(20, 20, 20)
+  #\\\\\\\Display Model
+  DISPLAY_FINGERLESS_GLOVE_04 = SF::Sprite.new(FINGERLESS_GLOVE_TEXTURE_01)
+  DISPLAY_FINGERLESS_GLOVE_04.texture_rect = SF.int_rect(0, 0, 96, 128)
+  DISPLAY_FINGERLESS_GLOVE_04.position = SF.vector2(1350, -250)
+  DISPLAY_FINGERLESS_GLOVE_04.scale = SF.vector2(5.0, 5.0)
+  DISPLAY_FINGERLESS_GLOVE_04.color = SF.color(20, 20, 20)
+ #.................................................Fingerless Gloves Orange...........................................................
+  #\\\\\\\Character Model
+  FINGERLESS_GLOVE_05 = SF::Sprite.new(FINGERLESS_GLOVE_TEXTURE_01) 
+  FINGERLESS_GLOVE_05.color = SF.color(255, 140, 0)
+  #\\\\\\\Display Model
+  DISPLAY_FINGERLESS_GLOVE_05 = SF::Sprite.new(FINGERLESS_GLOVE_TEXTURE_01)
+  DISPLAY_FINGERLESS_GLOVE_05.texture_rect = SF.int_rect(0, 0, 96, 128)
+  DISPLAY_FINGERLESS_GLOVE_05.position = SF.vector2(1350, -250)
+  DISPLAY_FINGERLESS_GLOVE_05.scale = SF.vector2(5.0, 5.0)
+  DISPLAY_FINGERLESS_GLOVE_05.color = SF.color(255, 140, 0)
+ #.................................................Fingerless Gloves Yellow...........................................................
+  #\\\\\\\Character Model
+  FINGERLESS_GLOVE_06 = SF::Sprite.new(FINGERLESS_GLOVE_TEXTURE_01) 
+  FINGERLESS_GLOVE_06.color = SF.color(255, 255, 153)
+  #\\\\\\\Display Model
+  DISPLAY_FINGERLESS_GLOVE_06 = SF::Sprite.new(FINGERLESS_GLOVE_TEXTURE_01)
+  DISPLAY_FINGERLESS_GLOVE_06.texture_rect = SF.int_rect(0, 0, 96, 128)
+  DISPLAY_FINGERLESS_GLOVE_06.position = SF.vector2(1350, -250)
+  DISPLAY_FINGERLESS_GLOVE_06.scale = SF.vector2(5.0, 5.0)
+  DISPLAY_FINGERLESS_GLOVE_06.color = SF.color(255, 255, 153)
+ #.................................................Fingerless Gloves Green...........................................................
+  #\\\\\\\Character Model
+  FINGERLESS_GLOVE_07 = SF::Sprite.new(FINGERLESS_GLOVE_TEXTURE_01) 
+  FINGERLESS_GLOVE_07.color = SF.color(85, 107, 47)
+  #\\\\\\\Display Model
+  DISPLAY_FINGERLESS_GLOVE_07 = SF::Sprite.new(FINGERLESS_GLOVE_TEXTURE_01)
+  DISPLAY_FINGERLESS_GLOVE_07.texture_rect = SF.int_rect(0, 0, 96, 128)
+  DISPLAY_FINGERLESS_GLOVE_07.position = SF.vector2(1350, -250)
+  DISPLAY_FINGERLESS_GLOVE_07.scale = SF.vector2(5.0, 5.0)
+  DISPLAY_FINGERLESS_GLOVE_07.color = SF.color(85, 107, 47)
+ #.................................................Fingerless Gloves Purple...........................................................
+  #\\\\\\\Character Model
+  FINGERLESS_GLOVE_08 = SF::Sprite.new(FINGERLESS_GLOVE_TEXTURE_01) 
+  FINGERLESS_GLOVE_08.color = SF.color(153, 50, 204)
+  #\\\\\\\Display Model
+  DISPLAY_FINGERLESS_GLOVE_08 = SF::Sprite.new(FINGERLESS_GLOVE_TEXTURE_01)
+  DISPLAY_FINGERLESS_GLOVE_08.texture_rect = SF.int_rect(0, 0, 96, 128)
+  DISPLAY_FINGERLESS_GLOVE_08.position = SF.vector2(1350, -250)
+  DISPLAY_FINGERLESS_GLOVE_08.scale = SF.vector2(5.0, 5.0)
+  DISPLAY_FINGERLESS_GLOVE_08.color = SF.color(153, 50, 204)
+ #.................................................Fingerless Gloves Pink...........................................................
+  #\\\\\\\Character Model
+  FINGERLESS_GLOVE_09 = SF::Sprite.new(FINGERLESS_GLOVE_TEXTURE_01) 
+  FINGERLESS_GLOVE_09.color = SF.color(219, 112, 147)
+  #\\\\\\\Display Model
+  DISPLAY_FINGERLESS_GLOVE_09 = SF::Sprite.new(FINGERLESS_GLOVE_TEXTURE_01)
+  DISPLAY_FINGERLESS_GLOVE_09.texture_rect = SF.int_rect(0, 0, 96, 128)
+  DISPLAY_FINGERLESS_GLOVE_09.position = SF.vector2(1350, -250)
+  DISPLAY_FINGERLESS_GLOVE_09.scale = SF.vector2(5.0, 5.0)
+  DISPLAY_FINGERLESS_GLOVE_09.color = SF.color(219, 112, 147)
+ #.................................................Fingerless Gloves Brown...........................................................
+  #\\\\\\\Character Model
+  FINGERLESS_GLOVE_10 = SF::Sprite.new(FINGERLESS_GLOVE_TEXTURE_01) 
+  FINGERLESS_GLOVE_10.color = SF.color(139, 69, 19)
+  #\\\\\\\Display Model
+  DISPLAY_FINGERLESS_GLOVE_10 = SF::Sprite.new(FINGERLESS_GLOVE_TEXTURE_01)
+  DISPLAY_FINGERLESS_GLOVE_10.texture_rect = SF.int_rect(0, 0, 96, 128)
+  DISPLAY_FINGERLESS_GLOVE_10.position = SF.vector2(1350, -250)
+  DISPLAY_FINGERLESS_GLOVE_10.scale = SF.vector2(5.0, 5.0)
+  DISPLAY_FINGERLESS_GLOVE_10.color = SF.color(139, 69, 19)
 #-------------------------------------------------------------------------------------------------------------------------------------
 #                                                     Shirt Textures
 #-------------------------------------------------------------------------------------------------------------------------------------
@@ -1586,3 +1660,8 @@
   Name_Box.outline_thickness = 2; Name_Box.outline_color = SF.color(150, 0, 0); Name_Box_Text = SF::Text.new;
   Name_Box_Text.font = FONT_PIXEL; Name_Box_Text.character_size = 20; Name_Box_Text.color = SF::Color::Black
   Health_Bar = SF::RectangleShape.new(SF.vector2(100, 10)); Health_Bar.fill_color = SF.color(255, 0, 0) 
+#______________________________________________________________________________________________________________________________________
+#--------------------------------------------------------------------------------------------------------------------------------------
+#                                                     Bounding Boxes
+#--------------------------------------------------------------------------------------------------------------------------------------
+  Bounding_Box = SF::RectangleShape.new(SF.vector2(100, 100)); Bounding_Box.fill_color = SF.color(255, 255, 255)
