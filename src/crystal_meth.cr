@@ -65,7 +65,7 @@ extend self
 #======================================================Character Model==================================================================+
 
 #-----------------------------------------------------initialize models-----------------------------------------------------------------+
- def Window_Class.player_model_initialize(@@current_shoes, @@current_gloves, @@current_shirt)
+ def Window_Class.player_model_initialize(@@current_shoes, @@current_gloves, @@current_shirt, @@current_pants) 
    @@player_character_model.clear(SF::Color::Transparent) #@note player customization happens here
    @@player_character_model.draw(SKIN_ARRAY[@@current_skin])
    @@player_character_model.draw(SHOES_ARRAY[@@current_shoes])
@@ -92,7 +92,7 @@ extend self
    @@current_display_hair_string = @@current_hair
    end; end
    Hair_Desc.string = HAIR_DESC_ARRAY[@@current_display_hair_string]
-   Window_Class.player_model_initialize(@@current_shoes, @@current_gloves, @@current_shirt)
+   Window_Class.player_model_initialize(@@current_shoes, @@current_gloves, @@current_shirt, @@current_pants) 
    window.draw(HAIR_ARRAY[@@current_hair])
  end
  def Window_Class.customize_skin(window, direction)
@@ -102,7 +102,7 @@ extend self
      @@current_skin = @@current_skin - 1
    end; end
      Skin_Desc.string = SKIN_DESC_ARRAY[@@current_skin]
-     Window_Class.player_model_initialize(@@current_shoes, @@current_gloves, @@current_shirt)
+     Window_Class.player_model_initialize(@@current_shoes, @@current_gloves, @@current_shirt, @@current_pants) 
      window.draw(SKIN_ARRAY[@@current_skin])
  end
  def Window_Class.customize_face(window, direction)
@@ -112,7 +112,7 @@ extend self
      @@current_face = @@current_face - 1
    end; end
      Face_Desc.string = FACE_DESC_ARRAY[@@current_face]
-     Window_Class.player_model_initialize(@@current_shoes, @@current_gloves, @@current_shirt)
+     Window_Class.player_model_initialize(@@current_shoes, @@current_gloves, @@current_shirt, @@current_pants) 
      window.draw(FACE_ARRAY[@@current_face])
  end
  def Window_Class.customize_shirt(window, direction)
@@ -122,7 +122,7 @@ extend self
      @@current_shirt = @@current_shirt - 1
    end; end
      Shirt_Desc.string = SHIRT_DESC_ARRAY[@@current_shirt]
-     Window_Class.player_model_initialize(@@current_shoes, @@current_gloves, @@current_shirt)
+     Window_Class.player_model_initialize(@@current_shoes, @@current_gloves, @@current_shirt, @@current_pants) 
      window.draw(SHIRT_ARRAY[@@current_shirt])
  end
  def Window_Class.customize_gloves(window, direction)
@@ -132,7 +132,7 @@ extend self
      @@current_gloves = @@current_gloves - 1
    end; end
    Glove_Desc.string = GLOVE_DESC_ARRAY[@@current_gloves]
-     Window_Class.player_model_initialize(@@current_shoes, @@current_gloves, @@current_shirt)
+   Window_Class.player_model_initialize(@@current_shoes, @@current_gloves, @@current_shirt, @@current_pants) 
      window.draw(GLOVE_ARRAY[@@current_gloves])
  end
  def Window_Class.customize_pants(window, direction)
@@ -142,7 +142,7 @@ extend self
      @@current_pants = @@current_pants - 1
    end; end
    Pants_Desc.string = PANTS_DESC_ARRAY[@@current_pants]
-     Window_Class.player_model_initialize(@@current_shoes, @@current_gloves, @@current_shirt)
+   Window_Class.player_model_initialize(@@current_shoes, @@current_gloves, @@current_shirt, @@current_pants) 
      window.draw(PANTS_ARRAY[@@current_pants])
  end
  def Window_Class.customize_shoes(window, direction)
@@ -152,7 +152,7 @@ extend self
      @@current_shoes = @@current_shoes - 1
    end; end
    Shoes_Desc.string = SHOES_DESC_ARRAY[@@current_shoes]
-     Window_Class.player_model_initialize(@@current_shoes, @@current_gloves, @@current_shirt)
+   Window_Class.player_model_initialize(@@current_shoes, @@current_gloves, @@current_shirt, @@current_pants) 
      window.draw(SHOES_ARRAY[@@current_shoes])
  end
 #=======================================================================================================================================+
@@ -375,6 +375,7 @@ extend self
         Clothing::Gloves.draw(window)
        when "pants"
         Window_Class.pants_tab(window)
+        Clothing::Pants.draw(window, @@page)
        when "shoes"
         Window_Class.shoes_tab(window)
         Clothing::Shoes.draw(window)
@@ -412,7 +413,7 @@ extend self
  debug_draw = SFMLDebugDraw.new(window, SF::RenderStates.new( #--------------------------------initializes crystal chipmunk draw area
  SF::Transform.new.translate(window.size / 2).scale(1, -1).scale(5, 5)
  ))
-  Window_Class.player_model_initialize(@@current_shoes, @@current_gloves, @@current_shirt)
+ Window_Class.player_model_initialize(@@current_shoes, @@current_gloves, @@current_shirt, @@current_pants) 
   case @@map
   when "test"
     Window_Class.initialize_test_map(debug_draw, window, @@space)
@@ -466,7 +467,7 @@ def Window_Class.main_menu_keypresses(window)
   when SF::Keyboard::W #---------------for testing purposes, remove when testing done
     Data_Manager.load_savegame
   when SF::Keyboard::C #---------------for testing purposes, remove when testing done
-    Window_Class.player_model_initialize(@@current_shoes, @@current_gloves, @@current_shirt)
+    Window_Class.player_model_initialize(@@current_shoes, @@current_gloves, @@current_shirt, @@current_pants) 
     @@menu = "charcreate"
   when SF::Keyboard::Enter
     puts "enter"
@@ -523,7 +524,7 @@ def Window_Class.char_select_menu_keypresses(window)
       when 1
       if File.exists?("Saves/Slot1/save01.yml") == false
         SaveData.create_new_savegame
-        Window_Class.player_model_initialize(@@current_shoes, @@current_gloves, @@current_shirt)
+        Window_Class.player_model_initialize(@@current_shoes, @@current_gloves, @@current_shirt, @@current_pants) 
         @@menu = "charcreate"
       else puts "loadgame"
       # SF::Event::Closed
@@ -821,30 +822,45 @@ def Window_Class.hud_keypresses(window)
         when 1
          this = 0
          Clothing::Shirt.determine_array_length(window, this)
+        when 2
+          this = 15
+          Clothing::Shirt.determine_array_length(window, this)
         end; end
       if (x >= 830 && x <= 950) && (y >= 490 && y <= 590) && @@tab == "shirt"
        case @@page
         when 1
          this = 1
          Clothing::Shirt.determine_array_length(window, this)
+        when 2
+          this = 16
+          Clothing::Shirt.determine_array_length(window, this)
        end; end
       if (x >= 940 && x <= 1060) && (y >= 490 && y <= 590) && @@tab == "shirt"
        case @@page
         when 1
          this = 2
          Clothing::Shirt.determine_array_length(window, this)
+        when 2
+          this = 17
+          Clothing::Shirt.determine_array_length(window, this)
        end; end
       if (x >= 1030 && x <= 1180) && (y >= 490 && y <= 590) && @@tab == "shirt"
        case @@page
         when 1
          this = 3
          Clothing::Shirt.determine_array_length(window, this)
+        when 2
+          this = 18
+          Clothing::Shirt.determine_array_length(window, this)
        end; end
       if (x >= 1175 && x <= 1290) && (y >= 490 && y <= 590) && @@tab == "shirt"
        case @@page
         when 1
          this = 4
          Clothing::Shirt.determine_array_length(window, this)
+        when 2
+          this = 19
+          Clothing::Shirt.determine_array_length(window, this)
        end; end
  #-------------------------------------------------------------row two---------------------------------------------------------------------
       if (x >= 710 && x <= 825) && (y >= 590 && y <= 690) && @@tab == "shirt"
@@ -852,30 +868,45 @@ def Window_Class.hud_keypresses(window)
         when 1
          this = 5
          Clothing::Shirt.determine_array_length(window, this)
+        when 2
+          this = 20
+          Clothing::Shirt.determine_array_length(window, this)
        end; end
       if (x >= 830 && x <= 950) && (y >= 590 && y <= 690) && @@tab == "shirt"
        case @@page
         when 1
          this = 6
          Clothing::Shirt.determine_array_length(window, this)
+        when 2
+          this = 21
+          Clothing::Shirt.determine_array_length(window, this)
        end; end
       if (x >= 940 && x <= 1060) && (y >= 590 && y <= 690) && @@tab == "shirt"
        case @@page
         when 1
          this = 7
          Clothing::Shirt.determine_array_length(window, this)
+        when 2
+          this = 22
+          Clothing::Shirt.determine_array_length(window, this)
        end; end
       if (x >= 1030 && x <= 1180) && (y >= 590 && y <= 690) && @@tab == "shirt"
        case @@page
         when 1
          this = 8
          Clothing::Shirt.determine_array_length(window, this)
+        when 2
+          this = 23
+          Clothing::Shirt.determine_array_length(window, this)
        end; end
       if (x >= 1175 && x <= 1290) && (y >= 590 && y <= 690) && @@tab == "shirt"
        case @@page
         when 1
          this = 9
          Clothing::Shirt.determine_array_length(window, this)
+        when 2
+          this = 24
+          Clothing::Shirt.determine_array_length(window, this)
        end; end
  #------------------------------------------------------------row three---------------------------------------------------------------------
       if (x >= 710 && x <= 825) && (y >= 690 && y <= 790) && @@tab == "shirt"
@@ -883,31 +914,47 @@ def Window_Class.hud_keypresses(window)
          when 1
           this = 10
           Clothing::Shirt.determine_array_length(window, this)
+        when 2
+          this = 25
+          Clothing::Shirt.determine_array_length(window, this)
        end; end
       if (x >= 830 && x <= 950) && (y >= 690 && y <= 790) && @@tab == "shirt"
        case @@page
         when 1
          this = 11
          Clothing::Shirt.determine_array_length(window, this)
+        when 2
+          this = 26
+          Clothing::Shirt.determine_array_length(window, this)
        end; end
       if (x >= 940 && x <= 1060) && (y >= 690 && y <= 790) && @@tab == "shirt"
        case @@page
         when 1
          this = 12
          Clothing::Shirt.determine_array_length(window, this)
+        when 2
+          this = 27
+          Clothing::Shirt.determine_array_length(window, this)
        end; end
       if (x >= 1030 && x <= 1180) && (y >= 690 && y <= 790) && @@tab == "shirt"
        case @@page
         when 1
          this = 13
          Clothing::Shirt.determine_array_length(window, this)
+        when 2
+          this = 28
+          Clothing::Shirt.determine_array_length(window, this)
        end; end
       if (x >= 1175 && x <= 1290) && (y >= 690 && y <= 790) && @@tab == "shirt"
        case @@page
         when 1
          this = 14
          Clothing::Shirt.determine_array_length(window, this)
+        when 2
+          this = 29
+          Clothing::Shirt.determine_array_length(window, this)
        end; end
+#___________________________________________________________________________________________________________________________________________
 #|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 #|                                                            gloves tab                                                                   |
 #|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||        
@@ -930,10 +977,6 @@ def Window_Class.hud_keypresses(window)
       end
 #___________________________________________________________________________________________________________________________________________
 
-      if (x >= 1001 && x <= 1141) && (y >= 450 && y <= 485) && @@popup == "Stats_Menu"
-         All_Audio::SFX.select1
-         @@tab = "pants"
-        end
 #|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 #|                                                             shoes tab                                                                   |
 #|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
@@ -942,6 +985,7 @@ def Window_Class.hud_keypresses(window)
          @@tab = "shoes"  
          Clothing::Shoes.gather_owned(window) #Shoes.select(window, @@player_character_model, selected_shoe)
       end
+ #-------------------------------------------------------------row one---------------------------------------------------------------------
       if (x >= 710 && x <= 825) && (y >= 470 && y <= 590) && @@tab == "shoes"
         this = 0
         Clothing::Shoes.determine_array_length(window, this)
@@ -950,14 +994,211 @@ def Window_Class.hud_keypresses(window)
         this = 1
         Clothing::Shoes.determine_array_length(window, this)
       end
-      if (x >= 940 && x <= 1175) && (y >= 490 && y <= 590) && @@tab == "shoes"
+      if (x >= 940 && x <= 1060) && (y >= 490 && y <= 590) && @@tab == "shoes"
          this = 2
          Clothing::Shoes.determine_array_length(window, this)
       end
+      if (x >= 1030 && x <= 1180) && (y >= 490 && y <= 590) && @@tab == "shoes"
+        this = 3
+        Clothing::Shoes.determine_array_length(window, this)
+     end
+     if (x >= 1175 && x <= 1290) && (y >= 490 && y <= 590) && @@tab == "shoes"
+      this = 4
+      Clothing::Shoes.determine_array_length(window, this)
+     end
+ #-------------------------------------------------------------row two---------------------------------------------------------------------
+     if (x >= 710 && x <= 825) && (y >= 590 && y <= 690) && @@tab == "shoes"
+      this = 5
+      Clothing::Shoes.determine_array_length(window, this)
+     end
+     if (x >= 830 && x <= 950) && (y >= 590 && y <= 690) && @@tab == "shoes"
+      this = 6
+      Clothing::Shoes.determine_array_length(window, this)
+     end
+     if (x >= 940 && x <= 1060) && (y >= 590 && y <= 690) && @@tab == "shoes"
+      this = 7
+      Clothing::Shoes.determine_array_length(window, this)
+     end
+     if (x >= 1030 && x <= 1180) && (y >= 590 && y <= 690) && @@tab == "shoes"
+      this = 8
+      Clothing::Shoes.determine_array_length(window, this)
+     end
+     if (x >= 1175 && x <= 1290) && (y >= 590 && y <= 690) && @@tab == "shoes"
+      this = 9
+      Clothing::Shoes.determine_array_length(window, this)
+     end
+ #------------------------------------------------------------row three--------------------------------------------------------------------
+     if (x >= 710 && x <= 825) && (y >= 690 && y <= 790) && @@tab == "shoes"
+      this = 10
+      Clothing::Shoes.determine_array_length(window, this)
+     end
+     if (x >= 830 && x <= 950) && (y >= 690 && y <= 790) && @@tab == "shoes"
+      this = 11
+      Clothing::Shoes.determine_array_length(window, this)
+     end
+     if (x >= 940 && x <= 1060) && (y >= 690 && y <= 790) && @@tab == "shoes"
+      this = 12
+      Clothing::Shoes.determine_array_length(window, this)
+     end
+     if (x >= 1030 && x <= 1180) && (y >= 690 && y <= 790) && @@tab == "shoes"
+      this = 12
+      Clothing::Shoes.determine_array_length(window, this)
+     end
+     if (x >= 1175 && x <= 1290) && (y >= 690 && y <= 790) && @@tab == "shoes"
+      this = 12
+      Clothing::Shoes.determine_array_length(window, this)
+     end
 #___________________________________________________________________________________________________________________________________________
-
+#|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+#|                                                       @note pants control tab                                                           |
+#||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| 
+if (x >= 1001 && x <= 1141) && (y >= 450 && y <= 485) && @@popup == "Stats_Menu"
+  All_Audio::SFX.select1
+  @@tab = "pants"
+  Clothing::Pants.gather_owned(window)
+ end
+#-------------------------------------------------------------row one---------------------------------------------------------------------
+if (x >= 710 && x <= 825) && (y >= 470 && y <= 590) && @@tab == "pants"
+  puts @@page
+ case @@page
+  when 1
+   this = 0
+   Clothing::Pants.determine_array_length(window, this)
+  when 2
+    this = 15
+    Clothing::Pants.determine_array_length(window, this)
+  end; end
+if (x >= 830 && x <= 950) && (y >= 490 && y <= 590) && @@tab == "pants"
+ case @@page
+  when 1
+   this = 1
+   Clothing::Pants.determine_array_length(window, this)
+  when 2
+    this = 16
+    Clothing::Pants.determine_array_length(window, this)
+ end; end
+if (x >= 940 && x <= 1060) && (y >= 490 && y <= 590) && @@tab == "pants"
+ case @@page
+  when 1
+   this = 2
+   Clothing::Pants.determine_array_length(window, this)
+  when 2
+    this = 17
+    Clothing::Pants.determine_array_length(window, this)
+ end; end
+if (x >= 1030 && x <= 1180) && (y >= 490 && y <= 590) && @@tab == "pants"
+ case @@page
+  when 1
+   this = 3
+   Clothing::Pants.determine_array_length(window, this)
+  when 2
+    this = 18
+    Clothing::Pants.determine_array_length(window, this)
+ end; end
+if (x >= 1175 && x <= 1290) && (y >= 490 && y <= 590) && @@tab == "pants"
+ case @@page
+  when 1
+   this = 4
+   Clothing::Pants.determine_array_length(window, this)
+  when 2
+    this = 19
+    Clothing::Pants.determine_array_length(window, this)
+ end; end
+#-------------------------------------------------------------row two---------------------------------------------------------------------
+if (x >= 710 && x <= 825) && (y >= 590 && y <= 690) && @@tab == "pants"
+ case @@page
+  when 1
+   this = 5
+   Clothing::Pants.determine_array_length(window, this)
+  when 2
+    this = 20
+    Clothing::Pants.determine_array_length(window, this)
+ end; end
+if (x >= 830 && x <= 950) && (y >= 590 && y <= 690) && @@tab == "pants"
+ case @@page
+  when 1
+   this = 6
+   Clothing::Pants.determine_array_length(window, this)
+  when 2
+    this = 21
+    Clothing::Pants.determine_array_length(window, this)
+ end; end
+if (x >= 940 && x <= 1060) && (y >= 590 && y <= 690) && @@tab == "pants"
+ case @@page
+  when 1
+   this = 7
+   Clothing::Pants.determine_array_length(window, this)
+  when 2
+    this = 22
+    Clothing::Pants.determine_array_length(window, this)
+ end; end
+if (x >= 1030 && x <= 1180) && (y >= 590 && y <= 690) && @@tab == "pants"
+ case @@page
+  when 1
+   this = 8
+   Clothing::Pants.determine_array_length(window, this)
+  when 2
+    this = 23
+    Clothing::Pants.determine_array_length(window, this)
+ end; end
+if (x >= 1175 && x <= 1290) && (y >= 590 && y <= 690) && @@tab == "pants"
+ case @@page
+  when 1
+   this = 9
+   Clothing::Pants.determine_array_length(window, this)
+  when 2
+    this = 24
+    Clothing::Pants.determine_array_length(window, this)
+ end; end
+#------------------------------------------------------------row three---------------------------------------------------------------------
+if (x >= 710 && x <= 825) && (y >= 690 && y <= 790) && @@tab == "pants"
+ case @@page
+   when 1
+    this = 10
+    Clothing::Pants.determine_array_length(window, this)
+  when 2
+    this = 25
+    Clothing::Pants.determine_array_length(window, this)
+ end; end
+if (x >= 830 && x <= 950) && (y >= 690 && y <= 790) && @@tab == "pants"
+ case @@page
+  when 1
+   this = 11
+   Clothing::Pants.determine_array_length(window, this)
+  when 2
+    this = 26
+    Clothing::Pants.determine_array_length(window, this)
+ end; end
+if (x >= 940 && x <= 1060) && (y >= 690 && y <= 790) && @@tab == "pants"
+ case @@page
+  when 1
+   this = 12
+   Clothing::Pants.determine_array_length(window, this)
+  when 2
+    this = 27
+    Clothing::Pants.determine_array_length(window, this)
+ end; end
+if (x >= 1030 && x <= 1180) && (y >= 690 && y <= 790) && @@tab == "pants"
+ case @@page
+  when 1
+   this = 13
+   Clothing::Pants.determine_array_length(window, this)
+  when 2
+    this = 28
+    Clothing::Pants.determine_array_length(window, this)
+ end; end
+if (x >= 1175 && x <= 1290) && (y >= 690 && y <= 790) && @@tab == "pants"
+ case @@page
+  when 1
+   this = 14
+   Clothing::Pants.determine_array_length(window, this)
+  when 2
+    this = 29
+    Clothing::Pants.determine_array_length(window, this)
+ end; end; end
+#____________________________________________________________________________________________________________________________________
         
-      end
+
     case event
     when SF::Event::Closed
       window.close
@@ -1193,24 +1434,31 @@ end; end; end; end; end; end
     def Clothing_Outfit_Slot.change_shoes(shoes_slot, window)
         @@shoes_slot = shoes_slot
         @@current_shoes = shoes_slot
-        Window_Class.player_model_initialize(@@current_shoes, @@current_gloves, @@current_shirt) 
+        Window_Class.player_model_initialize(@@current_shoes, @@current_gloves, @@current_shirt, @@current_pants) 
         @@player_character_model.draw(SHOES_ARRAY[@@shoes_slot])
         window.draw(SHOES_ARRAY[@@shoes_slot])
      end
      def Clothing_Outfit_Slot.change_gloves(gloves_slot, window)
        @@gloves_slot = gloves_slot
        @@current_gloves = gloves_slot
-       Window_Class.player_model_initialize(@@current_shoes, @@current_gloves, @@current_shirt) 
+       Window_Class.player_model_initialize(@@current_shoes, @@current_gloves, @@current_shirt, @@current_pants) 
        @@player_character_model.draw(GLOVE_ARRAY[@@gloves_slot])
        window.draw(GLOVE_ARRAY[@@gloves_slot])
     end
     def Clothing_Outfit_Slot.change_shirt(shirt_slot, window)
       @@shirt_slot = shirt_slot
       @@current_shirt = shirt_slot
-      Window_Class.player_model_initialize(@@current_shoes, @@current_gloves, @@current_shirt) 
+      Window_Class.player_model_initialize(@@current_shoes, @@current_gloves, @@current_shirt, @@current_pants) 
       @@player_character_model.draw(SHIRT_ARRAY[@@shirt_slot])
       window.draw(SHIRT_ARRAY[@@shirt_slot])
-   end
+    end
+    def Clothing_Outfit_Slot.change_pants(pants_slot, window)
+      @@pants_slot = pants_slot
+      @@current_pants = pants_slot
+      Window_Class.player_model_initialize(@@current_shoes, @@current_gloves, @@current_shirt, @@current_pants) 
+      @@player_character_model.draw(PANTS_ARRAY[@@current_pants])
+      window.draw(PANTS_ARRAY[@@current_pants])
+    end
   class Consumables_Slot
    end
   class Equipment_Slot
@@ -1586,59 +1834,469 @@ Gui::Window_Class.run
     Shounen_Hair_Purple[0], Grey_Ponytail[0], Blonde_Ponytail[0], Red_Ponytail[0], Brown_Ponytail[0], Pink_Ponytail[0], Blue_Ponytail[0]]
 module Clothing
 include Gui
-#WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
-#W                                                               Wardrobe                                                                  W
-#WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
-class Wardrobe < Window_Class  #@note is this necessary?
-  @@nil_shoe = Shoes.new(true, NIL_SHOE_TEXTURE, NIL_SHOE_TEXTURE, "Nil", "Nil", -1)
-  # __________________________________________________________________________________________________________________________________________
-  #|                                                             initialize                                                                  |
-  #|_________________________________________________________________________________________________________________________________________|
-   def initialize(x : Int32 | Nil, y : Int32 | Nil, number : Int32 | Nil, tab : String | Nil, occupant : Shoes = @@nil_shoe)
-     @x = x
-     @y = y
-     @number = number
-     @tab = tab
-     @occupant = occupant
+
+#PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP
+#P                                                                Pants                                                                       P
+#PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP
+ class Pants < Window_Class 
+   include Gui; include Player_Data
+ # __________________________________________________________________________________________________________________________________________
+ #|                                                             initialize                                                                  |
+ #|_________________________________________________________________________________________________________________________________________|
+   def initialize(is_owned : Bool, char_sprite : SF::Sprite, display_sprite : SF::Sprite, name : String, color : String, length : String, number : Int32) 
+     @is_owned = is_owned
+     @char_sprite = char_sprite
+     @display_sprite = display_sprite
+     @name = name
+     @color = color
+     @length = length
+     @number = number 
     end
-    property occupant
-   def x
-     @x
+   def is_owned
+     @is_owned
     end
-   def y
-     @y
+   def char_sprite
+     @char_sprite
     end
-   def occupant
-     @occupant 
+   def display_sprite
+     @display_sprite
+    end
+   def name
+     @name
+    end
+   def color
+     @color
+    end
+   def length
+     @length
     end
    def number
      @number
     end
-   def tab
-     @tab
+ 
+ # __________________________________________________________________________________________________________________________________________
+ #|                                                     pants methods and variables                                                         |
+ #|_________________________________________________________________________________________________________________________________________|
+  #..............................................................variables...................................................................
+   @@owned_pants_array = [] of Pants 
+   @@pants_array : Array(Pants)
+   property = @@owned_pants_array
+   @@outfit_pants_slot : Pants
+   @@outfit_pants_slot = @@white_shorts
+   @@pants_array = [@@white_shorts, @@brown_shorts, @@black_shorts, @@red_shorts, @@light_blue_shorts, @@orange_shorts, @@khaki_shorts,
+   @@green_shorts, @@blue_shorts, @@purple_shorts, @@pink_shorts, @@white_booty_shorts, @@brown_booty_shorts, @@red_booty_shorts,
+   @@orange_booty_shorts, @@yellow_booty_shorts, @@black_booty_shorts, @@green_booty_shorts, @@blue_booty_shorts, @@purple_booty_shorts,
+   @@pink_booty_shorts, @@white_jeans, @@black_jeans, @@brown_jeans, @@red_jeans, @@orange_jeans, @@yellow_jeans, @@green_jeans,
+   @@blue_jeans, @@purple_jeans, @@pink_jeans]
+  #******************************************************************************************************************************************
+  #...............................................................methods....................................................................
+   def Pants.obtain(this)#---------------------------------------obtain
+     this.is_owned = true
     end
-#  #------------------------------------------------------------------------------------------------------------------------------------------
-   def Wardrobe.gather_shoes(window)
-     Shoes.gather_owned(window)
-     end
-   def Wardrobe.gather_gloves(window)
-     Gloves.gather_owned(window)
-     end
-   def Wardrobe.gather_shirts(window)
-     Shirt.gather_owned(window)
-     end
-  # __________________________________________________________________________________________________________________________________________
-  #|                                                             Shoe Slots                                                                  |
-  #|_________________________________________________________________________________________________________________________________________|
-   @@shoe_wardrobe_slot_01 = Wardrobe.new(0, 0, 1, "shoes", @@nil_shoe); @@shoe_wardrobe_slot_02 = Wardrobe.new(0, 0, 2, "shoes", @@nil_shoe);
-   @@shoe_wardrobe_slot_03 = Wardrobe.new(0, 0, 3, "shoes", @@nil_shoe);
-end
   
+   def Pants.gather_owned(window)#----------------------------gather obtained
+    a = 0; b = @@pants_array.size 
+     while a < b 
+      if @@pants_array[a].is_owned == true
+        @@owned_pants_array.push(@@pants_array[a])
+       end
+    a += 1
+      end; end 
+  
+   def Pants.draw(window, @@page)#-----------------------------------------draw
+      @@owned_pants_array.uniq!
+      array = @@owned_pants_array; array_size = @@owned_pants_array.size
+      Pants.sort_by_color
+      @@owned_pants_array = array
+      s = @@owned_pants_array.size - 1
+    #__________________________page one________________________________________
+      if @@page == 1
+     #-------------------------row one-----------------------------------------
+      if s >= 0 && @@owned_pants_array[0].is_owned == true
+        @@owned_pants_array[0].display_sprite.scale = SF.vector2(2.5, 2.5)
+        @@owned_pants_array[0].display_sprite.position = SF.vector2(650, 300)
+        window.draw(@@owned_pants_array[0].display_sprite)
+       end
+      if s >= 1 && @@owned_pants_array[1].is_owned == true
+        @@owned_pants_array[1].display_sprite.scale = SF.vector2(2.5, 2.5)
+        @@owned_pants_array[1].display_sprite.position = SF.vector2(770, 300)
+        window.draw(@@owned_pants_array[1].display_sprite)
+       end
+      if s >=  2 && @@owned_pants_array[2].is_owned == true
+        @@owned_pants_array[2].display_sprite.scale = SF.vector2(2.5, 2.5)
+        @@owned_pants_array[2].display_sprite.position = SF.vector2(880, 300)
+        window.draw(@@owned_pants_array[2].display_sprite)
+       end
+      if s >=  3 && @@owned_pants_array[3].is_owned == true
+        @@owned_pants_array[3].display_sprite.scale = SF.vector2(2.5, 2.5)
+        @@owned_pants_array[3].display_sprite.position = SF.vector2(990, 300)
+        window.draw(@@owned_pants_array[3].display_sprite)
+       end
+      if s >=  4 && @@owned_pants_array[4].is_owned == true
+        @@owned_pants_array[4].display_sprite.scale = SF.vector2(2.5, 2.5)
+        @@owned_pants_array[4].display_sprite.position = SF.vector2(1110, 300)
+        window.draw(@@owned_pants_array[4].display_sprite)
+       end
+     #-------------------------row two-----------------------------------------
+      if s >=  5 && @@owned_pants_array[5].is_owned == true
+        @@owned_pants_array[5].display_sprite.scale = SF.vector2(2.5, 2.5)
+        @@owned_pants_array[5].display_sprite.position = SF.vector2(650, 400)
+        window.draw(@@owned_pants_array[5].display_sprite)
+       end
+      if s >=  6 && @@owned_pants_array[6].is_owned == true
+       @@owned_pants_array[6].display_sprite.scale = SF.vector2(2.5, 2.5)
+       @@owned_pants_array[6].display_sprite.position = SF.vector2(770, 400)
+       window.draw(@@owned_pants_array[6].display_sprite)
+       end
+      if s >=  7 && @@owned_pants_array[7].is_owned == true
+       @@owned_pants_array[7].display_sprite.scale = SF.vector2(2.5, 2.5)
+       @@owned_pants_array[7].display_sprite.position = SF.vector2(880, 400)
+       window.draw(@@owned_pants_array[7].display_sprite)
+       end
+      if s >=  8 && @@owned_pants_array[8].is_owned == true
+       @@owned_pants_array[8].display_sprite.scale = SF.vector2(2.5, 2.5)
+       @@owned_pants_array[8].display_sprite.position = SF.vector2(990, 400)
+       window.draw(@@owned_pants_array[8].display_sprite)
+       end
+      if s >=  9 && @@owned_pants_array[9].is_owned == true
+       @@owned_pants_array[9].display_sprite.scale = SF.vector2(2.5, 2.5)
+       @@owned_pants_array[9].display_sprite.position = SF.vector2(1110, 400)
+       window.draw(@@owned_pants_array[9].display_sprite)
+       end
+     #------------------------row three----------------------------------------   
+      if s >=  10 && @@owned_pants_array[10].is_owned == true
+       @@owned_pants_array[10].display_sprite.scale = SF.vector2(2.5, 2.5)
+       @@owned_pants_array[10].display_sprite.position = SF.vector2(650, 500)
+       window.draw(@@owned_pants_array[10].display_sprite)
+       end
+      if s >=  11 && @@owned_pants_array[11].is_owned == true
+        @@owned_pants_array[11].display_sprite.scale = SF.vector2(2.5, 2.5)
+        @@owned_pants_array[11].display_sprite.position = SF.vector2(770, 500)
+        window.draw(@@owned_pants_array[11].display_sprite)
+       end
+      if s >=  12 && @@owned_pants_array[12].is_owned == true
+        @@owned_pants_array[12].display_sprite.scale = SF.vector2(2.5, 2.5)
+        @@owned_pants_array[12].display_sprite.position = SF.vector2(880, 500)
+        window.draw(@@owned_pants_array[12].display_sprite)
+       end
+      if s >=  13 && @@owned_pants_array[13].is_owned == true
+        @@owned_pants_array[13].display_sprite.scale = SF.vector2(2.5, 2.5)
+        @@owned_pants_array[13].display_sprite.position = SF.vector2(990, 500)
+        window.draw(@@owned_pants_array[13].display_sprite)
+       end
+      if s >=  14 && @@owned_pants_array[14].is_owned == true
+        @@owned_pants_array[14].display_sprite.scale = SF.vector2(2.5, 2.5)
+        @@owned_pants_array[14].display_sprite.position = SF.vector2(1110, 500)
+        window.draw(@@owned_pants_array[14].display_sprite)
+       end; end
+    #__________________________page two________________________________________
+     if @@page == 2
+     #-------------------------row one----------------------------------------
+      if s >= 15 && @@owned_pants_array[15].is_owned == true
+        @@owned_pants_array[15].display_sprite.scale = SF.vector2(2.5, 2.5)
+        @@owned_pants_array[15].display_sprite.position = SF.vector2(650, 300)
+        window.draw(@@owned_pants_array[15].display_sprite)
+       end
+      if s >= 16 && @@owned_pants_array[16].is_owned == true
+        @@owned_pants_array[16].display_sprite.scale = SF.vector2(2.5, 2.5)
+        @@owned_pants_array[16].display_sprite.position = SF.vector2(770, 300)
+        window.draw(@@owned_pants_array[16].display_sprite)
+       end
+      if s >=  17 && @@owned_pants_array[17].is_owned == true
+        @@owned_pants_array[17].display_sprite.scale = SF.vector2(2.5, 2.5)
+        @@owned_pants_array[17].display_sprite.position = SF.vector2(880, 300)
+        window.draw(@@owned_pants_array[17].display_sprite)
+       end
+      if s >=  18 && @@owned_pants_array[18].is_owned == true
+        @@owned_pants_array[18].display_sprite.scale = SF.vector2(2.5, 2.5)
+        @@owned_pants_array[18].display_sprite.position = SF.vector2(990, 300)
+        window.draw(@@owned_pants_array[18].display_sprite)
+       end
+      if s >=  19 && @@owned_pants_array[19].is_owned == true
+        @@owned_pants_array[19].display_sprite.scale = SF.vector2(2.5, 2.5)
+        @@owned_pants_array[19].display_sprite.position = SF.vector2(1110, 300)
+        window.draw(@@owned_pants_array[19].display_sprite)
+       end
+     #-------------------------row two-----------------------------------------
+      if s >=  20 && @@owned_pants_array[20].is_owned == true
+       @@owned_pants_array[20].display_sprite.scale = SF.vector2(2.5, 2.5)
+       @@owned_pants_array[20].display_sprite.position = SF.vector2(650, 400)
+       window.draw(@@owned_pants_array[20].display_sprite)
+       end
+      if s >=  21 && @@owned_pants_array[21].is_owned == true
+       @@owned_pants_array[21].display_sprite.scale = SF.vector2(2.5, 2.5)
+       @@owned_pants_array[21].display_sprite.position = SF.vector2(770, 400)
+       window.draw(@@owned_pants_array[21].display_sprite)
+       end
+      if s >=  22 && @@owned_pants_array[22].is_owned == true
+       @@owned_pants_array[22].display_sprite.scale = SF.vector2(2.5, 2.5)
+       @@owned_pants_array[22].display_sprite.position = SF.vector2(880, 400)
+       window.draw(@@owned_pants_array[22].display_sprite)
+       end
+      if s >=  23 && @@owned_pants_array[23].is_owned == true
+       @@owned_pants_array[23].display_sprite.scale = SF.vector2(2.5, 2.5)
+       @@owned_pants_array[23].display_sprite.position = SF.vector2(990, 400)
+       window.draw(@@owned_pants_array[23].display_sprite)
+       end
+      if s >=  24 && @@owned_pants_array[24].is_owned == true
+       @@owned_pants_array[24].display_sprite.scale = SF.vector2(2.5, 2.5)
+       @@owned_pants_array[24].display_sprite.position = SF.vector2(1110, 400)
+       window.draw(@@owned_pants_array[24].display_sprite)
+       end
+     #-----------------------row three-----------------------------------------   
+      if s >=  25 && @@owned_pants_array[25].is_owned == true
+       @@owned_pants_array[25].display_sprite.scale = SF.vector2(2.5, 2.5)
+       @@owned_pants_array[25].display_sprite.position = SF.vector2(650, 500)
+       window.draw(@@owned_pants_array[25].display_sprite)
+       end
+      if s >=  26 && @@owned_pants_array[26].is_owned == true
+       @@owned_pants_array[26].display_sprite.scale = SF.vector2(2.5, 2.5)
+       @@owned_pants_array[26].display_sprite.position = SF.vector2(770, 500)
+       window.draw(@@owned_pants_array[26].display_sprite)
+       end
+      if s >=  27 && @@owned_pants_array[27].is_owned == true
+       @@owned_pants_array[27].display_sprite.scale = SF.vector2(2.5, 2.5)
+       @@owned_pants_array[27].display_sprite.position = SF.vector2(880, 500)
+       window.draw(@@owned_pants_array[27].display_sprite)
+       end
+      if s >=  28 && @@owned_pants_array[28].is_owned == true 
+       @@owned_pants_array[28].display_sprite.scale = SF.vector2(2.5, 2.5)
+       @@owned_pants_array[28].display_sprite.position = SF.vector2(990, 500)
+       window.draw(@@owned_pants_array[28].display_sprite)
+       end
+      if s >=  29 && @@owned_pants_array[29].is_owned == true
+       @@owned_pants_array[29].display_sprite.scale = SF.vector2(2.5, 2.5)
+       @@owned_pants_array[29].display_sprite.position = SF.vector2(1110, 500)
+       window.draw(@@owned_pants_array[29].display_sprite)
+      end; end; end
+   def Pants.determine_array_length(window, this)#--------------array length
+    @@owned_pants_array.uniq!
+    if this <= @@owned_pants_array.size - 1
+     case this
+      when 0
+       selected_pants = @@owned_pants_array[0].number
+       Clothing::Pants.select(window, selected_pants)
+      when 1
+       selected_pants = @@owned_pants_array[1].number
+       Clothing::Pants.select(window, selected_pants)
+      when 2
+       selected_pants = @@owned_pants_array[2].number
+       Clothing::Pants.select(window, selected_pants)
+      when 3
+       selected_pants = @@owned_pants_array[3].number
+       Clothing::Pants.select(window, selected_pants)
+      when 4
+       selected_pants = @@owned_pants_array[4].number
+       Clothing::Pants.select(window, selected_pants)
+      when 5
+       selected_pants = @@owned_pants_array[5].number
+       Clothing::Pants.select(window, selected_pants)
+      when 6
+       selected_pants = @@owned_pants_array[6].number
+       Clothing::Pants.select(window, selected_pants)
+      when 7
+       selected_pants = @@owned_pants_array[7].number
+       Clothing::Pants.select(window, selected_pants)
+      when 8
+       selected_pants = @@owned_pants_array[8].number
+       Clothing::Pants.select(window, selected_pants)
+      when 9
+       selected_pants = @@owned_pants_array[9].number
+       Clothing::Pants.select(window, selected_pants)
+      when 10
+       selected_pants = @@owned_pants_array[10].number
+       Clothing::Pants.select(window, selected_pants)
+      when 11
+       selected_pants = @@owned_pants_array[11].number
+       Clothing::Pants.select(window, selected_pants)
+      when 12
+       selected_pants = @@owned_pants_array[12].number
+       Clothing::Pants.select(window, selected_pants)
+      when 13
+       selected_pants = @@owned_pants_array[13].number
+       Clothing::Pants.select(window, selected_pants)
+      when 14
+       selected_pants = @@owned_pants_array[14].number
+       Clothing::Pants.select(window, selected_pants)
+      when 15
+       selected_pants = @@owned_pants_array[15].number
+       Clothing::Pants.select(window, selected_pants)
+      when 16
+       selected_pants = @@owned_pants_array[16].number
+       Clothing::Pants.select(window, selected_pants)
+      when 17
+       selected_pants = @@owned_pants_array[17].number
+       Clothing::Pants.select(window, selected_pants)
+      when 18
+       selected_pants = @@owned_pants_array[18].number
+       Clothing::Pants.select(window, selected_pants)
+      when 19
+       selected_pants = @@owned_pants_array[19].number
+       Clothing::Pants.select(window, selected_pants)
+      when 20
+       selected_pants = @@owned_pants_array[20].number
+       Clothing::Pants.select(window, selected_pants)
+      when 21
+       selected_pants = @@owned_pants_array[21].number
+       Clothing::Pants.select(window, selected_pants)
+      when 22
+       selected_pants = @@owned_pants_array[22].number
+       Clothing::Pants.select(window, selected_pants)
+      when 23
+       selected_pants = @@owned_pants_array[23].number
+       Clothing::Pants.select(window, selected_pants)
+      when 24
+       selected_pants = @@owned_pants_array[24].number
+       Clothing::Pants.select(window, selected_pants)
+      when 25
+        selected_pants = @@owned_pants_array[25].number
+        Clothing::Pants.select(window, selected_pants)
+      when 26
+        selected_pants = @@owned_pants_array[26].number
+        Clothing::Pants.select(window, selected_pants)
+      when 27
+        selected_pants = @@owned_pants_array[27].number
+        Clothing::Pants.select(window, selected_pants)
+      when 28
+        selected_pants = @@owned_pants_array[28].number
+        Clothing::Pants.select(window, selected_pants)
+      when 29
+        selected_pants = @@owned_pants_array[29].number
+        Clothing::Pants.select(window, selected_pants)
+      end; end; end
+   
+   def Pants.select(window, selected_pants)#----------------------select
+    pants_slot = selected_pants
+    Clothing_Outfit_Slot.change_pants(pants_slot, window)
+      end
+   
+   def Pants.sort_by_color#-----------------------------------sort by color
+    a = 0; sorted_array = @@owned_pants_array.dup
+    @@owned_pants_array.clear
+    while a < sorted_array.size
+     if sorted_array[a].color === "white"
+       @@owned_pants_array.push(sorted_array[a])
+      end
+      a += 1
+     end
+     a = 0
+    while a < sorted_array.size
+     if sorted_array[a].color === "black"
+       @@owned_pants_array.push(sorted_array[a])
+      end
+       a += 1
+      end
+      a = 0
+    while a < sorted_array.size
+     if sorted_array[a].color === "red"
+       @@owned_pants_array.push(sorted_array[a])
+      end
+       a += 1
+      end
+      a = 0
+    while a < sorted_array.size
+     if sorted_array[a].color === "orange"
+       @@owned_pants_array.push(sorted_array[a])
+      end
+       a += 1
+      end
+      a = 0
+    while a < sorted_array.size
+     if sorted_array[a].color === "yellow"
+       @@owned_pants_array.push(sorted_array[a])
+      end
+       a += 1
+      end
+      a = 0
+    while a < sorted_array.size
+     if sorted_array[a].color === "green"
+       @@owned_pants_array.push(sorted_array[a])
+      end
+       a += 1
+      end
+      a = 0
+    while a < sorted_array.size
+     if sorted_array[a].color === "blue"
+       @@owned_pants_array.push(sorted_array[a])
+      end
+       a += 1
+      end
+      a = 0
+    while a < sorted_array.size
+     if sorted_array[a].color === "purple"
+       @@owned_pants_array.push(sorted_array[a])
+      end
+       a += 1
+      end
+      a = 0
+    while a < sorted_array.size
+     if sorted_array[a].color === "pink"
+       @@owned_pants_array.push(sorted_array[a])
+      end
+       a += 1
+      end
+      a = 0
+    while a < sorted_array.size
+     if sorted_array[a].color === "brown"
+     @@owned_pants_array.push(sorted_array[a])
+    end
+     a += 1
+    end
+    end
+  #white, black, red, orange, yellow, green, blue, purple, pink, brown
+
+ # __________________________________________________________________________________________________________________________________________
+ #|                                                               shorts                                                                    |
+ #|_________________________________________________________________________________________________________________________________________|
+ 
+    @@white_shorts = Pants.new(true, SHORTS_01, DISPLAY_SHORTS_01,"White_Shorts", "white", "short", 0)
+    @@brown_shorts = Pants.new(true, SHORTS_02, DISPLAY_SHORTS_02, "Brown_Shorts", "brown", "short", 1)
+    @@black_shorts = Pants.new(true, SHORTS_03, DISPLAY_SHORTS_03, "Black_Shorts", "black", "short", 2)
+    @@red_shorts = Pants.new(true, SHORTS_04, DISPLAY_SHORTS_04, "Red Shorts", "red", "short", 3)
+    @@light_blue_shorts = Pants.new(true, SHORTS_05, DISPLAY_SHORTS_05, "Light-Blue Shorts", "blue", "short", 4)
+    @@orange_shorts = Pants.new(true, SHORTS_06, DISPLAY_SHORTS_06, "Orange Shorts", "orange", "short", 5)
+    @@khaki_shorts = Pants.new(true, SHORTS_07, DISPLAY_SHORTS_07, "Khaki_Shorts", "brown", "short", 6)
+    @@green_shorts = Pants.new(true, SHORTS_08, DISPLAY_SHORTS_08, "Green_Shorts", "green", "short", 7)
+    @@blue_shorts = Pants.new(true, SHORTS_09, DISPLAY_SHORTS_09, "Red_Shorts", "blue", "short", 8)
+    @@purple_shorts = Pants.new(true, SHORTS_10, DISPLAY_SHORTS_10, "Purple_Shorts", "purple", "short", 9)
+    @@pink_shorts = Pants.new(true, SHORTS_11, DISPLAY_SHORTS_11, "Pink_Shorts", "pink", "short", 10)
+ 
+ # __________________________________________________________________________________________________________________________________________
+ #|                                                             booty shorts                                                                |
+ #|_________________________________________________________________________________________________________________________________________|
+ 
+    @@white_booty_shorts = Pants.new(true, BOOTY_SHORTS_01, BOOTY_DISPLAY_SHORTS_01,"White Booty Shorts", "white", "very short", 11)
+    @@brown_booty_shorts = Pants.new(true, BOOTY_SHORTS_02, BOOTY_DISPLAY_SHORTS_02,"Brown Booty Shorts", "brown", "very short", 12)
+    @@red_booty_shorts = Pants.new(true, BOOTY_SHORTS_03, BOOTY_DISPLAY_SHORTS_03,"Red Booty Shorts", "red", "very short", 13)
+    @@orange_booty_shorts = Pants.new(true, BOOTY_SHORTS_04, BOOTY_DISPLAY_SHORTS_04,"Orange Booty Shorts", "orange", "very short", 14)
+    @@yellow_booty_shorts = Pants.new(true, BOOTY_SHORTS_05, BOOTY_DISPLAY_SHORTS_05,"Yellow Booty Shorts", "yellow", "very short", 15)
+    @@black_booty_shorts = Pants.new(true, BOOTY_SHORTS_06, BOOTY_DISPLAY_SHORTS_06,"Black Booty Shorts", "black", "very short", 16)
+    @@green_booty_shorts = Pants.new(true, BOOTY_SHORTS_07, BOOTY_DISPLAY_SHORTS_07,"Green Booty Shorts", "green", "very short", 17)
+    @@blue_booty_shorts = Pants.new(true, BOOTY_SHORTS_08, BOOTY_DISPLAY_SHORTS_08,"Blue Booty Shorts", "blue", "very short", 18)
+    @@purple_booty_shorts = Pants.new(true, BOOTY_SHORTS_09, BOOTY_DISPLAY_SHORTS_09,"Purple Booty Shorts", "purple", "very short", 19)
+    @@pink_booty_shorts = Pants.new(true, BOOTY_SHORTS_10, BOOTY_DISPLAY_SHORTS_10,"Pink Booty Shorts", "pink", "very short", 20)
+ 
+ # __________________________________________________________________________________________________________________________________________
+ #|                                                                Jeans                                                                    |
+ #|_________________________________________________________________________________________________________________________________________|
+
+   @@white_jeans = Pants.new(true, JEANS_01, DISPLAY_JEANS_01,"White Jeans", "white", "long", 21)
+   @@black_jeans = Pants.new(true, JEANS_02, DISPLAY_JEANS_02,"Black Jeans", "black", "long", 22)
+   @@brown_jeans = Pants.new(true, JEANS_03, DISPLAY_JEANS_03,"Brown Jeans", "brown", "long", 23)
+   @@red_jeans = Pants.new(true, JEANS_04, DISPLAY_JEANS_04,"Red Jeans", "red", "long", 24)
+   @@orange_jeans = Pants.new(true, JEANS_05, DISPLAY_JEANS_05,"Orange Jeans", "Orange", "long", 25)
+   @@yellow_jeans = Pants.new(true, JEANS_06, DISPLAY_JEANS_06,"Yellow Jeans", "yellow", "long", 26)
+   @@green_jeans = Pants.new(true, JEANS_07, DISPLAY_JEANS_07,"Green Jeans", "green", "long", 27)
+   @@blue_jeans = Pants.new(true, JEANS_08, DISPLAY_JEANS_08,"Blue Jeans", "blue", "long", 28)
+   @@purple_jeans = Pants.new(true, JEANS_09, DISPLAY_JEANS_09,"Purple Jeans", "purple", "long", 29)
+   @@pink_jeans = Pants.new(true, JEANS_10, DISPLAY_JEANS_10,"Pink Jeans", "pink", "long", 30)
+
+   end
 
 
-#SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
-#S                                                                Shoes                                                                     S
-#SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
+#SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
+#S                                                                Shoes                                                                       S
+#SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
  class Shoes  #@note Shoes go here
   include Gui; include Player_Data
   # __________________________________________________________________________________________________________________________________________
@@ -1681,38 +2339,93 @@ end
      @@shoes_array : Array(Shoes)
      property = @@owned_shoes_array
      @@outfit_shoe_slot : Shoes
-     @@outfit_shoe_slot = @@black_rain_boots
-     @@shoes_array = [@@black_rain_boots, @@red_rain_boots, @@blue_rain_boots]
+     @@outfit_shoe_slot = @@white_rain_boots
+     @@shoes_array = [@@white_rain_boots, @@red_rain_boots, @@blue_rain_boots, @@black_rain_boots, @@orange_rain_boots, @@yellow_rain_boots,
+     @@green_rain_boots, @@purple_rain_boots, @@pink_rain_boots]
     #.........................................................................................................................................
    #...............................................................methods....................................................................
        def Shoes.obtain(this)
          this.is_owned = true
         end 
        def Shoes.gather_owned(window)
-         a = -1; b = @@shoes_array.size
+         a = 0; b = @@shoes_array.size
           while a != b
           if @@shoes_array[a].is_owned == true
             @@owned_shoes_array.push(@@shoes_array[a])
           end
           a += 1
           end
-      end
-      def Shoes.draw(window)
-        @@owned_shoes_array.uniq!
-        s = @@owned_shoes_array.size - 1
-       if s >= 0 && @@owned_shoes_array[0].is_owned == true
-         @@owned_shoes_array[0].display_sprite.position = SF.vector2(595, 135)
-         window.draw(@@owned_shoes_array[0].display_sprite)
+        end
+       def Shoes.draw(window)
+         @@owned_shoes_array.uniq!
+         array = @@owned_shoes_array; array_size = @@owned_shoes_array.size
+         Shoes.sort_by_color
+     #_________________________page  one_______________________________________________________________________________________________________
+      #-------------------------Row One--------------------------------------------------------------------------------------------------------
+         s = @@owned_shoes_array.size - 1
+        if s >= 0 && @@owned_shoes_array[0].is_owned == true
+          @@owned_shoes_array[0].display_sprite.position = SF.vector2(595, 135)
+          window.draw(@@owned_shoes_array[0].display_sprite)
+         end
+        if s >= 1 && @@owned_shoes_array[1].is_owned == true
+          @@owned_shoes_array[1].display_sprite.position = SF.vector2(715, 135)
+          window.draw(@@owned_shoes_array[1].display_sprite)
+         end
+        if s >=  2 && @@owned_shoes_array[2].is_owned == true
+          @@owned_shoes_array[2].display_sprite.position = SF.vector2(830, 135)
+          window.draw(@@owned_shoes_array[2].display_sprite)
+         end
+        if s >=  3 && @@owned_shoes_array[3].is_owned == true
+          @@owned_shoes_array[3].display_sprite.position = SF.vector2(945, 135)
+          window.draw(@@owned_shoes_array[3].display_sprite)
+         end
+        if s >=  4 && @@owned_shoes_array[4].is_owned == true
+          @@owned_shoes_array[4].display_sprite.position = SF.vector2(1060, 135)
+          window.draw(@@owned_shoes_array[4].display_sprite)
+         end
+      #-------------------------Row Two--------------------------------------------------------------------------------------------------------
+        if s >= 5 && @@owned_shoes_array[5].is_owned == true
+          @@owned_shoes_array[5].display_sprite.position = SF.vector2(595, 235)
+          window.draw(@@owned_shoes_array[5].display_sprite)
+         end
+        if s >= 6 && @@owned_shoes_array[6].is_owned == true
+          @@owned_shoes_array[6].display_sprite.position = SF.vector2(715, 235)
+          window.draw(@@owned_shoes_array[6].display_sprite)
+         end
+        if s >= 7 && @@owned_shoes_array[7].is_owned == true
+          @@owned_shoes_array[7].display_sprite.position = SF.vector2(830, 235)
+          window.draw(@@owned_shoes_array[7].display_sprite)
+         end
+        if s >= 8 && @@owned_shoes_array[8].is_owned == true
+          @@owned_shoes_array[8].display_sprite.position = SF.vector2(945, 235)
+          window.draw(@@owned_shoes_array[8].display_sprite)
+         end
+        if s >= 9 && @@owned_shoes_array[9].is_owned == true
+          @@owned_shoes_array[9].display_sprite.position = SF.vector2(1060, 235)
+          window.draw(@@owned_shoes_array[9].display_sprite)
+        end
+      #-------------------------Row Three------------------------------------------------------------------------------------------------------
+       if s >= 10 && @@owned_shoes_array[10].is_owned == true
+         @@owned_shoes_array[10].display_sprite.position = SF.vector2(595, 335)
+         window.draw(@@owned_shoes_array[10].display_sprite)
+        end
+        if s >= 11 && @@owned_shoes_array[11].is_owned == true
+          @@owned_shoes_array[11].display_sprite.position = SF.vector2(715, 335)
+          window.draw(@@owned_shoes_array[11].display_sprite)
+         end
+        if s >= 12 && @@owned_shoes_array[12].is_owned == true
+          @@owned_shoes_array[12].display_sprite.position = SF.vector2(830, 335)
+          window.draw(@@owned_shoes_array[12].display_sprite)
+         end
+        if s >= 13 && @@owned_shoes_array[13].is_owned == true
+          @@owned_shoes_array[13].display_sprite.position = SF.vector2(945, 335)
+          window.draw(@@owned_shoes_array[13].display_sprite)
+         end
+        if s >= 14 && @@owned_shoes_array[14].is_owned == true
+          @@owned_shoes_array[14].display_sprite.position = SF.vector2(1060, 335)
+          window.draw(@@owned_shoes_array[14].display_sprite)
+         end
        end
-       if s >= 1 && @@owned_shoes_array[1].is_owned == true
-         @@owned_shoes_array[1].display_sprite.position = SF.vector2(715, 135)
-         window.draw(@@owned_shoes_array[1].display_sprite)
-       end
-       if s >=  2 && @@owned_shoes_array[2].is_owned == true
-         @@owned_shoes_array[2].display_sprite.position = SF.vector2(830, 135)
-         window.draw(@@owned_shoes_array[2].display_sprite)
-       end
-      end
     def Shoes.determine_array_length(window, this)
      @@owned_shoes_array.uniq!
      if this <= @@owned_shoes_array.size - 1
@@ -1726,20 +2439,117 @@ end
        when 2
          selected_shoe = @@owned_shoes_array[2].number
          Clothing::Shoes.select(window, selected_shoe)
+       when 3
+         selected_shoe = @@owned_shoes_array[3].number
+         Clothing::Shoes.select(window, selected_shoe)
+       when 4
+        selected_shoe = @@owned_shoes_array[4].number
+        Clothing::Shoes.select(window, selected_shoe)
+       when 5
+         selected_shoe = @@owned_shoes_array[5].number
+         Clothing::Shoes.select(window, selected_shoe)
+       when 6
+        selected_shoe = @@owned_shoes_array[6].number
+        Clothing::Shoes.select(window, selected_shoe)
+       when 7
+        selected_shoe = @@owned_shoes_array[7].number
+        Clothing::Shoes.select(window, selected_shoe)
+       when 8
+        selected_shoe = @@owned_shoes_array[8].number
+        Clothing::Shoes.select(window, selected_shoe)
+       when 9
+        selected_shoe = @@owned_shoes_array[9].number
+        Clothing::Shoes.select(window, selected_shoe)
+       when 10
+        selected_shoe = @@owned_shoes_array[10].number
+        Clothing::Shoes.select(window, selected_shoe)
        end; end; end
     def Shoes.select(window, selected_shoe)
       shoes_slot = selected_shoe
       Clothing_Outfit_Slot.change_shoes(shoes_slot, window)
      end
+    def Shoes.sort_by_color#-----------------------------------sort by color
+      a = 0; sorted_array = @@owned_shoes_array.dup
+      @@owned_shoes_array.clear
+     while a < sorted_array.size
+      if sorted_array[a].color === "white"
+        @@owned_shoes_array.push(sorted_array[a])
+       end
+       a += 1
+      end
+      a = 0
+     while a < sorted_array.size
+      if sorted_array[a].color === "black"
+        @@owned_shoes_array.push(sorted_array[a])
+       end
+        a += 1
+       end
+       a = 0
+     while a < sorted_array.size
+      if sorted_array[a].color === "red"
+        @@owned_shoes_array.push(sorted_array[a])
+       end
+        a += 1
+       end
+       a = 0
+     while a < sorted_array.size
+      if sorted_array[a].color === "orange"
+        @@owned_shoes_array.push(sorted_array[a])
+       end
+        a += 1
+       end
+       a = 0
+     while a < sorted_array.size
+      if sorted_array[a].color === "yellow"
+        @@owned_shoes_array.push(sorted_array[a])
+       end
+        a += 1
+       end
+       a = 0
+     while a < sorted_array.size
+      if sorted_array[a].color === "green"
+        @@owned_shoes_array.push(sorted_array[a])
+       end
+        a += 1
+       end
+       a = 0
+     while a < sorted_array.size
+      if sorted_array[a].color === "blue"
+        @@owned_shoes_array.push(sorted_array[a])
+       end
+        a += 1
+       end
+       a = 0
+     while a < sorted_array.size
+      if sorted_array[a].color === "purple"
+        @@owned_shoes_array.push(sorted_array[a])
+       end
+        a += 1
+       end
+       a = 0
+     while a < sorted_array.size
+      if sorted_array[a].color === "pink"
+        @@owned_shoes_array.push(sorted_array[a])
+       end
+        a += 1
+       end
+    end
     #.........................................................................................................................................
   #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     
   # __________________________________________________________________________________________________________________________________________
   #|                                                             Rain Boots                                                                  |
   #|_________________________________________________________________________________________________________________________________________|
-      @@black_rain_boots = Shoes.new(true, RAIN_BOOTS_01, DISPLAY_RAIN_BOOTS_01, "Black Rain Boots", "black", 0)
+      @@white_rain_boots = Shoes.new(true, RAIN_BOOTS_01, DISPLAY_RAIN_BOOTS_01, "White Rain Boots", "white", 0)
       @@red_rain_boots = Shoes.new(true, RAIN_BOOTS_02, DISPLAY_RAIN_BOOTS_02, "Red Rain Boots", "red", 1)
       @@blue_rain_boots = Shoes.new(true, RAIN_BOOTS_03, DISPLAY_RAIN_BOOTS_03, "Blue Rain Boots", "blue", 2)
+      @@black_rain_boots = Shoes.new(true, RAIN_BOOTS_04, DISPLAY_RAIN_BOOTS_04, "Black Rain Boots", "black", 3)
+      @@orange_rain_boots = Shoes.new(true, RAIN_BOOTS_05, DISPLAY_RAIN_BOOTS_05, "Orange Rain Boots", "orange", 4)
+      @@yellow_rain_boots = Shoes.new(true, RAIN_BOOTS_06, DISPLAY_RAIN_BOOTS_06, "Yellow Rain Boots", "yellow", 5)
+      @@green_rain_boots = Shoes.new(true, RAIN_BOOTS_07, DISPLAY_RAIN_BOOTS_07, "Green Rain Boots", "green", 6)
+      @@purple_rain_boots = Shoes.new(true, RAIN_BOOTS_08, DISPLAY_RAIN_BOOTS_08, "Purple Rain Boots", "purple", 7)
+      @@pink_rain_boots = Shoes.new(true, RAIN_BOOTS_09, DISPLAY_RAIN_BOOTS_09, "Pink Rain Boots", "pink", 8)
+
 
  #------------------------------------------------------------------------------------------------------------------------------------------ 
    end
@@ -1905,340 +2715,449 @@ class Face
 #SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
 #S                                                               Shirts                                                                     S
 #SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
-class Shirt < Window_Class 
-  include Gui; include Player_Data
- # __________________________________________________________________________________________________________________________________________
- #|                                                             initialize                                                                  |
- #|_________________________________________________________________________________________________________________________________________|
-  def initialize(is_owned : Bool, char_sprite : SF::Sprite, display_sprite : SF::Sprite, name : String, color : String, sleeve_length : String, number : Int32) 
-    @is_owned = is_owned
-    @char_sprite = char_sprite
-    @display_sprite = display_sprite
-    @name = name
-    @color = color
-    @sleeve_length = sleeve_length
-    @number = number 
-   end
-  def is_owned
-    @is_owned
-   end
-  def char_sprite
-    @char_sprite
-   end
-  def display_sprite
-    @display_sprite
-   end
-  def name
-    @name
-   end
-  def color
-    @color
-   end
-  def sleeve_length
-    @sleeve_length
-   end
-  def number
-    @number
-   end
- # __________________________________________________________________________________________________________________________________________
- #|                                                     shirt methods and variables                                                         |
- #|_________________________________________________________________________________________________________________________________________|
-  #..............................................................variables...................................................................
-   @@owned_shirt_array = [] of Shirt
-   @@shirt_array : Array(Shirt)
-   property = @@owned_shirt_array
-   @@outfit_shirt_slot : Shirt
-   @@outfit_shirt_slot = @@white_t_shirt
-   @@shirt_array = [@@white_t_shirt, @@blue_t_shirt, @@red_t_shirt, @@green_t_shirt, @@purple_t_shirt, @@black_t_shirt, @@white_tank_top,
-   @@black_tank_top,  @@red_tank_top, @@orange_tank_top, @@yellow_tank_top, @@green_tank_top, @@blue_tank_top, @@purple_tank_top,
-   @@pink_tank_top]
-  #******************************************************************************************************************************************
-  #...............................................................methods....................................................................
-   def Shirt.obtain(this)#---------------------------------------obtain
-     this.is_owned = true
+ class Shirt < Window_Class 
+   include Gui; include Player_Data
+  # __________________________________________________________________________________________________________________________________________
+  #|                                                           initialize                                                                    |
+  #|_________________________________________________________________________________________________________________________________________|
+   def initialize(is_owned : Bool, char_sprite : SF::Sprite, display_sprite : SF::Sprite, name : String, color : String, sleeve_length : String, number : Int32) 
+     @is_owned = is_owned
+     @char_sprite = char_sprite
+     @display_sprite = display_sprite
+     @name = name
+     @color = color
+     @sleeve_length = sleeve_length
+     @number = number 
     end
-
-   def Shirt.gather_owned(window)#----------------------------gather obtained
-    a = 0; b = @@shirt_array.size
-     while a < b 
-      if @@shirt_array[a].is_owned == true
-        @@owned_shirt_array.push(@@shirt_array[a])
-       end
-    a += 1
-      end; end 
-
-  def Shirt.draw(window, @@page)#-----------------------------------------draw
-     @@owned_shirt_array.uniq!
-     array = @@owned_shirt_array; array_size = @@owned_shirt_array.size
-     Shirt.sort_by_color
-     @@owned_shirt_array = array
-     s = @@owned_shirt_array.size - 1
-   #__________________________page one________________________________________
-    if @@page == 1
-    #-------------------------row one-----------------------------------------
-     if s >= 0 && @@owned_shirt_array[0].is_owned == true
-       @@owned_shirt_array[0].display_sprite.scale = SF.vector2(2.5, 2.5)
-       @@owned_shirt_array[0].display_sprite.position = SF.vector2(650, 360)
-       window.draw(@@owned_shirt_array[0].display_sprite)
-      end
-     if s >= 1 && @@owned_shirt_array[1].is_owned == true
-       @@owned_shirt_array[1].display_sprite.scale = SF.vector2(2.5, 2.5)
-       @@owned_shirt_array[1].display_sprite.position = SF.vector2(770, 360)
-       window.draw(@@owned_shirt_array[1].display_sprite)
-      end
-     if s >=  2 && @@owned_shirt_array[2].is_owned == true
-       @@owned_shirt_array[2].display_sprite.scale = SF.vector2(2.5, 2.5)
-       @@owned_shirt_array[2].display_sprite.position = SF.vector2(880, 360)
-       window.draw(@@owned_shirt_array[2].display_sprite)
-      end
-     if s >=  3 && @@owned_shirt_array[3].is_owned == true
-       @@owned_shirt_array[3].display_sprite.scale = SF.vector2(2.5, 2.5)
-       @@owned_shirt_array[3].display_sprite.position = SF.vector2(990, 360)
-       window.draw(@@owned_shirt_array[3].display_sprite)
-     end
-     if s >=  4 && @@owned_shirt_array[4].is_owned == true
-       @@owned_shirt_array[4].display_sprite.scale = SF.vector2(2.5, 2.5)
-       @@owned_shirt_array[4].display_sprite.position = SF.vector2(1110, 360)
-       window.draw(@@owned_shirt_array[4].display_sprite)
-     end
-    #-------------------------row two-----------------------------------------
-     if s >=  5 && @@owned_shirt_array[5].is_owned == true
-       @@owned_shirt_array[5].display_sprite.scale = SF.vector2(2.5, 2.5)
-       @@owned_shirt_array[5].display_sprite.position = SF.vector2(650, 460)
-       window.draw(@@owned_shirt_array[5].display_sprite)
-     end
-     if s >=  6 && @@owned_shirt_array[6].is_owned == true
-      @@owned_shirt_array[6].display_sprite.scale = SF.vector2(2.5, 2.5)
-      @@owned_shirt_array[6].display_sprite.position = SF.vector2(770, 460)
-      window.draw(@@owned_shirt_array[6].display_sprite)
-     end
-     if s >=  7 && @@owned_shirt_array[7].is_owned == true
-      @@owned_shirt_array[7].display_sprite.scale = SF.vector2(2.5, 2.5)
-      @@owned_shirt_array[7].display_sprite.position = SF.vector2(880, 460)
-      window.draw(@@owned_shirt_array[7].display_sprite)
-     end
-     if s >=  8 && @@owned_shirt_array[8].is_owned == true
-      @@owned_shirt_array[8].display_sprite.scale = SF.vector2(2.5, 2.5)
-      @@owned_shirt_array[8].display_sprite.position = SF.vector2(990, 460)
-      window.draw(@@owned_shirt_array[8].display_sprite)
-     end
-     if s >=  9 && @@owned_shirt_array[9].is_owned == true
-      @@owned_shirt_array[9].display_sprite.scale = SF.vector2(2.5, 2.5)
-      @@owned_shirt_array[9].display_sprite.position = SF.vector2(1110, 460)
-      window.draw(@@owned_shirt_array[9].display_sprite)
-     end
-   #-----------------------row three-----------------------------------------   
-    if s >=  10 && @@owned_shirt_array[10].is_owned == true
-     @@owned_shirt_array[10].display_sprite.scale = SF.vector2(2.5, 2.5)
-     @@owned_shirt_array[10].display_sprite.position = SF.vector2(650, 560)
-     window.draw(@@owned_shirt_array[10].display_sprite)
+   def is_owned
+     @is_owned
     end
-    if s >=  11 && @@owned_shirt_array[11].is_owned == true
-      @@owned_shirt_array[11].display_sprite.scale = SF.vector2(2.5, 2.5)
-      @@owned_shirt_array[11].display_sprite.position = SF.vector2(770, 560)
-      window.draw(@@owned_shirt_array[11].display_sprite)
-     end
-     if s >=  12 && @@owned_shirt_array[12].is_owned == true
-      @@owned_shirt_array[12].display_sprite.scale = SF.vector2(2.5, 2.5)
-      @@owned_shirt_array[12].display_sprite.position = SF.vector2(880, 560)
-      window.draw(@@owned_shirt_array[12].display_sprite)
-     end
-     if s >=  13 && @@owned_shirt_array[13].is_owned == true
-      @@owned_shirt_array[13].display_sprite.scale = SF.vector2(2.5, 2.5)
-      @@owned_shirt_array[13].display_sprite.position = SF.vector2(990, 560)
-      window.draw(@@owned_shirt_array[13].display_sprite)
-     end
-     if s >=  14 && @@owned_shirt_array[14].is_owned == true
-      @@owned_shirt_array[14].display_sprite.scale = SF.vector2(2.5, 2.5)
-      @@owned_shirt_array[14].display_sprite.position = SF.vector2(1110, 560)
-      window.draw(@@owned_shirt_array[14].display_sprite)
-     end; end
-    if @@page == 2
-    #-------------------------row one-----------------------------------------
-     if s >= 15 && @@owned_shirt_array[15].is_owned == true
-       @@owned_shirt_array[15].display_sprite.scale = SF.vector2(2.5, 2.5)
-       @@owned_shirt_array[15].display_sprite.position = SF.vector2(650, 360)
-       window.draw(@@owned_shirt_array[15].display_sprite)
-      end
-     end
+   def char_sprite
+     @char_sprite
     end
-  def Shirt.determine_array_length(window, this)#--------------array length
-   @@owned_shirt_array.uniq!
-   if this <= @@owned_shirt_array.size - 1
-    case this
-     when 0
-      selected_shirt = @@owned_shirt_array[0].number
-      Clothing::Shirt.select(window, selected_shirt)
-     when 1
-      selected_shirt = @@owned_shirt_array[1].number
-      Clothing::Shirt.select(window, selected_shirt)
-     when 2
-      selected_shirt = @@owned_shirt_array[2].number
-      Clothing::Shirt.select(window, selected_shirt)
-     when 3
-      selected_shirt = @@owned_shirt_array[3].number
-      Clothing::Shirt.select(window, selected_shirt)
-     when 4
-      selected_shirt = @@owned_shirt_array[4].number
-      Clothing::Shirt.select(window, selected_shirt)
-     when 5
-      selected_shirt = @@owned_shirt_array[5].number
-      Clothing::Shirt.select(window, selected_shirt)
-     when 6
-      selected_shirt = @@owned_shirt_array[6].number
-      Clothing::Shirt.select(window, selected_shirt)
-     when 7
-      selected_shirt = @@owned_shirt_array[7].number
-      Clothing::Shirt.select(window, selected_shirt)
-     when 8
-      selected_shirt = @@owned_shirt_array[8].number
-      Clothing::Shirt.select(window, selected_shirt)
-     when 9
-      selected_shirt = @@owned_shirt_array[9].number
-      Clothing::Shirt.select(window, selected_shirt)
-     when 10
-      selected_shirt = @@owned_shirt_array[10].number
-      Clothing::Shirt.select(window, selected_shirt)
-     when 11
-      selected_shirt = @@owned_shirt_array[11].number
-      Clothing::Shirt.select(window, selected_shirt)
-     when 12
-      selected_shirt = @@owned_shirt_array[12].number
-      Clothing::Shirt.select(window, selected_shirt)
-     when 13
-      selected_shirt = @@owned_shirt_array[13].number
-      Clothing::Shirt.select(window, selected_shirt)
-     when 14
-      selected_shirt = @@owned_shirt_array[14].number
-      Clothing::Shirt.select(window, selected_shirt)
-    end; end; end
-
-  def Shirt.select(window, selected_shirt)#----------------------select
-   shirt_slot = selected_shirt
-   Clothing_Outfit_Slot.change_shirt(shirt_slot, window)
+   def display_sprite
+     @display_sprite
+    end
+   def name
+     @name
+    end
+   def color
+     @color
+    end
+   def sleeve_length
+     @sleeve_length
+    end
+   def number
+     @number
+    end
+  # __________________________________________________________________________________________________________________________________________
+  #|                                                    shirt methods and variables                                                          |
+  #|_________________________________________________________________________________________________________________________________________|
+   #............................................................variables....................................................................
+    @@owned_shirt_array = [] of Shirt
+    @@shirt_array : Array(Shirt)
+    property = @@owned_shirt_array
+    @@outfit_shirt_slot : Shirt
+    @@outfit_shirt_slot = @@white_t_shirt
+    @@shirt_array = [@@white_t_shirt, @@blue_t_shirt, @@red_t_shirt, @@green_t_shirt, @@purple_t_shirt, @@black_t_shirt, @@white_tank_top,
+    @@black_tank_top,  @@red_tank_top, @@orange_tank_top, @@yellow_tank_top, @@green_tank_top, @@blue_tank_top, @@purple_tank_top,
+    @@pink_tank_top, @@orange_t_shirt, @@yellow_t_shirt, @@pink_t_shirt, @@white_tube_top, @@black_tube_top, @@red_tube_top, @@orange_tube_top,
+    @@yellow_tube_top, @@green_tube_top, @@blue_tube_top, @@purple_tube_top, @@pink_tube_top]
+   #******************************************************************************************************************************************
+   #.............................................................methods......................................................................
+    def Shirt.obtain(this)#---------------------------------------obtain
+      this.is_owned = true
      end
-
-  def Shirt.sort_by_color#-----------------------------------sort by color
-    a = 0; sorted_array = @@owned_shirt_array.dup
-    @@owned_shirt_array.clear
-   while a < sorted_array.size
-    if sorted_array[a].color === "white"
-      @@owned_shirt_array.push(sorted_array[a])
-     end
+ 
+    def Shirt.gather_owned(window)#----------------------------gather obtained
+     a = 0; b = @@shirt_array.size
+      while a < b 
+       if @@shirt_array[a].is_owned == true
+         @@owned_shirt_array.push(@@shirt_array[a])
+        end
      a += 1
+       end; end 
+ 
+    def Shirt.draw(window, @@page)#-----------------------------------------draw
+       @@owned_shirt_array.uniq!
+       array = @@owned_shirt_array; array_size = @@owned_shirt_array.size
+       Shirt.sort_by_color
+       @@owned_shirt_array = array
+       s = @@owned_shirt_array.size - 1
+     #__________________________page one________________________________________
+      if @@page == 1
+      #-------------------------row one-----------------------------------------
+       if s >= 0 && @@owned_shirt_array[0].is_owned == true
+         @@owned_shirt_array[0].display_sprite.scale = SF.vector2(2.5, 2.5)
+         @@owned_shirt_array[0].display_sprite.position = SF.vector2(650, 360)
+         window.draw(@@owned_shirt_array[0].display_sprite)
+        end
+       if s >= 1 && @@owned_shirt_array[1].is_owned == true
+         @@owned_shirt_array[1].display_sprite.scale = SF.vector2(2.5, 2.5)
+         @@owned_shirt_array[1].display_sprite.position = SF.vector2(770, 360)
+         window.draw(@@owned_shirt_array[1].display_sprite)
+        end
+       if s >=  2 && @@owned_shirt_array[2].is_owned == true
+         @@owned_shirt_array[2].display_sprite.scale = SF.vector2(2.5, 2.5)
+         @@owned_shirt_array[2].display_sprite.position = SF.vector2(880, 360)
+         window.draw(@@owned_shirt_array[2].display_sprite)
+        end
+       if s >=  3 && @@owned_shirt_array[3].is_owned == true
+         @@owned_shirt_array[3].display_sprite.scale = SF.vector2(2.5, 2.5)
+         @@owned_shirt_array[3].display_sprite.position = SF.vector2(990, 360)
+         window.draw(@@owned_shirt_array[3].display_sprite)
+       end
+       if s >=  4 && @@owned_shirt_array[4].is_owned == true
+         @@owned_shirt_array[4].display_sprite.scale = SF.vector2(2.5, 2.5)
+         @@owned_shirt_array[4].display_sprite.position = SF.vector2(1110, 360)
+         window.draw(@@owned_shirt_array[4].display_sprite)
+       end
+      #-------------------------row two-----------------------------------------
+       if s >=  5 && @@owned_shirt_array[5].is_owned == true
+         @@owned_shirt_array[5].display_sprite.scale = SF.vector2(2.5, 2.5)
+         @@owned_shirt_array[5].display_sprite.position = SF.vector2(650, 460)
+         window.draw(@@owned_shirt_array[5].display_sprite)
+       end
+       if s >=  6 && @@owned_shirt_array[6].is_owned == true
+        @@owned_shirt_array[6].display_sprite.scale = SF.vector2(2.5, 2.5)
+        @@owned_shirt_array[6].display_sprite.position = SF.vector2(770, 460)
+        window.draw(@@owned_shirt_array[6].display_sprite)
+       end
+       if s >=  7 && @@owned_shirt_array[7].is_owned == true
+        @@owned_shirt_array[7].display_sprite.scale = SF.vector2(2.5, 2.5)
+        @@owned_shirt_array[7].display_sprite.position = SF.vector2(880, 460)
+        window.draw(@@owned_shirt_array[7].display_sprite)
+       end
+       if s >=  8 && @@owned_shirt_array[8].is_owned == true
+        @@owned_shirt_array[8].display_sprite.scale = SF.vector2(2.5, 2.5)
+        @@owned_shirt_array[8].display_sprite.position = SF.vector2(990, 460)
+        window.draw(@@owned_shirt_array[8].display_sprite)
+       end
+       if s >=  9 && @@owned_shirt_array[9].is_owned == true
+        @@owned_shirt_array[9].display_sprite.scale = SF.vector2(2.5, 2.5)
+        @@owned_shirt_array[9].display_sprite.position = SF.vector2(1110, 460)
+        window.draw(@@owned_shirt_array[9].display_sprite)
+       end
+      #-----------------------row three-----------------------------------------   
+       if s >=  10 && @@owned_shirt_array[10].is_owned == true
+        @@owned_shirt_array[10].display_sprite.scale = SF.vector2(2.5, 2.5)
+        @@owned_shirt_array[10].display_sprite.position = SF.vector2(650, 560)
+        window.draw(@@owned_shirt_array[10].display_sprite)
+       end
+       if s >=  11 && @@owned_shirt_array[11].is_owned == true
+         @@owned_shirt_array[11].display_sprite.scale = SF.vector2(2.5, 2.5)
+         @@owned_shirt_array[11].display_sprite.position = SF.vector2(770, 560)
+         window.draw(@@owned_shirt_array[11].display_sprite)
+        end
+        if s >=  12 && @@owned_shirt_array[12].is_owned == true
+         @@owned_shirt_array[12].display_sprite.scale = SF.vector2(2.5, 2.5)
+         @@owned_shirt_array[12].display_sprite.position = SF.vector2(880, 560)
+         window.draw(@@owned_shirt_array[12].display_sprite)
+        end
+        if s >=  13 && @@owned_shirt_array[13].is_owned == true
+         @@owned_shirt_array[13].display_sprite.scale = SF.vector2(2.5, 2.5)
+         @@owned_shirt_array[13].display_sprite.position = SF.vector2(990, 560)
+         window.draw(@@owned_shirt_array[13].display_sprite)
+        end
+        if s >=  14 && @@owned_shirt_array[14].is_owned == true
+         @@owned_shirt_array[14].display_sprite.scale = SF.vector2(2.5, 2.5)
+         @@owned_shirt_array[14].display_sprite.position = SF.vector2(1110, 560)
+         window.draw(@@owned_shirt_array[14].display_sprite)
+        end; end
+     #__________________________page two________________________________________
+       if @@page == 2
+       #-------------------------row one-----------------------------------------
+        if s >= 15 && @@owned_shirt_array[15].is_owned == true
+          @@owned_shirt_array[15].display_sprite.scale = SF.vector2(2.5, 2.5)
+          @@owned_shirt_array[15].display_sprite.position = SF.vector2(650, 360)
+          window.draw(@@owned_shirt_array[15].display_sprite)
+         end
+        if s >= 16 && @@owned_shirt_array[16].is_owned == true
+          @@owned_shirt_array[16].display_sprite.scale = SF.vector2(2.5, 2.5)
+          @@owned_shirt_array[16].display_sprite.position = SF.vector2(770, 360)
+          window.draw(@@owned_shirt_array[16].display_sprite)
+         end
+        if s >=  17 && @@owned_shirt_array[17].is_owned == true
+          @@owned_shirt_array[17].display_sprite.scale = SF.vector2(2.5, 2.5)
+          @@owned_shirt_array[17].display_sprite.position = SF.vector2(880, 360)
+          window.draw(@@owned_shirt_array[17].display_sprite)
+         end
+        if s >=  18 && @@owned_shirt_array[18].is_owned == true
+          @@owned_shirt_array[18].display_sprite.scale = SF.vector2(2.5, 2.5)
+          @@owned_shirt_array[18].display_sprite.position = SF.vector2(990, 360)
+          window.draw(@@owned_shirt_array[18].display_sprite)
+        end
+        if s >=  19 && @@owned_shirt_array[19].is_owned == true
+          @@owned_shirt_array[19].display_sprite.scale = SF.vector2(2.5, 2.5)
+          @@owned_shirt_array[19].display_sprite.position = SF.vector2(1110, 360)
+          window.draw(@@owned_shirt_array[19].display_sprite)
+        end
+       #-------------------------row two-----------------------------------------
+        if s >=  20 && @@owned_shirt_array[20].is_owned == true
+         @@owned_shirt_array[20].display_sprite.scale = SF.vector2(2.5, 2.5)
+         @@owned_shirt_array[20].display_sprite.position = SF.vector2(650, 460)
+         window.draw(@@owned_shirt_array[20].display_sprite)
+        end
+        if s >=  21 && @@owned_shirt_array[21].is_owned == true
+         @@owned_shirt_array[21].display_sprite.scale = SF.vector2(2.5, 2.5)
+         @@owned_shirt_array[21].display_sprite.position = SF.vector2(770, 460)
+         window.draw(@@owned_shirt_array[21].display_sprite)
+        end
+        if s >=  22 && @@owned_shirt_array[22].is_owned == true
+         @@owned_shirt_array[22].display_sprite.scale = SF.vector2(2.5, 2.5)
+         @@owned_shirt_array[22].display_sprite.position = SF.vector2(880, 460)
+         window.draw(@@owned_shirt_array[22].display_sprite)
+        end
+        if s >=  23 && @@owned_shirt_array[23].is_owned == true
+         @@owned_shirt_array[23].display_sprite.scale = SF.vector2(2.5, 2.5)
+         @@owned_shirt_array[23].display_sprite.position = SF.vector2(990, 460)
+         window.draw(@@owned_shirt_array[23].display_sprite)
+        end
+        if s >=  24 && @@owned_shirt_array[24].is_owned == true
+         @@owned_shirt_array[24].display_sprite.scale = SF.vector2(2.5, 2.5)
+         @@owned_shirt_array[24].display_sprite.position = SF.vector2(1110, 460)
+         window.draw(@@owned_shirt_array[24].display_sprite)
+        end
+       #-----------------------row three-----------------------------------------   
+        if s >=  25 && @@owned_shirt_array[25].is_owned == true
+         @@owned_shirt_array[25].display_sprite.scale = SF.vector2(2.5, 2.5)
+         @@owned_shirt_array[25].display_sprite.position = SF.vector2(650, 560)
+         window.draw(@@owned_shirt_array[25].display_sprite)
+        end
+        if s >=  26 && @@owned_shirt_array[26].is_owned == true
+         @@owned_shirt_array[26].display_sprite.scale = SF.vector2(2.5, 2.5)
+         @@owned_shirt_array[26].display_sprite.position = SF.vector2(770, 560)
+         window.draw(@@owned_shirt_array[26].display_sprite)
+        end
+        if s >=  27 && @@owned_shirt_array[27].is_owned == true
+         @@owned_shirt_array[27].display_sprite.scale = SF.vector2(2.5, 2.5)
+         @@owned_shirt_array[27].display_sprite.position = SF.vector2(880, 560)
+         window.draw(@@owned_shirt_array[27].display_sprite)
+        end
+        if s >=  28 && @@owned_shirt_array[28].is_owned == true
+         @@owned_shirt_array[28].display_sprite.scale = SF.vector2(2.5, 2.5)
+         @@owned_shirt_array[28].display_sprite.position = SF.vector2(990, 560)
+         window.draw(@@owned_shirt_array[28].display_sprite)
+        end
+        if s >=  29 && @@owned_shirt_array[29].is_owned == true
+         @@owned_shirt_array[29].display_sprite.scale = SF.vector2(2.5, 2.5)
+         @@owned_shirt_array[29].display_sprite.position = SF.vector2(1110, 560)
+         window.draw(@@owned_shirt_array[29].display_sprite)
+        end; end; end
+    def Shirt.determine_array_length(window, this)#--------------array length
+     @@owned_shirt_array.uniq!
+     if this <= @@owned_shirt_array.size - 1
+      case this
+       when 0
+        selected_shirt = @@owned_shirt_array[0].number
+        Clothing::Shirt.select(window, selected_shirt)
+       when 1
+        selected_shirt = @@owned_shirt_array[1].number
+        Clothing::Shirt.select(window, selected_shirt)
+       when 2
+        selected_shirt = @@owned_shirt_array[2].number
+        Clothing::Shirt.select(window, selected_shirt)
+       when 3
+        selected_shirt = @@owned_shirt_array[3].number
+        Clothing::Shirt.select(window, selected_shirt)
+       when 4
+        selected_shirt = @@owned_shirt_array[4].number
+        Clothing::Shirt.select(window, selected_shirt)
+       when 5
+        selected_shirt = @@owned_shirt_array[5].number
+        Clothing::Shirt.select(window, selected_shirt)
+       when 6
+        selected_shirt = @@owned_shirt_array[6].number
+        Clothing::Shirt.select(window, selected_shirt)
+       when 7
+        selected_shirt = @@owned_shirt_array[7].number
+        Clothing::Shirt.select(window, selected_shirt)
+       when 8
+        selected_shirt = @@owned_shirt_array[8].number
+        Clothing::Shirt.select(window, selected_shirt)
+       when 9
+        selected_shirt = @@owned_shirt_array[9].number
+        Clothing::Shirt.select(window, selected_shirt)
+       when 10
+        selected_shirt = @@owned_shirt_array[10].number
+        Clothing::Shirt.select(window, selected_shirt)
+       when 11
+        selected_shirt = @@owned_shirt_array[11].number
+        Clothing::Shirt.select(window, selected_shirt)
+       when 12
+        selected_shirt = @@owned_shirt_array[12].number
+        Clothing::Shirt.select(window, selected_shirt)
+       when 13
+        selected_shirt = @@owned_shirt_array[13].number
+        Clothing::Shirt.select(window, selected_shirt)
+       when 14
+        selected_shirt = @@owned_shirt_array[14].number
+        Clothing::Shirt.select(window, selected_shirt)
+       when 15
+        selected_shirt = @@owned_shirt_array[15].number
+        Clothing::Shirt.select(window, selected_shirt)
+       when 16
+        selected_shirt = @@owned_shirt_array[16].number
+        Clothing::Shirt.select(window, selected_shirt)
+       when 17
+        selected_shirt = @@owned_shirt_array[17].number
+        Clothing::Shirt.select(window, selected_shirt)
+       when 18
+        selected_shirt = @@owned_shirt_array[18].number
+        Clothing::Shirt.select(window, selected_shirt)
+       when 19
+        selected_shirt = @@owned_shirt_array[19].number
+        Clothing::Shirt.select(window, selected_shirt)
+       when 20
+        selected_shirt = @@owned_shirt_array[20].number
+        Clothing::Shirt.select(window, selected_shirt)
+       when 21
+        selected_shirt = @@owned_shirt_array[21].number
+        Clothing::Shirt.select(window, selected_shirt)
+       when 22
+        selected_shirt = @@owned_shirt_array[22].number
+        Clothing::Shirt.select(window, selected_shirt)
+       when 23
+        selected_shirt = @@owned_shirt_array[23].number
+        Clothing::Shirt.select(window, selected_shirt)
+       when 24
+        selected_shirt = @@owned_shirt_array[24].number
+        Clothing::Shirt.select(window, selected_shirt)
+       when 25
+         selected_shirt = @@owned_shirt_array[25].number
+         Clothing::Shirt.select(window, selected_shirt)
+       when 26
+         selected_shirt = @@owned_shirt_array[26].number
+         Clothing::Shirt.select(window, selected_shirt)
+       when 27
+         selected_shirt = @@owned_shirt_array[27].number
+         Clothing::Shirt.select(window, selected_shirt)
+       when 28
+         selected_shirt = @@owned_shirt_array[28].number
+         Clothing::Shirt.select(window, selected_shirt)
+       when 29
+         selected_shirt = @@owned_shirt_array[29].number
+         Clothing::Shirt.select(window, selected_shirt)
+       end; end; end
+  
+    def Shirt.select(window, selected_shirt)#----------------------select
+     shirt_slot = selected_shirt
+     Clothing_Outfit_Slot.change_shirt(shirt_slot, window)
+       end
+  
+    def Shirt.sort_by_color#-----------------------------------sort by color
+      a = 0; sorted_array = @@owned_shirt_array.dup
+      @@owned_shirt_array.clear
+     while a < sorted_array.size
+      if sorted_array[a].color === "white"
+        @@owned_shirt_array.push(sorted_array[a])
+       end
+       a += 1
+      end
+      a = 0
+     while a < sorted_array.size
+      if sorted_array[a].color === "black"
+        @@owned_shirt_array.push(sorted_array[a])
+       end
+        a += 1
+       end
+       a = 0
+     while a < sorted_array.size
+      if sorted_array[a].color === "red"
+        @@owned_shirt_array.push(sorted_array[a])
+       end
+        a += 1
+       end
+       a = 0
+     while a < sorted_array.size
+      if sorted_array[a].color === "orange"
+        @@owned_shirt_array.push(sorted_array[a])
+       end
+        a += 1
+       end
+       a = 0
+     while a < sorted_array.size
+      if sorted_array[a].color === "yellow"
+        @@owned_shirt_array.push(sorted_array[a])
+       end
+        a += 1
+       end
+       a = 0
+     while a < sorted_array.size
+      if sorted_array[a].color === "green"
+        @@owned_shirt_array.push(sorted_array[a])
+       end
+        a += 1
+       end
+       a = 0
+     while a < sorted_array.size
+      if sorted_array[a].color === "blue"
+        @@owned_shirt_array.push(sorted_array[a])
+       end
+        a += 1
+       end
+       a = 0
+     while a < sorted_array.size
+      if sorted_array[a].color === "purple"
+        @@owned_shirt_array.push(sorted_array[a])
+       end
+        a += 1
+       end
+       a = 0
+     while a < sorted_array.size
+      if sorted_array[a].color === "pink"
+        @@owned_shirt_array.push(sorted_array[a])
+       end
+        a += 1
+       end
     end
-    a = 0
-   while a < sorted_array.size
-    if sorted_array[a].color === "black"
-      @@owned_shirt_array.push(sorted_array[a])
-     end
-      a += 1
-     end
-     a = 0
-   while a < sorted_array.size
-    if sorted_array[a].color === "red"
-      @@owned_shirt_array.push(sorted_array[a])
-     end
-      a += 1
-     end
-     a = 0
-   while a < sorted_array.size
-    if sorted_array[a].color === "orange"
-      @@owned_shirt_array.push(sorted_array[a])
-     end
-      a += 1
-     end
-     a = 0
-   while a < sorted_array.size
-    if sorted_array[a].color === "yellow"
-      @@owned_shirt_array.push(sorted_array[a])
-     end
-      a += 1
-     end
-     a = 0
-   while a < sorted_array.size
-    if sorted_array[a].color === "green"
-      @@owned_shirt_array.push(sorted_array[a])
-     end
-      a += 1
-     end
-     a = 0
-   while a < sorted_array.size
-    if sorted_array[a].color === "blue"
-      @@owned_shirt_array.push(sorted_array[a])
-     end
-      a += 1
-     end
-     a = 0
-   while a < sorted_array.size
-    if sorted_array[a].color === "purple"
-      @@owned_shirt_array.push(sorted_array[a])
-     end
-      a += 1
-     end
-     a = 0
-   while a < sorted_array.size
-    if sorted_array[a].color === "pink"
-      @@owned_shirt_array.push(sorted_array[a])
-     end
-      a += 1
-     end
-  end
-   #white, black, red, orange, yellow, green, blue, purple, pink
- # __________________________________________________________________________________________________________________________________________
- #|                                                          T-Shirts                                                                       |
- #|_________________________________________________________________________________________________________________________________________|
-  @@white_t_shirt = Shirt.new(true, T_SHIRT_01, DISPLAY_T_SHIRT_01, "White T-Shirt", "white", "short", 0)  
-  @@blue_t_shirt = Shirt.new(true, T_SHIRT_02, DISPLAY_T_SHIRT_02, "Blue T-Shirt", "blue", "short", 1)
-  @@red_t_shirt = Shirt.new(true, T_SHIRT_03, DISPLAY_T_SHIRT_03, "Red T-Shirt", "red", "short", 2)
-  @@green_t_shirt = Shirt.new(true, T_SHIRT_04, DISPLAY_T_SHIRT_04, "Green T-Shirt", "green", "short", 3)
-  @@purple_t_shirt = Shirt.new(true, T_SHIRT_05, DISPLAY_T_SHIRT_05, "Purple T-Shirt", "purple", "short", 4) 
-  @@black_t_shirt = Shirt.new(true, T_SHIRT_06, DISPLAY_T_SHIRT_06, "Black T-Shirt", "black", "short", 5) 
- # __________________________________________________________________________________________________________________________________________
- #|                                                          Tank Tops                                                                      |
- #|_________________________________________________________________________________________________________________________________________|
-  @@white_tank_top = Shirt.new(true, TANK_TOP_01, DISPLAY_TANK_TOP_01, "White_Tank_Top", "white", "short", 6)
-  @@black_tank_top = Shirt.new(true, TANK_TOP_02, DISPLAY_TANK_TOP_02, "Black_Tank_Top", "black", "short", 7)
-  @@red_tank_top = Shirt.new(true, TANK_TOP_03, DISPLAY_TANK_TOP_03, "Red_Tank_Top", "red", "short", 8)
-  @@orange_tank_top = Shirt.new(true, TANK_TOP_04, DISPLAY_TANK_TOP_04, "Orange_Tank_Top", "orange", "short", 9)
-  @@yellow_tank_top = Shirt.new(true, TANK_TOP_05, DISPLAY_TANK_TOP_05, "Yellow_Tank_Top", "yellow", "short", 10)
-  @@green_tank_top = Shirt.new(true, TANK_TOP_06, DISPLAY_TANK_TOP_06, "Green_Tank_Top", "green", "short", 11)
-  @@blue_tank_top = Shirt.new(true, TANK_TOP_07, DISPLAY_TANK_TOP_07, "Blue_Tank_Top", "blue", "short", 12)
-  @@purple_tank_top = Shirt.new(true, TANK_TOP_08, DISPLAY_TANK_TOP_08, "Purple_Tank_Top", "purple", "short", 13)
-  @@pink_tank_top = Shirt.new(true, TANK_TOP_09, DISPLAY_TANK_TOP_09, "Pink_Tank_Top", "pink", "short", 14)
-  end
-end
-end
+    #white, black, red, orange, yellow, green, blue, purple, pink
+  # __________________________________________________________________________________________________________________________________________
+  #|                                                          T-Shirts                                                                       |
+  #|_________________________________________________________________________________________________________________________________________|
+   @@white_t_shirt = Shirt.new(true, T_SHIRT_01, DISPLAY_T_SHIRT_01, "White T-Shirt", "white", "short", 0)  
+   @@blue_t_shirt = Shirt.new(true, T_SHIRT_02, DISPLAY_T_SHIRT_02, "Blue T-Shirt", "blue", "short", 1)
+   @@red_t_shirt = Shirt.new(true, T_SHIRT_03, DISPLAY_T_SHIRT_03, "Red T-Shirt", "red", "short", 2)
+   @@green_t_shirt = Shirt.new(true, T_SHIRT_04, DISPLAY_T_SHIRT_04, "Green T-Shirt", "green", "short", 3)
+   @@purple_t_shirt = Shirt.new(true, T_SHIRT_05, DISPLAY_T_SHIRT_05, "Purple T-Shirt", "purple", "short", 4) 
+   @@black_t_shirt = Shirt.new(true, T_SHIRT_06, DISPLAY_T_SHIRT_06, "Black T-Shirt", "black", "short", 5) 
+   @@orange_t_shirt = Shirt.new(true, T_SHIRT_07, DISPLAY_T_SHIRT_07, "Orange T-Shirt", "orange", "short", 15) 
+   @@yellow_t_shirt = Shirt.new(true, T_SHIRT_08, DISPLAY_T_SHIRT_08, "Yellow T-Shirt", "yellow", "short", 16) 
+   @@pink_t_shirt = Shirt.new(true, T_SHIRT_09, DISPLAY_T_SHIRT_09, "Pink T-Shirt", "pink", "short", 17) 
+  # __________________________________________________________________________________________________________________________________________
+  #|                                                          Tank Tops                                                                      |
+  #|_________________________________________________________________________________________________________________________________________|
+   @@white_tank_top = Shirt.new(true, TANK_TOP_01, DISPLAY_TANK_TOP_01, "White_Tank_Top", "white", "short", 6)
+   @@black_tank_top = Shirt.new(true, TANK_TOP_02, DISPLAY_TANK_TOP_02, "Black_Tank_Top", "black", "short", 7)
+   @@red_tank_top = Shirt.new(true, TANK_TOP_03, DISPLAY_TANK_TOP_03, "Red_Tank_Top", "red", "short", 8)
+   @@orange_tank_top = Shirt.new(true, TANK_TOP_04, DISPLAY_TANK_TOP_04, "Orange_Tank_Top", "orange", "short", 9)
+   @@yellow_tank_top = Shirt.new(true, TANK_TOP_05, DISPLAY_TANK_TOP_05, "Yellow_Tank_Top", "yellow", "short", 10)
+   @@green_tank_top = Shirt.new(true, TANK_TOP_06, DISPLAY_TANK_TOP_06, "Green_Tank_Top", "green", "short", 11)
+   @@blue_tank_top = Shirt.new(true, TANK_TOP_07, DISPLAY_TANK_TOP_07, "Blue_Tank_Top", "blue", "short", 12)
+   @@purple_tank_top = Shirt.new(true, TANK_TOP_08, DISPLAY_TANK_TOP_08, "Purple_Tank_Top", "purple", "short", 13)
+   @@pink_tank_top = Shirt.new(true, TANK_TOP_09, DISPLAY_TANK_TOP_09, "Pink_Tank_Top", "pink", "short", 14)
+  # __________________________________________________________________________________________________________________________________________
+  #|                                                          Tube Tops                                                                      |
+  #|_________________________________________________________________________________________________________________________________________|
+   @@white_tube_top = Shirt.new(true, TUBE_TOP_01, DISPLAY_TUBE_TOP_01, "White_Tube_Top", "white", "none", 18)
+   @@black_tube_top = Shirt.new(true, TUBE_TOP_02, DISPLAY_TUBE_TOP_02, "Black_Tube_Top", "black", "none", 19)
+   @@red_tube_top = Shirt.new(true, TUBE_TOP_03, DISPLAY_TUBE_TOP_03, "Red_Tube_Top", "red", "none", 20)
+   @@orange_tube_top = Shirt.new(true, TUBE_TOP_04, DISPLAY_TUBE_TOP_04, "Orange_Tube_Top", "orange", "none", 21)
+   @@yellow_tube_top = Shirt.new(true, TUBE_TOP_05, DISPLAY_TUBE_TOP_05, "Yellow_Tube_Top", "yellow", "none", 22)
+   @@green_tube_top = Shirt.new(true, TUBE_TOP_06, DISPLAY_TUBE_TOP_06, "Green_Tube_Top", "green", "none", 23)
+   @@blue_tube_top = Shirt.new(true, TUBE_TOP_07, DISPLAY_TUBE_TOP_07, "Blue_Tube_Top", "blue", "none", 24)
+   @@purple_tube_top = Shirt.new(true, TUBE_TOP_08, DISPLAY_TUBE_TOP_08, "Purple_Tube_Top", "purple", "none", 25)
+   @@pink_tube_top = Shirt.new(true, TUBE_TOP_09, DISPLAY_TUBE_TOP_09, "Pink_Tube_Top", "pink", "none", 26)
+   end
+   end
+ end
 
 
 
 
 
-#  module Pants
-#   #properties
-#    property is_owned : Bool
-#    property char_sprite : SF::Sprite
-#    property display_sprite : SF::Sprite
-#    property id : String
-#    property name : String
-#    property color : String
-#    property length : String
-#   class Shorts
-#    Blue_Shorts = new.Shorts(false, SHORTS_01, DISPLAY_SHORTS_01, "PS001", "Blue_Shorts", "blue", "short")
-#    Brown_Shorts = new.Shorts(false, SHORTS_02, DISPLAY_SHORTS_02, "PS002", "Brown_Shorts", "brown", "short")
-#    Black_Shorts = new.Shorts(false, SHORTS_03, DISPLAY_SHORTS_03, "PS003", "Black_Shorts", "black", "short")
-#    end
-#   end
-# end
 
 
-# class Test_Enemy < Enemy_Physics
-#   def initialize(name : String, sprite : SF::Sprite, max_hp : Int32, current_hp : Int32)
-#     @name = name
-#     @sprite = sprite   
-#     @max_hp = max_hp
-#     @current_hp = max_hp
-#   end
 
 
 # class SpriteInfo

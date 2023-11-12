@@ -841,15 +841,19 @@
 #-------------------------------------------------------------------------------------------------------------------------------------
 
  SHIRT_ARRAY = [T_SHIRT_01, T_SHIRT_02, T_SHIRT_03, T_SHIRT_04, T_SHIRT_05, T_SHIRT_06, TANK_TOP_01, TANK_TOP_02, TANK_TOP_03,
- TANK_TOP_04, TANK_TOP_05, TANK_TOP_06, TANK_TOP_07, TANK_TOP_08, TANK_TOP_09]
+ TANK_TOP_04, TANK_TOP_05, TANK_TOP_06, TANK_TOP_07, TANK_TOP_08, TANK_TOP_09, T_SHIRT_07, T_SHIRT_08, T_SHIRT_09, TUBE_TOP_01,
+ TUBE_TOP_02, TUBE_TOP_03, TUBE_TOP_04, TUBE_TOP_05, TUBE_TOP_06, TUBE_TOP_07, TUBE_TOP_08, TUBE_TOP_09]
 
  DISPLAY_SHIRT_ARRAY = [DISPLAY_T_SHIRT_01, DISPLAY_T_SHIRT_02, DISPLAY_T_SHIRT_03, DISPLAY_T_SHIRT_04,
  DISPLAY_T_SHIRT_05, DISPLAY_T_SHIRT_06, DISPLAY_TANK_TOP_01, DISPLAY_TANK_TOP_02, DISPLAY_TANK_TOP_03, DISPLAY_TANK_TOP_04,
- DISPLAY_TANK_TOP_05, DISPLAY_TANK_TOP_06, DISPLAY_TANK_TOP_07, DISPLAY_TANK_TOP_08, DISPLAY_TANK_TOP_09]
+ DISPLAY_TANK_TOP_05, DISPLAY_TANK_TOP_06, DISPLAY_TANK_TOP_07, DISPLAY_TANK_TOP_08, DISPLAY_TANK_TOP_09, DISPLAY_T_SHIRT_07,
+ DISPLAY_T_SHIRT_08, DISPLAY_T_SHIRT_09, DISPLAY_TUBE_TOP_01, DISPLAY_TUBE_TOP_02, DISPLAY_TUBE_TOP_03, DISPLAY_TUBE_TOP_04,
+ DISPLAY_TUBE_TOP_05, DISPLAY_TUBE_TOP_06, DISPLAY_TUBE_TOP_07, DISPLAY_TUBE_TOP_08, DISPLAY_TUBE_TOP_09]
 
  SHIRT_DESC_ARRAY = ["White T-Shirt", "Blue T-Shirt", "Red T-Shirt", "Green T-Shirt", "Purple T-Shirt", 
  "Black T-Shirt", "White Tank Top", "Red Tank Top", "Orange Tank Top", "Yellow Tank Top", "Green Tank Top", "Blue Tank Top",
- "Purple Tank Top", "Pink Tank Top"]
+ "Purple Tank Top", "Pink Tank Top", "Orange T-Shirt", "Yellow T-Shirt", "Pink T-Shirt", "White Tube Top", "Black Tube Top",
+ "Red Tube Top", "Orange Tube Top", "Yellow Tube Top", "Green Tube Top", "Blue Tube Top", "Purple Tube Top", "Pink Tube Top"]
 
  Shirt_Desc = SF::Text.new; Shirt_Desc.font = FONT_FANCY_BOLD
  Shirt_Desc.string = SHIRT_DESC_ARRAY[0]; Shirt_Desc.character_size = 40; Shirt_Desc.color = SF::Color::White
@@ -914,6 +918,36 @@
    DISPLAY_T_SHIRT_06.position = SF.vector2(1125, 475)
    DISPLAY_T_SHIRT_06.scale = SF.vector2(3.5, 3.5)
    DISPLAY_T_SHIRT_06.color = SF.color(10, 10, 10)
+  #....................................................Orange T-Shirt..................................................................
+   #\\\\\\\Character Model
+   T_SHIRT_07 = SF::Sprite.new(T_SHIRT_TEXTURE_01)
+   T_SHIRT_07.color = SF.color(255, 165, 0)
+   #\\\\\\\Display Model
+   DISPLAY_T_SHIRT_07 = SF::Sprite.new(T_SHIRT_TEXTURE_01)
+   DISPLAY_T_SHIRT_07.texture_rect = SF.int_rect(0, 0, 96, 128)
+   DISPLAY_T_SHIRT_07.position = SF.vector2(1125, 475)
+   DISPLAY_T_SHIRT_07.scale = SF.vector2(3.5, 3.5)
+   DISPLAY_T_SHIRT_07.color = SF.color(255, 165, 0)
+  #....................................................Yellow T-Shirt..................................................................
+   #\\\\\\\Character Model
+   T_SHIRT_08 = SF::Sprite.new(T_SHIRT_TEXTURE_01)
+   T_SHIRT_08.color = SF.color(255, 255, 153)
+   #\\\\\\\Display Model
+   DISPLAY_T_SHIRT_08 = SF::Sprite.new(T_SHIRT_TEXTURE_01)
+   DISPLAY_T_SHIRT_08.texture_rect = SF.int_rect(0, 0, 96, 128)
+   DISPLAY_T_SHIRT_08.position = SF.vector2(1125, 475)
+   DISPLAY_T_SHIRT_08.scale = SF.vector2(3.5, 3.5)
+   DISPLAY_T_SHIRT_08.color = SF.color(255, 255, 153)
+  #.....................................................Pink T-Shirt....................................................................
+   #\\\\\\\Character Model
+   T_SHIRT_09 = SF::Sprite.new(T_SHIRT_TEXTURE_01)
+   T_SHIRT_09.color = SF.color(199, 21, 133)
+   #\\\\\\\Display Model
+   DISPLAY_T_SHIRT_09 = SF::Sprite.new(T_SHIRT_TEXTURE_01)
+   DISPLAY_T_SHIRT_09.texture_rect = SF.int_rect(0, 0, 96, 128)
+   DISPLAY_T_SHIRT_09.position = SF.vector2(1125, 475)
+   DISPLAY_T_SHIRT_09.scale = SF.vector2(3.5, 3.5)
+   DISPLAY_T_SHIRT_09.color = SF.color(199, 21, 133)
  
  #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
  #'''''''''''''''''''''''''''''''''''''''''''''''''''''''Tank Tops'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
@@ -999,70 +1033,458 @@
   #...................................................Pink Tank Top....................................................................
    #\\\\\\\Character Model
    TANK_TOP_09 = SF::Sprite.new(TANK_TOP_TEXTURE_01)
-   TANK_TOP_09.color = SF.color(200, 100, 255)
+   TANK_TOP_09.color = SF.color(255, 105, 180)
    #\\\\\\\Display Model
    DISPLAY_TANK_TOP_09 = SF::Sprite.new(TANK_TOP_TEXTURE_01)
    DISPLAY_TANK_TOP_09.texture_rect = SF.int_rect(0, 0, 96, 128)
    DISPLAY_TANK_TOP_09.position = SF.vector2(1125, 475)
    DISPLAY_TANK_TOP_09.scale = SF.vector2(3.5, 3.5)
    DISPLAY_TANK_TOP_09.color = SF.color(255, 105, 180)
+ #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+ #'''''''''''''''''''''''''''''''''''''''''''''''''''''''Tube Tops'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+  #...................................................White Tube Top...................................................................
+   #\\\\\\\Character Model
+   TUBE_TOP_TEXTURE_01 = SF::Texture.from_file("graphics/Tube_Top_01.png")
+   TUBE_TOP_01 = SF::Sprite.new(TUBE_TOP_TEXTURE_01)
+   #\\\\\\\Display Model
+   DISPLAY_TUBE_TOP_01 = SF::Sprite.new(TUBE_TOP_TEXTURE_01)
+   DISPLAY_TUBE_TOP_01.texture_rect = SF.int_rect(0, 0, 96, 128)
+   DISPLAY_TUBE_TOP_01.position = SF.vector2(1125, 475)
+   DISPLAY_TUBE_TOP_01.scale = SF.vector2(3.5, 3.5)
+  #...................................................Black Tube Top...................................................................
+   #\\\\\\\Character Model
+   TUBE_TOP_02 = SF::Sprite.new(TUBE_TOP_TEXTURE_01)
+   TUBE_TOP_02.color = SF.color(0, 0, 0)
+   #\\\\\\\Display Model
+   DISPLAY_TUBE_TOP_02 = SF::Sprite.new(TUBE_TOP_TEXTURE_01)
+   DISPLAY_TUBE_TOP_02.texture_rect = SF.int_rect(0, 0, 96, 128)
+   DISPLAY_TUBE_TOP_02.position = SF.vector2(1125, 475)
+   DISPLAY_TUBE_TOP_02.scale = SF.vector2(3.5, 3.5)
+   DISPLAY_TUBE_TOP_02.color = SF.color(0, 0, 0)
+  #...................................................Red Tube Top...................................................................
+   #\\\\\\\Character Model
+   TUBE_TOP_03 = SF::Sprite.new(TUBE_TOP_TEXTURE_01)
+   TUBE_TOP_03.color = SF.color(128, 0, 0)
+   #\\\\\\\Display Model
+   DISPLAY_TUBE_TOP_03 = SF::Sprite.new(TUBE_TOP_TEXTURE_01)
+   DISPLAY_TUBE_TOP_03.texture_rect = SF.int_rect(0, 0, 96, 128)
+   DISPLAY_TUBE_TOP_03.position = SF.vector2(1125, 475)
+   DISPLAY_TUBE_TOP_03.scale = SF.vector2(3.5, 3.5)
+   DISPLAY_TUBE_TOP_03.color = SF.color(128, 0, 0)
+  #..................................................Orange Tube Top..................................................................
+   #\\\\\\\Character Model
+   TUBE_TOP_04 = SF::Sprite.new(TUBE_TOP_TEXTURE_01)
+   TUBE_TOP_04.color = SF.color(255, 165, 0)
+   #\\\\\\\Display Model
+   DISPLAY_TUBE_TOP_04 = SF::Sprite.new(TUBE_TOP_TEXTURE_01)
+   DISPLAY_TUBE_TOP_04.texture_rect = SF.int_rect(0, 0, 96, 128)
+   DISPLAY_TUBE_TOP_04.position = SF.vector2(1125, 475)
+   DISPLAY_TUBE_TOP_04.scale = SF.vector2(3.5, 3.5)
+   DISPLAY_TUBE_TOP_04.color = SF.color(255, 165, 0)
+  #..................................................Yellow Tube Top..................................................................
+   #\\\\\\\Character Model
+   TUBE_TOP_05 = SF::Sprite.new(TUBE_TOP_TEXTURE_01)
+   TUBE_TOP_05.color = SF.color(255, 255, 102)
+   #\\\\\\\Display Model
+   DISPLAY_TUBE_TOP_05 = SF::Sprite.new(TUBE_TOP_TEXTURE_01)
+   DISPLAY_TUBE_TOP_05.texture_rect = SF.int_rect(0, 0, 96, 128)
+   DISPLAY_TUBE_TOP_05.position = SF.vector2(1125, 475)
+   DISPLAY_TUBE_TOP_05.scale = SF.vector2(3.5, 3.5)
+   DISPLAY_TUBE_TOP_05.color = SF.color(255, 255, 102)
+  #...................................................Green Tube Top..................................................................
+   #\\\\\\\Character Model
+   TUBE_TOP_06 = SF::Sprite.new(TUBE_TOP_TEXTURE_01)
+   TUBE_TOP_06.color = SF.color(175, 255, 47)
+   #\\\\\\\Display Model
+   DISPLAY_TUBE_TOP_06 = SF::Sprite.new(TUBE_TOP_TEXTURE_01)
+   DISPLAY_TUBE_TOP_06.texture_rect = SF.int_rect(0, 0, 96, 128)
+   DISPLAY_TUBE_TOP_06.position = SF.vector2(1125, 475)
+   DISPLAY_TUBE_TOP_06.scale = SF.vector2(3.5, 3.5)
+   DISPLAY_TUBE_TOP_06.color = SF.color(175, 255, 47)
+  #....................................................Blue Tube Top...................................................................
+   #\\\\\\\Character Model
+   TUBE_TOP_07 = SF::Sprite.new(TUBE_TOP_TEXTURE_01)
+   TUBE_TOP_07.color = SF.color(25, 25, 112)
+   #\\\\\\\Display Model
+   DISPLAY_TUBE_TOP_07 = SF::Sprite.new(TUBE_TOP_TEXTURE_01)
+   DISPLAY_TUBE_TOP_07.texture_rect = SF.int_rect(0, 0, 96, 128)
+   DISPLAY_TUBE_TOP_07.position = SF.vector2(1125, 475)
+   DISPLAY_TUBE_TOP_07.scale = SF.vector2(3.5, 3.5)
+   DISPLAY_TUBE_TOP_07.color = SF.color(25, 25, 112)
+  #...................................................Purple Tube Top..................................................................
+   #\\\\\\\Character Model
+   TUBE_TOP_08 = SF::Sprite.new(TUBE_TOP_TEXTURE_01)
+   TUBE_TOP_08.color = SF.color(138, 43, 226)
+   #\\\\\\\Display Model
+   DISPLAY_TUBE_TOP_08 = SF::Sprite.new(TUBE_TOP_TEXTURE_01)
+   DISPLAY_TUBE_TOP_08.texture_rect = SF.int_rect(0, 0, 96, 128)
+   DISPLAY_TUBE_TOP_08.position = SF.vector2(1125, 475)
+   DISPLAY_TUBE_TOP_08.scale = SF.vector2(3.5, 3.5)
+   DISPLAY_TUBE_TOP_08.color = SF.color(138, 43, 226)
+  #.....................................................Pink Tube Top..................................................................
+   #\\\\\\\Character Model
+   TUBE_TOP_09 = SF::Sprite.new(TUBE_TOP_TEXTURE_01)
+   TUBE_TOP_09.color = SF.color(255, 105, 180)
+   #\\\\\\\Display Model
+   DISPLAY_TUBE_TOP_09 = SF::Sprite.new(TUBE_TOP_TEXTURE_01)
+   DISPLAY_TUBE_TOP_09.texture_rect = SF.int_rect(0, 0, 96, 128)
+   DISPLAY_TUBE_TOP_09.position = SF.vector2(1125, 475)
+   DISPLAY_TUBE_TOP_09.scale = SF.vector2(3.5, 3.5)
+   DISPLAY_TUBE_TOP_09.color = SF.color(255, 105, 180)
  #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 #-------------------------------------------------------------------------------------------------------------------------------------
 #                                                     Pants Textures
 #-------------------------------------------------------------------------------------------------------------------------------------
- PANTS_ARRAY = [SHORTS_01, SHORTS_02, SHORTS_03]
+ PANTS_ARRAY = [SHORTS_01, SHORTS_02, SHORTS_03, SHORTS_04, SHORTS_05, SHORTS_06, SHORTS_07, SHORTS_08, SHORTS_09, SHORTS_10, SHORTS_11,
+ BOOTY_SHORTS_01, BOOTY_SHORTS_02, BOOTY_SHORTS_03, BOOTY_SHORTS_04, BOOTY_SHORTS_05, BOOTY_SHORTS_06, BOOTY_SHORTS_07, BOOTY_SHORTS_08,
+ BOOTY_SHORTS_09, BOOTY_SHORTS_10, JEANS_01, JEANS_02, JEANS_03, JEANS_04, JEANS_05, JEANS_06, JEANS_07, JEANS_08, JEANS_09, JEANS_10]
 
- DISPLAY_PANTS_ARRAY = [DISPLAY_SHORTS_01, DISPLAY_SHORTS_02, DISPLAY_SHORTS_03]
+ DISPLAY_PANTS_ARRAY = [DISPLAY_SHORTS_01, DISPLAY_SHORTS_02, DISPLAY_SHORTS_03, DISPLAY_SHORTS_04, DISPLAY_SHORTS_05, DISPLAY_SHORTS_06,
+ DISPLAY_SHORTS_07, DISPLAY_SHORTS_08, DISPLAY_SHORTS_09, DISPLAY_SHORTS_10, DISPLAY_SHORTS_11, BOOTY_DISPLAY_SHORTS_01, BOOTY_DISPLAY_SHORTS_02,
+ BOOTY_DISPLAY_SHORTS_03, BOOTY_DISPLAY_SHORTS_04, BOOTY_DISPLAY_SHORTS_05, BOOTY_DISPLAY_SHORTS_06, BOOTY_DISPLAY_SHORTS_07,
+ BOOTY_DISPLAY_SHORTS_08, BOOTY_DISPLAY_SHORTS_09, BOOTY_DISPLAY_SHORTS_10, DISPLAY_JEANS_01, DISPLAY_JEANS_02, DISPLAY_JEANS_03,
+ DISPLAY_JEANS_04, DISPLAY_JEANS_05, DISPLAY_JEANS_06, DISPLAY_JEANS_07, DISPLAY_JEANS_08, DISPLAY_JEANS_09, DISPLAY_JEANS_10]
 
- PANTS_DESC_ARRAY = ["Blue Shorts", "Brown Shorts", "Black Shorts"]
+ PANTS_DESC_ARRAY = ["White Shorts", "Brown Shorts", "Black Shorts", "Red Shorts", "Light-Blue Shorts", "Orange Shorts", "Khaki Shorts",
+ "Green Shorts", "Blue Shorts", "Purple Shorts", "Pink Shorts", "White Booty Shorts", "Brown Booty Shorts", "Red Booty Shorts",
+ "Orange Booty Shorts", "Yellow Booty Shorts", "Black Booty Shorts", "Green Booty Shorts", "Blue Booty Shorts", "Purple Booty Shorts",
+ "Pink Booty Shorts", "White Jeans", "Black Jeans", "Brown Jeans", "Red Jeans", "Orange Jeans", "Yellow Jeans", "Green Jeans",
+ "Blue Jeans", "Purple Jeans", "Pink Jeans"]
 
  Pants_Desc = SF::Text.new; Pants_Desc.font = FONT_FANCY_BOLD
  Pants_Desc.string = PANTS_DESC_ARRAY[0]; Pants_Desc.character_size = 40; Pants_Desc.color = SF::Color::White
  Pants_Desc.position = SF.vector2(1500, 530)
- #.....................................................Blue Shorts...................................................................
-  #\\\\\\\Character Model
-  SHORTS_TEXTURE_01 = SF::Texture.from_file("graphics/Shorts.png")
-  SHORTS_01 = SF::Sprite.new(SHORTS_TEXTURE_01) 
-  #\\\\\\\Display Model
-  DISPLAY_SHORTS_01 = SF::Sprite.new(SHORTS_TEXTURE_01)
-  DISPLAY_SHORTS_01.texture_rect = SF.int_rect(0, 0, 96, 128)
-  DISPLAY_SHORTS_01.position = SF.vector2(1415, 120)
-  DISPLAY_SHORTS_01.scale = SF.vector2(3.5, 3.5)
- #.....................................................Brown Shorts..................................................................
-  #\\\\\\\Character Model
-  SHORTS_02 = SF::Sprite.new(SHORTS_TEXTURE_01) 
-  SHORTS_02.color = SF.color(255, 130, 80)
-  #\\\\\\\Display Model
-  DISPLAY_SHORTS_02 = SF::Sprite.new(SHORTS_TEXTURE_01)
-  DISPLAY_SHORTS_02.texture_rect = SF.int_rect(0, 0, 96, 128)
-  DISPLAY_SHORTS_02.position = SF.vector2(1415, 120)
-  DISPLAY_SHORTS_02.scale = SF.vector2(3.5, 3.5)
-  DISPLAY_SHORTS_02.color = SF.color(255, 130, 80)
- #.....................................................Black Shorts..................................................................
-  #\\\\\\\Character Model
-  SHORTS_03 = SF::Sprite.new(SHORTS_TEXTURE_01) 
-  SHORTS_03.color = SF.color(70, 70, 70)
-  #\\\\\\\Display Model
-  DISPLAY_SHORTS_03 = SF::Sprite.new(SHORTS_TEXTURE_01)
-  DISPLAY_SHORTS_03.texture_rect = SF.int_rect(0, 0, 96, 128)
-  DISPLAY_SHORTS_03.position = SF.vector2(1415, 120)
-  DISPLAY_SHORTS_03.scale = SF.vector2(3.5, 3.5)
-  DISPLAY_SHORTS_03.color = SF.color(70, 70, 70)
-#-------------------------------------------------------------------------------------------------------------------------------------
+ #''''''''''''''''''''''''''''''''''''''''''''''''''''''''Shorts'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+  #.....................................................White Shorts..................................................................
+   #\\\\\\\Character Model
+   SHORTS_TEXTURE_01 = SF::Texture.from_file("graphics/Shorts.png")
+   SHORTS_01 = SF::Sprite.new(SHORTS_TEXTURE_01) 
+   #\\\\\\\Display Model
+   DISPLAY_SHORTS_01 = SF::Sprite.new(SHORTS_TEXTURE_01)
+   DISPLAY_SHORTS_01.texture_rect = SF.int_rect(0, 0, 96, 128)
+   DISPLAY_SHORTS_01.position = SF.vector2(1415, 120)
+   DISPLAY_SHORTS_01.scale = SF.vector2(3.5, 3.5)
+  #.....................................................Brown Shorts..................................................................
+   #\\\\\\\Character Model
+   SHORTS_02 = SF::Sprite.new(SHORTS_TEXTURE_01) 
+   SHORTS_02.color = SF.color(139, 69, 19)
+   #\\\\\\\Display Model
+   DISPLAY_SHORTS_02 = SF::Sprite.new(SHORTS_TEXTURE_01)
+   DISPLAY_SHORTS_02.texture_rect = SF.int_rect(0, 0, 96, 128)
+   DISPLAY_SHORTS_02.position = SF.vector2(1415, 120)
+   DISPLAY_SHORTS_02.scale = SF.vector2(3.5, 3.5)
+   DISPLAY_SHORTS_02.color = SF.color(139, 69, 19)
+  #.....................................................Black Shorts..................................................................
+   #\\\\\\\Character Model
+   SHORTS_03 = SF::Sprite.new(SHORTS_TEXTURE_01) 
+   SHORTS_03.color = SF.color(70, 70, 70)
+   #\\\\\\\Display Model
+   DISPLAY_SHORTS_03 = SF::Sprite.new(SHORTS_TEXTURE_01)
+   DISPLAY_SHORTS_03.texture_rect = SF.int_rect(0, 0, 96, 128)
+   DISPLAY_SHORTS_03.position = SF.vector2(1415, 120)
+   DISPLAY_SHORTS_03.scale = SF.vector2(3.5, 3.5)
+   DISPLAY_SHORTS_03.color = SF.color(70, 70, 70)
+  #......................................................Red Shorts...................................................................
+   #\\\\\\\Character Model
+   SHORTS_04 = SF::Sprite.new(SHORTS_TEXTURE_01) 
+   SHORTS_04.color = SF.color(178, 34, 34)
+   #\\\\\\\Display Model
+   DISPLAY_SHORTS_04 = SF::Sprite.new(SHORTS_TEXTURE_01)
+   DISPLAY_SHORTS_04.texture_rect = SF.int_rect(0, 0, 96, 128)
+   DISPLAY_SHORTS_04.position = SF.vector2(1415, 120)
+   DISPLAY_SHORTS_04.scale = SF.vector2(3.5, 3.5)
+   DISPLAY_SHORTS_04.color = SF.color(178, 34, 34)
+  #..................................................Light-Blue Shorts................................................................
+   #\\\\\\\Character Model
+   SHORTS_05 = SF::Sprite.new(SHORTS_TEXTURE_01) 
+   SHORTS_05.color = SF.color(176, 224, 230)
+   #\\\\\\\Display Model
+   DISPLAY_SHORTS_05 = SF::Sprite.new(SHORTS_TEXTURE_01)
+   DISPLAY_SHORTS_05.texture_rect = SF.int_rect(0, 0, 96, 128)
+   DISPLAY_SHORTS_05.position = SF.vector2(1415, 120)
+   DISPLAY_SHORTS_05.scale = SF.vector2(3.5, 3.5)
+   DISPLAY_SHORTS_05.color = SF.color(176, 224, 230)
+  #.....................................................Orange Shorts.................................................................
+   #\\\\\\\Character Model
+   SHORTS_06 = SF::Sprite.new(SHORTS_TEXTURE_01) 
+   SHORTS_06.color = SF.color(255, 165, 0)
+   #\\\\\\\Display Model
+   DISPLAY_SHORTS_06 = SF::Sprite.new(SHORTS_TEXTURE_01)
+   DISPLAY_SHORTS_06.texture_rect = SF.int_rect(0, 0, 96, 128)
+   DISPLAY_SHORTS_06.position = SF.vector2(1415, 120)
+   DISPLAY_SHORTS_06.scale = SF.vector2(3.5, 3.5)
+   DISPLAY_SHORTS_06.color = SF.color(255, 165, 0)
+  #.....................................................Khaki Shorts..................................................................
+   #\\\\\\\Character Model
+   SHORTS_07 = SF::Sprite.new(SHORTS_TEXTURE_01) 
+   SHORTS_07.color = SF.color(240, 230, 140)
+   #\\\\\\\Display Model
+   DISPLAY_SHORTS_07 = SF::Sprite.new(SHORTS_TEXTURE_01)
+   DISPLAY_SHORTS_07.texture_rect = SF.int_rect(0, 0, 96, 128)
+   DISPLAY_SHORTS_07.position = SF.vector2(1415, 120)
+   DISPLAY_SHORTS_07.scale = SF.vector2(3.5, 3.5)
+   DISPLAY_SHORTS_07.color = SF.color(240, 230, 140)
+  #.....................................................Green Shorts..................................................................
+   #\\\\\\\Character Model
+   SHORTS_08 = SF::Sprite.new(SHORTS_TEXTURE_01) 
+   SHORTS_08.color = SF.color(85, 107, 47)
+   #\\\\\\\Display Model
+   DISPLAY_SHORTS_08 = SF::Sprite.new(SHORTS_TEXTURE_01)
+   DISPLAY_SHORTS_08.texture_rect = SF.int_rect(0, 0, 96, 128)
+   DISPLAY_SHORTS_08.position = SF.vector2(1415, 120)
+   DISPLAY_SHORTS_08.scale = SF.vector2(3.5, 3.5)
+   DISPLAY_SHORTS_08.color = SF.color(85, 107, 47)
+  #......................................................Blue Shorts..................................................................
+   #\\\\\\\Character Model
+   SHORTS_09 = SF::Sprite.new(SHORTS_TEXTURE_01) 
+   SHORTS_09.color = SF.color(70, 130, 180)
+   #\\\\\\\Display Model
+   DISPLAY_SHORTS_09 = SF::Sprite.new(SHORTS_TEXTURE_01)
+   DISPLAY_SHORTS_09.texture_rect = SF.int_rect(0, 0, 96, 128)
+   DISPLAY_SHORTS_09.position = SF.vector2(1415, 120)
+   DISPLAY_SHORTS_09.scale = SF.vector2(3.5, 3.5)
+   DISPLAY_SHORTS_09.color = SF.color(70, 130, 180)
+  #.....................................................Purple Shorts..................................................................
+   #\\\\\\\Character Model
+   SHORTS_10 = SF::Sprite.new(SHORTS_TEXTURE_01) 
+   SHORTS_10.color = SF.color(147, 112, 219)
+   #\\\\\\\Display Model
+   DISPLAY_SHORTS_10 = SF::Sprite.new(SHORTS_TEXTURE_01)
+   DISPLAY_SHORTS_10.texture_rect = SF.int_rect(0, 0, 96, 128)
+   DISPLAY_SHORTS_10.position = SF.vector2(1415, 120)
+   DISPLAY_SHORTS_10.scale = SF.vector2(3.5, 3.5)
+   DISPLAY_SHORTS_10.color = SF.color(147, 112, 219)
+  #......................................................Pink Shorts...................................................................
+   #\\\\\\\Character Model
+   SHORTS_11 = SF::Sprite.new(SHORTS_TEXTURE_01) 
+   SHORTS_11.color = SF.color(199, 21, 133)
+   #\\\\\\\DBOOTY_DISPLAY_SHORTS_01isplay Model
+   DISPLAY_SHORTS_11 = SF::Sprite.new(SHORTS_TEXTURE_01)
+   DISPLAY_SHORTS_11.texture_rect = SF.int_rect(0, 0, 96, 128)
+   DISPLAY_SHORTS_11.position = SF.vector2(1415, 120)
+   DISPLAY_SHORTS_11.scale = SF.vector2(3.5, 3.5)
+   DISPLAY_SHORTS_11.color = SF.color(199, 21, 133)
+ #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+ #'''''''''''''''''''''''''''''''''''''''''''''''''''''Booty Shorts''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+  #.................................................White Booty Shorts................................................................
+   #\\\\\\\Character Model
+   BOOTY_SHORTS_TEXTURE_01 = SF::Texture.from_file("graphics/Booty_Shorts_01.png")
+   BOOTY_SHORTS_01 = SF::Sprite.new(BOOTY_SHORTS_TEXTURE_01) 
+   #\\\\\\\Display Model
+   BOOTY_DISPLAY_SHORTS_01 = SF::Sprite.new(BOOTY_SHORTS_TEXTURE_01)
+   BOOTY_DISPLAY_SHORTS_01.texture_rect = SF.int_rect(0, 0, 96, 128)
+   BOOTY_DISPLAY_SHORTS_01.position = SF.vector2(1415, 120)
+   BOOTY_DISPLAY_SHORTS_01.scale = SF.vector2(3.5, 3.5)
+  #.................................................Brown Booty Shorts................................................................
+   #\\\\\\\Character Model
+   BOOTY_SHORTS_02 = SF::Sprite.new(BOOTY_SHORTS_TEXTURE_01) 
+   BOOTY_SHORTS_02.color = SF.color(210, 105, 30)
+   #\\\\\\\Display Model
+   BOOTY_DISPLAY_SHORTS_02 = SF::Sprite.new(BOOTY_SHORTS_TEXTURE_01)
+   BOOTY_DISPLAY_SHORTS_02.texture_rect = SF.int_rect(0, 0, 96, 128)
+   BOOTY_DISPLAY_SHORTS_02.position = SF.vector2(1415, 120)
+   BOOTY_DISPLAY_SHORTS_02.scale = SF.vector2(3.5, 3.5)
+   BOOTY_DISPLAY_SHORTS_02.color = SF.color(210, 105, 30)
+  #..................................................Red Booty Shorts.................................................................
+   #\\\\\\\Character Model
+   BOOTY_SHORTS_03 = SF::Sprite.new(BOOTY_SHORTS_TEXTURE_01) 
+   BOOTY_SHORTS_03.color = SF.color(205, 92, 92)
+   #\\\\\\\Display Model
+   BOOTY_DISPLAY_SHORTS_03 = SF::Sprite.new(BOOTY_SHORTS_TEXTURE_01)
+   BOOTY_DISPLAY_SHORTS_03.texture_rect = SF.int_rect(0, 0, 96, 128)
+   BOOTY_DISPLAY_SHORTS_03.position = SF.vector2(1415, 120)
+   BOOTY_DISPLAY_SHORTS_03.scale = SF.vector2(3.5, 3.5)
+   BOOTY_DISPLAY_SHORTS_03.color = SF.color(205, 92, 92)
+  #.................................................Orange Booty Shorts...............................................................
+   #\\\\\\\Character Model
+   BOOTY_SHORTS_04 = SF::Sprite.new(BOOTY_SHORTS_TEXTURE_01) 
+   BOOTY_SHORTS_04.color = SF.color(255, 215, 0)
+   #\\\\\\\Display Model
+   BOOTY_DISPLAY_SHORTS_04 = SF::Sprite.new(BOOTY_SHORTS_TEXTURE_01)
+   BOOTY_DISPLAY_SHORTS_04.texture_rect = SF.int_rect(0, 0, 96, 128)
+   BOOTY_DISPLAY_SHORTS_04.position = SF.vector2(1415, 120)
+   BOOTY_DISPLAY_SHORTS_04.scale = SF.vector2(3.5, 3.5)
+   BOOTY_DISPLAY_SHORTS_04.color = SF.color(255, 215, 0)
+  #.................................................Yellow Booty Shorts...............................................................
+   #\\\\\\\Character Model
+   BOOTY_SHORTS_05 = SF::Sprite.new(BOOTY_SHORTS_TEXTURE_01) 
+   BOOTY_SHORTS_05.color = SF.color(255, 255, 153)
+   #\\\\\\\Display Model
+   BOOTY_DISPLAY_SHORTS_05 = SF::Sprite.new(BOOTY_SHORTS_TEXTURE_01)
+   BOOTY_DISPLAY_SHORTS_05.texture_rect = SF.int_rect(0, 0, 96, 128)
+   BOOTY_DISPLAY_SHORTS_05.position = SF.vector2(1415, 120)
+   BOOTY_DISPLAY_SHORTS_05.scale = SF.vector2(3.5, 3.5)
+   BOOTY_DISPLAY_SHORTS_05.color = SF.color(255, 255, 153)
+  #..................................................Black Booty Shorts...............................................................
+   #\\\\\\\Character Model
+   BOOTY_SHORTS_06 = SF::Sprite.new(BOOTY_SHORTS_TEXTURE_01) 
+   BOOTY_SHORTS_06.color = SF.color(15, 15, 15)
+   #\\\\\\\Display Model
+   BOOTY_DISPLAY_SHORTS_06 = SF::Sprite.new(BOOTY_SHORTS_TEXTURE_01)
+   BOOTY_DISPLAY_SHORTS_06.texture_rect = SF.int_rect(0, 0, 96, 128)
+   BOOTY_DISPLAY_SHORTS_06.position = SF.vector2(1415, 120)
+   BOOTY_DISPLAY_SHORTS_06.scale = SF.vector2(3.5, 3.5)
+   BOOTY_DISPLAY_SHORTS_06.color = SF.color(15, 15, 15)
+  #..................................................Green Booty Shorts...............................................................
+   #\\\\\\\Character Model
+   BOOTY_SHORTS_07 = SF::Sprite.new(BOOTY_SHORTS_TEXTURE_01) 
+   BOOTY_SHORTS_07.color = SF.color(0, 255, 0)
+   #\\\\\\\Display Model
+   BOOTY_DISPLAY_SHORTS_07 = SF::Sprite.new(BOOTY_SHORTS_TEXTURE_01)
+   BOOTY_DISPLAY_SHORTS_07.texture_rect = SF.int_rect(0, 0, 96, 128)
+   BOOTY_DISPLAY_SHORTS_07.position = SF.vector2(1415, 120)
+   BOOTY_DISPLAY_SHORTS_07.scale = SF.vector2(3.5, 3.5)
+   BOOTY_DISPLAY_SHORTS_07.color = SF.color(0, 255, 0)
+  #..................................................Blue Booty Shorts................................................................
+   #\\\\\\\Character Model
+   BOOTY_SHORTS_08 = SF::Sprite.new(BOOTY_SHORTS_TEXTURE_01) 
+   BOOTY_SHORTS_08.color = SF.color(0, 191, 255)
+   #\\\\\\\Display Model
+   BOOTY_DISPLAY_SHORTS_08 = SF::Sprite.new(BOOTY_SHORTS_TEXTURE_01)
+   BOOTY_DISPLAY_SHORTS_08.texture_rect = SF.int_rect(0, 0, 96, 128)
+   BOOTY_DISPLAY_SHORTS_08.position = SF.vector2(1415, 120)
+   BOOTY_DISPLAY_SHORTS_08.scale = SF.vector2(3.5, 3.5)
+   BOOTY_DISPLAY_SHORTS_08.color = SF.color(0, 191, 255)
+  #.................................................Purple Booty Shorts...............................................................
+   #\\\\\\\Character Model
+   BOOTY_SHORTS_09 = SF::Sprite.new(BOOTY_SHORTS_TEXTURE_01) 
+   BOOTY_SHORTS_09.color = SF.color(138, 43, 226)
+   #\\\\\\\Display Model
+   BOOTY_DISPLAY_SHORTS_09 = SF::Sprite.new(BOOTY_SHORTS_TEXTURE_01)
+   BOOTY_DISPLAY_SHORTS_09.texture_rect = SF.int_rect(0, 0, 96, 128)
+   BOOTY_DISPLAY_SHORTS_09.position = SF.vector2(1415, 120)
+   BOOTY_DISPLAY_SHORTS_09.scale = SF.vector2(3.5, 3.5)
+   BOOTY_DISPLAY_SHORTS_09.color = SF.color(138, 43, 226)
+  #..................................................Pink Booty Shorts................................................................
+   #\\\\\\\Character Model
+   BOOTY_SHORTS_10 = SF::Sprite.new(BOOTY_SHORTS_TEXTURE_01) 
+   BOOTY_SHORTS_10.color = SF.color(255, 105, 180)
+   #\\\\\\\Display Model
+   BOOTY_DISPLAY_SHORTS_10 = SF::Sprite.new(BOOTY_SHORTS_TEXTURE_01)
+   BOOTY_DISPLAY_SHORTS_10.texture_rect = SF.int_rect(0, 0, 96, 128)
+   BOOTY_DISPLAY_SHORTS_10.position = SF.vector2(1415, 120)
+   BOOTY_DISPLAY_SHORTS_10.scale = SF.vector2(3.5, 3.5)
+   BOOTY_DISPLAY_SHORTS_10.color = SF.color(255, 105, 180)
+ #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+ #''''''''''''''''''''''''''''''''''''''''''''''''''''''''Jeans'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+  #....................................................White Jeans....................................................................
+   #\\\\\\\Character Model
+   JEANS_TEXTURE_01 = SF::Texture.from_file("graphics/Jeans.png")
+   JEANS_01 = SF::Sprite.new(JEANS_TEXTURE_01) 
+   #\\\\\\\Display Model
+   DISPLAY_JEANS_01 = SF::Sprite.new(JEANS_TEXTURE_01)
+   DISPLAY_JEANS_01.texture_rect = SF.int_rect(0, 0, 96, 128)
+   DISPLAY_JEANS_01.position = SF.vector2(1415, 120)
+   DISPLAY_JEANS_01.scale = SF.vector2(3.5, 3.5)
+  #....................................................Black Jeans....................................................................
+   #\\\\\\\Character Model
+   JEANS_02 = SF::Sprite.new(JEANS_TEXTURE_01) 
+   JEANS_02.color = SF.color(15, 15, 15)
+   #\\\\\\\Display Model
+   DISPLAY_JEANS_02 = SF::Sprite.new(JEANS_TEXTURE_01)
+   DISPLAY_JEANS_02.texture_rect = SF.int_rect(0, 0, 96, 128)
+   DISPLAY_JEANS_02.position = SF.vector2(1415, 120)
+   DISPLAY_JEANS_02.scale = SF.vector2(3.5, 3.5)
+   DISPLAY_JEANS_02.color = SF.color(15, 15, 15)
+  #....................................................Brown Jeans....................................................................
+   #\\\\\\\Character Model
+   JEANS_03 = SF::Sprite.new(JEANS_TEXTURE_01) 
+   JEANS_03.color = SF.color(139, 69, 19)
+   #\\\\\\\Display Model
+   DISPLAY_JEANS_03 = SF::Sprite.new(JEANS_TEXTURE_01)
+   DISPLAY_JEANS_03.texture_rect = SF.int_rect(0, 0, 96, 128)
+   DISPLAY_JEANS_03.position = SF.vector2(1415, 120)
+   DISPLAY_JEANS_03.scale = SF.vector2(3.5, 3.5)
+   DISPLAY_JEANS_03.color = SF.color(139, 69, 19)
+  #.....................................................Red Jeans.....................................................................
+   #\\\\\\\Character Model
+   JEANS_04 = SF::Sprite.new(JEANS_TEXTURE_01) 
+   JEANS_04.color = SF.color(178, 34, 34)
+   #\\\\\\\Display Model
+   DISPLAY_JEANS_04 = SF::Sprite.new(JEANS_TEXTURE_01)
+   DISPLAY_JEANS_04.texture_rect = SF.int_rect(0, 0, 96, 128)
+   DISPLAY_JEANS_04.position = SF.vector2(1415, 120)
+   DISPLAY_JEANS_04.scale = SF.vector2(3.5, 3.5)
+   DISPLAY_JEANS_04.color = SF.color(178, 34, 34)
+  #....................................................Orange Jeans...................................................................
+   #\\\\\\\Character Model
+   JEANS_05 = SF::Sprite.new(JEANS_TEXTURE_01) 
+   JEANS_05.color = SF.color(255, 140, 0)
+   #\\\\\\\Display Model
+   DISPLAY_JEANS_05 = SF::Sprite.new(JEANS_TEXTURE_01)
+   DISPLAY_JEANS_05.texture_rect = SF.int_rect(0, 0, 96, 128)
+   DISPLAY_JEANS_05.position = SF.vector2(1415, 120)
+   DISPLAY_JEANS_05.scale = SF.vector2(3.5, 3.5)
+   DISPLAY_JEANS_05.color = SF.color(255, 140, 0)
+  #....................................................Yellow Jeans...................................................................
+   #\\\\\\\Character Model
+   JEANS_06 = SF::Sprite.new(JEANS_TEXTURE_01) 
+   JEANS_06.color = SF.color(255, 255, 102)
+   #\\\\\\\Display Model
+   DISPLAY_JEANS_06 = SF::Sprite.new(JEANS_TEXTURE_01)
+   DISPLAY_JEANS_06.texture_rect = SF.int_rect(0, 0, 96, 128)
+   DISPLAY_JEANS_06.position = SF.vector2(1415, 120)
+   DISPLAY_JEANS_06.scale = SF.vector2(3.5, 3.5)
+   DISPLAY_JEANS_06.color = SF.color(255, 255, 102)
+  #.....................................................Green Jeans...................................................................
+   #\\\\\\\Character Model
+   JEANS_07 = SF::Sprite.new(JEANS_TEXTURE_01) 
+   JEANS_07.color = SF.color(46, 139, 87)
+   #\\\\\\\Display Model
+   DISPLAY_JEANS_07 = SF::Sprite.new(JEANS_TEXTURE_01)
+   DISPLAY_JEANS_07.texture_rect = SF.int_rect(0, 0, 96, 128)
+   DISPLAY_JEANS_07.position = SF.vector2(1415, 120)
+   DISPLAY_JEANS_07.scale = SF.vector2(3.5, 3.5)
+   DISPLAY_JEANS_07.color = SF.color(46, 139, 87)
+  #.....................................................Blue Jeans....................................................................
+   #\\\\\\\Character Model
+   JEANS_08 = SF::Sprite.new(JEANS_TEXTURE_01) 
+   JEANS_08.color = SF.color(70, 130, 180)
+   #\\\\\\\Display Model
+   DISPLAY_JEANS_08 = SF::Sprite.new(JEANS_TEXTURE_01)
+   DISPLAY_JEANS_08.texture_rect = SF.int_rect(0, 0, 96, 128)
+   DISPLAY_JEANS_08.position = SF.vector2(1415, 120)
+   DISPLAY_JEANS_08.scale = SF.vector2(3.5, 3.5)
+   DISPLAY_JEANS_08.color = SF.color(70, 130, 180)
+  #....................................................Purple Jeans...................................................................
+   #\\\\\\\Character Model
+   JEANS_09 = SF::Sprite.new(JEANS_TEXTURE_01) 
+   JEANS_09.color = SF.color(75, 0, 130)
+   #\\\\\\\Display Model
+   DISPLAY_JEANS_09 = SF::Sprite.new(JEANS_TEXTURE_01)
+   DISPLAY_JEANS_09.texture_rect = SF.int_rect(0, 0, 96, 128)
+   DISPLAY_JEANS_09.position = SF.vector2(1415, 120)
+   DISPLAY_JEANS_09.scale = SF.vector2(3.5, 3.5)
+   DISPLAY_JEANS_09.color = SF.color(75, 0, 130)
+  #.....................................................Pink Jeans....................................................................
+   #\\\\\\\Character Model
+   JEANS_10 = SF::Sprite.new(JEANS_TEXTURE_01) 
+   JEANS_10.color = SF.color(219, 112, 147)
+   #\\\\\\\Display Model
+   DISPLAY_JEANS_10 = SF::Sprite.new(JEANS_TEXTURE_01)
+   DISPLAY_JEANS_10.texture_rect = SF.int_rect(0, 0, 96, 128)
+   DISPLAY_JEANS_10.position = SF.vector2(1415, 120)
+   DISPLAY_JEANS_10.scale = SF.vector2(3.5, 3.5)
+   DISPLAY_JEANS_10.color = SF.color(219, 112, 147)
+ #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+#--------------------------------------------------------------------------------------------------------------------------------------
 #                                                     Shoes Textures
 #-------------------------------------------------------------------------------------------------------------------------------------
- SHOES_ARRAY = [RAIN_BOOTS_01, RAIN_BOOTS_02, RAIN_BOOTS_03]
+ SHOES_ARRAY = [RAIN_BOOTS_01, RAIN_BOOTS_02, RAIN_BOOTS_03, RAIN_BOOTS_04, RAIN_BOOTS_05, RAIN_BOOTS_06, RAIN_BOOTS_07, RAIN_BOOTS_08,
+ RAIN_BOOTS_09]
 
- DISPLAY_SHOES_ARRAY = [DISPLAY_RAIN_BOOTS_01, DISPLAY_RAIN_BOOTS_02, DISPLAY_RAIN_BOOTS_03]
+ DISPLAY_SHOES_ARRAY = [DISPLAY_RAIN_BOOTS_01, DISPLAY_RAIN_BOOTS_02, DISPLAY_RAIN_BOOTS_03, DISPLAY_RAIN_BOOTS_04, DISPLAY_RAIN_BOOTS_05,
+ DISPLAY_RAIN_BOOTS_06, DISPLAY_RAIN_BOOTS_07, DISPLAY_RAIN_BOOTS_08, DISPLAY_RAIN_BOOTS_09]
 
- SHOES_DESC_ARRAY = ["Black Rain Boots", "Red Rain Boots", "Blue Rain Boots"]
+ SHOES_DESC_ARRAY = ["White Rain Boots", "Red Rain Boots", "Blue Rain Boots", "Black Rain Boots", "Orange Rain Boots", "Yellow Rain Boots",
+ "Green Rain Boots", "Purple Rain Boots", "Pink Rain Boots"]
 
  Shoes_Desc = SF::Text.new; Shoes_Desc.font = FONT_FANCY_BOLD
  Shoes_Desc.string = SHOES_DESC_ARRAY[0]; Shoes_Desc.character_size = 40; Shoes_Desc.color = SF::Color::White
  Shoes_Desc.position = SF.vector2(1450, 800)
 
  NIL_SHOE_TEXTURE = SF::Sprite.new(RAIN_BOOTS_TEXTURE_01)
- #....................................................Black Rain Boots.................................................................
+ #....................................................White Rain Boots.................................................................
   #\\\\\\\Character Model
   RAIN_BOOTS_TEXTURE_01 = SF::Texture.from_file("graphics/Rain_Boots_01.png")
   RAIN_BOOTS_01 = SF::Sprite.new(RAIN_BOOTS_TEXTURE_01) 
@@ -1074,23 +1496,83 @@
  #.....................................................Red Rain Boots..................................................................
   #\\\\\\\Character Model
   RAIN_BOOTS_02 = SF::Sprite.new(RAIN_BOOTS_TEXTURE_01) 
-  RAIN_BOOTS_02.color = SF.color(255, 100, 100)
+  RAIN_BOOTS_02.color = SF.color(255, 0, 0)
   #\\\\\\\Display Model
   DISPLAY_RAIN_BOOTS_02 = SF::Sprite.new(RAIN_BOOTS_TEXTURE_01)
   DISPLAY_RAIN_BOOTS_02.texture_rect = SF.int_rect(0, 0, 96, 128)
   DISPLAY_RAIN_BOOTS_02.position = SF.vector2(1400, 350)
   DISPLAY_RAIN_BOOTS_02.scale = SF.vector2(3.5, 3.5)
-  DISPLAY_RAIN_BOOTS_02.color = SF.color(255, 100, 100)
+  DISPLAY_RAIN_BOOTS_02.color = SF.color(255, 0, 0)
  #....................................................Blue Rain Boots..................................................................
   #\\\\\\\Character Model
   RAIN_BOOTS_03 = SF::Sprite.new(RAIN_BOOTS_TEXTURE_01) 
-  RAIN_BOOTS_03.color = SF.color(100, 100, 255)
+  RAIN_BOOTS_03.color = SF.color(0, 191, 255)
   #\\\\\\\Display Model
   DISPLAY_RAIN_BOOTS_03 = SF::Sprite.new(RAIN_BOOTS_TEXTURE_01)
   DISPLAY_RAIN_BOOTS_03.texture_rect = SF.int_rect(0, 0, 96, 128)
   DISPLAY_RAIN_BOOTS_03.position = SF.vector2(1400, 350)
   DISPLAY_RAIN_BOOTS_03.scale = SF.vector2(3.5, 3.5)
-  DISPLAY_RAIN_BOOTS_03.color = SF.color(100, 100, 255)
+  DISPLAY_RAIN_BOOTS_03.color = SF.color(0, 191, 255)
+ #....................................................Black Rain Boots.................................................................
+  #\\\\\\\Character Model
+  RAIN_BOOTS_04 = SF::Sprite.new(RAIN_BOOTS_TEXTURE_01) 
+  RAIN_BOOTS_04.color = SF.color(10, 10, 10)
+  #\\\\\\\Display Model
+  DISPLAY_RAIN_BOOTS_04 = SF::Sprite.new(RAIN_BOOTS_TEXTURE_01)
+  DISPLAY_RAIN_BOOTS_04.texture_rect = SF.int_rect(0, 0, 96, 128)
+  DISPLAY_RAIN_BOOTS_04.position = SF.vector2(1400, 350)
+  DISPLAY_RAIN_BOOTS_04.scale = SF.vector2(3.5, 3.5)
+  DISPLAY_RAIN_BOOTS_04.color = SF.color(10, 10, 10)
+ #....................................................Orange Rain Boots................................................................
+  #\\\\\\\Character Model
+  RAIN_BOOTS_05 = SF::Sprite.new(RAIN_BOOTS_TEXTURE_01) 
+  RAIN_BOOTS_05.color = SF.color(255, 165, 0)
+  #\\\\\\\Display Model
+  DISPLAY_RAIN_BOOTS_05 = SF::Sprite.new(RAIN_BOOTS_TEXTURE_01)
+  DISPLAY_RAIN_BOOTS_05.texture_rect = SF.int_rect(0, 0, 96, 128)
+  DISPLAY_RAIN_BOOTS_05.position = SF.vector2(1400, 350)
+  DISPLAY_RAIN_BOOTS_05.scale = SF.vector2(3.5, 3.5)
+  DISPLAY_RAIN_BOOTS_05.color = SF.color(255, 165, 0)
+ #....................................................Yellow Rain Boots................................................................
+  #\\\\\\\Character Model
+  RAIN_BOOTS_06 = SF::Sprite.new(RAIN_BOOTS_TEXTURE_01) 
+  RAIN_BOOTS_06.color = SF.color(255, 255, 0)
+  #\\\\\\\Display Model
+  DISPLAY_RAIN_BOOTS_06 = SF::Sprite.new(RAIN_BOOTS_TEXTURE_01)
+  DISPLAY_RAIN_BOOTS_06.texture_rect = SF.int_rect(0, 0, 96, 128)
+  DISPLAY_RAIN_BOOTS_06.position = SF.vector2(1400, 350)
+  DISPLAY_RAIN_BOOTS_06.scale = SF.vector2(3.5, 3.5)
+  DISPLAY_RAIN_BOOTS_06.color = SF.color(255, 255, 0)
+ #....................................................Green Rain Boots..................................................................
+  #\\\\\\\Character Model
+  RAIN_BOOTS_07 = SF::Sprite.new(RAIN_BOOTS_TEXTURE_01) 
+  RAIN_BOOTS_07.color = SF.color(173, 255, 47)
+  #\\\\\\\Display Model
+  DISPLAY_RAIN_BOOTS_07 = SF::Sprite.new(RAIN_BOOTS_TEXTURE_01)
+  DISPLAY_RAIN_BOOTS_07.texture_rect = SF.int_rect(0, 0, 96, 128)
+  DISPLAY_RAIN_BOOTS_07.position = SF.vector2(1400, 350)
+  DISPLAY_RAIN_BOOTS_07.scale = SF.vector2(3.5, 3.5)
+  DISPLAY_RAIN_BOOTS_07.color = SF.color(173, 255, 47)
+ #....................................................Purple Rain Boots..................................................................
+  #\\\\\\\Character Model
+  RAIN_BOOTS_08 = SF::Sprite.new(RAIN_BOOTS_TEXTURE_01) 
+  RAIN_BOOTS_08.color = SF.color(138, 43, 226)
+  #\\\\\\\Display Model
+  DISPLAY_RAIN_BOOTS_08 = SF::Sprite.new(RAIN_BOOTS_TEXTURE_01)
+  DISPLAY_RAIN_BOOTS_08.texture_rect = SF.int_rect(0, 0, 96, 128)
+  DISPLAY_RAIN_BOOTS_08.position = SF.vector2(1400, 350)
+  DISPLAY_RAIN_BOOTS_08.scale = SF.vector2(3.5, 3.5)
+  DISPLAY_RAIN_BOOTS_08.color = SF.color(138, 43, 226)
+ #.....................................................Pink Rain Boots...................................................................
+  #\\\\\\\Character Model
+  RAIN_BOOTS_09 = SF::Sprite.new(RAIN_BOOTS_TEXTURE_01) 
+  RAIN_BOOTS_09.color = SF.color(255, 20, 147)
+  #\\\\\\\Display Model
+  DISPLAY_RAIN_BOOTS_09 = SF::Sprite.new(RAIN_BOOTS_TEXTURE_01)
+  DISPLAY_RAIN_BOOTS_09.texture_rect = SF.int_rect(0, 0, 96, 128)
+  DISPLAY_RAIN_BOOTS_09.position = SF.vector2(1400, 350)
+  DISPLAY_RAIN_BOOTS_09.scale = SF.vector2(3.5, 3.5)
+  DISPLAY_RAIN_BOOTS_09.color = SF.color(255, 20, 147)
 
 #______________________________________________________________________________________________________________________________________
 #--------------------------------------------------------------------------------------------------------------------------------------
