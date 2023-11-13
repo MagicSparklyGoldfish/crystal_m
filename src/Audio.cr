@@ -4,29 +4,44 @@ require "crsfml/system"
 require "crystal/system/time"
 require "../src/crystal_meth.cr"
 
-CURSOR_1 = SF::SoundBuffer.from_file("audio/Cursor1.wav")
-SYSSOUND_1 = SF::Sound.new
-SYSSOUND_1.buffer = CURSOR_1
+# =======================================================================================================================================================
+#+                                                                      SFX                                                                              +
+# =======================================================================================================================================================
 
-CURSOR_2 = SF::SoundBuffer.from_file("audio/Select1.wav")
-SYSSOUND_2 = SF::Sound.new
-SYSSOUND_2.buffer = CURSOR_2
+ CURSOR_1 = SF::SoundBuffer.from_file("audio/Cursor1.wav")
+ SYSSOUND_1 = SF::Sound.new
+ SYSSOUND_1.buffer = CURSOR_1
+ 
+ CURSOR_2 = SF::SoundBuffer.from_file("audio/Select1.wav")
+ SYSSOUND_2 = SF::Sound.new
+ SYSSOUND_2.buffer = CURSOR_2
+ 
+ CHAR_CREATE_CURSOR_UP = SF::SoundBuffer.from_file("audio/Char_Create_Up.wav")
+ SYSSOUND_3 = SF::Sound.new
+ SYSSOUND_3.buffer = CHAR_CREATE_CURSOR_UP
+ 
+ CHAR_CREATE_CURSOR_DOWN = SF::SoundBuffer.from_file("audio/Char_Create_Down.wav")
+ SYSSOUND_4 = SF::Sound.new
+ SYSSOUND_4.buffer = CHAR_CREATE_CURSOR_DOWN
+ 
+ CHAR_CREATE_CURSOR_SIDEWAYS = SF::SoundBuffer.from_file("audio/Char_Create_Sideways.wav")
+ SYSSOUND_5 = SF::Sound.new
+ SYSSOUND_5.buffer = CHAR_CREATE_CURSOR_SIDEWAYS
+ 
+ LIGHT_BONK = SF::SoundBuffer.from_file("audio/Light_Bonk.wav")
+ SYSSOUND_6 = SF::Sound.new
+ SYSSOUND_6.buffer = LIGHT_BONK
+#_________________________________________________________________________________________________________________________________________________________
 
-CHAR_CREATE_CURSOR_UP = SF::SoundBuffer.from_file("audio/Char_Create_Up.wav")
-SYSSOUND_3 = SF::Sound.new
-SYSSOUND_3.buffer = CHAR_CREATE_CURSOR_UP
-
-CHAR_CREATE_CURSOR_DOWN = SF::SoundBuffer.from_file("audio/Char_Create_Down.wav")
-SYSSOUND_4 = SF::Sound.new
-SYSSOUND_4.buffer = CHAR_CREATE_CURSOR_DOWN
-
-CHAR_CREATE_CURSOR_SIDEWAYS = SF::SoundBuffer.from_file("audio/Char_Create_Sideways.wav")
-SYSSOUND_5 = SF::Sound.new
-SYSSOUND_5.buffer = CHAR_CREATE_CURSOR_SIDEWAYS
-
-LIGHT_BONK = SF::SoundBuffer.from_file("audio/Light_Bonk.wav")
-SYSSOUND_6 = SF::Sound.new
-SYSSOUND_6.buffer = LIGHT_BONK
+# =======================================================================================================================================================
+#+                                                                     Music                                                                             +
+# =======================================================================================================================================================
+ TEST_SONG = SF::Music.new
+ if !TEST_SONG.open_from_file("audio/Test_Song.wav")
+    puts "error! File Test_Song.wav not found!"
+  end
+ TEST_SONG.loop = true
+#_________________________________________________________________________________________________________________________________________________________
 
 module All_Audio
     class SFX
@@ -52,5 +67,10 @@ module All_Audio
         def SFX.light_bonk
             SYSSOUND_6.play
         end
+    end #sfx class end
+  class MUSIC
+   def MUSIC.test_song
+     TEST_SONG.play
     end
-end
+  end #music class end
+end #all audio module end

@@ -464,6 +464,7 @@ def Window_Class.main_menu_keypresses(window)
     @@menu = "HUD"
     @@map = "test"
     @@player_character_rendered_model.scale = SF.vector2(1.0, 1.0)
+    All_Audio::MUSIC.test_song
     #view2 = SF::View.new(SF.vector2(350, 300), SF.vector2(300, 200))
   when SF::Keyboard::W #---------------for testing purposes, remove when testing done
     Data_Manager.load_savegame
@@ -1699,9 +1700,12 @@ module NPCS
     include Player_Data
     include Gui
    #**********************************************************Variables***********************************************************************
-   @@test_npcs_model_01 = SF::RenderTexture.new(672, 512)
-   @@test_npc_rendered_model_01 = SF::Sprite.new(@@test_npcs_model_01.texture)
-   @@test_npc_scene : String; @@test_npc_scene = "none"
+    @@test_npcs_model_01 = SF::RenderTexture.new(672, 512)
+    @@test_npc_rendered_model_01 = SF::Sprite.new(@@test_npcs_model_01.texture)
+    @@test_npc_scene : String; @@test_npc_scene = "none"; @@test_dialogue_box_01 : SF::RectangleShape; @@test_dialogue_box_01 = Dialog_Box.dup
+    @@test_dialogue_box_01.position = SF.vector2(950, 580); @@npc_frame : Int32; @@npc_frame = 0; @@test_dialogue_box_text_01 : SF::Text
+    @@test_dialogue_box_text_01 = Dialog_Box_Text.dup; @@test_dialogue_box_text_01.string = "Oh, hello! Do\n you need a haircut?"
+    @@test_dialogue_box_text_01.position = SF.vector2(960, 600);
    #__________________________________________________________________________________________________________________________________________ 
    #***********************************************************Methods************************************************************************
     def Test_Npcs.test_npc_initialize
@@ -1724,7 +1728,24 @@ module NPCS
     #  npc_bounding_01.position = @@test_npc_rendered_model_01.position
     #  window.draw(npc_bounding_01)
      window.draw(@@test_npc_rendered_model_01) #@todo create switch case for npc scenes
-     end
+      case @@test_npc_scene
+        when "test_quest_1_stage_1"
+            window.draw(@@test_dialogue_box_01)
+            #@@npc_frame += 1
+           if @@npc_frame  > -1 && @@npc_frame  < 1200
+            @@test_dialogue_box_01.texture_rect = SF.int_rect(0, 200, 150, 100);           @@npc_frame += 1
+           else if @@npc_frame  >= 1200 && @@npc_frame  < 1800
+            @@test_dialogue_box_01.texture_rect = SF.int_rect(0, 100, 150, 100);           @@npc_frame += 1
+           else if @@npc_frame  >= 1800 #&& @@npc_frame  < 210000
+            @@test_dialogue_box_01.texture_rect = SF.int_rect(0, 0, 150, 100);
+            @@test_npc_scene = "test_quest_1_stage_2"
+           end; end; end
+         when "test_quest_1_stage_2"
+           @@test_dialogue_box_text_01.string = "  Oh, hello! Do \n   you need a \n    haircut?"
+           window.draw(@@test_dialogue_box_01)
+           window.draw(@@test_dialogue_box_text_01)  
+           end
+          end
     def Test_Npcs.click(window, @@player_character_rendered_model)
      # npc_bounding_01 = Bounding_Box.dup
      # npc_bounding_01.position = @@test_npc_rendered_model_01.position
@@ -1734,7 +1755,7 @@ module NPCS
        if bounding_box1.intersects? bounding_box2
         Player_Data::Player_Physics.immobilize_player
          All_Audio::SFX.light_bonk
-         Dialog_Box
+         @@test_npc_scene = "test_quest_1_stage_1"
        end; end
 
     end #test npc class end

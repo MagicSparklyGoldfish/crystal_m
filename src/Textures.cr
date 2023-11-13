@@ -1668,5 +1668,8 @@
 #______________________________________________________________________________________________________________________________________  
 #--------------------------------------------------------------------------------------------------------------------------------------
 #                                                      Dialog Boxes
-#--------------------------------------------------------------------------------------------------------------------------------------
-  Dialog_Box = SF::RectangleShape.new(SF.vector2(100, 100)); Dialog_Box.fill_color = SF.color(235, 235, 255)
+#-------------------------------------------------------------------------------------------------------------------------------------- 
+  Dialog_Box = SF::RectangleShape.new(SF.vector2(150, 100)); Dialog_Box.fill_color = SF.color(255, 255, 255)
+  DIALOG_BOX_TEXTURE_01 = SF::Texture.from_file("graphics/Dialogue_Boxes.png"); Dialog_Box.set_texture(DIALOG_BOX_TEXTURE_01, reset_rect: false)
+  Dialog_Box.texture_rect = SF.int_rect(0, 0, 150, 100); Dialog_Box_Text = SF::Text.new; Dialog_Box_Text.font = FONT_PIXEL; 
+  Dialog_Box_Text.character_size = 20; Dialog_Box_Text.color = SF::Color::Black
