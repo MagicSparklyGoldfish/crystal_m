@@ -63,26 +63,24 @@ extend self
 #=======================================================================================================================================+
 #---------------------------------------------------------------------------------------------------------------------------------------+
 #======================================================Character Model==================================================================+
-
-#-----------------------------------------------------initialize models-----------------------------------------------------------------+
- def Window_Class.player_model_initialize(@@current_shoes, @@current_gloves, @@current_shirt, @@current_pants) 
-   @@player_character_model.clear(SF::Color::Transparent) #@note player customization happens here
-   @@player_character_model.draw(SKIN_ARRAY[@@current_skin])
-   @@player_character_model.draw(SHOES_ARRAY[@@current_shoes])
-   @@player_character_model.draw(FACE_ARRAY[@@current_face])
-   @@player_character_model.draw(HAIR_ARRAY[@@current_hair])
-   @@player_character_model.draw(PANTS_ARRAY[@@current_pants])
-   @@player_character_model.draw(SHIRT_ARRAY[@@current_shirt])
-   @@player_character_model.draw(GLOVE_ARRAY[@@current_gloves])
-   @@player_character_model.create(672, 512, false)
-   @@player_character_model.display
-   @@player_character_rendered_model.texture_rect = SF.int_rect(0, 0, 96, 128)
-   @@player_character_rendered_model.position = SF.vector2(660, 515)
-   @@player_character_rendered_model.scale = SF.vector2(3.0, 3.0)
-   end
-#--------------------------------------------------------draw models--------------------------------------------------------------------+
-
-#---------------------------------------------------customization functions-------------------------------------------------------------+
+ #-----------------------------------------------------initialize models----------------------------------------------------------------+
+  def Window_Class.player_model_initialize(@@current_shoes, @@current_gloves, @@current_shirt, @@current_pants) 
+    @@player_character_model.clear(SF::Color::Transparent) #@note player customization happens here
+    @@player_character_model.draw(SKIN_ARRAY[@@current_skin])
+    @@player_character_model.draw(SHOES_ARRAY[@@current_shoes])
+    @@player_character_model.draw(FACE_ARRAY[@@current_face])
+    @@player_character_model.draw(HAIR_ARRAY[@@current_hair])
+    @@player_character_model.draw(PANTS_ARRAY[@@current_pants])
+    @@player_character_model.draw(SHIRT_ARRAY[@@current_shirt])
+    @@player_character_model.draw(GLOVE_ARRAY[@@current_gloves])
+    @@player_character_model.create(672, 512, false)
+    @@player_character_model.display
+    @@player_character_rendered_model.texture_rect = SF.int_rect(0, 0, 96, 128)
+    @@player_character_rendered_model.position = SF.vector2(660, 515)
+    @@player_character_rendered_model.scale = SF.vector2(3.0, 3.0)
+    end
+ 
+ #---------------------------------------------------customization functions------------------------------------------------------------+
  def Window_Class.customize_hair(window, direction)
    if direction == "right"
    @@current_hair = @@current_hair + 1; @@current_display_hair = @@current_hair
@@ -157,8 +155,7 @@ extend self
  end
 #=======================================================================================================================================+
 #---------------------------------------------------------------------------------------------------------------------------------------+
-#=======================================================Menu Renderers==================================================================+
-  
+#=======================================================Menu Renderers==================================================================+ 
  #/////////////////////////////////////////////////////////Main Menu////////////////////////////////////////////////////////////////////+
    def Window_Class.main_menu(window)
        window.clear(SF::Color::Black);
@@ -398,10 +395,10 @@ extend self
       Window_Class.char_creation_menu_keypresses(window)
     when "HUD"
       Window_Class.hud_keypresses(window)
-      case @@map
-       when "test"
-        NPCS::Test_Npcs.click(window, @@player_character_rendered_model)
-       end
+   #   case @@map
+    #   when "test"
+       # NPCS::Test_Npcs.click(window, @@player_character_rendered_model)
+     #  end
     end
    end
 #//////////////////////////////////////////////////////Character Creation///////////////////////////////////////////////////////////////+
@@ -1239,8 +1236,11 @@ def Window_Class.hud_keypresses(window)
       window.close
     when SF::Event::KeyPressed
       case event.code
-      when SF::Keyboard::Backspace
-       @@popup = "none"
+    when SF::Keyboard::Backspace
+      @@popup = "none"
+
+      when SF::Keyboard::Space
+        NPCS::Test_Npcs.click(window, @@player_character_rendered_model)
 
       when SF::Keyboard::D
         Player_Data::Player_Physics.wasd_right(@@player_character_rendered_model)
@@ -1543,7 +1543,7 @@ end; end; end; end; end; end
     @@is_player_airborne : Bool; @@is_player_airborne = false; @@fall_rate : Int32 | Nil; @@fallrate = 0
     @@player_bounding_box : SF::Rect(Float32); @@player_bounding_box = @@player_character_rendered_model.global_bounds
     @@player_jumped : Bool; @@player_jumped = false; @@player_direction : String; @@player_direction = "right"
-    property == @@player_bounding_box
+    property == @@player_bounding_box; @@can_player_move_at_all : Bool; @@can_player_move_at_all = true
    #==================================================================================================================================+
 
    #============================================Walk Cycle============================================================================+
@@ -1628,23 +1628,25 @@ end; end; end; end; end; end
    #=============================================Movement=============================================================================+
     #----------------------------------------------Left-------------------------------------------------------------------------------+
      def Player_Physics.wasd_left(@@player_character_rendered_model)
+      if @@can_player_move_at_all == true
      @@player_character_rendered_model.position -= SF.vector2(3.5, 0)
      Player_Physics.walk_cycle_left(@@player_character_rendered_model)
-     #@@player_character_rendered_model.texture_rect = SF.int_rect(192, 128, 96, 128)
      @@player_direction = "left"
+       end
      end
     #---------------------------------------------------------------------------------------------------------------------------------+   
     #---------------------------------------------Right-------------------------------------------------------------------------------+
      def Player_Physics.wasd_right(@@player_character_rendered_model)
+      if @@can_player_move_at_all == true
      @@player_character_rendered_model.position += SF.vector2(3.5, 0)
      Player_Physics.walk_cycle_right(@@player_character_rendered_model)
-     #@@player_character_rendered_model.texture_rect = SF.int_rect(192, 0, 96, 128)
      @@player_direction = "right"
+       end
      end
     #---------------------------------------------------------------------------------------------------------------------------------+ 
     #----------------------------------------------Up---------------------------------------------------------------------------------+
      def Player_Physics.wasd_up(@@player_character_rendered_model, window) #f(x) = ax² + bx + c
-        if @@player_jumped == false
+        if @@player_jumped == false && @@can_player_move_at_all == true
          a = 0; b = 100000
         while a != 900000
           a += 1; b += 1
@@ -1669,6 +1671,14 @@ end; end; end; end; end; end
         Player_Physics.wasd_right(@@player_character_rendered_model)
      end
     #---------------------------------------------------------------------------------------------------------------------------------+ 
+    #-------------------------------------------Mobility------------------------------------------------------------------------------+
+     def Player_Physics.mobilize_player
+      @@can_player_move_at_all = true
+      end
+     def Player_Physics.immobilize_player
+        @@can_player_move_at_all = false
+      end
+    #---------------------------------------------------------------------------------------------------------------------------------+ 
  end
  end
 
@@ -1691,6 +1701,7 @@ module NPCS
    #**********************************************************Variables***********************************************************************
    @@test_npcs_model_01 = SF::RenderTexture.new(672, 512)
    @@test_npc_rendered_model_01 = SF::Sprite.new(@@test_npcs_model_01.texture)
+   @@test_npc_scene : String; @@test_npc_scene = "none"
    #__________________________________________________________________________________________________________________________________________ 
    #***********************************************************Methods************************************************************************
     def Test_Npcs.test_npc_initialize
@@ -1704,28 +1715,28 @@ module NPCS
       @@test_npcs_model_01.draw(GLOVE_ARRAY[2])
       @@test_npcs_model_01.create(672, 512, false)
       @@test_npcs_model_01.display
-      @@test_npc_rendered_model_01.texture_rect = SF.int_rect(0, 0, 96, 128)
-      @@test_npc_rendered_model_01.position = SF.vector2(702, 648)
+      @@test_npc_rendered_model_01.texture_rect = SF.int_rect(0, 128, 96, 128)
+      @@test_npc_rendered_model_01.position = SF.vector2(1002, 680)
       @@test_npc_rendered_model_01.scale = SF.vector2(1.0, 1.0)
      end
     def Test_Npcs.test_npc_maintain(window)
-      npc_bounding_01 = Bounding_Box.dup
-      npc_bounding_01.position = @@test_npc_rendered_model_01.position
-      window.draw(npc_bounding_01)
-     window.draw(@@test_npc_rendered_model_01)
+    #  npc_bounding_01 = Bounding_Box.dup
+    #  npc_bounding_01.position = @@test_npc_rendered_model_01.position
+    #  window.draw(npc_bounding_01)
+     window.draw(@@test_npc_rendered_model_01) #@todo create switch case for npc scenes
      end
     def Test_Npcs.click(window, @@player_character_rendered_model)
-      npc_bounding_01 = Bounding_Box.dup
-      npc_bounding_01.position = @@test_npc_rendered_model_01.position
-      window.draw(npc_bounding_01)
+     # npc_bounding_01 = Bounding_Box.dup
+     # npc_bounding_01.position = @@test_npc_rendered_model_01.position
+     # window.draw(npc_bounding_01)
       bounding_box1 = @@player_character_rendered_model.global_bounds
       bounding_box2 = @@test_npc_rendered_model_01.global_bounds
-     #while (event = window.poll_event)
        if bounding_box1.intersects? bounding_box2
-       if SF::Event::KeyPressed?(SF::Keyboard::Space) #@todo figure out how to make this only trigger on keypress
-         All_Audio::SFX.cursor1
+        Player_Data::Player_Physics.immobilize_player
+         All_Audio::SFX.light_bonk
+         Dialog_Box
        end; end
-     end
+
     end #test npc class end
   end #module end
 

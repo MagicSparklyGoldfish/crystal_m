@@ -24,6 +24,10 @@ CHAR_CREATE_CURSOR_SIDEWAYS = SF::SoundBuffer.from_file("audio/Char_Create_Sidew
 SYSSOUND_5 = SF::Sound.new
 SYSSOUND_5.buffer = CHAR_CREATE_CURSOR_SIDEWAYS
 
+LIGHT_BONK = SF::SoundBuffer.from_file("audio/Light_Bonk.wav")
+SYSSOUND_6 = SF::Sound.new
+SYSSOUND_6.buffer = LIGHT_BONK
+
 module All_Audio
     class SFX
         def SFX.cursor1
@@ -44,6 +48,9 @@ module All_Audio
 
         def SFX.char_create_sideways
             SYSSOUND_5.play
+        end
+        def SFX.light_bonk
+            SYSSOUND_6.play
         end
     end
 end
