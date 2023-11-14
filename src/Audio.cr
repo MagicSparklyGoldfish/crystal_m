@@ -31,6 +31,14 @@ require "../src/crystal_meth.cr"
  LIGHT_BONK = SF::SoundBuffer.from_file("audio/Light_Bonk.wav")
  SYSSOUND_6 = SF::Sound.new
  SYSSOUND_6.buffer = LIGHT_BONK
+
+ SELECT_1 = SF::SoundBuffer.from_file("audio/Select2.wav")
+ SYSSOUND_7 = SF::Sound.new
+ SYSSOUND_7.buffer = SELECT_1
+
+ CURSOR_3 = SF::SoundBuffer.from_file("audio/Cursor2.wav")
+ SYSSOUND_8 = SF::Sound.new
+ SYSSOUND_8.buffer = CURSOR_3
 #_________________________________________________________________________________________________________________________________________________________
 
 # =======================================================================================================================================================
@@ -66,6 +74,12 @@ module All_Audio
         end
         def SFX.light_bonk
             SYSSOUND_6.play
+        end
+        def SFX.select_2
+            SYSSOUND_7.play
+        end
+        def SFX.cursor2
+            SYSSOUND_8.play
         end
     end #sfx class end
   class MUSIC

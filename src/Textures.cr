@@ -457,7 +457,7 @@
  SHOUNEN_DISPLAY_HAIR_05, SHOUNEN_DISPLAY_HAIR_06, DISPLAY_PONYTAIL_HAIR_01, DISPLAY_PONYTAIL_HAIR_02, DISPLAY_PONYTAIL_HAIR_03,
  DISPLAY_PONYTAIL_HAIR_04, DISPLAY_PONYTAIL_HAIR_05, DISPLAY_PONYTAIL_HAIR_06]
 
- HAIR_DESC_ARRAY = ["Shounen Hair Black", "Shounen Hair Green", "Shounen Hair Blue", "Shounen Hair Red",
+ HAIR_DESC_ARRAY = ["Shounen Hair White", "Shounen Hair Green", "Shounen Hair Blue", "Shounen Hair Red",
  "Shounen Hair Yellow", "Shounen Hair Purple", "   Ponytail Grey", "Ponytail Blonde", "Ponytail Red", "Ponytail Brown",
  "Ponytail Pink", "Ponytail Blue"]
 
@@ -467,7 +467,7 @@
  #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
  #                                                    Shounen Hairs
  #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-  #.................................................Shounen Hair Black...............................................................
+  #.................................................Shounen Hair White...............................................................
    #\\\\\\\Character Model
    SHOUNEN_HAIR_TEXTURE_01 = SF::Texture.from_file("graphics/Shounen_Hair.png")
    SHOUNEN_HAIR_01 = SF::Sprite.new(SHOUNEN_HAIR_TEXTURE_01)
@@ -479,53 +479,53 @@
   #.................................................Shounen Hair Green...............................................................
    #\\\\\\\Character Model
    SHOUNEN_HAIR_02 = SF::Sprite.new(SHOUNEN_HAIR_TEXTURE_01) 
-   SHOUNEN_HAIR_02.color = SF.color(50, 255, 50)
+   SHOUNEN_HAIR_02.color = SF.color(32, 178, 170)
    #\\\\\\\Display Model
    SHOUNEN_DISPLAY_HAIR_02 = SF::Sprite.new(SHOUNEN_HAIR_TEXTURE_01)
    SHOUNEN_DISPLAY_HAIR_02.texture_rect = SF.int_rect(0, 0, 96, 128)
    SHOUNEN_DISPLAY_HAIR_02.position = SF.vector2(250, 50)
    SHOUNEN_DISPLAY_HAIR_02.scale = SF.vector2(3.0, 3.0)
-   SHOUNEN_DISPLAY_HAIR_02.color = SF.color(50, 255, 50)
+   SHOUNEN_DISPLAY_HAIR_02.color = SF.color(32, 178, 170)
   #.................................................Shounen Hair Blue................................................................
    #\\\\\\\Character Model
    SHOUNEN_HAIR_03 = SF::Sprite.new(SHOUNEN_HAIR_TEXTURE_01) 
-   SHOUNEN_HAIR_03.color = SF.color(50, 50, 255) 
+   SHOUNEN_HAIR_03.color = SF.color(70, 130, 180) 
    #\\\\\\\Display Model
    SHOUNEN_DISPLAY_HAIR_03 = SF::Sprite.new(SHOUNEN_HAIR_TEXTURE_01)
    SHOUNEN_DISPLAY_HAIR_03.texture_rect = SF.int_rect(0, 0, 96, 128)
    SHOUNEN_DISPLAY_HAIR_03.position = SF.vector2(250, 50)
    SHOUNEN_DISPLAY_HAIR_03.scale = SF.vector2(3.0, 3.0)
-   SHOUNEN_DISPLAY_HAIR_03.color = SF.color(50, 50, 255) 
+   SHOUNEN_DISPLAY_HAIR_03.color = SF.color(70, 130, 180) 
   #.................................................Shounen Hair Red.................................................................
    #\\\\\\\Character Model
    SHOUNEN_HAIR_04 = SF::Sprite.new(SHOUNEN_HAIR_TEXTURE_01) 
-   SHOUNEN_HAIR_04.color = SF.color(255, 0, 0) 
+   SHOUNEN_HAIR_04.color = SF.color(128, 0, 0) 
    #\\\\\\\Display Model
    SHOUNEN_DISPLAY_HAIR_04 = SF::Sprite.new(SHOUNEN_HAIR_TEXTURE_01)
    SHOUNEN_DISPLAY_HAIR_04.texture_rect = SF.int_rect(0, 0, 96, 128)
    SHOUNEN_DISPLAY_HAIR_04.position = SF.vector2(250, 50)
    SHOUNEN_DISPLAY_HAIR_04.scale = SF.vector2(3.0, 3.0)
-   SHOUNEN_DISPLAY_HAIR_04.color = SF.color(255, 0, 0) 
+   SHOUNEN_DISPLAY_HAIR_04.color = SF.color(128, 0, 0) 
   #.................................................Shounen Hair Yellow..............................................................
    #\\\\\\\Character Model
    SHOUNEN_HAIR_05 = SF::Sprite.new(SHOUNEN_HAIR_TEXTURE_01) 
-   SHOUNEN_HAIR_05.color = SF.color(255, 240, 80)
+   SHOUNEN_HAIR_05.color = SF.color(240, 230, 140)
    #\\\\\\\Display Model
    SHOUNEN_DISPLAY_HAIR_05 = SF::Sprite.new(SHOUNEN_HAIR_TEXTURE_01)
    SHOUNEN_DISPLAY_HAIR_05.texture_rect = SF.int_rect(0, 0, 96, 128)
    SHOUNEN_DISPLAY_HAIR_05.position = SF.vector2(250, 50)
    SHOUNEN_DISPLAY_HAIR_05.scale = SF.vector2(3.0, 3.0)
-   SHOUNEN_DISPLAY_HAIR_05.color = SF.color(255, 240, 80)
+   SHOUNEN_DISPLAY_HAIR_05.color = SF.color(240, 230, 140)
   #.................................................Shounen Hair Purple..............................................................
    #\\\\\\\Character Model
    SHOUNEN_HAIR_06 = SF::Sprite.new(SHOUNEN_HAIR_TEXTURE_01) 
-   SHOUNEN_HAIR_06.color = SF.color(255, 0, 255)
+   SHOUNEN_HAIR_06.color = SF.color(186, 85, 211)
    #\\\\\\\Display Model
    SHOUNEN_DISPLAY_HAIR_06 = SF::Sprite.new(SHOUNEN_HAIR_TEXTURE_01)
    SHOUNEN_DISPLAY_HAIR_06.texture_rect = SF.int_rect(0, 0, 96, 128)
    SHOUNEN_DISPLAY_HAIR_06.position = SF.vector2(250, 50)
    SHOUNEN_DISPLAY_HAIR_06.scale = SF.vector2(3.0, 3.0)
-   SHOUNEN_DISPLAY_HAIR_06.color = SF.color(255, 0, 255)
+   SHOUNEN_DISPLAY_HAIR_06.color = SF.color(186, 85, 211)
  #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
  #                                                      Ponytails
  #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -1680,3 +1680,14 @@
  Choice_Box = SF::RectangleShape.new(SF.vector2(300, 150)); Choice_Box.fill_color = SF.color(255, 255, 255)
  Choice_Box_Option = SF::RectangleShape.new(SF.vector2(100, 50)); Choice_Box_Option.fill_color = SF.color(155, 155, 255)
 #______________________________________________________________________________________________________________________________________  
+#--------------------------------------------------------------------------------------------------------------------------------------
+#                                                     Salon Textures
+#--------------------------------------------------------------------------------------------------------------------------------------
+ SALON_BOX_TEXTURE = SF::Texture.from_file("graphics/salon_box.png")
+ Salon_Box = SF::RectangleShape.new(SF.vector2(800, 600)); Salon_Box.set_texture(SALON_BOX_TEXTURE, reset_rect: false); 
+ Salon_Box.position = SF.vector2(600, 180); Salon_Confirm_Box = SF::RectangleShape.new(SF.vector2(100, 50)); 
+ Salon_Confirm_Box.fill_color = SF.color(155, 155, 255); Salon_Confirm_Box.position = SF.vector2(745, 350)
+ Salon_Confirm_Box_Text = SF::Text.new; Salon_Confirm_Box_Text.font = FONT_PIXEL; 
+ Salon_Confirm_Box_Text.character_size = 30; Salon_Confirm_Box_Text.color = SF::Color::White; Salon_Confirm_Box_Text.string = "Confirm"
+ Salon_Confirm_Box_Text.position = SF.vector2(750, 350)
+#______________________________________________________________________________________________________________________________________

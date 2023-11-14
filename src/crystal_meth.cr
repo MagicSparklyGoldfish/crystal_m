@@ -3,6 +3,7 @@ require "crsfml/audio"
 require "crsfml/system"
 require "../src/Textures.cr"
 require "../src/Items.cr"
+require "../src/Custom_Body.cr"
 require "../src/Audio.cr"
 require "../src/Saves.cr"
 require "../src/Fonts.cr"
@@ -46,6 +47,7 @@ extend self
   @@popup = "none"
   @@tab = "none"
   @@map = "none"
+  @@salon = "none"
   @@dialog : Bool; @@dialog = false;
   @@page : Int32 = 1
   @@cursorposition = "up"
@@ -56,7 +58,7 @@ extend self
   @@player_character_rendered_model = SF::Sprite.new(@@player_character_model.texture)
   #HAIR_ARRAY : Array(SF::Sprite)
   #@@view1 = SF::View.new(SF.float_rect(0, 0, 2000, 1080))
-
+  @@hair_choice : Int32; @@hair_choice = 0
   @@current_hair = 0; @@current_display_hair = 0; @@current_display_hair_string = 0
   @@current_skin = 0; @@current_display_skin_string = 0; @@current_face = 0; @@current_shirt = 0; @@current_gloves = 0
   @@current_pants = 0; @@current_shoes = 0
@@ -65,7 +67,7 @@ extend self
 #---------------------------------------------------------------------------------------------------------------------------------------+
 #======================================================Character Model==================================================================+
  #-----------------------------------------------------initialize models----------------------------------------------------------------+
-  def Window_Class.player_model_initialize(@@current_shoes, @@current_gloves, @@current_shirt, @@current_pants) 
+  def Window_Class.player_model_initialize(@@current_shoes, @@current_gloves, @@current_shirt, @@current_pants, @@current_hair) 
     @@player_character_model.clear(SF::Color::Transparent) #@note player customization happens here
     @@player_character_model.draw(SKIN_ARRAY[@@current_skin])
     @@player_character_model.draw(SHOES_ARRAY[@@current_shoes])
@@ -77,8 +79,10 @@ extend self
     @@player_character_model.create(672, 512, false)
     @@player_character_model.display
     @@player_character_rendered_model.texture_rect = SF.int_rect(0, 0, 96, 128)
+    if @@menu == "charcreate"
     @@player_character_rendered_model.position = SF.vector2(660, 515)
     @@player_character_rendered_model.scale = SF.vector2(3.0, 3.0)
+    end
     end
  
  #---------------------------------------------------customization functions------------------------------------------------------------+
@@ -91,7 +95,7 @@ extend self
    @@current_display_hair_string = @@current_hair
    end; end
    Hair_Desc.string = HAIR_DESC_ARRAY[@@current_display_hair_string]
-   Window_Class.player_model_initialize(@@current_shoes, @@current_gloves, @@current_shirt, @@current_pants) 
+   Window_Class.player_model_initialize(@@current_shoes, @@current_gloves, @@current_shirt, @@current_pants, @@current_hair) 
    window.draw(HAIR_ARRAY[@@current_hair])
  end
  def Window_Class.customize_skin(window, direction)
@@ -101,7 +105,7 @@ extend self
      @@current_skin = @@current_skin - 1
    end; end
      Skin_Desc.string = SKIN_DESC_ARRAY[@@current_skin]
-     Window_Class.player_model_initialize(@@current_shoes, @@current_gloves, @@current_shirt, @@current_pants) 
+     Window_Class.player_model_initialize(@@current_shoes, @@current_gloves, @@current_shirt, @@current_pants, @@current_hair) 
      window.draw(SKIN_ARRAY[@@current_skin])
  end
  def Window_Class.customize_face(window, direction)
@@ -111,7 +115,7 @@ extend self
      @@current_face = @@current_face - 1
    end; end
      Face_Desc.string = FACE_DESC_ARRAY[@@current_face]
-     Window_Class.player_model_initialize(@@current_shoes, @@current_gloves, @@current_shirt, @@current_pants) 
+     Window_Class.player_model_initialize(@@current_shoes, @@current_gloves, @@current_shirt, @@current_pants, @@current_hair) 
      window.draw(FACE_ARRAY[@@current_face])
  end
  def Window_Class.customize_shirt(window, direction)
@@ -121,7 +125,7 @@ extend self
      @@current_shirt = @@current_shirt - 1
    end; end
      Shirt_Desc.string = SHIRT_DESC_ARRAY[@@current_shirt]
-     Window_Class.player_model_initialize(@@current_shoes, @@current_gloves, @@current_shirt, @@current_pants) 
+     Window_Class.player_model_initialize(@@current_shoes, @@current_gloves, @@current_shirt, @@current_pants, @@current_hair) 
      window.draw(SHIRT_ARRAY[@@current_shirt])
  end
  def Window_Class.customize_gloves(window, direction)
@@ -131,7 +135,7 @@ extend self
      @@current_gloves = @@current_gloves - 1
    end; end
    Glove_Desc.string = GLOVE_DESC_ARRAY[@@current_gloves]
-   Window_Class.player_model_initialize(@@current_shoes, @@current_gloves, @@current_shirt, @@current_pants) 
+   Window_Class.player_model_initialize(@@current_shoes, @@current_gloves, @@current_shirt, @@current_pants, @@current_hair) 
      window.draw(GLOVE_ARRAY[@@current_gloves])
  end
  def Window_Class.customize_pants(window, direction)
@@ -141,7 +145,7 @@ extend self
      @@current_pants = @@current_pants - 1
    end; end
    Pants_Desc.string = PANTS_DESC_ARRAY[@@current_pants]
-   Window_Class.player_model_initialize(@@current_shoes, @@current_gloves, @@current_shirt, @@current_pants) 
+   Window_Class.player_model_initialize(@@current_shoes, @@current_gloves, @@current_shirt, @@current_pants, @@current_hair) 
      window.draw(PANTS_ARRAY[@@current_pants])
  end
  def Window_Class.customize_shoes(window, direction)
@@ -151,12 +155,12 @@ extend self
      @@current_shoes = @@current_shoes - 1
    end; end
    Shoes_Desc.string = SHOES_DESC_ARRAY[@@current_shoes]
-   Window_Class.player_model_initialize(@@current_shoes, @@current_gloves, @@current_shirt, @@current_pants) 
+   Window_Class.player_model_initialize(@@current_shoes, @@current_gloves, @@current_shirt, @@current_pants, @@current_hair) 
      window.draw(SHOES_ARRAY[@@current_shoes])
  end
 #=======================================================================================================================================+
 #---------------------------------------------------------------------------------------------------------------------------------------+
-#=======================================================Menu Renderers==================================================================+ 
+#=======================================================Menu Renderers==================================================================+ @note menu renderers
  #/////////////////////////////////////////////////////////Main Menu////////////////////////////////////////////////////////////////////+
    def Window_Class.main_menu(window)
        window.clear(SF::Color::Black);
@@ -269,7 +273,30 @@ extend self
     window.draw(Rectangle_Opt1); window.draw(Text_Opt1)
     window.draw(Rectangle_Opt2); window.draw(Text_Opt2)
     window.draw(Cursor_opt1)
+   end
+  def Window_Class.salon(window)
+    view5 = SF::View.new(SF.float_rect(0, 0, 1920, 1080))
+    view5.viewport = SF.float_rect(0, 0, 1, 1)
+    window.view = view5
+    exit_box = Stats_Window_Exit_Box.dup; exit_box.position = SF.vector2(1320, 205)
+    window.draw(Salon_Box); window.draw(exit_box); window.draw(Salon_Confirm_Box); window.draw(Salon_Confirm_Box_Text)
+    player = SF::Sprite.new(@@player_character_rendered_model)
+    player.position = SF.vector2(600, 200); player.scale = SF.vector2(1.5, 1.5); window.draw(player) 
+    this = @@salon
+    Hair.display_offered_hair(this, window)
   end
+ def Window_Class.salon_confirm_tab(window)
+  Window_Class.salon(window)
+  salon_confirm_box = Choice_Box.dup; salon_confirm_box.position = SF.vector2(735, 390); salon_confirm_box.scale = SF.vector2(1.5, 1.5)
+  salon_option_1 = Choice_Box_Option.dup; salon_option_1.position = SF.vector2(750, 525); salon_option_1.scale = SF.vector2(1.5, 1.5)
+  salon_option_2 = salon_option_1.dup; salon_option_1.position = SF.vector2(1020, 525); salon_confirm_text = Dialog_Box_Text.dup
+  salon_confirm_text.character_size = 40
+  salon_confirm_text.position = SF.vector2(805, 390); salon_confirm_text.string = "Would you like this \n    hair style?"
+  salon_confirm_option_1 = salon_confirm_text.dup; salon_confirm_option_1.position = SF.vector2(795, 530)
+  salon_confirm_option_1.string = "Yes               No"
+  window.draw(salon_confirm_box); window.draw(salon_option_1); window.draw(salon_option_2); window.draw(salon_confirm_text)
+  window.draw(salon_confirm_option_1)
+ end
 #=======================================================================================================================================+
 #---------------------------------------------------------------------------------------------------------------------------------------+
 #========================================================Map Renderers==================================================================+
@@ -325,6 +352,13 @@ extend self
 #=======================================================================================================================================+
 #---------------------------------------------------------------------------------------------------------------------------------------+
 #========================================================Window Functions===============================================================+
+#////////////////////////////////////////////////////////Change_Variables///////////////////////////////////////////////////////////////+
+  def Window_Class.change_popup(this)
+    @@popup = this
+   end
+  def Window_Class.change_salon(this)
+    @@salon = this
+   end 
 
 #/////////////////////////////////////////////////////////////Draw//////////////////////////////////////////////////////////////////////+
 
@@ -356,6 +390,13 @@ extend self
      end
    when "HUD"
     Window_Class.hud(window)
+    if @@popup == "Salon"
+      Window_Class.salon(window)
+      if @@tab == "salon_confirm"
+        Window_Class.salon_confirm_tab(window)
+      end
+    end
+
     if @@popup == "System_Popup_Menu"
       Window_Class.system_popup(window)
      end
@@ -417,7 +458,7 @@ extend self
  debug_draw = SFMLDebugDraw.new(window, SF::RenderStates.new( #--------------------------------initializes crystal chipmunk draw area
  SF::Transform.new.translate(window.size / 2).scale(1, -1).scale(5, 5)
  ))
- Window_Class.player_model_initialize(@@current_shoes, @@current_gloves, @@current_shirt, @@current_pants) 
+ Window_Class.player_model_initialize(@@current_shoes, @@current_gloves, @@current_shirt, @@current_pants, @@current_hair) 
   case @@map
   when "test"
     Window_Class.initialize_test_map(debug_draw, window, @@space)
@@ -472,7 +513,7 @@ def Window_Class.main_menu_keypresses(window)
   when SF::Keyboard::W #---------------for testing purposes, remove when testing done
     Data_Manager.load_savegame
   when SF::Keyboard::C #---------------for testing purposes, remove when testing done
-    Window_Class.player_model_initialize(@@current_shoes, @@current_gloves, @@current_shirt, @@current_pants) 
+    Window_Class.player_model_initialize(@@current_shoes, @@current_gloves, @@current_shirt, @@current_pants, @@current_hair) 
     @@menu = "charcreate"
   when SF::Keyboard::Enter
     puts "enter"
@@ -529,7 +570,7 @@ def Window_Class.char_select_menu_keypresses(window)
       when 1
       if File.exists?("Saves/Slot1/save01.yml") == false
         SaveData.create_new_savegame
-        Window_Class.player_model_initialize(@@current_shoes, @@current_gloves, @@current_shirt, @@current_pants) 
+        Window_Class.player_model_initialize(@@current_shoes, @@current_gloves, @@current_shirt, @@current_pants, @@current_hair) 
         @@menu = "charcreate"
       else puts "loadgame"
       # SF::Event::Closed
@@ -726,7 +767,7 @@ def Window_Class.char_creation_menu_keypresses(window)
       end; end; end; end; end; end; end
 
 #------------------------------------------------------------------------------------------------------------------------------------------+
-#                                                            HUD Keypresses
+#                                                        @note HUD Mouse clicks
 #------------------------------------------------------------------------------------------------------------------------------------------+
 def Window_Class.hud_keypresses(window)
   while (event = window.poll_event)
@@ -736,71 +777,121 @@ def Window_Class.hud_keypresses(window)
       y = mouse_position.y
       puts "x", x
       puts "y", y
-      if (x >= 1730 && x <= 1880) && (y >= 930 && y <= 990)
-      #if (x >= 1700 && x <= 1850) && (y >= 960 && y <= 1010)
-        case @@popup
-         when "none" 
+     case @@popup
+      when "Salon" #-------------------------------------------------------------Salon clicks
+        if (x >= 750 && x <= 900) && (y >= 530 && y <= 600) && @@tab == "salon_confirm" #yes
+          All_Audio::SFX.select_2
+          hair_slot = @@hair_choice
+          Player_Data::Clothing_Outfit_Slot.change_hair(hair_slot, window)
+          @@popup = "none"
+          @@tab = "none"
+          Player_Data::Player_Physics.mobilize_player
+          NPCS::Test_Npcs.nullify_npc_scene
+          Player_Data::Player_Physics.nullify_quest
+        end
+        if (x >= 1020 && x <= 1170) && (y >= 530 && y <= 600) && @@tab == "salon_confirm" #no
+          All_Audio::SFX.select_2
+          NPCS::Test_Npcs.revert_hair(window)
+          @@tab = "none"
+        end
+        if (x >= 1320 && x <= 1370) && (y >= 200 && y <= 250) && @@tab != "salon_confirm" #exit salon
+          @@popup = "none"
+          @@tab = "none"
+          Player_Data::Player_Physics.mobilize_player
+          NPCS::Test_Npcs.nullify_npc_scene
+          Player_Data::Player_Physics.nullify_quest
+          NPCS::Test_Npcs.revert_hair(window)
+        end
+        if (x >= 745 && x <= 845) && (y >= 350 && y <= 400) && @@tab != "salon_confirm" #confirm button
+          @@tab = "salon_confirm"
+        end
+        if (x >= 640 && x <= 760) && (y >= 420 && y <= 540) && @@tab != "salon_confirm" #hair 0
+          @@hair_choice = 0
+          puts @@tab; puts @@hair_choice
+          All_Audio::SFX.cursor2
+          hair_slot = @@hair_choice
+          Player_Data::Clothing_Outfit_Slot.change_hair(hair_slot, window)
+        end
+        if (x >= 790 && x <= 910) && (y >= 420 && y <= 540) && @@tab != "salon_confirm" #hair 1
+          @@hair_choice = 1
+          puts @@tab; puts @@hair_choice
+          All_Audio::SFX.cursor2
+          hair_slot = @@hair_choice
+          Player_Data::Clothing_Outfit_Slot.change_hair(hair_slot, window)
+        end
+        if (x >= 940 && x <= 1060) && (y >= 420 && y <= 540) && @@tab != "salon_confirm" #hair 2
+          @@hair_choice = 2
+          puts @@tab; puts @@hair_choice
+          All_Audio::SFX.cursor2
+          hair_slot = @@hair_choice
+          Player_Data::Clothing_Outfit_Slot.change_hair(hair_slot, window)
+        end
+        if (x >= 1090 && x <= 1200) && (y >= 420 && y <= 540) && @@tab != "salon_confirm" #hair 3
+          @@hair_choice = 3
+          puts @@tab; puts @@hair_choice
+          All_Audio::SFX.cursor2
+          hair_slot = @@hair_choice
+          Player_Data::Clothing_Outfit_Slot.change_hair(hair_slot, window)
+        end
+        if (x >= 1240 && x <= 1330) && (y >= 420 && y <= 540) && @@tab != "salon_confirm" #hair 4
+          @@hair_choice = 4
+          puts @@tab; puts @@hair_choice
+          All_Audio::SFX.cursor2
+          hair_slot = @@hair_choice
+          Player_Data::Clothing_Outfit_Slot.change_hair(hair_slot, window)
+        end
+        if (x >= 640 && x <= 760) && (y >= 570 && y <= 720) && @@tab != "salon_confirm" #hair 5
+          @@hair_choice = 5
+          puts @@tab; puts @@hair_choice
+          All_Audio::SFX.cursor2
+          hair_slot = @@hair_choice
+          Player_Data::Clothing_Outfit_Slot.change_hair(hair_slot, window)
+        end
+      when "none"  #--------------------------------------------------------------none clicks
+        if (x >= 1730 && x <= 1880) && (y >= 930 && y <= 990)
            All_Audio::SFX.char_create_down; @@popup = "System_Popup_Menu"
-         when "System_Popup_Menu" 
+          end
+      when "System_Popup_Menu" #-------------------------------------------------System clicks
+          if (x >= 1730 && x <= 1880) && (y >= 930 && y <= 990)
            @@popup = "none"
-        end
-        end
-       if (x >= 1730 && x <= 1880) && (y >= 900 && y <= 940)
-      #if (x >= 1700 && x <= 1850) && (y >= 910 && y <= 960)
-         case @@popup
-         when "System_Popup_Menu" 
-          All_Audio::SFX.char_create_sideways
-          @@popup = "Quit_Menu"
-         when "none"
-         end
-         end  
-     # if (x >= 1700 && x <= 1850) && (y >= 860 && y <= 910)
-      if (x >= 1730 && x <= 1850) && (y >= 870 && y <= 900)
-         case @@popup
-         when "System_Popup_Menu" 
-           player = SF::Sprite.new(@@player_character_rendered_model)
-           player.position = SF.vector2(790, 200)
-           player.scale = SF.vector2(1.5, 1.5)
-           window.draw(player)
-           @@popup = "Stats_Menu"
-           Clothing::Shirt.gather_owned(window)
-           @@tab = "shirt"
-           Player_Data::Clothing_Wardrobe_Slot.pull_arrays
-         when "none"
           end
-          end
-      if (x >= 1700 && x <= 1850) && (y >= 810 && y <= 860)
-          case @@popup
-          when "System_Popup_Menu" 
+          if (x >= 1730 && x <= 1880) && (y >= 900 && y <= 940)
+            All_Audio::SFX.char_create_sideways
+            @@popup = "Quit_Menu"
+           end
+          if (x >= 1730 && x <= 1850) && (y >= 870 && y <= 900)
+            player = SF::Sprite.new(@@player_character_rendered_model)
+            player.position = SF.vector2(790, 200)
+            player.scale = SF.vector2(1.5, 1.5)
+            window.draw(player)
+            @@popup = "Stats_Menu"
+            Clothing::Shirt.gather_owned(window)
+            @@tab = "shirt"
+            Player_Data::Clothing_Wardrobe_Slot.pull_arrays
+           end
+          if (x >= 1700 && x <= 1850) && (y >= 810 && y <= 860)
             All_Audio::SFX.select1
             puts "system"
-        when "none"
-          end
-          end
-      if (x >= 710 && x <= 880) && (y >= 490 && y <= 590)
-        case @@popup
-          when "Quit_Menu" 
+           end
+      when "Quit_Menu" #----------------------------------------------------------Quit Menu
+        if (x >= 710 && x <= 880) && (y >= 490 && y <= 590)
             window.close
-          when "none"
-            end
-            end
-      if (x >= 1020 && x <= 1190) && (y >= 490 && y <= 590)
-        case @@popup
-          when "Quit_Menu" 
-            @@popup = "none"
-          when "none"
-            end
-            end
-      if (x >= 1240 && x <= 1290) && (y >= 210 && y <= 260) && @@popup == "Stats_Menu"
-         @@popup = "none"
-         @@tab = "none"
-         @@player_character_rendered_model.scale = SF.vector2(1.0, 1.0)
-         #@@player_character_rendered_model.position = SF.vector2(450, 670)
+           end
+        if (x >= 1020 && x <= 1190) && (y >= 490 && y <= 590)
+          @@popup = "none"
+           end
+      when "Stats_Menu" #---------------------------------------------------------Stats Menu
+        if (x >= 1240 && x <= 1290) && (y >= 210 && y <= 260)
+          @@popup = "none"
+          @@tab = "none"
+          @@player_character_rendered_model.scale = SF.vector2(1.0, 1.0)
+        end
+
 #|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 #|                                                 shirt tab @note shirt control tab                                                       |
 #||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| 
-        end
-      if (x >= 713 && x <= 853) && (y >= 450 && y <= 485) && @@popup == "Stats_Menu"
+
+      if (x >= 713 && x <= 853) && (y >= 450 && y <= 485)
          All_Audio::SFX.select1
          @@tab = "shirt"
          Clothing::Shirt.gather_owned(window)
@@ -958,7 +1049,7 @@ def Window_Class.hud_keypresses(window)
         when 2
           this = 29
           Clothing::Shirt.determine_array_length(window, this)
-       end; end
+       end; end; end
 #___________________________________________________________________________________________________________________________________________
 #|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 #|                                                            gloves tab                                                                   |
@@ -1431,7 +1522,7 @@ end; end; end; end; end; end
    @@hair_slot = 0; @@skin_slot = 0; @@face_slot = 0; @@shirt_slot = 0; @@gloves_slot = 0; @@pants_slot = 0; @@shoes_slot = 0
    @@hair_slot : (Int32); @@skin_slot : (Int32); @@face_slot : (Int32); @@shirt_slot : (Int32); @@gloves_slot : (Int32); @@pants_slot : (Int32)
    @@shoes_slot : (Int32); @@outfit_array : Array(Int32) = [@@hair_slot, @@skin_slot, @@face_slot, @@shirt_slot, @@gloves_slot, @@pants_slot, @@shoes_slot]
-   
+   property = @@hair_slot 
  
    def add_item(@@item_type, item)
      if item.is_owned == false 
@@ -1472,34 +1563,41 @@ end; end; end; end; end; end
     def import_outfit
 
      end
-    end
+     end
     def Clothing_Outfit_Slot.change_shoes(shoes_slot, window)
         @@shoes_slot = shoes_slot
         @@current_shoes = shoes_slot
-        Window_Class.player_model_initialize(@@current_shoes, @@current_gloves, @@current_shirt, @@current_pants) 
+        Window_Class.player_model_initialize(@@current_shoes, @@current_gloves, @@current_shirt, @@current_pants, @@current_hair) 
         @@player_character_model.draw(SHOES_ARRAY[@@shoes_slot])
         window.draw(SHOES_ARRAY[@@shoes_slot])
      end
      def Clothing_Outfit_Slot.change_gloves(gloves_slot, window)
        @@gloves_slot = gloves_slot
        @@current_gloves = gloves_slot
-       Window_Class.player_model_initialize(@@current_shoes, @@current_gloves, @@current_shirt, @@current_pants) 
+       Window_Class.player_model_initialize(@@current_shoes, @@current_gloves, @@current_shirt, @@current_pants, @@current_hair) 
        @@player_character_model.draw(GLOVE_ARRAY[@@gloves_slot])
        window.draw(GLOVE_ARRAY[@@gloves_slot])
     end
     def Clothing_Outfit_Slot.change_shirt(shirt_slot, window)
       @@shirt_slot = shirt_slot
       @@current_shirt = shirt_slot
-      Window_Class.player_model_initialize(@@current_shoes, @@current_gloves, @@current_shirt, @@current_pants) 
+      Window_Class.player_model_initialize(@@current_shoes, @@current_gloves, @@current_shirt, @@current_pants, @@current_hair) 
       @@player_character_model.draw(SHIRT_ARRAY[@@shirt_slot])
       window.draw(SHIRT_ARRAY[@@shirt_slot])
     end
     def Clothing_Outfit_Slot.change_pants(pants_slot, window)
       @@pants_slot = pants_slot
       @@current_pants = pants_slot
-      Window_Class.player_model_initialize(@@current_shoes, @@current_gloves, @@current_shirt, @@current_pants) 
+      Window_Class.player_model_initialize(@@current_shoes, @@current_gloves, @@current_shirt, @@current_pants, @@current_hair) 
       @@player_character_model.draw(PANTS_ARRAY[@@current_pants])
       window.draw(PANTS_ARRAY[@@current_pants])
+    end
+    def Clothing_Outfit_Slot.change_hair(hair_slot, window)
+      @@hair_slot = hair_slot
+      @@current_hair = hair_slot
+      Window_Class.player_model_initialize(@@current_shoes, @@current_gloves, @@current_shirt, @@current_pants, @@current_hair) 
+      @@player_character_model.draw(HAIR_ARRAY[@@current_hair])
+      window.draw(HAIR_ARRAY[@@current_hair])
     end
   class Consumables_Slot
    end
@@ -1654,6 +1752,11 @@ end; end; end; end; end; end
      @@player_character_rendered_model.position += SF.vector2(3.5, 0)
      Player_Physics.walk_cycle_right(@@player_character_rendered_model)
      @@player_direction = "right"
+    else if @@current_quest != "none"
+      case @@current_quest
+       when "test"
+        NPCS::Test_Npcs.dialogue_menu_right
+       end; end
        end
      end
     #---------------------------------------------------------------------------------------------------------------------------------+ 
@@ -1694,6 +1797,9 @@ end; end; end; end; end; end
      def Player_Physics.get_quest_movement(quest)
       @@current_quest = quest
       end
+     def Player_Physics.nullify_quest
+      @@current_quest = "none"
+     end
     #---------------------------------------------------------------------------------------------------------------------------------+ 
  end
  end
@@ -1720,7 +1826,8 @@ module NPCS
      @@test_npc_rendered_model_01 = SF::Sprite.new(@@test_npcs_model_01.texture)
     #----------------------------------------------------------------------------------------------------------------------------------------
     #......................................................Scene_Variables...................................................................
-     @@test_npc_scene : String; @@test_npc_scene = "none"; @@test_scene_option : Int32; @@test_scene_option = 0
+     @@test_npc_scene : String; @@test_npc_scene = "none"; @@test_scene_option : Int32; @@test_scene_option = 0; @@saved_hair : Int32;
+     @@saved_hair = 0; property = @@saved_hair 
     #----------------------------------------------------------------------------------------------------------------------------------------
     #.......................................................Dialogue Box.....................................................................
      @@test_dialogue_box_01 : SF::RectangleShape; @@test_dialogue_box_01 = Dialog_Box.dup
@@ -1743,7 +1850,7 @@ module NPCS
       @@test_npcs_model_01.draw(SKIN_ARRAY[0])
       @@test_npcs_model_01.draw(SHOES_ARRAY[2])
       @@test_npcs_model_01.draw(FACE_ARRAY[7])
-      @@test_npcs_model_01.draw(HAIR_ARRAY[7])
+      @@test_npcs_model_01.draw(HAIR_ARRAY[3])
       @@test_npcs_model_01.draw(PANTS_ARRAY[18])
       @@test_npcs_model_01.draw(SHIRT_ARRAY[8])
       @@test_npcs_model_01.draw(GLOVE_ARRAY[2])
@@ -1753,27 +1860,53 @@ module NPCS
       @@test_npc_rendered_model_01.position = SF.vector2(1002, 680)
       @@test_npc_rendered_model_01.scale = SF.vector2(1.0, 1.0)
      end
-     def Test_Npcs.dialogue_menu_select
+     def Test_Npcs.nullify_npc_scene
+      @@test_npc_scene = "none"
+     end
+     def Test_Npcs.dialogue_menu_select(window)
+      All_Audio::SFX.light_bonk
       case @@test_scene_option 
       when 0
         All_Audio::SFX.light_bonk
       when 1
         @@test_npc_scene = "test_quest_1_stage_4"
+        @@saved_hair = @@hair_slot
+        puts @@saved_hair
+        this = "Salon"
+        Gui::Window_Class.change_popup(this)
+        this = "test"
+        Gui::Window_Class.change_salon(this)
       when 2
         @@test_npc_scene = "none"
+        quest = "none"
+        Player_Data::Player_Physics.get_quest_movement(quest)
+        Player_Data::Player_Physics.mobilize_player
       end
+    end
+     def Test_Npcs.revert_hair(window)
+      hair_slot = @@saved_hair
+      Clothing_Outfit_Slot.change_hair(hair_slot, window)
      end
-     def Test_Npcs.dialogue_menu_left #@todo finish this function and write the right one
+     def Test_Npcs.dialogue_menu_left
       All_Audio::SFX.light_bonk
+      @@choice_02.fill_color = SF.color(155, 155, 255)
       @@choice_01.fill_color = SF.color(100, 100, 255)
       @@test_scene_option = 1
+      end
+     def Test_Npcs.dialogue_menu_right
+        All_Audio::SFX.light_bonk
+        @@choice_01.fill_color = SF.color(155, 155, 255)
+        @@choice_02.fill_color = SF.color(100, 100, 255)
+        @@test_scene_option = 2
       end
     def Test_Npcs.test_npc_maintain(window)
     #  npc_bounding_01 = Bounding_Box.dup
     #  npc_bounding_01.position = @@test_npc_rendered_model_01.position
     #  window.draw(npc_bounding_01)
-     window.draw(@@test_npc_rendered_model_01) #@todo create switch case for npc scenes
+     window.draw(@@test_npc_rendered_model_01) 
       case @@test_npc_scene
+        when "none"
+          window.draw(@@test_npc_rendered_model_01)
         when "test_quest_1_stage_1"
             window.draw(@@test_dialogue_box_01)
            if @@npc_frame  > -1 && @@npc_frame  < 1200
@@ -1819,6 +1952,7 @@ module NPCS
           @@test_npc_scene = "test_quest_1_stage_1"
          end
         if @@test_npc_scene == "test_quest_1_stage_3" 
+          Test_Npcs.dialogue_menu_select(window)
        end
 
     end #test npc class end
