@@ -46,6 +46,7 @@ extend self
   @@popup = "none"
   @@tab = "none"
   @@map = "none"
+  @@dialog : Bool; @@dialog = false;
   @@page : Int32 = 1
   @@cursorposition = "up"
   @@char_select_pointer_position = 0
@@ -395,10 +396,12 @@ extend self
       Window_Class.char_creation_menu_keypresses(window)
     when "HUD"
       Window_Class.hud_keypresses(window)
+      if @@dialog == true
+    #    Window_Class.dialog_keypresses(window)
    #   case @@map
     #   when "test"
        # NPCS::Test_Npcs.click(window, @@player_character_rendered_model)
-     #  end
+       end
     end
    end
 #//////////////////////////////////////////////////////Character Creation///////////////////////////////////////////////////////////////+
@@ -1230,7 +1233,10 @@ def Window_Class.hud_keypresses(window)
      Clothing::Pants.determine_array_length(window, this)
   end; end; end
 #___________________________________________________________________________________________________________________________________________
-        
+  
+#|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+#|                                                       @note player control tab                                                          |
+#||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| 
 
     case event
     when SF::Event::Closed
@@ -1257,12 +1263,11 @@ def Window_Class.hud_keypresses(window)
       when SF::Keyboard::W && SF::Keyboard::D
         Player_Data::Player_Physics.wasd_up(@@player_character_rendered_model, window)
         window.draw(@@player_character_rendered_model)
-
+#___________________________________________________________________________________________________________________________________________
 #********************************************************Escape**********************************************************************
   when SF::Keyboard::Escape
     window.close
 end; end; end; end; end; end
-
 
 
 #-----------------------------------------------------Menu Elements------------------------------------------------------------------+
@@ -1426,6 +1431,7 @@ end; end; end; end; end; end
    @@hair_slot = 0; @@skin_slot = 0; @@face_slot = 0; @@shirt_slot = 0; @@gloves_slot = 0; @@pants_slot = 0; @@shoes_slot = 0
    @@hair_slot : (Int32); @@skin_slot : (Int32); @@face_slot : (Int32); @@shirt_slot : (Int32); @@gloves_slot : (Int32); @@pants_slot : (Int32)
    @@shoes_slot : (Int32); @@outfit_array : Array(Int32) = [@@hair_slot, @@skin_slot, @@face_slot, @@shirt_slot, @@gloves_slot, @@pants_slot, @@shoes_slot]
+   
  
    def add_item(@@item_type, item)
      if item.is_owned == false 
@@ -1545,6 +1551,7 @@ end; end; end; end; end; end
     @@player_bounding_box : SF::Rect(Float32); @@player_bounding_box = @@player_character_rendered_model.global_bounds
     @@player_jumped : Bool; @@player_jumped = false; @@player_direction : String; @@player_direction = "right"
     property == @@player_bounding_box; @@can_player_move_at_all : Bool; @@can_player_move_at_all = true
+    @@current_quest : String; @@current_quest = "none"
    #==================================================================================================================================+
 
    #============================================Walk Cycle============================================================================+
@@ -1633,6 +1640,11 @@ end; end; end; end; end; end
      @@player_character_rendered_model.position -= SF.vector2(3.5, 0)
      Player_Physics.walk_cycle_left(@@player_character_rendered_model)
      @@player_direction = "left"
+      else if @@current_quest != "none"
+        case @@current_quest
+         when "test"
+          NPCS::Test_Npcs.dialogue_menu_left
+         end; end
        end
      end
     #---------------------------------------------------------------------------------------------------------------------------------+   
@@ -1679,6 +1691,9 @@ end; end; end; end; end; end
      def Player_Physics.immobilize_player
         @@can_player_move_at_all = false
       end
+     def Player_Physics.get_quest_movement(quest)
+      @@current_quest = quest
+      end
     #---------------------------------------------------------------------------------------------------------------------------------+ 
  end
  end
@@ -1700,12 +1715,27 @@ module NPCS
     include Player_Data
     include Gui
    #**********************************************************Variables***********************************************************************
-    @@test_npcs_model_01 = SF::RenderTexture.new(672, 512)
-    @@test_npc_rendered_model_01 = SF::Sprite.new(@@test_npcs_model_01.texture)
-    @@test_npc_scene : String; @@test_npc_scene = "none"; @@test_dialogue_box_01 : SF::RectangleShape; @@test_dialogue_box_01 = Dialog_Box.dup
-    @@test_dialogue_box_01.position = SF.vector2(950, 580); @@npc_frame : Int32; @@npc_frame = 0; @@test_dialogue_box_text_01 : SF::Text
-    @@test_dialogue_box_text_01 = Dialog_Box_Text.dup; @@test_dialogue_box_text_01.string = "Oh, hello! Do\n you need a haircut?"
-    @@test_dialogue_box_text_01.position = SF.vector2(960, 600);
+    #........................................................NPC Models......................................................................
+     @@test_npcs_model_01 = SF::RenderTexture.new(672, 512)
+     @@test_npc_rendered_model_01 = SF::Sprite.new(@@test_npcs_model_01.texture)
+    #----------------------------------------------------------------------------------------------------------------------------------------
+    #......................................................Scene_Variables...................................................................
+     @@test_npc_scene : String; @@test_npc_scene = "none"; @@test_scene_option : Int32; @@test_scene_option = 0
+    #----------------------------------------------------------------------------------------------------------------------------------------
+    #.......................................................Dialogue Box.....................................................................
+     @@test_dialogue_box_01 : SF::RectangleShape; @@test_dialogue_box_01 = Dialog_Box.dup
+     @@test_dialogue_box_01.position = SF.vector2(950, 580); @@npc_frame : Int32; @@npc_frame = 0; @@test_dialogue_box_text_01 : SF::Text
+     @@test_dialogue_box_text_01 = Dialog_Box_Text.dup; @@test_dialogue_box_text_01.string = "Oh, hello! Do\n you need a haircut?"
+     @@test_dialogue_box_text_01.position = SF.vector2(960, 600)
+    #----------------------------------------------------------------------------------------------------------------------------------------
+    #........................................................Choice Box......................................................................
+     @@choice_01 = Choice_Box_Option.dup; @@choice_01 : SF::RectangleShape;
+     @@choice_01.position = SF.vector2(622, 570); @@choice_02 = Choice_Box_Option.dup; @@choice_02 : SF::RectangleShape;
+     @@choice_02.position = SF.vector2(780, 570); @@choice_box_text : SF::Text
+     @@choice_box_text = Dialog_Box_Text.dup; @@choice_box_text.string = "Would you like a haircut for 1000\nShards?"
+     @@choice_box_text.position = SF.vector2(622, 490); @@choice_box_choice_text_01 = Dialog_Box_Text.dup; @@choice_box_choice_text_01 : SF::Text
+     @@choice_box_choice_text_01.position = SF.vector2(622, 570); @@choice_box_choice_text_01.string = "  Yes           No"; 
+     @@choice_box_choice_text_01.character_size = 30
    #__________________________________________________________________________________________________________________________________________ 
    #***********************************************************Methods************************************************************************
     def Test_Npcs.test_npc_initialize
@@ -1723,6 +1753,21 @@ module NPCS
       @@test_npc_rendered_model_01.position = SF.vector2(1002, 680)
       @@test_npc_rendered_model_01.scale = SF.vector2(1.0, 1.0)
      end
+     def Test_Npcs.dialogue_menu_select
+      case @@test_scene_option 
+      when 0
+        All_Audio::SFX.light_bonk
+      when 1
+        @@test_npc_scene = "test_quest_1_stage_4"
+      when 2
+        @@test_npc_scene = "none"
+      end
+     end
+     def Test_Npcs.dialogue_menu_left #@todo finish this function and write the right one
+      All_Audio::SFX.light_bonk
+      @@choice_01.fill_color = SF.color(100, 100, 255)
+      @@test_scene_option = 1
+      end
     def Test_Npcs.test_npc_maintain(window)
     #  npc_bounding_01 = Bounding_Box.dup
     #  npc_bounding_01.position = @@test_npc_rendered_model_01.position
@@ -1731,7 +1776,6 @@ module NPCS
       case @@test_npc_scene
         when "test_quest_1_stage_1"
             window.draw(@@test_dialogue_box_01)
-            #@@npc_frame += 1
            if @@npc_frame  > -1 && @@npc_frame  < 1200
             @@test_dialogue_box_01.texture_rect = SF.int_rect(0, 200, 150, 100);           @@npc_frame += 1
            else if @@npc_frame  >= 1200 && @@npc_frame  < 1800
@@ -1741,22 +1785,41 @@ module NPCS
             @@test_npc_scene = "test_quest_1_stage_2"
            end; end; end
          when "test_quest_1_stage_2"
+           @@npc_frame = 0
            @@test_dialogue_box_text_01.string = "  Oh, hello! Do \n   you need a \n    haircut?"
            window.draw(@@test_dialogue_box_01)
            window.draw(@@test_dialogue_box_text_01)  
+           Choice_Box.position = SF.vector2(602, 480)
+           @@test_npc_scene = "test_quest_1_stage_3"
+         when "test_quest_1_stage_3"
+         if @@npc_frame  > -1 && @@npc_frame  < 1200 @@npc_frame += 1
+          window.draw(@@test_dialogue_box_01)
+          window.draw(@@test_dialogue_box_text_01) 
+        else if @@npc_frame  >= 1200
+          window.draw(@@test_dialogue_box_01)
+          window.draw(@@test_dialogue_box_text_01) 
+          window.draw(Choice_Box); window.draw(@@choice_01)
+          window.draw(@@choice_02); window.draw(@@choice_box_text)
+          window.draw(@@choice_box_choice_text_01) 
+        end; end; end; end
            end
           end
-    def Test_Npcs.click(window, @@player_character_rendered_model)
+    def NPCS::Test_Npcs.click(window, @@player_character_rendered_model)
      # npc_bounding_01 = Bounding_Box.dup
      # npc_bounding_01.position = @@test_npc_rendered_model_01.position
      # window.draw(npc_bounding_01)
       bounding_box1 = @@player_character_rendered_model.global_bounds
       bounding_box2 = @@test_npc_rendered_model_01.global_bounds
        if bounding_box1.intersects? bounding_box2
-        Player_Data::Player_Physics.immobilize_player
-         All_Audio::SFX.light_bonk
-         @@test_npc_scene = "test_quest_1_stage_1"
-       end; end
+         if @@test_npc_scene == "none" 
+          Player_Data::Player_Physics.immobilize_player
+          quest = "test"
+          Player_Data::Player_Physics.get_quest_movement(quest)
+          All_Audio::SFX.light_bonk
+          @@test_npc_scene = "test_quest_1_stage_1"
+         end
+        if @@test_npc_scene == "test_quest_1_stage_3" 
+       end
 
     end #test npc class end
   end #module end
