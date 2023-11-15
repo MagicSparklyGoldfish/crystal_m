@@ -51,6 +51,7 @@ extend self
   @@dialog : Bool; @@dialog = false;
   @@page : Int32 = 1
   @@cursorposition = "up"
+  @@has_weapon : Bool; @@has_weapon = false
   @@char_select_pointer_position = 0
   @@save_file_slot : Int32 = 0
   @@char_create_pointer_position = [1, 1]
@@ -61,7 +62,7 @@ extend self
   @@hair_choice : Int32; @@hair_choice = 0
   @@current_hair = 0; @@current_display_hair = 0; @@current_display_hair_string = 0
   @@current_skin = 0; @@current_display_skin_string = 0; @@current_face = 0; @@current_shirt = 0; @@current_gloves = 0
-  @@current_pants = 0; @@current_shoes = 0
+  @@current_pants = 0; @@current_shoes = 0; @@current_weapon = 0; @@current_direction : String; @@current_direction = "right"
 
 #=======================================================================================================================================+
 #---------------------------------------------------------------------------------------------------------------------------------------+
@@ -70,12 +71,18 @@ extend self
   def Window_Class.player_model_initialize(@@current_shoes, @@current_gloves, @@current_shirt, @@current_pants, @@current_hair) 
     @@player_character_model.clear(SF::Color::Transparent) #@note player customization happens here
     @@player_character_model.draw(SKIN_ARRAY[@@current_skin])
+    if @@has_weapon == true && @@current_direction == "left"
+      @@player_character_model.draw(WEAPON_ARRAY[@@current_weapon])
+    end
     @@player_character_model.draw(SHOES_ARRAY[@@current_shoes])
     @@player_character_model.draw(FACE_ARRAY[@@current_face])
     @@player_character_model.draw(HAIR_ARRAY[@@current_hair])
     @@player_character_model.draw(PANTS_ARRAY[@@current_pants])
     @@player_character_model.draw(SHIRT_ARRAY[@@current_shirt])
     @@player_character_model.draw(GLOVE_ARRAY[@@current_gloves])
+    if @@has_weapon == true && @@current_direction == "right"
+      @@player_character_model.draw(WEAPON_ARRAY[@@current_weapon])
+    end
     @@player_character_model.create(672, 512, false)
     @@player_character_model.display
     @@player_character_rendered_model.texture_rect = SF.int_rect(0, 0, 96, 128)
@@ -305,9 +312,9 @@ extend self
   window.draw(Weapon_Tab_Text); window.draw(Use_Tab_Text); window.draw(Etc_Tab_Text)
   if @@tab == "Equipment"
     page = @@page
-    Equipment::Sticks.test(window, page)
+    Equipment::Stick.test(window, page)
   else if @@tab == "Use"
-    puts "use"
+
   end
   end
  end
@@ -381,13 +388,22 @@ extend self
 #=======================================================================================================================================+
 #---------------------------------------------------------------------------------------------------------------------------------------+
 #========================================================Window Functions===============================================================+
-#////////////////////////////////////////////////////////Change_Variables///////////////////////////////////////////////////////////////+
+#////////////////////////////////////////////////////////Change_Variables///////////////////////////////////////////////////////////////+ #@note change window variables
   def Window_Class.change_popup(this)
     @@popup = this
    end
   def Window_Class.change_salon(this)
     @@salon = this
    end 
+  def Window_Class.change_direction(this)
+    @@current_direction = this
+   end
+  def Window_Class.equip_weapon(this2)
+    @@current_weapon = this2
+    puts @@current_direction
+    @@has_weapon = true
+    Window_Class.player_model_initialize(@@current_shoes, @@current_gloves, @@current_shirt, @@current_pants, @@current_hair) 
+  end
 
 #/////////////////////////////////////////////////////////////Draw//////////////////////////////////////////////////////////////////////+
 
@@ -826,6 +842,16 @@ def Window_Class.hud_keypresses(window)
           Window_Class.etc_tab(window)
           @@tab = "Etc"
          end
+      case @@tab
+      when "Equipment"
+        if (x >= 550 && x <= 700) && (y >= 300 && y <= 450)
+          All_Audio::SFX.light_bonk
+          this = 0
+          Equipment.equip_weapon(this)
+          this2 = @@current_weapon
+          Gui::Window_Class.equip_weapon(this2)
+        end
+      end
       when "Salon" #-------------------------------------------------------------Salon clicks
         if (x >= 750 && x <= 900) && (y >= 530 && y <= 600) && @@tab == "salon_confirm" #yes
           All_Audio::SFX.select_2

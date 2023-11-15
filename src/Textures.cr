@@ -373,7 +373,9 @@
   Etc_Tab_Text.string = "Etc"; Test_Rectangle_01 = SF::RectangleShape.new(SF.vector2(140, 140));
   Test_Rectangle_01.fill_color = SF.color(155, 155, 255); Test_Rectangle_01.position = SF.vector2(555, 310);
   #--------------------------------------------------Weapon Textures---------------------------------------------------------------
-   WEAPON_DISPLAY_TEXTURE_01 = SF::Texture.from_file("graphics/Weapons_display.png"); 
+   WEAPON_DISPLAY_TEXTURE_01 = SF::Texture.from_file("graphics/Weapons_display.png"); STICK_TEXTURE = SF::Texture.from_file("graphics/Stick01.png");
+   Stick01 = SF::Sprite.new(STICK_TEXTURE)
+   WEAPON_ARRAY = [Stick01]
    #.....................................................Stick.....................................................................
     Weapon_Rectangle_01 = SF::RectangleShape.new(SF.vector2(140, 140));
     Weapon_Rectangle_01.set_texture(WEAPON_DISPLAY_TEXTURE_01, reset_rect: false);  Weapon_Rectangle_01.position = SF.vector2(555, 310);

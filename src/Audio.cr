@@ -36,9 +36,13 @@ require "../src/crystal_meth.cr"
  SYSSOUND_7 = SF::Sound.new
  SYSSOUND_7.buffer = SELECT_1
 
- CURSOR_3 = SF::SoundBuffer.from_file("audio/Cursor2.wav")
+ CURSOR_3 = SF::SoundBuffer.from_file("audio/Cursor2.wav") 
  SYSSOUND_8 = SF::Sound.new
  SYSSOUND_8.buffer = CURSOR_3
+
+ SWING_1 = SF::SoundBuffer.from_file("audio/Stick_Swing01.wav") 
+ WEAPSOUND_01 = SF::Sound.new
+ WEAPSOUND_01.buffer = SWING_1
 #_________________________________________________________________________________________________________________________________________________________
 
 # =======================================================================================================================================================
@@ -59,28 +63,31 @@ module All_Audio
     
         def SFX.select1
             SYSSOUND_2.play
-        end
+         end
 
         def SFX.char_create_up
             SYSSOUND_3.play
-        end
+         end
 
         def SFX.char_create_down
             SYSSOUND_4.play
-        end
+         end
 
         def SFX.char_create_sideways
             SYSSOUND_5.play
-        end
+         end
         def SFX.light_bonk
             SYSSOUND_6.play
-        end
+         end
         def SFX.select_2
             SYSSOUND_7.play
-        end
+         end
         def SFX.cursor2
             SYSSOUND_8.play
-        end
+         end
+        def SFX.stick_swing_01
+            WEAPSOUND_01.play
+         end
     end #sfx class end
   class MUSIC
    def MUSIC.test_song
