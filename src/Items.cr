@@ -18,7 +18,11 @@ require "file_utils"
 
 module Equipment
    extend self
-   @@current_weapon : Int32 | Nil
+   @@nil_stick = Stick.new("", -1, false, false, false, 1.5, ["none"], ["none"], WEAPSOUND_01, Weapon_Rectangle_01, false)
+   @@current_weapon : Int32
+   @@current_weapon = -1
+   @@current_weapon_object : Stick 
+   @@current_weapon_object = @@nil_stick
    property = @@current_weapon
    STICK_ARRAY = [@@stick01]
    WEAPON_INVENTORY_ARRAY = [] of Stick
@@ -27,7 +31,14 @@ module Equipment
       if this > size
          All_Audio::SFX.light_bonk
       else 
-         @@current_weapon  = WEAPON_INVENTORY_ARRAY[this].number
+         if @@current_weapon_object != Nil
+          WEAPON_INVENTORY_ARRAY.push(@@current_weapon_object)
+         end
+         if size != 0
+          @@current_weapon = WEAPON_INVENTORY_ARRAY[this].number
+          @@current_weapon_object = WEAPON_INVENTORY_ARRAY[this]
+          WEAPON_INVENTORY_ARRAY.delete(@@current_weapon_object)
+         end
      # Gui::Window_Class.equip_weapon(this2)
    end
    end
@@ -84,7 +95,9 @@ module Equipment
  def Stick.test(window, page)
         window.draw(Weapon_Rectangle_01)
     end
+    WEAPON_INVENTORY_ARRAY.push(@@nil_stick)
     WEAPON_INVENTORY_ARRAY.push(@@stick01)
+ @@nil_stick = Stick.new("", -1, false, false, false, 1.5, ["none"], ["none"], WEAPSOUND_01, Weapon_Rectangle_01, false)
  @@stick01 = Stick.new("Stick", 0, true, false, false, 1.5, ["none"], ["none"], WEAPSOUND_01, Weapon_Rectangle_01, false)
  end
 end

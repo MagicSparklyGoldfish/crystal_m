@@ -397,10 +397,10 @@ extend self
    end 
   def Window_Class.change_direction(this)
     @@current_direction = this
+    Window_Class.player_model_initialize(@@current_shoes, @@current_gloves, @@current_shirt, @@current_pants, @@current_hair) 
    end
   def Window_Class.equip_weapon(this2)
     @@current_weapon = this2
-    puts @@current_direction
     @@has_weapon = true
     Window_Class.player_model_initialize(@@current_shoes, @@current_gloves, @@current_shirt, @@current_pants, @@current_hair) 
   end
@@ -1444,10 +1444,18 @@ def Window_Class.hud_keypresses(window)
 
       when SF::Keyboard::D
         Player_Data::Player_Physics.wasd_right(@@player_character_rendered_model)
+        if @@current_direction == "left"
+        this = "right"
+        Window_Class.change_direction(this)
+        end
         window.draw(@@player_character_rendered_model)
         
       when SF::Keyboard::A
         Player_Data::Player_Physics.wasd_left(@@player_character_rendered_model)
+        if @@current_direction == "right"
+        this = "left"
+        Window_Class.change_direction(this)
+        end
         window.draw(@@player_character_rendered_model)
       when SF::Keyboard::W
         Player_Data::Player_Physics.wasd_up(@@player_character_rendered_model, window)
