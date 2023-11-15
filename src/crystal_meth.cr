@@ -847,6 +847,34 @@ def Window_Class.hud_keypresses(window)
           hair_slot = @@hair_choice
           Player_Data::Clothing_Outfit_Slot.change_hair(hair_slot, window)
         end
+        if (x >= 790 && x <= 910) && (y >= 570 && y <= 720) && @@tab != "salon_confirm" #hair 6
+          @@hair_choice = 6
+          puts @@tab; puts @@hair_choice
+          All_Audio::SFX.cursor2
+          hair_slot = @@hair_choice
+          Player_Data::Clothing_Outfit_Slot.change_hair(hair_slot, window)
+        end
+        if (x >= 940 && x <= 1060) && (y >= 570 && y <= 720) && @@tab != "salon_confirm" #hair 7
+          @@hair_choice = 7
+          puts @@tab; puts @@hair_choice
+          All_Audio::SFX.cursor2
+          hair_slot = @@hair_choice
+          Player_Data::Clothing_Outfit_Slot.change_hair(hair_slot, window)
+        end
+        if (x >= 1090 && x <= 1200) && (y >= 570 && y <= 720) && @@tab != "salon_confirm" #hair 8
+          @@hair_choice = 8
+          puts @@tab; puts @@hair_choice
+          All_Audio::SFX.cursor2
+          hair_slot = @@hair_choice
+          Player_Data::Clothing_Outfit_Slot.change_hair(hair_slot, window)
+        end
+        if (x >= 1240 && x <= 1330) && (y >= 570 && y <= 720) && @@tab != "salon_confirm" #hair 9
+          @@hair_choice = 9
+          puts @@tab; puts @@hair_choice
+          All_Audio::SFX.cursor2
+          hair_slot = @@hair_choice
+          Player_Data::Clothing_Outfit_Slot.change_hair(hair_slot, window)
+        end
       when "none"  #--------------------------------------------------------------none clicks
         if (x >= 1730 && x <= 1880) && (y >= 930 && y <= 990)
            All_Audio::SFX.char_create_down; @@popup = "System_Popup_Menu"

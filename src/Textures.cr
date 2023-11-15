@@ -450,16 +450,17 @@
 #------------------------------------------------------------------------------------------------------------------------------------
 #                                                     Hair Textures
 #------------------------------------------------------------------------------------------------------------------------------------
- HAIR_ARRAY = [SHOUNEN_HAIR_01, SHOUNEN_HAIR_02, SHOUNEN_HAIR_03, SHOUNEN_HAIR_04, SHOUNEN_HAIR_05, SHOUNEN_HAIR_06,
- PONYTAIL_01, PONYTAIL_02, PONYTAIL_03, PONYTAIL_04, PONYTAIL_05, PONYTAIL_06]
+ HAIR_ARRAY = [SHOUNEN_HAIR_01, SHOUNEN_HAIR_02, SHOUNEN_HAIR_03, SHOUNEN_HAIR_04, SHOUNEN_HAIR_05, SHOUNEN_HAIR_06, SHOUNEN_HAIR_07,
+ SHOUNEN_HAIR_08, SHOUNEN_HAIR_09, SHOUNEN_HAIR_10, PONYTAIL_01, PONYTAIL_02, PONYTAIL_03, PONYTAIL_04, PONYTAIL_05, PONYTAIL_06]
 
  HAIR_DISPLAY_ARRAY = [SHOUNEN_DISPLAY_HAIR_01, SHOUNEN_DISPLAY_HAIR_02, SHOUNEN_DISPLAY_HAIR_03, SHOUNEN_DISPLAY_HAIR_04, 
- SHOUNEN_DISPLAY_HAIR_05, SHOUNEN_DISPLAY_HAIR_06, DISPLAY_PONYTAIL_HAIR_01, DISPLAY_PONYTAIL_HAIR_02, DISPLAY_PONYTAIL_HAIR_03,
- DISPLAY_PONYTAIL_HAIR_04, DISPLAY_PONYTAIL_HAIR_05, DISPLAY_PONYTAIL_HAIR_06]
+ SHOUNEN_DISPLAY_HAIR_05, SHOUNEN_DISPLAY_HAIR_06, SHOUNEN_DISPLAY_HAIR_07, SHOUNEN_DISPLAY_HAIR_08, SHOUNEN_DISPLAY_HAIR_09, 
+ SHOUNEN_DISPLAY_HAIR_10, DISPLAY_PONYTAIL_HAIR_01, DISPLAY_PONYTAIL_HAIR_02, DISPLAY_PONYTAIL_HAIR_03, DISPLAY_PONYTAIL_HAIR_04, 
+ DISPLAY_PONYTAIL_HAIR_05, DISPLAY_PONYTAIL_HAIR_06]
 
  HAIR_DESC_ARRAY = ["Shounen Hair White", "Shounen Hair Green", "Shounen Hair Blue", "Shounen Hair Red",
- "Shounen Hair Yellow", "Shounen Hair Purple", "   Ponytail Grey", "Ponytail Blonde", "Ponytail Red", "Ponytail Brown",
- "Ponytail Pink", "Ponytail Blue"]
+ "Shounen Hair Yellow", "Shounen Hair Purple", "Shounen Hair Orange", "Shounen Hair Black", "Shounen Hair Brown", "Shounen Hair Black", 
+ "   Ponytail Grey", "Ponytail Blonde", "Ponytail Red", "Ponytail Brown", "Ponytail Pink", "Ponytail Blue"]
 
  Hair_Desc = SF::Text.new; Hair_Desc.font = FONT_FANCY_BOLD
  Hair_Desc.string = HAIR_DESC_ARRAY[0]; Hair_Desc.character_size = 40; Hair_Desc.color = SF::Color::White
@@ -526,6 +527,46 @@
    SHOUNEN_DISPLAY_HAIR_06.position = SF.vector2(250, 50)
    SHOUNEN_DISPLAY_HAIR_06.scale = SF.vector2(3.0, 3.0)
    SHOUNEN_DISPLAY_HAIR_06.color = SF.color(186, 85, 211)
+  #.................................................Shounen Hair Orange..............................................................
+   #\\\\\\\Character Model
+   SHOUNEN_HAIR_07 = SF::Sprite.new(SHOUNEN_HAIR_TEXTURE_01) 
+   SHOUNEN_HAIR_07.color = SF.color(255, 165, 0)
+   #\\\\\\\Display Model
+   SHOUNEN_DISPLAY_HAIR_07 = SF::Sprite.new(SHOUNEN_HAIR_TEXTURE_01)
+   SHOUNEN_DISPLAY_HAIR_07.texture_rect = SF.int_rect(0, 0, 96, 128)
+   SHOUNEN_DISPLAY_HAIR_07.position = SF.vector2(250, 50)
+   SHOUNEN_DISPLAY_HAIR_07.scale = SF.vector2(3.0, 3.0)
+   SHOUNEN_DISPLAY_HAIR_07.color = SF.color(255, 165, 0)
+  #.................................................Shounen Hair Black..............................................................
+   #\\\\\\\Character Model
+   SHOUNEN_HAIR_08 = SF::Sprite.new(SHOUNEN_HAIR_TEXTURE_01) 
+   SHOUNEN_HAIR_08.color = SF.color(10, 10, 10)
+   #\\\\\\\Display Model
+   SHOUNEN_DISPLAY_HAIR_08 = SF::Sprite.new(SHOUNEN_HAIR_TEXTURE_01)
+   SHOUNEN_DISPLAY_HAIR_08.texture_rect = SF.int_rect(0, 0, 96, 128)
+   SHOUNEN_DISPLAY_HAIR_08.position = SF.vector2(250, 50)
+   SHOUNEN_DISPLAY_HAIR_08.scale = SF.vector2(3.0, 3.0)
+   SHOUNEN_DISPLAY_HAIR_08.color = SF.color(10, 10, 10)
+  #.................................................Shounen Hair Brown..............................................................
+   #\\\\\\\Character Model
+   SHOUNEN_HAIR_09 = SF::Sprite.new(SHOUNEN_HAIR_TEXTURE_01) 
+   SHOUNEN_HAIR_09.color = SF.color(139, 69, 19)
+   #\\\\\\\Display Model
+   SHOUNEN_DISPLAY_HAIR_09 = SF::Sprite.new(SHOUNEN_HAIR_TEXTURE_01)
+   SHOUNEN_DISPLAY_HAIR_09.texture_rect = SF.int_rect(0, 0, 96, 128)
+   SHOUNEN_DISPLAY_HAIR_09.position = SF.vector2(250, 50)
+   SHOUNEN_DISPLAY_HAIR_09.scale = SF.vector2(3.0, 3.0)
+   SHOUNEN_DISPLAY_HAIR_09.color = SF.color(139, 69, 19)
+  #.................................................Shounen Hair Pink...............................................................
+   #\\\\\\\Character Model
+   SHOUNEN_HAIR_10 = SF::Sprite.new(SHOUNEN_HAIR_TEXTURE_01) 
+   SHOUNEN_HAIR_10.color = SF.color(255, 20, 147)
+   #\\\\\\\Display Model
+   SHOUNEN_DISPLAY_HAIR_10 = SF::Sprite.new(SHOUNEN_HAIR_TEXTURE_01)
+   SHOUNEN_DISPLAY_HAIR_10.texture_rect = SF.int_rect(0, 0, 96, 128)
+   SHOUNEN_DISPLAY_HAIR_10.position = SF.vector2(250, 50)
+   SHOUNEN_DISPLAY_HAIR_10.scale = SF.vector2(3.0, 3.0)
+   SHOUNEN_DISPLAY_HAIR_10.color = SF.color(255, 20, 147)
  #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
  #                                                      Ponytails
  #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
