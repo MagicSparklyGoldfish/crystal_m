@@ -357,6 +357,27 @@
 
    Inventory_arrow_down = SF::RectangleShape.new(SF.vector2(20, 40)); Inventory_arrow_down.position = SF.vector2(670, 650);
    Inventory_arrow_down.fill_color = SF.color(255, 100, 100)
+ #__________________________________________________Inventory Window________________________________________________________________  
+  INVENTORY_TEXTURE_01 = SF::Texture.from_file("graphics/Inventory_01.png"); INVENTORY_TAB_TEXTURE_01 = SF::Texture.from_file("graphics/Inventory_Tab_01.png"); 
+  Inventory_Window.set_texture(INVENTORY_TEXTURE_01, reset_rect: false); Inventory_Window = SF::RectangleShape.new(SF.vector2(1000, 600)); 
+  Inventory_Window.position = SF.vector2(500, 200); Weapon_Tab = SF::RectangleShape.new(SF.vector2(200, 70)); 
+  Weapon_Tab.position = SF.vector2(800, 160); Weapon_Tab.set_texture(INVENTORY_TAB_TEXTURE_01, reset_rect: false); 
+  Weapon_Tab.texture_rect = SF.int_rect(0, 0, 200, 70); Use_Tab = SF::RectangleShape.new(SF.vector2(200, 70)); 
+  Use_Tab.position = SF.vector2(1010, 160); Use_Tab.set_texture(INVENTORY_TAB_TEXTURE_01, reset_rect: false); 
+  Use_Tab.texture_rect = SF.int_rect(0, 0, 200, 70); Etc_Tab = SF::RectangleShape.new(SF.vector2(200, 70)); 
+  Etc_Tab.position = SF.vector2(1220, 160); Etc_Tab.set_texture(INVENTORY_TAB_TEXTURE_01, reset_rect: false);   
+  Etc_Tab.texture_rect = SF.int_rect(0, 0, 200, 70); Weapon_Tab_Text = SF::Text.new; Weapon_Tab_Text.font = FONT_FANCY_BOLD
+  Weapon_Tab_Text.character_size = 40; Weapon_Tab_Text.color = SF::Color::White; Weapon_Tab_Text.position = SF.vector2(820, 165);
+  Weapon_Tab_Text.string = "Equipment"; Use_Tab_Text = Weapon_Tab_Text.dup; Use_Tab_Text.position = SF.vector2(1080, 165);
+  Use_Tab_Text.string = "Use"; Etc_Tab_Text = Weapon_Tab_Text.dup; Etc_Tab_Text.position = SF.vector2(1290, 165);
+  Etc_Tab_Text.string = "Etc"; Test_Rectangle_01 = SF::RectangleShape.new(SF.vector2(140, 140));
+  Test_Rectangle_01.fill_color = SF.color(155, 155, 255); Test_Rectangle_01.position = SF.vector2(555, 310);
+  #--------------------------------------------------Weapon Textures---------------------------------------------------------------
+   WEAPON_DISPLAY_TEXTURE_01 = SF::Texture.from_file("graphics/Weapons_display.png"); 
+   #.....................................................Stick.....................................................................
+    Weapon_Rectangle_01 = SF::RectangleShape.new(SF.vector2(140, 140));
+    Weapon_Rectangle_01.set_texture(WEAPON_DISPLAY_TEXTURE_01, reset_rect: false);  Weapon_Rectangle_01.position = SF.vector2(555, 310);
+    Weapon_Rectangle_01.texture_rect = SF.int_rect(0, 0, 140, 140);
 #-----------------------------------------------------------------------------------------------------------------------------------
 #                                                    Character Model
 #-----------------------------------------------------------------------------------------------------------------------------------

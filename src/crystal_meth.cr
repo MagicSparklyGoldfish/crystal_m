@@ -284,7 +284,7 @@ extend self
     player.position = SF.vector2(600, 200); player.scale = SF.vector2(1.5, 1.5); window.draw(player) 
     this = @@salon
     Hair.display_offered_hair(this, window)
-  end
+   end
  def Window_Class.salon_confirm_tab(window)
   Window_Class.salon(window)
   salon_confirm_box = Choice_Box.dup; salon_confirm_box.position = SF.vector2(735, 390); salon_confirm_box.scale = SF.vector2(1.5, 1.5)
@@ -297,6 +297,35 @@ extend self
   window.draw(salon_confirm_box); window.draw(salon_option_1); window.draw(salon_option_2); window.draw(salon_confirm_text)
   window.draw(salon_confirm_option_1)
  end
+ def Window_Class.inventory(window)
+  view5 = SF::View.new(SF.float_rect(0, 0, 1920, 1080))
+  view5.viewport = SF.float_rect(0, 0, 1, 1)
+  window.view = view5
+  window.draw(Inventory_Window); window.draw(Weapon_Tab); window.draw(Use_Tab); window.draw(Etc_Tab)
+  window.draw(Weapon_Tab_Text); window.draw(Use_Tab_Text); window.draw(Etc_Tab_Text)
+  if @@tab == "Equipment"
+    page = @@page
+    Equipment::Sticks.test(window, page)
+  else if @@tab == "Use"
+    puts "use"
+  end
+  end
+ end
+ def Window_Class.weapon_tab(window)
+   Weapon_Tab.texture_rect = SF.int_rect(200, 0, 200, 70)
+   Use_Tab.texture_rect = SF.int_rect(0, 0, 200, 70)
+   Etc_Tab.texture_rect = SF.int_rect(0, 0, 200, 70);
+  end
+ def Window_Class.use_tab(window)
+   Weapon_Tab.texture_rect = SF.int_rect(0, 0, 200, 70)
+   Use_Tab.texture_rect = SF.int_rect(200, 0, 200, 70)
+   Etc_Tab.texture_rect = SF.int_rect(0, 0, 200, 70);
+  end
+ def Window_Class.etc_tab(window)
+   Weapon_Tab.texture_rect = SF.int_rect(0, 0, 200, 70)
+   Use_Tab.texture_rect = SF.int_rect(0, 0, 200, 70)
+   Etc_Tab.texture_rect = SF.int_rect(200, 0, 200, 70);
+  end
 #=======================================================================================================================================+
 #---------------------------------------------------------------------------------------------------------------------------------------+
 #========================================================Map Renderers==================================================================+
@@ -396,7 +425,10 @@ extend self
         Window_Class.salon_confirm_tab(window)
       end
     end
+    if @@popup == "Inventory"
+      Window_Class.inventory(window)
 
+    end
     if @@popup == "System_Popup_Menu"
       Window_Class.system_popup(window)
      end
@@ -778,6 +810,22 @@ def Window_Class.hud_keypresses(window)
       puts "x", x
       puts "y", y
      case @@popup
+      when "Inventory" #--------------------------------------------------------Inventory clicks
+        if (x >= 800 && x <= 1000) && (y >= 160 && y <= 230)
+          All_Audio::SFX.select1
+          Window_Class.weapon_tab(window)
+          @@tab = "Equipment"
+         end
+        if (x >= 1010 && x <= 1210) && (y >= 160 && y <= 230)
+          All_Audio::SFX.select1
+          Window_Class.use_tab(window)
+          @@tab = "Use"
+         end
+        if (x >= 1220 && x <= 1420) && (y >= 160 && y <= 230)
+          All_Audio::SFX.select1
+          Window_Class.etc_tab(window)
+          @@tab = "Etc"
+         end
       when "Salon" #-------------------------------------------------------------Salon clicks
         if (x >= 750 && x <= 900) && (y >= 530 && y <= 600) && @@tab == "salon_confirm" #yes
           All_Audio::SFX.select_2
@@ -788,12 +836,12 @@ def Window_Class.hud_keypresses(window)
           Player_Data::Player_Physics.mobilize_player
           NPCS::Test_Npcs.nullify_npc_scene
           Player_Data::Player_Physics.nullify_quest
-        end
+         end
         if (x >= 1020 && x <= 1170) && (y >= 530 && y <= 600) && @@tab == "salon_confirm" #no
           All_Audio::SFX.select_2
           NPCS::Test_Npcs.revert_hair(window)
           @@tab = "none"
-        end
+         end
         if (x >= 1320 && x <= 1370) && (y >= 200 && y <= 250) && @@tab != "salon_confirm" #exit salon
           @@popup = "none"
           @@tab = "none"
@@ -801,80 +849,80 @@ def Window_Class.hud_keypresses(window)
           NPCS::Test_Npcs.nullify_npc_scene
           Player_Data::Player_Physics.nullify_quest
           NPCS::Test_Npcs.revert_hair(window)
-        end
+         end
         if (x >= 745 && x <= 845) && (y >= 350 && y <= 400) && @@tab != "salon_confirm" #confirm button
           @@tab = "salon_confirm"
-        end
+         end
         if (x >= 640 && x <= 760) && (y >= 420 && y <= 540) && @@tab != "salon_confirm" #hair 0
           @@hair_choice = 0
           puts @@tab; puts @@hair_choice
           All_Audio::SFX.cursor2
           hair_slot = @@hair_choice
           Player_Data::Clothing_Outfit_Slot.change_hair(hair_slot, window)
-        end
+         end
         if (x >= 790 && x <= 910) && (y >= 420 && y <= 540) && @@tab != "salon_confirm" #hair 1
           @@hair_choice = 1
           puts @@tab; puts @@hair_choice
           All_Audio::SFX.cursor2
           hair_slot = @@hair_choice
           Player_Data::Clothing_Outfit_Slot.change_hair(hair_slot, window)
-        end
+         end
         if (x >= 940 && x <= 1060) && (y >= 420 && y <= 540) && @@tab != "salon_confirm" #hair 2
           @@hair_choice = 2
           puts @@tab; puts @@hair_choice
           All_Audio::SFX.cursor2
           hair_slot = @@hair_choice
           Player_Data::Clothing_Outfit_Slot.change_hair(hair_slot, window)
-        end
+         end
         if (x >= 1090 && x <= 1200) && (y >= 420 && y <= 540) && @@tab != "salon_confirm" #hair 3
           @@hair_choice = 3
           puts @@tab; puts @@hair_choice
           All_Audio::SFX.cursor2
           hair_slot = @@hair_choice
           Player_Data::Clothing_Outfit_Slot.change_hair(hair_slot, window)
-        end
+         end
         if (x >= 1240 && x <= 1330) && (y >= 420 && y <= 540) && @@tab != "salon_confirm" #hair 4
           @@hair_choice = 4
           puts @@tab; puts @@hair_choice
           All_Audio::SFX.cursor2
           hair_slot = @@hair_choice
           Player_Data::Clothing_Outfit_Slot.change_hair(hair_slot, window)
-        end
+         end
         if (x >= 640 && x <= 760) && (y >= 570 && y <= 720) && @@tab != "salon_confirm" #hair 5
           @@hair_choice = 5
           puts @@tab; puts @@hair_choice
           All_Audio::SFX.cursor2
           hair_slot = @@hair_choice
           Player_Data::Clothing_Outfit_Slot.change_hair(hair_slot, window)
-        end
+         end
         if (x >= 790 && x <= 910) && (y >= 570 && y <= 720) && @@tab != "salon_confirm" #hair 6
           @@hair_choice = 6
           puts @@tab; puts @@hair_choice
           All_Audio::SFX.cursor2
           hair_slot = @@hair_choice
           Player_Data::Clothing_Outfit_Slot.change_hair(hair_slot, window)
-        end
+         end
         if (x >= 940 && x <= 1060) && (y >= 570 && y <= 720) && @@tab != "salon_confirm" #hair 7
           @@hair_choice = 7
           puts @@tab; puts @@hair_choice
           All_Audio::SFX.cursor2
           hair_slot = @@hair_choice
           Player_Data::Clothing_Outfit_Slot.change_hair(hair_slot, window)
-        end
+         end
         if (x >= 1090 && x <= 1200) && (y >= 570 && y <= 720) && @@tab != "salon_confirm" #hair 8
           @@hair_choice = 8
           puts @@tab; puts @@hair_choice
           All_Audio::SFX.cursor2
           hair_slot = @@hair_choice
           Player_Data::Clothing_Outfit_Slot.change_hair(hair_slot, window)
-        end
+         end
         if (x >= 1240 && x <= 1330) && (y >= 570 && y <= 720) && @@tab != "salon_confirm" #hair 9
           @@hair_choice = 9
           puts @@tab; puts @@hair_choice
           All_Audio::SFX.cursor2
           hair_slot = @@hair_choice
           Player_Data::Clothing_Outfit_Slot.change_hair(hair_slot, window)
-        end
+         end
       when "none"  #--------------------------------------------------------------none clicks
         if (x >= 1730 && x <= 1880) && (y >= 930 && y <= 990)
            All_Audio::SFX.char_create_down; @@popup = "System_Popup_Menu"
@@ -1383,6 +1431,18 @@ def Window_Class.hud_keypresses(window)
         Player_Data::Player_Physics.wasd_up(@@player_character_rendered_model, window)
         window.draw(@@player_character_rendered_model)
 #___________________________________________________________________________________________________________________________________________
+#|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+#|                                                       @note menu shortcuts                                                              |
+#||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| 
+      when SF::Keyboard::I
+        if @@popup != "Inventory"
+        @@popup = "Inventory"
+        @@tab = "Equipment"
+        Gui::Window_Class.weapon_tab(window)
+        else if @@popup == "Inventory"
+          @@popup = "none"
+        end; end
+#___________________________________________________________________________________________________________________________________________
 #********************************************************Escape**********************************************************************
   when SF::Keyboard::Escape
     window.close
@@ -1598,35 +1658,35 @@ end; end; end; end; end; end
         Window_Class.player_model_initialize(@@current_shoes, @@current_gloves, @@current_shirt, @@current_pants, @@current_hair) 
         @@player_character_model.draw(SHOES_ARRAY[@@shoes_slot])
         window.draw(SHOES_ARRAY[@@shoes_slot])
-     end
+      end
      def Clothing_Outfit_Slot.change_gloves(gloves_slot, window)
        @@gloves_slot = gloves_slot
        @@current_gloves = gloves_slot
        Window_Class.player_model_initialize(@@current_shoes, @@current_gloves, @@current_shirt, @@current_pants, @@current_hair) 
        @@player_character_model.draw(GLOVE_ARRAY[@@gloves_slot])
        window.draw(GLOVE_ARRAY[@@gloves_slot])
-    end
+     end
     def Clothing_Outfit_Slot.change_shirt(shirt_slot, window)
       @@shirt_slot = shirt_slot
       @@current_shirt = shirt_slot
       Window_Class.player_model_initialize(@@current_shoes, @@current_gloves, @@current_shirt, @@current_pants, @@current_hair) 
       @@player_character_model.draw(SHIRT_ARRAY[@@shirt_slot])
       window.draw(SHIRT_ARRAY[@@shirt_slot])
-    end
+     end
     def Clothing_Outfit_Slot.change_pants(pants_slot, window)
       @@pants_slot = pants_slot
       @@current_pants = pants_slot
       Window_Class.player_model_initialize(@@current_shoes, @@current_gloves, @@current_shirt, @@current_pants, @@current_hair) 
       @@player_character_model.draw(PANTS_ARRAY[@@current_pants])
       window.draw(PANTS_ARRAY[@@current_pants])
-    end
+     end
     def Clothing_Outfit_Slot.change_hair(hair_slot, window)
       @@hair_slot = hair_slot
       @@current_hair = hair_slot
       Window_Class.player_model_initialize(@@current_shoes, @@current_gloves, @@current_shirt, @@current_pants, @@current_hair) 
       @@player_character_model.draw(HAIR_ARRAY[@@current_hair])
       window.draw(HAIR_ARRAY[@@current_hair])
-    end
+     end
   class Consumables_Slot
    end
   class Equipment_Slot
