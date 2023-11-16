@@ -37,6 +37,7 @@ GL.enable(GL::TEXTURE_2D)
 include X11
 
 module Gui  
+include Equipment
 extend self
 
  class Window_Class 
@@ -63,6 +64,7 @@ extend self
   @@current_hair = 0; @@current_display_hair = 0; @@current_display_hair_string = 0
   @@current_skin = 0; @@current_display_skin_string = 0; @@current_face = 0; @@current_shirt = 0; @@current_gloves = 0
   @@current_pants = 0; @@current_shoes = 0; @@current_weapon = 0; @@current_direction : String; @@current_direction = "right"
+  @@idle : Bool; @@idle = true; @@attacking : Bool; @@attacking = false
 
 #=======================================================================================================================================+
 #---------------------------------------------------------------------------------------------------------------------------------------+
@@ -83,7 +85,7 @@ extend self
     if @@has_weapon == true && @@current_direction == "right"
       @@player_character_model.draw(WEAPON_ARRAY[@@current_weapon])
     end
-    @@player_character_model.create(672, 512, false)
+    @@player_character_model.create(672, 1024, false)
     @@player_character_model.display
     @@player_character_rendered_model.texture_rect = SF.int_rect(0, 0, 96, 128)
     if @@menu == "charcreate"
@@ -223,6 +225,7 @@ extend self
     window.view = view4
     window.draw(System_Menu_Extended); window.draw(Text_System_Menu_Opt_01); window.draw(Text_System_Menu_Opt_02)
     window.draw(Text_System_Menu_Opt_03)
+
    end
   def Window_Class.quit_window(window)
     view5 = SF::View.new(SF.float_rect(0, 0, 1920, 1080))
@@ -333,6 +336,15 @@ extend self
    Use_Tab.texture_rect = SF.int_rect(0, 0, 200, 70)
    Etc_Tab.texture_rect = SF.int_rect(200, 0, 200, 70);
   end
+  def Window_Class.player_attack_bounding_box(window) #@todo make the box only appear while player is attacking
+    if @@current_direction == "right"
+     Player_Attack_Bounding_Box.position = @@player_character_rendered_model.position + SF.vector2(65, 25)
+    end
+    if @@current_direction == "left"
+      Player_Attack_Bounding_Box.position = @@player_character_rendered_model.position + SF.vector2(-65, 25)
+     end
+    window.draw(Player_Attack_Bounding_Box)
+   end
 #=======================================================================================================================================+
 #---------------------------------------------------------------------------------------------------------------------------------------+
 #========================================================Map Renderers==================================================================+
@@ -371,6 +383,8 @@ extend self
     view1.center = SF.vector2(x, y)
     view1.viewport = SF.float_rect(0, 0, 1, 0.85)
     window.view = view1
+    # Player_Attack_Bounding_Box.position = @@player_character_rendered_model.position + SF.vector2(65, 25)
+    # window.draw(Player_Attack_Bounding_Box)
     if @@space.contains?(@@shape) == false #<----This is proabably a really fucking stupid way to do this, but it works and I'm tired of fucking with it
       @@space.add(@@shape)
       Enemy_Data::Test_Enemy.draw; NPCS::Test_Npcs.test_npc_initialize
@@ -383,8 +397,54 @@ extend self
       @@space.add(@@pc_skin)
     end
     debug_draw.draw @@space
-    window.draw(Ground); window.draw(@@player_character_rendered_model); Enemy_Data::Test_Enemy.maintain(window); NPCS::Test_Npcs.test_npc_maintain(window)
+    Window_Class.player_attack_bounding_box(window)
+    window.draw(Ground); Enemy_Data::Test_Enemy.maintain(window); NPCS::Test_Npcs.test_npc_maintain(window); window.draw(@@player_character_rendered_model);
+    
    end
+#=======================================================================================================================================+
+#---------------------------------------------------------------------------------------------------------------------------------------+
+#==========================================================Animations===================================================================+
+   #====================================================Idle Animations=================================================================+
+    def Window_Class.idle_animation_right(window)
+    end
+   #====================================================================================================================================+
+   #====================================================Attack Animations===============================================================+
+    #------------------------------------------------------Left Swing------------------------------------------------------------------+
+     @@frame = 0
+     def Window_Class.attack_swing_left(@@player_character_rendered_model, window)
+      @@frame += 1
+      if @@frame  > 0 && @@frame  < 2
+       All_Audio::SFX.stick_swing_01
+        @@player_character_rendered_model.texture_rect = SF.int_rect(0, 768, 96, 128)
+      else if @@frame  > 3 && @@frame  < 5
+        @@player_character_rendered_model.texture_rect = SF.int_rect(96, 768, 96, 128)
+      else if @@frame  > 6 && @@frame  < 8
+        @@player_character_rendered_model.texture_rect = SF.int_rect(192, 768, 96, 128)
+      else if @@frame  > 9 && @@frame  < 11
+        @@player_character_rendered_model.texture_rect = SF.int_rect(288, 768, 96, 128)
+      else if @@frame  > 11
+        @@frame = 0
+      end; end; end; end; end
+     end
+    #----------------------------------------------------------------------------------------------------------------------------------+
+    #------------------------------------------------------Right Swing-----------------------------------------------------------------+
+     @@frame = 0
+     def Window_Class.attack_swing_right(@@player_character_rendered_model, window)
+      @@frame += 1
+      if @@frame  > 0 && @@frame  < 2
+       All_Audio::SFX.stick_swing_01
+        @@player_character_rendered_model.texture_rect = SF.int_rect(0, 512, 96, 128)
+      else if @@frame  > 3 && @@frame  < 5
+        @@player_character_rendered_model.texture_rect = SF.int_rect(96, 512, 96, 128)
+      else if @@frame  > 6 && @@frame  < 8
+        @@player_character_rendered_model.texture_rect = SF.int_rect(192, 512, 96, 128)
+      else if @@frame  > 9 && @@frame  < 11
+        @@player_character_rendered_model.texture_rect = SF.int_rect(288, 512, 96, 128)
+      else if @@frame  > 11
+        @@frame = 0
+      end; end; end; end; end
+     end
+    #----------------------------------------------------------------------------------------------------------------------------------+
 #=======================================================================================================================================+
 #---------------------------------------------------------------------------------------------------------------------------------------+
 #========================================================Window Functions===============================================================+
@@ -485,12 +545,17 @@ extend self
       Window_Class.char_creation_menu_keypresses(window)
     when "HUD"
       Window_Class.hud_keypresses(window)
+      Window_Class.check_if_idle(window)
       if @@dialog == true
-    #    Window_Class.dialog_keypresses(window)
-   #   case @@map
-    #   when "test"
-       # NPCS::Test_Npcs.click(window, @@player_character_rendered_model)
        end
+    end
+   end
+   def Window_Class.check_if_idle(window)
+    if SF::Event::KeyPressed == true
+      @@idle = false
+    else
+      @@idle = true
+      @@attacking = false
     end
    end
 #//////////////////////////////////////////////////////Character Creation///////////////////////////////////////////////////////////////+
@@ -1439,6 +1504,14 @@ def Window_Class.hud_keypresses(window)
     when SF::Keyboard::Backspace
       @@popup = "none"
 
+    when SF::Keyboard::Enter
+      if @@has_weapon == true && WEAPON_OBJECT_ARRAY[@@current_weapon].can_swing == true
+        case @@current_direction
+      when "left"
+        Window_Class.attack_swing_left(@@player_character_rendered_model, window)
+      when "right"
+        Window_Class.attack_swing_right(@@player_character_rendered_model, window)
+      end; end
       when SF::Keyboard::Space
         NPCS::Test_Npcs.click(window, @@player_character_rendered_model)
 
@@ -1814,6 +1887,8 @@ end; end; end; end; end; end
         end; end; end; end; end; end
        end
     #---------------------------------------------------------------------------------------------------------------------------------+
+   #==================================================================================================================================+
+
    #==================================================================================================================================+
 
    #=============================================Gravity==============================================================================+

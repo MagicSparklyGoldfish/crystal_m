@@ -18,30 +18,38 @@ require "file_utils"
 
 module Equipment
    extend self
+ # ____________________________________________________________________________________________________________________________________
+ #|                                                     Equipment Variables                                                            |
+ #|____________________________________________________________________________________________________________________________________|
    @@nil_stick = Stick.new("", -1, false, false, false, 1.5, ["none"], ["none"], WEAPSOUND_01, Weapon_Rectangle_01, false)
    @@current_weapon : Int32
    @@current_weapon = -1
    @@current_weapon_object : Stick 
    @@current_weapon_object = @@nil_stick
    property = @@current_weapon
-   STICK_ARRAY = [@@stick01]
+   property = @@current_weapon_object
+   WEAPON_OBJECT_ARRAY = [] of Stick
    WEAPON_INVENTORY_ARRAY = [] of Stick
+ #======================================================================================================================================
+ # ____________________________________________________________________________________________________________________________________
+ #|                                                     Equipment Methods                                                              |
+ #|____________________________________________________________________________________________________________________________________|
    def Equipment.equip_weapon(this)
-      size = WEAPON_INVENTORY_ARRAY.size - 1
-      if this > size
-         All_Audio::SFX.light_bonk
+    size = WEAPON_INVENTORY_ARRAY.size - 1
+     if this > size
+       All_Audio::SFX.light_bonk
       else 
-         if @@current_weapon_object != Nil
-          WEAPON_INVENTORY_ARRAY.push(@@current_weapon_object)
-         end
-         if size != 0
-          @@current_weapon = WEAPON_INVENTORY_ARRAY[this].number
-          @@current_weapon_object = WEAPON_INVENTORY_ARRAY[this]
-          WEAPON_INVENTORY_ARRAY.delete(@@current_weapon_object)
-         end
-     # Gui::Window_Class.equip_weapon(this2)
-   end
-   end
+     if @@current_weapon_object != Nil
+       WEAPON_INVENTORY_ARRAY.push(@@current_weapon_object)
+      end
+     if size != 0
+       @@current_weapon = WEAPON_INVENTORY_ARRAY[this].number
+       @@current_weapon_object = WEAPON_INVENTORY_ARRAY[this]
+       WEAPON_INVENTORY_ARRAY.delete(@@current_weapon_object)
+      end
+      end
+    end
+ #======================================================================================================================================
  class Stick
  def initialize(name : String, number : Int32, can_swing : Bool, can_stab : Bool, can_shoot : Bool, atk_power : Float64, elements : Array(String), special_effects : Array(String), sfx : SF::Sound, rectangle : SF::RectangleShape, is_equipped : Bool)
     @name = name
@@ -95,6 +103,7 @@ module Equipment
  def Stick.test(window, page)
         window.draw(Weapon_Rectangle_01)
     end
+    WEAPON_OBJECT_ARRAY.push(@@stick01)
     WEAPON_INVENTORY_ARRAY.push(@@nil_stick)
     WEAPON_INVENTORY_ARRAY.push(@@stick01)
  @@nil_stick = Stick.new("", -1, false, false, false, 1.5, ["none"], ["none"], WEAPSOUND_01, Weapon_Rectangle_01, false)
