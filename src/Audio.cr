@@ -43,10 +43,30 @@ require "../src/crystal_meth.cr"
  SWING_1 = SF::SoundBuffer.from_file("audio/Stick_Swing01.wav") 
  WEAPSOUND_01 = SF::Sound.new
  WEAPSOUND_01.buffer = SWING_1
+
+ Hit_1 = SF::SoundBuffer.from_file("audio/Stick_Hit.wav")
+ WEAPSOUND_02 = SF::Sound.new
+ WEAPSOUND_02.buffer = Hit_1
+
+ Swing_2 = SF::SoundBuffer.from_file("audio/Chainsaw_Swing.wav")
+ WEAPSOUND_03 = SF::Sound.new
+ WEAPSOUND_03.buffer = Swing_2
+
+ Hit_2 = SF::SoundBuffer.from_file("audio/Chainsaw_Hit_01.wav")
+ WEAPSOUND_04 = SF::Sound.new
+ WEAPSOUND_04.buffer = Hit_2
+
+ Swing_3 = SF::SoundBuffer.from_file("audio/Laser_Club_Swing_01.wav ")
+ WEAPSOUND_05 = SF::Sound.new
+ WEAPSOUND_05.buffer = Swing_3
+
+ Hit_3 = SF::SoundBuffer.from_file("audio/Laser_Clab_Hit_01.wav")
+ WEAPSOUND_06 = SF::Sound.new
+ WEAPSOUND_06.buffer = Hit_3
 #_________________________________________________________________________________________________________________________________________________________
 
 # =======================================================================================================================================================
-#+                                                                     Music                                                                             +
+#+                                                                     Music                                                                            +
 # =======================================================================================================================================================
  TEST_SONG = SF::Music.new
  if !TEST_SONG.open_from_file("audio/Test_Song.wav")
@@ -88,10 +108,25 @@ module All_Audio
         def SFX.stick_swing_01
             WEAPSOUND_01.play
          end
+        def SFX.stick_hit_01
+            WEAPSOUND_02.play
+         end
+        def SFX.chaintana_swing_01
+            WEAPSOUND_03.play
+         end
+        def SFX.chaintana_hit_01
+            WEAPSOUND_04.play
+         end
+        def SFX.laser_club_swing_01
+            WEAPSOUND_05.play
+         end
+        def SFX.laser_club_hit_01
+            WEAPSOUND_06.play
+         end
     end #sfx class end
   class MUSIC
    def MUSIC.test_song
      TEST_SONG.play
     end
   end #music class end
-end #all audio module end
+end #all audio module end 

@@ -44,27 +44,43 @@ extend self
 #----------------------------------------------------------------------------------------------------------------------------------------+
 #====================================================Window_Class Variables==============================================================+
   @@item_type = "Consumable"
+ #-------------------------------------------------------Location Variables--------------------------------------------------------------+
   @@menu = "main"
   @@popup = "none"
   @@tab = "none"
   @@map = "none"
   @@salon = "none"
-  @@dialog : Bool; @@dialog = false;
   @@page : Int32 = 1
+ #_______________________________________________________________________________________________________________________________________+
+ #-------------------------------------------------------Game State Variables------------------------------------------------------------+
+  @@dialog : Bool; @@dialog = false;
+  @@case_frame = 0
+ #_______________________________________________________________________________________________________________________________________+
+ #---------------------------------------------------------Cursor Variables--------------------------------------------------------------+
   @@cursorposition = "up"
-  @@has_weapon : Bool; @@has_weapon = false
   @@char_select_pointer_position = 0
-  @@save_file_slot : Int32 = 0
   @@char_create_pointer_position = [1, 1]
-  @@player_character_model = SF::RenderTexture.new(672, 512)
-  @@player_character_rendered_model = SF::Sprite.new(@@player_character_model.texture)
-  #HAIR_ARRAY : Array(SF::Sprite)
-  #@@view1 = SF::View.new(SF.float_rect(0, 0, 2000, 1080))
-  @@hair_choice : Int32; @@hair_choice = 0
-  @@current_hair = 0; @@current_display_hair = 0; @@current_display_hair_string = 0
-  @@current_skin = 0; @@current_display_skin_string = 0; @@current_face = 0; @@current_shirt = 0; @@current_gloves = 0
-  @@current_pants = 0; @@current_shoes = 0; @@current_weapon = 0; @@current_direction : String; @@current_direction = "right"
-  @@idle : Bool; @@idle = true; @@attacking : Bool; @@attacking = false; @@idleframes = 0
+ #_______________________________________________________________________________________________________________________________________+
+ #-----------------------------------------------------Character State Variables---------------------------------------------------------+
+  @@has_weapon : Bool; @@has_weapon = false
+  @@idle : Bool; @@idle = true 
+  @@attacking : Bool; @@attacking = false
+  @@idleframes = 0
+  @@idle_animation_frames = 0
+ #_______________________________________________________________________________________________________________________________________+
+ #-----------------------------------------------------Character Model Variables---------------------------------------------------------+
+ @@player_character_model = SF::RenderTexture.new(672, 512)
+ @@player_character_rendered_model = SF::Sprite.new(@@player_character_model.texture)
+ @@hair_choice : Int32; @@hair_choice = 0
+ @@current_hair = 0; @@current_display_hair = 0; @@current_display_hair_string = 0
+ @@current_skin = 0; @@current_display_skin_string = 0; @@current_face = 0; @@current_shirt = 0; @@current_gloves = 0
+ @@current_pants = 0; @@current_shoes = 0; @@current_weapon = 0; @@current_direction : String; @@current_direction = "right"
+ #_______________________________________________________________________________________________________________________________________+
+ #-----------------------------------------------------------Save Variables--------------------------------------------------------------+
+  @@save_file_slot : Int32 = 0
+ #_______________________________________________________________________________________________________________________________________+
+
+ 
 
 #=======================================================================================================================================+
 #---------------------------------------------------------------------------------------------------------------------------------------+
@@ -218,11 +234,13 @@ extend self
    window.draw(LVL_Box); window.draw(LVL_Bar); window.draw(LVL_Bar_Color); window.draw(EXP_Label); window.draw(MP_Bar) 
    window.draw(MP_Bar_Color); window.draw(MP_Label); window.draw(HP_Bar); 
    window.draw(HP_Bar_Color); window.draw(HP_Label); window.draw(LVL_Label); 
-   if @@idle == true #@todo create animations for both directions
+   if @@idle == true 
     @@idleframes += 1
-    puts @@idleframes
-    if @@idleframes >= 100000
+    if @@idleframes >= 4500 && @@current_direction == "right"
     Window_Class.idle_animation_right(window)
+    else if @@idleframes >= 4500 && @@current_direction == "left"
+      Window_Class.idle_animation_left(window)
+    end
     end
   end
    end
@@ -343,14 +361,16 @@ extend self
    Use_Tab.texture_rect = SF.int_rect(0, 0, 200, 70)
    Etc_Tab.texture_rect = SF.int_rect(200, 0, 200, 70);
   end
-  def Window_Class.player_attack_bounding_box(window) #@todo make the box only appear while player is attacking
+  def Window_Class.player_attack_bounding_box(window) 
     if @@current_direction == "right"
      Player_Attack_Bounding_Box.position = @@player_character_rendered_model.position + SF.vector2(65, 25)
     end
     if @@current_direction == "left"
       Player_Attack_Bounding_Box.position = @@player_character_rendered_model.position + SF.vector2(-65, 25)
      end
+    if @@attacking == true
     window.draw(Player_Attack_Bounding_Box)
+    end
    end
 #=======================================================================================================================================+
 #---------------------------------------------------------------------------------------------------------------------------------------+
@@ -397,6 +417,8 @@ extend self
       Enemy_Data::Test_Enemy.draw; NPCS::Test_Npcs.test_npc_initialize
     end
     if @@space.contains?(@@pc_body) == false
+      @@player_character_rendered_model.texture_rect = SF.int_rect(96, 128, 96, 128)
+      @@player_character_rendered_model.position = SF.vector2(700, 300)
       @@pc_body.position = CP.v(-60, -40)
       @@space.add(@@pc_body)
     end
@@ -404,7 +426,10 @@ extend self
       @@space.add(@@pc_skin)
     end
     debug_draw.draw @@space
+    if @@attacking == true
     Window_Class.player_attack_bounding_box(window)
+    end
+
     window.draw(Ground); Enemy_Data::Test_Enemy.maintain(window); NPCS::Test_Npcs.test_npc_maintain(window); window.draw(@@player_character_rendered_model);
     
    end
@@ -413,8 +438,59 @@ extend self
 #==========================================================Animations===================================================================+
    #====================================================Idle Animations=================================================================+
     def Window_Class.idle_animation_right(window)
-      @@player_character_rendered_model.texture_rect = SF.int_rect(0, 0, 96, 128)
-    end
+      @@idle_animation_frames += 1
+      @@attacking = false
+      if @@idle_animation_frames >= 6000 && @@case_frame <= 5
+        @@case_frame += 1
+        @@idle_animation_frames = 0
+      else if @@idle_animation_frames >= 6000 && @@case_frame >= 6
+        @@case_frame = 0
+        @@idle_animation_frames = 0
+      end; end
+     case @@case_frame
+      when 0
+        @@player_character_rendered_model.texture_rect = SF.int_rect(0, 256, 96, 128)
+      when 1
+        @@player_character_rendered_model.texture_rect = SF.int_rect(96, 256, 96, 128)
+      when 2
+        @@player_character_rendered_model.texture_rect = SF.int_rect(192, 256, 96, 128)
+      when 3
+        @@player_character_rendered_model.texture_rect = SF.int_rect(288, 256, 96, 128)
+      when 4
+        @@player_character_rendered_model.texture_rect = SF.int_rect(384, 256, 96, 128)
+      when 5
+        @@player_character_rendered_model.texture_rect = SF.int_rect(480, 256, 96, 128)
+      when 6
+        @@player_character_rendered_model.texture_rect = SF.int_rect(576, 256, 96, 128)
+      end
+     end
+    def Window_Class.idle_animation_left(window) 
+      @@idle_animation_frames += 1
+      @@attacking = false
+      if @@idle_animation_frames >= 6000 && @@case_frame <= 5
+        @@case_frame += 1
+        @@idle_animation_frames = 0
+      else if @@idle_animation_frames >= 6000 && @@case_frame >= 6
+        @@case_frame = 0
+        @@idle_animation_frames = 0
+      end; end
+     case @@case_frame
+      when 0
+        @@player_character_rendered_model.texture_rect = SF.int_rect(0, 384, 96, 128)
+      when 1
+        @@player_character_rendered_model.texture_rect = SF.int_rect(96, 384, 96, 128)
+      when 2
+        @@player_character_rendered_model.texture_rect = SF.int_rect(192, 384, 96, 128)
+      when 3
+        @@player_character_rendered_model.texture_rect = SF.int_rect(288, 384, 96, 128)
+      when 4
+        @@player_character_rendered_model.texture_rect = SF.int_rect(384, 384, 96, 128)
+      when 5
+        @@player_character_rendered_model.texture_rect = SF.int_rect(480, 384, 96, 128)
+      when 6
+        @@player_character_rendered_model.texture_rect = SF.int_rect(576, 384, 96, 128)
+      end
+     end
    #====================================================================================================================================+
    #====================================================Attack Animations===============================================================+
     #------------------------------------------------------Left Swing------------------------------------------------------------------+
@@ -422,7 +498,7 @@ extend self
      def Window_Class.attack_swing_left(@@player_character_rendered_model, window)
       @@frame += 1
       if @@frame  > 0 && @@frame  < 2
-       All_Audio::SFX.stick_swing_01
+       Equipment.play_swing_sound
         @@player_character_rendered_model.texture_rect = SF.int_rect(0, 768, 96, 128)
       else if @@frame  > 3 && @@frame  < 5
         @@player_character_rendered_model.texture_rect = SF.int_rect(96, 768, 96, 128)
@@ -440,7 +516,7 @@ extend self
      def Window_Class.attack_swing_right(@@player_character_rendered_model, window)
       @@frame += 1
       if @@frame  > 0 && @@frame  < 2
-       All_Audio::SFX.stick_swing_01
+        Equipment.play_swing_sound
         @@player_character_rendered_model.texture_rect = SF.int_rect(0, 512, 96, 128)
       else if @@frame  > 3 && @@frame  < 5
         @@player_character_rendered_model.texture_rect = SF.int_rect(96, 512, 96, 128)
@@ -564,7 +640,7 @@ extend self
       @@idleframes = 0
     else
       @@idle = true
-      @@attacking = false
+      #@@attacking = false
     end
    end
 #//////////////////////////////////////////////////////Character Creation///////////////////////////////////////////////////////////////+
@@ -1518,15 +1594,19 @@ def Window_Class.hud_keypresses(window)
       if @@has_weapon == true && WEAPON_OBJECT_ARRAY[@@current_weapon].can_swing == true
         case @@current_direction
       when "left"
+        @@attacking = true
         Window_Class.attack_swing_left(@@player_character_rendered_model, window)
       when "right"
+        @@attacking = true
         Window_Class.attack_swing_right(@@player_character_rendered_model, window)
       end; end
       when SF::Keyboard::Space
+        @@attacking = false
         NPCS::Test_Npcs.click(window, @@player_character_rendered_model)
 
       when SF::Keyboard::D
         @@idleframes = 0
+        @@attacking = false
         Player_Data::Player_Physics.wasd_right(@@player_character_rendered_model)
         if @@current_direction == "left"
         this = "right"
@@ -1536,6 +1616,7 @@ def Window_Class.hud_keypresses(window)
         
       when SF::Keyboard::A
         @@idleframes = 0
+        @@attacking = false
         Player_Data::Player_Physics.wasd_left(@@player_character_rendered_model)
         if @@current_direction == "right"
         this = "left"
@@ -1544,6 +1625,7 @@ def Window_Class.hud_keypresses(window)
         window.draw(@@player_character_rendered_model)
       when SF::Keyboard::W
         @@idleframes = 0
+        @@attacking = false
         Player_Data::Player_Physics.wasd_up(@@player_character_rendered_model, window)
         window.draw(@@player_character_rendered_model)
         

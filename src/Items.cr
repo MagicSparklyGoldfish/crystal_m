@@ -21,7 +21,7 @@ module Equipment
  # ____________________________________________________________________________________________________________________________________
  #|                                                     Equipment Variables                                                            |
  #|____________________________________________________________________________________________________________________________________|
-   @@nil_stick = Stick.new("", -1, false, false, false, 1.5, ["none"], ["none"], WEAPSOUND_01, Weapon_Rectangle_01, false)
+   @@nil_stick = Stick.new("", -1, false, false, false, 1.5, ["none"], ["none"], WEAPSOUND_01, WEAPSOUND_02, Weapon_Rectangle_01, false)
    @@current_weapon : Int32
    @@current_weapon = -1
    @@current_weapon_object : Stick 
@@ -49,9 +49,15 @@ module Equipment
       end
       end
     end
+   def Equipment.play_swing_sound
+    @@current_weapon_object.swing_sound.play
+   end
+   def Equipment.play_hit_sound
+    @@current_weapon_object.hit_sound.play
+   end
  #======================================================================================================================================
  class Stick
- def initialize(name : String, number : Int32, can_swing : Bool, can_stab : Bool, can_shoot : Bool, atk_power : Float64, elements : Array(String), special_effects : Array(String), sfx : SF::Sound, rectangle : SF::RectangleShape, is_equipped : Bool)
+ def initialize(name : String, number : Int32, can_swing : Bool, can_stab : Bool, can_shoot : Bool, atk_power : Float64, elements : Array(String), special_effects : Array(String), swing_sound : SF::Sound, hit_sound : SF::Sound, rectangle : SF::RectangleShape, is_equipped : Bool)
     @name = name
     @number = number
     @can_swing = can_swing
@@ -60,7 +66,8 @@ module Equipment
     @atk_power = atk_power
     @elements = elements
     @special_effects = special_effects
-    @sfx = sfx
+    @swing_sound = swing_sound
+    @hit_sound = hit_sound
     @rectangle = rectangle
     @is_equipped = is_equipped
   end
@@ -91,10 +98,13 @@ module Equipment
  def special_effects
     @special_effects
   end
- def sfx
-    @sfx
+ def swing_sound
+    @swing_sound
   end
-  def rectangle
+ def hit_sound
+  @hit_sound
+  end
+ def rectangle
    @rectangle
   end
  def is_equipped
@@ -106,7 +116,7 @@ module Equipment
     WEAPON_OBJECT_ARRAY.push(@@stick01)
     WEAPON_INVENTORY_ARRAY.push(@@nil_stick)
     WEAPON_INVENTORY_ARRAY.push(@@stick01)
- @@nil_stick = Stick.new("", -1, false, false, false, 1.5, ["none"], ["none"], WEAPSOUND_01, Weapon_Rectangle_01, false)
- @@stick01 = Stick.new("Stick", 0, true, false, false, 1.5, ["none"], ["none"], WEAPSOUND_01, Weapon_Rectangle_01, false)
+ @@nil_stick = Stick.new("", -1, false, false, false, 1.5, ["none"], ["none"], WEAPSOUND_01, WEAPSOUND_02, Weapon_Rectangle_01, false)
+ @@stick01 = Stick.new("Stick", 0, true, false, false, 1.5, ["none"], ["none"], WEAPSOUND_01, WEAPSOUND_02, Weapon_Rectangle_01, false)
  end
 end
