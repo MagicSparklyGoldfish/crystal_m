@@ -64,7 +64,7 @@ extend self
   @@current_hair = 0; @@current_display_hair = 0; @@current_display_hair_string = 0
   @@current_skin = 0; @@current_display_skin_string = 0; @@current_face = 0; @@current_shirt = 0; @@current_gloves = 0
   @@current_pants = 0; @@current_shoes = 0; @@current_weapon = 0; @@current_direction : String; @@current_direction = "right"
-  @@idle : Bool; @@idle = true; @@attacking : Bool; @@attacking = false
+  @@idle : Bool; @@idle = true; @@attacking : Bool; @@attacking = false; @@idleframes = 0
 
 #=======================================================================================================================================+
 #---------------------------------------------------------------------------------------------------------------------------------------+
@@ -218,6 +218,13 @@ extend self
    window.draw(LVL_Box); window.draw(LVL_Bar); window.draw(LVL_Bar_Color); window.draw(EXP_Label); window.draw(MP_Bar) 
    window.draw(MP_Bar_Color); window.draw(MP_Label); window.draw(HP_Bar); 
    window.draw(HP_Bar_Color); window.draw(HP_Label); window.draw(LVL_Label); 
+   if @@idle == true #@todo create animations for both directions
+    @@idleframes += 1
+    puts @@idleframes
+    if @@idleframes >= 100000
+    Window_Class.idle_animation_right(window)
+    end
+  end
    end
   def Window_Class.system_popup(window)
     view4 = SF::View.new(SF.float_rect(1700, 810, 150, 150))
@@ -295,18 +302,18 @@ extend self
     this = @@salon
     Hair.display_offered_hair(this, window)
    end
- def Window_Class.salon_confirm_tab(window)
-  Window_Class.salon(window)
-  salon_confirm_box = Choice_Box.dup; salon_confirm_box.position = SF.vector2(735, 390); salon_confirm_box.scale = SF.vector2(1.5, 1.5)
-  salon_option_1 = Choice_Box_Option.dup; salon_option_1.position = SF.vector2(750, 525); salon_option_1.scale = SF.vector2(1.5, 1.5)
-  salon_option_2 = salon_option_1.dup; salon_option_1.position = SF.vector2(1020, 525); salon_confirm_text = Dialog_Box_Text.dup
-  salon_confirm_text.character_size = 40
-  salon_confirm_text.position = SF.vector2(805, 390); salon_confirm_text.string = "Would you like this \n    hair style?"
-  salon_confirm_option_1 = salon_confirm_text.dup; salon_confirm_option_1.position = SF.vector2(795, 530)
-  salon_confirm_option_1.string = "Yes               No"
-  window.draw(salon_confirm_box); window.draw(salon_option_1); window.draw(salon_option_2); window.draw(salon_confirm_text)
-  window.draw(salon_confirm_option_1)
- end
+  def Window_Class.salon_confirm_tab(window)
+    Window_Class.salon(window)
+    salon_confirm_box = Choice_Box.dup; salon_confirm_box.position = SF.vector2(735, 390); salon_confirm_box.scale = SF.vector2(1.5, 1.5)
+    salon_option_1 = Choice_Box_Option.dup; salon_option_1.position = SF.vector2(750, 525); salon_option_1.scale = SF.vector2(1.5, 1.5)
+    salon_option_2 = salon_option_1.dup; salon_option_1.position = SF.vector2(1020, 525); salon_confirm_text = Dialog_Box_Text.dup
+    salon_confirm_text.character_size = 40
+    salon_confirm_text.position = SF.vector2(805, 390); salon_confirm_text.string = "Would you like this \n    hair style?"
+    salon_confirm_option_1 = salon_confirm_text.dup; salon_confirm_option_1.position = SF.vector2(795, 530)
+    salon_confirm_option_1.string = "Yes               No"
+    window.draw(salon_confirm_box); window.draw(salon_option_1); window.draw(salon_option_2); window.draw(salon_confirm_text)
+    window.draw(salon_confirm_option_1)
+   end
  def Window_Class.inventory(window)
   view5 = SF::View.new(SF.float_rect(0, 0, 1920, 1080))
   view5.viewport = SF.float_rect(0, 0, 1, 1)
@@ -406,6 +413,7 @@ extend self
 #==========================================================Animations===================================================================+
    #====================================================Idle Animations=================================================================+
     def Window_Class.idle_animation_right(window)
+      @@player_character_rendered_model.texture_rect = SF.int_rect(0, 0, 96, 128)
     end
    #====================================================================================================================================+
    #====================================================Attack Animations===============================================================+
@@ -553,6 +561,7 @@ extend self
    def Window_Class.check_if_idle(window)
     if SF::Event::KeyPressed == true
       @@idle = false
+      @@idleframes = 0
     else
       @@idle = true
       @@attacking = false
@@ -1505,6 +1514,7 @@ def Window_Class.hud_keypresses(window)
       @@popup = "none"
 
     when SF::Keyboard::Enter
+      @@idleframes = 0
       if @@has_weapon == true && WEAPON_OBJECT_ARRAY[@@current_weapon].can_swing == true
         case @@current_direction
       when "left"
@@ -1516,6 +1526,7 @@ def Window_Class.hud_keypresses(window)
         NPCS::Test_Npcs.click(window, @@player_character_rendered_model)
 
       when SF::Keyboard::D
+        @@idleframes = 0
         Player_Data::Player_Physics.wasd_right(@@player_character_rendered_model)
         if @@current_direction == "left"
         this = "right"
@@ -1524,6 +1535,7 @@ def Window_Class.hud_keypresses(window)
         window.draw(@@player_character_rendered_model)
         
       when SF::Keyboard::A
+        @@idleframes = 0
         Player_Data::Player_Physics.wasd_left(@@player_character_rendered_model)
         if @@current_direction == "right"
         this = "left"
@@ -1531,6 +1543,7 @@ def Window_Class.hud_keypresses(window)
         end
         window.draw(@@player_character_rendered_model)
       when SF::Keyboard::W
+        @@idleframes = 0
         Player_Data::Player_Physics.wasd_up(@@player_character_rendered_model, window)
         window.draw(@@player_character_rendered_model)
         
