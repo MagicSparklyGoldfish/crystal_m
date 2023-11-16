@@ -2260,10 +2260,16 @@ module Enemy_Data # @note Enemy data is stored here
       ground_box =  Ground.global_bounds
     if this.intersects? ground_box
       fallrate = 0
-  else
+    else
       this2.position += SF.vector2(0, 0.95)
-  end
-    end  
+    end
+    end 
+    def Enemy_Physics.hit_enemy(this)
+      attack = Player_Attack_Bounding_Box.global_bounds
+      if this.intersects? attack
+        Equipment.play_hit_sound
+      end
+    end 
   end
   class Test_Enemy < Enemy_Physics
      def initialize(name : String, sprite : SF::Sprite, max_hp : Int32, current_hp : Int32)
@@ -2348,7 +2354,7 @@ module Enemy_Data # @note Enemy data is stored here
     end
     def Test_Enemy.maintain(window) #@todo tidy this shit up
      #---------------------------------------------test humanoid 1----------------------------------------------------------------------
-      window.draw(@@test_humanoid.sprite); 
+      window.draw(@@test_humanoid.sprite); Enemy_Physics.hit_enemy(@@test_humanoid.sprite.global_bounds)
       name01 = Name_Box.dup; name01.position = @@test_humanoid.sprite.position + SF.vector2(-10, 130); window.draw(name01)
       nametext01 = Name_Box_Text.dup; nametext01.string = "Test Humanoid"; nametext01.position = name01.position - SF.vector2(-3, 5)
       window.draw(nametext01); health1 = Health_Bar.dup; health1.position = @@test_humanoid.sprite.position + SF.vector2(-5, 160)
@@ -2364,6 +2370,7 @@ module Enemy_Data # @note Enemy data is stored here
       bounding_boxes = [@@test_humanoid.sprite.global_bounds, @@test_humanoid2.sprite.global_bounds]
       sprites = [@@test_humanoid.sprite, @@test_humanoid2.sprite]
       this = bounding_boxes[0]; this2 = sprites[0]
+      Enemy_Physics.hit_enemy(this)
       Enemy_Physics.gravity(this, this2)
       this = bounding_boxes[1]; this2 = sprites[1]
       Enemy_Physics.gravity(this, this2)

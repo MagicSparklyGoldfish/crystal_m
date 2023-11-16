@@ -56,7 +56,7 @@ require "../src/crystal_meth.cr"
  WEAPSOUND_04 = SF::Sound.new
  WEAPSOUND_04.buffer = Hit_2
 
- Swing_3 = SF::SoundBuffer.from_file("audio/Laser_Club_Swing_01.wav ")
+ Swing_3 = SF::SoundBuffer.from_file("audio/Laser_Club_Swing_01.wav")
  WEAPSOUND_05 = SF::Sound.new
  WEAPSOUND_05.buffer = Swing_3
 
