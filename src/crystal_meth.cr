@@ -402,7 +402,7 @@ extend self
     debug_draw.draw @@space
    end
   def Window_Class.attack_check_test_map
-    #Harvestables::Ore.harvest(@@attacking)
+    Harvestables::Ore.harvest(@@attacking)
     event = "mining_ore"
     this = Bloodstone_Ore.global_bounds
     Window_Class.check_attacking(this, event)

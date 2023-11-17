@@ -380,6 +380,14 @@
     Weapon_Rectangle_01 = SF::RectangleShape.new(SF.vector2(140, 140));
     Weapon_Rectangle_01.set_texture(WEAPON_DISPLAY_TEXTURE_01, reset_rect: false);  Weapon_Rectangle_01.position = SF.vector2(555, 310);
     Weapon_Rectangle_01.texture_rect = SF.int_rect(0, 0, 140, 140);
+  #--------------------------------------------------ETC item Textures--------------------------------------------------------------
+   #......................................................Rocks.....................................................................
+    #''''''''''''''''''''''''''''''''''''''''''''''''''Bloodstone'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     BLOODSTONE_INVENTORY_ORE_TEXTURE = SF::Texture.from_file("graphics/Bloodstone_Ore.png")
+     Bloodstone_Inventory_Ore = SF::Sprite.new(BLOODSTONE_INVENTORY_ORE_TEXTURE)  
+    #''''''''''''''''''''''''''''''''''''''''''''''''''Moss Agate'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     MOSS_AGATE_INVENTORY_ORE_TEXTURE = SF::Texture.from_file("graphics/Moss_Agate_Ore.png")
+     Moss_Agate_Inventory_Ore = SF::Sprite.new(MOSS_AGATE_INVENTORY_ORE_TEXTURE)  
 #-----------------------------------------------------------------------------------------------------------------------------------
 #                                                    Character Model
 #-----------------------------------------------------------------------------------------------------------------------------------
@@ -1767,6 +1775,10 @@
   Ore_Box = SF::RectangleShape.new(SF.vector2(100, 100)); Ore_Box.position = SF.vector2(1800, 700); Ore_Box.fill_color = SF.color(255, 255, 255)
   Bloodstone_Ore = SF::Sprite.new(BLOODSTONE_TEXTURE); Bloodstone_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
   Bloodstone_Ore.position = SF.vector2(1800, 702)
+
+  MOSS_AGATE_TEXTURE = SF::Texture.from_file("graphics/Moss_Agate.png")
+  Moss_Agate_Ore = SF::Sprite.new(MOSS_AGATE_TEXTURE); Moss_Agate_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
+  Moss_Agate_Ore.position = SF.vector2(2200, 702)
 #______________________________________________________________________________________________________________________________________
 Testing_Text = SF::Text.new; Testing_Text.font = FONT_PIXEL; 
 Testing_Text.character_size = 20; Testing_Text.color = SF::Color::White; Testing_Text.position = SF.vector2(1800, 652)

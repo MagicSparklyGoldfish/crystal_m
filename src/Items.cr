@@ -124,15 +124,81 @@ module Equipment
  @@stick01 = Stick.new("Stick", 0, true, false, false, 1.5, ["none"], ["none"], WEAPSOUND_01, WEAPSOUND_02, Weapon_Rectangle_01, false)
  end
 end
+module Etc
+  extend self
+ # _________________________________________________________________________________________________________________________________________________________
+ #|                                                              Etc Variables                                                                              |
+ #|_________________________________________________________________________________________________________________________________________________________|
+   Inventory_Ore_Array = [] of Inventory_Ore
+
+  class Inventory_Ore
+   #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+   #!                                                              Initialize                                                                              !
+   #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    def initialize(name : String, id : Int32, sprite : SF::Sprite, amount_owned : Int32, color : String, element : String, effect : String, sell_price : Int32)
+      @name = name
+      @id = id
+      @sprite = sprite
+      @amount_owned = amount_owned
+      @color = color
+      @element = element
+      @effect = effect
+      @sell_price = sell_price
+     end
+    def name
+      @name
+     end
+    def id
+      @id
+     end
+    def sprite
+      @sprite
+     end
+    def amount_owned
+      @amount_owned
+     end
+    def color
+      @color
+     end
+    def element
+      @element
+     end
+    def effect
+      @effect
+     end
+    def sell_price
+      @sell_price
+     end
+   #________________________________________________________________________________________________________________________________________________________
+   #????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
+   #?                                                               Methods                                                                                ?
+   #????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
+    def add_ore(amount)
+      @amount_owned += amount
+     end
+    def remove_ore(amount)
+      @amount_owned -= amount
+    end
+   #________________________________________________________________________________________________________________________________________________________
+   #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+   #/                                                               Entities                                                                               /
+   #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    @@bloodstone_inventory_ore = Inventory_Ore.new("Bloodstone Ore", 1, Bloodstone_Inventory_Ore, 0, "red", "life", "hp+", 70)
+    @@moss_agate_inventory_ore = Inventory_Ore.new("Moss_Agate", 1, Moss_Agate_Inventory_Ore, 0, "green", "life", "passive_mp_regen", 60)
+   #________________________________________________________________________________________________________________________________________________________
+  end
+end
+
 
 module Harvestables
+  extend self
   class Ore
-    Test_Ore_Array = [@@bloodstone_01, @@bloodstone_02, @@bloodstone_03]
-    Test_Ore_Sprite_Array = [@@bloodstone_01.sprite, @@bloodstone_02.sprite, @@bloodstone_03.sprite]
+    Test_Ore_Array = [@@bloodstone_01, @@bloodstone_02, @@bloodstone_03, @@moss_agate_01]
+    Test_Ore_Sprite_Array = [@@bloodstone_01.sprite, @@bloodstone_02.sprite, @@bloodstone_03.sprite, @@moss_agate_01.sprite]
    #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
    #+                                                              Variables                                                                               +
    #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-   @@ore_animation_frame = 0; @@ore_reset = 0
+   @@ore_animation_frame = 0; @@ore_reset = 0; @@ore_break_iterator = 0
    #________________________________________________________________________________________________________________________________________________________
    #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
    #!                                                              Initialize                                                                              !
@@ -207,18 +273,21 @@ module Harvestables
        def global_bounds
         @global_bounds
        end
-       def Ore.check_collision_test(attack) #@todo figure out WHY this works
-        bounce = false              
-        player_attack = Player_Attack_Bounding_Box.global_bounds
-        x = 0; y = Test_Ore_Array.size - 1
-        if Test_Ore_Sprite_Array.each { |x| x.global_bounds.intersects? player_attack } #holy shit I did not think this would actually work wtf!?
-          this = Test_Ore_Array[x]
-          Test_Ore_Array[x].hit_ore_test(attack, this)
-          bounce = true
-          Ore_Clock_01.restart
-        else
-          x += 1
-        end; end
+       def Ore.harvest2(attack, this, ore)
+        time = Ore_Clock_01.elapsed_time
+        attack2 = Player_Attack_Bounding_Box.global_bounds
+        #ore = @@bloodstone_01.sprite.global_bounds
+       if attack2.intersects? this
+       if ore.hp > 0
+       if time >= SF.seconds(0.35) && attack == true
+         Equipment.play_hit_sound
+         ore.hp_subtract(10)
+         Ore.animation_harvest(this, ore)
+         Ore_Clock_01.restart
+        end; end; end
+
+
+        end
       def hit_ore_test(attack, this)
         time = Ore_Clock_01.elapsed_time
         if time >= SF.seconds(0.35) && attack == true
@@ -236,60 +305,58 @@ module Harvestables
    #????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
     Ore_Clock_01 = SF::Clock.new; Ore_Clock_Break = SF::Clock.new
     def Ore.harvest(attack)
-      Ore.check_collision_test(attack)
-      time = Ore_Clock_01.elapsed_time
-      attack2 = Player_Attack_Bounding_Box.global_bounds
-      ore = @@bloodstone_01.sprite.global_bounds
-     if attack2.intersects? ore
-     if @@bloodstone_01.hp > 0
-     if time >= SF.seconds(0.35) && attack == true
-       Equipment.play_hit_sound
-       @@bloodstone_01.hp_subtract(10)
-     #  puts @@bloodstone_01.hp
-       Ore.animation_harvest
-       Ore_Clock_01.restart
-      end; end; end
+      x = 0; y = Test_Ore_Array.size - 1
+      while x <= y
+      Test_Ore_Array[x]
+      ore = Test_Ore_Array[x]
+      Test_Ore_Array[x].sprite.global_bounds
+      this = Test_Ore_Array[x].sprite.global_bounds
+      Ore.harvest2(attack, this, ore)
+      if x <= y
+        x += 1
+      end
+    end
      end
     #..............................................................Animations...............................................................................
-     def Ore.animation_harvest
+     def Ore.animation_harvest(this, ore)
       Ore_Clock_Break.restart
-       if @@ore_animation_frame == 1 && @@bloodstone_01.hp >= 200
+       if @@ore_animation_frame == 1 && ore.hp >= 200
        a = 100; b = 0; x = 100; y = 100
-       @@bloodstone_01.sprite_change_square(a, b, x, y)
+       ore.sprite_change_square(a, b, x, y)
        end
        if @@ore_animation_frame == 2
          a = 200; b = 0; x = 100; y = 100
-         @@bloodstone_01.sprite_change_square(a, b, x, y)
+         ore.sprite_change_square(a, b, x, y)
        end
        if @@ore_animation_frame == 3
          a = 300; b = 0; x = 100; y = 100
-         @@bloodstone_01.sprite_change_square(a, b, x, y)
+         ore.sprite_change_square(a, b, x, y)
        end
        if @@ore_animation_frame == 4
          a = 400; b = 0; x = 100; y = 100
-         @@bloodstone_01.sprite_change_square(a, b, x, y)
+         ore.sprite_change_square(a, b, x, y)
          @@ore_animation_frame = 0
        end
        @@ore_animation_frame += 1
-       if @@bloodstone_01.hp < 200 && @@bloodstone_01.hp > 0
+       if ore.hp < 200 && ore.hp > 0
          case @@ore_animation_frame 
          when 1
           a = 100; b = 100; x = 100; y = 100
-          @@bloodstone_01.sprite_change_square(a, b, x, y)
+          ore.sprite_change_square(a, b, x, y)
          when 2
           a = 200; b = 100; x = 100; y = 100
-          @@bloodstone_01.sprite_change_square(a, b, x, y)
+          ore.sprite_change_square(a, b, x, y)
          when 3
            a = 300; b = 100; x = 100; y = 100
-           @@bloodstone_01.sprite_change_square(a, b, x, y)
+           ore.sprite_change_square(a, b, x, y)
          when 4
            a = 400; b = 100; x = 100; y = 100
-           @@bloodstone_01.sprite_change_square(a, b, x, y)
-        if @@bloodstone_01.hp >= 0
+           ore.sprite_change_square(a, b, x, y)
+        if ore.hp >= 0
 
          end; end; end; end
-      def Ore.break
-        if @@bloodstone_01.hp >= 0 && @@bloodstone_01.is_broke == false
+      def Ore.break(broken)
+        if broken.hp >= 0 && broken.is_broke == false
         if @@ore_reset == 0
           Ore_Clock_Break.restart
           @@ore_reset = 1
@@ -297,39 +364,52 @@ module Harvestables
            time = Ore_Clock_Break.elapsed_time
           if time >= SF.seconds(0.25) && time < SF.seconds(0.5)
            a = 0; b = 200; x = 100; y = 100
-           @@bloodstone_01.sprite_change_square(a, b, x, y)
+           broken.sprite_change_square(a, b, x, y)
      else if time >= SF.seconds(0.5) && time < SF.seconds(0.75)
            a = 100; b = 200; x = 100; y = 100
-           @@bloodstone_01.sprite_change_square(a, b, x, y)
+           broken.sprite_change_square(a, b, x, y)
      else if time >= SF.seconds(0.75) && time < SF.seconds(1)
            a = 200; b = 200; x = 100; y = 100
-           @@bloodstone_01.sprite_change_square(a, b, x, y)
+           broken.sprite_change_square(a, b, x, y)
      else if time >= SF.seconds(1) && time < SF.seconds(1.25)
            a = 300; b = 200; x = 100; y = 100
-           @@bloodstone_01.sprite_change_square(a, b, x, y)
+           broken.sprite_change_square(a, b, x, y)
      else if time >= SF.seconds(1.25) && time < SF.seconds(1.5)
             a = 400; b = 200; x = 100; y = 100
-            @@bloodstone_01.sprite_change_square(a, b, x, y)
+            broken.sprite_change_square(a, b, x, y)
      else if time >= SF.seconds(1.5) && time < SF.seconds(1.75)
-           @@bloodstone_01.is_broke_toggle   
+      broken.is_broke_toggle   
      else if time >= SF.seconds(30) 
       Ore_Clock_Break.restart
            this = 500
-           @@bloodstone_01.hp_set(this)
+           broken.hp_set(this)
            a = 0; b = 0; x = 100; y = 100
-           @@bloodstone_01.sprite_change_square(a, b, x, y)
-           this = @@bloodstone_01.is_broke  
-           @@bloodstone_01.is_broke_toggle 
+           broken.sprite_change_square(a, b, x, y)
+           this = broken.is_broke  
+           broken.is_broke_toggle 
            Ore_Clock_Break.restart
        end; end; end; end; end; end; end; end
     #-------------------------------------------------------------------------------------------------------------------------------------------------     
     def Ore.draw_ores(window)
-      if @@bloodstone_01.hp <= 0 #&& @@bloodstone_01.is_broke == false
-        Ore.break
+      s = Test_Ore_Array.size - 1
+      if Test_Ore_Array[@@ore_break_iterator].hp <= 0 && Test_Ore_Array[@@ore_break_iterator].is_broke == false
+        broken = Test_Ore_Array[@@ore_break_iterator]
+        Ore.break(broken)
+      end
+      if @@ore_break_iterator < s
+        @@ore_break_iterator += 1
+      else
+        @@ore_break_iterator = 0
       end
       Testing_Text.string = @@bloodstone_01.hp.to_s + Ore_Clock_Break.elapsed_time.to_s
+      test_text_2 = Testing_Text.dup; test_text_2.string = @@bloodstone_02.hp.to_s + Ore_Clock_Break.elapsed_time.to_s
+      test_text_3 = Testing_Text.dup; test_text_3.string = @@moss_agate_01.hp.to_s + Ore_Clock_Break.elapsed_time.to_s
       window.draw(Testing_Text)
-      window.draw(@@bloodstone_01.sprite)
+      @@bloodstone_02.sprite.position = SF.vector2(2500, 702)
+      test_text_2.position = @@bloodstone_02.sprite.position
+      test_text_3.position = @@moss_agate_01.sprite.position
+      window.draw(@@bloodstone_01.sprite); window.draw(@@bloodstone_02.sprite); window.draw(test_text_2)
+      window.draw(@@moss_agate_01.sprite); window.draw(test_text_3)
     end
    #________________________________________________________________________________________________________________________________________________________
    #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -337,8 +417,14 @@ module Harvestables
    #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     #..............................................................Bloodstone...............................................................................
      @@bloodstone_01 = Ore.new("Bloodstone", 1, "red", 7, 500, "life", "hp+", 70, Bloodstone_Ore, false) 
-     @@bloodstone_02 = Ore.new("Bloodstone", 2, "red", 7, 500, "life", "hp+", 70, Bloodstone_Ore, false)
+     @@bloodstone_02 = Ore.new("Bloodstone", 2, "red", 7, 500, "life", "hp+", 70, Bloodstone_Ore.dup, false)
      @@bloodstone_03 = Ore.new("Bloodstone", 3, "red", 7, 500, "life", "hp+", 70, Bloodstone_Ore, false)
+     @@bloodstone_04 = Ore.new("Bloodstone", 4, "red", 7, 500, "life", "hp+", 70, Bloodstone_Ore, false)
+     @@bloodstone_05 = Ore.new("Bloodstone", 5, "red", 7, 500, "life", "hp+", 70, Bloodstone_Ore, false)
+     @@bloodstone_06 = Ore.new("Bloodstone", 6, "red", 7, 500, "life", "hp+", 70, Bloodstone_Ore, false)
+    #.......................................................................................................................................................
+    #..............................................................Moss Stone...............................................................................
+     @@moss_agate_01 = Ore.new("Moss Agate", 7, "green", 7, 450, "Life", "passive_mp_regen", 60, Moss_Agate_Ore, false)
     #.......................................................................................................................................................
    #________________________________________________________________________________________________________________________________________________________
   end
