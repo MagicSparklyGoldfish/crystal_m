@@ -127,6 +127,8 @@ end
 
 module Harvestables
   class Ore
+    Test_Ore_Array = [@@bloodstone_01, @@bloodstone_02, @@bloodstone_03]
+    Test_Ore_Sprite_Array = [@@bloodstone_01.sprite, @@bloodstone_02.sprite, @@bloodstone_03.sprite]
    #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
    #+                                                              Variables                                                                               +
    #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -202,10 +204,31 @@ module Harvestables
           end
          end; end
        #,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Test Map,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-       def check_collision_test(attack)
-        player_attack = Player_Attack_Bounding_Box.global_bounds
-
+       def global_bounds
+        @global_bounds
        end
+       def Ore.check_collision_test(attack) #@todo figure out WHY this works
+        bounce = false              
+        player_attack = Player_Attack_Bounding_Box.global_bounds
+        x = 0; y = Test_Ore_Array.size - 1
+        if Test_Ore_Sprite_Array.each { |x| x.global_bounds.intersects? player_attack } #holy shit I did not think this would actually work wtf!?
+          this = Test_Ore_Array[x]
+          Test_Ore_Array[x].hit_ore_test(attack, this)
+          bounce = true
+          Ore_Clock_01.restart
+        else
+          x += 1
+        end; end
+      def hit_ore_test(attack, this)
+        time = Ore_Clock_01.elapsed_time
+        if time >= SF.seconds(0.35) && attack == true
+          Equipment.play_hit_sound
+          this.hp_subtract(10)
+          Ore_Clock_01.restart
+        end
+
+    end
+
     #_______________________________________________________________________________________________________________________________________________________
    #________________________________________________________________________________________________________________________________________________________
    #????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
@@ -213,7 +236,7 @@ module Harvestables
    #????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
     Ore_Clock_01 = SF::Clock.new; Ore_Clock_Break = SF::Clock.new
     def Ore.harvest(attack)
-      @@bloodstone_01.check_collision_test(attack)
+      Ore.check_collision_test(attack)
       time = Ore_Clock_01.elapsed_time
       attack2 = Player_Attack_Bounding_Box.global_bounds
       ore = @@bloodstone_01.sprite.global_bounds
@@ -319,7 +342,6 @@ module Harvestables
     #.......................................................................................................................................................
    #________________________________________________________________________________________________________________________________________________________
   end
-  Ore_Array = [@@bloodstone_01, @@bloodstone_02, @@bloodstone_03]
 end
 
 # if time >= SF.seconds(0.35) && @@attacking == true
