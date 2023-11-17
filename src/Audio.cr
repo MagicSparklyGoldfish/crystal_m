@@ -63,6 +63,14 @@ require "../src/crystal_meth.cr"
  Hit_3 = SF::SoundBuffer.from_file("audio/Laser_Clab_Hit_01.wav")
  WEAPSOUND_06 = SF::Sound.new
  WEAPSOUND_06.buffer = Hit_3
+
+ Dig_1 = SF::SoundBuffer.from_file("audio/Dig_01.wav")
+ ENVIROSOUND_01 = SF::Sound.new
+ ENVIROSOUND_01.buffer = Dig_1
+
+ Dig_2 = SF::SoundBuffer.from_file("audio/Dig_2.wav")
+ ENVIROSOUND_02 = SF::Sound.new
+ ENVIROSOUND_02.buffer = Dig_2
 #_________________________________________________________________________________________________________________________________________________________
 
 # =======================================================================================================================================================
@@ -123,6 +131,12 @@ module All_Audio
         def SFX.laser_club_hit_01
             WEAPSOUND_06.play
          end
+        def SFX.dig_01
+            ENVIROSOUND_01.play
+        end
+        def SFX.dig_02
+            ENVIROSOUND_02.play
+        end
     end #sfx class end
   class MUSIC
    def MUSIC.test_song

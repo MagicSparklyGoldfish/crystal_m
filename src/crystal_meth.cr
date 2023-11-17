@@ -236,9 +236,9 @@ extend self
    window.draw(HP_Bar_Color); window.draw(HP_Label); window.draw(LVL_Label); 
    if @@idle == true 
     @@idleframes += 1
-    if @@idleframes >= 4500 && @@current_direction == "right"
+    if @@idleframes >= 2200 && @@current_direction == "right"
     Window_Class.idle_animation_right(window)
-    else if @@idleframes >= 4500 && @@current_direction == "left"
+    else if @@idleframes >= 2200 && @@current_direction == "left"
       Window_Class.idle_animation_left(window)
     end
     end
@@ -401,6 +401,12 @@ extend self
     @@space.add(@@shape, @@pc_body, @@pc_skin)
     debug_draw.draw @@space
    end
+  def Window_Class.attack_check_test_map
+    #Harvestables::Ore.harvest(@@attacking)
+    event = "mining_ore"
+    this = Bloodstone_Ore.global_bounds
+    Window_Class.check_attacking(this, event)
+  end
 
   def Window_Class.test_map(debug_draw, window, @@space)
     window.clear(SF::Color::Transparent);
@@ -428,10 +434,13 @@ extend self
     debug_draw.draw @@space
     if @@attacking == true
     Window_Class.player_attack_bounding_box(window)
+
     end
 
-    window.draw(Ground); Enemy_Data::Test_Enemy.maintain(window); NPCS::Test_Npcs.test_npc_maintain(window); window.draw(@@player_character_rendered_model);
-    
+
+    window.draw(Ground);  Enemy_Data::Test_Enemy.maintain(window); NPCS::Test_Npcs.test_npc_maintain(window); 
+    window.draw(@@player_character_rendered_model);
+    #window.draw(Bloodstone_Ore);
    end
 #=======================================================================================================================================+
 #---------------------------------------------------------------------------------------------------------------------------------------+
@@ -548,6 +557,23 @@ extend self
     @@has_weapon = true
     Window_Class.player_model_initialize(@@current_shoes, @@current_gloves, @@current_shirt, @@current_pants, @@current_hair) 
   end
+  def Window_Class.check_attacking(this, event)
+    if @@attacking == true
+      attack = true
+    end
+    if @@attacking == false
+      attack = false
+    end
+    case event
+    when "player_attacking"
+      Window_Class.hit_enemy02(this, @@attacking)
+    when "mining_ore"
+      case @@map
+      when "test"
+      Harvestables::Ore.harvest(attack)
+      end
+  end
+end
 
 #/////////////////////////////////////////////////////////////Draw//////////////////////////////////////////////////////////////////////+
 
@@ -555,6 +581,8 @@ extend self
    case @@map
     when "test"
       Window_Class.test_map(debug_draw, window, @@space)
+      Window_Class.attack_check_test_map
+      Harvestables::Ore.draw_ores(window)
       Player_Data::Player_Physics.gravity(@@player_character_rendered_model, window)
       Window_Class.hud(window)
     end
@@ -718,7 +746,6 @@ def Window_Class.main_menu_keypresses(window)
      if @@menu == "main"
       All_Audio::SFX.select1
      case (@@cursorposition)
-
      when "up" #----------------up
        @@menu = "charselect"
        #@@cursorposition = "File1"
@@ -1031,7 +1058,7 @@ def Window_Class.hud_keypresses(window)
          end
         if (x >= 640 && x <= 760) && (y >= 420 && y <= 540) && @@tab != "salon_confirm" #hair 0
           @@hair_choice = 0
-          puts @@tab; puts @@hair_choice
+        #  puts @@tab; puts @@hair_choice
           All_Audio::SFX.cursor2
           hair_slot = @@hair_choice
           Player_Data::Clothing_Outfit_Slot.change_hair(hair_slot, window)
@@ -1325,7 +1352,6 @@ def Window_Class.hud_keypresses(window)
          Clothing::Gloves.determine_array_length(window, this)
        end
       if (x >= 1050 && x <= 1180) && (y >= 490 && y <= 590) && @@tab == "gloves"
-        puts "boop"
         this = 3
         Clothing::Gloves.determine_array_length(window, this)
        end
@@ -1438,7 +1464,6 @@ def Window_Class.hud_keypresses(window)
   end
  #-------------------------------------------------------------row one---------------------------------------------------------------------
   if (x >= 710 && x <= 825) && (y >= 470 && y <= 590) && @@tab == "pants"
-    puts @@page
    case @@page
     when 1
      this = 0
@@ -1590,6 +1615,7 @@ def Window_Class.hud_keypresses(window)
       @@popup = "none"
 
     when SF::Keyboard::Enter
+      @@attacking = true
       @@idleframes = 0
       if @@has_weapon == true && WEAPON_OBJECT_ARRAY[@@current_weapon].can_swing == true
         case @@current_direction
@@ -2253,24 +2279,35 @@ module NPCS
 #------------------------------------------------------------------------------------------------------------------------------------+
 #                                                   Enemy Data                                                                       +
 #------------------------------------------------------------------------------------------------------------------------------------+
-
+Player_Attack_Clock = SF::Clock.new
 module Enemy_Data # @note Enemy data is stored here 
-  class Enemy_Physics
+  include Gui
+  include Player_Data
+  extend self
+  class Enemy_Physics < Window_Class
+
     def Enemy_Physics.gravity(this, this2)
       ground_box =  Ground.global_bounds
     if this.intersects? ground_box
       fallrate = 0
     else
       this2.position += SF.vector2(0, 0.95)
-    end
-    end 
-    def Enemy_Physics.hit_enemy(this)
+    end; end 
+
+    def Enemy_Physics.hit_enemy01(this)
+      event = "player_attacking"
+      Gui::Window_Class.check_attacking(this, event)
+     end
+    def Window_Class.hit_enemy02(this, @@attacking)
+      time = Player_Attack_Clock.elapsed_time
       attack = Player_Attack_Bounding_Box.global_bounds
       if this.intersects? attack
-        Equipment.play_hit_sound
-      end
-    end 
-  end
+      if time >= SF.seconds(0.35) && @@attacking == true
+           Equipment.play_hit_sound
+          # this.current_hp - 10
+           Player_Attack_Clock.restart
+      end; end; end 
+    end
   class Test_Enemy < Enemy_Physics
      def initialize(name : String, sprite : SF::Sprite, max_hp : Int32, current_hp : Int32)
        @name = name
@@ -2354,11 +2391,12 @@ module Enemy_Data # @note Enemy data is stored here
     end
     def Test_Enemy.maintain(window) #@todo tidy this shit up
      #---------------------------------------------test humanoid 1----------------------------------------------------------------------
-      window.draw(@@test_humanoid.sprite); Enemy_Physics.hit_enemy(@@test_humanoid.sprite.global_bounds)
+      window.draw(@@test_humanoid.sprite); #Enemy_Physics.hit_enemy01(@@test_humanoid.sprite.global_bounds)
       name01 = Name_Box.dup; name01.position = @@test_humanoid.sprite.position + SF.vector2(-10, 130); window.draw(name01)
       nametext01 = Name_Box_Text.dup; nametext01.string = "Test Humanoid"; nametext01.position = name01.position - SF.vector2(-3, 5)
       window.draw(nametext01); health1 = Health_Bar.dup; health1.position = @@test_humanoid.sprite.position + SF.vector2(-5, 160)
-      window.draw(health1)
+      x = @@test_humanoid.current_hp
+      health1.size = SF.vector2(x, 10); window.draw(health1)
      #----------------------------------------------------------------------------------------------------------------------------------
      #---------------------------------------------test humanoid 2----------------------------------------------------------------------
       window.draw(@@test_humanoid2.sprite)
@@ -2367,12 +2405,14 @@ module Enemy_Data # @note Enemy data is stored here
       window.draw(nametext02); health2 = Health_Bar.dup; health2.position = @@test_humanoid2.sprite.position + SF.vector2(5, 160)
       window.draw(health2)
      #----------------------------------------------------------------------------------------------------------------------------------
+      entities = [@@test_humanoid, @@test_humanoid]
       bounding_boxes = [@@test_humanoid.sprite.global_bounds, @@test_humanoid2.sprite.global_bounds]
       sprites = [@@test_humanoid.sprite, @@test_humanoid2.sprite]
-      this = bounding_boxes[0]; this2 = sprites[0]
-      Enemy_Physics.hit_enemy(this)
+      this = bounding_boxes[0]; this2 = sprites[0]; this3 = 
+      Enemy_Physics.hit_enemy01(this)
       Enemy_Physics.gravity(this, this2)
       this = bounding_boxes[1]; this2 = sprites[1]
+      Enemy_Physics.hit_enemy01(this)
       Enemy_Physics.gravity(this, this2)
     end     
   end
