@@ -341,8 +341,9 @@ extend self
   if @@tab == "Equipment"
     page = @@page
     Equipment::Stick.test(window, page)
-  else if @@tab == "Use"
-
+  else if @@tab == "Etc"
+    page = @@page
+    Etc::Inventory_Ore.draw(window, page)
   end
   end
  end
@@ -1017,7 +1018,9 @@ def Window_Class.hud_keypresses(window)
         if (x >= 1220 && x <= 1420) && (y >= 160 && y <= 230)
           All_Audio::SFX.select1
           Window_Class.etc_tab(window)
+          Etc::Inventory_Ore.update_inventory
           @@tab = "Etc"
+          puts @@tab
          end
       case @@tab
       when "Equipment"
