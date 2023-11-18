@@ -124,106 +124,75 @@ module Equipment
  @@stick01 = Stick.new("Stick", 0, true, false, false, 1.5, ["none"], ["none"], WEAPSOUND_01, WEAPSOUND_02, Weapon_Rectangle_01, false)
  end
 end
- module Etc
-   extend self
-#  # _________________________________________________________________________________________________________________________________________________________
-#  #|                                                              Etc Variables                                                                              |
-#  #|_________________________________________________________________________________________________________________________________________________________|
-#    Inventory_Ore_Owned_Array = [] of Inventory_Ore
-#    Inventory_Ore_Array = [] of Inventory_Ore
+module Etc
+  extend self
+ # _________________________________________________________________________________________________________________________________________________________
+ #|                                                              Etc Variables                                                                              |
+ #|_________________________________________________________________________________________________________________________________________________________|
+   Inventory_Ore_Array = [] of Inventory_Ore
 
-
-   class Inventory_Ore
-#    #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-#    #!                                                              Initialize                                                                              !
-#    #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-     def initialize(name : String, id : Int32, sprite : SF::Sprite, color : String, element : String, effect : String, sell_price : Int32)
-       @name = name
-       @id = id
-       @sprite = sprite
-       @color = color
-       @element = element
-       @effect = effect
-       @sell_price = sell_price
-      end
-#     def name
-#       @name
-#      end
-#     def id
-#       @id
-#      end
-#     def sprite
-#       @sprite
-#      end
-#     def amount_owned
-#       @amount_owned
-#      end
-#     def color
-#       @color
-#      end
-#     def element
-#       @element
-#      end
-#     def effect
-#       @effect
-#      end
-#     def sell_price
-#       @sell_price
-#      end
-#      @@iterator1 = 0
-#    #________________________________________________________________________________________________________________________________________________________
-#    #????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
-#    #?                                                               Methods                                                                                ?
-#    #????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
-#     def add_ore(amount, item)
-#      # @amount_owned += amount
-#      case item
-#      when "moss_agate_ore"
-#       @@moss_agate_inventory_ore.amount_owned += amount
-#      end
-#       Inventory_Ore.update_inventory
-#      end
-#     # def remove_ore(amount)
-#     #   @amount_owned -= amount
-#     #   Inventory_Ore.update_inventory
-#     # end
-#     def Inventory_Ore.update_inventory #todo figure out why this doesn't work
-#       s = Inventory_Ore_Array.size - 1
-#      while s >= @@iterator1
-#       if Inventory_Ore_Array[@@iterator1].amount_owned >= 1
-#         Inventory_Ore_Owned_Array.push(Inventory_Ore_Array[@@iterator1]) 
-#       end
-#       if s < @@iterator1
-#        @@iterator1 = 0
-#      end
-#      Inventory_Ore_Owned_Array.uniq!
-#      @@iterator1 +=1
-#     end 
-#     end
-#     def Inventory_Ore.draw(window, page)
-#       s = Inventory_Ore_Owned_Array.size - 1
-#       if s >= 1
-#         Inventory_Ore_Owned_Array[0].sprite.position = SF.vector2(555, 310);
-#         window.draw(Inventory_Ore_Owned_Array[0].sprite)
-#       end
-#     end
-#    #________________________________________________________________________________________________________________________________________________________
-#    #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-#    #/                                                               Entities                                                                               /
-#    #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-#     @@bloodstone_inventory_ore = Inventory_Ore.new("Bloodstone Ore", 1, Bloodstone_Inventory_Ore, 0, "red", "life", "hp+", 70)
-#     Inventory_Ore_Array.push(@@bloodstone_inventory_ore)
-#     @@moss_agate_inventory_ore = Inventory_Ore.new("Moss_Agate", 1, Moss_Agate_Inventory_Ore, 0, "green", "life", "passive_mp_regen", 60)
-#     Inventory_Ore_Array.push(@@moss_agate_inventory_ore)
-#    #________________________________________________________________________________________________________________________________________________________
-   end
- end
+  class Inventory_Ore
+   #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+   #!                                                              Initialize                                                                              !
+   #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    def initialize(name : String, id : Int32, sprite : SF::Sprite, amount_owned : Int32, color : String, element : String, effect : String, sell_price : Int32)
+      @name = name
+      @id = id
+      @sprite = sprite
+      @amount_owned = amount_owned
+      @color = color
+      @element = element
+      @effect = effect
+      @sell_price = sell_price
+     end
+    def name
+      @name
+     end
+    def id
+      @id
+     end
+    def sprite
+      @sprite
+     end
+    def amount_owned
+      @amount_owned
+     end
+    def color
+      @color
+     end
+    def element
+      @element
+     end
+    def effect
+      @effect
+     end
+    def sell_price
+      @sell_price
+     end
+   #________________________________________________________________________________________________________________________________________________________
+   #????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
+   #?                                                               Methods                                                                                ?
+   #????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
+    def add_ore(amount)
+      @amount_owned += amount
+     end
+    def remove_ore(amount)
+      @amount_owned -= amount
+    end
+   #________________________________________________________________________________________________________________________________________________________
+   #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+   #/                                                               Entities                                                                               /
+   #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    @@bloodstone_inventory_ore = Inventory_Ore.new("Bloodstone Ore", 1, Bloodstone_Inventory_Ore, 0, "red", "life", "hp+", 70)
+    @@moss_agate_inventory_ore = Inventory_Ore.new("Moss_Agate", 1, Moss_Agate_Inventory_Ore, 0, "green", "life", "passive_mp_regen", 60)
+   #________________________________________________________________________________________________________________________________________________________
+  end
+end
 
 
 module Harvestables
-include Etc
   extend self
-  class Ore < Inventory_Ore
+  class Ore
     Test_Ore_Array = [@@bloodstone_01, @@bloodstone_02, @@bloodstone_03, @@moss_agate_01]
     Test_Ore_Sprite_Array = [@@bloodstone_01.sprite, @@bloodstone_02.sprite, @@bloodstone_03.sprite, @@moss_agate_01.sprite]
    #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -234,13 +203,15 @@ include Etc
    #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
    #!                                                              Initialize                                                                              !
    #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    def initialize(name : String, id : Int32, color : String, hardness : Int32, hp : Int32, drop_item : String, sprite : SF::Sprite, is_broke : Bool)
+    def initialize(name : String, id : Int32, color : String, hardness : Int32, hp : Int32, element : String, effect : String, sell_price : Int32, sprite : SF::Sprite, is_broke : Bool)
       @name = name
       @id = id
       @color = color
       @hardness = hardness
       @hp = hp
-      @drop_item = drop_item
+      @element = element
+      @effect = effect
+      @sell_price = sell_price
       @sprite = sprite
       @is_broke = is_broke
      end
@@ -260,15 +231,21 @@ include Etc
      def hp
        @hp
       end
+     def element
+       @element
+      end
+     def effect
+       @effect
+      end
+     def sell_price
+       @sell_price
+      end
      def sprite
        @sprite
       end
      def is_broke
        @is_broke
       end
-    #  def amount_owned
-    #    @amount_owned
-    #   end
     #_______________________________________________________________________________________________________________________________________________________
     #..........................................................HP Class Functions...........................................................................
      def hp_subtract(damage)
@@ -402,10 +379,6 @@ include Etc
             broken.sprite_change_square(a, b, x, y)
      else if time >= SF.seconds(1.5) && time < SF.seconds(1.75)
       broken.is_broke_toggle   
-      r = rand(3)
-      amount = r
-    #  item = drop_item
-    #  broken.drop_item.add_ore(amount, item)
      else if time >= SF.seconds(30) 
       puts "boop"
       Ore_Clock_Break.restart
@@ -444,15 +417,15 @@ include Etc
    #/                                                               Entities                                                                               /
    #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     #..............................................................Bloodstone...............................................................................
-     @@bloodstone_01 = Ore.new("Bloodstone", 1, "red", 7, 500, "bloodstone_ore", Bloodstone_Ore, false) 
-     @@bloodstone_02 = Ore.new("Bloodstone", 2, "red", 7, 500, "bloodstone_ore", Bloodstone_Ore.dup, false)
-     @@bloodstone_03 = Ore.new("Bloodstone", 3, "red", 7, 500, "bloodstone_ore", Bloodstone_Ore, false)
-     @@bloodstone_04 = Ore.new("Bloodstone", 4, "red", 7, 500, "bloodstone_ore", Bloodstone_Ore, false)
-     @@bloodstone_05 = Ore.new("Bloodstone", 5, "red", 7, 500, "bloodstone_ore", Bloodstone_Ore, false)
-     @@bloodstone_06 = Ore.new("Bloodstone", 6, "red", 7, 500, "bloodstone_ore", Bloodstone_Ore, false)
+     @@bloodstone_01 = Ore.new("Bloodstone", 1, "red", 7, 500, "life", "hp+", 70, Bloodstone_Ore, false) 
+     @@bloodstone_02 = Ore.new("Bloodstone", 2, "red", 7, 500, "life", "hp+", 70, Bloodstone_Ore.dup, false)
+     @@bloodstone_03 = Ore.new("Bloodstone", 3, "red", 7, 500, "life", "hp+", 70, Bloodstone_Ore, false)
+     @@bloodstone_04 = Ore.new("Bloodstone", 4, "red", 7, 500, "life", "hp+", 70, Bloodstone_Ore, false)
+     @@bloodstone_05 = Ore.new("Bloodstone", 5, "red", 7, 500, "life", "hp+", 70, Bloodstone_Ore, false)
+     @@bloodstone_06 = Ore.new("Bloodstone", 6, "red", 7, 500, "life", "hp+", 70, Bloodstone_Ore, false)
     #.......................................................................................................................................................
     #..............................................................Moss Stone...............................................................................
-     @@moss_agate_01 = Ore.new("Moss Agate", 7, "green", 7, 450, "moss_agate_ore", Moss_Agate_Ore, false)
+     @@moss_agate_01 = Ore.new("Moss Agate", 7, "green", 7, 450, "Life", "passive_mp_regen", 60, Moss_Agate_Ore, false)
     #.......................................................................................................................................................
    #________________________________________________________________________________________________________________________________________________________
   end
