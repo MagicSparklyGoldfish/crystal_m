@@ -341,7 +341,8 @@ extend self
   if @@tab == "Equipment"
     page = @@page
     Equipment::Stick.test(window, page)
-  else if @@tab == "Use"
+  else if @@tab == "Etc"
+    Etc::Inventory_Ore.display_ore(window)
 
   end
   end

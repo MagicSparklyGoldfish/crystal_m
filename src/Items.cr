@@ -125,11 +125,11 @@ module Equipment
  end
 end
 module Etc
-  extend self
  # _________________________________________________________________________________________________________________________________________________________
  #|                                                              Etc Variables                                                                              |
  #|_________________________________________________________________________________________________________________________________________________________|
    Inventory_Ore_Array = [] of Inventory_Ore
+   Ore_Array = [] of Inventory_Ore
 
   class Inventory_Ore
    #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -140,6 +140,7 @@ module Etc
       @id = id
       @sprite = sprite
       @amount_owned = amount_owned
+ #     self.amount_owned = amount_owned
       @color = color
       @element = element
       @effect = effect
@@ -173,18 +174,45 @@ module Etc
    #????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
    #?                                                               Methods                                                                                ?
    #????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
-    def add_ore(amount)
-      @amount_owned += amount
+   def amount_owned=(value : Int32)
+    @amount_owned = value
+   end
+    def Inventory_Ore.add_ore(amount, ore)
+      case ore
+      when "bloodstone_ore"
+        @@bloodstone_owned += amount
+      when "moss_agate"
+        @@moss_agate_inventory_ore.amount_owned += amount
+      end
      end
     def remove_ore(amount)
       @amount_owned -= amount
     end
+   def Inventory_Ore.update_ore_inventory #@todo this is the final piece that needs fixed I think
+    s = Ore_Array.size - 1; x = 0
+    while s >= x
+      if Ore_Array[x].amount_owned >= 1
+        Inventory_Ore_Array.push(Ore_Array[x])
+        puts Inventory_Ore_Array
+      end
+      x += 1
+    end
+   end
+   def Inventory_Ore.display_ore(window) 
+    if Inventory_Ore_Array.size >= 1
+    Inventory_Ore_Array[0].sprite.position = SF.vector2(555, 310);
+    window.draw(Ore_Array[0].sprite)
+    end
+   end
    #________________________________________________________________________________________________________________________________________________________
    #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
    #/                                                               Entities                                                                               /
    #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    @@bloodstone_inventory_ore = Inventory_Ore.new("Bloodstone Ore", 1, Bloodstone_Inventory_Ore, 0, "red", "life", "hp+", 70)
+    @@bloodstone_owned = 0
+    @@bloodstone_inventory_ore = Inventory_Ore.new("Bloodstone Ore", 1, Bloodstone_Inventory_Ore, @@bloodstone_owned, "red", "life", "hp+", 70)
+    Ore_Array.push(@@bloodstone_inventory_ore)
     @@moss_agate_inventory_ore = Inventory_Ore.new("Moss_Agate", 1, Moss_Agate_Inventory_Ore, 0, "green", "life", "passive_mp_regen", 60)
+    Ore_Array.push(@@moss_agate_inventory_ore)
    #________________________________________________________________________________________________________________________________________________________
   end
 end
@@ -203,15 +231,13 @@ module Harvestables
    #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
    #!                                                              Initialize                                                                              !
    #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    def initialize(name : String, id : Int32, color : String, hardness : Int32, hp : Int32, element : String, effect : String, sell_price : Int32, sprite : SF::Sprite, is_broke : Bool)
+    def initialize(name : String, id : Int32, color : String, hardness : Int32, hp : Int32, drop_item : String, sprite : SF::Sprite, is_broke : Bool)
       @name = name
       @id = id
       @color = color
       @hardness = hardness
       @hp = hp
-      @element = element
-      @effect = effect
-      @sell_price = sell_price
+      @drop_item = drop_item
       @sprite = sprite
       @is_broke = is_broke
      end
@@ -231,14 +257,8 @@ module Harvestables
      def hp
        @hp
       end
-     def element
-       @element
-      end
-     def effect
-       @effect
-      end
-     def sell_price
-       @sell_price
+      def drop_item
+        @drop_item
       end
      def sprite
        @sprite
@@ -356,9 +376,14 @@ module Harvestables
 
          end; end; end; end
       def Ore.break(broken)
+        amount = rand(3)
+        ore = broken.drop_item
+
         if broken.hp >= 0 && broken.is_broke == false
         if @@ore_reset == 0
           Ore_Clock_Break.restart
+          Etc::Inventory_Ore.add_ore(amount, ore)
+          Etc::Inventory_Ore.update_ore_inventory
           @@ore_reset = 1
         end; end
            time = Ore_Clock_Break.elapsed_time
@@ -380,7 +405,6 @@ module Harvestables
      else if time >= SF.seconds(1.5) && time < SF.seconds(1.75)
       broken.is_broke_toggle   
      else if time >= SF.seconds(30) 
-      puts "boop"
       Ore_Clock_Break.restart
            this = 500
            broken.hp_set(this)
@@ -417,15 +441,15 @@ module Harvestables
    #/                                                               Entities                                                                               /
    #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     #..............................................................Bloodstone...............................................................................
-     @@bloodstone_01 = Ore.new("Bloodstone", 1, "red", 7, 500, "life", "hp+", 70, Bloodstone_Ore, false) 
-     @@bloodstone_02 = Ore.new("Bloodstone", 2, "red", 7, 500, "life", "hp+", 70, Bloodstone_Ore.dup, false)
-     @@bloodstone_03 = Ore.new("Bloodstone", 3, "red", 7, 500, "life", "hp+", 70, Bloodstone_Ore, false)
-     @@bloodstone_04 = Ore.new("Bloodstone", 4, "red", 7, 500, "life", "hp+", 70, Bloodstone_Ore, false)
-     @@bloodstone_05 = Ore.new("Bloodstone", 5, "red", 7, 500, "life", "hp+", 70, Bloodstone_Ore, false)
-     @@bloodstone_06 = Ore.new("Bloodstone", 6, "red", 7, 500, "life", "hp+", 70, Bloodstone_Ore, false)
+     @@bloodstone_01 = Ore.new("Bloodstone", 1, "red", 7, 500, "bloodstone_ore", Bloodstone_Ore, false) 
+     @@bloodstone_02 = Ore.new("Bloodstone", 2, "red", 7, 500, "bloodstone_ore", Bloodstone_Ore.dup, false)
+     @@bloodstone_03 = Ore.new("Bloodstone", 3, "red", 7, 500, "bloodstone_ore", Bloodstone_Ore, false)
+     @@bloodstone_04 = Ore.new("Bloodstone", 4, "red", 7, 500, "bloodstone_ore", Bloodstone_Ore, false)
+     @@bloodstone_05 = Ore.new("Bloodstone", 5, "red", 7, 500, "bloodstone_ore", Bloodstone_Ore, false)
+     @@bloodstone_06 = Ore.new("Bloodstone", 6, "red", 7, 500, "bloodstone_ore", Bloodstone_Ore, false)
     #.......................................................................................................................................................
     #..............................................................Moss Stone...............................................................................
-     @@moss_agate_01 = Ore.new("Moss Agate", 7, "green", 7, 450, "Life", "passive_mp_regen", 60, Moss_Agate_Ore, false)
+     @@moss_agate_01 = Ore.new("Moss Agate", 7, "green", 7, 450, "moss_agate", Moss_Agate_Ore, false)
     #.......................................................................................................................................................
    #________________________________________________________________________________________________________________________________________________________
   end
