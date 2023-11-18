@@ -189,9 +189,10 @@ module Etc
       @amount_owned -= amount
     end
    def Inventory_Ore.update_ore_inventory #@todo this is the final piece that needs fixed I think
+    puts "boop"
     s = Ore_Array.size - 1; x = 0
     while s >= x
-      if Ore_Array[x].amount_owned >= 1
+      if Ore_Array[x].amount_owned > 0
         Inventory_Ore_Array.push(Ore_Array[x])
         puts Inventory_Ore_Array
       end
@@ -201,7 +202,7 @@ module Etc
    def Inventory_Ore.display_ore(window) 
     if Inventory_Ore_Array.size >= 1
     Inventory_Ore_Array[0].sprite.position = SF.vector2(555, 310);
-    window.draw(Ore_Array[0].sprite)
+    window.draw(Inventory_Ore_Array[0].sprite)
     end
    end
    #________________________________________________________________________________________________________________________________________________________
