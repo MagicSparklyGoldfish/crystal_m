@@ -194,7 +194,10 @@ module Etc
       if ore == "wavellite"
         @@wavellite_inventory_ore.amount_owned += amount
       end
-     if ore != "bloodstone_ore" && ore != "moss_agate" && ore != "amber" && ore != "wavellite"
+      if ore == "topaz"
+        @@topaz_inventory_ore.amount_owned += amount
+      end
+     if ore != "bloodstone_ore" && ore != "moss_agate" && ore != "amber" && ore != "wavellite" && ore != "topaz"
       puts "error! drop ore does not exist!"
      end
      end
@@ -241,6 +244,13 @@ module Etc
      ore_array_text_04.string = Inventory_Ore_Array[3].amount_owned.to_s
      window.draw(Inventory_Ore_Array[3].sprite); window.draw(ore_array_text_04)
       end
+    if Inventory_Ore_Array.size >= 4
+     Inventory_Ore_Array[4].sprite.position = SF.vector2(1145, 310);
+     ore_array_text_05 = Ore_amount_owned_text.dup
+     ore_array_text_05.position = Inventory_Ore_Array[4].sprite.position + SF.vector2(110, 110)
+     ore_array_text_05.string = Inventory_Ore_Array[4].amount_owned.to_s
+     window.draw(Inventory_Ore_Array[4].sprite); window.draw(ore_array_text_05)
+      end
    end                
    #________________________________________________________________________________________________________________________________________________________
    #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -260,6 +270,12 @@ module Etc
 
     @@wavellite_inventory_ore = Inventory_Ore.new("Wavellite", 4, Wavellite_Inventory_Ore, 1, "green", "light", "mp+", 75)
     Ore_Array.push(@@wavellite_inventory_ore)
+
+    @@topaz_inventory_ore = Inventory_Ore.new("Topaz", 5, Topaz_Inventory_Ore, 1, "yellow", "light", "INT+", 175)
+    Ore_Array.push(@@topaz_inventory_ore)
+
+    @@amethyst_inventory_ore = Inventory_Ore.new("Amethyst", 6, Topaz_Inventory_Ore, 1, "purple", "light", "INT+", 105)
+    Ore_Array.push(@@amethyst_inventory_ore) 
    #________________________________________________________________________________________________________________________________________________________
   end
 end
@@ -268,9 +284,9 @@ end
 module Harvestables
   extend self
   class Ore
-    Test_Ore_Array = [@@bloodstone_01, @@bloodstone_02, @@bloodstone_03, @@moss_agate_01, @@amber01, @@wavellite01]
+    Test_Ore_Array = [@@bloodstone_01, @@bloodstone_02, @@bloodstone_03, @@moss_agate_01, @@amber01, @@wavellite01,  @@topaz01]
     Test_Ore_Sprite_Array = [@@bloodstone_01.sprite, @@bloodstone_02.sprite, @@bloodstone_03.sprite, @@moss_agate_01.sprite, @@amber01.sprite, 
-    @@wavellite01.sprite]
+    @@wavellite01.sprite,  @@topaz01.sprite]
    #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
    #+                                                              Variables                                                                               +
    #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -429,6 +445,7 @@ module Harvestables
         end; end
            time = Ore_Clock_Break.elapsed_time
           if time >= SF.seconds(0.25) && time < SF.seconds(0.5)
+            All_Audio::SFX.dig_02
            a = 0; b = 200; x = 100; y = 100
            broken.sprite_change_square(a, b, x, y)
      else if time >= SF.seconds(0.5) && time < SF.seconds(0.75)
@@ -481,7 +498,7 @@ module Harvestables
       test_text_5.position = @@wavellite01.sprite.position
       window.draw(@@bloodstone_01.sprite); window.draw(@@bloodstone_02.sprite); window.draw(test_text_2)
       window.draw(@@moss_agate_01.sprite); window.draw(test_text_3); window.draw(@@amber01.sprite); window.draw(test_text_4); window.draw(@@wavellite01.sprite)
-      window.draw(test_text_5)
+      window.draw(test_text_5); window.draw(@@topaz01.sprite)
     end
    #________________________________________________________________________________________________________________________________________________________
    #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -512,9 +529,24 @@ module Harvestables
      @@amber06 = Ore.new("Amber", 18, "yellow", 2, 100, "amber", Amber_Ore.dup, false, 100) 
     #.......................................................................................................................................................
     #...............................................................Wavellite...............................................................................
-     @@wavellite01 = Ore.new("Wavellite", 0, "green", 4, 200, "wavellite", Wavellite_Ore.dup, false, 200) 
+     @@wavellite01 = Ore.new("Wavellite", 19, "green", 4, 200, "wavellite", Wavellite_Ore.dup, false, 200) 
+     @@wavellite02 = Ore.new("Wavellite", 20, "green", 4, 200, "wavellite", Wavellite_Ore.dup, false, 200) 
+     @@wavellite03 = Ore.new("Wavellite", 21, "green", 4, 200, "wavellite", Wavellite_Ore.dup, false, 200) 
+     @@wavellite04 = Ore.new("Wavellite", 22, "green", 4, 200, "wavellite", Wavellite_Ore.dup, false, 200) 
+     @@wavellite05 = Ore.new("Wavellite", 23, "green", 4, 200, "wavellite", Wavellite_Ore.dup, false, 200) 
+     @@wavellite06 = Ore.new("Wavellite", 24, "green", 4, 200, "wavellite", Wavellite_Ore.dup, false, 200) 
     #.......................................................................................................................................................
+    #.................................................................Topaz.................................................................................
+     @@topaz01 = Ore.new("Topaz", 25, "yellow", 8, 550, "topaz", Topaz_Ore.dup, false, 550)
+     @@topaz02 = Ore.new("Topaz", 26, "yellow", 8, 550, "topaz", Topaz_Ore.dup, false, 550)
+     @@topaz03 = Ore.new("Topaz", 27, "yellow", 8, 550, "topaz", Topaz_Ore.dup, false, 550)
+     @@topaz04 = Ore.new("Topaz", 28, "yellow", 8, 550, "topaz", Topaz_Ore.dup, false, 550)
+     @@topaz05 = Ore.new("Topaz", 29, "yellow", 8, 550, "topaz", Topaz_Ore.dup, false, 550)
+     @@topaz06 = Ore.new("Topaz", 20, "yellow", 8, 550, "topaz", Topaz_Ore.dup, false, 550)
    #________________________________________________________________________________________________________________________________________________________
+   #.................................................................Amethyst...............................................................................
+    @@amethyst = Ore.new("Amethyst", 21, "purple", 7, 500, "amethyst", Topaz_Ore.dup, false, 500)
+   #.......................................................................................................................................................
   end
   class Herbs
   def initialize(name : String, id : Int32, color : String, hp : Int32, drop_item : String, sprite : SF::Sprite, is_broke : Bool)
