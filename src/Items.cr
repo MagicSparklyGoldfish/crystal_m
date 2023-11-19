@@ -140,7 +140,6 @@ module Etc
       @id = id
       @sprite = sprite
       @amount_owned = amount_owned
- #     self.amount_owned = amount_owned
       @color = color
       @element = element
       @effect = effect
@@ -171,6 +170,10 @@ module Etc
       @sell_price
      end
    #________________________________________________________________________________________________________________________________________________________
+   #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+   #+                                                              Variables                                                                               +
+   #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+   #________________________________________________________________________________________________________________________________________________________
    #????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
    #?                                                               Methods                                                                                ?
    #????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
@@ -178,42 +181,85 @@ module Etc
     @amount_owned = value
    end
     def Inventory_Ore.add_ore(amount, ore)
-      case ore
-      when "bloodstone_ore"
-        @@bloodstone_owned += amount
-      when "moss_agate"
+      puts ore
+      if ore == "bloodstone_ore"
+        @@bloodstone_inventory_ore.amount_owned += amount
+      end
+      if ore == "moss_agate"
         @@moss_agate_inventory_ore.amount_owned += amount
       end
+      if ore == "amber"
+        @@amber_inventory_ore.amount_owned += amount
+      end
+      if ore == "wavellite"
+        @@wavellite_inventory_ore.amount_owned += amount
+      end
+     if ore != "bloodstone_ore" && ore != "moss_agate" && ore != "amber" && ore != "wavellite"
+      puts "error! drop ore does not exist!"
+     end
      end
     def remove_ore(amount)
       @amount_owned -= amount
     end
-   def Inventory_Ore.update_ore_inventory #@todo this is the final piece that needs fixed I think
-    puts "boop"
+   def Inventory_Ore.update_ore_inventory 
     s = Ore_Array.size - 1; x = 0
     while s >= x
       if Ore_Array[x].amount_owned > 0
+        puts Ore_Array[x].amount_owned
         Inventory_Ore_Array.push(Ore_Array[x])
-        puts Inventory_Ore_Array
       end
       x += 1
     end
    end
    def Inventory_Ore.display_ore(window) 
     if Inventory_Ore_Array.size >= 1
-    Inventory_Ore_Array[0].sprite.position = SF.vector2(555, 310);
-    window.draw(Inventory_Ore_Array[0].sprite)
-    end
-   end
+     Inventory_Ore_Array[0].sprite.position = SF.vector2(555, 310);
+     ore_array_text_01 = Ore_amount_owned_text.dup
+     ore_array_text_01.position = Inventory_Ore_Array[0].sprite.position + SF.vector2(50, 110)
+     ore_array_text_01.string = Inventory_Ore_Array[0].amount_owned.to_s
+
+     window.draw(Inventory_Ore_Array[0].sprite); window.draw(ore_array_text_01)
+     end
+    if Inventory_Ore_Array.size >= 2
+     Inventory_Ore_Array[1].sprite.position = SF.vector2(695, 310);
+     ore_array_text_02 = Ore_amount_owned_text.dup
+     ore_array_text_02.position = Inventory_Ore_Array[1].sprite.position + SF.vector2(50, 110)
+     ore_array_text_02.string = Inventory_Ore_Array[1].amount_owned.to_s
+     window.draw(Inventory_Ore_Array[1].sprite); window.draw(ore_array_text_02)
+      end
+    if Inventory_Ore_Array.size >= 2
+     Inventory_Ore_Array[2].sprite.position = SF.vector2(845, 310);
+     ore_array_text_03 = Ore_amount_owned_text.dup
+     ore_array_text_03.position = Inventory_Ore_Array[2].sprite.position + SF.vector2(110, 110)
+     ore_array_text_03.string = Inventory_Ore_Array[2].amount_owned.to_s
+     window.draw(Inventory_Ore_Array[2].sprite); window.draw(ore_array_text_03)
+      end
+    if Inventory_Ore_Array.size >= 3
+     Inventory_Ore_Array[3].sprite.position = SF.vector2(995, 310);
+     ore_array_text_04 = Ore_amount_owned_text.dup
+     ore_array_text_04.position = Inventory_Ore_Array[3].sprite.position + SF.vector2(110, 110)
+     ore_array_text_04.string = Inventory_Ore_Array[3].amount_owned.to_s
+     window.draw(Inventory_Ore_Array[3].sprite); window.draw(ore_array_text_04)
+      end
+   end                
    #________________________________________________________________________________________________________________________________________________________
    #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
    #/                                                               Entities                                                                               /
    #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     @@bloodstone_owned = 0
-    @@bloodstone_inventory_ore = Inventory_Ore.new("Bloodstone Ore", 1, Bloodstone_Inventory_Ore, @@bloodstone_owned, "red", "life", "hp+", 70)
+    @@bloodstone_inventory_ore = Inventory_Ore.new("Bloodstone Ore", 1, Bloodstone_Inventory_Ore, 1, "red", "life", "hp+", 70)
     Ore_Array.push(@@bloodstone_inventory_ore)
-    @@moss_agate_inventory_ore = Inventory_Ore.new("Moss_Agate", 1, Moss_Agate_Inventory_Ore, 0, "green", "life", "passive_mp_regen", 60)
+
+    @@moss_agate_owned = 0
+    @@moss_agate_inventory_ore = Inventory_Ore.new("Moss_Agate", 2, Moss_Agate_Inventory_Ore, 1, "green", "life", "passive_mp_regen", 60)
     Ore_Array.push(@@moss_agate_inventory_ore)
+
+    @@amber_owned = 0
+    @@amber_inventory_ore = Inventory_Ore.new("Amber", 3, Amber_Inventory_Ore, 1, "yellow", "light", "passive_hp_regen", 55)
+    Ore_Array.push(@@amber_inventory_ore)
+
+    @@wavellite_inventory_ore = Inventory_Ore.new("Wavellite", 4, Wavellite_Inventory_Ore, 1, "green", "light", "mp+", 75)
+    Ore_Array.push(@@wavellite_inventory_ore)
    #________________________________________________________________________________________________________________________________________________________
   end
 end
@@ -222,8 +268,9 @@ end
 module Harvestables
   extend self
   class Ore
-    Test_Ore_Array = [@@bloodstone_01, @@bloodstone_02, @@bloodstone_03, @@moss_agate_01]
-    Test_Ore_Sprite_Array = [@@bloodstone_01.sprite, @@bloodstone_02.sprite, @@bloodstone_03.sprite, @@moss_agate_01.sprite]
+    Test_Ore_Array = [@@bloodstone_01, @@bloodstone_02, @@bloodstone_03, @@moss_agate_01, @@amber01, @@wavellite01]
+    Test_Ore_Sprite_Array = [@@bloodstone_01.sprite, @@bloodstone_02.sprite, @@bloodstone_03.sprite, @@moss_agate_01.sprite, @@amber01.sprite, 
+    @@wavellite01.sprite]
    #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
    #+                                                              Variables                                                                               +
    #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -232,7 +279,7 @@ module Harvestables
    #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
    #!                                                              Initialize                                                                              !
    #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    def initialize(name : String, id : Int32, color : String, hardness : Int32, hp : Int32, drop_item : String, sprite : SF::Sprite, is_broke : Bool)
+    def initialize(name : String, id : Int32, color : String, hardness : Int32, hp : Int32, drop_item : String, sprite : SF::Sprite, is_broke : Bool, max_hp : Int32)
       @name = name
       @id = id
       @color = color
@@ -241,6 +288,7 @@ module Harvestables
       @drop_item = drop_item
       @sprite = sprite
       @is_broke = is_broke
+      @max_hp = max_hp 
      end
     #..........................................................Basic Initializers...........................................................................
      def name
@@ -266,6 +314,9 @@ module Harvestables
       end
      def is_broke
        @is_broke
+      end
+      def max_hp
+        @max_hp
       end
     #_______________________________________________________________________________________________________________________________________________________
     #..........................................................HP Class Functions...........................................................................
@@ -297,7 +348,6 @@ module Harvestables
        def Ore.harvest2(attack, this, ore)
         time = Ore_Clock_01.elapsed_time
         attack2 = Player_Attack_Bounding_Box.global_bounds
-        #ore = @@bloodstone_01.sprite.global_bounds
        if attack2.intersects? this
        if ore.hp > 0
        if time >= SF.seconds(0.35) && attack == true
@@ -309,15 +359,6 @@ module Harvestables
 
 
         end
-      def hit_ore_test(attack, this)
-        time = Ore_Clock_01.elapsed_time
-        if time >= SF.seconds(0.35) && attack == true
-          Equipment.play_hit_sound
-          this.hp_subtract(10)
-          Ore_Clock_01.restart
-        end
-
-    end
 
     #_______________________________________________________________________________________________________________________________________________________
    #________________________________________________________________________________________________________________________________________________________
@@ -377,14 +418,13 @@ module Harvestables
 
          end; end; end; end
       def Ore.break(broken)
-        amount = rand(3)
+        amount = rand(1..3)
         ore = broken.drop_item
-
         if broken.hp >= 0 && broken.is_broke == false
         if @@ore_reset == 0
-          Ore_Clock_Break.restart
           Etc::Inventory_Ore.add_ore(amount, ore)
           Etc::Inventory_Ore.update_ore_inventory
+          Ore_Clock_Break.restart
           @@ore_reset = 1
         end; end
            time = Ore_Clock_Break.elapsed_time
@@ -405,9 +445,10 @@ module Harvestables
             broken.sprite_change_square(a, b, x, y)
      else if time >= SF.seconds(1.5) && time < SF.seconds(1.75)
       broken.is_broke_toggle   
-     else if time >= SF.seconds(30) 
+      @@ore_reset = 0
+      if time > SF.milliseconds(30)  #@note this only works with microseconds and milliseconds, not seconds. I don't know why, there wasn't a typo
       Ore_Clock_Break.restart
-           this = 500
+           this = broken.max_hp
            broken.hp_set(this)
            a = 0; b = 0; x = 100; y = 100
            broken.sprite_change_square(a, b, x, y)
@@ -430,29 +471,82 @@ module Harvestables
       Testing_Text.string = @@bloodstone_01.hp.to_s + Ore_Clock_Break.elapsed_time.to_s
       test_text_2 = Testing_Text.dup; test_text_2.string = @@bloodstone_02.hp.to_s + Ore_Clock_Break.elapsed_time.to_s
       test_text_3 = Testing_Text.dup; test_text_3.string = @@moss_agate_01.hp.to_s + Ore_Clock_Break.elapsed_time.to_s
+      test_text_4 = Testing_Text.dup; test_text_4.string = @@amber01.hp.to_s + Ore_Clock_Break.elapsed_time.to_s
+      test_text_5 = Testing_Text.dup; test_text_5.string = @@wavellite01.hp.to_s + Ore_Clock_Break.elapsed_time.to_s
       window.draw(Testing_Text)
       @@bloodstone_02.sprite.position = SF.vector2(2500, 702)
       test_text_2.position = @@bloodstone_02.sprite.position
       test_text_3.position = @@moss_agate_01.sprite.position
+      test_text_4.position = @@amber01.sprite.position
+      test_text_5.position = @@wavellite01.sprite.position
       window.draw(@@bloodstone_01.sprite); window.draw(@@bloodstone_02.sprite); window.draw(test_text_2)
-      window.draw(@@moss_agate_01.sprite); window.draw(test_text_3)
+      window.draw(@@moss_agate_01.sprite); window.draw(test_text_3); window.draw(@@amber01.sprite); window.draw(test_text_4); window.draw(@@wavellite01.sprite)
+      window.draw(test_text_5)
     end
    #________________________________________________________________________________________________________________________________________________________
    #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
    #/                                                               Entities                                                                               /
    #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     #..............................................................Bloodstone...............................................................................
-     @@bloodstone_01 = Ore.new("Bloodstone", 1, "red", 7, 500, "bloodstone_ore", Bloodstone_Ore, false) 
-     @@bloodstone_02 = Ore.new("Bloodstone", 2, "red", 7, 500, "bloodstone_ore", Bloodstone_Ore.dup, false)
-     @@bloodstone_03 = Ore.new("Bloodstone", 3, "red", 7, 500, "bloodstone_ore", Bloodstone_Ore, false)
-     @@bloodstone_04 = Ore.new("Bloodstone", 4, "red", 7, 500, "bloodstone_ore", Bloodstone_Ore, false)
-     @@bloodstone_05 = Ore.new("Bloodstone", 5, "red", 7, 500, "bloodstone_ore", Bloodstone_Ore, false)
-     @@bloodstone_06 = Ore.new("Bloodstone", 6, "red", 7, 500, "bloodstone_ore", Bloodstone_Ore, false)
+     @@bloodstone_01 = Ore.new("Bloodstone", 1, "red", 7, 500, "bloodstone_ore", Bloodstone_Ore.dup, false, 500) 
+     @@bloodstone_02 = Ore.new("Bloodstone", 2, "red", 7, 500, "bloodstone_ore", Bloodstone_Ore.dup, false, 500) 
+     @@bloodstone_03 = Ore.new("Bloodstone", 3, "red", 7, 500, "bloodstone_ore", Bloodstone_Ore.dup, false, 500) 
+     @@bloodstone_04 = Ore.new("Bloodstone", 4, "red", 7, 500, "bloodstone_ore", Bloodstone_Ore.dup, false, 500) 
+     @@bloodstone_05 = Ore.new("Bloodstone", 5, "red", 7, 500, "bloodstone_ore", Bloodstone_Ore.dup, false, 500) 
+     @@bloodstone_06 = Ore.new("Bloodstone", 6, "red", 7, 500, "bloodstone_ore", Bloodstone_Ore.dup, false, 500) 
     #.......................................................................................................................................................
     #..............................................................Moss Stone...............................................................................
-     @@moss_agate_01 = Ore.new("Moss Agate", 7, "green", 7, 450, "moss_agate", Moss_Agate_Ore, false)
+     @@moss_agate_01 = Ore.new("Moss Agate", 7, "green", 7, 450, "moss_agate", Moss_Agate_Ore.dup, false, 450) 
+     @@moss_agate_02 = Ore.new("Moss Agate", 8, "green", 7, 450, "moss_agate", Moss_Agate_Ore.dup, false, 450) 
+     @@moss_agate_03 = Ore.new("Moss Agate", 9, "green", 7, 450, "moss_agate", Moss_Agate_Ore.dup, false, 450) 
+     @@moss_agate_04 = Ore.new("Moss Agate", 10, "green", 7, 450, "moss_agate", Moss_Agate_Ore.dup, false, 450) 
+     @@moss_agate_05 = Ore.new("Moss Agate", 11, "green", 7, 450, "moss_agate", Moss_Agate_Ore.dup, false, 450) 
+     @@moss_agate_06 = Ore.new("Moss Agate", 12, "green", 7, 450, "moss_agate", Moss_Agate_Ore.dup, false, 450) 
+    #.......................................................................................................................................................
+    #................................................................Amber..................................................................................
+     @@amber01 = Ore.new("Amber", 13, "yellow", 2, 100, "amber", Amber_Ore.dup, false, 100) 
+     @@amber02 = Ore.new("Amber", 14, "yellow", 2, 100, "amber", Amber_Ore.dup, false, 100) 
+     @@amber03 = Ore.new("Amber", 15, "yellow", 2, 100, "amber", Amber_Ore.dup, false, 100) 
+     @@amber04 = Ore.new("Amber", 16, "yellow", 2, 100, "amber", Amber_Ore.dup, false, 100) 
+     @@amber05 = Ore.new("Amber", 17, "yellow", 2, 100, "amber", Amber_Ore.dup, false, 100) 
+     @@amber06 = Ore.new("Amber", 18, "yellow", 2, 100, "amber", Amber_Ore.dup, false, 100) 
+    #.......................................................................................................................................................
+    #...............................................................Wavellite...............................................................................
+     @@wavellite01 = Ore.new("Wavellite", 0, "green", 4, 200, "wavellite", Wavellite_Ore.dup, false, 200) 
     #.......................................................................................................................................................
    #________________________________________________________________________________________________________________________________________________________
+  end
+  class Herbs
+  def initialize(name : String, id : Int32, color : String, hp : Int32, drop_item : String, sprite : SF::Sprite, is_broke : Bool)
+    @name = name
+    @id = id
+    @color = color
+    @hp = hp
+    @drop_item = drop_item
+    @sprite = sprite
+    @is_broke = is_broke
+  end
+  def name
+    @name
+  end
+  def id
+    @id
+  end
+  def color
+    @color
+  end
+  def hp 
+    @hp
+  end
+  def drop_item
+    @drop_item
+  end
+  def sprite
+    @sprite
+  end
+  def is_broke
+    @is_broke
+  end
   end
 end
 

@@ -382,13 +382,20 @@
     Weapon_Rectangle_01.texture_rect = SF.int_rect(0, 0, 140, 140);
   #--------------------------------------------------ETC item Textures--------------------------------------------------------------
    #......................................................Rocks.....................................................................
+     Ore_amount_owned_text = SF::Text.new; Ore_amount_owned_text.font = FONT_COMMON; Ore_amount_owned_text.character_size = 20
     #''''''''''''''''''''''''''''''''''''''''''''''''''Bloodstone'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      BLOODSTONE_INVENTORY_ORE_TEXTURE = SF::Texture.from_file("graphics/Bloodstone_Ore.png")
      Bloodstone_Inventory_Ore = SF::Sprite.new(BLOODSTONE_INVENTORY_ORE_TEXTURE)  
-    #''''''''''''''''''''''''''''''''''''''''''''''''''Moss Agate'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    #''''''''''''''''''''''''''''''''''''''''''''''''''Moss Agate''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
      MOSS_AGATE_INVENTORY_ORE_TEXTURE = SF::Texture.from_file("graphics/Moss_Agate_Ore.png")
      Moss_Agate_Inventory_Ore = SF::Sprite.new(MOSS_AGATE_INVENTORY_ORE_TEXTURE)  
-#-----------------------------------------------------------------------------------------------------------------------------------
+    #'''''''''''''''''''''''''''''''''''''''''''''''''''''Amber'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     AMBER_INVENTORY_ORE_TEXTURE = SF::Texture.from_file("graphics/Amber_Ore.png")
+     Amber_Inventory_Ore = SF::Sprite.new(AMBER_INVENTORY_ORE_TEXTURE)  
+    #'''''''''''''''''''''''''''''''''''''''''''''''''''Wavellite'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     WAVELLITE_INVENTORY_ORE_TEXTURE = SF::Texture.from_file("graphics/Wavellite_ore.png")
+     Wavellite_Inventory_Ore = SF::Sprite.new(WAVELLITE_INVENTORY_ORE_TEXTURE)  
+#----------------------------------------------------------------------------------------------------------------------------------- 
 #                                                    Character Model
 #-----------------------------------------------------------------------------------------------------------------------------------
 #____________________________________________________Character Skin_________________________________________________________________
@@ -1779,6 +1786,14 @@
   MOSS_AGATE_TEXTURE = SF::Texture.from_file("graphics/Moss_Agate.png")
   Moss_Agate_Ore = SF::Sprite.new(MOSS_AGATE_TEXTURE); Moss_Agate_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
   Moss_Agate_Ore.position = SF.vector2(2200, 702)
+
+  AMBER_TEXTURE = SF::Texture.from_file("graphics/Amber.png")
+  Amber_Ore = SF::Sprite.new(AMBER_TEXTURE); Amber_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
+  Amber_Ore.position = SF.vector2(1600, 702)
+
+  WAVELLITE_TEXTURE = SF::Texture.from_file("graphics/Wavellite.png")
+  Wavellite_Ore = SF::Sprite.new(WAVELLITE_TEXTURE); Wavellite_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
+  Wavellite_Ore.position = SF.vector2(2000, 702)
 #______________________________________________________________________________________________________________________________________
 Testing_Text = SF::Text.new; Testing_Text.font = FONT_PIXEL; 
 Testing_Text.character_size = 20; Testing_Text.color = SF::Color::White; Testing_Text.position = SF.vector2(1800, 652)
