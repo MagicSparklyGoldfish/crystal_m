@@ -197,7 +197,10 @@ module Etc
       if ore == "topaz"
         @@topaz_inventory_ore.amount_owned += amount
       end
-     if ore != "bloodstone_ore" && ore != "moss_agate" && ore != "amber" && ore != "wavellite" && ore != "topaz"
+      if ore == "amethyst"
+        @@amethyst_inventory_ore.amount_owned += amount
+      end
+     if ore != "bloodstone_ore" && ore != "moss_agate" && ore != "amber" && ore != "wavellite" && ore != "topaz" && ore != "amethyst"
       puts "error! drop ore does not exist!"
      end
      end
@@ -251,6 +254,13 @@ module Etc
      ore_array_text_05.string = Inventory_Ore_Array[4].amount_owned.to_s
      window.draw(Inventory_Ore_Array[4].sprite); window.draw(ore_array_text_05)
       end
+    if Inventory_Ore_Array.size >= 5
+     Inventory_Ore_Array[5].sprite.position = SF.vector2(1285, 310);
+     ore_array_text_06 = Ore_amount_owned_text.dup
+     ore_array_text_06.position = Inventory_Ore_Array[5].sprite.position + SF.vector2(110, 110)
+     ore_array_text_06.string = Inventory_Ore_Array[5].amount_owned.to_s
+     window.draw(Inventory_Ore_Array[5].sprite); window.draw(ore_array_text_06)
+      end
    end                
    #________________________________________________________________________________________________________________________________________________________
    #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -274,7 +284,7 @@ module Etc
     @@topaz_inventory_ore = Inventory_Ore.new("Topaz", 5, Topaz_Inventory_Ore, 1, "yellow", "light", "INT+", 175)
     Ore_Array.push(@@topaz_inventory_ore)
 
-    @@amethyst_inventory_ore = Inventory_Ore.new("Amethyst", 6, Topaz_Inventory_Ore, 1, "purple", "light", "INT+", 105)
+    @@amethyst_inventory_ore = Inventory_Ore.new("Amethyst", 6, Amethyst_Inventory_Ore, 1, "purple", "light", "INT+", 105)
     Ore_Array.push(@@amethyst_inventory_ore) 
    #________________________________________________________________________________________________________________________________________________________
   end
@@ -284,9 +294,9 @@ end
 module Harvestables
   extend self
   class Ore
-    Test_Ore_Array = [@@bloodstone_01, @@bloodstone_02, @@bloodstone_03, @@moss_agate_01, @@amber01, @@wavellite01,  @@topaz01]
+    Test_Ore_Array = [@@bloodstone_01, @@bloodstone_02, @@bloodstone_03, @@moss_agate_01, @@amber01, @@wavellite01,  @@topaz01, @@amethyst01]
     Test_Ore_Sprite_Array = [@@bloodstone_01.sprite, @@bloodstone_02.sprite, @@bloodstone_03.sprite, @@moss_agate_01.sprite, @@amber01.sprite, 
-    @@wavellite01.sprite,  @@topaz01.sprite]
+    @@wavellite01.sprite,  @@topaz01.sprite, @@amethyst01.sprite]
    #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
    #+                                                              Variables                                                                               +
    #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -490,15 +500,17 @@ module Harvestables
       test_text_3 = Testing_Text.dup; test_text_3.string = @@moss_agate_01.hp.to_s + Ore_Clock_Break.elapsed_time.to_s
       test_text_4 = Testing_Text.dup; test_text_4.string = @@amber01.hp.to_s + Ore_Clock_Break.elapsed_time.to_s
       test_text_5 = Testing_Text.dup; test_text_5.string = @@wavellite01.hp.to_s + Ore_Clock_Break.elapsed_time.to_s
+      test_text_6 = Testing_Text.dup; test_text_5.string = @@amethyst01.hp.to_s + Ore_Clock_Break.elapsed_time.to_s
       window.draw(Testing_Text)
       @@bloodstone_02.sprite.position = SF.vector2(2500, 702)
       test_text_2.position = @@bloodstone_02.sprite.position
       test_text_3.position = @@moss_agate_01.sprite.position
       test_text_4.position = @@amber01.sprite.position
       test_text_5.position = @@wavellite01.sprite.position
+      test_text_6.position = @@amethyst01.sprite.position
       window.draw(@@bloodstone_01.sprite); window.draw(@@bloodstone_02.sprite); window.draw(test_text_2)
       window.draw(@@moss_agate_01.sprite); window.draw(test_text_3); window.draw(@@amber01.sprite); window.draw(test_text_4); window.draw(@@wavellite01.sprite)
-      window.draw(test_text_5); window.draw(@@topaz01.sprite)
+      window.draw(test_text_5); window.draw(@@topaz01.sprite); window.draw(@@amethyst01.sprite); window.draw(test_text_6)
     end
    #________________________________________________________________________________________________________________________________________________________
    #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -545,7 +557,12 @@ module Harvestables
      @@topaz06 = Ore.new("Topaz", 20, "yellow", 8, 550, "topaz", Topaz_Ore.dup, false, 550)
    #________________________________________________________________________________________________________________________________________________________
    #.................................................................Amethyst...............................................................................
-    @@amethyst = Ore.new("Amethyst", 21, "purple", 7, 500, "amethyst", Topaz_Ore.dup, false, 500)
+    @@amethyst01 = Ore.new("Amethyst", 21, "purple", 7, 500, "amethyst", Amethyst_Ore.dup, false, 500)
+    @@amethyst02 = Ore.new("Amethyst", 22, "purple", 7, 500, "amethyst", Amethyst_Ore.dup, false, 500)
+    @@amethyst03 = Ore.new("Amethyst", 23, "purple", 7, 500, "amethyst", Amethyst_Ore.dup, false, 500)
+    @@amethyst04 = Ore.new("Amethyst", 24, "purple", 7, 500, "amethyst", Amethyst_Ore.dup, false, 500)
+    @@amethyst05 = Ore.new("Amethyst", 25, "purple", 7, 500, "amethyst", Amethyst_Ore.dup, false, 500)
+    @@amethyst06 = Ore.new("Amethyst", 26, "purple", 7, 500, "amethyst", Amethyst_Ore.dup, false, 500)
    #.......................................................................................................................................................
   end
   class Herbs

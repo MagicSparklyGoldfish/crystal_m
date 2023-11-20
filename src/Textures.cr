@@ -389,15 +389,18 @@
     #''''''''''''''''''''''''''''''''''''''''''''''''''Moss Agate''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
      MOSS_AGATE_INVENTORY_ORE_TEXTURE = SF::Texture.from_file("graphics/Moss_Agate_Ore.png")
      Moss_Agate_Inventory_Ore = SF::Sprite.new(MOSS_AGATE_INVENTORY_ORE_TEXTURE)  
-    #'''''''''''''''''''''''''''''''''''''''''''''''''''''Amber'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    #'''''''''''''''''''''''''''''''''''''''''''''''''''''Amber''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
      AMBER_INVENTORY_ORE_TEXTURE = SF::Texture.from_file("graphics/Amber_Ore.png")
      Amber_Inventory_Ore = SF::Sprite.new(AMBER_INVENTORY_ORE_TEXTURE)  
     #'''''''''''''''''''''''''''''''''''''''''''''''''''Wavellite''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
      WAVELLITE_INVENTORY_ORE_TEXTURE = SF::Texture.from_file("graphics/Wavellite_ore.png")
      Wavellite_Inventory_Ore = SF::Sprite.new(WAVELLITE_INVENTORY_ORE_TEXTURE)  
     #'''''''''''''''''''''''''''''''''''''''''''''''''''''Topaz'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-    TOPAZ_INVENTORY_ORE_TEXTURE = SF::Texture.from_file("graphics/Topaz_ore.png")
-    Topaz_Inventory_Ore = SF::Sprite.new(TOPAZ_INVENTORY_ORE_TEXTURE)  
+     TOPAZ_INVENTORY_ORE_TEXTURE = SF::Texture.from_file("graphics/Topaz_ore.png")
+     Topaz_Inventory_Ore = SF::Sprite.new(TOPAZ_INVENTORY_ORE_TEXTURE)  
+    #''''''''''''''''''''''''''''''''''''''''''''''''''''Amethyst'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     AMETHYST_INVENTORY_ORE_TEXTURE = SF::Texture.from_file("graphics/Amethyst_ore.png")
+     Amethyst_Inventory_Ore = SF::Sprite.new(AMETHYST_INVENTORY_ORE_TEXTURE)  
 #----------------------------------------------------------------------------------------------------------------------------------- 
 #                                                    Character Model
 #-----------------------------------------------------------------------------------------------------------------------------------
@@ -1781,26 +1784,31 @@
 #--------------------------------------------------------------------------------------------------------------------------------------
 #                                                         Ores
 #-------------------------------------------------------------------------------------------------------------------------------------- 
+ #''''''''''''''''''''''''''''''''''''''''''''''''''Bloodstone'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
   BLOODSTONE_TEXTURE = SF::Texture.from_file("graphics/Bloodstone.png")
   Ore_Box = SF::RectangleShape.new(SF.vector2(100, 100)); Ore_Box.position = SF.vector2(1800, 700); Ore_Box.fill_color = SF.color(255, 255, 255)
   Bloodstone_Ore = SF::Sprite.new(BLOODSTONE_TEXTURE); Bloodstone_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
   Bloodstone_Ore.position = SF.vector2(1800, 702)
-
+ #''''''''''''''''''''''''''''''''''''''''''''''''''Moss Agate''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
   MOSS_AGATE_TEXTURE = SF::Texture.from_file("graphics/Moss_Agate.png")
   Moss_Agate_Ore = SF::Sprite.new(MOSS_AGATE_TEXTURE); Moss_Agate_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
   Moss_Agate_Ore.position = SF.vector2(2200, 702)
-
+ #'''''''''''''''''''''''''''''''''''''''''''''''''''''Amber''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
   AMBER_TEXTURE = SF::Texture.from_file("graphics/Amber.png")
   Amber_Ore = SF::Sprite.new(AMBER_TEXTURE); Amber_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
   Amber_Ore.position = SF.vector2(1600, 702)
-
+ #'''''''''''''''''''''''''''''''''''''''''''''''''''Wavellite''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
   WAVELLITE_TEXTURE = SF::Texture.from_file("graphics/Wavellite.png")
   Wavellite_Ore = SF::Sprite.new(WAVELLITE_TEXTURE); Wavellite_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
   Wavellite_Ore.position = SF.vector2(2000, 702)
-
+ #'''''''''''''''''''''''''''''''''''''''''''''''''''''Topaz'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
   TOPAZ_TEXTURE = SF::Texture.from_file("graphics/Topaz.png")
   Topaz_Ore = SF::Sprite.new(TOPAZ_TEXTURE); Topaz_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
   Topaz_Ore.position = SF.vector2(2400, 702)
+ #''''''''''''''''''''''''''''''''''''''''''''''''''''Amethyst'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+  AMETHYST_TEXTURE = SF::Texture.from_file("graphics/Amethyst_Ore.png")
+  Amethyst_Ore = SF::Sprite.new(AMETHYST_TEXTURE); Amethyst_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
+  Amethyst_Ore.position = SF.vector2(1400, 702)
 #______________________________________________________________________________________________________________________________________
 Testing_Text = SF::Text.new; Testing_Text.font = FONT_PIXEL; 
 Testing_Text.character_size = 20; Testing_Text.color = SF::Color::White; Testing_Text.position = SF.vector2(1800, 652)
