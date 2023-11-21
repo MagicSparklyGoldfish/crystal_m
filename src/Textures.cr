@@ -405,8 +405,11 @@
      SMOKEY_QUARTZ_INVENTORY_ORE_TEXTURE = SF::Texture.from_file("graphics/Smokey_Quartz_Ore.png")
      Smokey_Quartz_Inventory_Ore = SF::Sprite.new(SMOKEY_QUARTZ_INVENTORY_ORE_TEXTURE)  
     #'''''''''''''''''''''''''''''''''''''''''''''''''''''Sapphire''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-    SAPPHIRE_INVENTORY_ORE_TEXTURE = SF::Texture.from_file("graphics/Sapphire_Ore.png")
-    Sapphire_Inventory_Ore = SF::Sprite.new(SAPPHIRE_INVENTORY_ORE_TEXTURE)  
+     SAPPHIRE_INVENTORY_ORE_TEXTURE = SF::Texture.from_file("graphics/Sapphire_Ore.png")
+     Sapphire_Inventory_Ore = SF::Sprite.new(SAPPHIRE_INVENTORY_ORE_TEXTURE)  
+    #''''''''''''''''''''''''''''''''''''''''''''''''''''Black Opal'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     BLACK_OPAL_INVENTORY_ORE_TEXTURE = SF::Texture.from_file("graphics/Black_Opal_Inventory.png")
+     Black_Opal_Inventory_Ore = SF::Sprite.new(BLACK_OPAL_INVENTORY_ORE_TEXTURE)  
 #----------------------------------------------------------------------------------------------------------------------------------- 
 #                                                    Character Model
 #-----------------------------------------------------------------------------------------------------------------------------------
@@ -1819,10 +1822,19 @@
   SMOKEY_QUARTZ_TEXTURE = SF::Texture.from_file("graphics/Smokey_Quartz.png")
   Smokey_Quartz_Ore = SF::Sprite.new(SMOKEY_QUARTZ_TEXTURE); Smokey_Quartz_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
   Smokey_Quartz_Ore.position = SF.vector2(1200, 702)
- #'''''''''''''''''''''''''''''''''''''''''''''''''''''Sapphire'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+ #'''''''''''''''''''''''''''''''''''''''''''''''''''''Sapphire''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
   SAPPHIRE_TEXTURE = SF::Texture.from_file("graphics/Sapphire.png")
   Sapphire_Ore = SF::Sprite.new(SAPPHIRE_TEXTURE); Sapphire_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
   Sapphire_Ore.position = SF.vector2(400, 702)
+ #''''''''''''''''''''''''''''''''''''''''''''''''''''Black Opal'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+  BLACK_OPAL_TEXTURE = SF::Texture.from_file("graphics/Black_Opal.png")
+  Black_Opal_Ore = SF::Sprite.new(BLACK_OPAL_TEXTURE); Black_Opal_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
+  Black_Opal_Ore.position = SF.vector2(200, 702)
 #______________________________________________________________________________________________________________________________________
 Testing_Text = SF::Text.new; Testing_Text.font = FONT_PIXEL; 
 Testing_Text.character_size = 20; Testing_Text.color = SF::Color::White; Testing_Text.position = SF.vector2(1800, 652)
+#--------------------------------------------------------------------------------------------------------------------------------------
+#                                                         Maps
+#-------------------------------------------------------------------------------------------------------------------------------------- 
+ Test_Teleporter = SF::RectangleShape.new(SF.vector2(100, 40)); Test_Teleporter.fill_color = SF.color(50, 150, 255)
+ Test_Teleporter.position = SF.vector2(100, 752);

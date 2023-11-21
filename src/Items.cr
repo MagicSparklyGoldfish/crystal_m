@@ -206,8 +206,11 @@ module Etc
       if ore == "sapphire"
         @@sapphire.amount_owned += amount 
       end
+      if ore == "black_opal"
+        @@black_opal.amount_owned += amount 
+      end
      if ore != "bloodstone_ore" && ore != "moss_agate" && ore != "amber" && ore != "wavellite" && ore != "topaz" && ore != "amethyst" && ore != "smokey_quartz"
-     if ore != "sapphire"
+     if ore != "sapphire" && ore != "black_opal"
       puts "error! drop ore does not exist!"
      end; end
      end
@@ -282,6 +285,13 @@ module Etc
      ore_array_text_08.string = "x" + Inventory_Ore_Array[7].amount_owned.to_s
      window.draw(Inventory_Ore_Array[7].sprite); window.draw(ore_array_text_08)
       end
+    if Inventory_Ore_Array.size >= 9
+     Inventory_Ore_Array[8].sprite.position = SF.vector2(855, 460);
+     ore_array_text_09 = Ore_amount_owned_text.dup
+     ore_array_text_09.position = Inventory_Ore_Array[8].sprite.position + SF.vector2(100, -5)
+     ore_array_text_09.string = "x" + Inventory_Ore_Array[8].amount_owned.to_s
+     window.draw(Inventory_Ore_Array[8].sprite); window.draw(ore_array_text_09)
+      end
    end                
    #________________________________________________________________________________________________________________________________________________________
    #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -313,6 +323,9 @@ module Etc
 
     @@sapphire = Inventory_Ore.new("Sapphire", 8, Sapphire_Inventory_Ore, 1, "blue", "water", "EXP+", 950)
     Ore_Array.push(@@sapphire) 
+
+    @@black_opal = Inventory_Ore.new("Black Opal", 9, Black_Opal_Inventory_Ore, 1, "black", "water", "LUK+", 80)
+    Ore_Array.push(@@black_opal) 
    #________________________________________________________________________________________________________________________________________________________
   end
 end 
@@ -322,9 +335,9 @@ module Harvestables
   extend self
   class Ore
     Test_Ore_Array = [@@bloodstone_01, @@bloodstone_02, @@bloodstone_03, @@moss_agate_01, @@amber01, @@wavellite01,  @@topaz01, @@amethyst01,
-    @@smokey_quartz01, @@sapphire01]
+    @@smokey_quartz01, @@sapphire01, @@black_opal01]
     Test_Ore_Sprite_Array = [@@bloodstone_01.sprite, @@bloodstone_02.sprite, @@bloodstone_03.sprite, @@moss_agate_01.sprite, @@amber01.sprite, 
-    @@wavellite01.sprite,  @@topaz01.sprite, @@amethyst01.sprite, @@smokey_quartz01.sprite, @@sapphire01.sprite]
+    @@wavellite01.sprite,  @@topaz01.sprite, @@amethyst01.sprite, @@smokey_quartz01.sprite, @@sapphire01.sprite, @@black_opal01.sprite]
    #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
    #+                                                              Variables                                                                               +
    #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -538,7 +551,7 @@ module Harvestables
       test_text_6.position = @@amethyst01.sprite.position
       window.draw(@@bloodstone_01.sprite); window.draw(@@bloodstone_02.sprite); window.draw(test_text_2); window.draw(@@moss_agate_01.sprite); 
       window.draw(@@amber01.sprite); window.draw(@@wavellite01.sprite); window.draw(@@topaz01.sprite); window.draw(@@amethyst01.sprite)
-      window.draw(@@smokey_quartz01.sprite); window.draw(@@sapphire01.sprite)
+      window.draw(@@smokey_quartz01.sprite); window.draw(@@sapphire01.sprite); window.draw(@@black_opal01.sprite)
     end
    #________________________________________________________________________________________________________________________________________________________
    #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -601,7 +614,15 @@ module Harvestables
     @@smokey_quartz06 = Ore.new("Smokey Quartz", 32, "clear", 7, 500, "smokey_quartz", Smokey_Quartz_Ore.dup, false, 500)
    #.......................................................................................................................................................
    #.................................................................Sapphire..............................................................................
-   @@sapphire01 = Ore.new("Sapphire", 33, "clear", 9, 600, "sapphire", Sapphire_Ore.dup, false, 600)
+    @@sapphire01 = Ore.new("Sapphire", 33, "clear", 9, 600, "sapphire", Sapphire_Ore.dup, false, 600)
+    @@sapphire02 = Ore.new("Sapphire", 34, "clear", 9, 600, "sapphire", Sapphire_Ore.dup, false, 600)
+    @@sapphire03 = Ore.new("Sapphire", 35, "clear", 9, 600, "sapphire", Sapphire_Ore.dup, false, 600)
+    @@sapphire04 = Ore.new("Sapphire", 36, "clear", 9, 600, "sapphire", Sapphire_Ore.dup, false, 600)
+    @@sapphire05 = Ore.new("Sapphire", 37, "clear", 9, 600, "sapphire", Sapphire_Ore.dup, false, 600)
+    @@sapphire06 = Ore.new("Sapphire", 38, "clear", 9, 600, "sapphire", Sapphire_Ore.dup, false, 600)
+   #.......................................................................................................................................................
+   #.................................................................Black Opal............................................................................
+    @@black_opal01 = Ore.new("Black Opal", 39, "clear", 6, 400, "black_opal", Black_Opal_Ore.dup, false, 400)
    #.......................................................................................................................................................
   end
   class Herbs

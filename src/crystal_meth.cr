@@ -376,6 +376,7 @@ extend self
 #=======================================================================================================================================+
 #---------------------------------------------------------------------------------------------------------------------------------------+
 #========================================================Map Renderers==================================================================+
+ #---------------------------------------------------------test-------------------------------------------------------------------------
    @@space : CP::Space; @@space = CP::Space.new
    Mass = 1.0
    Width = 50
@@ -407,6 +408,13 @@ extend self
     event = "mining_ore"
     this = Bloodstone_Ore.global_bounds
     Window_Class.check_attacking(this, event)
+  end
+  def Window_Class.space_test_map
+    bounding_box1 = @@player_character_rendered_model.global_bounds
+    bounding_box2 = Test_Teleporter.global_bounds
+    if bounding_box1.intersects? bounding_box2
+      @@map = "test_ore"
+    end
   end
 
   def Window_Class.test_map(debug_draw, window, @@space)
@@ -440,9 +448,31 @@ extend self
 
 
     window.draw(Ground);  Enemy_Data::Test_Enemy.maintain(window); NPCS::Test_Npcs.test_npc_maintain(window); 
-    window.draw(@@player_character_rendered_model);
+    window.draw(@@player_character_rendered_model); window.draw(Test_Teleporter); 
     #window.draw(Bloodstone_Ore);
    end
+ #---------------------------------------------------------ore test---------------------------------------------------------------------
+  def Window_Class.ore_test(window)
+   window.clear(SF::Color::Transparent);
+   b = @@player_character_rendered_model.position
+   x = b[0]; y = b[1]
+   view1 = SF::View.new(SF.float_rect(0, 0, 1900, 700))
+   view1.center = SF.vector2(x, y)
+   view1.viewport = SF.float_rect(0, 0, 1, 0.85)
+   window.view = view1
+   if @@attacking == true
+    Window_Class.player_attack_bounding_box(window)
+    end
+   bounding_box1 = @@player_character_rendered_model.global_bounds
+   bounding_box2 = @@player_character_rendered_model.global_bounds
+   window.draw(Ground); window.draw(@@player_character_rendered_model); window.draw(Test_Teleporter); 
+ end
+ def Window_Class.attack_check_test_ore_map
+   Harvestables::Ore.harvest(@@attacking)
+   event = "mining_ore"
+   this = Bloodstone_Ore.global_bounds
+   Window_Class.check_attacking(this, event)
+ end
 #=======================================================================================================================================+
 #---------------------------------------------------------------------------------------------------------------------------------------+
 #==========================================================Animations===================================================================+
@@ -565,15 +595,6 @@ extend self
     if @@attacking == false
       attack = false
     end
-    case event
-    when "player_attacking"
-      Window_Class.hit_enemy02(this, @@attacking)
-    when "mining_ore"
-      case @@map
-      when "test"
-      Harvestables::Ore.harvest(attack)
-      end
-  end
 end
 
 #/////////////////////////////////////////////////////////////Draw//////////////////////////////////////////////////////////////////////+
@@ -586,7 +607,13 @@ end
       Harvestables::Ore.draw_ores(window)
       Player_Data::Player_Physics.gravity(@@player_character_rendered_model, window)
       Window_Class.hud(window)
-    end
+  when "test_ore"
+    Window_Class.ore_test(window)
+    Window_Class.attack_check_test_ore_map
+    Harvestables::Ore.draw_ores(window)
+    Player_Data::Player_Physics.gravity(@@player_character_rendered_model, window)
+    Window_Class.hud(window)
+  end
    end
   def Window_Class.draw(window)
     case @@menu
@@ -1059,70 +1086,60 @@ def Window_Class.hud_keypresses(window)
          end
         if (x >= 640 && x <= 760) && (y >= 420 && y <= 540) && @@tab != "salon_confirm" #hair 0
           @@hair_choice = 0
-        #  puts @@tab; puts @@hair_choice
           All_Audio::SFX.cursor2
           hair_slot = @@hair_choice
           Player_Data::Clothing_Outfit_Slot.change_hair(hair_slot, window)
          end
         if (x >= 790 && x <= 910) && (y >= 420 && y <= 540) && @@tab != "salon_confirm" #hair 1
           @@hair_choice = 1
-          puts @@tab; puts @@hair_choice
           All_Audio::SFX.cursor2
           hair_slot = @@hair_choice
           Player_Data::Clothing_Outfit_Slot.change_hair(hair_slot, window)
          end
         if (x >= 940 && x <= 1060) && (y >= 420 && y <= 540) && @@tab != "salon_confirm" #hair 2
           @@hair_choice = 2
-          puts @@tab; puts @@hair_choice
           All_Audio::SFX.cursor2
           hair_slot = @@hair_choice
           Player_Data::Clothing_Outfit_Slot.change_hair(hair_slot, window)
          end
         if (x >= 1090 && x <= 1200) && (y >= 420 && y <= 540) && @@tab != "salon_confirm" #hair 3
           @@hair_choice = 3
-          puts @@tab; puts @@hair_choice
           All_Audio::SFX.cursor2
           hair_slot = @@hair_choice
           Player_Data::Clothing_Outfit_Slot.change_hair(hair_slot, window)
          end
         if (x >= 1240 && x <= 1330) && (y >= 420 && y <= 540) && @@tab != "salon_confirm" #hair 4
           @@hair_choice = 4
-          puts @@tab; puts @@hair_choice
           All_Audio::SFX.cursor2
           hair_slot = @@hair_choice
           Player_Data::Clothing_Outfit_Slot.change_hair(hair_slot, window)
          end
         if (x >= 640 && x <= 760) && (y >= 570 && y <= 720) && @@tab != "salon_confirm" #hair 5
           @@hair_choice = 5
-          puts @@tab; puts @@hair_choice
           All_Audio::SFX.cursor2
           hair_slot = @@hair_choice
           Player_Data::Clothing_Outfit_Slot.change_hair(hair_slot, window)
          end
         if (x >= 790 && x <= 910) && (y >= 570 && y <= 720) && @@tab != "salon_confirm" #hair 6
           @@hair_choice = 6
-          puts @@tab; puts @@hair_choice
           All_Audio::SFX.cursor2
           hair_slot = @@hair_choice
           Player_Data::Clothing_Outfit_Slot.change_hair(hair_slot, window)
          end
         if (x >= 940 && x <= 1060) && (y >= 570 && y <= 720) && @@tab != "salon_confirm" #hair 7
           @@hair_choice = 7
-          puts @@tab; puts @@hair_choice
           All_Audio::SFX.cursor2
           hair_slot = @@hair_choice
           Player_Data::Clothing_Outfit_Slot.change_hair(hair_slot, window)
          end
         if (x >= 1090 && x <= 1200) && (y >= 570 && y <= 720) && @@tab != "salon_confirm" #hair 8
           @@hair_choice = 8
-          puts @@tab; puts @@hair_choice
           All_Audio::SFX.cursor2
           hair_slot = @@hair_choice
           Player_Data::Clothing_Outfit_Slot.change_hair(hair_slot, window)
          end
         if (x >= 1240 && x <= 1330) && (y >= 570 && y <= 720) && @@tab != "salon_confirm" #hair 9
           @@hair_choice = 9
-          puts @@tab; puts @@hair_choice
           All_Audio::SFX.cursor2
           hair_slot = @@hair_choice
           Player_Data::Clothing_Outfit_Slot.change_hair(hair_slot, window)
@@ -1629,7 +1646,12 @@ def Window_Class.hud_keypresses(window)
       end; end
       when SF::Keyboard::Space
         @@attacking = false
-        NPCS::Test_Npcs.click(window, @@player_character_rendered_model)
+        case @@map
+        when "test"
+          NPCS::Test_Npcs.click(window, @@player_character_rendered_model)
+          Window_Class.space_test_map
+        when "test_ore"
+        end
 
       when SF::Keyboard::D
         @@idleframes = 0
@@ -1659,6 +1681,7 @@ def Window_Class.hud_keypresses(window)
       when SF::Keyboard::W && SF::Keyboard::D
         Player_Data::Player_Physics.wasd_up(@@player_character_rendered_model, window)
         window.draw(@@player_character_rendered_model)
+
 #___________________________________________________________________________________________________________________________________________
 #|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 #|                                                       @note menu shortcuts                                                              |
