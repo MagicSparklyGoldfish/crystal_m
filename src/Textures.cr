@@ -401,6 +401,9 @@
     #''''''''''''''''''''''''''''''''''''''''''''''''''''Amethyst'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      AMETHYST_INVENTORY_ORE_TEXTURE = SF::Texture.from_file("graphics/Amethyst_ore.png")
      Amethyst_Inventory_Ore = SF::Sprite.new(AMETHYST_INVENTORY_ORE_TEXTURE)  
+    #''''''''''''''''''''''''''''''''''''''''''''''''''Smokey Quartz'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     SMOKEY_QUARTZ_INVENTORY_ORE_TEXTURE = SF::Texture.from_file("graphics/Smokey_Quartz_Ore.png")
+     Smokey_Quartz_Inventory_Ore = SF::Sprite.new(SMOKEY_QUARTZ_INVENTORY_ORE_TEXTURE)  
 #----------------------------------------------------------------------------------------------------------------------------------- 
 #                                                    Character Model
 #-----------------------------------------------------------------------------------------------------------------------------------
@@ -1805,10 +1808,14 @@
   TOPAZ_TEXTURE = SF::Texture.from_file("graphics/Topaz.png")
   Topaz_Ore = SF::Sprite.new(TOPAZ_TEXTURE); Topaz_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
   Topaz_Ore.position = SF.vector2(2400, 702)
- #''''''''''''''''''''''''''''''''''''''''''''''''''''Amethyst'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+ #''''''''''''''''''''''''''''''''''''''''''''''''''''Amethyst''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
   AMETHYST_TEXTURE = SF::Texture.from_file("graphics/Amethyst_Ore.png")
   Amethyst_Ore = SF::Sprite.new(AMETHYST_TEXTURE); Amethyst_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
   Amethyst_Ore.position = SF.vector2(1400, 702)
+ #''''''''''''''''''''''''''''''''''''''''''''''''''Smokey Quartz'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+ SMOKEY_QUARTZ_TEXTURE = SF::Texture.from_file("graphics/Smokey_Quartz.png")
+ Smokey_Quartz_Ore = SF::Sprite.new(SMOKEY_QUARTZ_TEXTURE); Smokey_Quartz_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
+ Smokey_Quartz_Ore.position = SF.vector2(1200, 702)
 #______________________________________________________________________________________________________________________________________
 Testing_Text = SF::Text.new; Testing_Text.font = FONT_PIXEL; 
 Testing_Text.character_size = 20; Testing_Text.color = SF::Color::White; Testing_Text.position = SF.vector2(1800, 652)

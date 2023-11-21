@@ -200,7 +200,10 @@ module Etc
       if ore == "amethyst"
         @@amethyst_inventory_ore.amount_owned += amount
       end
-     if ore != "bloodstone_ore" && ore != "moss_agate" && ore != "amber" && ore != "wavellite" && ore != "topaz" && ore != "amethyst"
+      if ore == "smokey_quartz"
+        @@smokey_quartz_inventory_ore.amount_owned += amount
+      end
+     if ore != "bloodstone_ore" && ore != "moss_agate" && ore != "amber" && ore != "wavellite" && ore != "topaz" && ore != "amethyst" && ore != "smokey_quartz"
       puts "error! drop ore does not exist!"
      end
      end
@@ -221,45 +224,52 @@ module Etc
     if Inventory_Ore_Array.size >= 1
      Inventory_Ore_Array[0].sprite.position = SF.vector2(555, 310);
      ore_array_text_01 = Ore_amount_owned_text.dup
-     ore_array_text_01.position = Inventory_Ore_Array[0].sprite.position + SF.vector2(50, 110)
-     ore_array_text_01.string = Inventory_Ore_Array[0].amount_owned.to_s
+     ore_array_text_01.position = Inventory_Ore_Array[0].sprite.position + SF.vector2(100, -5)
+     ore_array_text_01.string = "x" + Inventory_Ore_Array[0].amount_owned.to_s
 
      window.draw(Inventory_Ore_Array[0].sprite); window.draw(ore_array_text_01)
      end
     if Inventory_Ore_Array.size >= 2
-     Inventory_Ore_Array[1].sprite.position = SF.vector2(695, 310);
+     Inventory_Ore_Array[1].sprite.position = SF.vector2(710, 310);
      ore_array_text_02 = Ore_amount_owned_text.dup
-     ore_array_text_02.position = Inventory_Ore_Array[1].sprite.position + SF.vector2(50, 110)
-     ore_array_text_02.string = Inventory_Ore_Array[1].amount_owned.to_s
+     ore_array_text_02.position = Inventory_Ore_Array[1].sprite.position + SF.vector2(100, -5)
+     ore_array_text_02.string = "x" + Inventory_Ore_Array[1].amount_owned.to_s
      window.draw(Inventory_Ore_Array[1].sprite); window.draw(ore_array_text_02)
       end
-    if Inventory_Ore_Array.size >= 2
-     Inventory_Ore_Array[2].sprite.position = SF.vector2(845, 310);
+    if Inventory_Ore_Array.size >= 3
+     Inventory_Ore_Array[2].sprite.position = SF.vector2(855, 310);
      ore_array_text_03 = Ore_amount_owned_text.dup
-     ore_array_text_03.position = Inventory_Ore_Array[2].sprite.position + SF.vector2(110, 110)
-     ore_array_text_03.string = Inventory_Ore_Array[2].amount_owned.to_s
+     ore_array_text_03.position = Inventory_Ore_Array[2].sprite.position + SF.vector2(100, -5)
+     ore_array_text_03.string = "x" + Inventory_Ore_Array[2].amount_owned.to_s
      window.draw(Inventory_Ore_Array[2].sprite); window.draw(ore_array_text_03)
       end
-    if Inventory_Ore_Array.size >= 3
-     Inventory_Ore_Array[3].sprite.position = SF.vector2(995, 310);
+    if Inventory_Ore_Array.size >= 4
+     Inventory_Ore_Array[3].sprite.position = SF.vector2(1005, 310);
      ore_array_text_04 = Ore_amount_owned_text.dup
-     ore_array_text_04.position = Inventory_Ore_Array[3].sprite.position + SF.vector2(110, 110)
-     ore_array_text_04.string = Inventory_Ore_Array[3].amount_owned.to_s
+     ore_array_text_04.position = Inventory_Ore_Array[3].sprite.position + SF.vector2(100, -5)
+     ore_array_text_04.string = "x" + Inventory_Ore_Array[3].amount_owned.to_s
      window.draw(Inventory_Ore_Array[3].sprite); window.draw(ore_array_text_04)
       end
-    if Inventory_Ore_Array.size >= 4
-     Inventory_Ore_Array[4].sprite.position = SF.vector2(1145, 310);
+    if Inventory_Ore_Array.size >= 5
+     Inventory_Ore_Array[4].sprite.position = SF.vector2(1155, 310);
      ore_array_text_05 = Ore_amount_owned_text.dup
-     ore_array_text_05.position = Inventory_Ore_Array[4].sprite.position + SF.vector2(110, 110)
-     ore_array_text_05.string = Inventory_Ore_Array[4].amount_owned.to_s
+     ore_array_text_05.position = Inventory_Ore_Array[4].sprite.position + SF.vector2(100, -5)
+     ore_array_text_05.string = "x" + Inventory_Ore_Array[4].amount_owned.to_s
      window.draw(Inventory_Ore_Array[4].sprite); window.draw(ore_array_text_05)
       end
-    if Inventory_Ore_Array.size >= 5
-     Inventory_Ore_Array[5].sprite.position = SF.vector2(1285, 310);
+    if Inventory_Ore_Array.size >= 6
+     Inventory_Ore_Array[5].sprite.position = SF.vector2(1305, 310);
      ore_array_text_06 = Ore_amount_owned_text.dup
-     ore_array_text_06.position = Inventory_Ore_Array[5].sprite.position + SF.vector2(110, 110)
-     ore_array_text_06.string = Inventory_Ore_Array[5].amount_owned.to_s
+     ore_array_text_06.position = Inventory_Ore_Array[5].sprite.position + SF.vector2(100, -5)
+     ore_array_text_06.string = "x" + Inventory_Ore_Array[5].amount_owned.to_s
      window.draw(Inventory_Ore_Array[5].sprite); window.draw(ore_array_text_06)
+      end
+    if Inventory_Ore_Array.size >= 7
+     Inventory_Ore_Array[6].sprite.position = SF.vector2(555, 460);
+     ore_array_text_07 = Ore_amount_owned_text.dup
+     ore_array_text_07.position = Inventory_Ore_Array[6].sprite.position + SF.vector2(100, -5)
+     ore_array_text_07.string = "x" + Inventory_Ore_Array[6].amount_owned.to_s
+     window.draw(Inventory_Ore_Array[6].sprite); window.draw(ore_array_text_07)
       end
    end                
    #________________________________________________________________________________________________________________________________________________________
@@ -286,17 +296,21 @@ module Etc
 
     @@amethyst_inventory_ore = Inventory_Ore.new("Amethyst", 6, Amethyst_Inventory_Ore, 1, "purple", "light", "INT+", 105)
     Ore_Array.push(@@amethyst_inventory_ore) 
+
+    @@smokey_quartz_inventory_ore = Inventory_Ore.new("Smokey Quartz", 7, Smokey_Quartz_Inventory_Ore, 1, "clear", "dark", "STR+", 95)
+    Ore_Array.push(@@smokey_quartz_inventory_ore) 
    #________________________________________________________________________________________________________________________________________________________
   end
-end
+end 
 
 
 module Harvestables
   extend self
   class Ore
-    Test_Ore_Array = [@@bloodstone_01, @@bloodstone_02, @@bloodstone_03, @@moss_agate_01, @@amber01, @@wavellite01,  @@topaz01, @@amethyst01]
+    Test_Ore_Array = [@@bloodstone_01, @@bloodstone_02, @@bloodstone_03, @@moss_agate_01, @@amber01, @@wavellite01,  @@topaz01, @@amethyst01,
+    @@smokey_quartz01]
     Test_Ore_Sprite_Array = [@@bloodstone_01.sprite, @@bloodstone_02.sprite, @@bloodstone_03.sprite, @@moss_agate_01.sprite, @@amber01.sprite, 
-    @@wavellite01.sprite,  @@topaz01.sprite, @@amethyst01.sprite]
+    @@wavellite01.sprite,  @@topaz01.sprite, @@amethyst01.sprite, @@smokey_quartz01.sprite]
    #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
    #+                                                              Variables                                                                               +
    #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -508,14 +522,14 @@ module Harvestables
       test_text_4.position = @@amber01.sprite.position
       test_text_5.position = @@wavellite01.sprite.position
       test_text_6.position = @@amethyst01.sprite.position
-      window.draw(@@bloodstone_01.sprite); window.draw(@@bloodstone_02.sprite); window.draw(test_text_2)
-      window.draw(@@moss_agate_01.sprite); window.draw(test_text_3); window.draw(@@amber01.sprite); window.draw(test_text_4); window.draw(@@wavellite01.sprite)
-      window.draw(test_text_5); window.draw(@@topaz01.sprite); window.draw(@@amethyst01.sprite); window.draw(test_text_6)
+      window.draw(@@bloodstone_01.sprite); window.draw(@@bloodstone_02.sprite); window.draw(test_text_2); window.draw(@@moss_agate_01.sprite); 
+      window.draw(@@amber01.sprite); window.draw(@@wavellite01.sprite); window.draw(@@topaz01.sprite); window.draw(@@amethyst01.sprite)
+      window.draw(@@smokey_quartz01.sprite)
     end
    #________________________________________________________________________________________________________________________________________________________
    #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
    #/                                                               Entities                                                                               /
-   #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+   #///////////////////////////////////////////////////@@smokey_quartz01/////////////////////////////////////////////////////////////////////////////////////////////////////
     #..............................................................Bloodstone...............................................................................
      @@bloodstone_01 = Ore.new("Bloodstone", 1, "red", 7, 500, "bloodstone_ore", Bloodstone_Ore.dup, false, 500) 
      @@bloodstone_02 = Ore.new("Bloodstone", 2, "red", 7, 500, "bloodstone_ore", Bloodstone_Ore.dup, false, 500) 
@@ -563,6 +577,14 @@ module Harvestables
     @@amethyst04 = Ore.new("Amethyst", 24, "purple", 7, 500, "amethyst", Amethyst_Ore.dup, false, 500)
     @@amethyst05 = Ore.new("Amethyst", 25, "purple", 7, 500, "amethyst", Amethyst_Ore.dup, false, 500)
     @@amethyst06 = Ore.new("Amethyst", 26, "purple", 7, 500, "amethyst", Amethyst_Ore.dup, false, 500)
+   #.......................................................................................................................................................
+   #...............................................................Smokey Quartz...........................................................................
+    @@smokey_quartz01 = Ore.new("Smokey Quartz", 27, "clear", 7, 500, "smokey_quartz", Smokey_Quartz_Ore.dup, false, 500)
+    @@smokey_quartz02 = Ore.new("Smokey Quartz", 28, "clear", 7, 500, "smokey_quartz", Smokey_Quartz_Ore.dup, false, 500)
+    @@smokey_quartz03 = Ore.new("Smokey Quartz", 29, "clear", 7, 500, "smokey_quartz", Smokey_Quartz_Ore.dup, false, 500)
+    @@smokey_quartz04 = Ore.new("Smokey Quartz", 30, "clear", 7, 500, "smokey_quartz", Smokey_Quartz_Ore.dup, false, 500)
+    @@smokey_quartz05 = Ore.new("Smokey Quartz", 31, "clear", 7, 500, "smokey_quartz", Smokey_Quartz_Ore.dup, false, 500)
+    @@smokey_quartz06 = Ore.new("Smokey Quartz", 32, "clear", 7, 500, "smokey_quartz", Smokey_Quartz_Ore.dup, false, 500)
    #.......................................................................................................................................................
   end
   class Herbs
