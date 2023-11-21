@@ -473,6 +473,13 @@ extend self
    this = Bloodstone_Ore.global_bounds
    Window_Class.check_attacking(this, event)
  end
+ def Window_Class.teleport_test_ore_map
+  bounding_box1 = @@player_character_rendered_model.global_bounds
+  bounding_box2 = Test_Teleporter.global_bounds
+  if bounding_box1.intersects? bounding_box2
+    @@map = "test"
+  end
+end
 #=======================================================================================================================================+
 #---------------------------------------------------------------------------------------------------------------------------------------+
 #==========================================================Animations===================================================================+
@@ -604,7 +611,7 @@ end
     when "test"
       Window_Class.test_map(debug_draw, window, @@space)
       Window_Class.attack_check_test_map
-      Harvestables::Ore.draw_ores(window)
+     # Harvestables::Ore.draw_ores(window)
       Player_Data::Player_Physics.gravity(@@player_character_rendered_model, window)
       Window_Class.hud(window)
   when "test_ore"
@@ -1651,6 +1658,7 @@ def Window_Class.hud_keypresses(window)
           NPCS::Test_Npcs.click(window, @@player_character_rendered_model)
           Window_Class.space_test_map
         when "test_ore"
+          Window_Class.teleport_test_ore_map
         end
 
       when SF::Keyboard::D

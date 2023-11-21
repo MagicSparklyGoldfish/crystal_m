@@ -1797,39 +1797,43 @@
   BLOODSTONE_TEXTURE = SF::Texture.from_file("graphics/Bloodstone.png")
   Ore_Box = SF::RectangleShape.new(SF.vector2(100, 100)); Ore_Box.position = SF.vector2(1800, 700); Ore_Box.fill_color = SF.color(255, 255, 255)
   Bloodstone_Ore = SF::Sprite.new(BLOODSTONE_TEXTURE); Bloodstone_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
-  Bloodstone_Ore.position = SF.vector2(1800, 702)
+  Bloodstone_Ore.position = SF.vector2(300, 702)
  #''''''''''''''''''''''''''''''''''''''''''''''''''Moss Agate''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
   MOSS_AGATE_TEXTURE = SF::Texture.from_file("graphics/Moss_Agate.png")
   Moss_Agate_Ore = SF::Sprite.new(MOSS_AGATE_TEXTURE); Moss_Agate_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
-  Moss_Agate_Ore.position = SF.vector2(2200, 702)
+  Moss_Agate_Ore.position = SF.vector2(500, 702)
  #'''''''''''''''''''''''''''''''''''''''''''''''''''''Amber''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
   AMBER_TEXTURE = SF::Texture.from_file("graphics/Amber.png")
   Amber_Ore = SF::Sprite.new(AMBER_TEXTURE); Amber_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
-  Amber_Ore.position = SF.vector2(1600, 702)
+  Amber_Ore.position = SF.vector2(700, 702)
  #'''''''''''''''''''''''''''''''''''''''''''''''''''Wavellite''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
   WAVELLITE_TEXTURE = SF::Texture.from_file("graphics/Wavellite.png")
   Wavellite_Ore = SF::Sprite.new(WAVELLITE_TEXTURE); Wavellite_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
-  Wavellite_Ore.position = SF.vector2(2000, 702)
+  Wavellite_Ore.position = SF.vector2(900, 702)
  #'''''''''''''''''''''''''''''''''''''''''''''''''''''Topaz'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
   TOPAZ_TEXTURE = SF::Texture.from_file("graphics/Topaz.png")
   Topaz_Ore = SF::Sprite.new(TOPAZ_TEXTURE); Topaz_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
-  Topaz_Ore.position = SF.vector2(2400, 702)
+  Topaz_Ore.position = SF.vector2(1100, 702)
  #''''''''''''''''''''''''''''''''''''''''''''''''''''Amethyst''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
   AMETHYST_TEXTURE = SF::Texture.from_file("graphics/Amethyst_Ore.png")
   Amethyst_Ore = SF::Sprite.new(AMETHYST_TEXTURE); Amethyst_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
-  Amethyst_Ore.position = SF.vector2(1400, 702)
+  Amethyst_Ore.position = SF.vector2(1300, 702)
  #''''''''''''''''''''''''''''''''''''''''''''''''''Smokey Quartz'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
   SMOKEY_QUARTZ_TEXTURE = SF::Texture.from_file("graphics/Smokey_Quartz.png")
   Smokey_Quartz_Ore = SF::Sprite.new(SMOKEY_QUARTZ_TEXTURE); Smokey_Quartz_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
-  Smokey_Quartz_Ore.position = SF.vector2(1200, 702)
+  Smokey_Quartz_Ore.position = SF.vector2(1500, 702)
  #'''''''''''''''''''''''''''''''''''''''''''''''''''''Sapphire''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
   SAPPHIRE_TEXTURE = SF::Texture.from_file("graphics/Sapphire.png")
   Sapphire_Ore = SF::Sprite.new(SAPPHIRE_TEXTURE); Sapphire_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
-  Sapphire_Ore.position = SF.vector2(400, 702)
+  Sapphire_Ore.position = SF.vector2(1700, 702)
  #''''''''''''''''''''''''''''''''''''''''''''''''''''Black Opal'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
   BLACK_OPAL_TEXTURE = SF::Texture.from_file("graphics/Black_Opal.png")
   Black_Opal_Ore = SF::Sprite.new(BLACK_OPAL_TEXTURE); Black_Opal_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
-  Black_Opal_Ore.position = SF.vector2(200, 702)
+  Black_Opal_Ore.position = SF.vector2(1900, 702)
+ #''''''''''''''''''''''''''''''''''''''''''''''''''''Black Opal'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+  AJOITE_TEXTURE = SF::Texture.from_file("graphics/Ajoite.png")
+  Ajoite_Ore = SF::Sprite.new(AJOITE_TEXTURE); Ajoite_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
+  Ajoite_Ore.position = SF.vector2(1900, 702)
 #______________________________________________________________________________________________________________________________________
 Testing_Text = SF::Text.new; Testing_Text.font = FONT_PIXEL; 
 Testing_Text.character_size = 20; Testing_Text.color = SF::Color::White; Testing_Text.position = SF.vector2(1800, 652)

@@ -128,7 +128,7 @@ module Etc
  # _________________________________________________________________________________________________________________________________________________________
  #|                                                              Etc Variables                                                                              |
  #|_________________________________________________________________________________________________________________________________________________________|
-   Inventory_Ore_Array = [] of Inventory_Ore
+   Inventory_Ore_Array = [] of Inventory_Ore; 
    Ore_Array = [] of Inventory_Ore
 
   class Inventory_Ore
@@ -180,39 +180,17 @@ module Etc
    def amount_owned=(value : Int32)
     @amount_owned = value
    end
+   @@drop_iterator : Int32; @@drop_iterator = 0
     def Inventory_Ore.add_ore(amount, ore)
-      puts ore
-      if ore == "bloodstone_ore"
-        @@bloodstone_inventory_ore.amount_owned += amount
+      s = Ore_Array.size; @@drop_iterator = 0
+      while @@drop_iterator < s
+        if Ore_Array[@@drop_iterator].name == ore
+          Ore_Array[@@drop_iterator].amount_owned += amount
+         @@drop_iterator = 0
+         ore = "none"
+        end
+        @@drop_iterator += 1
       end
-      if ore == "moss_agate"
-        @@moss_agate_inventory_ore.amount_owned += amount
-      end
-      if ore == "amber"
-        @@amber_inventory_ore.amount_owned += amount
-      end
-      if ore == "wavellite"
-        @@wavellite_inventory_ore.amount_owned += amount
-      end
-      if ore == "topaz"
-        @@topaz_inventory_ore.amount_owned += amount
-      end
-      if ore == "amethyst"
-        @@amethyst_inventory_ore.amount_owned += amount
-      end
-      if ore == "smokey_quartz"
-        @@smokey_quartz_inventory_ore.amount_owned += amount
-      end
-      if ore == "sapphire"
-        @@sapphire.amount_owned += amount 
-      end
-      if ore == "black_opal"
-        @@black_opal.amount_owned += amount 
-      end
-     if ore != "bloodstone_ore" && ore != "moss_agate" && ore != "amber" && ore != "wavellite" && ore != "topaz" && ore != "amethyst" && ore != "smokey_quartz"
-     if ore != "sapphire" && ore != "black_opal"
-      puts "error! drop ore does not exist!"
-     end; end
      end
     def remove_ore(amount)
       @amount_owned -= amount
@@ -221,7 +199,6 @@ module Etc
     s = Ore_Array.size - 1; x = 0
     while s >= x
       if Ore_Array[x].amount_owned > 0
-        puts Ore_Array[x].amount_owned
         Inventory_Ore_Array.push(Ore_Array[x])
       end
       x += 1
@@ -298,11 +275,11 @@ module Etc
    #/                                                               Entities                                                                               /
    #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     @@bloodstone_owned = 0
-    @@bloodstone_inventory_ore = Inventory_Ore.new("Bloodstone Ore", 1, Bloodstone_Inventory_Ore, 1, "red", "earth", "hp+", 70)
+    @@bloodstone_inventory_ore = Inventory_Ore.new("Bloodstone", 1, Bloodstone_Inventory_Ore, 1, "red", "earth", "hp+", 70)
     Ore_Array.push(@@bloodstone_inventory_ore)
 
     @@moss_agate_owned = 0
-    @@moss_agate_inventory_ore = Inventory_Ore.new("Moss_Agate", 2, Moss_Agate_Inventory_Ore, 1, "green", "earth", "passive_mp_regen", 60)
+    @@moss_agate_inventory_ore = Inventory_Ore.new("Moss Agate", 2, Moss_Agate_Inventory_Ore, 1, "green", "earth", "passive_mp_regen", 60)
     Ore_Array.push(@@moss_agate_inventory_ore)
 
     @@amber_owned = 0
@@ -486,7 +463,7 @@ module Harvestables
          end; end; end; end
       def Ore.break(broken)
         amount = rand(1..3)
-        ore = broken.drop_item
+        ore = broken.name
         if broken.hp >= 0 && broken.is_broke == false
         if @@ore_reset == 0
           Etc::Inventory_Ore.add_ore(amount, ore)
