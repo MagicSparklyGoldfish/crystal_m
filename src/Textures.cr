@@ -404,12 +404,15 @@
     #''''''''''''''''''''''''''''''''''''''''''''''''''Smokey Quartz'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
      SMOKEY_QUARTZ_INVENTORY_ORE_TEXTURE = SF::Texture.from_file("graphics/Smokey_Quartz_Ore.png")
      Smokey_Quartz_Inventory_Ore = SF::Sprite.new(SMOKEY_QUARTZ_INVENTORY_ORE_TEXTURE)  
-    #'''''''''''''''''''''''''''''''''''''''''''''''''''''Sapphire''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    #'''''''''''''''''''''''''''''''''''''''''''''''''''''Sapphire'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
      SAPPHIRE_INVENTORY_ORE_TEXTURE = SF::Texture.from_file("graphics/Sapphire_Ore.png")
      Sapphire_Inventory_Ore = SF::Sprite.new(SAPPHIRE_INVENTORY_ORE_TEXTURE)  
     #''''''''''''''''''''''''''''''''''''''''''''''''''''Black Opal'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      BLACK_OPAL_INVENTORY_ORE_TEXTURE = SF::Texture.from_file("graphics/Black_Opal_Inventory.png")
      Black_Opal_Inventory_Ore = SF::Sprite.new(BLACK_OPAL_INVENTORY_ORE_TEXTURE)  
+    #''''''''''''''''''''''''''''''''''''''''''''''''''''Black Opal'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     AJOITE_INVENTORY_ORE_TEXTURE = SF::Texture.from_file("graphics/Ajoite_Inventory.png")
+     Ajoite_Inventory_Ore = SF::Sprite.new(AJOITE_INVENTORY_ORE_TEXTURE) 
 #----------------------------------------------------------------------------------------------------------------------------------- 
 #                                                    Character Model
 #-----------------------------------------------------------------------------------------------------------------------------------
@@ -1833,7 +1836,7 @@
  #''''''''''''''''''''''''''''''''''''''''''''''''''''Black Opal'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
   AJOITE_TEXTURE = SF::Texture.from_file("graphics/Ajoite.png")
   Ajoite_Ore = SF::Sprite.new(AJOITE_TEXTURE); Ajoite_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
-  Ajoite_Ore.position = SF.vector2(1900, 702)
+  Ajoite_Ore.position = SF.vector2(2100, 702)
 #______________________________________________________________________________________________________________________________________
 Testing_Text = SF::Text.new; Testing_Text.font = FONT_PIXEL; 
 Testing_Text.character_size = 20; Testing_Text.color = SF::Color::White; Testing_Text.position = SF.vector2(1800, 652)
