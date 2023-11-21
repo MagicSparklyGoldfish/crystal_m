@@ -205,6 +205,7 @@ module Etc
     end
    end
    def Inventory_Ore.display_ore(window) 
+    Inventory_Ore_Array.uniq!
     if Inventory_Ore_Array.size >= 1
      Inventory_Ore_Array[0].sprite.position = SF.vector2(555, 310);
      ore_array_text_01 = Ore_amount_owned_text.dup
@@ -276,43 +277,51 @@ module Etc
      ore_array_text_10.string = "x" + Inventory_Ore_Array[9].amount_owned.to_s
      window.draw(Inventory_Ore_Array[9].sprite); window.draw(ore_array_text_10)
       end
+    if Inventory_Ore_Array.size >= 11
+     Inventory_Ore_Array[10].sprite.position = SF.vector2(1155, 460);
+     ore_array_text_11 = Ore_amount_owned_text.dup
+     ore_array_text_11.position = Inventory_Ore_Array[10].sprite.position + SF.vector2(100, -5)
+     ore_array_text_11.string = "x" + Inventory_Ore_Array[10].amount_owned.to_s
+     window.draw(Inventory_Ore_Array[10].sprite); window.draw(ore_array_text_11)
+      end
    end                
    #________________________________________________________________________________________________________________________________________________________
    #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
    #/                                                               Entities                                                                               /
    #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    @@bloodstone_owned = 0
-    @@bloodstone_inventory_ore = Inventory_Ore.new("Bloodstone", 1, Bloodstone_Inventory_Ore, 1, "red", "earth", "hp+", 70)
-    Ore_Array.push(@@bloodstone_inventory_ore)
-
-    @@moss_agate_owned = 0
-    @@moss_agate_inventory_ore = Inventory_Ore.new("Moss Agate", 2, Moss_Agate_Inventory_Ore, 1, "green", "earth", "passive_mp_regen", 60)
-    Ore_Array.push(@@moss_agate_inventory_ore)
-
-    @@amber_owned = 0
-    @@amber_inventory_ore = Inventory_Ore.new("Amber", 3, Amber_Inventory_Ore, 1, "yellow", "fire", "passive_hp_regen", 55)
-    Ore_Array.push(@@amber_inventory_ore)
-
-    @@wavellite_inventory_ore = Inventory_Ore.new("Wavellite", 4, Wavellite_Inventory_Ore, 1, "green", "earth", "mp+", 75)
-    Ore_Array.push(@@wavellite_inventory_ore)
-
-    @@topaz_inventory_ore = Inventory_Ore.new("Topaz", 5, Topaz_Inventory_Ore, 1, "yellow", "fire", "INT+", 175)
-    Ore_Array.push(@@topaz_inventory_ore)
-
-    @@amethyst_inventory_ore = Inventory_Ore.new("Amethyst", 6, Amethyst_Inventory_Ore, 1, "purple", "air", "INT+", 105)
-    Ore_Array.push(@@amethyst_inventory_ore) 
-
-    @@smokey_quartz_inventory_ore = Inventory_Ore.new("Smokey Quartz", 7, Smokey_Quartz_Inventory_Ore, 1, "clear", "earth", "STR+", 95)
-    Ore_Array.push(@@smokey_quartz_inventory_ore) 
-
-    @@sapphire = Inventory_Ore.new("Sapphire", 8, Sapphire_Inventory_Ore, 1, "blue", "water", "EXP+", 950)
-    Ore_Array.push(@@sapphire) 
-
-    @@black_opal = Inventory_Ore.new("Black Opal", 9, Black_Opal_Inventory_Ore, 1, "black", "water", "LUK+", 80)
-    Ore_Array.push(@@black_opal) 
-
-    @@ajiote = Inventory_Ore.new("Ajoite", 10, Ajoite_Inventory_Ore, 1, "clear", "water", "DEX+", 60)
-    Ore_Array.push(@@ajiote) 
+    #--------------------------------------------------------------Bloodstone------------------------------------------------------------------------------
+     @@bloodstone_inventory_ore = Inventory_Ore.new("Bloodstone", 1, Bloodstone_Inventory_Ore, 1, "red", "earth", "hp+", 70)
+     Ore_Array.push(@@bloodstone_inventory_ore)
+    #--------------------------------------------------------------Moss Agate------------------------------------------------------------------------------
+     @@moss_agate_inventory_ore = Inventory_Ore.new("Moss Agate", 2, Moss_Agate_Inventory_Ore, 1, "green", "earth", "passive_mp_regen", 60)
+     Ore_Array.push(@@moss_agate_inventory_ore)
+    #----------------------------------------------------------------Amber---------------------------------------------------------------------------------
+     @@amber_inventory_ore = Inventory_Ore.new("Amber", 3, Amber_Inventory_Ore, 1, "yellow", "fire", "passive_hp_regen", 55)
+     Ore_Array.push(@@amber_inventory_ore)
+    #---------------------------------------------------------------Wavellite------------------------------------------------------------------------------ 
+     @@wavellite_inventory_ore = Inventory_Ore.new("Wavellite", 4, Wavellite_Inventory_Ore, 1, "green", "earth", "mp+", 75)
+     Ore_Array.push(@@wavellite_inventory_ore)
+    #-----------------------------------------------------------------Topaz-------------------------------------------------------------------------------- 
+     @@topaz_inventory_ore = Inventory_Ore.new("Topaz", 5, Topaz_Inventory_Ore, 1, "yellow", "fire", "INT+", 175)
+     Ore_Array.push(@@topaz_inventory_ore)
+    #---------------------------------------------------------------Amethyst------------------------------------------------------------------------------- 
+     @@amethyst_inventory_ore = Inventory_Ore.new("Amethyst", 6, Amethyst_Inventory_Ore, 1, "purple", "air", "INT+", 105)
+     Ore_Array.push(@@amethyst_inventory_ore) 
+    #-------------------------------------------------------------Smokey Quartz---------------------------------------------------------------------------- 
+     @@smokey_quartz_inventory_ore = Inventory_Ore.new("Smokey Quartz", 7, Smokey_Quartz_Inventory_Ore, 1, "clear", "earth", "STR+", 95)
+     Ore_Array.push(@@smokey_quartz_inventory_ore) 
+    #---------------------------------------------------------------Sapphire------------------------------------------------------------------------------- 
+     @@sapphire = Inventory_Ore.new("Sapphire", 8, Sapphire_Inventory_Ore, 1, "blue", "water", "EXP+", 950)
+     Ore_Array.push(@@sapphire) 
+    #--------------------------------------------------------------Black Opal------------------------------------------------------------------------------ 
+     @@black_opal = Inventory_Ore.new("Black Opal", 9, Black_Opal_Inventory_Ore, 1, "black", "water", "LUK+", 80)
+     Ore_Array.push(@@black_opal) 
+    #---------------------------------------------------------------Ajiote--------------------------------------------------------------------------------- 
+     @@ajiote = Inventory_Ore.new("Ajoite", 10, Ajoite_Inventory_Ore, 1, "clear", "water", "DEX+", 60)
+     Ore_Array.push(@@ajiote) 
+    #--------------------------------------------------------------Rhodolite------------------------------------------------------------------------------ 
+     @@rhodolite = Inventory_Ore.new("Rhodolite", 11, Rhodolite_Inventory_Ore, 1, "pink", "water", "STR+", 60)
+     Ore_Array.push(@@rhodolite)
    #________________________________________________________________________________________________________________________________________________________
   end
 end 
@@ -322,10 +331,10 @@ module Harvestables
   extend self
   class Ore
     Test_Ore_Array = [@@bloodstone_01, @@bloodstone_02, @@bloodstone_03, @@moss_agate_01, @@amber01, @@wavellite01,  @@topaz01, @@amethyst01,
-    @@smokey_quartz01, @@sapphire01, @@black_opal01, @@ajoite01]
+    @@smokey_quartz01, @@sapphire01, @@black_opal01, @@ajoite01, @@rhodolite01]
     Test_Ore_Sprite_Array = [@@bloodstone_01.sprite, @@bloodstone_02.sprite, @@bloodstone_03.sprite, @@moss_agate_01.sprite, @@amber01.sprite, 
     @@wavellite01.sprite,  @@topaz01.sprite, @@amethyst01.sprite, @@smokey_quartz01.sprite, @@sapphire01.sprite, @@black_opal01.sprite,
-    @@ajoite01.sprite]
+    @@ajoite01.sprite, @@rhodolite01.sprite]
    #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
    #+                                                              Variables                                                                               +
    #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -455,7 +464,7 @@ module Harvestables
          @@ore_animation_frame = 0
        end
        @@ore_animation_frame += 1
-       if ore.hp < 200 && ore.hp > 0
+       if ore.hp < ore.max_hp/2 # && ore.hp > 0
          case @@ore_animation_frame 
          when 1
           a = 100; b = 100; x = 100; y = 100
@@ -530,8 +539,8 @@ module Harvestables
       test_text_4 = Testing_Text.dup; test_text_4.string = @@amber01.hp.to_s + Ore_Clock_Break.elapsed_time.to_s
       test_text_5 = Testing_Text.dup; test_text_5.string = @@wavellite01.hp.to_s + Ore_Clock_Break.elapsed_time.to_s
       test_text_6 = Testing_Text.dup; test_text_5.string = @@amethyst01.hp.to_s + Ore_Clock_Break.elapsed_time.to_s
-      window.draw(Testing_Text)
-      @@bloodstone_02.sprite.position = SF.vector2(2500, 702)
+
+      @@bloodstone_02.sprite.position = SF.vector2(3500, 702)
       test_text_2.position = @@bloodstone_02.sprite.position
       test_text_3.position = @@moss_agate_01.sprite.position
       test_text_4.position = @@amber01.sprite.position
@@ -540,11 +549,12 @@ module Harvestables
       window.draw(@@bloodstone_01.sprite); window.draw(@@bloodstone_02.sprite); window.draw(test_text_2); window.draw(@@moss_agate_01.sprite); 
       window.draw(@@amber01.sprite); window.draw(@@wavellite01.sprite); window.draw(@@topaz01.sprite); window.draw(@@amethyst01.sprite)
       window.draw(@@smokey_quartz01.sprite); window.draw(@@sapphire01.sprite); window.draw(@@black_opal01.sprite); window.draw(@@ajoite01.sprite)
+      window.draw(@@rhodolite01.sprite)
     end
    #________________________________________________________________________________________________________________________________________________________
    #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
    #/                                                               Entities                                                                               /
-   #///////////////////////////////////////////////////@@smokey_quartz01/////////////////////////////////////////////////////////////////////////////////////////////////////
+   #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     #..............................................................Bloodstone...............................................................................
      @@bloodstone_01 = Ore.new("Bloodstone", 1, "red", 7, 500, "bloodstone_ore", Bloodstone_Ore.dup, false, 500) 
      @@bloodstone_02 = Ore.new("Bloodstone", 2, "red", 7, 500, "bloodstone_ore", Bloodstone_Ore.dup, false, 500) 
@@ -619,6 +629,19 @@ module Harvestables
    #.......................................................................................................................................................
    #...................................................................Ajoite..............................................................................
     @@ajoite01 = Ore.new("Ajoite", 45, "clear", 3, 150, "ajoite", Ajoite_Ore.dup, false, 150)
+    @@ajoite02 = Ore.new("Ajoite", 46, "clear", 3, 150, "ajoite", Ajoite_Ore.dup, false, 150)
+    @@ajoite03 = Ore.new("Ajoite", 47, "clear", 3, 150, "ajoite", Ajoite_Ore.dup, false, 150)
+    @@ajoite04 = Ore.new("Ajoite", 48, "clear", 3, 150, "ajoite", Ajoite_Ore.dup, false, 150)
+    @@ajoite05 = Ore.new("Ajoite", 49, "clear", 3, 150, "ajoite", Ajoite_Ore.dup, false, 150)
+    @@ajoite06 = Ore.new("Ajoite", 50, "clear", 3, 150, "ajoite", Ajoite_Ore.dup, false, 150)
+   #.......................................................................................................................................................
+   #.................................................................Rhodolite.............................................................................
+    @@rhodolite01 = Ore.new("Rhodolite", 51, "pink", 7, 500, "rhodolite", Rhodolite_Ore.dup, false, 500)
+    @@rhodolite02 = Ore.new("Rhodolite", 52, "pink", 7, 500, "rhodolite", Rhodolite_Ore.dup, false, 500)
+    @@rhodolite03 = Ore.new("Rhodolite", 53, "pink", 7, 500, "rhodolite", Rhodolite_Ore.dup, false, 500)
+    @@rhodolite04 = Ore.new("Rhodolite", 54, "pink", 7, 500, "rhodolite", Rhodolite_Ore.dup, false, 500)
+    @@rhodolite05 = Ore.new("Rhodolite", 55, "pink", 7, 500, "rhodolite", Rhodolite_Ore.dup, false, 500)
+    @@rhodolite06 = Ore.new("Rhodolite", 56, "pink", 7, 500, "rhodolite", Rhodolite_Ore.dup, false, 500)
    #.......................................................................................................................................................
   end
   class Herbs
