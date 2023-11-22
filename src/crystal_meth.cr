@@ -471,7 +471,8 @@ extend self
     end
    bounding_box1 = @@player_character_rendered_model.global_bounds
    bounding_box2 = @@player_character_rendered_model.global_bounds
-   window.draw(Ground); window.draw(@@player_character_rendered_model); window.draw(Test_Teleporter); 
+   ore_ground = Ground.dup; Ground.position = SF.vector2(-5000, 800)
+   window.draw(ore_ground); window.draw(@@player_character_rendered_model); window.draw(Test_Teleporter); 
  end
  def Window_Class.attack_check_test_ore_map
    Harvestables::Ore.harvest(@@attacking)
