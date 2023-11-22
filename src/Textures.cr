@@ -435,6 +435,9 @@
     #'''''''''''''''''''''''''''''''''''''''''''''''''''''Amorite'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      AMORITE_INVENTORY_ORE_TEXTURE = SF::Texture.from_file("graphics/Amorite_Inventory.png")
      Amorite_Inventory_Ore = SF::Sprite.new(AMORITE_INVENTORY_ORE_TEXTURE) 
+    #'''''''''''''''''''''''''''''''''''''''''''''''''''Lapis Lazuli''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     LAPIS_LAZULI_INVENTORY_ORE_TEXTURE = SF::Texture.from_file("graphics/Lapis_Lazuli_Inventory.png")
+     Lapis_Lazuli_Inventory_Ore = SF::Sprite.new(LAPIS_LAZULI_INVENTORY_ORE_TEXTURE) 
 #----------------------------------------------------------------------------------------------------------------------------------- 
 #                                                    Character Model
 #-----------------------------------------------------------------------------------------------------------------------------------
@@ -1871,10 +1874,14 @@
   FLOURITE_TEXTURE = SF::Texture.from_file("graphics/Flourite.png")
   Flourite_Ore = SF::Sprite.new(FLOURITE_TEXTURE); Flourite_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
   Flourite_Ore.position = SF.vector2(2700, 702)
- #''''''''''''''''''''''''''''''''''''''''''''''''''''Flourite''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+ #'''''''''''''''''''''''''''''''''''''''''''''''''''''Amorite''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
   AMORITE_TEXTURE = SF::Texture.from_file("graphics/Amorite.png")
   Amorite_Ore = SF::Sprite.new(AMORITE_TEXTURE); Amorite_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
   Amorite_Ore.position = SF.vector2(2900, 702)
+ #'''''''''''''''''''''''''''''''''''''''''''''''''''''Amorite''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+  LAPIS_LAZULI_TEXTURE = SF::Texture.from_file("graphics/Lapis_Lazuli.png")
+  Lapis_Lazuli_Ore = SF::Sprite.new(LAPIS_LAZULI_TEXTURE); Lapis_Lazuli_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
+  Lapis_Lazuli_Ore.position = SF.vector2(3100, 702)
 #______________________________________________________________________________________________________________________________________
 Testing_Text = SF::Text.new; Testing_Text.font = FONT_PIXEL; 
 Testing_Text.character_size = 20; Testing_Text.color = SF::Color::White; Testing_Text.position = SF.vector2(1800, 652)
