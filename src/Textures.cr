@@ -438,9 +438,12 @@
     #'''''''''''''''''''''''''''''''''''''''''''''''''''Lapis Lazuli''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      LAPIS_LAZULI_INVENTORY_ORE_TEXTURE = SF::Texture.from_file("graphics/Lapis_Lazuli_Inventory.png")
      Lapis_Lazuli_Inventory_Ore = SF::Sprite.new(LAPIS_LAZULI_INVENTORY_ORE_TEXTURE) 
-    #'''''''''''''''''''''''''''''''''''''''''''''''''''Lapis Lazuli''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    #'''''''''''''''''''''''''''''''''''''''''''''''''''''Moonstone'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      MOONSTONE_INVENTORY_ORE_TEXTURE = SF::Texture.from_file("graphics/Moonstone_Inventory.png")
      Moonstone_Inventory_Ore = SF::Sprite.new(MOONSTONE_INVENTORY_ORE_TEXTURE) 
+    #'''''''''''''''''''''''''''''''''''''''''''''''''''''Moonstone'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     BLUE_CALCITE_INVENTORY_ORE_TEXTURE = SF::Texture.from_file("graphics/Blue_Calcite_Inventory.png")
+     Blue_Calcite_Inventory_Ore = SF::Sprite.new(BLUE_CALCITE_INVENTORY_ORE_TEXTURE) 
 #----------------------------------------------------------------------------------------------------------------------------------- 
 #                                                    Character Model
 #-----------------------------------------------------------------------------------------------------------------------------------
@@ -1889,6 +1892,10 @@
   MOONSTONE_TEXTURE = SF::Texture.from_file("graphics/Moonstone.png")
   Moonstone_Ore = SF::Sprite.new(MOONSTONE_TEXTURE); Moonstone_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
   Moonstone_Ore.position = SF.vector2(3300, 702)
+ #''''''''''''''''''''''''''''''''''''''''''''''''''''Moonstone''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+  BLUE_CALCITE_TEXTURE = SF::Texture.from_file("graphics/Blue_Calcite.png")
+  Blue_Calcite_Ore = SF::Sprite.new(BLUE_CALCITE_TEXTURE); Blue_Calcite_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
+  Blue_Calcite_Ore.position = SF.vector2(3500, 702)
 #______________________________________________________________________________________________________________________________________
 Testing_Text = SF::Text.new; Testing_Text.font = FONT_PIXEL; 
 Testing_Text.character_size = 20; Testing_Text.color = SF::Color::White; Testing_Text.position = SF.vector2(1800, 652)

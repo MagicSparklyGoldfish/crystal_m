@@ -439,6 +439,9 @@ module Etc
     #--------------------------------------------------------------Moonstone------------------------------------------------------------------------------- 
      @@moonstone = Inventory_Ore.new("Moonstone", 16, Moonstone_Inventory_Ore, 1, "white", "water", "DEX+", 70)
      Ore_Array.push(@@moonstone)
+    #-------------------------------------------------------------Blue Calcite------------------------------------------------------------------------------ 
+     @@blue_calcite = Inventory_Ore.new("Blue Calcite", 17, Blue_Calcite_Inventory_Ore, 1, "blue", "water", "DEX+", 70)
+     Ore_Array.push(@@blue_calcite)
    #________________________________________________________________________________________________________________________________________________________
   end
 end 
@@ -449,12 +452,12 @@ module Harvestables
   class Ore
     Test_Ore_Array = [@@bloodstone_01, @@bloodstone_02, @@bloodstone_03, @@moss_agate_01, @@amber01, @@wavellite01,  @@topaz01, @@amethyst01,
     @@smokey_quartz01, @@sapphire01, @@black_opal01, @@ajoite01, @@rhodolite01, @@chalcanthite01, @@flourite01, @@amorite01, @@lapis_lazuli01,
-    @@moonstone01]
+    @@moonstone01, @@blue_calcite]
 
     Test_Ore_Sprite_Array = [@@bloodstone_01.sprite, @@bloodstone_02.sprite, @@bloodstone_03.sprite, @@moss_agate_01.sprite, @@amber01.sprite, 
     @@wavellite01.sprite,  @@topaz01.sprite, @@amethyst01.sprite, @@smokey_quartz01.sprite, @@sapphire01.sprite, @@black_opal01.sprite,
     @@ajoite01.sprite, @@rhodolite01.sprite, @@chalcanthite01.sprite, @@flourite01.sprite, @@amorite01.sprite, @@lapis_lazuli01.sprite,
-    @@moonstone01.sprite]
+    @@moonstone01.sprite, @@blue_calcite.sprite]
    #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
    #+                                                              Variables                                                                               +
    #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -670,7 +673,7 @@ module Harvestables
       window.draw(@@amber01.sprite); window.draw(@@wavellite01.sprite); window.draw(@@topaz01.sprite); window.draw(@@amethyst01.sprite)
       window.draw(@@smokey_quartz01.sprite); window.draw(@@sapphire01.sprite); window.draw(@@black_opal01.sprite); window.draw(@@ajoite01.sprite)
       window.draw(@@rhodolite01.sprite); window.draw(@@chalcanthite01.sprite); window.draw(@@flourite01.sprite); window.draw(@@amorite01.sprite)
-      window.draw(@@lapis_lazuli01.sprite); window.draw(@@moonstone01.sprite)
+      window.draw(@@lapis_lazuli01.sprite); window.draw(@@moonstone01.sprite); window.draw(@@blue_calcite.sprite)
     end
    #________________________________________________________________________________________________________________________________________________________
    #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -799,6 +802,14 @@ module Harvestables
     #........................................................................................................................................................
     #................................................................Moonstone...............................................................................
      @@moonstone01 = Ore.new("Moonstone", 81, "white", 6, 300, "moonstone", Moonstone_Ore.dup, false, 300)
+     @@moonstone02 = Ore.new("Moonstone", 82, "white", 6, 300, "moonstone", Moonstone_Ore.dup, false, 300)
+     @@moonstone03 = Ore.new("Moonstone", 83, "white", 6, 300, "moonstone", Moonstone_Ore.dup, false, 300)
+     @@moonstone04 = Ore.new("Moonstone", 84, "white", 6, 300, "moonstone", Moonstone_Ore.dup, false, 300)
+     @@moonstone05 = Ore.new("Moonstone", 85, "white", 6, 300, "moonstone", Moonstone_Ore.dup, false, 300)
+     @@moonstone06 = Ore.new("Moonstone", 86, "white", 6, 300, "moonstone", Moonstone_Ore.dup, false, 300)
+    #........................................................................................................................................................
+    #..............................................................Blue Calcite..............................................................................
+    @@blue_calcite = Ore.new("Blue Calcite", 87, "blue", 3, 250, "blue calcite", Blue_Calcite_Ore.dup, false, 250)
     #........................................................................................................................................................
   end
   class Herbs
