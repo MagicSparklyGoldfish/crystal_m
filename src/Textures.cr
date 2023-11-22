@@ -426,6 +426,9 @@
     #''''''''''''''''''''''''''''''''''''''''''''''''''''Rhodolite''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      RHODOLITE_INVENTORY_ORE_TEXTURE = SF::Texture.from_file("graphics/Rhodolite_Inventory.png")
      Rhodolite_Inventory_Ore = SF::Sprite.new(RHODOLITE_INVENTORY_ORE_TEXTURE) 
+    #'''''''''''''''''''''''''''''''''''''''''''''''''''Chalcanthite''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     CHALCANTHITE_INVENTORY_ORE_TEXTURE = SF::Texture.from_file("graphics/Chalcanthite_Inventory.png")
+     Chalcanthite_Inventory_Ore = SF::Sprite.new(CHALCANTHITE_INVENTORY_ORE_TEXTURE) 
 #----------------------------------------------------------------------------------------------------------------------------------- 
 #                                                    Character Model
 #-----------------------------------------------------------------------------------------------------------------------------------
@@ -1854,6 +1857,10 @@
   RHODOLITE_TEXTURE = SF::Texture.from_file("graphics/Rhodolite.png")
   Rhodolite_Ore = SF::Sprite.new(RHODOLITE_TEXTURE); Rhodolite_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
   Rhodolite_Ore.position = SF.vector2(2300, 702)
+ #'''''''''''''''''''''''''''''''''''''''''''''''''''Chalcanthite'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+  CHALCANTHITE_TEXTURE = SF::Texture.from_file("graphics/Chalcanthite.png")
+  Chalcanthite_Ore = SF::Sprite.new(CHALCANTHITE_TEXTURE); Chalcanthite_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
+  Chalcanthite_Ore.position = SF.vector2(2500, 702)
 #______________________________________________________________________________________________________________________________________
 Testing_Text = SF::Text.new; Testing_Text.font = FONT_PIXEL; 
 Testing_Text.character_size = 20; Testing_Text.color = SF::Color::White; Testing_Text.position = SF.vector2(1800, 652)

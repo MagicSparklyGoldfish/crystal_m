@@ -336,6 +336,16 @@ module Etc
       ore_array_text_13.string = "x" + Inventory_Ore_Array[12].amount_owned.to_s
       window.draw(Inventory_Ore_Array[12].sprite); window.draw(ore_array_text_13)
        end; end
+    #----------------------------------------------------slot 14------------------------------------------
+     if Inventory_Ore_Array.size >= 14
+       case page
+       when 1   
+       Inventory_Ore_Array[13].sprite.position = SF.vector2(710, 610);
+       ore_array_text_14 = Ore_amount_owned_text.dup
+       ore_array_text_14.position = Inventory_Ore_Array[13].sprite.position + SF.vector2(100, -5)
+       ore_array_text_14.string = "x" + Inventory_Ore_Array[13].amount_owned.to_s
+       window.draw(Inventory_Ore_Array[13].sprite); window.draw(ore_array_text_14)
+        end; end
    end                
    #________________________________________________________________________________________________________________________________________________________
    #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -371,9 +381,12 @@ module Etc
     #---------------------------------------------------------------Ajiote--------------------------------------------------------------------------------- 
      @@ajiote = Inventory_Ore.new("Ajoite", 10, Ajoite_Inventory_Ore, 1, "clear", "water", "DEX+", 60)
      Ore_Array.push(@@ajiote) 
-    #--------------------------------------------------------------Rhodolite------------------------------------------------------------------------------ 
+    #--------------------------------------------------------------Rhodolite------------------------------------------------------------------------------- 
      @@rhodolite = Inventory_Ore.new("Rhodolite", 11, Rhodolite_Inventory_Ore, 1, "pink", "water", "STR+", 60)
      Ore_Array.push(@@rhodolite)
+    #-------------------------------------------------------------Chalcanthite----------------------------------------------------------------------------- 
+     @@chalcanthite = Inventory_Ore.new("Chalcanthite", 12, Chalcanthite_Inventory_Ore, 1, "blue", "water", "poison", 30)
+     Ore_Array.push(@@chalcanthite)
    #________________________________________________________________________________________________________________________________________________________
   end
 end 
@@ -383,10 +396,10 @@ module Harvestables
   extend self
   class Ore
     Test_Ore_Array = [@@bloodstone_01, @@bloodstone_02, @@bloodstone_03, @@moss_agate_01, @@amber01, @@wavellite01,  @@topaz01, @@amethyst01,
-    @@smokey_quartz01, @@sapphire01, @@black_opal01, @@ajoite01, @@rhodolite01]
+    @@smokey_quartz01, @@sapphire01, @@black_opal01, @@ajoite01, @@rhodolite01, @@chalcanthite01]
     Test_Ore_Sprite_Array = [@@bloodstone_01.sprite, @@bloodstone_02.sprite, @@bloodstone_03.sprite, @@moss_agate_01.sprite, @@amber01.sprite, 
     @@wavellite01.sprite,  @@topaz01.sprite, @@amethyst01.sprite, @@smokey_quartz01.sprite, @@sapphire01.sprite, @@black_opal01.sprite,
-    @@ajoite01.sprite, @@rhodolite01.sprite]
+    @@ajoite01.sprite, @@rhodolite01.sprite, @@chalcanthite01.sprite]
    #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
    #+                                                              Variables                                                                               +
    #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -601,7 +614,7 @@ module Harvestables
       window.draw(@@bloodstone_01.sprite); window.draw(@@bloodstone_02.sprite); window.draw(test_text_2); window.draw(@@moss_agate_01.sprite); 
       window.draw(@@amber01.sprite); window.draw(@@wavellite01.sprite); window.draw(@@topaz01.sprite); window.draw(@@amethyst01.sprite)
       window.draw(@@smokey_quartz01.sprite); window.draw(@@sapphire01.sprite); window.draw(@@black_opal01.sprite); window.draw(@@ajoite01.sprite)
-      window.draw(@@rhodolite01.sprite)
+      window.draw(@@rhodolite01.sprite); window.draw(@@chalcanthite01.sprite)
     end
    #________________________________________________________________________________________________________________________________________________________
    #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -694,6 +707,9 @@ module Harvestables
     @@rhodolite04 = Ore.new("Rhodolite", 54, "pink", 7, 500, "rhodolite", Rhodolite_Ore.dup, false, 500)
     @@rhodolite05 = Ore.new("Rhodolite", 55, "pink", 7, 500, "rhodolite", Rhodolite_Ore.dup, false, 500)
     @@rhodolite06 = Ore.new("Rhodolite", 56, "pink", 7, 500, "rhodolite", Rhodolite_Ore.dup, false, 500)
+   #.......................................................................................................................................................
+   #...............................................................Chalcanthite............................................................................
+    @@chalcanthite01 = Ore.new("Chalcanthite", 57, "blue", 2, 100, "chalcanthite", Chalcanthite_Ore.dup, false, 100)
    #.......................................................................................................................................................
   end
   class Herbs
