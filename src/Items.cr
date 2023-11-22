@@ -204,86 +204,138 @@ module Etc
       x += 1
     end
    end
-   def Inventory_Ore.display_ore(window) 
-    Inventory_Ore_Array.uniq!
-    if Inventory_Ore_Array.size >= 1
-     Inventory_Ore_Array[0].sprite.position = SF.vector2(555, 310);
-     ore_array_text_01 = Ore_amount_owned_text.dup
-     ore_array_text_01.position = Inventory_Ore_Array[0].sprite.position + SF.vector2(100, -5)
-     ore_array_text_01.string = "x" + Inventory_Ore_Array[0].amount_owned.to_s
-
-     window.draw(Inventory_Ore_Array[0].sprite); window.draw(ore_array_text_01)
-     end
-    if Inventory_Ore_Array.size >= 2
-     Inventory_Ore_Array[1].sprite.position = SF.vector2(710, 310);
-     ore_array_text_02 = Ore_amount_owned_text.dup
-     ore_array_text_02.position = Inventory_Ore_Array[1].sprite.position + SF.vector2(100, -5)
-     ore_array_text_02.string = "x" + Inventory_Ore_Array[1].amount_owned.to_s
-     window.draw(Inventory_Ore_Array[1].sprite); window.draw(ore_array_text_02)
-      end
-    if Inventory_Ore_Array.size >= 3
-     Inventory_Ore_Array[2].sprite.position = SF.vector2(855, 310);
-     ore_array_text_03 = Ore_amount_owned_text.dup
-     ore_array_text_03.position = Inventory_Ore_Array[2].sprite.position + SF.vector2(100, -5)
-     ore_array_text_03.string = "x" + Inventory_Ore_Array[2].amount_owned.to_s
-     window.draw(Inventory_Ore_Array[2].sprite); window.draw(ore_array_text_03)
-      end
-    if Inventory_Ore_Array.size >= 4
-     Inventory_Ore_Array[3].sprite.position = SF.vector2(1005, 310);
-     ore_array_text_04 = Ore_amount_owned_text.dup
-     ore_array_text_04.position = Inventory_Ore_Array[3].sprite.position + SF.vector2(100, -5)
-     ore_array_text_04.string = "x" + Inventory_Ore_Array[3].amount_owned.to_s
-     window.draw(Inventory_Ore_Array[3].sprite); window.draw(ore_array_text_04)
-      end
-    if Inventory_Ore_Array.size >= 5
-     Inventory_Ore_Array[4].sprite.position = SF.vector2(1155, 310);
-     ore_array_text_05 = Ore_amount_owned_text.dup
-     ore_array_text_05.position = Inventory_Ore_Array[4].sprite.position + SF.vector2(100, -5)
-     ore_array_text_05.string = "x" + Inventory_Ore_Array[4].amount_owned.to_s
-     window.draw(Inventory_Ore_Array[4].sprite); window.draw(ore_array_text_05)
-      end
-    if Inventory_Ore_Array.size >= 6
-     Inventory_Ore_Array[5].sprite.position = SF.vector2(1305, 310);
-     ore_array_text_06 = Ore_amount_owned_text.dup
-     ore_array_text_06.position = Inventory_Ore_Array[5].sprite.position + SF.vector2(100, -5)
-     ore_array_text_06.string = "x" + Inventory_Ore_Array[5].amount_owned.to_s
-     window.draw(Inventory_Ore_Array[5].sprite); window.draw(ore_array_text_06)
-      end
-    if Inventory_Ore_Array.size >= 7
-     Inventory_Ore_Array[6].sprite.position = SF.vector2(555, 460);
-     ore_array_text_07 = Ore_amount_owned_text.dup
-     ore_array_text_07.position = Inventory_Ore_Array[6].sprite.position + SF.vector2(100, -5)
-     ore_array_text_07.string = "x" + Inventory_Ore_Array[6].amount_owned.to_s
-     window.draw(Inventory_Ore_Array[6].sprite); window.draw(ore_array_text_07)
-      end
-    if Inventory_Ore_Array.size >= 8
-     Inventory_Ore_Array[7].sprite.position = SF.vector2(710, 460);
-     ore_array_text_08 = Ore_amount_owned_text.dup
-     ore_array_text_08.position = Inventory_Ore_Array[7].sprite.position + SF.vector2(100, -5)
-     ore_array_text_08.string = "x" + Inventory_Ore_Array[7].amount_owned.to_s
-     window.draw(Inventory_Ore_Array[7].sprite); window.draw(ore_array_text_08)
-      end
-    if Inventory_Ore_Array.size >= 9
-     Inventory_Ore_Array[8].sprite.position = SF.vector2(855, 460);
-     ore_array_text_09 = Ore_amount_owned_text.dup
-     ore_array_text_09.position = Inventory_Ore_Array[8].sprite.position + SF.vector2(100, -5)
-     ore_array_text_09.string = "x" + Inventory_Ore_Array[8].amount_owned.to_s
-     window.draw(Inventory_Ore_Array[8].sprite); window.draw(ore_array_text_09)
-      end
-    if Inventory_Ore_Array.size >= 10
-     Inventory_Ore_Array[9].sprite.position = SF.vector2(1005, 460);
-     ore_array_text_10 = Ore_amount_owned_text.dup
-     ore_array_text_10.position = Inventory_Ore_Array[9].sprite.position + SF.vector2(100, -5)
-     ore_array_text_10.string = "x" + Inventory_Ore_Array[9].amount_owned.to_s
-     window.draw(Inventory_Ore_Array[9].sprite); window.draw(ore_array_text_10)
-      end
-    if Inventory_Ore_Array.size >= 11
-     Inventory_Ore_Array[10].sprite.position = SF.vector2(1155, 460);
-     ore_array_text_11 = Ore_amount_owned_text.dup
-     ore_array_text_11.position = Inventory_Ore_Array[10].sprite.position + SF.vector2(100, -5)
-     ore_array_text_11.string = "x" + Inventory_Ore_Array[10].amount_owned.to_s
-     window.draw(Inventory_Ore_Array[10].sprite); window.draw(ore_array_text_11)
-      end
+   def Inventory_Ore.display_ore(window, page) 
+     Inventory_Ore_Array.uniq!
+    #----------------------------------------------------slot 1-------------------------------------------
+     if Inventory_Ore_Array.size >= 1
+       case page
+       when 1   
+      Inventory_Ore_Array[0].sprite.position = SF.vector2(555, 310);
+      ore_array_text_01 = Ore_amount_owned_text.dup
+      ore_array_text_01.position = Inventory_Ore_Array[0].sprite.position + SF.vector2(100, -5)
+      ore_array_text_01.string = "x" + Inventory_Ore_Array[0].amount_owned.to_s
+      window.draw(Inventory_Ore_Array[0].sprite); window.draw(ore_array_text_01)
+      end; end
+    #----------------------------------------------------slot 2-------------------------------------------
+     if Inventory_Ore_Array.size >= 2
+      case page
+      when 1   
+      Inventory_Ore_Array[1].sprite.position = SF.vector2(710, 310);
+      ore_array_text_02 = Ore_amount_owned_text.dup
+      ore_array_text_02.position = Inventory_Ore_Array[1].sprite.position + SF.vector2(100, -5)
+      ore_array_text_02.string = "x" + Inventory_Ore_Array[1].amount_owned.to_s
+      window.draw(Inventory_Ore_Array[1].sprite); window.draw(ore_array_text_02)
+       end; end
+    #----------------------------------------------------slot 3-------------------------------------------
+     if Inventory_Ore_Array.size >= 3
+      case page
+      when 1   
+      Inventory_Ore_Array[2].sprite.position = SF.vector2(855, 310);
+      ore_array_text_03 = Ore_amount_owned_text.dup
+      ore_array_text_03.position = Inventory_Ore_Array[2].sprite.position + SF.vector2(100, -5)
+      ore_array_text_03.string = "x" + Inventory_Ore_Array[2].amount_owned.to_s
+      window.draw(Inventory_Ore_Array[2].sprite); window.draw(ore_array_text_03)
+       end; end
+    #----------------------------------------------------slot 4-------------------------------------------
+     if Inventory_Ore_Array.size >= 4
+      case page
+      when 1   
+      Inventory_Ore_Array[3].sprite.position = SF.vector2(1005, 310);
+      ore_array_text_04 = Ore_amount_owned_text.dup
+      ore_array_text_04.position = Inventory_Ore_Array[3].sprite.position + SF.vector2(100, -5)
+      ore_array_text_04.string = "x" + Inventory_Ore_Array[3].amount_owned.to_s
+      window.draw(Inventory_Ore_Array[3].sprite); window.draw(ore_array_text_04)
+       end; end
+    #----------------------------------------------------slot 5-------------------------------------------
+     if Inventory_Ore_Array.size >= 5
+      case page
+      when 1   
+      Inventory_Ore_Array[4].sprite.position = SF.vector2(1155, 310);
+      ore_array_text_05 = Ore_amount_owned_text.dup
+      ore_array_text_05.position = Inventory_Ore_Array[4].sprite.position + SF.vector2(100, -5)
+      ore_array_text_05.string = "x" + Inventory_Ore_Array[4].amount_owned.to_s
+      window.draw(Inventory_Ore_Array[4].sprite); window.draw(ore_array_text_05)
+       end; end
+    #----------------------------------------------------slot 6-------------------------------------------
+     if Inventory_Ore_Array.size >= 6
+      case page
+      when 1   
+      Inventory_Ore_Array[5].sprite.position = SF.vector2(1305, 310);
+      ore_array_text_06 = Ore_amount_owned_text.dup
+      ore_array_text_06.position = Inventory_Ore_Array[5].sprite.position + SF.vector2(100, -5)
+      ore_array_text_06.string = "x" + Inventory_Ore_Array[5].amount_owned.to_s
+      window.draw(Inventory_Ore_Array[5].sprite); window.draw(ore_array_text_06)
+       end; end
+    #----------------------------------------------------slot 7-------------------------------------------
+     if Inventory_Ore_Array.size >= 7
+      case page
+      when 1   
+      Inventory_Ore_Array[6].sprite.position = SF.vector2(555, 460);
+      ore_array_text_07 = Ore_amount_owned_text.dup
+      ore_array_text_07.position = Inventory_Ore_Array[6].sprite.position + SF.vector2(100, -5)
+      ore_array_text_07.string = "x" + Inventory_Ore_Array[6].amount_owned.to_s
+      window.draw(Inventory_Ore_Array[6].sprite); window.draw(ore_array_text_07)
+       end; end
+    #----------------------------------------------------slot 8-------------------------------------------
+     if Inventory_Ore_Array.size >= 8
+      case page
+      when 1   
+      Inventory_Ore_Array[7].sprite.position = SF.vector2(710, 460);
+      ore_array_text_08 = Ore_amount_owned_text.dup
+      ore_array_text_08.position = Inventory_Ore_Array[7].sprite.position + SF.vector2(100, -5)
+      ore_array_text_08.string = "x" + Inventory_Ore_Array[7].amount_owned.to_s
+      window.draw(Inventory_Ore_Array[7].sprite); window.draw(ore_array_text_08)
+       end; end
+    #----------------------------------------------------slot 9-------------------------------------------
+     if Inventory_Ore_Array.size >= 9
+      case page
+      when 1   
+      Inventory_Ore_Array[8].sprite.position = SF.vector2(855, 460);
+      ore_array_text_09 = Ore_amount_owned_text.dup
+      ore_array_text_09.position = Inventory_Ore_Array[8].sprite.position + SF.vector2(100, -5)
+      ore_array_text_09.string = "x" + Inventory_Ore_Array[8].amount_owned.to_s
+      window.draw(Inventory_Ore_Array[8].sprite); window.draw(ore_array_text_09)
+       end; end
+    #----------------------------------------------------slot 10------------------------------------------
+     if Inventory_Ore_Array.size >= 10
+      case page
+      when 1   
+      Inventory_Ore_Array[9].sprite.position = SF.vector2(1005, 460);
+      ore_array_text_10 = Ore_amount_owned_text.dup
+      ore_array_text_10.position = Inventory_Ore_Array[9].sprite.position + SF.vector2(100, -5)
+      ore_array_text_10.string = "x" + Inventory_Ore_Array[9].amount_owned.to_s
+      window.draw(Inventory_Ore_Array[9].sprite); window.draw(ore_array_text_10)
+       end; end
+    #----------------------------------------------------slot 11------------------------------------------
+     if Inventory_Ore_Array.size >= 11
+      case page
+      when 1   
+      Inventory_Ore_Array[10].sprite.position = SF.vector2(1155, 460);
+      ore_array_text_11 = Ore_amount_owned_text.dup
+      ore_array_text_11.position = Inventory_Ore_Array[10].sprite.position + SF.vector2(100, -5)
+      ore_array_text_11.string = "x" + Inventory_Ore_Array[10].amount_owned.to_s
+      window.draw(Inventory_Ore_Array[10].sprite); window.draw(ore_array_text_11)
+       end; end
+    #----------------------------------------------------slot 12------------------------------------------
+     if Inventory_Ore_Array.size >= 12
+      case page
+      when 1   
+      Inventory_Ore_Array[11].sprite.position = SF.vector2(1305, 460);
+      ore_array_text_12 = Ore_amount_owned_text.dup
+      ore_array_text_12.position = Inventory_Ore_Array[11].sprite.position + SF.vector2(100, -5)
+      ore_array_text_12.string = "x" + Inventory_Ore_Array[11].amount_owned.to_s
+      window.draw(Inventory_Ore_Array[11].sprite); window.draw(ore_array_text_12)
+       end; end
+    #----------------------------------------------------slot 13------------------------------------------
+     if Inventory_Ore_Array.size >= 13
+      case page
+      when 1   
+      Inventory_Ore_Array[12].sprite.position = SF.vector2(555, 610);
+      ore_array_text_13 = Ore_amount_owned_text.dup
+      ore_array_text_13.position = Inventory_Ore_Array[12].sprite.position + SF.vector2(100, -5)
+      ore_array_text_13.string = "x" + Inventory_Ore_Array[12].amount_owned.to_s
+      window.draw(Inventory_Ore_Array[12].sprite); window.draw(ore_array_text_13)
+       end; end
    end                
    #________________________________________________________________________________________________________________________________________________________
    #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -311,7 +363,7 @@ module Etc
      @@smokey_quartz_inventory_ore = Inventory_Ore.new("Smokey Quartz", 7, Smokey_Quartz_Inventory_Ore, 1, "clear", "earth", "STR+", 95)
      Ore_Array.push(@@smokey_quartz_inventory_ore) 
     #---------------------------------------------------------------Sapphire------------------------------------------------------------------------------- 
-     @@sapphire = Inventory_Ore.new("Sapphire", 8, Sapphire_Inventory_Ore, 1, "blue", "water", "EXP+", 950)
+     @@sapphire = Inventory_Ore.new("Sapphire", 8, Sapphire_Inventory_Ore, 1, "blue", "water", "EXP++", 950)
      Ore_Array.push(@@sapphire) 
     #--------------------------------------------------------------Black Opal------------------------------------------------------------------------------ 
      @@black_opal = Inventory_Ore.new("Black Opal", 9, Black_Opal_Inventory_Ore, 1, "black", "water", "LUK+", 80)

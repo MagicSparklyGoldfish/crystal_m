@@ -370,7 +370,17 @@
   Weapon_Tab_Text.character_size = 40; Weapon_Tab_Text.color = SF::Color::White; Weapon_Tab_Text.position = SF.vector2(820, 165);
   Weapon_Tab_Text.string = "Equipment"; Use_Tab_Text = Weapon_Tab_Text.dup; Use_Tab_Text.position = SF.vector2(1080, 165);
   Use_Tab_Text.string = "Use"; Etc_Tab_Text = Weapon_Tab_Text.dup; Etc_Tab_Text.position = SF.vector2(1290, 165);
-  Etc_Tab_Text.string = "Etc"; Test_Rectangle_01 = SF::RectangleShape.new(SF.vector2(140, 140));
+  Etc_Tab_Text.string = "Etc"; 
+  Inventory_arrow_up2 = SF::RectangleShape.new(SF.vector2(50, 90)); Inventory_arrow_up2.position = SF.vector2(400, 400);
+  Inventory_arrow_up2.fill_color = SF.color(255, 100, 100)
+  Inventory_arrow_down2 = SF::RectangleShape.new(SF.vector2(50, 90)); Inventory_arrow_down2.position = SF.vector2(400, 550);
+  Inventory_arrow_down2.fill_color = SF.color(255, 100, 100)
+  Ore_Button = SF::RectangleShape.new(SF.vector2(90, 50)); Ore_Button.position = SF.vector2(555, 245);
+  Ore_Button.fill_color = SF.color(100, 255, 100)
+  Ore_Button_Text = SF::Text.new; Ore_Button_Text.font = FONT_BOLD_OUTLINE; Ore_Button_Text.character_size = 30;
+  Ore_Button_Text.color = SF::Color::White; Ore_Button_Text.position = SF.vector2(575, 250); Ore_Button_Text.string = "Ores";
+
+  Test_Rectangle_01 = SF::RectangleShape.new(SF.vector2(140, 140));
   Test_Rectangle_01.fill_color = SF.color(155, 155, 255); Test_Rectangle_01.position = SF.vector2(555, 310);
   #--------------------------------------------------Weapon Textures---------------------------------------------------------------
    WEAPON_DISPLAY_TEXTURE_01 = SF::Texture.from_file("graphics/Weapons_display.png"); STICK_TEXTURE = SF::Texture.from_file("graphics/Stick01.png");
@@ -1840,7 +1850,7 @@
   AJOITE_TEXTURE = SF::Texture.from_file("graphics/Ajoite.png")
   Ajoite_Ore = SF::Sprite.new(AJOITE_TEXTURE); Ajoite_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
   Ajoite_Ore.position = SF.vector2(2100, 702)
- #'''''''''''''''''''''''''''''''''''''''''''''''''''''Ajoite'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+ #''''''''''''''''''''''''''''''''''''''''''''''''''''Rhodolite'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
   RHODOLITE_TEXTURE = SF::Texture.from_file("graphics/Rhodolite.png")
   Rhodolite_Ore = SF::Sprite.new(RHODOLITE_TEXTURE); Rhodolite_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
   Rhodolite_Ore.position = SF.vector2(2300, 702)
@@ -1851,4 +1861,4 @@ Testing_Text.character_size = 20; Testing_Text.color = SF::Color::White; Testing
 #                                                         Maps
 #-------------------------------------------------------------------------------------------------------------------------------------- 
  Test_Teleporter = SF::RectangleShape.new(SF.vector2(100, 40)); Test_Teleporter.fill_color = SF.color(50, 150, 255)
- Test_Teleporter.position = SF.vector2(100, 752);
+ Test_Teleporter.position = SF.vector2(100, 762);

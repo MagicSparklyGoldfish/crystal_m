@@ -51,6 +51,7 @@ extend self
   @@map = "none"
   @@salon = "none"
   @@page : Int32 = 1
+  @@category = "ore"
  #_______________________________________________________________________________________________________________________________________+
  #-------------------------------------------------------Game State Variables------------------------------------------------------------+
   @@dialog : Bool; @@dialog = false;
@@ -69,12 +70,12 @@ extend self
   @@idle_animation_frames = 0
  #_______________________________________________________________________________________________________________________________________+
  #-----------------------------------------------------Character Model Variables---------------------------------------------------------+
- @@player_character_model = SF::RenderTexture.new(672, 512)
- @@player_character_rendered_model = SF::Sprite.new(@@player_character_model.texture)
- @@hair_choice : Int32; @@hair_choice = 0
- @@current_hair = 0; @@current_display_hair = 0; @@current_display_hair_string = 0
- @@current_skin = 0; @@current_display_skin_string = 0; @@current_face = 0; @@current_shirt = 0; @@current_gloves = 0
- @@current_pants = 0; @@current_shoes = 0; @@current_weapon = 0; @@current_direction : String; @@current_direction = "right"
+  @@player_character_model = SF::RenderTexture.new(672, 512)
+  @@player_character_rendered_model = SF::Sprite.new(@@player_character_model.texture)
+  @@hair_choice : Int32; @@hair_choice = 0
+  @@current_hair = 0; @@current_display_hair = 0; @@current_display_hair_string = 0
+  @@current_skin = 0; @@current_display_skin_string = 0; @@current_face = 0; @@current_shirt = 0; @@current_gloves = 0
+  @@current_pants = 0; @@current_shoes = 0; @@current_weapon = 0; @@current_direction : String; @@current_direction = "right"
  #_______________________________________________________________________________________________________________________________________+
  #-----------------------------------------------------------Save Variables--------------------------------------------------------------+
   @@save_file_slot : Int32 = 0
@@ -337,14 +338,19 @@ extend self
   view5.viewport = SF.float_rect(0, 0, 1, 1)
   window.view = view5
   window.draw(Inventory_Window); window.draw(Weapon_Tab); window.draw(Use_Tab); window.draw(Etc_Tab)
-  window.draw(Weapon_Tab_Text); window.draw(Use_Tab_Text); window.draw(Etc_Tab_Text)
+  window.draw(Weapon_Tab_Text); window.draw(Use_Tab_Text); window.draw(Etc_Tab_Text); window.draw(Inventory_arrow_up2)
+  window.draw(Inventory_arrow_down2)
   if @@tab == "Equipment"
     page = @@page
     Equipment::Stick.test(window, page)
   else if @@tab == "Etc"
-    Etc::Inventory_Ore.display_ore(window)
+    window.draw(Ore_Button); window.draw(Ore_Button_Text)
+    page = @@page
+    case @@category
+     when "ore"
+      Etc::Inventory_Ore.display_ore(window, page) 
 
-  end
+  end; end
   end
  end
  def Window_Class.weapon_tab(window)
@@ -1039,20 +1045,36 @@ def Window_Class.hud_keypresses(window)
       puts "y", y
      case @@popup
       when "Inventory" #--------------------------------------------------------Inventory clicks
+        if (x >= 400 && x <= 450) && (y >= 400 && y <= 490) #----page down
+          if @@page > 1
+            @@page -= 1
+          All_Audio::SFX.select1
+          else
+            All_Audio::SFX.char_create_down
+          end
+         end
+        if (x >= 400 && x <= 450) && (y >= 550 && y <= 640) #----page up
+          if @@page < 6
+            @@page += 1
+          All_Audio::SFX.select1
+          else
+            All_Audio::SFX.char_create_down
+          end
+         end
         if (x >= 800 && x <= 1000) && (y >= 160 && y <= 230)
           All_Audio::SFX.select1
           Window_Class.weapon_tab(window)
-          @@tab = "Equipment"
+          @@tab = "Equipment"; @@page = 1
          end
         if (x >= 1010 && x <= 1210) && (y >= 160 && y <= 230)
           All_Audio::SFX.select1
           Window_Class.use_tab(window)
-          @@tab = "Use"
+          @@tab = "Use"; @@page = 1
          end
         if (x >= 1220 && x <= 1420) && (y >= 160 && y <= 230)
           All_Audio::SFX.select1
           Window_Class.etc_tab(window)
-          @@tab = "Etc"
+          @@tab = "Etc"; @@page = 1
          end
       case @@tab
       when "Equipment"
@@ -1062,6 +1084,11 @@ def Window_Class.hud_keypresses(window)
           Equipment.equip_weapon(this)
           this2 = @@current_weapon
           Gui::Window_Class.equip_weapon(this2)
+        end
+      when "Etc"
+        if (x >= 555 && x <= 645) && (y >= 245 && y <= 295)
+          All_Audio::SFX.light_bonk
+          @@category = "ore"
         end
       end
       when "Salon" #-------------------------------------------------------------Salon clicks
