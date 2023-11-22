@@ -346,6 +346,16 @@ module Etc
        ore_array_text_14.string = "x" + Inventory_Ore_Array[13].amount_owned.to_s
        window.draw(Inventory_Ore_Array[13].sprite); window.draw(ore_array_text_14)
         end; end
+    #----------------------------------------------------slot 15------------------------------------------
+     if Inventory_Ore_Array.size >= 15
+       case page
+       when 1   
+       Inventory_Ore_Array[14].sprite.position = SF.vector2(855, 610);
+       ore_array_text_15 = Ore_amount_owned_text.dup
+       ore_array_text_15.position = Inventory_Ore_Array[14].sprite.position + SF.vector2(100, -5)
+       ore_array_text_15.string = "x" + Inventory_Ore_Array[14].amount_owned.to_s
+       window.draw(Inventory_Ore_Array[14].sprite); window.draw(ore_array_text_15)
+        end; end
    end                
    #________________________________________________________________________________________________________________________________________________________
    #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -387,6 +397,9 @@ module Etc
     #-------------------------------------------------------------Chalcanthite----------------------------------------------------------------------------- 
      @@chalcanthite = Inventory_Ore.new("Chalcanthite", 12, Chalcanthite_Inventory_Ore, 1, "blue", "water", "poison", 30)
      Ore_Array.push(@@chalcanthite)
+    #-------------------------------------------------------------Chalcanthite----------------------------------------------------------------------------- 
+     @@flourite = Inventory_Ore.new("Flourite", 13, Flourite_Inventory_Ore, 1, "clear", "water", "INT+", 40)
+     Ore_Array.push(@@flourite)
    #________________________________________________________________________________________________________________________________________________________
   end
 end 
@@ -396,10 +409,10 @@ module Harvestables
   extend self
   class Ore
     Test_Ore_Array = [@@bloodstone_01, @@bloodstone_02, @@bloodstone_03, @@moss_agate_01, @@amber01, @@wavellite01,  @@topaz01, @@amethyst01,
-    @@smokey_quartz01, @@sapphire01, @@black_opal01, @@ajoite01, @@rhodolite01, @@chalcanthite01]
+    @@smokey_quartz01, @@sapphire01, @@black_opal01, @@ajoite01, @@rhodolite01, @@chalcanthite01, @@flourite01]
     Test_Ore_Sprite_Array = [@@bloodstone_01.sprite, @@bloodstone_02.sprite, @@bloodstone_03.sprite, @@moss_agate_01.sprite, @@amber01.sprite, 
     @@wavellite01.sprite,  @@topaz01.sprite, @@amethyst01.sprite, @@smokey_quartz01.sprite, @@sapphire01.sprite, @@black_opal01.sprite,
-    @@ajoite01.sprite, @@rhodolite01.sprite, @@chalcanthite01.sprite]
+    @@ajoite01.sprite, @@rhodolite01.sprite, @@chalcanthite01.sprite, @@flourite01.sprite]
    #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
    #+                                                              Variables                                                                               +
    #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -605,7 +618,7 @@ module Harvestables
       test_text_5 = Testing_Text.dup; test_text_5.string = @@wavellite01.hp.to_s + Ore_Clock_Break.elapsed_time.to_s
       test_text_6 = Testing_Text.dup; test_text_5.string = @@amethyst01.hp.to_s + Ore_Clock_Break.elapsed_time.to_s
 
-      @@bloodstone_02.sprite.position = SF.vector2(3500, 702)
+      @@bloodstone_02.sprite.position = SF.vector2(4500, 702)
       test_text_2.position = @@bloodstone_02.sprite.position
       test_text_3.position = @@moss_agate_01.sprite.position
       test_text_4.position = @@amber01.sprite.position
@@ -614,12 +627,14 @@ module Harvestables
       window.draw(@@bloodstone_01.sprite); window.draw(@@bloodstone_02.sprite); window.draw(test_text_2); window.draw(@@moss_agate_01.sprite); 
       window.draw(@@amber01.sprite); window.draw(@@wavellite01.sprite); window.draw(@@topaz01.sprite); window.draw(@@amethyst01.sprite)
       window.draw(@@smokey_quartz01.sprite); window.draw(@@sapphire01.sprite); window.draw(@@black_opal01.sprite); window.draw(@@ajoite01.sprite)
-      window.draw(@@rhodolite01.sprite); window.draw(@@chalcanthite01.sprite)
+      window.draw(@@rhodolite01.sprite); window.draw(@@chalcanthite01.sprite); window.draw(@@flourite01.sprite)
     end
    #________________________________________________________________________________________________________________________________________________________
    #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
    #/                                                               Entities                                                                               /
    #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+   #========================================================================================================================================================
+   #================================================================Minerals================================================================================
     #..............................................................Bloodstone...............................................................................
      @@bloodstone_01 = Ore.new("Bloodstone", 1, "red", 7, 500, "bloodstone_ore", Bloodstone_Ore.dup, false, 500) 
      @@bloodstone_02 = Ore.new("Bloodstone", 2, "red", 7, 500, "bloodstone_ore", Bloodstone_Ore.dup, false, 500) 
@@ -659,58 +674,65 @@ module Harvestables
      @@topaz04 = Ore.new("Topaz", 28, "yellow", 8, 550, "topaz", Topaz_Ore.dup, false, 550)
      @@topaz05 = Ore.new("Topaz", 29, "yellow", 8, 550, "topaz", Topaz_Ore.dup, false, 550)
      @@topaz06 = Ore.new("Topaz", 20, "yellow", 8, 550, "topaz", Topaz_Ore.dup, false, 550)
-   #________________________________________________________________________________________________________________________________________________________
-   #.................................................................Amethyst...............................................................................
-    @@amethyst01 = Ore.new("Amethyst", 21, "purple", 7, 500, "amethyst", Amethyst_Ore.dup, false, 500)
-    @@amethyst02 = Ore.new("Amethyst", 22, "purple", 7, 500, "amethyst", Amethyst_Ore.dup, false, 500)
-    @@amethyst03 = Ore.new("Amethyst", 23, "purple", 7, 500, "amethyst", Amethyst_Ore.dup, false, 500)
-    @@amethyst04 = Ore.new("Amethyst", 24, "purple", 7, 500, "amethyst", Amethyst_Ore.dup, false, 500)
-    @@amethyst05 = Ore.new("Amethyst", 25, "purple", 7, 500, "amethyst", Amethyst_Ore.dup, false, 500)
-    @@amethyst06 = Ore.new("Amethyst", 26, "purple", 7, 500, "amethyst", Amethyst_Ore.dup, false, 500)
-   #.......................................................................................................................................................
-   #...............................................................Smokey Quartz...........................................................................
-    @@smokey_quartz01 = Ore.new("Smokey Quartz", 27, "clear", 7, 500, "smokey_quartz", Smokey_Quartz_Ore.dup, false, 500)
-    @@smokey_quartz02 = Ore.new("Smokey Quartz", 28, "clear", 7, 500, "smokey_quartz", Smokey_Quartz_Ore.dup, false, 500)
-    @@smokey_quartz03 = Ore.new("Smokey Quartz", 29, "clear", 7, 500, "smokey_quartz", Smokey_Quartz_Ore.dup, false, 500)
-    @@smokey_quartz04 = Ore.new("Smokey Quartz", 30, "clear", 7, 500, "smokey_quartz", Smokey_Quartz_Ore.dup, false, 500)
-    @@smokey_quartz05 = Ore.new("Smokey Quartz", 31, "clear", 7, 500, "smokey_quartz", Smokey_Quartz_Ore.dup, false, 500)
-    @@smokey_quartz06 = Ore.new("Smokey Quartz", 32, "clear", 7, 500, "smokey_quartz", Smokey_Quartz_Ore.dup, false, 500)
-   #.......................................................................................................................................................
-   #.................................................................Sapphire..............................................................................
-    @@sapphire01 = Ore.new("Sapphire", 33, "clear", 9, 600, "sapphire", Sapphire_Ore.dup, false, 600)
-    @@sapphire02 = Ore.new("Sapphire", 34, "clear", 9, 600, "sapphire", Sapphire_Ore.dup, false, 600)
-    @@sapphire03 = Ore.new("Sapphire", 35, "clear", 9, 600, "sapphire", Sapphire_Ore.dup, false, 600)
-    @@sapphire04 = Ore.new("Sapphire", 36, "clear", 9, 600, "sapphire", Sapphire_Ore.dup, false, 600)
-    @@sapphire05 = Ore.new("Sapphire", 37, "clear", 9, 600, "sapphire", Sapphire_Ore.dup, false, 600)
-    @@sapphire06 = Ore.new("Sapphire", 38, "clear", 9, 600, "sapphire", Sapphire_Ore.dup, false, 600)
-   #.......................................................................................................................................................
-   #.................................................................Black Opal............................................................................
-    @@black_opal01 = Ore.new("Black Opal", 39, "clear", 6, 400, "black_opal", Black_Opal_Ore.dup, false, 400)
-    @@black_opal02 = Ore.new("Black Opal", 40, "clear", 6, 400, "black_opal", Black_Opal_Ore.dup, false, 400)
-    @@black_opal03 = Ore.new("Black Opal", 41, "clear", 6, 400, "black_opal", Black_Opal_Ore.dup, false, 400)
-    @@black_opal04 = Ore.new("Black Opal", 42, "clear", 6, 400, "black_opal", Black_Opal_Ore.dup, false, 400)
-    @@black_opal05 = Ore.new("Black Opal", 43, "clear", 6, 400, "black_opal", Black_Opal_Ore.dup, false, 400)
-    @@black_opal06 = Ore.new("Black Opal", 44, "clear", 6, 400, "black_opal", Black_Opal_Ore.dup, false, 400)
-   #.......................................................................................................................................................
-   #...................................................................Ajoite..............................................................................
-    @@ajoite01 = Ore.new("Ajoite", 45, "clear", 3, 150, "ajoite", Ajoite_Ore.dup, false, 150)
-    @@ajoite02 = Ore.new("Ajoite", 46, "clear", 3, 150, "ajoite", Ajoite_Ore.dup, false, 150)
-    @@ajoite03 = Ore.new("Ajoite", 47, "clear", 3, 150, "ajoite", Ajoite_Ore.dup, false, 150)
-    @@ajoite04 = Ore.new("Ajoite", 48, "clear", 3, 150, "ajoite", Ajoite_Ore.dup, false, 150)
-    @@ajoite05 = Ore.new("Ajoite", 49, "clear", 3, 150, "ajoite", Ajoite_Ore.dup, false, 150)
-    @@ajoite06 = Ore.new("Ajoite", 50, "clear", 3, 150, "ajoite", Ajoite_Ore.dup, false, 150)
-   #.......................................................................................................................................................
-   #.................................................................Rhodolite.............................................................................
-    @@rhodolite01 = Ore.new("Rhodolite", 51, "pink", 7, 500, "rhodolite", Rhodolite_Ore.dup, false, 500)
-    @@rhodolite02 = Ore.new("Rhodolite", 52, "pink", 7, 500, "rhodolite", Rhodolite_Ore.dup, false, 500)
-    @@rhodolite03 = Ore.new("Rhodolite", 53, "pink", 7, 500, "rhodolite", Rhodolite_Ore.dup, false, 500)
-    @@rhodolite04 = Ore.new("Rhodolite", 54, "pink", 7, 500, "rhodolite", Rhodolite_Ore.dup, false, 500)
-    @@rhodolite05 = Ore.new("Rhodolite", 55, "pink", 7, 500, "rhodolite", Rhodolite_Ore.dup, false, 500)
-    @@rhodolite06 = Ore.new("Rhodolite", 56, "pink", 7, 500, "rhodolite", Rhodolite_Ore.dup, false, 500)
-   #.......................................................................................................................................................
-   #...............................................................Chalcanthite............................................................................
-    @@chalcanthite01 = Ore.new("Chalcanthite", 57, "blue", 2, 100, "chalcanthite", Chalcanthite_Ore.dup, false, 100)
-   #.......................................................................................................................................................
+    #.......................................................................................................................................................
+    #................................................................Amethyst...............................................................................
+     @@amethyst01 = Ore.new("Amethyst", 21, "purple", 7, 500, "amethyst", Amethyst_Ore.dup, false, 500)
+     @@amethyst02 = Ore.new("Amethyst", 22, "purple", 7, 500, "amethyst", Amethyst_Ore.dup, false, 500)
+     @@amethyst03 = Ore.new("Amethyst", 23, "purple", 7, 500, "amethyst", Amethyst_Ore.dup, false, 500)
+     @@amethyst04 = Ore.new("Amethyst", 24, "purple", 7, 500, "amethyst", Amethyst_Ore.dup, false, 500)
+     @@amethyst05 = Ore.new("Amethyst", 25, "purple", 7, 500, "amethyst", Amethyst_Ore.dup, false, 500)
+     @@amethyst06 = Ore.new("Amethyst", 26, "purple", 7, 500, "amethyst", Amethyst_Ore.dup, false, 500)
+    #.......................................................................................................................................................
+    #..............................................................Smokey Quartz...........................................................................
+     @@smokey_quartz01 = Ore.new("Smokey Quartz", 27, "clear", 7, 500, "smokey_quartz", Smokey_Quartz_Ore.dup, false, 500)
+     @@smokey_quartz02 = Ore.new("Smokey Quartz", 28, "clear", 7, 500, "smokey_quartz", Smokey_Quartz_Ore.dup, false, 500)
+     @@smokey_quartz03 = Ore.new("Smokey Quartz", 29, "clear", 7, 500, "smokey_quartz", Smokey_Quartz_Ore.dup, false, 500)
+     @@smokey_quartz04 = Ore.new("Smokey Quartz", 30, "clear", 7, 500, "smokey_quartz", Smokey_Quartz_Ore.dup, false, 500)
+     @@smokey_quartz05 = Ore.new("Smokey Quartz", 31, "clear", 7, 500, "smokey_quartz", Smokey_Quartz_Ore.dup, false, 500)
+     @@smokey_quartz06 = Ore.new("Smokey Quartz", 32, "clear", 7, 500, "smokey_quartz", Smokey_Quartz_Ore.dup, false, 500)
+    #.......................................................................................................................................................
+    #................................................................Sapphire..............................................................................
+     @@sapphire01 = Ore.new("Sapphire", 33, "clear", 9, 600, "sapphire", Sapphire_Ore.dup, false, 600)
+     @@sapphire02 = Ore.new("Sapphire", 34, "clear", 9, 600, "sapphire", Sapphire_Ore.dup, false, 600)
+     @@sapphire03 = Ore.new("Sapphire", 35, "clear", 9, 600, "sapphire", Sapphire_Ore.dup, false, 600)
+     @@sapphire04 = Ore.new("Sapphire", 36, "clear", 9, 600, "sapphire", Sapphire_Ore.dup, false, 600)
+     @@sapphire05 = Ore.new("Sapphire", 37, "clear", 9, 600, "sapphire", Sapphire_Ore.dup, false, 600)
+     @@sapphire06 = Ore.new("Sapphire", 38, "clear", 9, 600, "sapphire", Sapphire_Ore.dup, false, 600)
+    #.......................................................................................................................................................
+    #................................................................Black Opal.............................................................................
+     @@black_opal01 = Ore.new("Black Opal", 39, "clear", 6, 400, "black_opal", Black_Opal_Ore.dup, false, 400)
+     @@black_opal02 = Ore.new("Black Opal", 40, "clear", 6, 400, "black_opal", Black_Opal_Ore.dup, false, 400)
+     @@black_opal03 = Ore.new("Black Opal", 41, "clear", 6, 400, "black_opal", Black_Opal_Ore.dup, false, 400)
+     @@black_opal04 = Ore.new("Black Opal", 42, "clear", 6, 400, "black_opal", Black_Opal_Ore.dup, false, 400)
+     @@black_opal05 = Ore.new("Black Opal", 43, "clear", 6, 400, "black_opal", Black_Opal_Ore.dup, false, 400)
+     @@black_opal06 = Ore.new("Black Opal", 44, "clear", 6, 400, "black_opal", Black_Opal_Ore.dup, false, 400)
+    #.......................................................................................................................................................
+    #.................................................................Ajoite................................................................................
+     @@ajoite01 = Ore.new("Ajoite", 45, "clear", 3, 150, "ajoite", Ajoite_Ore.dup, false, 150)
+     @@ajoite02 = Ore.new("Ajoite", 46, "clear", 3, 150, "ajoite", Ajoite_Ore.dup, false, 150)
+     @@ajoite03 = Ore.new("Ajoite", 47, "clear", 3, 150, "ajoite", Ajoite_Ore.dup, false, 150)
+     @@ajoite04 = Ore.new("Ajoite", 48, "clear", 3, 150, "ajoite", Ajoite_Ore.dup, false, 150)
+     @@ajoite05 = Ore.new("Ajoite", 49, "clear", 3, 150, "ajoite", Ajoite_Ore.dup, false, 150)
+     @@ajoite06 = Ore.new("Ajoite", 50, "clear", 3, 150, "ajoite", Ajoite_Ore.dup, false, 150)
+    #.......................................................................................................................................................
+    #................................................................Rhodolite..............................................................................
+     @@rhodolite01 = Ore.new("Rhodolite", 51, "pink", 7, 500, "rhodolite", Rhodolite_Ore.dup, false, 500)
+     @@rhodolite02 = Ore.new("Rhodolite", 52, "pink", 7, 500, "rhodolite", Rhodolite_Ore.dup, false, 500)
+     @@rhodolite03 = Ore.new("Rhodolite", 53, "pink", 7, 500, "rhodolite", Rhodolite_Ore.dup, false, 500)
+     @@rhodolite04 = Ore.new("Rhodolite", 54, "pink", 7, 500, "rhodolite", Rhodolite_Ore.dup, false, 500)
+     @@rhodolite05 = Ore.new("Rhodolite", 55, "pink", 7, 500, "rhodolite", Rhodolite_Ore.dup, false, 500)
+     @@rhodolite06 = Ore.new("Rhodolite", 56, "pink", 7, 500, "rhodolite", Rhodolite_Ore.dup, false, 500)
+    #.......................................................................................................................................................
+    #...............................................................Chalcanthite............................................................................
+     @@chalcanthite01 = Ore.new("Chalcanthite", 57, "blue", 2, 100, "chalcanthite", Chalcanthite_Ore.dup, false, 100)
+     @@chalcanthite02 = Ore.new("Chalcanthite", 58, "blue", 2, 100, "chalcanthite", Chalcanthite_Ore.dup, false, 100)
+     @@chalcanthite03 = Ore.new("Chalcanthite", 59, "blue", 2, 100, "chalcanthite", Chalcanthite_Ore.dup, false, 100)
+     @@chalcanthite04 = Ore.new("Chalcanthite", 60, "blue", 2, 100, "chalcanthite", Chalcanthite_Ore.dup, false, 100)
+     @@chalcanthite05 = Ore.new("Chalcanthite", 61, "blue", 2, 100, "chalcanthite", Chalcanthite_Ore.dup, false, 100)
+     @@chalcanthite06 = Ore.new("Chalcanthite", 62, "blue", 2, 100, "chalcanthite", Chalcanthite_Ore.dup, false, 100)
+    #.......................................................................................................................................................
+    #.................................................................Flourite..............................................................................
+     @@flourite01 = Ore.new("Flourite", 63, "clear", 4, 200, "flourite", Flourite_Ore.dup, false, 200)
   end
   class Herbs
   def initialize(name : String, id : Int32, color : String, hp : Int32, drop_item : String, sprite : SF::Sprite, is_broke : Bool)
