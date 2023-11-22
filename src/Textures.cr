@@ -438,6 +438,9 @@
     #'''''''''''''''''''''''''''''''''''''''''''''''''''Lapis Lazuli''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      LAPIS_LAZULI_INVENTORY_ORE_TEXTURE = SF::Texture.from_file("graphics/Lapis_Lazuli_Inventory.png")
      Lapis_Lazuli_Inventory_Ore = SF::Sprite.new(LAPIS_LAZULI_INVENTORY_ORE_TEXTURE) 
+    #'''''''''''''''''''''''''''''''''''''''''''''''''''Lapis Lazuli''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     MOONSTONE_INVENTORY_ORE_TEXTURE = SF::Texture.from_file("graphics/Moonstone_Inventory.png")
+     Moonstone_Inventory_Ore = SF::Sprite.new(MOONSTONE_INVENTORY_ORE_TEXTURE) 
 #----------------------------------------------------------------------------------------------------------------------------------- 
 #                                                    Character Model
 #-----------------------------------------------------------------------------------------------------------------------------------
@@ -1878,10 +1881,14 @@
   AMORITE_TEXTURE = SF::Texture.from_file("graphics/Amorite.png")
   Amorite_Ore = SF::Sprite.new(AMORITE_TEXTURE); Amorite_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
   Amorite_Ore.position = SF.vector2(2900, 702)
- #'''''''''''''''''''''''''''''''''''''''''''''''''''''Amorite''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+ #'''''''''''''''''''''''''''''''''''''''''''''''''''Lapis Lazuli''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
   LAPIS_LAZULI_TEXTURE = SF::Texture.from_file("graphics/Lapis_Lazuli.png")
   Lapis_Lazuli_Ore = SF::Sprite.new(LAPIS_LAZULI_TEXTURE); Lapis_Lazuli_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
   Lapis_Lazuli_Ore.position = SF.vector2(3100, 702)
+ #''''''''''''''''''''''''''''''''''''''''''''''''''''Moonstone''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+  MOONSTONE_TEXTURE = SF::Texture.from_file("graphics/Moonstone.png")
+  Moonstone_Ore = SF::Sprite.new(MOONSTONE_TEXTURE); Moonstone_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
+  Moonstone_Ore.position = SF.vector2(3300, 702)
 #______________________________________________________________________________________________________________________________________
 Testing_Text = SF::Text.new; Testing_Text.font = FONT_PIXEL; 
 Testing_Text.character_size = 20; Testing_Text.color = SF::Color::White; Testing_Text.position = SF.vector2(1800, 652)
