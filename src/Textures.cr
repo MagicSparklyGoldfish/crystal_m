@@ -432,6 +432,9 @@
     #'''''''''''''''''''''''''''''''''''''''''''''''''''''Flourite''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      FLOURITE_INVENTORY_ORE_TEXTURE = SF::Texture.from_file("graphics/Flourite_Inventory.png")
      Flourite_Inventory_Ore = SF::Sprite.new(FLOURITE_INVENTORY_ORE_TEXTURE) 
+    #'''''''''''''''''''''''''''''''''''''''''''''''''''''Amorite'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     AMORITE_INVENTORY_ORE_TEXTURE = SF::Texture.from_file("graphics/Amorite_Inventory.png")
+     Amorite_Inventory_Ore = SF::Sprite.new(AMORITE_INVENTORY_ORE_TEXTURE) 
 #----------------------------------------------------------------------------------------------------------------------------------- 
 #                                                    Character Model
 #-----------------------------------------------------------------------------------------------------------------------------------
@@ -1864,14 +1867,18 @@
   CHALCANTHITE_TEXTURE = SF::Texture.from_file("graphics/Chalcanthite.png")
   Chalcanthite_Ore = SF::Sprite.new(CHALCANTHITE_TEXTURE); Chalcanthite_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
   Chalcanthite_Ore.position = SF.vector2(2500, 702)
- #'''''''''''''''''''''''''''''''''''''''''''''''''''Chalcanthite'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+ #''''''''''''''''''''''''''''''''''''''''''''''''''''Flourite''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
   FLOURITE_TEXTURE = SF::Texture.from_file("graphics/Flourite.png")
   Flourite_Ore = SF::Sprite.new(FLOURITE_TEXTURE); Flourite_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
   Flourite_Ore.position = SF.vector2(2700, 702)
+ #''''''''''''''''''''''''''''''''''''''''''''''''''''Flourite''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+  AMORITE_TEXTURE = SF::Texture.from_file("graphics/Amorite.png")
+  Amorite_Ore = SF::Sprite.new(AMORITE_TEXTURE); Amorite_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
+  Amorite_Ore.position = SF.vector2(2900, 702)
 #______________________________________________________________________________________________________________________________________
 Testing_Text = SF::Text.new; Testing_Text.font = FONT_PIXEL; 
 Testing_Text.character_size = 20; Testing_Text.color = SF::Color::White; Testing_Text.position = SF.vector2(1800, 652)
-#--------------------------------------------------------------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------------------------------------------------------------- 
 #                                                         Maps
 #-------------------------------------------------------------------------------------------------------------------------------------- 
  Test_Teleporter = SF::RectangleShape.new(SF.vector2(100, 40)); Test_Teleporter.fill_color = SF.color(50, 150, 255)
