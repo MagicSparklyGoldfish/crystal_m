@@ -536,9 +536,12 @@ module Etc
     #--------------------------------------------------------------Hiddenite------------------------------------------------------------------------------- 
      @@hiddenite = Inventory_Ore.new("Hiddenite", 18, Hiddenite_Inventory_Ore, 1, "green", "water", "passive_hp_regen", 70)
      Ore_Array.push(@@hiddenite)
-    #--------------------------------------------------------------Hiddenite------------------------------------------------------------------------------- 
+    #--------------------------------------------------------------Offretite------------------------------------------------------------------------------- 
      @@offretite = Inventory_Ore.new("Offretite", 19, Offretite_Inventory_Ore, 1, "clear", "air", "INT+", 70)
      Ore_Array.push(@@offretite)
+    #--------------------------------------------------------------Hiddenite------------------------------------------------------------------------------- 
+     @@holley_blue_agate = Inventory_Ore.new("Holley Blue Agate", 20, Holley_Blue_Agate_Inventory_Ore, 1, "blue", "air", "STR+", 70)
+     Ore_Array.push(@@holley_blue_agate)
    #________________________________________________________________________________________________________________________________________________________
   end
 end 
@@ -549,12 +552,12 @@ module Harvestables
   class Ore
     Test_Ore_Array = [@@bloodstone_01, @@bloodstone_02, @@bloodstone_03, @@moss_agate_01, @@amber01, @@wavellite01,  @@topaz01, @@amethyst01,
     @@smokey_quartz01, @@sapphire01, @@black_opal01, @@ajoite01, @@rhodolite01, @@chalcanthite01, @@flourite01, @@amorite01, @@lapis_lazuli01,
-    @@moonstone01, @@blue_calcite01, @@hiddenite01, @@ofretite01]
+    @@moonstone01, @@blue_calcite01, @@hiddenite01, @@ofretite01, @@holley_blue_agate01]
 
     Test_Ore_Sprite_Array = [@@bloodstone_01.sprite, @@bloodstone_02.sprite, @@bloodstone_03.sprite, @@moss_agate_01.sprite, @@amber01.sprite, 
     @@wavellite01.sprite,  @@topaz01.sprite, @@amethyst01.sprite, @@smokey_quartz01.sprite, @@sapphire01.sprite, @@black_opal01.sprite,
     @@ajoite01.sprite, @@rhodolite01.sprite, @@chalcanthite01.sprite, @@flourite01.sprite, @@amorite01.sprite, @@lapis_lazuli01.sprite,
-    @@moonstone01.sprite, @@blue_calcite01.sprite, @@hiddenite01.sprite, @@ofretite01.sprite]
+    @@moonstone01.sprite, @@blue_calcite01.sprite, @@hiddenite01.sprite, @@ofretite01.sprite, @@holley_blue_agate01.sprite]
    #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
    #+                                                              Variables                                                                               +
    #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -771,7 +774,7 @@ module Harvestables
       window.draw(@@smokey_quartz01.sprite); window.draw(@@sapphire01.sprite); window.draw(@@black_opal01.sprite); window.draw(@@ajoite01.sprite)
       window.draw(@@rhodolite01.sprite); window.draw(@@chalcanthite01.sprite); window.draw(@@flourite01.sprite); window.draw(@@amorite01.sprite)
       window.draw(@@lapis_lazuli01.sprite); window.draw(@@moonstone01.sprite); window.draw(@@blue_calcite01.sprite); window.draw(@@hiddenite01.sprite)
-      window.draw(@@ofretite01.sprite)
+      window.draw(@@ofretite01.sprite); window.draw(@@holley_blue_agate01.sprite)
     end
    #________________________________________________________________________________________________________________________________________________________
    #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -924,7 +927,15 @@ module Harvestables
      @@hiddenite06 = Ore.new("Hiddenite", 98, "green", 7, 350, "hiddenite", Hiddenite_Ore.dup, false, 350)
     #........................................................................................................................................................
     #................................................................Offretite...............................................................................
-     @@ofretite01 = Ore.new("Offretite", 99, "clear", 5, 250, "hiddenite", Offretite_Ore.dup, false, 250)
+     @@ofretite01 = Ore.new("Offretite", 99, "clear", 5, 250, "offretite", Offretite_Ore.dup, false, 250)
+     @@ofretite02 = Ore.new("Offretite", 100, "clear", 5, 250, "offretite", Offretite_Ore.dup, false, 250)
+     @@ofretite03 = Ore.new("Offretite", 101, "clear", 5, 250, "offretite", Offretite_Ore.dup, false, 250)
+     @@ofretite04 = Ore.new("Offretite", 102, "clear", 5, 250, "offretite", Offretite_Ore.dup, false, 250)
+     @@ofretite05 = Ore.new("Offretite", 103, "clear", 5, 250, "offretite", Offretite_Ore.dup, false, 250)
+     @@ofretite06 = Ore.new("Offretite", 104, "clear", 5, 250, "offretite", Offretite_Ore.dup, false, 250)
+    #........................................................................................................................................................
+    #................................................................Offretite...............................................................................
+     @@holley_blue_agate01 = Ore.new("Holley Blue Agate", 105, "blue", 7, 350, "holley_blue_agate", Holley_Blue_Agate_Ore.dup, false, 350)
     #........................................................................................................................................................
   end
   class Herbs

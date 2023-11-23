@@ -447,9 +447,12 @@
     #'''''''''''''''''''''''''''''''''''''''''''''''''''''Hiddenite'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      HIDDENITE_INVENTORY_ORE_TEXTURE = SF::Texture.from_file("graphics/Hiddenite_Inventory.png")
      Hiddenite_Inventory_Ore = SF::Sprite.new(HIDDENITE_INVENTORY_ORE_TEXTURE) 
-    #'''''''''''''''''''''''''''''''''''''''''''''''''''''Hiddenite'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-    OFFRETITE_INVENTORY_ORE_TEXTURE = SF::Texture.from_file("graphics/Offretite_Inventory.png")
-    Offretite_Inventory_Ore = SF::Sprite.new(OFFRETITE_INVENTORY_ORE_TEXTURE) 
+    #'''''''''''''''''''''''''''''''''''''''''''''''''''''Offretite'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     OFFRETITE_INVENTORY_ORE_TEXTURE = SF::Texture.from_file("graphics/Offretite_Inventory.png")
+     Offretite_Inventory_Ore = SF::Sprite.new(OFFRETITE_INVENTORY_ORE_TEXTURE) 
+    #'''''''''''''''''''''''''''''''''''''''''''''''''Holley Blue Agate'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     HOLLEY_BLUE_AGATE_INVENTORY_ORE_TEXTURE = SF::Texture.from_file("graphics/Holley_Blue_Agate_Inventory.png")
+     Holley_Blue_Agate_Inventory_Ore = SF::Sprite.new(HOLLEY_BLUE_AGATE_INVENTORY_ORE_TEXTURE) 
 #----------------------------------------------------------------------------------------------------------------------------------- 
 #                                                    Character Model
 #-----------------------------------------------------------------------------------------------------------------------------------
@@ -1910,6 +1913,10 @@
   OFFRETITE_TEXTURE = SF::Texture.from_file("graphics/Offretite.png")
   Offretite_Ore = SF::Sprite.new(OFFRETITE_TEXTURE); Offretite_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
   Offretite_Ore.position = SF.vector2(3900, 702)
+ #''''''''''''''''''''''''''''''''''''''''''''''''Holley_Blue_Agate_Ore''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+  HOLLEY_BLUE_AGATE_TEXTURE = SF::Texture.from_file("graphics/Holley_Blue_Agate.png")
+  Holley_Blue_Agate_Ore = SF::Sprite.new(HOLLEY_BLUE_AGATE_TEXTURE); Holley_Blue_Agate_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
+  Holley_Blue_Agate_Ore.position = SF.vector2(4100, 702)
 #______________________________________________________________________________________________________________________________________
 Testing_Text = SF::Text.new; Testing_Text.font = FONT_PIXEL; 
 Testing_Text.character_size = 20; Testing_Text.color = SF::Color::White; Testing_Text.position = SF.vector2(1800, 652)
