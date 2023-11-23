@@ -456,6 +456,9 @@
     #'''''''''''''''''''''''''''''''''''''''''''''''''''''Ametrine''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      AMETRINE_INVENTORY_ORE_TEXTURE = SF::Texture.from_file("graphics/Ametrine_Inventory.png")
      Ametrine_Inventory_Ore = SF::Sprite.new(AMETRINE_INVENTORY_ORE_TEXTURE) 
+    #'''''''''''''''''''''''''''''''''''''''''''''''''''''Ametrine''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     HEMIMORPHITE_INVENTORY_ORE_TEXTURE = SF::Texture.from_file("graphics/Hemimorphite_Inventory.png")
+     Hemimorphite_Inventory_Ore = SF::Sprite.new(HEMIMORPHITE_INVENTORY_ORE_TEXTURE) 
 #----------------------------------------------------------------------------------------------------------------------------------- 
 #                                                    Character Model
 #-----------------------------------------------------------------------------------------------------------------------------------
@@ -1896,34 +1899,38 @@
   AMORITE_TEXTURE = SF::Texture.from_file("graphics/Amorite.png")
   Amorite_Ore = SF::Sprite.new(AMORITE_TEXTURE); Amorite_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
   Amorite_Ore.position = SF.vector2(2900, 702)
- #'''''''''''''''''''''''''''''''''''''''''''''''''''Lapis Lazuli''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+ #'''''''''''''''''''''''''''''''''''''''''''''''''''Lapis Lazuli'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
   LAPIS_LAZULI_TEXTURE = SF::Texture.from_file("graphics/Lapis_Lazuli.png")
   Lapis_Lazuli_Ore = SF::Sprite.new(LAPIS_LAZULI_TEXTURE); Lapis_Lazuli_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
   Lapis_Lazuli_Ore.position = SF.vector2(3100, 702)
- #''''''''''''''''''''''''''''''''''''''''''''''''''''Moonstone''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+ #''''''''''''''''''''''''''''''''''''''''''''''''''''Moonstone'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
   MOONSTONE_TEXTURE = SF::Texture.from_file("graphics/Moonstone.png")
   Moonstone_Ore = SF::Sprite.new(MOONSTONE_TEXTURE); Moonstone_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
   Moonstone_Ore.position = SF.vector2(3300, 702)
- #'''''''''''''''''''''''''''''''''''''''''''''''''''Blue Calcite''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+ #'''''''''''''''''''''''''''''''''''''''''''''''''''Blue Calcite'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
   BLUE_CALCITE_TEXTURE = SF::Texture.from_file("graphics/Blue_Calcite.png")
   Blue_Calcite_Ore = SF::Sprite.new(BLUE_CALCITE_TEXTURE); Blue_Calcite_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
   Blue_Calcite_Ore.position = SF.vector2(3500, 702)
- #''''''''''''''''''''''''''''''''''''''''''''''''''''Hiddenite''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+ #''''''''''''''''''''''''''''''''''''''''''''''''''''Hiddenite'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
   HIDDENITE_TEXTURE = SF::Texture.from_file("graphics/Hiddenite.png")
   Hiddenite_Ore = SF::Sprite.new(HIDDENITE_TEXTURE); Hiddenite_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
   Hiddenite_Ore.position = SF.vector2(3700, 702)
- #''''''''''''''''''''''''''''''''''''''''''''''''''''Offretite''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+ #''''''''''''''''''''''''''''''''''''''''''''''''''''Offretite'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
   OFFRETITE_TEXTURE = SF::Texture.from_file("graphics/Offretite.png")
   Offretite_Ore = SF::Sprite.new(OFFRETITE_TEXTURE); Offretite_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
   Offretite_Ore.position = SF.vector2(3900, 702)
- #''''''''''''''''''''''''''''''''''''''''''''''''Holley_Blue_Agate_Ore''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+ #''''''''''''''''''''''''''''''''''''''''''''''''Holley_Blue_Agate_Ore'''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
   HOLLEY_BLUE_AGATE_TEXTURE = SF::Texture.from_file("graphics/Holley_Blue_Agate.png")
   Holley_Blue_Agate_Ore = SF::Sprite.new(HOLLEY_BLUE_AGATE_TEXTURE); Holley_Blue_Agate_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
   Holley_Blue_Agate_Ore.position = SF.vector2(4100, 702)
- #''''''''''''''''''''''''''''''''''''''''''''''''''''''Ametrine'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+ #''''''''''''''''''''''''''''''''''''''''''''''''''''''Ametrine''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
   AMETRINE_TEXTURE = SF::Texture.from_file("graphics/Ametrine.png")
   Ametrine_Ore = SF::Sprite.new(AMETRINE_TEXTURE); Ametrine_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
   Ametrine_Ore.position = SF.vector2(4300, 702)
+ #''''''''''''''''''''''''''''''''''''''''''''''''''''Hemimorphite''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+  HEMIMORPHITE_TEXTURE = SF::Texture.from_file("graphics/Hemimorphite.png")
+  Hemimorphite_Ore = SF::Sprite.new(HEMIMORPHITE_TEXTURE); Hemimorphite_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
+  Hemimorphite_Ore.position = SF.vector2(-200, 702)
 #______________________________________________________________________________________________________________________________________
 Testing_Text = SF::Text.new; Testing_Text.font = FONT_PIXEL; 
 Testing_Text.character_size = 20; Testing_Text.color = SF::Color::White; Testing_Text.position = SF.vector2(1800, 652)
