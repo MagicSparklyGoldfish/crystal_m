@@ -1895,6 +1895,7 @@ end; end; end; end; end; end
 
    module Player_Data #@note Player data is stored here 
    include Gui;       #@todo fix all the classes
+   extend self
    @@hair_slot = 0; @@skin_slot = 0; @@face_slot = 0; @@shirt_slot = 0; @@gloves_slot = 0; @@pants_slot = 0; @@shoes_slot = 0
    @@hair_slot : (Int32); @@skin_slot : (Int32); @@face_slot : (Int32); @@shirt_slot : (Int32); @@gloves_slot : (Int32); @@pants_slot : (Int32)
    @@shoes_slot : (Int32); @@outfit_array : Array(Int32) = [@@hair_slot, @@skin_slot, @@face_slot, @@shirt_slot, @@gloves_slot, @@pants_slot, @@shoes_slot]
@@ -1981,7 +1982,7 @@ end; end; end; end; end; end
    end
   class Quest_Item_Slot
    end                  
-  class Stats
+  class Stats < Window_Class
    #----------------------------------------------Class Variables------------------------------------------------------------------------- 
     @@name : (String); @@name = "Some Rando"
     @@lvl : (Int32); @@exp : (Int32); @@exp_scale : (Int32 | Float64); @@exp_cap : (Int32 | Float64); @@lvl_points : (Int32)
@@ -1997,6 +1998,7 @@ end; end; end; end; end; end
     @@current_str = Base_Str + @@lvl_str + @@equip_str; @@current_dex = Base_Dex + @@lvl_dex + @@equip_dex 
     @@current_luk = Base_Luk + @@lvl_luk + @@equip_luk; @@current_int = Base_Int + @@lvl_int + @@equip_int
     @@lvl = 1; @@exp = 0; @@exp_cap = @@lvl * Math.sqrt(100) ; @@exp_scale = @@exp / @@exp_cap
+    @@speed : Int32; @@speed = @@current_dex + @@equip_speed + 3; @@equip_speed : Int32; @@equip_speed = 0
 
    def Stats.bars
      HP_Bar_Color.scale = SF.vector2(@@current_hp * 0.005, 1); HP_Bar.scale = SF.vector2(@@current_max_hp * 0.005, 1)
@@ -2019,7 +2021,7 @@ end; end; end; end; end; end
      Stats_Window_Name_Text.string = @@name
     end
    end
-  class Player_Physics < Window_Class
+  class Player_Physics < Stats
    #==========================================Class Variables=========================================================================+
     @@is_player_airborne : Bool; @@is_player_airborne = false; @@fall_rate : Int32 | Nil; @@fallrate = 0
     @@player_bounding_box : SF::Rect(Float32); @@player_bounding_box = @@player_character_rendered_model.global_bounds
@@ -2113,7 +2115,7 @@ end; end; end; end; end; end
     #----------------------------------------------Left-------------------------------------------------------------------------------+
      def Player_Physics.wasd_left(@@player_character_rendered_model)
       if @@can_player_move_at_all == true
-     @@player_character_rendered_model.position -= SF.vector2(4, 0)
+     @@player_character_rendered_model.position -= SF.vector2(@@speed, 0)
      Player_Physics.walk_cycle_left(@@player_character_rendered_model)
      @@player_direction = "left"
       else if @@current_quest != "none"
@@ -2127,7 +2129,7 @@ end; end; end; end; end; end
     #---------------------------------------------Right-------------------------------------------------------------------------------+
      def Player_Physics.wasd_right(@@player_character_rendered_model)
       if @@can_player_move_at_all == true
-     @@player_character_rendered_model.position += SF.vector2(4, 0)
+     @@player_character_rendered_model.position += SF.vector2(@@speed, 0)
      Player_Physics.walk_cycle_right(@@player_character_rendered_model)
      @@player_direction = "right"
     else if @@current_quest != "none"
