@@ -2113,7 +2113,7 @@ end; end; end; end; end; end
     #----------------------------------------------Left-------------------------------------------------------------------------------+
      def Player_Physics.wasd_left(@@player_character_rendered_model)
       if @@can_player_move_at_all == true
-     @@player_character_rendered_model.position -= SF.vector2(3.5, 0)
+     @@player_character_rendered_model.position -= SF.vector2(4, 0)
      Player_Physics.walk_cycle_left(@@player_character_rendered_model)
      @@player_direction = "left"
       else if @@current_quest != "none"
@@ -2127,7 +2127,7 @@ end; end; end; end; end; end
     #---------------------------------------------Right-------------------------------------------------------------------------------+
      def Player_Physics.wasd_right(@@player_character_rendered_model)
       if @@can_player_move_at_all == true
-     @@player_character_rendered_model.position += SF.vector2(3.5, 0)
+     @@player_character_rendered_model.position += SF.vector2(4, 0)
      Player_Physics.walk_cycle_right(@@player_character_rendered_model)
      @@player_direction = "right"
     else if @@current_quest != "none"

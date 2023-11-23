@@ -441,9 +441,12 @@
     #'''''''''''''''''''''''''''''''''''''''''''''''''''''Moonstone'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      MOONSTONE_INVENTORY_ORE_TEXTURE = SF::Texture.from_file("graphics/Moonstone_Inventory.png")
      Moonstone_Inventory_Ore = SF::Sprite.new(MOONSTONE_INVENTORY_ORE_TEXTURE) 
-    #'''''''''''''''''''''''''''''''''''''''''''''''''''''Moonstone'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    #''''''''''''''''''''''''''''''''''''''''''''''''''''Blue Calcite'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      BLUE_CALCITE_INVENTORY_ORE_TEXTURE = SF::Texture.from_file("graphics/Blue_Calcite_Inventory.png")
      Blue_Calcite_Inventory_Ore = SF::Sprite.new(BLUE_CALCITE_INVENTORY_ORE_TEXTURE) 
+    #''''''''''''''''''''''''''''''''''''''''''''''''''''Blue Calcite'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     HIDDENITE_INVENTORY_ORE_TEXTURE = SF::Texture.from_file("graphics/Hiddenite_Inventory.png")
+     Hiddenite_Inventory_Ore = SF::Sprite.new(HIDDENITE_INVENTORY_ORE_TEXTURE) 
 #----------------------------------------------------------------------------------------------------------------------------------- 
 #                                                    Character Model
 #-----------------------------------------------------------------------------------------------------------------------------------
@@ -1892,10 +1895,14 @@
   MOONSTONE_TEXTURE = SF::Texture.from_file("graphics/Moonstone.png")
   Moonstone_Ore = SF::Sprite.new(MOONSTONE_TEXTURE); Moonstone_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
   Moonstone_Ore.position = SF.vector2(3300, 702)
- #''''''''''''''''''''''''''''''''''''''''''''''''''''Moonstone''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+ #'''''''''''''''''''''''''''''''''''''''''''''''''''Blue Calcite''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
   BLUE_CALCITE_TEXTURE = SF::Texture.from_file("graphics/Blue_Calcite.png")
   Blue_Calcite_Ore = SF::Sprite.new(BLUE_CALCITE_TEXTURE); Blue_Calcite_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
   Blue_Calcite_Ore.position = SF.vector2(3500, 702)
+ #''''''''''''''''''''''''''''''''''''''''''''''''''''Hiddenite''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+  HIDDENITE_TEXTURE = SF::Texture.from_file("graphics/Hiddenite.png")
+  Hiddenite_Ore = SF::Sprite.new(HIDDENITE_TEXTURE); Hiddenite_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
+  Hiddenite_Ore.position = SF.vector2(3700, 702)
 #______________________________________________________________________________________________________________________________________
 Testing_Text = SF::Text.new; Testing_Text.font = FONT_PIXEL; 
 Testing_Text.character_size = 20; Testing_Text.color = SF::Color::White; Testing_Text.position = SF.vector2(1800, 652)
