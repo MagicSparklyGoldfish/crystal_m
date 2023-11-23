@@ -453,6 +453,9 @@
     #'''''''''''''''''''''''''''''''''''''''''''''''''Holley Blue Agate'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      HOLLEY_BLUE_AGATE_INVENTORY_ORE_TEXTURE = SF::Texture.from_file("graphics/Holley_Blue_Agate_Inventory.png")
      Holley_Blue_Agate_Inventory_Ore = SF::Sprite.new(HOLLEY_BLUE_AGATE_INVENTORY_ORE_TEXTURE) 
+    #'''''''''''''''''''''''''''''''''''''''''''''''''''''Ametrine''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     AMETRINE_INVENTORY_ORE_TEXTURE = SF::Texture.from_file("graphics/Ametrine_Inventory.png")
+     Ametrine_Inventory_Ore = SF::Sprite.new(AMETRINE_INVENTORY_ORE_TEXTURE) 
 #----------------------------------------------------------------------------------------------------------------------------------- 
 #                                                    Character Model
 #-----------------------------------------------------------------------------------------------------------------------------------
@@ -1917,6 +1920,10 @@
   HOLLEY_BLUE_AGATE_TEXTURE = SF::Texture.from_file("graphics/Holley_Blue_Agate.png")
   Holley_Blue_Agate_Ore = SF::Sprite.new(HOLLEY_BLUE_AGATE_TEXTURE); Holley_Blue_Agate_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
   Holley_Blue_Agate_Ore.position = SF.vector2(4100, 702)
+ #''''''''''''''''''''''''''''''''''''''''''''''''''''''Ametrine'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+  AMETRINE_TEXTURE = SF::Texture.from_file("graphics/Ametrine.png")
+  Ametrine_Ore = SF::Sprite.new(AMETRINE_TEXTURE); Ametrine_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
+  Ametrine_Ore.position = SF.vector2(4300, 702)
 #______________________________________________________________________________________________________________________________________
 Testing_Text = SF::Text.new; Testing_Text.font = FONT_PIXEL; 
 Testing_Text.character_size = 20; Testing_Text.color = SF::Color::White; Testing_Text.position = SF.vector2(1800, 652)
