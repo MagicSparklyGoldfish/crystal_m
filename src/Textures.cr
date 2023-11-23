@@ -444,9 +444,12 @@
     #''''''''''''''''''''''''''''''''''''''''''''''''''''Blue Calcite'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      BLUE_CALCITE_INVENTORY_ORE_TEXTURE = SF::Texture.from_file("graphics/Blue_Calcite_Inventory.png")
      Blue_Calcite_Inventory_Ore = SF::Sprite.new(BLUE_CALCITE_INVENTORY_ORE_TEXTURE) 
-    #''''''''''''''''''''''''''''''''''''''''''''''''''''Blue Calcite'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    #'''''''''''''''''''''''''''''''''''''''''''''''''''''Hiddenite'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      HIDDENITE_INVENTORY_ORE_TEXTURE = SF::Texture.from_file("graphics/Hiddenite_Inventory.png")
      Hiddenite_Inventory_Ore = SF::Sprite.new(HIDDENITE_INVENTORY_ORE_TEXTURE) 
+    #'''''''''''''''''''''''''''''''''''''''''''''''''''''Hiddenite'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    OFFRETITE_INVENTORY_ORE_TEXTURE = SF::Texture.from_file("graphics/Offretite_Inventory.png")
+    Offretite_Inventory_Ore = SF::Sprite.new(OFFRETITE_INVENTORY_ORE_TEXTURE) 
 #----------------------------------------------------------------------------------------------------------------------------------- 
 #                                                    Character Model
 #-----------------------------------------------------------------------------------------------------------------------------------
@@ -1903,6 +1906,10 @@
   HIDDENITE_TEXTURE = SF::Texture.from_file("graphics/Hiddenite.png")
   Hiddenite_Ore = SF::Sprite.new(HIDDENITE_TEXTURE); Hiddenite_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
   Hiddenite_Ore.position = SF.vector2(3700, 702)
+ #''''''''''''''''''''''''''''''''''''''''''''''''''''Offretite''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+  OFFRETITE_TEXTURE = SF::Texture.from_file("graphics/Offretite.png")
+  Offretite_Ore = SF::Sprite.new(OFFRETITE_TEXTURE); Offretite_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
+  Offretite_Ore.position = SF.vector2(3900, 702)
 #______________________________________________________________________________________________________________________________________
 Testing_Text = SF::Text.new; Testing_Text.font = FONT_PIXEL; 
 Testing_Text.character_size = 20; Testing_Text.color = SF::Color::White; Testing_Text.position = SF.vector2(1800, 652)
