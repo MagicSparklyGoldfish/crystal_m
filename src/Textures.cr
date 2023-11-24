@@ -462,9 +462,12 @@
     #'''''''''''''''''''''''''''''''''''''''''''''''''''Tiffany Stone'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      TIFFANY_STONE_INVENTORY_ORE_TEXTURE = SF::Texture.from_file("graphics/Tiffany_Stone_Inventory.png")
      Tiffany_Stone_Inventory_Ore = SF::Sprite.new(TIFFANY_STONE_INVENTORY_ORE_TEXTURE) 
-    #'''''''''''''''''''''''''''''''''''''''''''''''''''Tiffany Stone'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-     AZURITE_INVENTORY_ORE_TEXTURE = SF::Texture.from_file("graphics/Azurite_Inventory.png")
+    #''''''''''''''''''''''''''''''''''''''''''''''''''''''Azurite''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     AZURITE_INVENTORY_ORE_TEXTURE = SF::Texture.from_file("graphics/minerals/Azurite_Inventory.png")
      Azurite_Inventory_Ore = SF::Sprite.new(AZURITE_INVENTORY_ORE_TEXTURE) 
+    #''''''''''''''''''''''''''''''''''''''''''''''''''''''Howlite''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     HOWLITE_INVENTORY_ORE_TEXTURE = SF::Texture.from_file("graphics/minerals/Howlite_Inventory.png")
+     Howlite_Inventory_Ore = SF::Sprite.new(HOWLITE_INVENTORY_ORE_TEXTURE) 
 #----------------------------------------------------------------------------------------------------------------------------------- 
 #                                                    Character Model
 #-----------------------------------------------------------------------------------------------------------------------------------
@@ -1926,25 +1929,29 @@
   Offretite_Ore = SF::Sprite.new(OFFRETITE_TEXTURE); Offretite_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
   Offretite_Ore.position = SF.vector2(3900, 702)
  #''''''''''''''''''''''''''''''''''''''''''''''''Holley_Blue_Agate_Ore'''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
-  HOLLEY_BLUE_AGATE_TEXTURE = SF::Texture.from_file("graphics/Holley_Blue_Agate.png")
+  HOLLEY_BLUE_AGATE_TEXTURE = SF::Texture.from_file("graphics/minerals/Holley_Blue_Agate.png")
   Holley_Blue_Agate_Ore = SF::Sprite.new(HOLLEY_BLUE_AGATE_TEXTURE); Holley_Blue_Agate_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
   Holley_Blue_Agate_Ore.position = SF.vector2(4100, 702)
  #''''''''''''''''''''''''''''''''''''''''''''''''''''''Ametrine''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
-  AMETRINE_TEXTURE = SF::Texture.from_file("graphics/Ametrine.png")
+  AMETRINE_TEXTURE = SF::Texture.from_file("graphics/minerals/Ametrine.png")
   Ametrine_Ore = SF::Sprite.new(AMETRINE_TEXTURE); Ametrine_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
   Ametrine_Ore.position = SF.vector2(4300, 702)
  #''''''''''''''''''''''''''''''''''''''''''''''''''''Hemimorphite''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
-  HEMIMORPHITE_TEXTURE = SF::Texture.from_file("graphics/Hemimorphite.png")
+  HEMIMORPHITE_TEXTURE = SF::Texture.from_file("graphics/minerals/Hemimorphite.png")
   Hemimorphite_Ore = SF::Sprite.new(HEMIMORPHITE_TEXTURE); Hemimorphite_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
   Hemimorphite_Ore.position = SF.vector2(-200, 702)
  #''''''''''''''''''''''''''''''''''''''''''''''''''''Tiffany Stone'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
-  TIFFANY_STONE_TEXTURE = SF::Texture.from_file("graphics/Tiffany_Stone.png")
+  TIFFANY_STONE_TEXTURE = SF::Texture.from_file("graphics/minerals/Tiffany_Stone.png")
   Tiffany_Stone_Ore = SF::Sprite.new(TIFFANY_STONE_TEXTURE); Tiffany_Stone_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
   Tiffany_Stone_Ore.position = SF.vector2(-400, 702)
  #'''''''''''''''''''''''''''''''''''''''''''''''''''''''Azurite''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
-  AZURITE_TEXTURE = SF::Texture.from_file("graphics/Azurite.png")
+  AZURITE_TEXTURE = SF::Texture.from_file("graphics/minerals/Azurite.png")
   Azurite_Ore = SF::Sprite.new(AZURITE_TEXTURE); Azurite_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
   Azurite_Ore.position = SF.vector2(-600, 702)
+ #'''''''''''''''''''''''''''''''''''''''''''''''''''''''Azurite''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+  HOWLITE_TEXTURE = SF::Texture.from_file("graphics/minerals/Howlite.png")
+  Howlite_Ore = SF::Sprite.new(HOWLITE_TEXTURE); Howlite_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
+  Howlite_Ore.position = SF.vector2(-800, 702)
 #______________________________________________________________________________________________________________________________________
 Testing_Text = SF::Text.new; Testing_Text.font = FONT_PIXEL; 
 Testing_Text.character_size = 20; Testing_Text.color = SF::Color::White; Testing_Text.position = SF.vector2(1800, 652)

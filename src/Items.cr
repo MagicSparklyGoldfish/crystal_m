@@ -589,6 +589,9 @@ module Etc
     #-----------------------------------------------------------Tiffany Stone------------------------------------------------------------------------------ 
      @@azurite = Inventory_Ore.new("Azurite", 24, Azurite_Inventory_Ore, 1, "blue", "air", "DEX+", 70)
      Ore_Array.push(@@azurite)
+    #-----------------------------------------------------------Tiffany Stone------------------------------------------------------------------------------ 
+     @@howlite = Inventory_Ore.new("Howlite", 25, Howlite_Inventory_Ore, 1, "white", "air", "DEX+", 70)
+     Ore_Array.push(@@howlite)
    #________________________________________________________________________________________________________________________________________________________
   end
 end 
@@ -600,13 +603,13 @@ module Harvestables
     Test_Ore_Array = [@@bloodstone_01, @@bloodstone_02, @@bloodstone_03, @@moss_agate_01, @@amber01, @@wavellite01,  @@topaz01, @@amethyst01,
     @@smokey_quartz01, @@sapphire01, @@black_opal01, @@ajoite01, @@rhodolite01, @@chalcanthite01, @@flourite01, @@amorite01, @@lapis_lazuli01,
     @@moonstone01, @@blue_calcite01, @@hiddenite01, @@ofretite01, @@holley_blue_agate01, @@ametrine01, @@hemimorphite01, @@tiffany_stone01,
-    @@azurite01]
+    @@azurite01, @@howlite01]
 
     Test_Ore_Sprite_Array = [@@bloodstone_01.sprite, @@bloodstone_02.sprite, @@bloodstone_03.sprite, @@moss_agate_01.sprite, @@amber01.sprite, 
     @@wavellite01.sprite,  @@topaz01.sprite, @@amethyst01.sprite, @@smokey_quartz01.sprite, @@sapphire01.sprite, @@black_opal01.sprite,
     @@ajoite01.sprite, @@rhodolite01.sprite, @@chalcanthite01.sprite, @@flourite01.sprite, @@amorite01.sprite, @@lapis_lazuli01.sprite,
     @@moonstone01.sprite, @@blue_calcite01.sprite, @@hiddenite01.sprite, @@ofretite01.sprite, @@holley_blue_agate01.sprite, @@ametrine01.sprite,
-    @@hemimorphite01.sprite, @@tiffany_stone01.sprite, @@azurite01.sprite]
+    @@hemimorphite01.sprite, @@tiffany_stone01.sprite, @@azurite01.sprite, @@howlite01.sprite]
    #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
    #+                                                              Variables                                                                               +
    #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -814,7 +817,7 @@ module Harvestables
       window.draw(@@chalcanthite01.sprite); window.draw(@@flourite01.sprite); window.draw(@@amorite01.sprite); window.draw(@@lapis_lazuli01.sprite); 
       window.draw(@@moonstone01.sprite); window.draw(@@blue_calcite01.sprite); window.draw(@@hiddenite01.sprite); window.draw(@@ofretite01.sprite); 
       window.draw(@@holley_blue_agate01.sprite); window.draw(@@ametrine01.sprite); window.draw(@@hemimorphite01.sprite); window.draw(@@tiffany_stone01.sprite);
-      window.draw(@@azurite01.sprite)
+      window.draw(@@azurite01.sprite); window.draw(@@howlite01.sprite)
     end
    #________________________________________________________________________________________________________________________________________________________
    #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1006,7 +1009,15 @@ module Harvestables
      @@tiffany_stone06 = Ore.new("Tiffany Stone", 128, "purple", 5, 250, "tiffany stone", Tiffany_Stone_Ore.dup, false, 250)
     #........................................................................................................................................................
     #..................................................................Azurite...............................................................................
-     @@azurite01 = Ore.new("Azurite", 123, "blue", 4, 200, "azurite", Azurite_Ore.dup, false, 200)
+     @@azurite01 = Ore.new("Azurite", 129, "blue", 4, 200, "azurite", Azurite_Ore.dup, false, 200)
+     @@azurite02 = Ore.new("Azurite", 130, "blue", 4, 200, "azurite", Azurite_Ore.dup, false, 200)
+     @@azurite03 = Ore.new("Azurite", 131, "blue", 4, 200, "azurite", Azurite_Ore.dup, false, 200)
+     @@azurite04 = Ore.new("Azurite", 132, "blue", 4, 200, "azurite", Azurite_Ore.dup, false, 200)
+     @@azurite05 = Ore.new("Azurite", 133, "blue", 4, 200, "azurite", Azurite_Ore.dup, false, 200)
+     @@azurite06 = Ore.new("Azurite", 134, "blue", 4, 200, "azurite", Azurite_Ore.dup, false, 200)
+    #........................................................................................................................................................
+    #..................................................................Howlite...............................................................................
+     @@howlite01 = Ore.new("Howlite", 135, "white", 3, 150, "howlite", Howlite_Ore.dup, false, 150)
   end
   class Herbs
   def initialize(name : String, id : Int32, color : String, hp : Int32, drop_item : String, sprite : SF::Sprite, is_broke : Bool)
