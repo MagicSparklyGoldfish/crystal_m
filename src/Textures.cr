@@ -474,6 +474,9 @@
     #'''''''''''''''''''''''''''''''''''''''''''''''''''Blue Lace Agate''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      BLUE_LACE_AGATE_INVENTORY_ORE_TEXTURE = SF::Texture.from_file("graphics/minerals/Blue_Lace_Agate_Inventory.png")
      Blue_Lace_Agate_Inventory_Ore = SF::Sprite.new(BLUE_LACE_AGATE_INVENTORY_ORE_TEXTURE) 
+    #'''''''''''''''''''''''''''''''''''''''''''''''''''Blue Lace Agate''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     IOLITE_INVENTORY_ORE_TEXTURE = SF::Texture.from_file("graphics/minerals/Iolite_Inventory.png")
+     Iolite_Inventory_Ore = SF::Sprite.new(IOLITE_INVENTORY_ORE_TEXTURE) 
 #----------------------------------------------------------------------------------------------------------------------------------- 
 #                                                    Character Model
 #-----------------------------------------------------------------------------------------------------------------------------------
@@ -1962,10 +1965,14 @@
   ANGELITE_TEXTURE = SF::Texture.from_file("graphics/minerals/Angelite.png")
   Angelite_Ore = SF::Sprite.new(ANGELITE_TEXTURE); Angelite_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
   Angelite_Ore.position = SF.vector2(-1000, 702)
- #'''''''''''''''''''''''''''''''''''''''''''''''''''''Angelite'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+ #'''''''''''''''''''''''''''''''''''''''''''''''''''Blue Lace Agate''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
   BLUE_LACE_AGATE_TEXTURE = SF::Texture.from_file("graphics/minerals/Blue_Lace_Agate.png")
   Blue_Lace_Agate_Ore = SF::Sprite.new(BLUE_LACE_AGATE_TEXTURE); Blue_Lace_Agate_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
   Blue_Lace_Agate_Ore.position = SF.vector2(-1200, 702)
+ #'''''''''''''''''''''''''''''''''''''''''''''''''''''''Iolite'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+  IOLITE_TEXTURE = SF::Texture.from_file("graphics/minerals/Iolite.png")
+  Iolite_Ore = SF::Sprite.new(IOLITE_TEXTURE); Iolite_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
+  Iolite_Ore.position = SF.vector2(-1400, 702)
 #______________________________________________________________________________________________________________________________________
 Testing_Text = SF::Text.new; Testing_Text.font = FONT_PIXEL; 
 Testing_Text.character_size = 20; Testing_Text.color = SF::Color::White; Testing_Text.position = SF.vector2(1800, 652)
