@@ -456,9 +456,15 @@
     #'''''''''''''''''''''''''''''''''''''''''''''''''''''Ametrine''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      AMETRINE_INVENTORY_ORE_TEXTURE = SF::Texture.from_file("graphics/Ametrine_Inventory.png")
      Ametrine_Inventory_Ore = SF::Sprite.new(AMETRINE_INVENTORY_ORE_TEXTURE) 
-    #'''''''''''''''''''''''''''''''''''''''''''''''''''''Ametrine''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    #'''''''''''''''''''''''''''''''''''''''''''''''''''Hemimorphite''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      HEMIMORPHITE_INVENTORY_ORE_TEXTURE = SF::Texture.from_file("graphics/Hemimorphite_Inventory.png")
      Hemimorphite_Inventory_Ore = SF::Sprite.new(HEMIMORPHITE_INVENTORY_ORE_TEXTURE) 
+    #'''''''''''''''''''''''''''''''''''''''''''''''''''Tiffany Stone'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     TIFFANY_STONE_INVENTORY_ORE_TEXTURE = SF::Texture.from_file("graphics/Tiffany_Stone_Inventory.png")
+     Tiffany_Stone_Inventory_Ore = SF::Sprite.new(TIFFANY_STONE_INVENTORY_ORE_TEXTURE) 
+    #'''''''''''''''''''''''''''''''''''''''''''''''''''Tiffany Stone'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     AZURITE_INVENTORY_ORE_TEXTURE = SF::Texture.from_file("graphics/Azurite_Inventory.png")
+     Azurite_Inventory_Ore = SF::Sprite.new(AZURITE_INVENTORY_ORE_TEXTURE) 
 #----------------------------------------------------------------------------------------------------------------------------------- 
 #                                                    Character Model
 #-----------------------------------------------------------------------------------------------------------------------------------
@@ -1931,6 +1937,14 @@
   HEMIMORPHITE_TEXTURE = SF::Texture.from_file("graphics/Hemimorphite.png")
   Hemimorphite_Ore = SF::Sprite.new(HEMIMORPHITE_TEXTURE); Hemimorphite_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
   Hemimorphite_Ore.position = SF.vector2(-200, 702)
+ #''''''''''''''''''''''''''''''''''''''''''''''''''''Tiffany Stone'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+  TIFFANY_STONE_TEXTURE = SF::Texture.from_file("graphics/Tiffany_Stone.png")
+  Tiffany_Stone_Ore = SF::Sprite.new(TIFFANY_STONE_TEXTURE); Tiffany_Stone_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
+  Tiffany_Stone_Ore.position = SF.vector2(-400, 702)
+ #'''''''''''''''''''''''''''''''''''''''''''''''''''''''Azurite''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+  AZURITE_TEXTURE = SF::Texture.from_file("graphics/Azurite.png")
+  Azurite_Ore = SF::Sprite.new(AZURITE_TEXTURE); Azurite_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
+  Azurite_Ore.position = SF.vector2(-600, 702)
 #______________________________________________________________________________________________________________________________________
 Testing_Text = SF::Text.new; Testing_Text.font = FONT_PIXEL; 
 Testing_Text.character_size = 20; Testing_Text.color = SF::Color::White; Testing_Text.position = SF.vector2(1800, 652)
