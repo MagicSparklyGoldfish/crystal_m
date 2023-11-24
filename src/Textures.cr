@@ -1962,6 +1962,10 @@
   ANGELITE_TEXTURE = SF::Texture.from_file("graphics/minerals/Angelite.png")
   Angelite_Ore = SF::Sprite.new(ANGELITE_TEXTURE); Angelite_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
   Angelite_Ore.position = SF.vector2(-1000, 702)
+ #'''''''''''''''''''''''''''''''''''''''''''''''''''''Angelite'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+  BLUE_LACE_AGATE_TEXTURE = SF::Texture.from_file("graphics/minerals/Blue_Lace_Agate.png")
+  Blue_Lace_Agate_Ore = SF::Sprite.new(BLUE_LACE_AGATE_TEXTURE); Blue_Lace_Agate_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
+  Blue_Lace_Agate_Ore.position = SF.vector2(-1200, 702)
 #______________________________________________________________________________________________________________________________________
 Testing_Text = SF::Text.new; Testing_Text.font = FONT_PIXEL; 
 Testing_Text.character_size = 20; Testing_Text.color = SF::Color::White; Testing_Text.position = SF.vector2(1800, 652)
