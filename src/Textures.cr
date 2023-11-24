@@ -468,6 +468,12 @@
     #''''''''''''''''''''''''''''''''''''''''''''''''''''''Howlite''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      HOWLITE_INVENTORY_ORE_TEXTURE = SF::Texture.from_file("graphics/minerals/Howlite_Inventory.png")
      Howlite_Inventory_Ore = SF::Sprite.new(HOWLITE_INVENTORY_ORE_TEXTURE) 
+    #''''''''''''''''''''''''''''''''''''''''''''''''''''''Angelite''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     ANGELITE_INVENTORY_ORE_TEXTURE = SF::Texture.from_file("graphics/minerals/Angelite_Inventory.png")
+     Angelite_Inventory_Ore = SF::Sprite.new(ANGELITE_INVENTORY_ORE_TEXTURE) 
+    #'''''''''''''''''''''''''''''''''''''''''''''''''''Blue Lace Agate''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     BLUE_LACE_AGATE_INVENTORY_ORE_TEXTURE = SF::Texture.from_file("graphics/minerals/Blue_Lace_Agate_Inventory.png")
+     Blue_Lace_Agate_Inventory_Ore = SF::Sprite.new(BLUE_LACE_AGATE_INVENTORY_ORE_TEXTURE) 
 #----------------------------------------------------------------------------------------------------------------------------------- 
 #                                                    Character Model
 #-----------------------------------------------------------------------------------------------------------------------------------
@@ -1952,6 +1958,10 @@
   HOWLITE_TEXTURE = SF::Texture.from_file("graphics/minerals/Howlite.png")
   Howlite_Ore = SF::Sprite.new(HOWLITE_TEXTURE); Howlite_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
   Howlite_Ore.position = SF.vector2(-800, 702)
+ #'''''''''''''''''''''''''''''''''''''''''''''''''''''Angelite'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+  ANGELITE_TEXTURE = SF::Texture.from_file("graphics/minerals/Angelite.png")
+  Angelite_Ore = SF::Sprite.new(ANGELITE_TEXTURE); Angelite_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
+  Angelite_Ore.position = SF.vector2(-1000, 702)
 #______________________________________________________________________________________________________________________________________
 Testing_Text = SF::Text.new; Testing_Text.font = FONT_PIXEL; 
 Testing_Text.character_size = 20; Testing_Text.color = SF::Color::White; Testing_Text.position = SF.vector2(1800, 652)
