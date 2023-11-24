@@ -474,9 +474,12 @@
     #'''''''''''''''''''''''''''''''''''''''''''''''''''Blue Lace Agate''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      BLUE_LACE_AGATE_INVENTORY_ORE_TEXTURE = SF::Texture.from_file("graphics/minerals/Blue_Lace_Agate_Inventory.png")
      Blue_Lace_Agate_Inventory_Ore = SF::Sprite.new(BLUE_LACE_AGATE_INVENTORY_ORE_TEXTURE) 
-    #'''''''''''''''''''''''''''''''''''''''''''''''''''Blue Lace Agate''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    #''''''''''''''''''''''''''''''''''''''''''''''''''''''Iolite''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      IOLITE_INVENTORY_ORE_TEXTURE = SF::Texture.from_file("graphics/minerals/Iolite_Inventory.png")
      Iolite_Inventory_Ore = SF::Sprite.new(IOLITE_INVENTORY_ORE_TEXTURE) 
+    #''''''''''''''''''''''''''''''''''''''''''''''''''''''Iolite''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     SODALITE_INVENTORY_ORE_TEXTURE = SF::Texture.from_file("graphics/minerals/Sodalite_Inventory.png")
+     Sodalite_Inventory_Ore = SF::Sprite.new(SODALITE_INVENTORY_ORE_TEXTURE) 
 #----------------------------------------------------------------------------------------------------------------------------------- 
 #                                                    Character Model
 #-----------------------------------------------------------------------------------------------------------------------------------
@@ -1973,6 +1976,10 @@
   IOLITE_TEXTURE = SF::Texture.from_file("graphics/minerals/Iolite.png")
   Iolite_Ore = SF::Sprite.new(IOLITE_TEXTURE); Iolite_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
   Iolite_Ore.position = SF.vector2(-1400, 702)
+ #''''''''''''''''''''''''''''''''''''''''''''''''''''''Sodalite''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+  SODALITE_TEXTURE = SF::Texture.from_file("graphics/minerals/Sodalite.png")
+  Sodalite_Ore = SF::Sprite.new(SODALITE_TEXTURE); Sodalite_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
+  Sodalite_Ore.position = SF.vector2(-1600, 702)
 #______________________________________________________________________________________________________________________________________
 Testing_Text = SF::Text.new; Testing_Text.font = FONT_PIXEL; 
 Testing_Text.character_size = 20; Testing_Text.color = SF::Color::White; Testing_Text.position = SF.vector2(1800, 652)
