@@ -483,9 +483,12 @@
     #'''''''''''''''''''''''''''''''''''''''''''''''''''''Kyanite'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      KYANITE_INVENTORY_ORE_TEXTURE = SF::Texture.from_file("graphics/minerals/Kyanite_Inventory.png")
      Kyanite_Inventory_Ore = SF::Sprite.new(KYANITE_INVENTORY_ORE_TEXTURE) 
-    #'''''''''''''''''''''''''''''''''''''''''''''''''''''Kyanite'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    #'''''''''''''''''''''''''''''''''''''''''''''''''''''Sunstone'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      SUNSTONE_INVENTORY_ORE_TEXTURE = SF::Texture.from_file("graphics/minerals/Sunstone_Inventory.png")
      Sunstone_Inventory_Ore = SF::Sprite.new(SUNSTONE_INVENTORY_ORE_TEXTURE) 
+    #'''''''''''''''''''''''''''''''''''''''''''''''''''''Sunstone'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     BONY_AMBER_INVENTORY_ORE_TEXTURE = SF::Texture.from_file("graphics/minerals/Bony_Amber_Inventory.png")
+     Bony_Amber_Inventory_Ore = SF::Sprite.new(BONY_AMBER_INVENTORY_ORE_TEXTURE) 
 #----------------------------------------------------------------------------------------------------------------------------------- 
 #                                                    Character Model
 #-----------------------------------------------------------------------------------------------------------------------------------
@@ -1994,6 +1997,10 @@
   SUNSTONE_TEXTURE = SF::Texture.from_file("graphics/minerals/Sunstone.png")
   Sunstone_Ore = SF::Sprite.new(SUNSTONE_TEXTURE); Sunstone_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
   Sunstone_Ore.position = SF.vector2(-2000, 702)
+ #'''''''''''''''''''''''''''''''''''''''''''''''''''''Bony Amber''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+  BONY_AMBER_TEXTURE = SF::Texture.from_file("graphics/minerals/Bony_Amber.png")
+  Bony_Amber_Ore = SF::Sprite.new(BONY_AMBER_TEXTURE); Bony_Amber_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
+  Bony_Amber_Ore.position = SF.vector2(-2200, 702)
 #______________________________________________________________________________________________________________________________________
 Testing_Text = SF::Text.new; Testing_Text.font = FONT_PIXEL; 
 Testing_Text.character_size = 20; Testing_Text.color = SF::Color::White; Testing_Text.position = SF.vector2(1800, 652)
