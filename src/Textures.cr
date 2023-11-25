@@ -489,9 +489,12 @@
     #''''''''''''''''''''''''''''''''''''''''''''''''''''Bony Amber'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      BONY_AMBER_INVENTORY_ORE_TEXTURE = SF::Texture.from_file("graphics/minerals/Bony_Amber_Inventory.png")
      Bony_Amber_Inventory_Ore = SF::Sprite.new(BONY_AMBER_INVENTORY_ORE_TEXTURE) 
-    #''''''''''''''''''''''''''''''''''''''''''''''''''''Bony Amber'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    #''''''''''''''''''''''''''''''''''''''''''''''''''''Blue Amber'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      BLUE_AMBER_INVENTORY_ORE_TEXTURE = SF::Texture.from_file("graphics/minerals/Blue_Amber_Inventory.png")
      Blue_Amber_Inventory_Ore = SF::Sprite.new(BLUE_AMBER_INVENTORY_ORE_TEXTURE) 
+    #''''''''''''''''''''''''''''''''''''''''''''''''''''Blue Amber'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     BLUE_SPINEL_INVENTORY_ORE_TEXTURE = SF::Texture.from_file("graphics/minerals/Blue_Spinel_Inventory.png")
+     Blue_Spinel_Inventory_Ore = SF::Sprite.new(BLUE_SPINEL_INVENTORY_ORE_TEXTURE) 
 #----------------------------------------------------------------------------------------------------------------------------------- 
 #                                                    Character Model
 #-----------------------------------------------------------------------------------------------------------------------------------
@@ -2008,6 +2011,10 @@
   BLUE_AMBER_TEXTURE = SF::Texture.from_file("graphics/minerals/Blue_Amber.png")
   Blue_Amber_Ore = SF::Sprite.new(BLUE_AMBER_TEXTURE); Blue_Amber_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
   Blue_Amber_Ore.position = SF.vector2(-2400, 702)
+ #'''''''''''''''''''''''''''''''''''''''''''''''''''''Blue Spinel'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+  BLUE_SPINEL_TEXTURE = SF::Texture.from_file("graphics/minerals/Blue_Spinel.png")
+  Blue_Spinel_Ore = SF::Sprite.new(BLUE_SPINEL_TEXTURE); Blue_Spinel_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
+  Blue_Spinel_Ore.position = SF.vector2(-2600, 702)
 #______________________________________________________________________________________________________________________________________
 Testing_Text = SF::Text.new; Testing_Text.font = FONT_PIXEL; 
 Testing_Text.character_size = 20; Testing_Text.color = SF::Color::White; Testing_Text.position = SF.vector2(1800, 652)
