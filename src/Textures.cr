@@ -480,9 +480,12 @@
     #'''''''''''''''''''''''''''''''''''''''''''''''''''''Sodalite'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      SODALITE_INVENTORY_ORE_TEXTURE = SF::Texture.from_file("graphics/minerals/Sodalite_Inventory.png")
      Sodalite_Inventory_Ore = SF::Sprite.new(SODALITE_INVENTORY_ORE_TEXTURE) 
-    #'''''''''''''''''''''''''''''''''''''''''''''''''''''Sodalite'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    #'''''''''''''''''''''''''''''''''''''''''''''''''''''Kyanite'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      KYANITE_INVENTORY_ORE_TEXTURE = SF::Texture.from_file("graphics/minerals/Kyanite_Inventory.png")
      Kyanite_Inventory_Ore = SF::Sprite.new(KYANITE_INVENTORY_ORE_TEXTURE) 
+    #'''''''''''''''''''''''''''''''''''''''''''''''''''''Kyanite'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     SUNSTONE_INVENTORY_ORE_TEXTURE = SF::Texture.from_file("graphics/minerals/Sunstone_Inventory.png")
+     Sunstone_Inventory_Ore = SF::Sprite.new(SUNSTONE_INVENTORY_ORE_TEXTURE) 
 #----------------------------------------------------------------------------------------------------------------------------------- 
 #                                                    Character Model
 #-----------------------------------------------------------------------------------------------------------------------------------
@@ -1987,6 +1990,10 @@
   KYANITE_TEXTURE = SF::Texture.from_file("graphics/minerals/Kyanite.png")
   Kyanite_Ore = SF::Sprite.new(KYANITE_TEXTURE); Kyanite_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
   Kyanite_Ore.position = SF.vector2(-1800, 702)
+ #''''''''''''''''''''''''''''''''''''''''''''''''''''''Sunstone'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+  SUNSTONE_TEXTURE = SF::Texture.from_file("graphics/minerals/Sunstone.png")
+  Sunstone_Ore = SF::Sprite.new(SUNSTONE_TEXTURE); Sunstone_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
+  Sunstone_Ore.position = SF.vector2(-2000, 702)
 #______________________________________________________________________________________________________________________________________
 Testing_Text = SF::Text.new; Testing_Text.font = FONT_PIXEL; 
 Testing_Text.character_size = 20; Testing_Text.color = SF::Color::White; Testing_Text.position = SF.vector2(1800, 652)
