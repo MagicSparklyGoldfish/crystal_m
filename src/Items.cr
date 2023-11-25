@@ -610,9 +610,12 @@ module Etc
     #--------------------------------------------------------------Sunstone--------------------------------------------------------------------------------- 
      @@sunstone = Inventory_Ore.new("Sunstone", 31, Sunstone_Inventory_Ore, 1, "orange", "fire", "LUK+", 70)
      Ore_Array.push(@@sunstone)
-    #--------------------------------------------------------------Sunstone--------------------------------------------------------------------------------- 
+    #-------------------------------------------------------------Bony Amber-------------------------------------------------------------------------------- 
      @@bony_amber = Inventory_Ore.new("Bony Amber", 32, Bony_Amber_Inventory_Ore, 1, "orange", "fire", "passive_hp_regen", 70)
      Ore_Array.push(@@bony_amber)
+    #-------------------------------------------------------------Bony Amber-------------------------------------------------------------------------------- 
+     @@blue_amber = Inventory_Ore.new("Blue Amber", 33, Blue_Amber_Inventory_Ore, 1, "blue", "fire", "passive_mp_regen", 70)
+     Ore_Array.push(@@blue_amber)
    #________________________________________________________________________________________________________________________________________________________
   end
 end 
@@ -624,14 +627,14 @@ module Harvestables
     Test_Ore_Array = [@@bloodstone_01, @@bloodstone_02, @@bloodstone_03, @@moss_agate_01, @@amber01, @@wavellite01,  @@topaz01, @@amethyst01,
     @@smokey_quartz01, @@sapphire01, @@black_opal01, @@ajoite01, @@rhodolite01, @@chalcanthite01, @@flourite01, @@amorite01, @@lapis_lazuli01,
     @@moonstone01, @@blue_calcite01, @@hiddenite01, @@ofretite01, @@holley_blue_agate01, @@ametrine01, @@hemimorphite01, @@tiffany_stone01,
-    @@azurite01, @@howlite01, @@angelite01, @@blue_lace_agate01, @@iolite01, @@sodalite01, @@kyanite01, @@sunstone01, @@bony_amber01]
+    @@azurite01, @@howlite01, @@angelite01, @@blue_lace_agate01, @@iolite01, @@sodalite01, @@kyanite01, @@sunstone01, @@bony_amber01, @@blue_amber01]
 
     Test_Ore_Sprite_Array = [@@bloodstone_01.sprite, @@bloodstone_02.sprite, @@bloodstone_03.sprite, @@moss_agate_01.sprite, @@amber01.sprite, 
     @@wavellite01.sprite,  @@topaz01.sprite, @@amethyst01.sprite, @@smokey_quartz01.sprite, @@sapphire01.sprite, @@black_opal01.sprite,
     @@ajoite01.sprite, @@rhodolite01.sprite, @@chalcanthite01.sprite, @@flourite01.sprite, @@amorite01.sprite, @@lapis_lazuli01.sprite,
     @@moonstone01.sprite, @@blue_calcite01.sprite, @@hiddenite01.sprite, @@ofretite01.sprite, @@holley_blue_agate01.sprite, @@ametrine01.sprite,
     @@hemimorphite01.sprite, @@tiffany_stone01.sprite, @@azurite01.sprite, @@howlite01.sprite, @@angelite01.sprite, @@blue_lace_agate01.sprite,
-    @@iolite01.sprite, @@sodalite01.sprite, @@kyanite01.sprite, @@sunstone01.sprite, @@bony_amber01.sprite]
+    @@iolite01.sprite, @@sodalite01.sprite, @@kyanite01.sprite, @@sunstone01.sprite, @@bony_amber01.sprite, @@blue_amber01.sprite]
    #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
    #+                                                              Variables                                                                               +
    #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -841,7 +844,7 @@ module Harvestables
       window.draw(@@holley_blue_agate01.sprite); window.draw(@@ametrine01.sprite); window.draw(@@hemimorphite01.sprite); window.draw(@@tiffany_stone01.sprite);
       window.draw(@@azurite01.sprite); window.draw(@@howlite01.sprite); window.draw(@@angelite01.sprite); window.draw(@@blue_lace_agate01.sprite)
       window.draw(@@iolite01.sprite); window.draw(@@sodalite01.sprite); window.draw(@@kyanite01.sprite); window.draw(@@sunstone01.sprite) 
-      window.draw(@@bony_amber01.sprite)
+      window.draw(@@bony_amber01.sprite); window.draw(@@blue_amber01.sprite)
     end
    #________________________________________________________________________________________________________________________________________________________
    #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1099,6 +1102,14 @@ module Harvestables
     #........................................................................................................................................................
     #..................................................................Bony Amber............................................................................
      @@bony_amber01 = Ore.new("Bony Amber", 177, "orange", 3, 250, "bony amber", Bony_Amber_Ore.dup, false, 250)
+     @@bony_amber02 = Ore.new("Bony Amber", 178, "orange", 3, 250, "bony amber", Bony_Amber_Ore.dup, false, 250)
+     @@bony_amber03 = Ore.new("Bony Amber", 179, "orange", 3, 250, "bony amber", Bony_Amber_Ore.dup, false, 250)
+     @@bony_amber04 = Ore.new("Bony Amber", 180, "orange", 3, 250, "bony amber", Bony_Amber_Ore.dup, false, 250)
+     @@bony_amber05 = Ore.new("Bony Amber", 181, "orange", 3, 250, "bony amber", Bony_Amber_Ore.dup, false, 250)
+     @@bony_amber06 = Ore.new("Bony Amber", 182, "orange", 3, 250, "bony amber", Bony_Amber_Ore.dup, false, 250)
+    #........................................................................................................................................................
+    #..................................................................Bony Amber............................................................................
+     @@blue_amber01 = Ore.new("Blue Amber", 183, "blue", 2, 200, "blue amber", Blue_Amber_Ore.dup, false, 200)
     #........................................................................................................................................................
   end
   class Herbs
