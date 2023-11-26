@@ -2,7 +2,7 @@
   Ground = SF::RectangleShape.new(SF.vector2(10000, 500)); Ground.fill_color = SF.color(0, 255, 100)
   Ground.position = SF.vector2(0, 800)
 
-  Test_Platform_01 = SF::RectangleShape.new(SF.vector2(1000, 100)); Test_Platform_01.fill_color = SF.color(0, 255, 100)
+  Test_Platform_01 = SF::RectangleShape.new(SF.vector2(1000, 5)); Test_Platform_01.fill_color = SF.color(0, 255, 100)
   Test_Platform_01.position = SF.vector2(0, 400)
 #------------------------------------------------------------------------------------------------------------------------------------
 #                                                    Menu Textures
@@ -1869,6 +1869,9 @@
 #--------------------------------------------------------------------------------------------------------------------------------------
   Bounding_Box = SF::RectangleShape.new(SF.vector2(100, 100)); Bounding_Box.fill_color = SF.color(255, 255, 255)
   Bounding_Box.position = SF.vector2(0, 500) 
+
+  Feet_Bounding_Box = SF::RectangleShape.new(SF.vector2(50, 5)); Feet_Bounding_Box.fill_color = SF.color(255, 255, 255, 155)
+  Feet_Bounding_Box.position = SF.vector2(0, 500) 
  #....................................................Player_attack....................................................................
   Player_Attack_Bounding_Box = SF::RectangleShape.new; Player_Attack_Bounding_Box.size = SF.vector2(100, 100)
   Player_Attack_Bounding_Box.fill_color = SF.color(255, 255, 255, 100); 

@@ -474,7 +474,7 @@ extend self
    ore_ground = Ground.dup; Ground.position = SF.vector2(-5000, 800); ore_platform = Ground.dup; ore_platform.scale = SF.vector2(0.5, 0.2)
    ore_platform.position = SF.vector2(-100, 400)
    window.draw(ore_ground); window.draw(@@player_character_rendered_model); window.draw(Test_Teleporter); window.draw(Test_Ladder)
-   window.draw(Test_Platform_01)
+   window.draw(Test_Platform_01); #window.draw(Feet_Bounding_Box)
  end
  def Window_Class.attack_check_test_ore_map
    Harvestables::Ore.harvest(@@attacking)
@@ -2087,7 +2087,8 @@ end; end; end; end; end; end
     def Player_Physics.gravity(@@player_character_rendered_model, window)
      #-------------------------------------------Variables-----------------------------------------------------------------------------+  
       ground_box = Ground.global_bounds; test_platform_box = Test_Platform_01.global_bounds
-      @@player_bounding_box = @@player_character_rendered_model.global_bounds
+      @@player_bounding_box = Feet_Bounding_Box.global_bounds #@@player_character_rendered_model.global_bounds
+      Feet_Bounding_Box.position = @@player_character_rendered_model.position + SF.vector2(25, 120)
      #---------------------------------------------------------------------------------------------------------------------------------+
 
      if @@player_bounding_box.intersects? ground_box
