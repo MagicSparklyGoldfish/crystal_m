@@ -1913,7 +1913,7 @@
  #'''''''''''''''''''''''''''''''''''''''''''''''''''''Moss Agate''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
   MOSS_AGATE_TEXTURE = SF::Texture.from_file("graphics/minerals/Moss_Agate.png")
   Moss_Agate_Ore = SF::Sprite.new(MOSS_AGATE_TEXTURE); Moss_Agate_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
-  Moss_Agate_Ore.position = SF.vector2(500, 702)
+
  #'''''''''''''''''''''''''''''''''''''''''''''''''''''''Amber'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
   AMBER_TEXTURE = SF::Texture.from_file("graphics/minerals/Amber.png")
   Amber_Ore = SF::Sprite.new(AMBER_TEXTURE); Amber_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)

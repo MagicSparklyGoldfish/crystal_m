@@ -410,7 +410,7 @@ extend self
     debug_draw.draw @@space
    end
   def Window_Class.attack_check_test_map
-    Harvestables::Ore.harvest(@@attacking)
+    # Harvestables::Ore.harvest(@@attacking)
     event = "mining_ore"
     this = Bloodstone_Ore.global_bounds
     Window_Class.check_attacking(this, event)
@@ -419,6 +419,7 @@ extend self
     bounding_box1 = @@player_character_rendered_model.global_bounds
     bounding_box2 = Test_Teleporter.global_bounds
     if bounding_box1.intersects? bounding_box2
+      Window_Class.ore_test_initialize
       @@map = "test_ore"
     end
   end
@@ -458,6 +459,9 @@ extend self
     #window.draw(Bloodstone_Ore);
    end
  #---------------------------------------------------------ore test---------------------------------------------------------------------
+  def Window_Class.ore_test_initialize
+    Moss_Agate_Ore.position = SF.vector2(500, 702)
+  end
   def Window_Class.ore_test(window)
    window.clear(SF::Color::Transparent);
    b = @@player_character_rendered_model.position
