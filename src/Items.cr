@@ -790,6 +790,9 @@ module Etc
     #---------------------------------------------------------------Garnet---------------------------------------------------------------------------------- 
      @@garnet = Inventory_Ore.new("Garnet", 37, Garnet_Inventory_Ore, 1, "red", "fire", "HP+", 70)
      Ore_Array.push(@@garnet)
+    #---------------------------------------------------------------Garnet---------------------------------------------------------------------------------- 
+     @@ruby = Inventory_Ore.new("Ruby", 38, Ruby_Inventory_Ore, 1, "red", "fire", "STR+", 70)
+     Ore_Array.push(@@ruby)
    #________________________________________________________________________________________________________________________________________________________
   end
 end 
@@ -802,7 +805,7 @@ module Harvestables
     @@smokey_quartz01, @@sapphire01, @@black_opal01, @@ajoite01, @@rhodolite01, @@chalcanthite01, @@flourite01, @@amorite01, @@lapis_lazuli01,
     @@moonstone01, @@blue_calcite01, @@hiddenite01, @@ofretite01, @@holley_blue_agate01, @@ametrine01, @@hemimorphite01, @@tiffany_stone01,
     @@azurite01, @@howlite01, @@angelite01, @@blue_lace_agate01, @@iolite01, @@sodalite01, @@kyanite01, @@sunstone01, @@bony_amber01, @@blue_amber01,
-    @@blue_spinel01, @@red_spinel01, @@fire_opal01, @@garnet01]
+    @@blue_spinel01, @@red_spinel01, @@fire_opal01, @@garnet01, @@ruby01]
 
     Test_Ore_Sprite_Array = [@@bloodstone_01.sprite, @@bloodstone_02.sprite, @@bloodstone_03.sprite, @@moss_agate_01.sprite, @@amber01.sprite, 
     @@wavellite01.sprite,  @@topaz01.sprite, @@amethyst01.sprite, @@smokey_quartz01.sprite, @@sapphire01.sprite, @@black_opal01.sprite,
@@ -810,7 +813,7 @@ module Harvestables
     @@moonstone01.sprite, @@blue_calcite01.sprite, @@hiddenite01.sprite, @@ofretite01.sprite, @@holley_blue_agate01.sprite, @@ametrine01.sprite,
     @@hemimorphite01.sprite, @@tiffany_stone01.sprite, @@azurite01.sprite, @@howlite01.sprite, @@angelite01.sprite, @@blue_lace_agate01.sprite,
     @@iolite01.sprite, @@sodalite01.sprite, @@kyanite01.sprite, @@sunstone01.sprite, @@bony_amber01.sprite, @@blue_amber01.sprite, @@blue_spinel01.sprite,
-    @@red_spinel01.sprite, @@fire_opal01.sprite, @@garnet01.sprite]
+    @@red_spinel01.sprite, @@fire_opal01.sprite, @@garnet01.sprite, @@ruby01.sprite]
    #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
    #+                                                              Variables                                                                               +
    #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -1021,7 +1024,7 @@ module Harvestables
       window.draw(@@azurite01.sprite); window.draw(@@howlite01.sprite); window.draw(@@angelite01.sprite); window.draw(@@blue_lace_agate01.sprite)
       window.draw(@@iolite01.sprite); window.draw(@@sodalite01.sprite); window.draw(@@kyanite01.sprite); window.draw(@@sunstone01.sprite) 
       window.draw(@@bony_amber01.sprite); window.draw(@@blue_amber01.sprite); window.draw(@@blue_spinel01.sprite); window.draw(@@red_spinel01.sprite)
-      window.draw(@@fire_opal01.sprite); window.draw(@@garnet01.sprite)
+      window.draw(@@fire_opal01.sprite); window.draw(@@garnet01.sprite); window.draw(@@ruby01.sprite)
     end
    #________________________________________________________________________________________________________________________________________________________
    #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1317,8 +1320,20 @@ module Harvestables
      @@fire_opal05 = Ore.new("Fire Opal", 205, "orange", 6, 400, "fire opal", Fire_Opal_Ore.dup, false, 400)
      @@fire_opal06 = Ore.new("Fire Opal", 206, "orange", 6, 400, "fire opal", Fire_Opal_Ore.dup, false, 400)
     #........................................................................................................................................................
-    #...................................................................Fire Opal............................................................................
+    #....................................................................Garnet..............................................................................
      @@garnet01 = Ore.new("Garnet", 207, "red", 7, 450, "garnet", Garnet_Ore.dup, false, 450)
+     @@garnet02 = Ore.new("Garnet", 208, "red", 7, 450, "garnet", Garnet_Ore.dup, false, 450)
+     @@garnet03 = Ore.new("Garnet", 209, "red", 7, 450, "garnet", Garnet_Ore.dup, false, 450)
+     @@garnet04 = Ore.new("Garnet", 210, "red", 7, 450, "garnet", Garnet_Ore.dup, false, 450)
+     @@garnet05 = Ore.new("Garnet", 211, "red", 7, 450, "garnet", Garnet_Ore.dup, false, 450)
+     @@garnet06 = Ore.new("Garnet", 212, "red", 7, 450, "garnet", Garnet_Ore.dup, false, 450)
+    #.....................................................................Ruby...............................................................................
+     @@ruby01 = Ore.new("Ruby", 213, "red", 9, 550, "ruby", Ruby_Ore.dup, false, 550)
+     @@ruby02 = Ore.new("Ruby", 214, "red", 9, 550, "ruby", Ruby_Ore.dup, false, 550)
+     @@ruby03 = Ore.new("Ruby", 215, "red", 9, 550, "ruby", Ruby_Ore.dup, false, 550)
+     @@ruby04 = Ore.new("Ruby", 216, "red", 9, 550, "ruby", Ruby_Ore.dup, false, 550)
+     @@ruby05 = Ore.new("Ruby", 217, "red", 9, 550, "ruby", Ruby_Ore.dup, false, 550)
+     @@ruby06 = Ore.new("Ruby", 218, "red", 9, 550, "ruby", Ruby_Ore.dup, false, 550)
     #........................................................................................................................................................
   end
   class Herbs

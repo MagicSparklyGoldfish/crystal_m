@@ -501,9 +501,12 @@
     #''''''''''''''''''''''''''''''''''''''''''''''''''''Fire Opal''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      FIRE_OPAL_INVENTORY_ORE_TEXTURE = SF::Texture.from_file("graphics/minerals/Fire_Opal_Inventory.png")
      Fire_Opal_Inventory_Ore = SF::Sprite.new(FIRE_OPAL_INVENTORY_ORE_TEXTURE) 
-    #''''''''''''''''''''''''''''''''''''''''''''''''''''Fire Opal''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    #'''''''''''''''''''''''''''''''''''''''''''''''''''''Garnet''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      GARNET_INVENTORY_ORE_TEXTURE = SF::Texture.from_file("graphics/minerals/Garnet_Inventory.png")
      Garnet_Inventory_Ore = SF::Sprite.new(GARNET_INVENTORY_ORE_TEXTURE) 
+    #'''''''''''''''''''''''''''''''''''''''''''''''''''''Garnet''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     RUBY_INVENTORY_ORE_TEXTURE = SF::Texture.from_file("graphics/minerals/Ruby_Inventory.png")
+     Ruby_Inventory_Ore = SF::Sprite.new(RUBY_INVENTORY_ORE_TEXTURE) 
 #----------------------------------------------------------------------------------------------------------------------------------- 
 #                                                    Character Model
 #-----------------------------------------------------------------------------------------------------------------------------------
@@ -1988,19 +1991,19 @@
   HOWLITE_TEXTURE = SF::Texture.from_file("graphics/minerals/Howlite.png")
   Howlite_Ore = SF::Sprite.new(HOWLITE_TEXTURE); Howlite_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
   Howlite_Ore.position = SF.vector2(-800, 702)
- #'''''''''''''''''''''''''''''''''''''''''''''''''''''Angelite'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+ #'''''''''''''''''''''''''''''''''''''''''''''''''''''Angelite''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
   ANGELITE_TEXTURE = SF::Texture.from_file("graphics/minerals/Angelite.png")
   Angelite_Ore = SF::Sprite.new(ANGELITE_TEXTURE); Angelite_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
   Angelite_Ore.position = SF.vector2(-1000, 702)
- #'''''''''''''''''''''''''''''''''''''''''''''''''''Blue Lace Agate''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+ #'''''''''''''''''''''''''''''''''''''''''''''''''''Blue Lace Agate'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
   BLUE_LACE_AGATE_TEXTURE = SF::Texture.from_file("graphics/minerals/Blue_Lace_Agate.png")
   Blue_Lace_Agate_Ore = SF::Sprite.new(BLUE_LACE_AGATE_TEXTURE); Blue_Lace_Agate_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
   Blue_Lace_Agate_Ore.position = SF.vector2(-1200, 702)
- #'''''''''''''''''''''''''''''''''''''''''''''''''''''''Iolite'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+ #'''''''''''''''''''''''''''''''''''''''''''''''''''''''Iolite''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
   IOLITE_TEXTURE = SF::Texture.from_file("graphics/minerals/Iolite.png")
   Iolite_Ore = SF::Sprite.new(IOLITE_TEXTURE); Iolite_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
   Iolite_Ore.position = SF.vector2(-1400, 702)
- #''''''''''''''''''''''''''''''''''''''''''''''''''''''Sodalite''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+ #''''''''''''''''''''''''''''''''''''''''''''''''''''''Sodalite'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
   SODALITE_TEXTURE = SF::Texture.from_file("graphics/minerals/Sodalite.png")
   Sodalite_Ore = SF::Sprite.new(SODALITE_TEXTURE); Sodalite_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
   Sodalite_Ore.position = SF.vector2(-1600, 702)
@@ -2036,6 +2039,10 @@
   GARNET_TEXTURE = SF::Texture.from_file("graphics/minerals/Garnet.png")
   Garnet_Ore = SF::Sprite.new(GARNET_TEXTURE); Garnet_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
   Garnet_Ore.position = SF.vector2(-3200, 702)
+ #''''''''''''''''''''''''''''''''''''''''''''''''''''''Garnet'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+  RUBY_TEXTURE = SF::Texture.from_file("graphics/minerals/Ruby.png")
+  Ruby_Ore = SF::Sprite.new(RUBY_TEXTURE); Ruby_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
+  Ruby_Ore.position = SF.vector2(-3400, 702)
 #______________________________________________________________________________________________________________________________________
 Testing_Text = SF::Text.new; Testing_Text.font = FONT_PIXEL; 
 Testing_Text.character_size = 20; Testing_Text.color = SF::Color::White; Testing_Text.position = SF.vector2(1800, 652)
