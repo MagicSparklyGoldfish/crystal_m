@@ -793,9 +793,12 @@ module Etc
     #----------------------------------------------------------------Ruby----------------------------------------------------------------------------------- 
      @@ruby = Inventory_Ore.new("Ruby", 38, Ruby_Inventory_Ore, 1, "red", "fire", "STR+", 70)
      Ore_Array.push(@@ruby)
-    #----------------------------------------------------------------Ruby----------------------------------------------------------------------------------- 
+    #------------------------------------------------------------Cherry Quartz------------------------------------------------------------------------------- 
      @@cherry_quartz = Inventory_Ore.new("Cherry Quartz", 39, Cherry_Quartz_Inventory_Ore, 1, "red", "fire", "HP+", 70)
      Ore_Array.push(@@cherry_quartz)
+    #------------------------------------------------------------Cherry Quartz------------------------------------------------------------------------------- 
+     @@lemon_quartz = Inventory_Ore.new("Lemon Quartz", 40, Lemon_Quartz_Inventory_Ore, 1, "yellow", "fire", "drop_rate+", 70)
+     Ore_Array.push(@@lemon_quartz)
    #________________________________________________________________________________________________________________________________________________________
   end
 end 
@@ -808,7 +811,7 @@ module Harvestables
     @@smokey_quartz01, @@sapphire01, @@black_opal01, @@ajoite01, @@rhodolite01, @@chalcanthite01, @@flourite01, @@amorite01, @@lapis_lazuli01,
     @@moonstone01, @@blue_calcite01, @@hiddenite01, @@ofretite01, @@holley_blue_agate01, @@ametrine01, @@hemimorphite01, @@tiffany_stone01,
     @@azurite01, @@howlite01, @@angelite01, @@blue_lace_agate01, @@iolite01, @@sodalite01, @@kyanite01, @@sunstone01, @@bony_amber01, @@blue_amber01,
-    @@blue_spinel01, @@red_spinel01, @@fire_opal01, @@garnet01, @@ruby01, @@cherry_quartz01]
+    @@blue_spinel01, @@red_spinel01, @@fire_opal01, @@garnet01, @@ruby01, @@cherry_quartz01, @@lemon_quartz01]
 
     Test_Ore_Sprite_Array = [@@bloodstone_01.sprite, @@bloodstone_02.sprite, @@bloodstone_03.sprite, @@moss_agate_01.sprite, @@amber01.sprite, 
     @@wavellite01.sprite,  @@topaz01.sprite, @@amethyst01.sprite, @@smokey_quartz01.sprite, @@sapphire01.sprite, @@black_opal01.sprite,
@@ -816,7 +819,7 @@ module Harvestables
     @@moonstone01.sprite, @@blue_calcite01.sprite, @@hiddenite01.sprite, @@ofretite01.sprite, @@holley_blue_agate01.sprite, @@ametrine01.sprite,
     @@hemimorphite01.sprite, @@tiffany_stone01.sprite, @@azurite01.sprite, @@howlite01.sprite, @@angelite01.sprite, @@blue_lace_agate01.sprite,
     @@iolite01.sprite, @@sodalite01.sprite, @@kyanite01.sprite, @@sunstone01.sprite, @@bony_amber01.sprite, @@blue_amber01.sprite, @@blue_spinel01.sprite,
-    @@red_spinel01.sprite, @@fire_opal01.sprite, @@garnet01.sprite, @@ruby01.sprite, @@cherry_quartz01.sprite]
+    @@red_spinel01.sprite, @@fire_opal01.sprite, @@garnet01.sprite, @@ruby01.sprite, @@cherry_quartz01.sprite, @@lemon_quartz01.sprite]
    #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
    #+                                                              Variables                                                                               +
    #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -1028,6 +1031,7 @@ module Harvestables
       window.draw(@@iolite01.sprite); window.draw(@@sodalite01.sprite); window.draw(@@kyanite01.sprite); window.draw(@@sunstone01.sprite) 
       window.draw(@@bony_amber01.sprite); window.draw(@@blue_amber01.sprite); window.draw(@@blue_spinel01.sprite); window.draw(@@red_spinel01.sprite)
       window.draw(@@fire_opal01.sprite); window.draw(@@garnet01.sprite); window.draw(@@ruby01.sprite); window.draw(@@cherry_quartz01.sprite)
+      window.draw(@@lemon_quartz01.sprite)
     end
    #________________________________________________________________________________________________________________________________________________________
    #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1340,13 +1344,15 @@ module Harvestables
      @@ruby06 = Ore.new("Ruby", 218, "red", 9, 550, "ruby", Ruby_Ore.dup, false, 550)
     #........................................................................................................................................................
     #................................................................Cherry Quartz...........................................................................
-    #.....................................................................Ruby...............................................................................
      @@cherry_quartz01 = Ore.new("Cherry Quartz", 219, "red", 7, 450, "cherry quartz", Cherry_Quartz_Ore.dup, false, 450)
      @@cherry_quartz02 = Ore.new("Cherry Quartz", 220, "red", 7, 450, "cherry quartz", Cherry_Quartz_Ore.dup, false, 450)
      @@cherry_quartz03 = Ore.new("Cherry Quartz", 221, "red", 7, 450, "cherry quartz", Cherry_Quartz_Ore.dup, false, 450)
      @@cherry_quartz04 = Ore.new("Cherry Quartz", 222, "red", 7, 450, "cherry quartz", Cherry_Quartz_Ore.dup, false, 450)
      @@cherry_quartz05 = Ore.new("Cherry Quartz", 223, "red", 7, 450, "cherry quartz", Cherry_Quartz_Ore.dup, false, 450)
      @@cherry_quartz06 = Ore.new("Cherry Quartz", 224, "red", 7, 450, "cherry quartz", Cherry_Quartz_Ore.dup, false, 450)
+    #........................................................................................................................................................
+    #................................................................Lemon Quartz...........................................................................
+     @@lemon_quartz01 = Ore.new("Lemon Quartz", 225, "yellow", 7, 450, "lemon quartz", Lemon_Quartz_Ore.dup, false, 450)
     #........................................................................................................................................................
   end
   class Herbs

@@ -510,6 +510,9 @@
     #''''''''''''''''''''''''''''''''''''''''''''''''''Cherry Quartz'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      CHERRY_QUARTZ_INVENTORY_ORE_TEXTURE = SF::Texture.from_file("graphics/minerals/Cherry_Quartz_Inventory.png")
      Cherry_Quartz_Inventory_Ore = SF::Sprite.new(CHERRY_QUARTZ_INVENTORY_ORE_TEXTURE) 
+    #''''''''''''''''''''''''''''''''''''''''''''''''''Lemon Quartz'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     LEMON_QUARTZ_INVENTORY_ORE_TEXTURE = SF::Texture.from_file("graphics/minerals/Lemon_Quartz_Inventory.png")
+     Lemon_Quartz_Inventory_Ore = SF::Sprite.new(LEMON_QUARTZ_INVENTORY_ORE_TEXTURE) 
 #----------------------------------------------------------------------------------------------------------------------------------- 
 #                                                    Character Model
 #-----------------------------------------------------------------------------------------------------------------------------------
@@ -2050,6 +2053,10 @@
   CHERRY_QUARTZ_TEXTURE = SF::Texture.from_file("graphics/minerals/Cherry_Quartz.png")
   Cherry_Quartz_Ore = SF::Sprite.new(CHERRY_QUARTZ_TEXTURE); Cherry_Quartz_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
   Cherry_Quartz_Ore.position = SF.vector2(-3600, 702)
+ #'''''''''''''''''''''''''''''''''''''''''''''''''''Lemon Quartz'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+  LEMON_QUARTZ_TEXTURE = SF::Texture.from_file("graphics/minerals/Lemon_Quartz.png")
+  Lemon_Quartz_Ore = SF::Sprite.new(LEMON_QUARTZ_TEXTURE); Lemon_Quartz_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
+  Lemon_Quartz_Ore.position = SF.vector2(-3800, 702)
 #______________________________________________________________________________________________________________________________________
 Testing_Text = SF::Text.new; Testing_Text.font = FONT_PIXEL; 
 Testing_Text.character_size = 20; Testing_Text.color = SF::Color::White; Testing_Text.position = SF.vector2(1800, 652)
