@@ -439,7 +439,7 @@ extend self
     end
     if @@space.contains?(@@pc_body) == false
       @@player_character_rendered_model.texture_rect = SF.int_rect(96, 128, 96, 128)
-      @@player_character_rendered_model.position = SF.vector2(700, 300)
+      @@player_character_rendered_model.position = SF.vector2(100, 650)
       @@pc_body.position = CP.v(-60, -40)
       @@space.add(@@pc_body)
     end
