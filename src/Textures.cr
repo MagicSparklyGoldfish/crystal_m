@@ -501,6 +501,9 @@
     #''''''''''''''''''''''''''''''''''''''''''''''''''''Fire Opal''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      FIRE_OPAL_INVENTORY_ORE_TEXTURE = SF::Texture.from_file("graphics/minerals/Fire_Opal_Inventory.png")
      Fire_Opal_Inventory_Ore = SF::Sprite.new(FIRE_OPAL_INVENTORY_ORE_TEXTURE) 
+    #''''''''''''''''''''''''''''''''''''''''''''''''''''Fire Opal''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     GARNET_INVENTORY_ORE_TEXTURE = SF::Texture.from_file("graphics/minerals/Garnet_Inventory.png")
+     Garnet_Inventory_Ore = SF::Sprite.new(GARNET_INVENTORY_ORE_TEXTURE) 
 #----------------------------------------------------------------------------------------------------------------------------------- 
 #                                                    Character Model
 #-----------------------------------------------------------------------------------------------------------------------------------
@@ -2025,10 +2028,14 @@
   RED_SPINEL_TEXTURE = SF::Texture.from_file("graphics/minerals/Red_Spinel.png")
   Red_Spinel_Ore = SF::Sprite.new(RED_SPINEL_TEXTURE); Red_Spinel_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
   Red_Spinel_Ore.position = SF.vector2(-2800, 702)
- #'''''''''''''''''''''''''''''''''''''''''''''''''''''Fire Opal''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+ #'''''''''''''''''''''''''''''''''''''''''''''''''''''Fire Opal'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
   FIRE_OPAL_TEXTURE = SF::Texture.from_file("graphics/minerals/Fire_Opal.png")
   Fire_Opal_Ore = SF::Sprite.new(FIRE_OPAL_TEXTURE); Fire_Opal_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
   Fire_Opal_Ore.position = SF.vector2(-3000, 702)
+ #''''''''''''''''''''''''''''''''''''''''''''''''''''''Garnet'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+  GARNET_TEXTURE = SF::Texture.from_file("graphics/minerals/Garnet.png")
+  Garnet_Ore = SF::Sprite.new(GARNET_TEXTURE); Garnet_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
+  Garnet_Ore.position = SF.vector2(-3200, 702)
 #______________________________________________________________________________________________________________________________________
 Testing_Text = SF::Text.new; Testing_Text.font = FONT_PIXEL; 
 Testing_Text.character_size = 20; Testing_Text.color = SF::Color::White; Testing_Text.position = SF.vector2(1800, 652)
