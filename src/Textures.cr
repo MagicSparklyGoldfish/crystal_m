@@ -498,6 +498,9 @@
     #''''''''''''''''''''''''''''''''''''''''''''''''''''Red Spinel'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      RED_SPINEL_INVENTORY_ORE_TEXTURE = SF::Texture.from_file("graphics/minerals/Red_Spinel_Inventory.png")
      Red_Spinel_Inventory_Ore = SF::Sprite.new(RED_SPINEL_INVENTORY_ORE_TEXTURE) 
+    #''''''''''''''''''''''''''''''''''''''''''''''''''''Fire Opal''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     FIRE_OPAL_INVENTORY_ORE_TEXTURE = SF::Texture.from_file("graphics/minerals/Fire_Opal_Inventory.png")
+     Fire_Opal_Inventory_Ore = SF::Sprite.new(FIRE_OPAL_INVENTORY_ORE_TEXTURE) 
 #----------------------------------------------------------------------------------------------------------------------------------- 
 #                                                    Character Model
 #-----------------------------------------------------------------------------------------------------------------------------------
@@ -2018,10 +2021,14 @@
   BLUE_SPINEL_TEXTURE = SF::Texture.from_file("graphics/minerals/Blue_Spinel.png")
   Blue_Spinel_Ore = SF::Sprite.new(BLUE_SPINEL_TEXTURE); Blue_Spinel_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
   Blue_Spinel_Ore.position = SF.vector2(-2600, 702)
- #'''''''''''''''''''''''''''''''''''''''''''''''''''''Blue Spinel'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+ #'''''''''''''''''''''''''''''''''''''''''''''''''''''Red Spinel''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
   RED_SPINEL_TEXTURE = SF::Texture.from_file("graphics/minerals/Red_Spinel.png")
   Red_Spinel_Ore = SF::Sprite.new(RED_SPINEL_TEXTURE); Red_Spinel_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
   Red_Spinel_Ore.position = SF.vector2(-2800, 702)
+ #'''''''''''''''''''''''''''''''''''''''''''''''''''''Fire Opal''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+  FIRE_OPAL_TEXTURE = SF::Texture.from_file("graphics/minerals/Fire_Opal.png")
+  Fire_Opal_Ore = SF::Sprite.new(FIRE_OPAL_TEXTURE); Fire_Opal_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
+  Fire_Opal_Ore.position = SF.vector2(-3000, 702)
 #______________________________________________________________________________________________________________________________________
 Testing_Text = SF::Text.new; Testing_Text.font = FONT_PIXEL; 
 Testing_Text.character_size = 20; Testing_Text.color = SF::Color::White; Testing_Text.position = SF.vector2(1800, 652)

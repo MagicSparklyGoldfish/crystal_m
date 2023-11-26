@@ -781,9 +781,12 @@ module Etc
     #-------------------------------------------------------------Blue Spinel-------------------------------------------------------------------------------- 
      @@blue_spinel = Inventory_Ore.new("Blue Spinel", 34, Blue_Spinel_Inventory_Ore, 1, "blue", "fire", "DEX+", 70)
      Ore_Array.push(@@blue_spinel)
-    #-------------------------------------------------------------Blue Spinel-------------------------------------------------------------------------------- 
+    #-------------------------------------------------------------Red Spinel-------------------------------------------------------------------------------- 
      @@red_spinel = Inventory_Ore.new("Red Spinel", 35, Red_Spinel_Inventory_Ore, 1, "red", "fire", "STR+", 70)
      Ore_Array.push(@@red_spinel)
+    #-------------------------------------------------------------Fire Opal-------------------------------------------------------------------------------- 
+     @@fire_opal = Inventory_Ore.new("Fire Opal", 36, Fire_Opal_Inventory_Ore, 1, "orange", "fire", "HP+", 70)
+     Ore_Array.push(@@fire_opal)
    #________________________________________________________________________________________________________________________________________________________
   end
 end 
@@ -796,7 +799,7 @@ module Harvestables
     @@smokey_quartz01, @@sapphire01, @@black_opal01, @@ajoite01, @@rhodolite01, @@chalcanthite01, @@flourite01, @@amorite01, @@lapis_lazuli01,
     @@moonstone01, @@blue_calcite01, @@hiddenite01, @@ofretite01, @@holley_blue_agate01, @@ametrine01, @@hemimorphite01, @@tiffany_stone01,
     @@azurite01, @@howlite01, @@angelite01, @@blue_lace_agate01, @@iolite01, @@sodalite01, @@kyanite01, @@sunstone01, @@bony_amber01, @@blue_amber01,
-    @@blue_spinel01, @@red_spinel01]
+    @@blue_spinel01, @@red_spinel01, @@fire_opal01]
 
     Test_Ore_Sprite_Array = [@@bloodstone_01.sprite, @@bloodstone_02.sprite, @@bloodstone_03.sprite, @@moss_agate_01.sprite, @@amber01.sprite, 
     @@wavellite01.sprite,  @@topaz01.sprite, @@amethyst01.sprite, @@smokey_quartz01.sprite, @@sapphire01.sprite, @@black_opal01.sprite,
@@ -804,7 +807,7 @@ module Harvestables
     @@moonstone01.sprite, @@blue_calcite01.sprite, @@hiddenite01.sprite, @@ofretite01.sprite, @@holley_blue_agate01.sprite, @@ametrine01.sprite,
     @@hemimorphite01.sprite, @@tiffany_stone01.sprite, @@azurite01.sprite, @@howlite01.sprite, @@angelite01.sprite, @@blue_lace_agate01.sprite,
     @@iolite01.sprite, @@sodalite01.sprite, @@kyanite01.sprite, @@sunstone01.sprite, @@bony_amber01.sprite, @@blue_amber01.sprite, @@blue_spinel01.sprite,
-    @@red_spinel01.sprite]
+    @@red_spinel01.sprite, @@fire_opal01.sprite]
    #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
    #+                                                              Variables                                                                               +
    #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -1015,6 +1018,7 @@ module Harvestables
       window.draw(@@azurite01.sprite); window.draw(@@howlite01.sprite); window.draw(@@angelite01.sprite); window.draw(@@blue_lace_agate01.sprite)
       window.draw(@@iolite01.sprite); window.draw(@@sodalite01.sprite); window.draw(@@kyanite01.sprite); window.draw(@@sunstone01.sprite) 
       window.draw(@@bony_amber01.sprite); window.draw(@@blue_amber01.sprite); window.draw(@@blue_spinel01.sprite); window.draw(@@red_spinel01.sprite)
+      window.draw(@@fire_opal01.sprite)
     end
    #________________________________________________________________________________________________________________________________________________________
    #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1286,7 +1290,7 @@ module Harvestables
      @@blue_amber05 = Ore.new("Blue Amber", 187, "blue", 2, 200, "blue amber", Blue_Amber_Ore.dup, false, 200)
      @@blue_amber06 = Ore.new("Blue Amber", 188, "blue", 2, 200, "blue amber", Blue_Amber_Ore.dup, false, 200)
     #........................................................................................................................................................
-    #..................................................................Blue Amber............................................................................
+    #..................................................................Blue Spinel...........................................................................
      @@blue_spinel01 = Ore.new("Blue Spinel", 189, "blue", 8, 500, "blue spinel", Blue_Spinel_Ore.dup, false, 500)
      @@blue_spinel02 = Ore.new("Blue Spinel", 190, "blue", 8, 500, "blue spinel", Blue_Spinel_Ore.dup, false, 500)
      @@blue_spinel03 = Ore.new("Blue Spinel", 191, "blue", 8, 500, "blue spinel", Blue_Spinel_Ore.dup, false, 500)
@@ -1294,8 +1298,16 @@ module Harvestables
      @@blue_spinel05 = Ore.new("Blue Spinel", 193, "blue", 8, 500, "blue spinel", Blue_Spinel_Ore.dup, false, 500)
      @@blue_spinel06 = Ore.new("Blue Spinel", 194, "blue", 8, 500, "blue spinel", Blue_Spinel_Ore.dup, false, 500)
     #........................................................................................................................................................
-    #..................................................................Blue Amber............................................................................
+    #..................................................................Red Spinel............................................................................
      @@red_spinel01 = Ore.new("Red Spinel", 195, "red", 8, 500, "red spinel", Red_Spinel_Ore.dup, false, 500)
+     @@red_spinel02 = Ore.new("Red Spinel", 196, "red", 8, 500, "red spinel", Red_Spinel_Ore.dup, false, 500)
+     @@red_spinel03 = Ore.new("Red Spinel", 197, "red", 8, 500, "red spinel", Red_Spinel_Ore.dup, false, 500)
+     @@red_spinel04 = Ore.new("Red Spinel", 198, "red", 8, 500, "red spinel", Red_Spinel_Ore.dup, false, 500)
+     @@red_spinel05 = Ore.new("Red Spinel", 199, "red", 8, 500, "red spinel", Red_Spinel_Ore.dup, false, 500)
+     @@red_spinel06 = Ore.new("Red Spinel", 200, "red", 8, 500, "red spinel", Red_Spinel_Ore.dup, false, 500)
+    #........................................................................................................................................................
+    #..................................................................Red Spinel............................................................................
+     @@fire_opal01 = Ore.new("Fire Opal", 201, "orange", 6, 400, "fire opal", Fire_Opal_Ore.dup, false, 400)
     #........................................................................................................................................................
   end
   class Herbs
