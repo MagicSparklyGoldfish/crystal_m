@@ -471,8 +471,10 @@ extend self
     end
    bounding_box1 = @@player_character_rendered_model.global_bounds
    bounding_box2 = @@player_character_rendered_model.global_bounds
-   ore_ground = Ground.dup; Ground.position = SF.vector2(-5000, 800)
-   window.draw(ore_ground); window.draw(@@player_character_rendered_model); window.draw(Test_Teleporter); 
+   ore_ground = Ground.dup; Ground.position = SF.vector2(-5000, 800); ore_platform = Ground.dup; ore_platform.scale = SF.vector2(0.5, 0.2)
+   ore_platform.position = SF.vector2(-100, 400)
+   window.draw(ore_ground); window.draw(@@player_character_rendered_model); window.draw(Test_Teleporter); window.draw(Test_Ladder)
+   window.draw(Test_Platform_01)
  end
  def Window_Class.attack_check_test_ore_map
    Harvestables::Ore.harvest(@@attacking)
@@ -487,6 +489,12 @@ extend self
     @@map = "test"
   end
 end
+def Window_Class.ladder_test_ore_map
+  bounding_box1 = @@player_character_rendered_model.global_bounds
+  bounding_box2 = Test_Ladder.global_bounds
+  if bounding_box1.intersects? bounding_box2
+    @@player_character_rendered_model.position -= SF.vector2(0, 40)
+  end; end
 #=======================================================================================================================================+
 #---------------------------------------------------------------------------------------------------------------------------------------+
 #==========================================================Animations===================================================================+
@@ -1679,6 +1687,7 @@ def Window_Class.hud_keypresses(window)
         @@attacking = true
         Window_Class.attack_swing_right(@@player_character_rendered_model, window)
       end; end
+
       when SF::Keyboard::Space
         @@attacking = false
         case @@map
@@ -1686,7 +1695,7 @@ def Window_Class.hud_keypresses(window)
           NPCS::Test_Npcs.click(window, @@player_character_rendered_model)
           Window_Class.space_test_map
         when "test_ore"
-          Window_Class.teleport_test_ore_map
+          Window_Class.teleport_test_ore_map; Window_Class.ladder_test_ore_map
         end
 
       when SF::Keyboard::D
@@ -2077,7 +2086,7 @@ end; end; end; end; end; end
    #=============================================Gravity==============================================================================+
     def Player_Physics.gravity(@@player_character_rendered_model, window)
      #-------------------------------------------Variables-----------------------------------------------------------------------------+  
-      ground_box = Ground.global_bounds
+      ground_box = Ground.global_bounds; test_platform_box = Test_Platform_01.global_bounds
       @@player_bounding_box = @@player_character_rendered_model.global_bounds
      #---------------------------------------------------------------------------------------------------------------------------------+
 
@@ -2085,14 +2094,11 @@ end; end; end; end; end; end
        @@player_jumped = false
        @@is_player_airborne = false
        @@fallrate = 0
-      
-        if SF::Keyboard.key_pressed?(SF::Keyboard::A) #-------------------turbo mode motherfucker! So much glitch, so little time!
-          #Player_Physics.wasd_left(@@player_character_rendered_model)
-        end
-        if SF::Keyboard.key_pressed?(SF::Keyboard::D)
-         SF::Event::KeyPressed
-          #Player_Physics.wasd_right(@@player_character_rendered_model)
-        end
+     else if @@player_bounding_box.intersects? test_platform_box
+       @@player_jumped = false
+       @@is_player_airborne = false
+       @@fallrate = 0
+
      else
        @@is_player_airborne = true
    
@@ -2107,7 +2113,7 @@ end; end; end; end; end; end
          @@fallrate = 0  
        else
          @@fallrate += 1
-       end; end
+       end; end; end
       end
    #==================================================================================================================================+
 
@@ -4125,3 +4131,11 @@ class Face
 
 # john = Person.new "John"
 # john.name
+
+# if SF::Keyboard.key_pressed?(SF::Keyboard::A) #-------------------turbo mode motherfucker! So much glitch, so little time!
+#   #Player_Physics.wasd_left(@@player_character_rendered_model)
+# end
+# if SF::Keyboard.key_pressed?(SF::Keyboard::D)
+#  SF::Event::KeyPressed
+#   #Player_Physics.wasd_right(@@player_character_rendered_model)
+# end
