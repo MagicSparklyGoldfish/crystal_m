@@ -504,9 +504,12 @@
     #'''''''''''''''''''''''''''''''''''''''''''''''''''''Garnet''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      GARNET_INVENTORY_ORE_TEXTURE = SF::Texture.from_file("graphics/minerals/Garnet_Inventory.png")
      Garnet_Inventory_Ore = SF::Sprite.new(GARNET_INVENTORY_ORE_TEXTURE) 
-    #'''''''''''''''''''''''''''''''''''''''''''''''''''''Garnet''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    #''''''''''''''''''''''''''''''''''''''''''''''''''''''Ruby'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      RUBY_INVENTORY_ORE_TEXTURE = SF::Texture.from_file("graphics/minerals/Ruby_Inventory.png")
      Ruby_Inventory_Ore = SF::Sprite.new(RUBY_INVENTORY_ORE_TEXTURE) 
+    #''''''''''''''''''''''''''''''''''''''''''''''''''Cherry Quartz'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     CHERRY_QUARTZ_INVENTORY_ORE_TEXTURE = SF::Texture.from_file("graphics/minerals/Cherry_Quartz_Inventory.png")
+     Cherry_Quartz_Inventory_Ore = SF::Sprite.new(CHERRY_QUARTZ_INVENTORY_ORE_TEXTURE) 
 #----------------------------------------------------------------------------------------------------------------------------------- 
 #                                                    Character Model
 #-----------------------------------------------------------------------------------------------------------------------------------
@@ -2039,10 +2042,14 @@
   GARNET_TEXTURE = SF::Texture.from_file("graphics/minerals/Garnet.png")
   Garnet_Ore = SF::Sprite.new(GARNET_TEXTURE); Garnet_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
   Garnet_Ore.position = SF.vector2(-3200, 702)
- #''''''''''''''''''''''''''''''''''''''''''''''''''''''Garnet'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+ #'''''''''''''''''''''''''''''''''''''''''''''''''''''''Ruby''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
   RUBY_TEXTURE = SF::Texture.from_file("graphics/minerals/Ruby.png")
   Ruby_Ore = SF::Sprite.new(RUBY_TEXTURE); Ruby_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
   Ruby_Ore.position = SF.vector2(-3400, 702)
+ #'''''''''''''''''''''''''''''''''''''''''''''''''''Cherry Quartz'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+  CHERRY_QUARTZ_TEXTURE = SF::Texture.from_file("graphics/minerals/Cherry_Quartz.png")
+  Cherry_Quartz_Ore = SF::Sprite.new(CHERRY_QUARTZ_TEXTURE); Cherry_Quartz_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
+  Cherry_Quartz_Ore.position = SF.vector2(-3600, 702)
 #______________________________________________________________________________________________________________________________________
 Testing_Text = SF::Text.new; Testing_Text.font = FONT_PIXEL; 
 Testing_Text.character_size = 20; Testing_Text.color = SF::Color::White; Testing_Text.position = SF.vector2(1800, 652)
