@@ -802,9 +802,12 @@ module Etc
     #--------------------------------------------------------------Turquoise-------------------------------------------------------------------------------- 
      @@turquoise = Inventory_Ore.new("Turquoise", 41, Turquoise_Inventory_Ore, 1, "green", "fire", "LUK+", 70)
      Ore_Array.push(@@turquoise)
-    #--------------------------------------------------------------Turquoise-------------------------------------------------------------------------------- 
+    #-------------------------------------------------------------Tiger's Eye------------------------------------------------------------------------------- 
      @@tigers_eye = Inventory_Ore.new("Tiger's Eye", 42, Tigers_Eye_Inventory_Ore, 1, "orange", "fire", "DEX+", 70)
      Ore_Array.push(@@tigers_eye)
+    #-------------------------------------------------------------Orange Calcite------------------------------------------------------------------------------- 
+     @@orange_calcite = Inventory_Ore.new("Orange Calcite", 43, Orange_Calcite_Inventory_Ore, 1, "orange", "fire", "HP+", 70)
+     Ore_Array.push(@@orange_calcite)
    #________________________________________________________________________________________________________________________________________________________
   end
 end 
@@ -817,7 +820,8 @@ module Harvestables
     @@smokey_quartz01, @@sapphire01, @@black_opal01, @@ajoite01, @@rhodolite01, @@chalcanthite01, @@flourite01, @@amorite01, @@lapis_lazuli01,
     @@moonstone01, @@blue_calcite01, @@hiddenite01, @@ofretite01, @@holley_blue_agate01, @@ametrine01, @@hemimorphite01, @@tiffany_stone01,
     @@azurite01, @@howlite01, @@angelite01, @@blue_lace_agate01, @@iolite01, @@sodalite01, @@kyanite01, @@sunstone01, @@bony_amber01, @@blue_amber01,
-    @@blue_spinel01, @@red_spinel01, @@fire_opal01, @@garnet01, @@ruby01, @@cherry_quartz01, @@lemon_quartz01, @@turquoise01, @@tigers_eye01]
+    @@blue_spinel01, @@red_spinel01, @@fire_opal01, @@garnet01, @@ruby01, @@cherry_quartz01, @@lemon_quartz01, @@turquoise01, @@tigers_eye01,
+    @@orange_calcite01]
 
     Test_Ore_Sprite_Array = [@@bloodstone_01.sprite, @@bloodstone_02.sprite, @@bloodstone_03.sprite, @@moss_agate_01.sprite, @@amber01.sprite, 
     @@wavellite01.sprite,  @@topaz01.sprite, @@amethyst01.sprite, @@smokey_quartz01.sprite, @@sapphire01.sprite, @@black_opal01.sprite,
@@ -826,7 +830,7 @@ module Harvestables
     @@hemimorphite01.sprite, @@tiffany_stone01.sprite, @@azurite01.sprite, @@howlite01.sprite, @@angelite01.sprite, @@blue_lace_agate01.sprite,
     @@iolite01.sprite, @@sodalite01.sprite, @@kyanite01.sprite, @@sunstone01.sprite, @@bony_amber01.sprite, @@blue_amber01.sprite, @@blue_spinel01.sprite,
     @@red_spinel01.sprite, @@fire_opal01.sprite, @@garnet01.sprite, @@ruby01.sprite, @@cherry_quartz01.sprite, @@lemon_quartz01.sprite,
-    @@turquoise01.sprite, @@tigers_eye01.sprite]
+    @@turquoise01.sprite, @@tigers_eye01.sprite, @@orange_calcite01.sprite]
    #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
    #+                                                              Variables                                                                               +
    #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -1037,7 +1041,7 @@ module Harvestables
       window.draw(@@iolite01.sprite); window.draw(@@sodalite01.sprite); window.draw(@@kyanite01.sprite); window.draw(@@sunstone01.sprite) 
       window.draw(@@bony_amber01.sprite); window.draw(@@blue_amber01.sprite); window.draw(@@blue_spinel01.sprite); window.draw(@@red_spinel01.sprite)
       window.draw(@@fire_opal01.sprite); window.draw(@@garnet01.sprite); window.draw(@@ruby01.sprite); window.draw(@@cherry_quartz01.sprite)
-      window.draw(@@lemon_quartz01.sprite); window.draw(@@turquoise01.sprite); window.draw(@@tigers_eye01.sprite)
+      window.draw(@@lemon_quartz01.sprite); window.draw(@@turquoise01.sprite); window.draw(@@tigers_eye01.sprite); window.draw(@@orange_calcite01.sprite)
     end
    #________________________________________________________________________________________________________________________________________________________
    #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1375,6 +1379,14 @@ module Harvestables
     #........................................................................................................................................................
     #.................................................................Tiger's Eye............................................................................
      @@tigers_eye01 = Ore.new("Tiger's Eye", 237, "orange", 7, 450, "tiger's eye", Tigers_Eye_Ore.dup, false, 450)
+     @@tigers_eye02 = Ore.new("Tiger's Eye", 238, "orange", 7, 450, "tiger's eye", Tigers_Eye_Ore.dup, false, 450)
+     @@tigers_eye03 = Ore.new("Tiger's Eye", 239, "orange", 7, 450, "tiger's eye", Tigers_Eye_Ore.dup, false, 450)
+     @@tigers_eye04 = Ore.new("Tiger's Eye", 240, "orange", 7, 450, "tiger's eye", Tigers_Eye_Ore.dup, false, 450)
+     @@tigers_eye05 = Ore.new("Tiger's Eye", 241, "orange", 7, 450, "tiger's eye", Tigers_Eye_Ore.dup, false, 450)
+     @@tigers_eye06 = Ore.new("Tiger's Eye", 242, "orange", 7, 450, "tiger's eye", Tigers_Eye_Ore.dup, false, 450)
+    #........................................................................................................................................................
+    #.................................................................Tiger's Eye............................................................................
+     @@orange_calcite01 = Ore.new("Orange Calcite", 243, "orange", 3, 250, "orange calclite", Orange_Calcite_Ore.dup, false, 250)
     #........................................................................................................................................................
   end
   class Herbs

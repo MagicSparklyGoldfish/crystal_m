@@ -522,6 +522,9 @@
     #'''''''''''''''''''''''''''''''''''''''''''''''''''Tiger's Eye'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      TIGERS_EYE_INVENTORY_ORE_TEXTURE = SF::Texture.from_file("graphics/minerals/Tiger's_Eye_Inventory.png")
      Tigers_Eye_Inventory_Ore = SF::Sprite.new(TIGERS_EYE_INVENTORY_ORE_TEXTURE) 
+    #''''''''''''''''''''''''''''''''''''''''''''''''''Orange Calcite'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     ORANGE_CALCITE_INVENTORY_ORE_TEXTURE = SF::Texture.from_file("graphics/minerals/Orange_Calcite_Inventory.png")
+     Orange_Calcite_Inventory_Ore = SF::Sprite.new(ORANGE_CALCITE_INVENTORY_ORE_TEXTURE) 
 #----------------------------------------------------------------------------------------------------------------------------------- 
 #                                                    Character Model
 #-----------------------------------------------------------------------------------------------------------------------------------
@@ -2072,10 +2075,14 @@
   TURQUOISE_TEXTURE = SF::Texture.from_file("graphics/minerals/Turquoise.png")
   Turquoise_Ore = SF::Sprite.new(TURQUOISE_TEXTURE); Turquoise_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
   Turquoise_Ore.position = SF.vector2(-4000, 702)
- #'''''''''''''''''''''''''''''''''''''''''''''''''''''Turquoise''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+ #''''''''''''''''''''''''''''''''''''''''''''''''''''Tiger's Eye'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
   TIGERS_EYE_TEXTURE = SF::Texture.from_file("graphics/minerals/Tiger's_Eye.png")
   Tigers_Eye_Ore = SF::Sprite.new(TIGERS_EYE_TEXTURE); Tigers_Eye_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
   Tigers_Eye_Ore.position = SF.vector2(-4200, 702)
+ #'''''''''''''''''''''''''''''''''''''''''''''''''''Orange Calcite'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+  ORANGE_CALCITE_TEXTURE = SF::Texture.from_file("graphics/minerals/Orange_Calcite.png")
+  Orange_Calcite_Ore = SF::Sprite.new(ORANGE_CALCITE_TEXTURE); Orange_Calcite_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
+  Orange_Calcite_Ore.position = SF.vector2(-4400, 702)
 #______________________________________________________________________________________________________________________________________
 Testing_Text = SF::Text.new; Testing_Text.font = FONT_PIXEL; 
 Testing_Text.character_size = 20; Testing_Text.color = SF::Color::White; Testing_Text.position = SF.vector2(1800, 652)
