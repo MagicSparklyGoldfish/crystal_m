@@ -543,6 +543,9 @@
     #'''''''''''''''''''''''''''''''''''''''''''''''Bumblebee Jasper''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      BUMBLEBEE_JASPER_INVENTORY_ORE_TEXTURE = SF::Texture.from_file("graphics/minerals/Bumblebee_Jasper_Inventory.png")
      Bumblebee_Jasper_Inventory_Ore = SF::Sprite.new(BUMBLEBEE_JASPER_INVENTORY_ORE_TEXTURE) 
+    #'''''''''''''''''''''''''''''''''''''''''''''''''Blood Jasper''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     BLOOD_JASPER_INVENTORY_ORE_TEXTURE = SF::Texture.from_file("graphics/minerals/Blood_Jasper_Inventory.png")
+     Blood_Jasper_Inventory_Ore = SF::Sprite.new(BLOOD_JASPER_INVENTORY_ORE_TEXTURE) 
 #----------------------------------------------------------------------------------------------------------------------------------- 
 #                                                    Character Model
 #-----------------------------------------------------------------------------------------------------------------------------------
@@ -2125,6 +2128,10 @@
   BUMBLEBEE_JASPER_TEXTURE = SF::Texture.from_file("graphics/minerals/Bumblebee_Jasper.png")
   Bumblebee_Jasper_Ore = SF::Sprite.new(BUMBLEBEE_JASPER_TEXTURE); Bumblebee_Jasper_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
   Bumblebee_Jasper_Ore.position = SF.vector2(650, 302)
+ #'''''''''''''''''''''''''''''''''''''''''''''''''''Blood Jasper''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+  BLOOD_JASPER_TEXTURE = SF::Texture.from_file("graphics/minerals/Blood_Jasper.png")
+  Blood_Jasper_Ore = SF::Sprite.new(BLOOD_JASPER_TEXTURE); Blood_Jasper_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
+  Blood_Jasper_Ore.position = SF.vector2(850, 302)
 #______________________________________________________________________________________________________________________________________
 Testing_Text = SF::Text.new; Testing_Text.font = FONT_PIXEL; 
 Testing_Text.character_size = 20; Testing_Text.color = SF::Color::White; Testing_Text.position = SF.vector2(1800, 652)
