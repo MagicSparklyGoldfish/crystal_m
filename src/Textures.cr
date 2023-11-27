@@ -537,6 +537,9 @@
     #''''''''''''''''''''''''''''''''''''''''''''''''''''Emerald''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      EMERALD_INVENTORY_ORE_TEXTURE = SF::Texture.from_file("graphics/minerals/Emerald_Inventory.png")
      Emerald_Inventory_Ore = SF::Sprite.new(EMERALD_INVENTORY_ORE_TEXTURE) 
+    #''''''''''''''''''''''''''''''''''''''''''''''''''''Painite''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     PAINITE_INVENTORY_ORE_TEXTURE = SF::Texture.from_file("graphics/minerals/Painite_Inventory.png")
+     Painite_Inventory_Ore = SF::Sprite.new(PAINITE_INVENTORY_ORE_TEXTURE) 
 #----------------------------------------------------------------------------------------------------------------------------------- 
 #                                                    Character Model
 #-----------------------------------------------------------------------------------------------------------------------------------
@@ -2111,6 +2114,10 @@
   EMERALD_TEXTURE = SF::Texture.from_file("graphics/minerals/Emerald.png")
   Emerald_Ore = SF::Sprite.new(EMERALD_TEXTURE); Emerald_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
   Emerald_Ore.position = SF.vector2(250, 302)
+ #''''''''''''''''''''''''''''''''''''''''''''''''''''''Painite'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+  PAINITE_TEXTURE = SF::Texture.from_file("graphics/minerals/Painite.png")
+  Painite_Ore = SF::Sprite.new(PAINITE_TEXTURE); Painite_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
+  Painite_Ore.position = SF.vector2(450, 302)
 #______________________________________________________________________________________________________________________________________
 Testing_Text = SF::Text.new; Testing_Text.font = FONT_PIXEL; 
 Testing_Text.character_size = 20; Testing_Text.color = SF::Color::White; Testing_Text.position = SF.vector2(1800, 652)
