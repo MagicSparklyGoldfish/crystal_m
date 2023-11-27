@@ -802,6 +802,9 @@ module Etc
     #--------------------------------------------------------------Turquoise-------------------------------------------------------------------------------- 
      @@turquoise = Inventory_Ore.new("Turquoise", 41, Turquoise_Inventory_Ore, 1, "green", "fire", "LUK+", 70)
      Ore_Array.push(@@turquoise)
+    #--------------------------------------------------------------Turquoise-------------------------------------------------------------------------------- 
+     @@tigers_eye = Inventory_Ore.new("Tiger's Eye", 42, Tigers_Eye_Inventory_Ore, 1, "orange", "fire", "DEX+", 70)
+     Ore_Array.push(@@tigers_eye)
    #________________________________________________________________________________________________________________________________________________________
   end
 end 
@@ -814,7 +817,7 @@ module Harvestables
     @@smokey_quartz01, @@sapphire01, @@black_opal01, @@ajoite01, @@rhodolite01, @@chalcanthite01, @@flourite01, @@amorite01, @@lapis_lazuli01,
     @@moonstone01, @@blue_calcite01, @@hiddenite01, @@ofretite01, @@holley_blue_agate01, @@ametrine01, @@hemimorphite01, @@tiffany_stone01,
     @@azurite01, @@howlite01, @@angelite01, @@blue_lace_agate01, @@iolite01, @@sodalite01, @@kyanite01, @@sunstone01, @@bony_amber01, @@blue_amber01,
-    @@blue_spinel01, @@red_spinel01, @@fire_opal01, @@garnet01, @@ruby01, @@cherry_quartz01, @@lemon_quartz01, @@turquoise01]
+    @@blue_spinel01, @@red_spinel01, @@fire_opal01, @@garnet01, @@ruby01, @@cherry_quartz01, @@lemon_quartz01, @@turquoise01, @@tigers_eye01]
 
     Test_Ore_Sprite_Array = [@@bloodstone_01.sprite, @@bloodstone_02.sprite, @@bloodstone_03.sprite, @@moss_agate_01.sprite, @@amber01.sprite, 
     @@wavellite01.sprite,  @@topaz01.sprite, @@amethyst01.sprite, @@smokey_quartz01.sprite, @@sapphire01.sprite, @@black_opal01.sprite,
@@ -823,7 +826,7 @@ module Harvestables
     @@hemimorphite01.sprite, @@tiffany_stone01.sprite, @@azurite01.sprite, @@howlite01.sprite, @@angelite01.sprite, @@blue_lace_agate01.sprite,
     @@iolite01.sprite, @@sodalite01.sprite, @@kyanite01.sprite, @@sunstone01.sprite, @@bony_amber01.sprite, @@blue_amber01.sprite, @@blue_spinel01.sprite,
     @@red_spinel01.sprite, @@fire_opal01.sprite, @@garnet01.sprite, @@ruby01.sprite, @@cherry_quartz01.sprite, @@lemon_quartz01.sprite,
-    @@turquoise01.sprite]
+    @@turquoise01.sprite, @@tigers_eye01.sprite]
    #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
    #+                                                              Variables                                                                               +
    #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -1023,8 +1026,7 @@ module Harvestables
         @@ore_break_iterator = 0
       end
       Testing_Text.string = @@bloodstone_01.hp.to_s + Ore_Clock_Break.elapsed_time.to_s
-
-      @@bloodstone_02.sprite.position = SF.vector2(4500, 702)
+      @@bloodstone_02.sprite.position = SF.vector2(4500, 702); @@bloodstone_01.sprite.position = SF.vector2(300, 702)
       window.draw(@@bloodstone_01.sprite); window.draw(@@bloodstone_02.sprite); window.draw(@@moss_agate_01.sprite); window.draw(@@amber01.sprite); 
       window.draw(@@wavellite01.sprite); window.draw(@@topaz01.sprite); window.draw(@@amethyst01.sprite); window.draw(@@smokey_quartz01.sprite); 
       window.draw(@@sapphire01.sprite); window.draw(@@black_opal01.sprite); window.draw(@@ajoite01.sprite); window.draw(@@rhodolite01.sprite); 
@@ -1035,7 +1037,7 @@ module Harvestables
       window.draw(@@iolite01.sprite); window.draw(@@sodalite01.sprite); window.draw(@@kyanite01.sprite); window.draw(@@sunstone01.sprite) 
       window.draw(@@bony_amber01.sprite); window.draw(@@blue_amber01.sprite); window.draw(@@blue_spinel01.sprite); window.draw(@@red_spinel01.sprite)
       window.draw(@@fire_opal01.sprite); window.draw(@@garnet01.sprite); window.draw(@@ruby01.sprite); window.draw(@@cherry_quartz01.sprite)
-      window.draw(@@lemon_quartz01.sprite); window.draw(@@turquoise01.sprite)
+      window.draw(@@lemon_quartz01.sprite); window.draw(@@turquoise01.sprite); window.draw(@@tigers_eye01.sprite)
     end
    #________________________________________________________________________________________________________________________________________________________
    #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1363,8 +1365,17 @@ module Harvestables
      @@lemon_quartz05 = Ore.new("Lemon Quartz", 229, "yellow", 7, 450, "lemon quartz", Lemon_Quartz_Ore.dup, false, 450)
      @@lemon_quartz06 = Ore.new("Lemon Quartz", 230, "yellow", 7, 450, "lemon quartz", Lemon_Quartz_Ore.dup, false, 450)
     #........................................................................................................................................................
-    #................................................................Lemon Quartz...........................................................................
+    #..................................................................Turquoise.............................................................................
      @@turquoise01 = Ore.new("Turquoise", 231, "green", 5, 350, "turquoise", Turquoise_Ore.dup, false, 350)
+     @@turquoise02 = Ore.new("Turquoise", 232, "green", 5, 350, "turquoise", Turquoise_Ore.dup, false, 350)
+     @@turquoise03 = Ore.new("Turquoise", 233, "green", 5, 350, "turquoise", Turquoise_Ore.dup, false, 350)
+     @@turquoise04 = Ore.new("Turquoise", 234, "green", 5, 350, "turquoise", Turquoise_Ore.dup, false, 350)
+     @@turquoise05 = Ore.new("Turquoise", 235, "green", 5, 350, "turquoise", Turquoise_Ore.dup, false, 350)
+     @@turquoise06 = Ore.new("Turquoise", 236, "green", 5, 350, "turquoise", Turquoise_Ore.dup, false, 350)
+    #........................................................................................................................................................
+    #.................................................................Tiger's Eye............................................................................
+     @@tigers_eye01 = Ore.new("Tiger's Eye", 237, "orange", 7, 450, "tiger's eye", Tigers_Eye_Ore.dup, false, 450)
+    #........................................................................................................................................................
   end
   class Herbs
   def initialize(name : String, id : Int32, color : String, hp : Int32, drop_item : String, sprite : SF::Sprite, is_broke : Bool)

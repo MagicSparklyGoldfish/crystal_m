@@ -412,8 +412,7 @@ extend self
   def Window_Class.attack_check_test_map
     # Harvestables::Ore.harvest(@@attacking)
     event = "mining_ore"
-    this = Bloodstone_Ore.global_bounds
-    Window_Class.check_attacking(this, event)
+    Window_Class.check_attacking(event)
   end
   def Window_Class.space_test_map
     bounding_box1 = @@player_character_rendered_model.global_bounds
@@ -483,8 +482,7 @@ extend self
  def Window_Class.attack_check_test_ore_map
    Harvestables::Ore.harvest(@@attacking)
    event = "mining_ore"
-   this = Bloodstone_Ore.global_bounds
-   Window_Class.check_attacking(this, event)
+   Window_Class.check_attacking(event)
  end
  def Window_Class.teleport_test_ore_map
   bounding_box1 = @@player_character_rendered_model.global_bounds
@@ -614,7 +612,7 @@ def Window_Class.ladder_test_ore_map
     @@has_weapon = true
     Window_Class.player_model_initialize(@@current_shoes, @@current_gloves, @@current_shirt, @@current_pants, @@current_hair) 
   end
-  def Window_Class.check_attacking(this, event)
+  def Window_Class.check_attacking(event)
     if @@attacking == true
       attack = true
     end
@@ -2369,7 +2367,7 @@ module Enemy_Data # @note Enemy data is stored here
 
     def Enemy_Physics.hit_enemy01(this)
       event = "player_attacking"
-      Gui::Window_Class.check_attacking(this, event)
+      Gui::Window_Class.check_attacking(event)
      end
     def Window_Class.hit_enemy02(this, @@attacking)
       time = Player_Attack_Clock.elapsed_time

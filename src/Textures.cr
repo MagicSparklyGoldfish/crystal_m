@@ -519,6 +519,9 @@
     #''''''''''''''''''''''''''''''''''''''''''''''''''''Turquoise''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      TURQUOISE_INVENTORY_ORE_TEXTURE = SF::Texture.from_file("graphics/minerals/Turquoise_Inventory.png")
      Turquoise_Inventory_Ore = SF::Sprite.new(TURQUOISE_INVENTORY_ORE_TEXTURE) 
+    #'''''''''''''''''''''''''''''''''''''''''''''''''''Tiger's Eye'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     TIGERS_EYE_INVENTORY_ORE_TEXTURE = SF::Texture.from_file("graphics/minerals/Tiger's_Eye_Inventory.png")
+     Tigers_Eye_Inventory_Ore = SF::Sprite.new(TIGERS_EYE_INVENTORY_ORE_TEXTURE) 
 #----------------------------------------------------------------------------------------------------------------------------------- 
 #                                                    Character Model
 #-----------------------------------------------------------------------------------------------------------------------------------
@@ -1907,13 +1910,12 @@
 #-------------------------------------------------------------------------------------------------------------------------------------- 
  #'''''''''''''''''''''''''''''''''''''''''''''''''''''Bloodstone'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
   BLOODSTONE_TEXTURE = SF::Texture.from_file("graphics/minerals/Bloodstone.png")
-  Ore_Box = SF::RectangleShape.new(SF.vector2(100, 100)); Ore_Box.position = SF.vector2(1800, 700); Ore_Box.fill_color = SF.color(255, 255, 255)
+  #Ore_Box = SF::RectangleShape.new(SF.vector2(100, 100)); Ore_Box.position = SF.vector2(1800, 700); Ore_Box.fill_color = SF.color(255, 255, 255)
   Bloodstone_Ore = SF::Sprite.new(BLOODSTONE_TEXTURE); Bloodstone_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
-  Bloodstone_Ore.position = SF.vector2(300, 702)
  #'''''''''''''''''''''''''''''''''''''''''''''''''''''Moss Agate''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
   MOSS_AGATE_TEXTURE = SF::Texture.from_file("graphics/minerals/Moss_Agate.png")
   Moss_Agate_Ore = SF::Sprite.new(MOSS_AGATE_TEXTURE); Moss_Agate_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
-
+  Moss_Agate_Ore.position = SF.vector2(500, 702)
  #'''''''''''''''''''''''''''''''''''''''''''''''''''''''Amber'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
   AMBER_TEXTURE = SF::Texture.from_file("graphics/minerals/Amber.png")
   Amber_Ore = SF::Sprite.new(AMBER_TEXTURE); Amber_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
@@ -2070,6 +2072,10 @@
   TURQUOISE_TEXTURE = SF::Texture.from_file("graphics/minerals/Turquoise.png")
   Turquoise_Ore = SF::Sprite.new(TURQUOISE_TEXTURE); Turquoise_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
   Turquoise_Ore.position = SF.vector2(-4000, 702)
+ #'''''''''''''''''''''''''''''''''''''''''''''''''''''Turquoise''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+  TIGERS_EYE_TEXTURE = SF::Texture.from_file("graphics/minerals/Tiger's_Eye.png")
+  Tigers_Eye_Ore = SF::Sprite.new(TIGERS_EYE_TEXTURE); Tigers_Eye_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
+  Tigers_Eye_Ore.position = SF.vector2(-4200, 702)
 #______________________________________________________________________________________________________________________________________
 Testing_Text = SF::Text.new; Testing_Text.font = FONT_PIXEL; 
 Testing_Text.character_size = 20; Testing_Text.color = SF::Color::White; Testing_Text.position = SF.vector2(1800, 652)
