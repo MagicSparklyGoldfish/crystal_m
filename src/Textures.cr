@@ -531,6 +531,9 @@
     #''''''''''''''''''''''''''''''''''''''''''''''''''''''Jade'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      JADE_INVENTORY_ORE_TEXTURE = SF::Texture.from_file("graphics/minerals/Jade_Inventory.png")
      Jade_Inventory_Ore = SF::Sprite.new(JADE_INVENTORY_ORE_TEXTURE) 
+    #''''''''''''''''''''''''''''''''''''''''''''''''''''Diamond''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     DIAMOND_INVENTORY_ORE_TEXTURE = SF::Texture.from_file("graphics/minerals/Diamond_Inventory.png")
+     Diamond_Inventory_Ore = SF::Sprite.new(DIAMOND_INVENTORY_ORE_TEXTURE) 
 #----------------------------------------------------------------------------------------------------------------------------------- 
 #                                                    Character Model
 #-----------------------------------------------------------------------------------------------------------------------------------
@@ -2097,6 +2100,10 @@
   JADE_TEXTURE = SF::Texture.from_file("graphics/minerals/Jade.png")
   Jade_Ore = SF::Sprite.new(JADE_TEXTURE); Jade_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
   Jade_Ore.position = SF.vector2(-4800, 702)
+ #''''''''''''''''''''''''''''''''''''''''''''''''''''''Diamond'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+  DIAMOND_TEXTURE = SF::Texture.from_file("graphics/minerals/Diamond.png")
+  Diamond_Ore = SF::Sprite.new(DIAMOND_TEXTURE); Diamond_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
+  Diamond_Ore.position = SF.vector2(50, 302)
 #______________________________________________________________________________________________________________________________________
 Testing_Text = SF::Text.new; Testing_Text.font = FONT_PIXEL; 
 Testing_Text.character_size = 20; Testing_Text.color = SF::Color::White; Testing_Text.position = SF.vector2(1800, 652)
