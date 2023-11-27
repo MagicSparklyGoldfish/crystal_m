@@ -2,7 +2,7 @@
   Ground = SF::RectangleShape.new(SF.vector2(10000, 500)); Ground.fill_color = SF.color(0, 255, 100)
   Ground.position = SF.vector2(0, 800)
 
-  Test_Platform_01 = SF::RectangleShape.new(SF.vector2(1000, 5)); Test_Platform_01.fill_color = SF.color(0, 255, 100)
+  Test_Platform_01 = SF::RectangleShape.new(SF.vector2(5000, 5)); Test_Platform_01.fill_color = SF.color(0, 255, 100)
   Test_Platform_01.position = SF.vector2(0, 400)
 #------------------------------------------------------------------------------------------------------------------------------------
 #                                                    Menu Textures
@@ -540,6 +540,9 @@
     #''''''''''''''''''''''''''''''''''''''''''''''''''''Painite''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      PAINITE_INVENTORY_ORE_TEXTURE = SF::Texture.from_file("graphics/minerals/Painite_Inventory.png")
      Painite_Inventory_Ore = SF::Sprite.new(PAINITE_INVENTORY_ORE_TEXTURE) 
+    #'''''''''''''''''''''''''''''''''''''''''''''''Bumblebee Jasper''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     BUMBLEBEE_JASPER_INVENTORY_ORE_TEXTURE = SF::Texture.from_file("graphics/minerals/Bumblebee_Jasper_Inventory.png")
+     Bumblebee_Jasper_Inventory_Ore = SF::Sprite.new(BUMBLEBEE_JASPER_INVENTORY_ORE_TEXTURE) 
 #----------------------------------------------------------------------------------------------------------------------------------- 
 #                                                    Character Model
 #-----------------------------------------------------------------------------------------------------------------------------------
@@ -2118,6 +2121,10 @@
   PAINITE_TEXTURE = SF::Texture.from_file("graphics/minerals/Painite.png")
   Painite_Ore = SF::Sprite.new(PAINITE_TEXTURE); Painite_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
   Painite_Ore.position = SF.vector2(450, 302)
+ #'''''''''''''''''''''''''''''''''''''''''''''''''Bumblebee Jasper'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+  BUMBLEBEE_JASPER_TEXTURE = SF::Texture.from_file("graphics/minerals/Bumblebee_Jasper.png")
+  Bumblebee_Jasper_Ore = SF::Sprite.new(BUMBLEBEE_JASPER_TEXTURE); Bumblebee_Jasper_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
+  Bumblebee_Jasper_Ore.position = SF.vector2(650, 302)
 #______________________________________________________________________________________________________________________________________
 Testing_Text = SF::Text.new; Testing_Text.font = FONT_PIXEL; 
 Testing_Text.character_size = 20; Testing_Text.color = SF::Color::White; Testing_Text.position = SF.vector2(1800, 652)
