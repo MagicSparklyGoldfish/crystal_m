@@ -546,6 +546,9 @@
     #'''''''''''''''''''''''''''''''''''''''''''''''''Blood Jasper''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      BLOOD_JASPER_INVENTORY_ORE_TEXTURE = SF::Texture.from_file("graphics/minerals/Blood_Jasper_Inventory.png")
      Blood_Jasper_Inventory_Ore = SF::Sprite.new(BLOOD_JASPER_INVENTORY_ORE_TEXTURE) 
+    #'''''''''''''''''''''''''''''''''''''''''''''''''Mook Jasper'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     MOOK_JASPER_INVENTORY_ORE_TEXTURE = SF::Texture.from_file("graphics/minerals/Mook_Jasper_Inventory.png")
+     Mook_Jasper_Inventory_Ore = SF::Sprite.new(MOOK_JASPER_INVENTORY_ORE_TEXTURE) 
 #----------------------------------------------------------------------------------------------------------------------------------- 
 #                                                    Character Model
 #-----------------------------------------------------------------------------------------------------------------------------------
@@ -2132,6 +2135,10 @@
   BLOOD_JASPER_TEXTURE = SF::Texture.from_file("graphics/minerals/Blood_Jasper.png")
   Blood_Jasper_Ore = SF::Sprite.new(BLOOD_JASPER_TEXTURE); Blood_Jasper_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
   Blood_Jasper_Ore.position = SF.vector2(850, 302)
+ #'''''''''''''''''''''''''''''''''''''''''''''''''''Mook Jasper'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+  MOOK_JASPER_TEXTURE = SF::Texture.from_file("graphics/minerals/Mook_Jasper.png")
+  Mook_Jasper_Ore = SF::Sprite.new(MOOK_JASPER_TEXTURE); Mook_Jasper_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
+  Mook_Jasper_Ore.position = SF.vector2(1050, 302)
 #______________________________________________________________________________________________________________________________________
 Testing_Text = SF::Text.new; Testing_Text.font = FONT_PIXEL; 
 Testing_Text.character_size = 20; Testing_Text.color = SF::Color::White; Testing_Text.position = SF.vector2(1800, 652)
