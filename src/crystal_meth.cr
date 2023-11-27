@@ -458,6 +458,7 @@ extend self
     #window.draw(Bloodstone_Ore);
    end
  #---------------------------------------------------------ore test---------------------------------------------------------------------
+ @@test_ladder_02 : SF::RectangleShape; @@test_ladder_02 = Test_Ladder.dup; @@test_ladder_02.position = SF.vector2(1400, 0);
   def Window_Class.ore_test_initialize
     Moss_Agate_Ore.position = SF.vector2(500, 702)
   end
@@ -472,12 +473,13 @@ extend self
    if @@attacking == true
     Window_Class.player_attack_bounding_box(window)
     end
+
    bounding_box1 = @@player_character_rendered_model.global_bounds
    bounding_box2 = @@player_character_rendered_model.global_bounds
    ore_ground = Ground.dup; Ground.position = SF.vector2(-5000, 800); ore_platform = Ground.dup; ore_platform.scale = SF.vector2(0.5, 0.2)
    ore_platform.position = SF.vector2(-100, 400)
    window.draw(ore_ground); window.draw(@@player_character_rendered_model); window.draw(Test_Teleporter); window.draw(Test_Ladder)
-   window.draw(Test_Platform_01); #window.draw(Feet_Bounding_Box)
+   window.draw(Test_Platform_01); window.draw(Test_Platform_02); window.draw(@@test_ladder_02) #window.draw(Feet_Bounding_Box)
  end
  def Window_Class.attack_check_test_ore_map
    Harvestables::Ore.harvest(@@attacking)
@@ -491,12 +493,18 @@ extend self
     @@map = "test"
   end
 end
+ @@ladder_array = [Test_Ladder, @@test_ladder_02]; @@ladder_iterator : Int32; @@ladder_iterator = 0
 def Window_Class.ladder_test_ore_map
   bounding_box1 = @@player_character_rendered_model.global_bounds
-  bounding_box2 = Test_Ladder.global_bounds
+  bounding_box2 = @@ladder_array[@@ladder_iterator].global_bounds 
   if bounding_box1.intersects? bounding_box2
     @@player_character_rendered_model.position -= SF.vector2(0, 40)
-  end; end
+  end 
+   @@ladder_iterator += 1 
+   if @@ladder_iterator >= @@ladder_array.size
+    @@ladder_iterator = 0 
+   end
+ end
 #=======================================================================================================================================+
 #---------------------------------------------------------------------------------------------------------------------------------------+
 #==========================================================Animations===================================================================+
@@ -2086,18 +2094,21 @@ end; end; end; end; end; end
    #==================================================================================================================================+
 
    #=============================================Gravity==============================================================================+
+    @@gravity_iterator : Int32; @@gravity_iterator = 0
     def Player_Physics.gravity(@@player_character_rendered_model, window)
      #-------------------------------------------Variables-----------------------------------------------------------------------------+  
       ground_box = Ground.global_bounds; test_platform_box = Test_Platform_01.global_bounds
+      test_platform_box_2 = Test_Platform_02.global_bounds
       @@player_bounding_box = Feet_Bounding_Box.global_bounds #@@player_character_rendered_model.global_bounds
       Feet_Bounding_Box.position = @@player_character_rendered_model.position + SF.vector2(25, 120)
+      test_platform_array = [ground_box, test_platform_box, test_platform_box_2]
      #---------------------------------------------------------------------------------------------------------------------------------+
 
-     if @@player_bounding_box.intersects? ground_box
+     if @@player_bounding_box.intersects? test_platform_array[@@gravity_iterator] #ground_box
        @@player_jumped = false
        @@is_player_airborne = false
        @@fallrate = 0
-     else if @@player_bounding_box.intersects? test_platform_box
+     else if @@player_bounding_box.intersects? test_platform_box || test_platform_box_2
        @@player_jumped = false
        @@is_player_airborne = false
        @@fallrate = 0
@@ -2117,6 +2128,11 @@ end; end; end; end; end; end
        else
          @@fallrate += 1
        end; end; end
+       if @@gravity_iterator >= test_platform_array.size - 1
+        @@gravity_iterator = 0
+       else
+        @@gravity_iterator += 1
+       end
       end
    #==================================================================================================================================+
 
