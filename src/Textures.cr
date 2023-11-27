@@ -525,9 +525,12 @@
     #''''''''''''''''''''''''''''''''''''''''''''''''''Orange Calcite'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      ORANGE_CALCITE_INVENTORY_ORE_TEXTURE = SF::Texture.from_file("graphics/minerals/Orange_Calcite_Inventory.png")
      Orange_Calcite_Inventory_Ore = SF::Sprite.new(ORANGE_CALCITE_INVENTORY_ORE_TEXTURE) 
-    #''''''''''''''''''''''''''''''''''''''''''''''''''Orange Calcite'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    #'''''''''''''''''''''''''''''''''''''''''''''''''''Grape Agate'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      GRAPE_AGATE_INVENTORY_ORE_TEXTURE = SF::Texture.from_file("graphics/minerals/Grape_Agate_Inventory.png")
      Grape_Agate_Inventory_Ore = SF::Sprite.new(GRAPE_AGATE_INVENTORY_ORE_TEXTURE) 
+    #''''''''''''''''''''''''''''''''''''''''''''''''''''''Jade'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     JADE_INVENTORY_ORE_TEXTURE = SF::Texture.from_file("graphics/minerals/Jade_Inventory.png")
+     Jade_Inventory_Ore = SF::Sprite.new(JADE_INVENTORY_ORE_TEXTURE) 
 #----------------------------------------------------------------------------------------------------------------------------------- 
 #                                                    Character Model
 #-----------------------------------------------------------------------------------------------------------------------------------
@@ -2090,6 +2093,10 @@
   GRAPE_AGATE_TEXTURE = SF::Texture.from_file("graphics/minerals/Grape_Agate.png")
   Grape_Agate_Ore = SF::Sprite.new(GRAPE_AGATE_TEXTURE); Grape_Agate_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
   Grape_Agate_Ore.position = SF.vector2(-4600, 702)
+ #''''''''''''''''''''''''''''''''''''''''''''''''''''''''Jade''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+  JADE_TEXTURE = SF::Texture.from_file("graphics/minerals/Jade.png")
+  Jade_Ore = SF::Sprite.new(JADE_TEXTURE); Jade_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
+  Jade_Ore.position = SF.vector2(-4800, 702)
 #______________________________________________________________________________________________________________________________________
 Testing_Text = SF::Text.new; Testing_Text.font = FONT_PIXEL; 
 Testing_Text.character_size = 20; Testing_Text.color = SF::Color::White; Testing_Text.position = SF.vector2(1800, 652)
