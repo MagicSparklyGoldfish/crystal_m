@@ -886,9 +886,12 @@ module Etc
       Ore_Array.push(@@red_jasper)
    #________________________________________________________________________________________________________________________________________________________
     #////////////////////////////////////////////////////////////////Metals\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-     #------------------------------------------------------------Red Jasper------------------------------------------------------------------------------ 
+     #---------------------------------------------------------------Carbon--------------------------------------------------------------------------------- 
       @@carbon = Inventory_Ore.new("Carbon", 1000, Carbon_Inventory_Ore, 1, "black", "none", "none", 70)
       Ore_Array.push(@@carbon)
+     #---------------------------------------------------------------Carbon--------------------------------------------------------------------------------- 
+      @@copper = Inventory_Ore.new("Copper", 1001, Copper_Inventory_Ore, 1, "brown", "none", "none", 70)
+      Ore_Array.push(@@copper)
    #________________________________________________________________________________________________________________________________________________________
   end
 end 
@@ -903,7 +906,7 @@ module Harvestables
     @@azurite01, @@howlite01, @@angelite01, @@blue_lace_agate01, @@iolite01, @@sodalite01, @@kyanite01, @@sunstone01, @@bony_amber01, @@blue_amber01,
     @@blue_spinel01, @@red_spinel01, @@fire_opal01, @@garnet01, @@ruby01, @@cherry_quartz01, @@lemon_quartz01, @@turquoise01, @@tigers_eye01,
     @@orange_calcite01, @@grape_agate01, @@jade01, @@diamond01, @@emerald01, @@painite01, @@bumblebee_jasper01, @@blood_jasper01, @@mook_jasper01,
-    @@red_jasper01, @@carbon01]
+    @@red_jasper01, @@carbon01, @@copper01]
 
     Test_Ore_Sprite_Array = [@@bloodstone_01.sprite, @@bloodstone_02.sprite, @@bloodstone_03.sprite, @@moss_agate_01.sprite, @@amber01.sprite, 
     @@wavellite01.sprite,  @@topaz01.sprite, @@amethyst01.sprite, @@smokey_quartz01.sprite, @@sapphire01.sprite, @@black_opal01.sprite,
@@ -913,7 +916,8 @@ module Harvestables
     @@iolite01.sprite, @@sodalite01.sprite, @@kyanite01.sprite, @@sunstone01.sprite, @@bony_amber01.sprite, @@blue_amber01.sprite, @@blue_spinel01.sprite,
     @@red_spinel01.sprite, @@fire_opal01.sprite, @@garnet01.sprite, @@ruby01.sprite, @@cherry_quartz01.sprite, @@lemon_quartz01.sprite,
     @@turquoise01.sprite, @@tigers_eye01.sprite, @@orange_calcite01.sprite, @@grape_agate01.sprite, @@jade01.sprite, @@diamond01.sprite, @@emerald01.sprite,
-    @@painite01.sprite, @@bumblebee_jasper01.sprite, @@blood_jasper01.sprite, @@mook_jasper01.sprite, @@red_jasper01.sprite, @@carbon01.sprite]
+    @@painite01.sprite, @@bumblebee_jasper01.sprite, @@blood_jasper01.sprite, @@mook_jasper01.sprite, @@red_jasper01.sprite, @@carbon01.sprite, 
+    @@copper01.sprite]
    #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
    #+                                                              Variables                                                                               +
    #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -1127,7 +1131,7 @@ module Harvestables
       window.draw(@@lemon_quartz01.sprite); window.draw(@@turquoise01.sprite); window.draw(@@tigers_eye01.sprite); window.draw(@@orange_calcite01.sprite)
       window.draw(@@grape_agate01.sprite); window.draw(@@jade01.sprite); window.draw(@@diamond01.sprite); window.draw(@@emerald01.sprite)
       window.draw(@@painite01.sprite); window.draw(@@bumblebee_jasper01.sprite); window.draw(@@blood_jasper01.sprite); window.draw(@@mook_jasper01.sprite)
-      window.draw(@@red_jasper01.sprite); window.draw(@@carbon01.sprite)
+      window.draw(@@red_jasper01.sprite); window.draw(@@carbon01.sprite); window.draw(@@copper01.sprite)
     end
    #________________________________________________________________________________________________________________________________________________________
    #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1554,8 +1558,21 @@ module Harvestables
    #========================================================================================================================================================
    #==================================================================Metals================================================================================
     #.................................................................Carbon.................................................................................
-     @@carbon01 = Ore.new("Carbon", 303, "black", 0, 200, "carbon", Carbon_Ore.dup, false, 200)
+     @@carbon01 = Ore.new("Carbon", 3000, "black", 0, 200, "carbon", Carbon_Ore.dup, false, 200)
+     @@carbon02 = Ore.new("Carbon", 3001, "black", 0, 200, "carbon", Carbon_Ore.dup, false, 200)
+     @@carbon03 = Ore.new("Carbon", 3002, "black", 0, 200, "carbon", Carbon_Ore.dup, false, 200)
+     @@carbon04 = Ore.new("Carbon", 3003, "black", 0, 200, "carbon", Carbon_Ore.dup, false, 200)
+     @@carbon05 = Ore.new("Carbon", 3004, "black", 0, 200, "carbon", Carbon_Ore.dup, false, 200)
+     @@carbon06 = Ore.new("Carbon", 3005, "black", 0, 200, "carbon", Carbon_Ore.dup, false, 200)
+     @@carbon07 = Ore.new("Carbon", 3006, "black", 0, 200, "carbon", Carbon_Ore.dup, false, 200)
+     @@carbon08 = Ore.new("Carbon", 3007, "black", 0, 200, "carbon", Carbon_Ore.dup, false, 200)
+     @@carbon09 = Ore.new("Carbon", 3008, "black", 0, 200, "carbon", Carbon_Ore.dup, false, 200)
+     @@carbon10 = Ore.new("Carbon", 3009, "black", 0, 200, "carbon", Carbon_Ore.dup, false, 200)
+     @@carbon11 = Ore.new("Carbon", 3010, "black", 0, 200, "carbon", Carbon_Ore.dup, false, 200)
+     @@carbon12 = Ore.new("Carbon", 3011, "black", 0, 200, "carbon", Carbon_Ore.dup, false, 200)
     #........................................................................................................................................................
+    #.................................................................Copper.................................................................................
+     @@copper01 = Ore.new("Copper", 3012, "brown", 0, 300, "copper", Copper_Ore.dup, false, 300)
   end
   class Herbs
   def initialize(name : String, id : Int32, color : String, hp : Int32, drop_item : String, sprite : SF::Sprite, is_broke : Bool)

@@ -557,8 +557,11 @@
      Red_Jasper_Inventory_Ore = SF::Sprite.new(RED_JASPER_INVENTORY_ORE_TEXTURE) 
    #.....................................................Metals.....................................................................
     #''''''''''''''''''''''''''''''''''''''''''''''''''''Carbon'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-    CARBON_INVENTORY_ORE_TEXTURE = SF::Texture.from_file("graphics/metals/Carbon_Inventory.png")
-    Carbon_Inventory_Ore = SF::Sprite.new(CARBON_INVENTORY_ORE_TEXTURE) 
+     CARBON_INVENTORY_ORE_TEXTURE = SF::Texture.from_file("graphics/metals/Carbon_Inventory.png")
+     Carbon_Inventory_Ore = SF::Sprite.new(CARBON_INVENTORY_ORE_TEXTURE) 
+    #''''''''''''''''''''''''''''''''''''''''''''''''''''Copper'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     COPPER_INVENTORY_ORE_TEXTURE = SF::Texture.from_file("graphics/metals/Copper_Inventory.png")
+     Copper_Inventory_Ore = SF::Sprite.new(COPPER_INVENTORY_ORE_TEXTURE) 
 #----------------------------------------------------------------------------------------------------------------------------------- 
 #                                                    Character Model
 #-----------------------------------------------------------------------------------------------------------------------------------
@@ -2159,6 +2162,11 @@
    CARBON_TEXTURE = SF::Texture.from_file("graphics/metals/Carbon_Ore.png")
    Carbon_Ore = SF::Sprite.new(CARBON_TEXTURE); Carbon_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
    Carbon_Ore.position = SF.vector2(0, 100)
+  #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+  #''''''''''''''''''''''''''''''''''''''''''''''''''''''Copper'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+   COPPER_TEXTURE = SF::Texture.from_file("graphics/metals/Copper_Ore.png")
+   Copper_Ore = SF::Sprite.new(COPPER_TEXTURE); Copper_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
+   Copper_Ore.position = SF.vector2(200, 100)
   #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
 #______________________________________________________________________________________________________________________________________
 Testing_Text = SF::Text.new; Testing_Text.font = FONT_PIXEL; 
