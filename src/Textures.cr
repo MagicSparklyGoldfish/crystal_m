@@ -555,6 +555,10 @@
     #''''''''''''''''''''''''''''''''''''''''''''''''''Red Jasper'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      RED_JASPER_INVENTORY_ORE_TEXTURE = SF::Texture.from_file("graphics/minerals/Red_Jasper_Inventory.png")
      Red_Jasper_Inventory_Ore = SF::Sprite.new(RED_JASPER_INVENTORY_ORE_TEXTURE) 
+   #.....................................................Metals.....................................................................
+    #''''''''''''''''''''''''''''''''''''''''''''''''''''Carbon'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    CARBON_INVENTORY_ORE_TEXTURE = SF::Texture.from_file("graphics/metals/Carbon_Inventory.png")
+    Carbon_Inventory_Ore = SF::Sprite.new(CARBON_INVENTORY_ORE_TEXTURE) 
 #----------------------------------------------------------------------------------------------------------------------------------- 
 #                                                    Character Model
 #-----------------------------------------------------------------------------------------------------------------------------------
@@ -1941,214 +1945,221 @@
 #--------------------------------------------------------------------------------------------------------------------------------------
 #                                                         Ores
 #-------------------------------------------------------------------------------------------------------------------------------------- 
- #'''''''''''''''''''''''''''''''''''''''''''''''''''''Bloodstone'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-  BLOODSTONE_TEXTURE = SF::Texture.from_file("graphics/minerals/Bloodstone.png")
-  #Ore_Box = SF::RectangleShape.new(SF.vector2(100, 100)); Ore_Box.position = SF.vector2(1800, 700); Ore_Box.fill_color = SF.color(255, 255, 255)
-  Bloodstone_Ore = SF::Sprite.new(BLOODSTONE_TEXTURE); Bloodstone_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
- #'''''''''''''''''''''''''''''''''''''''''''''''''''''Moss Agate''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
-  MOSS_AGATE_TEXTURE = SF::Texture.from_file("graphics/minerals/Moss_Agate.png")
-  Moss_Agate_Ore = SF::Sprite.new(MOSS_AGATE_TEXTURE); Moss_Agate_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
-  Moss_Agate_Ore.position = SF.vector2(500, 702)
- #'''''''''''''''''''''''''''''''''''''''''''''''''''''''Amber'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
-  AMBER_TEXTURE = SF::Texture.from_file("graphics/minerals/Amber.png")
-  Amber_Ore = SF::Sprite.new(AMBER_TEXTURE); Amber_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
-  Amber_Ore.position = SF.vector2(700, 702)
- #'''''''''''''''''''''''''''''''''''''''''''''''''''''Wavellite'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
-  WAVELLITE_TEXTURE = SF::Texture.from_file("graphics/minerals/Wavellite.png")
-  Wavellite_Ore = SF::Sprite.new(WAVELLITE_TEXTURE); Wavellite_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
-  Wavellite_Ore.position = SF.vector2(900, 702)
- #'''''''''''''''''''''''''''''''''''''''''''''''''''''''Topaz''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-  TOPAZ_TEXTURE = SF::Texture.from_file("graphics/minerals/Topaz.png")
-  Topaz_Ore = SF::Sprite.new(TOPAZ_TEXTURE); Topaz_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
-  Topaz_Ore.position = SF.vector2(1100, 702)
- #'''''''''''''''''''''''''''''''''''''''''''''''''''''Amethyst''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
-  AMETHYST_TEXTURE = SF::Texture.from_file("graphics/minerals/Amethyst_Ore.png")
-  Amethyst_Ore = SF::Sprite.new(AMETHYST_TEXTURE); Amethyst_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
-  Amethyst_Ore.position = SF.vector2(1300, 702)
- #'''''''''''''''''''''''''''''''''''''''''''''''''''Smokey Quartz''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-  SMOKEY_QUARTZ_TEXTURE = SF::Texture.from_file("graphics/minerals/Smokey_Quartz.png")
-  Smokey_Quartz_Ore = SF::Sprite.new(SMOKEY_QUARTZ_TEXTURE); Smokey_Quartz_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
-  Smokey_Quartz_Ore.position = SF.vector2(1500, 702)
- #'''''''''''''''''''''''''''''''''''''''''''''''''''''Sapphire''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
-  SAPPHIRE_TEXTURE = SF::Texture.from_file("graphics/minerals/Sapphire.png")
-  Sapphire_Ore = SF::Sprite.new(SAPPHIRE_TEXTURE); Sapphire_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
-  Sapphire_Ore.position = SF.vector2(1700, 702)
- #''''''''''''''''''''''''''''''''''''''''''''''''''''Black Opal'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
-  BLACK_OPAL_TEXTURE = SF::Texture.from_file("graphics/minerals/Black_Opal.png")
-  Black_Opal_Ore = SF::Sprite.new(BLACK_OPAL_TEXTURE); Black_Opal_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
-  Black_Opal_Ore.position = SF.vector2(1900, 702)
- #''''''''''''''''''''''''''''''''''''''''''''''''''''''Ajoite'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
-  AJOITE_TEXTURE = SF::Texture.from_file("graphics/minerals/Ajoite.png")
-  Ajoite_Ore = SF::Sprite.new(AJOITE_TEXTURE); Ajoite_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
-  Ajoite_Ore.position = SF.vector2(2100, 702)
- #''''''''''''''''''''''''''''''''''''''''''''''''''''Rhodolite''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
-  RHODOLITE_TEXTURE = SF::Texture.from_file("graphics/minerals/Rhodolite.png")
-  Rhodolite_Ore = SF::Sprite.new(RHODOLITE_TEXTURE); Rhodolite_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
-  Rhodolite_Ore.position = SF.vector2(2300, 702)
- #'''''''''''''''''''''''''''''''''''''''''''''''''''Chalcanthite''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
-  CHALCANTHITE_TEXTURE = SF::Texture.from_file("graphics/minerals/Chalcanthite.png")
-  Chalcanthite_Ore = SF::Sprite.new(CHALCANTHITE_TEXTURE); Chalcanthite_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
-  Chalcanthite_Ore.position = SF.vector2(2500, 702)
- #'''''''''''''''''''''''''''''''''''''''''''''''''''''Flourite''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
-  FLOURITE_TEXTURE = SF::Texture.from_file("graphics/minerals/Flourite.png")
-  Flourite_Ore = SF::Sprite.new(FLOURITE_TEXTURE); Flourite_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
-  Flourite_Ore.position = SF.vector2(2700, 702)
- #'''''''''''''''''''''''''''''''''''''''''''''''''''''Amorite'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
-  AMORITE_TEXTURE = SF::Texture.from_file("graphics/minerals/Amorite.png")
-  Amorite_Ore = SF::Sprite.new(AMORITE_TEXTURE); Amorite_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
-  Amorite_Ore.position = SF.vector2(2900, 702)
- #'''''''''''''''''''''''''''''''''''''''''''''''''''Lapis Lazuli''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
-  LAPIS_LAZULI_TEXTURE = SF::Texture.from_file("graphics/minerals/Lapis_Lazuli.png")
-  Lapis_Lazuli_Ore = SF::Sprite.new(LAPIS_LAZULI_TEXTURE); Lapis_Lazuli_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
-  Lapis_Lazuli_Ore.position = SF.vector2(3100, 702)
- #''''''''''''''''''''''''''''''''''''''''''''''''''''Moonstone''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
-  MOONSTONE_TEXTURE = SF::Texture.from_file("graphics/minerals/Moonstone.png")
-  Moonstone_Ore = SF::Sprite.new(MOONSTONE_TEXTURE); Moonstone_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
-  Moonstone_Ore.position = SF.vector2(3300, 702)
- #'''''''''''''''''''''''''''''''''''''''''''''''''''Blue Calcite''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
-  BLUE_CALCITE_TEXTURE = SF::Texture.from_file("graphics/minerals/Blue_Calcite.png")
-  Blue_Calcite_Ore = SF::Sprite.new(BLUE_CALCITE_TEXTURE); Blue_Calcite_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
-  Blue_Calcite_Ore.position = SF.vector2(3500, 702)
- #''''''''''''''''''''''''''''''''''''''''''''''''''''Hiddenite''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
-  HIDDENITE_TEXTURE = SF::Texture.from_file("graphics/minerals/Hiddenite.png")
-  Hiddenite_Ore = SF::Sprite.new(HIDDENITE_TEXTURE); Hiddenite_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
-  Hiddenite_Ore.position = SF.vector2(3700, 702)
- #''''''''''''''''''''''''''''''''''''''''''''''''''''Offretite''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
-  OFFRETITE_TEXTURE = SF::Texture.from_file("graphics/minerals/Offretite.png")
-  Offretite_Ore = SF::Sprite.new(OFFRETITE_TEXTURE); Offretite_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
-  Offretite_Ore.position = SF.vector2(3900, 702)
- #''''''''''''''''''''''''''''''''''''''''''''''''Holley_Blue_Agate_Ore''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
-  HOLLEY_BLUE_AGATE_TEXTURE = SF::Texture.from_file("graphics/minerals/Holley_Blue_Agate.png")
-  Holley_Blue_Agate_Ore = SF::Sprite.new(HOLLEY_BLUE_AGATE_TEXTURE); Holley_Blue_Agate_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
-  Holley_Blue_Agate_Ore.position = SF.vector2(4100, 702)
- #''''''''''''''''''''''''''''''''''''''''''''''''''''Ametrine'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
-  AMETRINE_TEXTURE = SF::Texture.from_file("graphics/minerals/Ametrine.png")
-  Ametrine_Ore = SF::Sprite.new(AMETRINE_TEXTURE); Ametrine_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
-  Ametrine_Ore.position = SF.vector2(4300, 702)
- #''''''''''''''''''''''''''''''''''''''''''''''''''Hemimorphite'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
-  HEMIMORPHITE_TEXTURE = SF::Texture.from_file("graphics/minerals/Hemimorphite.png")
-  Hemimorphite_Ore = SF::Sprite.new(HEMIMORPHITE_TEXTURE); Hemimorphite_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
-  Hemimorphite_Ore.position = SF.vector2(-200, 702)
- #''''''''''''''''''''''''''''''''''''''''''''''''''Tiffany Stone''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
-  TIFFANY_STONE_TEXTURE = SF::Texture.from_file("graphics/minerals/Tiffany_Stone.png")
-  Tiffany_Stone_Ore = SF::Sprite.new(TIFFANY_STONE_TEXTURE); Tiffany_Stone_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
-  Tiffany_Stone_Ore.position = SF.vector2(-400, 702)
- #'''''''''''''''''''''''''''''''''''''''''''''''''''''Azurite'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
-  AZURITE_TEXTURE = SF::Texture.from_file("graphics/minerals/Azurite.png")
-  Azurite_Ore = SF::Sprite.new(AZURITE_TEXTURE); Azurite_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
-  Azurite_Ore.position = SF.vector2(-600, 702)
- #'''''''''''''''''''''''''''''''''''''''''''''''''''''Howlite'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
-  HOWLITE_TEXTURE = SF::Texture.from_file("graphics/minerals/Howlite.png")
-  Howlite_Ore = SF::Sprite.new(HOWLITE_TEXTURE); Howlite_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
-  Howlite_Ore.position = SF.vector2(-800, 702)
- #'''''''''''''''''''''''''''''''''''''''''''''''''''''Angelite''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
-  ANGELITE_TEXTURE = SF::Texture.from_file("graphics/minerals/Angelite.png")
-  Angelite_Ore = SF::Sprite.new(ANGELITE_TEXTURE); Angelite_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
-  Angelite_Ore.position = SF.vector2(-1000, 702)
- #'''''''''''''''''''''''''''''''''''''''''''''''''''Blue Lace Agate'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
-  BLUE_LACE_AGATE_TEXTURE = SF::Texture.from_file("graphics/minerals/Blue_Lace_Agate.png")
-  Blue_Lace_Agate_Ore = SF::Sprite.new(BLUE_LACE_AGATE_TEXTURE); Blue_Lace_Agate_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
-  Blue_Lace_Agate_Ore.position = SF.vector2(-1200, 702)
- #'''''''''''''''''''''''''''''''''''''''''''''''''''''''Iolite''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
-  IOLITE_TEXTURE = SF::Texture.from_file("graphics/minerals/Iolite.png")
-  Iolite_Ore = SF::Sprite.new(IOLITE_TEXTURE); Iolite_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
-  Iolite_Ore.position = SF.vector2(-1400, 702)
- #''''''''''''''''''''''''''''''''''''''''''''''''''''''Sodalite'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
-  SODALITE_TEXTURE = SF::Texture.from_file("graphics/minerals/Sodalite.png")
-  Sodalite_Ore = SF::Sprite.new(SODALITE_TEXTURE); Sodalite_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
-  Sodalite_Ore.position = SF.vector2(-1600, 702)
- #''''''''''''''''''''''''''''''''''''''''''''''''''''''Kyanite''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
-  KYANITE_TEXTURE = SF::Texture.from_file("graphics/minerals/Kyanite.png")
-  Kyanite_Ore = SF::Sprite.new(KYANITE_TEXTURE); Kyanite_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
-  Kyanite_Ore.position = SF.vector2(-1800, 702)
- #''''''''''''''''''''''''''''''''''''''''''''''''''''''Sunstone'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
-  SUNSTONE_TEXTURE = SF::Texture.from_file("graphics/minerals/Sunstone.png")
-  Sunstone_Ore = SF::Sprite.new(SUNSTONE_TEXTURE); Sunstone_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
-  Sunstone_Ore.position = SF.vector2(-2000, 702)
- #'''''''''''''''''''''''''''''''''''''''''''''''''''''Bony Amber''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
-  BONY_AMBER_TEXTURE = SF::Texture.from_file("graphics/minerals/Bony_Amber.png")
-  Bony_Amber_Ore = SF::Sprite.new(BONY_AMBER_TEXTURE); Bony_Amber_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
-  Bony_Amber_Ore.position = SF.vector2(-2200, 702)
- #'''''''''''''''''''''''''''''''''''''''''''''''''''''Blue Amber''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
-  BLUE_AMBER_TEXTURE = SF::Texture.from_file("graphics/minerals/Blue_Amber.png")
-  Blue_Amber_Ore = SF::Sprite.new(BLUE_AMBER_TEXTURE); Blue_Amber_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
-  Blue_Amber_Ore.position = SF.vector2(-2400, 702)
- #'''''''''''''''''''''''''''''''''''''''''''''''''''''Blue Spinel'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
-  BLUE_SPINEL_TEXTURE = SF::Texture.from_file("graphics/minerals/Blue_Spinel.png")
-  Blue_Spinel_Ore = SF::Sprite.new(BLUE_SPINEL_TEXTURE); Blue_Spinel_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
-  Blue_Spinel_Ore.position = SF.vector2(-2600, 702)
- #'''''''''''''''''''''''''''''''''''''''''''''''''''''Red Spinel''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
-  RED_SPINEL_TEXTURE = SF::Texture.from_file("graphics/minerals/Red_Spinel.png")
-  Red_Spinel_Ore = SF::Sprite.new(RED_SPINEL_TEXTURE); Red_Spinel_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
-  Red_Spinel_Ore.position = SF.vector2(-2800, 702)
- #'''''''''''''''''''''''''''''''''''''''''''''''''''''Fire Opal'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
-  FIRE_OPAL_TEXTURE = SF::Texture.from_file("graphics/minerals/Fire_Opal.png")
-  Fire_Opal_Ore = SF::Sprite.new(FIRE_OPAL_TEXTURE); Fire_Opal_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
-  Fire_Opal_Ore.position = SF.vector2(-3000, 702)
- #''''''''''''''''''''''''''''''''''''''''''''''''''''''Garnet'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
-  GARNET_TEXTURE = SF::Texture.from_file("graphics/minerals/Garnet.png")
-  Garnet_Ore = SF::Sprite.new(GARNET_TEXTURE); Garnet_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
-  Garnet_Ore.position = SF.vector2(-3200, 702)
- #'''''''''''''''''''''''''''''''''''''''''''''''''''''''Ruby''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
-  RUBY_TEXTURE = SF::Texture.from_file("graphics/minerals/Ruby.png")
-  Ruby_Ore = SF::Sprite.new(RUBY_TEXTURE); Ruby_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
-  Ruby_Ore.position = SF.vector2(-3400, 702)
- #'''''''''''''''''''''''''''''''''''''''''''''''''''Cherry Quartz'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
-  CHERRY_QUARTZ_TEXTURE = SF::Texture.from_file("graphics/minerals/Cherry_Quartz.png")
-  Cherry_Quartz_Ore = SF::Sprite.new(CHERRY_QUARTZ_TEXTURE); Cherry_Quartz_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
-  Cherry_Quartz_Ore.position = SF.vector2(-3600, 702)
- #'''''''''''''''''''''''''''''''''''''''''''''''''''Lemon Quartz'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
-  LEMON_QUARTZ_TEXTURE = SF::Texture.from_file("graphics/minerals/Lemon_Quartz.png")
-  Lemon_Quartz_Ore = SF::Sprite.new(LEMON_QUARTZ_TEXTURE); Lemon_Quartz_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
-  Lemon_Quartz_Ore.position = SF.vector2(-3800, 702)
- #'''''''''''''''''''''''''''''''''''''''''''''''''''''Turquoise''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
-  TURQUOISE_TEXTURE = SF::Texture.from_file("graphics/minerals/Turquoise.png")
-  Turquoise_Ore = SF::Sprite.new(TURQUOISE_TEXTURE); Turquoise_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
-  Turquoise_Ore.position = SF.vector2(-4000, 702)
- #''''''''''''''''''''''''''''''''''''''''''''''''''''Tiger's Eye'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
-  TIGERS_EYE_TEXTURE = SF::Texture.from_file("graphics/minerals/Tiger's_Eye.png")
-  Tigers_Eye_Ore = SF::Sprite.new(TIGERS_EYE_TEXTURE); Tigers_Eye_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
-  Tigers_Eye_Ore.position = SF.vector2(-4200, 702)
- #'''''''''''''''''''''''''''''''''''''''''''''''''''Orange Calcite'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
-  ORANGE_CALCITE_TEXTURE = SF::Texture.from_file("graphics/minerals/Orange_Calcite.png")
-  Orange_Calcite_Ore = SF::Sprite.new(ORANGE_CALCITE_TEXTURE); Orange_Calcite_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
-  Orange_Calcite_Ore.position = SF.vector2(-4400, 702)
- #''''''''''''''''''''''''''''''''''''''''''''''''''''Grape Agate'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
-  GRAPE_AGATE_TEXTURE = SF::Texture.from_file("graphics/minerals/Grape_Agate.png")
-  Grape_Agate_Ore = SF::Sprite.new(GRAPE_AGATE_TEXTURE); Grape_Agate_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
-  Grape_Agate_Ore.position = SF.vector2(-4600, 702)
- #''''''''''''''''''''''''''''''''''''''''''''''''''''''''Jade''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
-  JADE_TEXTURE = SF::Texture.from_file("graphics/minerals/Jade.png")
-  Jade_Ore = SF::Sprite.new(JADE_TEXTURE); Jade_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
-  Jade_Ore.position = SF.vector2(-4800, 702)
- #''''''''''''''''''''''''''''''''''''''''''''''''''''''Diamond'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
-  DIAMOND_TEXTURE = SF::Texture.from_file("graphics/minerals/Diamond.png")
-  Diamond_Ore = SF::Sprite.new(DIAMOND_TEXTURE); Diamond_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
-  Diamond_Ore.position = SF.vector2(50, 302)
- #''''''''''''''''''''''''''''''''''''''''''''''''''''''Emerald'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
-  EMERALD_TEXTURE = SF::Texture.from_file("graphics/minerals/Emerald.png")
-  Emerald_Ore = SF::Sprite.new(EMERALD_TEXTURE); Emerald_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
-  Emerald_Ore.position = SF.vector2(250, 302)
- #''''''''''''''''''''''''''''''''''''''''''''''''''''''Painite'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
-  PAINITE_TEXTURE = SF::Texture.from_file("graphics/minerals/Painite.png")
-  Painite_Ore = SF::Sprite.new(PAINITE_TEXTURE); Painite_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
-  Painite_Ore.position = SF.vector2(450, 302)
- #'''''''''''''''''''''''''''''''''''''''''''''''''Bumblebee Jasper'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
-  BUMBLEBEE_JASPER_TEXTURE = SF::Texture.from_file("graphics/minerals/Bumblebee_Jasper.png")
-  Bumblebee_Jasper_Ore = SF::Sprite.new(BUMBLEBEE_JASPER_TEXTURE); Bumblebee_Jasper_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
-  Bumblebee_Jasper_Ore.position = SF.vector2(650, 302)
- #'''''''''''''''''''''''''''''''''''''''''''''''''''Blood Jasper''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
-  BLOOD_JASPER_TEXTURE = SF::Texture.from_file("graphics/minerals/Blood_Jasper.png")
-  Blood_Jasper_Ore = SF::Sprite.new(BLOOD_JASPER_TEXTURE); Blood_Jasper_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
-  Blood_Jasper_Ore.position = SF.vector2(850, 302)
- #'''''''''''''''''''''''''''''''''''''''''''''''''''Mook Jasper'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
-  MOOK_JASPER_TEXTURE = SF::Texture.from_file("graphics/minerals/Mook_Jasper.png")
-  Mook_Jasper_Ore = SF::Sprite.new(MOOK_JASPER_TEXTURE); Mook_Jasper_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
-  Mook_Jasper_Ore.position = SF.vector2(1050, 302)
- #''''''''''''''''''''''''''''''''''''''''''''''''''''Red Jasper'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
-  RED_JASPER_TEXTURE = SF::Texture.from_file("graphics/minerals/Red_Jasper.png")
-  Red_Jasper_Ore = SF::Sprite.new(RED_JASPER_TEXTURE); Red_Jasper_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
-  Red_Jasper_Ore.position = SF.vector2(1250, 302)
+ #//////////////////////////////////////////////////////Minerals\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+  #'''''''''''''''''''''''''''''''''''''''''''''''''''''Bloodstone'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+   BLOODSTONE_TEXTURE = SF::Texture.from_file("graphics/minerals/Bloodstone.png")
+   #Ore_Box = SF::RectangleShape.new(SF.vector2(100, 100)); Ore_Box.position = SF.vector2(1800, 700); Ore_Box.fill_color = SF.color(255, 255, 255)
+   Bloodstone_Ore = SF::Sprite.new(BLOODSTONE_TEXTURE); Bloodstone_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
+  #'''''''''''''''''''''''''''''''''''''''''''''''''''''Moss Agate''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+   MOSS_AGATE_TEXTURE = SF::Texture.from_file("graphics/minerals/Moss_Agate.png")
+   Moss_Agate_Ore = SF::Sprite.new(MOSS_AGATE_TEXTURE); Moss_Agate_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
+   Moss_Agate_Ore.position = SF.vector2(500, 702)
+  #'''''''''''''''''''''''''''''''''''''''''''''''''''''''Amber'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+   AMBER_TEXTURE = SF::Texture.from_file("graphics/minerals/Amber.png")
+   Amber_Ore = SF::Sprite.new(AMBER_TEXTURE); Amber_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
+   Amber_Ore.position = SF.vector2(700, 702)
+  #'''''''''''''''''''''''''''''''''''''''''''''''''''''Wavellite'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+   WAVELLITE_TEXTURE = SF::Texture.from_file("graphics/minerals/Wavellite.png")
+   Wavellite_Ore = SF::Sprite.new(WAVELLITE_TEXTURE); Wavellite_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
+   Wavellite_Ore.position = SF.vector2(900, 702)
+  #'''''''''''''''''''''''''''''''''''''''''''''''''''''''Topaz''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+   TOPAZ_TEXTURE = SF::Texture.from_file("graphics/minerals/Topaz.png")
+   Topaz_Ore = SF::Sprite.new(TOPAZ_TEXTURE); Topaz_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
+   Topaz_Ore.position = SF.vector2(1100, 702)
+  #'''''''''''''''''''''''''''''''''''''''''''''''''''''Amethyst''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+   AMETHYST_TEXTURE = SF::Texture.from_file("graphics/minerals/Amethyst_Ore.png")
+   Amethyst_Ore = SF::Sprite.new(AMETHYST_TEXTURE); Amethyst_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
+   Amethyst_Ore.position = SF.vector2(1300, 702)
+  #'''''''''''''''''''''''''''''''''''''''''''''''''''Smokey Quartz''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+   SMOKEY_QUARTZ_TEXTURE = SF::Texture.from_file("graphics/minerals/Smokey_Quartz.png")
+   Smokey_Quartz_Ore = SF::Sprite.new(SMOKEY_QUARTZ_TEXTURE); Smokey_Quartz_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
+   Smokey_Quartz_Ore.position = SF.vector2(1500, 702)
+  #'''''''''''''''''''''''''''''''''''''''''''''''''''''Sapphire''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+   SAPPHIRE_TEXTURE = SF::Texture.from_file("graphics/minerals/Sapphire.png")
+   Sapphire_Ore = SF::Sprite.new(SAPPHIRE_TEXTURE); Sapphire_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
+   Sapphire_Ore.position = SF.vector2(1700, 702)
+  #''''''''''''''''''''''''''''''''''''''''''''''''''''Black Opal'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+   BLACK_OPAL_TEXTURE = SF::Texture.from_file("graphics/minerals/Black_Opal.png")
+   Black_Opal_Ore = SF::Sprite.new(BLACK_OPAL_TEXTURE); Black_Opal_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
+   Black_Opal_Ore.position = SF.vector2(1900, 702)
+  #''''''''''''''''''''''''''''''''''''''''''''''''''''''Ajoite'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+   AJOITE_TEXTURE = SF::Texture.from_file("graphics/minerals/Ajoite.png")
+   Ajoite_Ore = SF::Sprite.new(AJOITE_TEXTURE); Ajoite_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
+   Ajoite_Ore.position = SF.vector2(2100, 702)
+  #''''''''''''''''''''''''''''''''''''''''''''''''''''Rhodolite''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+   RHODOLITE_TEXTURE = SF::Texture.from_file("graphics/minerals/Rhodolite.png")
+   Rhodolite_Ore = SF::Sprite.new(RHODOLITE_TEXTURE); Rhodolite_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
+   Rhodolite_Ore.position = SF.vector2(2300, 702)
+  #'''''''''''''''''''''''''''''''''''''''''''''''''''Chalcanthite''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+   CHALCANTHITE_TEXTURE = SF::Texture.from_file("graphics/minerals/Chalcanthite.png")
+   Chalcanthite_Ore = SF::Sprite.new(CHALCANTHITE_TEXTURE); Chalcanthite_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
+   Chalcanthite_Ore.position = SF.vector2(2500, 702)
+  #'''''''''''''''''''''''''''''''''''''''''''''''''''''Flourite''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+   FLOURITE_TEXTURE = SF::Texture.from_file("graphics/minerals/Flourite.png")
+   Flourite_Ore = SF::Sprite.new(FLOURITE_TEXTURE); Flourite_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
+   Flourite_Ore.position = SF.vector2(2700, 702)
+  #'''''''''''''''''''''''''''''''''''''''''''''''''''''Amorite'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+   AMORITE_TEXTURE = SF::Texture.from_file("graphics/minerals/Amorite.png")
+   Amorite_Ore = SF::Sprite.new(AMORITE_TEXTURE); Amorite_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
+   Amorite_Ore.position = SF.vector2(2900, 702)
+  #'''''''''''''''''''''''''''''''''''''''''''''''''''Lapis Lazuli''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+   LAPIS_LAZULI_TEXTURE = SF::Texture.from_file("graphics/minerals/Lapis_Lazuli.png")
+   Lapis_Lazuli_Ore = SF::Sprite.new(LAPIS_LAZULI_TEXTURE); Lapis_Lazuli_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
+   Lapis_Lazuli_Ore.position = SF.vector2(3100, 702)
+  #''''''''''''''''''''''''''''''''''''''''''''''''''''Moonstone''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+   MOONSTONE_TEXTURE = SF::Texture.from_file("graphics/minerals/Moonstone.png")
+   Moonstone_Ore = SF::Sprite.new(MOONSTONE_TEXTURE); Moonstone_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
+   Moonstone_Ore.position = SF.vector2(3300, 702)
+  #'''''''''''''''''''''''''''''''''''''''''''''''''''Blue Calcite''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+   BLUE_CALCITE_TEXTURE = SF::Texture.from_file("graphics/minerals/Blue_Calcite.png")
+   Blue_Calcite_Ore = SF::Sprite.new(BLUE_CALCITE_TEXTURE); Blue_Calcite_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
+   Blue_Calcite_Ore.position = SF.vector2(3500, 702)
+  #''''''''''''''''''''''''''''''''''''''''''''''''''''Hiddenite''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+   HIDDENITE_TEXTURE = SF::Texture.from_file("graphics/minerals/Hiddenite.png")
+   Hiddenite_Ore = SF::Sprite.new(HIDDENITE_TEXTURE); Hiddenite_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
+   Hiddenite_Ore.position = SF.vector2(3700, 702)
+  #''''''''''''''''''''''''''''''''''''''''''''''''''''Offretite''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+   OFFRETITE_TEXTURE = SF::Texture.from_file("graphics/minerals/Offretite.png")
+   Offretite_Ore = SF::Sprite.new(OFFRETITE_TEXTURE); Offretite_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
+   Offretite_Ore.position = SF.vector2(3900, 702)
+  #''''''''''''''''''''''''''''''''''''''''''''''''Holley_Blue_Agate_Ore''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+   HOLLEY_BLUE_AGATE_TEXTURE = SF::Texture.from_file("graphics/minerals/Holley_Blue_Agate.png")
+   Holley_Blue_Agate_Ore = SF::Sprite.new(HOLLEY_BLUE_AGATE_TEXTURE); Holley_Blue_Agate_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
+   Holley_Blue_Agate_Ore.position = SF.vector2(4100, 702)
+  #''''''''''''''''''''''''''''''''''''''''''''''''''''Ametrine'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+   AMETRINE_TEXTURE = SF::Texture.from_file("graphics/minerals/Ametrine.png")
+   Ametrine_Ore = SF::Sprite.new(AMETRINE_TEXTURE); Ametrine_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
+   Ametrine_Ore.position = SF.vector2(4300, 702)
+  #''''''''''''''''''''''''''''''''''''''''''''''''''Hemimorphite'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+   HEMIMORPHITE_TEXTURE = SF::Texture.from_file("graphics/minerals/Hemimorphite.png")
+   Hemimorphite_Ore = SF::Sprite.new(HEMIMORPHITE_TEXTURE); Hemimorphite_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
+   Hemimorphite_Ore.position = SF.vector2(-200, 702)
+  #''''''''''''''''''''''''''''''''''''''''''''''''''Tiffany Stone''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+   TIFFANY_STONE_TEXTURE = SF::Texture.from_file("graphics/minerals/Tiffany_Stone.png")
+   Tiffany_Stone_Ore = SF::Sprite.new(TIFFANY_STONE_TEXTURE); Tiffany_Stone_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
+   Tiffany_Stone_Ore.position = SF.vector2(-400, 702)
+  #'''''''''''''''''''''''''''''''''''''''''''''''''''''Azurite'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+   AZURITE_TEXTURE = SF::Texture.from_file("graphics/minerals/Azurite.png")
+   Azurite_Ore = SF::Sprite.new(AZURITE_TEXTURE); Azurite_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
+   Azurite_Ore.position = SF.vector2(-600, 702)
+  #'''''''''''''''''''''''''''''''''''''''''''''''''''''Howlite'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+   HOWLITE_TEXTURE = SF::Texture.from_file("graphics/minerals/Howlite.png")
+   Howlite_Ore = SF::Sprite.new(HOWLITE_TEXTURE); Howlite_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
+   Howlite_Ore.position = SF.vector2(-800, 702)
+  #'''''''''''''''''''''''''''''''''''''''''''''''''''''Angelite''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+   ANGELITE_TEXTURE = SF::Texture.from_file("graphics/minerals/Angelite.png")
+   Angelite_Ore = SF::Sprite.new(ANGELITE_TEXTURE); Angelite_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
+   Angelite_Ore.position = SF.vector2(-1000, 702)
+  #'''''''''''''''''''''''''''''''''''''''''''''''''''Blue Lace Agate'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+   BLUE_LACE_AGATE_TEXTURE = SF::Texture.from_file("graphics/minerals/Blue_Lace_Agate.png")
+   Blue_Lace_Agate_Ore = SF::Sprite.new(BLUE_LACE_AGATE_TEXTURE); Blue_Lace_Agate_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
+   Blue_Lace_Agate_Ore.position = SF.vector2(-1200, 702)
+  #'''''''''''''''''''''''''''''''''''''''''''''''''''''''Iolite''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+   IOLITE_TEXTURE = SF::Texture.from_file("graphics/minerals/Iolite.png")
+   Iolite_Ore = SF::Sprite.new(IOLITE_TEXTURE); Iolite_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
+   Iolite_Ore.position = SF.vector2(-1400, 702)
+  #''''''''''''''''''''''''''''''''''''''''''''''''''''''Sodalite'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+   SODALITE_TEXTURE = SF::Texture.from_file("graphics/minerals/Sodalite.png")
+   Sodalite_Ore = SF::Sprite.new(SODALITE_TEXTURE); Sodalite_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
+   Sodalite_Ore.position = SF.vector2(-1600, 702)
+  #''''''''''''''''''''''''''''''''''''''''''''''''''''''Kyanite''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+   KYANITE_TEXTURE = SF::Texture.from_file("graphics/minerals/Kyanite.png")
+   Kyanite_Ore = SF::Sprite.new(KYANITE_TEXTURE); Kyanite_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
+   Kyanite_Ore.position = SF.vector2(-1800, 702)
+  #''''''''''''''''''''''''''''''''''''''''''''''''''''''Sunstone'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+   SUNSTONE_TEXTURE = SF::Texture.from_file("graphics/minerals/Sunstone.png")
+   Sunstone_Ore = SF::Sprite.new(SUNSTONE_TEXTURE); Sunstone_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
+   Sunstone_Ore.position = SF.vector2(-2000, 702)
+  #'''''''''''''''''''''''''''''''''''''''''''''''''''''Bony Amber''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+   BONY_AMBER_TEXTURE = SF::Texture.from_file("graphics/minerals/Bony_Amber.png")
+   Bony_Amber_Ore = SF::Sprite.new(BONY_AMBER_TEXTURE); Bony_Amber_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
+   Bony_Amber_Ore.position = SF.vector2(-2200, 702)
+  #'''''''''''''''''''''''''''''''''''''''''''''''''''''Blue Amber''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+   BLUE_AMBER_TEXTURE = SF::Texture.from_file("graphics/minerals/Blue_Amber.png")
+   Blue_Amber_Ore = SF::Sprite.new(BLUE_AMBER_TEXTURE); Blue_Amber_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
+   Blue_Amber_Ore.position = SF.vector2(-2400, 702)
+  #'''''''''''''''''''''''''''''''''''''''''''''''''''''Blue Spinel'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+   BLUE_SPINEL_TEXTURE = SF::Texture.from_file("graphics/minerals/Blue_Spinel.png")
+   Blue_Spinel_Ore = SF::Sprite.new(BLUE_SPINEL_TEXTURE); Blue_Spinel_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
+   Blue_Spinel_Ore.position = SF.vector2(-2600, 702)
+  #'''''''''''''''''''''''''''''''''''''''''''''''''''''Red Spinel''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+   RED_SPINEL_TEXTURE = SF::Texture.from_file("graphics/minerals/Red_Spinel.png")
+   Red_Spinel_Ore = SF::Sprite.new(RED_SPINEL_TEXTURE); Red_Spinel_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
+   Red_Spinel_Ore.position = SF.vector2(-2800, 702)
+  #'''''''''''''''''''''''''''''''''''''''''''''''''''''Fire Opal'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+   FIRE_OPAL_TEXTURE = SF::Texture.from_file("graphics/minerals/Fire_Opal.png")
+   Fire_Opal_Ore = SF::Sprite.new(FIRE_OPAL_TEXTURE); Fire_Opal_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
+   Fire_Opal_Ore.position = SF.vector2(-3000, 702)
+  #''''''''''''''''''''''''''''''''''''''''''''''''''''''Garnet'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+   GARNET_TEXTURE = SF::Texture.from_file("graphics/minerals/Garnet.png")
+   Garnet_Ore = SF::Sprite.new(GARNET_TEXTURE); Garnet_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
+   Garnet_Ore.position = SF.vector2(-3200, 702)
+  #'''''''''''''''''''''''''''''''''''''''''''''''''''''''Ruby''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+   RUBY_TEXTURE = SF::Texture.from_file("graphics/minerals/Ruby.png")
+   Ruby_Ore = SF::Sprite.new(RUBY_TEXTURE); Ruby_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
+   Ruby_Ore.position = SF.vector2(-3400, 702)
+  #'''''''''''''''''''''''''''''''''''''''''''''''''''Cherry Quartz'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+   CHERRY_QUARTZ_TEXTURE = SF::Texture.from_file("graphics/minerals/Cherry_Quartz.png")
+   Cherry_Quartz_Ore = SF::Sprite.new(CHERRY_QUARTZ_TEXTURE); Cherry_Quartz_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
+   Cherry_Quartz_Ore.position = SF.vector2(-3600, 702)
+  #'''''''''''''''''''''''''''''''''''''''''''''''''''Lemon Quartz'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+   LEMON_QUARTZ_TEXTURE = SF::Texture.from_file("graphics/minerals/Lemon_Quartz.png")
+   Lemon_Quartz_Ore = SF::Sprite.new(LEMON_QUARTZ_TEXTURE); Lemon_Quartz_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
+   Lemon_Quartz_Ore.position = SF.vector2(-3800, 702)
+  #'''''''''''''''''''''''''''''''''''''''''''''''''''''Turquoise''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+   TURQUOISE_TEXTURE = SF::Texture.from_file("graphics/minerals/Turquoise.png")
+   Turquoise_Ore = SF::Sprite.new(TURQUOISE_TEXTURE); Turquoise_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
+   Turquoise_Ore.position = SF.vector2(-4000, 702)
+  #''''''''''''''''''''''''''''''''''''''''''''''''''''Tiger's Eye'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+   TIGERS_EYE_TEXTURE = SF::Texture.from_file("graphics/minerals/Tiger's_Eye.png")
+   Tigers_Eye_Ore = SF::Sprite.new(TIGERS_EYE_TEXTURE); Tigers_Eye_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
+   Tigers_Eye_Ore.position = SF.vector2(-4200, 702)
+  #'''''''''''''''''''''''''''''''''''''''''''''''''''Orange Calcite'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+   ORANGE_CALCITE_TEXTURE = SF::Texture.from_file("graphics/minerals/Orange_Calcite.png")
+   Orange_Calcite_Ore = SF::Sprite.new(ORANGE_CALCITE_TEXTURE); Orange_Calcite_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
+   Orange_Calcite_Ore.position = SF.vector2(-4400, 702)
+  #''''''''''''''''''''''''''''''''''''''''''''''''''''Grape Agate'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+   GRAPE_AGATE_TEXTURE = SF::Texture.from_file("graphics/minerals/Grape_Agate.png")
+   Grape_Agate_Ore = SF::Sprite.new(GRAPE_AGATE_TEXTURE); Grape_Agate_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
+   Grape_Agate_Ore.position = SF.vector2(-4600, 702)
+  #''''''''''''''''''''''''''''''''''''''''''''''''''''''''Jade''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+   JADE_TEXTURE = SF::Texture.from_file("graphics/minerals/Jade.png")
+   Jade_Ore = SF::Sprite.new(JADE_TEXTURE); Jade_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
+   Jade_Ore.position = SF.vector2(-4800, 702)
+  #''''''''''''''''''''''''''''''''''''''''''''''''''''''Diamond'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+   DIAMOND_TEXTURE = SF::Texture.from_file("graphics/minerals/Diamond.png")
+   Diamond_Ore = SF::Sprite.new(DIAMOND_TEXTURE); Diamond_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
+   Diamond_Ore.position = SF.vector2(50, 302)
+  #''''''''''''''''''''''''''''''''''''''''''''''''''''''Emerald'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+   EMERALD_TEXTURE = SF::Texture.from_file("graphics/minerals/Emerald.png")
+   Emerald_Ore = SF::Sprite.new(EMERALD_TEXTURE); Emerald_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
+   Emerald_Ore.position = SF.vector2(250, 302)
+  #''''''''''''''''''''''''''''''''''''''''''''''''''''''Painite'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+   PAINITE_TEXTURE = SF::Texture.from_file("graphics/minerals/Painite.png")
+   Painite_Ore = SF::Sprite.new(PAINITE_TEXTURE); Painite_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
+   Painite_Ore.position = SF.vector2(450, 302)
+  #'''''''''''''''''''''''''''''''''''''''''''''''''Bumblebee Jasper'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+   BUMBLEBEE_JASPER_TEXTURE = SF::Texture.from_file("graphics/minerals/Bumblebee_Jasper.png")
+   Bumblebee_Jasper_Ore = SF::Sprite.new(BUMBLEBEE_JASPER_TEXTURE); Bumblebee_Jasper_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
+   Bumblebee_Jasper_Ore.position = SF.vector2(650, 302)
+  #'''''''''''''''''''''''''''''''''''''''''''''''''''Blood Jasper''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+   BLOOD_JASPER_TEXTURE = SF::Texture.from_file("graphics/minerals/Blood_Jasper.png")
+   Blood_Jasper_Ore = SF::Sprite.new(BLOOD_JASPER_TEXTURE); Blood_Jasper_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
+   Blood_Jasper_Ore.position = SF.vector2(850, 302)
+  #'''''''''''''''''''''''''''''''''''''''''''''''''''Mook Jasper'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+   MOOK_JASPER_TEXTURE = SF::Texture.from_file("graphics/minerals/Mook_Jasper.png")
+   Mook_Jasper_Ore = SF::Sprite.new(MOOK_JASPER_TEXTURE); Mook_Jasper_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
+   Mook_Jasper_Ore.position = SF.vector2(1050, 302)
+  #''''''''''''''''''''''''''''''''''''''''''''''''''''Red Jasper'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+   RED_JASPER_TEXTURE = SF::Texture.from_file("graphics/minerals/Red_Jasper.png")
+   Red_Jasper_Ore = SF::Sprite.new(RED_JASPER_TEXTURE); Red_Jasper_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
+   Red_Jasper_Ore.position = SF.vector2(1250, 302)
+ #///////////////////////////////////////////////////////Metals\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+  #''''''''''''''''''''''''''''''''''''''''''''''''''''''Carbon'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+   CARBON_TEXTURE = SF::Texture.from_file("graphics/metals/Carbon_Ore.png")
+   Carbon_Ore = SF::Sprite.new(CARBON_TEXTURE); Carbon_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
+   Carbon_Ore.position = SF.vector2(0, 100)
+  #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
 #______________________________________________________________________________________________________________________________________
 Testing_Text = SF::Text.new; Testing_Text.font = FONT_PIXEL; 
 Testing_Text.character_size = 20; Testing_Text.color = SF::Color::White; Testing_Text.position = SF.vector2(1800, 652)
