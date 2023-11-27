@@ -525,6 +525,9 @@
     #''''''''''''''''''''''''''''''''''''''''''''''''''Orange Calcite'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      ORANGE_CALCITE_INVENTORY_ORE_TEXTURE = SF::Texture.from_file("graphics/minerals/Orange_Calcite_Inventory.png")
      Orange_Calcite_Inventory_Ore = SF::Sprite.new(ORANGE_CALCITE_INVENTORY_ORE_TEXTURE) 
+    #''''''''''''''''''''''''''''''''''''''''''''''''''Orange Calcite'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     GRAPE_AGATE_INVENTORY_ORE_TEXTURE = SF::Texture.from_file("graphics/minerals/Grape_Agate_Inventory.png")
+     Grape_Agate_Inventory_Ore = SF::Sprite.new(GRAPE_AGATE_INVENTORY_ORE_TEXTURE) 
 #----------------------------------------------------------------------------------------------------------------------------------- 
 #                                                    Character Model
 #-----------------------------------------------------------------------------------------------------------------------------------
@@ -2083,6 +2086,10 @@
   ORANGE_CALCITE_TEXTURE = SF::Texture.from_file("graphics/minerals/Orange_Calcite.png")
   Orange_Calcite_Ore = SF::Sprite.new(ORANGE_CALCITE_TEXTURE); Orange_Calcite_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
   Orange_Calcite_Ore.position = SF.vector2(-4400, 702)
+ #''''''''''''''''''''''''''''''''''''''''''''''''''''Grape Agate'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+  GRAPE_AGATE_TEXTURE = SF::Texture.from_file("graphics/minerals/Grape_Agate.png")
+  Grape_Agate_Ore = SF::Sprite.new(GRAPE_AGATE_TEXTURE); Grape_Agate_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
+  Grape_Agate_Ore.position = SF.vector2(-4600, 702)
 #______________________________________________________________________________________________________________________________________
 Testing_Text = SF::Text.new; Testing_Text.font = FONT_PIXEL; 
 Testing_Text.character_size = 20; Testing_Text.color = SF::Color::White; Testing_Text.position = SF.vector2(1800, 652)

@@ -808,6 +808,9 @@ module Etc
     #-------------------------------------------------------------Orange Calcite------------------------------------------------------------------------------- 
      @@orange_calcite = Inventory_Ore.new("Orange Calcite", 43, Orange_Calcite_Inventory_Ore, 1, "orange", "fire", "HP+", 70)
      Ore_Array.push(@@orange_calcite)
+    #-------------------------------------------------------------Orange Calcite------------------------------------------------------------------------------- 
+     @@grape_agate = Inventory_Ore.new("Grape Agate", 44, Grape_Agate_Inventory_Ore, 1, "purple", "fire", "INT+", 70)
+     Ore_Array.push(@@grape_agate)
    #________________________________________________________________________________________________________________________________________________________
   end
 end 
@@ -821,7 +824,7 @@ module Harvestables
     @@moonstone01, @@blue_calcite01, @@hiddenite01, @@ofretite01, @@holley_blue_agate01, @@ametrine01, @@hemimorphite01, @@tiffany_stone01,
     @@azurite01, @@howlite01, @@angelite01, @@blue_lace_agate01, @@iolite01, @@sodalite01, @@kyanite01, @@sunstone01, @@bony_amber01, @@blue_amber01,
     @@blue_spinel01, @@red_spinel01, @@fire_opal01, @@garnet01, @@ruby01, @@cherry_quartz01, @@lemon_quartz01, @@turquoise01, @@tigers_eye01,
-    @@orange_calcite01]
+    @@orange_calcite01, @@grape_agate01]
 
     Test_Ore_Sprite_Array = [@@bloodstone_01.sprite, @@bloodstone_02.sprite, @@bloodstone_03.sprite, @@moss_agate_01.sprite, @@amber01.sprite, 
     @@wavellite01.sprite,  @@topaz01.sprite, @@amethyst01.sprite, @@smokey_quartz01.sprite, @@sapphire01.sprite, @@black_opal01.sprite,
@@ -830,7 +833,7 @@ module Harvestables
     @@hemimorphite01.sprite, @@tiffany_stone01.sprite, @@azurite01.sprite, @@howlite01.sprite, @@angelite01.sprite, @@blue_lace_agate01.sprite,
     @@iolite01.sprite, @@sodalite01.sprite, @@kyanite01.sprite, @@sunstone01.sprite, @@bony_amber01.sprite, @@blue_amber01.sprite, @@blue_spinel01.sprite,
     @@red_spinel01.sprite, @@fire_opal01.sprite, @@garnet01.sprite, @@ruby01.sprite, @@cherry_quartz01.sprite, @@lemon_quartz01.sprite,
-    @@turquoise01.sprite, @@tigers_eye01.sprite, @@orange_calcite01.sprite]
+    @@turquoise01.sprite, @@tigers_eye01.sprite, @@orange_calcite01.sprite, @@grape_agate01.sprite]
    #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
    #+                                                              Variables                                                                               +
    #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -1042,6 +1045,7 @@ module Harvestables
       window.draw(@@bony_amber01.sprite); window.draw(@@blue_amber01.sprite); window.draw(@@blue_spinel01.sprite); window.draw(@@red_spinel01.sprite)
       window.draw(@@fire_opal01.sprite); window.draw(@@garnet01.sprite); window.draw(@@ruby01.sprite); window.draw(@@cherry_quartz01.sprite)
       window.draw(@@lemon_quartz01.sprite); window.draw(@@turquoise01.sprite); window.draw(@@tigers_eye01.sprite); window.draw(@@orange_calcite01.sprite)
+      window.draw(@@grape_agate01.sprite)
     end
    #________________________________________________________________________________________________________________________________________________________
    #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1385,8 +1389,16 @@ module Harvestables
      @@tigers_eye05 = Ore.new("Tiger's Eye", 241, "orange", 7, 450, "tiger's eye", Tigers_Eye_Ore.dup, false, 450)
      @@tigers_eye06 = Ore.new("Tiger's Eye", 242, "orange", 7, 450, "tiger's eye", Tigers_Eye_Ore.dup, false, 450)
     #........................................................................................................................................................
-    #.................................................................Tiger's Eye............................................................................
+    #................................................................Orange Calcite..........................................................................
      @@orange_calcite01 = Ore.new("Orange Calcite", 243, "orange", 3, 250, "orange calclite", Orange_Calcite_Ore.dup, false, 250)
+     @@orange_calcite02 = Ore.new("Orange Calcite", 244, "orange", 3, 250, "orange calclite", Orange_Calcite_Ore.dup, false, 250)
+     @@orange_calcite03 = Ore.new("Orange Calcite", 245, "orange", 3, 250, "orange calclite", Orange_Calcite_Ore.dup, false, 250)
+     @@orange_calcite04 = Ore.new("Orange Calcite", 246, "orange", 3, 250, "orange calclite", Orange_Calcite_Ore.dup, false, 250)
+     @@orange_calcite05 = Ore.new("Orange Calcite", 247, "orange", 3, 250, "orange calclite", Orange_Calcite_Ore.dup, false, 250)
+     @@orange_calcite06 = Ore.new("Orange Calcite", 248, "orange", 3, 250, "orange calclite", Orange_Calcite_Ore.dup, false, 250)
+    #........................................................................................................................................................
+    #................................................................Orange Calcite..........................................................................
+     @@grape_agate01 = Ore.new("Grape Agate", 249, "purple", 6, 400, "grape agate", Grape_Agate_Ore.dup, false, 400)
     #........................................................................................................................................................
   end
   class Herbs
