@@ -1732,6 +1732,13 @@ def Window_Class.hud_keypresses(window)
         @@attacking = false
         Player_Data::Player_Physics.wasd_up(@@player_character_rendered_model, window)
         window.draw(@@player_character_rendered_model)
+
+      when SF::Keyboard::S
+        @@idleframes = 0
+        @@attacking = false
+        Player_Data::Player_Physics.wasd_down(@@player_character_rendered_model, window)
+        window.draw(@@player_character_rendered_model)
+
         
       when SF::Keyboard::W && SF::Keyboard::D
         Player_Data::Player_Physics.wasd_up(@@player_character_rendered_model, window)
@@ -2108,10 +2115,6 @@ end; end; end; end; end; end
        @@player_jumped = false
        @@is_player_airborne = false
        @@fallrate = 0
-     else if @@player_bounding_box.intersects? test_platform_box || test_platform_box_2
-       @@player_jumped = false
-       @@is_player_airborne = false
-       @@fallrate = 0
 
      else
        @@is_player_airborne = true
@@ -2127,7 +2130,7 @@ end; end; end; end; end; end
          @@fallrate = 0  
        else
          @@fallrate += 1
-       end; end; end
+       end; end
        if @@gravity_iterator >= test_platform_array.size - 1
         @@gravity_iterator = 0
        else
@@ -2190,6 +2193,14 @@ end; end; end; end; end; end
       if SF::Keyboard.key_pressed?(SF::Keyboard::D)
        SF::Event::KeyPressed
         Player_Physics.wasd_right(@@player_character_rendered_model)
+     end
+     def Player_Physics.wasd_down(@@player_character_rendered_model, window)
+      if @@player_bounding_box.intersects? Ground.global_bounds
+        @@player_jumped = false
+      else if @@can_player_move_at_all == true && @@player_jumped == false
+        @@player_character_rendered_model.position += SF.vector2(0, 10)
+        @@player_jumped = true
+      end; end
      end
     #---------------------------------------------------------------------------------------------------------------------------------+ 
     #-------------------------------------------Mobility------------------------------------------------------------------------------+
