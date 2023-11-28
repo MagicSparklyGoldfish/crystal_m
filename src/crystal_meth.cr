@@ -1263,6 +1263,11 @@ def Window_Class.hud_keypresses(window)
           cubby_number = 1
           Etc::Inventory_Ore.select_ore_one(window, cubby_number)
          end
+         if (x >= 685 && x <= 735) && (y >= 140 && y <= 200)
+          All_Audio::SFX.dig_02
+          cubby_number = 2
+          Etc::Inventory_Ore.select_ore_one(window, cubby_number)
+         end
       when "Stats_Menu" #---------------------------------------------------------Stats Menu
         if (x >= 1280 && x <= 1330) && (y >= 210 && y <= 260)
           @@popup = "none"

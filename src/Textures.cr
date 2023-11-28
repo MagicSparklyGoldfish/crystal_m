@@ -568,6 +568,9 @@
     #''''''''''''''''''''''''''''''''''''''''''''''''''''Copper'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      COPPER_INVENTORY_ORE_TEXTURE = SF::Texture.from_file("graphics/metals/Copper_Inventory.png")
      Copper_Inventory_Ore = SF::Sprite.new(COPPER_INVENTORY_ORE_TEXTURE) 
+    #'''''''''''''''''''''''''''''''''''''''''''''''''''''Tin'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     TIN_INVENTORY_ORE_TEXTURE = SF::Texture.from_file("graphics/metals/Tin_Inventory.png")
+     Tin_Inventory_Ore = SF::Sprite.new(TIN_INVENTORY_ORE_TEXTURE) 
 #----------------------------------------------------------------------------------------------------------------------------------- 
 #                                                    Character Model
 #-----------------------------------------------------------------------------------------------------------------------------------
@@ -2174,6 +2177,11 @@
    Copper_Ore = SF::Sprite.new(COPPER_TEXTURE); Copper_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
    Copper_Ore.position = SF.vector2(200, 102)
   #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+  #'''''''''''''''''''''''''''''''''''''''''''''''''''''''Tin'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+   TIN_TEXTURE = SF::Texture.from_file("graphics/metals/Tin_Ore.png")
+   Tin_Ore = SF::Sprite.new(TIN_TEXTURE); Tin_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
+   Tin_Ore.position = SF.vector2(1000, 102)
+ #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
 #______________________________________________________________________________________________________________________________________
 Testing_Text = SF::Text.new; Testing_Text.font = FONT_PIXEL; 
 Testing_Text.character_size = 20; Testing_Text.color = SF::Color::White; Testing_Text.position = SF.vector2(1800, 652)
@@ -2210,6 +2218,14 @@ Testing_Text.character_size = 20; Testing_Text.color = SF::Color::White; Testing
     COPPER_INGOT_TEXTURE = SF::Texture.from_file("graphics/metals/Copper_Ingot.png")
     Copper_Ingot_Ore = SF::Sprite.new(COPPER_INGOT_TEXTURE)
   #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+  #'''''''''''''''''''''''''''''''''''''''''''''''''''''''Tin'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+   #......................................................Ore..........................................................................
+    TIN_SMELTER_TEXTURE = SF::Texture.from_file("graphics/metals/Tin_Smelter.png")
+    Tin_Smelter_Ore = SF::Sprite.new(TIN_SMELTER_TEXTURE)
+   #.....................................................Ingot.........................................................................
+    TIN_INGOT_TEXTURE = SF::Texture.from_file("graphics/metals/Tin_Ingot.png")
+    Tin_Ingot_Ore = SF::Sprite.new(COPPER_INGOT_TEXTURE)
+ #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
 
    Smelter_Nil_Sprite = SF::Sprite.new(COPPER_TEXTURE)
    Smelter_Nil_Sprite.color = SF.color(0, 0, 0, 0) 
