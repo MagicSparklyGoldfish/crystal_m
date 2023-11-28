@@ -296,6 +296,8 @@ module Etc
       #-------------------------------------------------------------Smelt------------------------------------------------------------------------------------
          def Inventory_Ore.smelt
           case @@selected_ore_01.name
+          when "Carbon"
+            Inventory_Ore.smelt_carbon
            when "Copper"
             Inventory_Ore.smelt_copper
            when "Tin"
@@ -305,6 +307,22 @@ module Etc
            when "Iron"
             Inventory_Ore.smelt_iron
          end; end
+       #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Carbon'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+       def Inventory_Ore.smelt_carbon
+        case @@selected_ore_02.name
+         when "Iron"
+          if @@carbon.amount_owned >= 4 && @@iron.amount_owned >= 6
+            amount = 4
+            @@carbon.remove_ore(amount)
+            amount = 6
+            @@iron.remove_ore(amount)
+         ingot = "steel"
+          Inventory_Ingot.smelt_ingot(ingot)
+          else
+            All_Audio::SFX.light_bonk
+          end
+         end
+        end
        #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Copper'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
          def Inventory_Ore.smelt_copper
           case @@selected_ore_02.name
@@ -412,7 +430,7 @@ module Etc
             @@carbon.remove_ore(amount)
             amount = 6
             @@iron.remove_ore(amount)
-         ingot = "brass"
+         ingot = "steel"
           Inventory_Ingot.smelt_ingot(ingot)
           else
             All_Audio::SFX.light_bonk
@@ -1380,6 +1398,9 @@ module Etc
       when "iron"
         difficulty = 4; ingot = @@iron_ingot
         Inventory_Ingot.determine_ingots_smelted(difficulty, ingot)
+      when "steel"
+        difficulty = 6; ingot = @@steel_ingot
+        Inventory_Ingot.determine_ingots_smelted(difficulty, ingot)
        end
      end
      def Inventory_Ingot.determine_ingots_smelted(difficulty, ingot)
@@ -1422,6 +1443,9 @@ module Etc
     #---------------------------------------------------------------Iron--------------------------------------------------------------------------------- 
      @@iron_ingot = Inventory_Ingot.new("Iron", 0, Iron_Ingot_Ore, 0, 10)
      Ingot_Array.push(@@iron_ingot)
+    #---------------------------------------------------------------Steel-------------------------------------------------------------------------------- 
+     @@steel_ingot = Inventory_Ingot.new("Steel", 0, Steel_Ingot_Ore, 0, 10)
+     Ingot_Array.push(@@steel_ingot)
    end
 end 
 

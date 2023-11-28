@@ -2267,6 +2267,11 @@ Testing_Text.character_size = 20; Testing_Text.color = SF::Color::White; Testing
    #.....................................................Ingot.........................................................................
     IRON_INGOT_TEXTURE = SF::Texture.from_file("graphics/metals/Iron_Ingot.png")
     Iron_Ingot_Ore = SF::Sprite.new(IRON_INGOT_TEXTURE)
+  #''''''''''''''''''''''''''''''''''''''''''''''''''''''Steel''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+   #.....................................................Ingot.........................................................................
+   STEEL_INGOT_TEXTURE = SF::Texture.from_file("graphics/metals/Steel_Ingot.png")
+   Steel_Ingot_Ore = SF::Sprite.new(STEEL_INGOT_TEXTURE)
+  #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
 
    Smelter_Nil_Sprite = SF::Sprite.new(COPPER_TEXTURE)
    Smelter_Nil_Sprite.color = SF.color(0, 0, 0, 0) 
