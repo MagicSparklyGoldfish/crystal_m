@@ -282,6 +282,14 @@ module Etc
           metal_array_text_04.position =  Smelter_Ore_Sprite_Hash[Inventory_Metal_Ore_Array[3].name].position + SF.vector2(5, 25)
           window.draw(Smelter_Ore_Sprite_Hash[Inventory_Metal_Ore_Array[3].name])
           window.draw(metal_array_text_04)
+         end
+        if Inventory_Metal_Ore_Array.size >= 5
+          metal_array_text_05 = Ore_amount_owned_text.dup
+          metal_array_text_05.string = "x" + Inventory_Metal_Ore_Array[4].amount_owned.to_s
+          Smelter_Ore_Sprite_Hash[Inventory_Metal_Ore_Array[4].name].position = SF.vector2(225, -170)
+          metal_array_text_05.position =  Smelter_Ore_Sprite_Hash[Inventory_Metal_Ore_Array[4].name].position + SF.vector2(5, 25)
+          window.draw(Smelter_Ore_Sprite_Hash[Inventory_Metal_Ore_Array[4].name])
+          window.draw(metal_array_text_05)
         end
        end
       #------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -294,6 +302,8 @@ module Etc
             Inventory_Ore.smelt_tin
            when "Zinc"
             Inventory_Ore.smelt_zinc
+           when "Iron"
+            Inventory_Ore.smelt_iron
          end; end
        #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Copper'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
          def Inventory_Ore.smelt_copper
@@ -384,6 +394,32 @@ module Etc
          end
         end
        #_____________________________________________________________________________________________________________________________________________________
+       #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Iron''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+       def Inventory_Ore.smelt_iron
+        case @@selected_ore_02.name
+        when "Nil"
+          if @@iron.amount_owned >= 10
+            amount = 10
+            @@iron.remove_ore(amount)
+         ingot = "iron"
+          Inventory_Ingot.smelt_ingot(ingot)
+          else
+            All_Audio::SFX.light_bonk
+          end
+        when "Carbon"
+          if @@carbon.amount_owned >= 4 && @@iron.amount_owned >= 6
+            amount = 4
+            @@carbon.remove_ore(amount)
+            amount = 6
+            @@iron.remove_ore(amount)
+         ingot = "brass"
+          Inventory_Ingot.smelt_ingot(ingot)
+          else
+            All_Audio::SFX.light_bonk
+          end
+        end
+       end
+      #_____________________________________________________________________________________________________________________________________________________
       #------------------------------------------------------------------------------------------------------------------------------------------------------
      #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
      #++++++++++++++++++++++++++++++++++++++++++++++++++++++Inventory Ore Display++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -1179,7 +1215,11 @@ module Etc
       #---------------------------------------------------------------Zinc----------------------------------------------------------------------------------- 
        @@zinc = Inventory_Ore.new("Zinc", 1003, Zinc_Inventory_Ore, 1, "white", "none", "none", 70)
        Ore_Array.push(@@zinc); Smelter_Ore_Sprite_Hash["Zinc"] = Zinc_Smelter_Ore
-     #________________________________________________________________________________________________________________________________________________________
+      #_____________________________________________________________________________________________________________________________________________________
+      #---------------------------------------------------------------Iron----------------------------------------------------------------------------------- 
+       @@iron = Inventory_Ore.new("Iron", 1004, Iron_Inventory_Ore, 1, "grey", "none", "none", 70)
+       Ore_Array.push(@@iron); Smelter_Ore_Sprite_Hash["Iron"] = Iron_Smelter_Ore
+      #_______________________________________________________________________________________________________________________________________________________
    end
  #IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
  #IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
@@ -1305,7 +1345,18 @@ module Etc
            window.draw(Owned_Ingot_Array[5].sprite); window.draw(ore_array_text_06)
           end
         end
+      #----------------------------------------------------slot 7-------------------------------------------
+        if Owned_Ingot_Array.size >= 7
+          case page
+           when 1   
+            Owned_Ingot_Array[6].sprite.position = SF.vector2(555, 460);
+            ore_array_text_07 = Ore_amount_owned_text.dup
+            ore_array_text_07.position = Owned_Ingot_Array[6].sprite.position + SF.vector2(100, -5)
+            ore_array_text_07.string = "x" + Owned_Ingot_Array[6].amount_owned.to_s
+            window.draw(Owned_Ingot_Array[6].sprite); window.draw(ore_array_text_07)
      end
+    end
+  end
     #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++Player Skill+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++Amount Owned Methods++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
      def Inventory_Ingot.smelt_ingot(ingot)
@@ -1325,6 +1376,9 @@ module Etc
         Inventory_Ingot.determine_ingots_smelted(difficulty, ingot)
       when "brass"
         difficulty = 2; ingot = @@brass_ingot
+        Inventory_Ingot.determine_ingots_smelted(difficulty, ingot)
+      when "iron"
+        difficulty = 4; ingot = @@iron_ingot
         Inventory_Ingot.determine_ingots_smelted(difficulty, ingot)
        end
      end
@@ -1365,6 +1419,9 @@ module Etc
     #---------------------------------------------------------------Brass--------------------------------------------------------------------------------- 
      @@brass_ingot = Inventory_Ingot.new("Brass", 0, Brass_Ingot_Ore, 0, 10)
      Ingot_Array.push(@@brass_ingot)
+    #---------------------------------------------------------------Iron--------------------------------------------------------------------------------- 
+     @@iron_ingot = Inventory_Ingot.new("Iron", 0, Iron_Ingot_Ore, 0, 10)
+     Ingot_Array.push(@@iron_ingot)
    end
 end 
 
@@ -1378,7 +1435,7 @@ module Harvestables
     @@azurite01, @@howlite01, @@angelite01, @@blue_lace_agate01, @@iolite01, @@sodalite01, @@kyanite01, @@sunstone01, @@bony_amber01, @@blue_amber01,
     @@blue_spinel01, @@red_spinel01, @@fire_opal01, @@garnet01, @@ruby01, @@cherry_quartz01, @@lemon_quartz01, @@turquoise01, @@tigers_eye01,
     @@orange_calcite01, @@grape_agate01, @@jade01, @@diamond01, @@emerald01, @@painite01, @@bumblebee_jasper01, @@blood_jasper01, @@mook_jasper01,
-    @@red_jasper01, @@carbon01, @@copper01, @@tin01, @@zinc01]
+    @@red_jasper01, @@carbon01, @@copper01, @@tin01, @@zinc01, @@iron01]
 
     Test_Ore_Sprite_Array = [@@bloodstone_01.sprite, @@bloodstone_02.sprite, @@bloodstone_03.sprite, @@moss_agate_01.sprite, @@amber01.sprite, 
     @@wavellite01.sprite,  @@topaz01.sprite, @@amethyst01.sprite, @@smokey_quartz01.sprite, @@sapphire01.sprite, @@black_opal01.sprite,
@@ -1389,7 +1446,7 @@ module Harvestables
     @@red_spinel01.sprite, @@fire_opal01.sprite, @@garnet01.sprite, @@ruby01.sprite, @@cherry_quartz01.sprite, @@lemon_quartz01.sprite,
     @@turquoise01.sprite, @@tigers_eye01.sprite, @@orange_calcite01.sprite, @@grape_agate01.sprite, @@jade01.sprite, @@diamond01.sprite, @@emerald01.sprite,
     @@painite01.sprite, @@bumblebee_jasper01.sprite, @@blood_jasper01.sprite, @@mook_jasper01.sprite, @@red_jasper01.sprite, @@carbon01.sprite, 
-    @@copper01.sprite, @@tin01.sprite, @@zinc01.sprite]
+    @@copper01.sprite, @@tin01.sprite, @@zinc01.sprite, @@iron01.sprite]
    #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
    #+                                                              Variables                                                                               +
    #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -1613,7 +1670,7 @@ module Harvestables
       window.draw(@@grape_agate01.sprite); window.draw(@@jade01.sprite); window.draw(@@diamond01.sprite); window.draw(@@emerald01.sprite)
       window.draw(@@painite01.sprite); window.draw(@@bumblebee_jasper01.sprite); window.draw(@@blood_jasper01.sprite); window.draw(@@mook_jasper01.sprite)
       window.draw(@@red_jasper01.sprite); window.draw(@@carbon01.sprite); window.draw(@@copper01.sprite); window.draw(@@tin01.sprite)
-      window.draw(@@zinc01.sprite)
+      window.draw(@@zinc01.sprite); window.draw(@@iron01.sprite)
       if @@is_smelting == true
         page = 1
         window.draw(Test_Smelter_Menu); Etc::Inventory_Ore.update_ore_inventory; Etc::Inventory_Ore.display_metal_smelter(window)  
@@ -2098,6 +2155,9 @@ module Harvestables
      @@zinc10 = Ore.new("Zinc", 3045, "white", 0, 100, "zinc", Zinc_Ore.dup, false, 100)
      @@zinc11 = Ore.new("Zinc", 3046, "white", 0, 100, "zinc", Zinc_Ore.dup, false, 100)
      @@zinc12 = Ore.new("Zinc", 3047, "white", 0, 100, "zinc", Zinc_Ore.dup, false, 100)
+    #........................................................................................................................................................
+    #.................................................................Zinc...................................................................................
+     @@iron01 = Ore.new("Iron", 3048, "grey", 0, 100, "iron", Iron_Ore.dup, false, 100)
     #........................................................................................................................................................
   end
   class Herbs
