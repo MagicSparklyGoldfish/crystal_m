@@ -1243,11 +1243,17 @@ def Window_Class.hud_keypresses(window)
           All_Audio::SFX.select1
           Etc::Inventory_Ore.initialize_smelter
         end
+        if (x >= 970 && x <= 1160) && (y >= 625 && y <= 690)
+          All_Audio::SFX.dig_01 #All_Audio::SFX.select1
+          Etc::Inventory_Ore.smelt
+        end
         if (x >= 585 && x <= 635) && (y >= 140 && y <= 200)
+          All_Audio::SFX.dig_02
           cubby_number = 0
           Etc::Inventory_Ore.select_ore_one(window, cubby_number)
          end
         if (x >= 635 && x <= 685) && (y >= 140 && y <= 200)
+          All_Audio::SFX.dig_02
           cubby_number = 1
           Etc::Inventory_Ore.select_ore_one(window, cubby_number)
          end

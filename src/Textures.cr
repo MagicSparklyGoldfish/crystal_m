@@ -2192,11 +2192,18 @@ Testing_Text.character_size = 20; Testing_Text.color = SF::Color::White; Testing
   #Test_Smelter_Menu.fill_color = SF.color(150, 150, 155)
   Test_Smelter_Menu.position = SF.vector2(0, -200);
   #''''''''''''''''''''''''''''''''''''''''''''''''''''''Carbon'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
-   CARBON_SMELTER_TEXTURE = SF::Texture.from_file("graphics/metals/Carbon_Smelter.png")
-   Carbon_Smelter_Ore = SF::Sprite.new(CARBON_SMELTER_TEXTURE)
-  #''''''''''''''''''''''''''''''''''''''''''''''''''''''Carbon'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
-   COPPER_SMELTER_TEXTURE = SF::Texture.from_file("graphics/metals/Copper_Smelter.png")
-   Copper_Smelter_Ore = SF::Sprite.new(COPPER_SMELTER_TEXTURE)
+   #......................................................Ore..........................................................................
+    CARBON_SMELTER_TEXTURE = SF::Texture.from_file("graphics/metals/Carbon_Smelter.png")
+    Carbon_Smelter_Ore = SF::Sprite.new(CARBON_SMELTER_TEXTURE)
+  #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+  #''''''''''''''''''''''''''''''''''''''''''''''''''''''Copper'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+   #......................................................Ore..........................................................................
+    COPPER_SMELTER_TEXTURE = SF::Texture.from_file("graphics/metals/Copper_Smelter.png")
+    Copper_Smelter_Ore = SF::Sprite.new(COPPER_SMELTER_TEXTURE)
+   #.....................................................Ingot.........................................................................
+    COPPER_INGOT_TEXTURE = SF::Texture.from_file("graphics/metals/Copper_Ingot.png")
+    Copper_Ingot_Ore = SF::Sprite.new(COPPER_INGOT_TEXTURE)
+  #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
 
    Smelter_Nil_Sprite = SF::Sprite.new(COPPER_TEXTURE)
    Smelter_Nil_Sprite.color = SF.color(0, 0, 0, 0) 
