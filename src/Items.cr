@@ -180,7 +180,7 @@ module Etc
     #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
      @@selected_ore_01 : Inventory_Ore; @@selected_ore_01 = @@nil_inventory_ore; @@selected_ore_02 : Inventory_Ore; @@selected_ore_02 = @@nil_inventory_ore
      @@selected_ore_sprite_01 : SF::Sprite; @@selected_ore_sprite_01 = Smelter_Nil_Sprite; @@selected_ore_sprite_02 : SF::Sprite
-     @@selected_ore_sprite_02 = Smelter_Nil_Sprite  
+     @@selected_ore_sprite_02 = Smelter_Nil_Sprite; @@result_ore : SF::Sprite; @@result_ore = Smelter_Nil_Sprite; 
     #________________________________________________________________________________________________________________________________________________________
     #????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
     #?                                                               Methods                                                                                ?
@@ -238,6 +238,7 @@ module Etc
          @@selected_ore_sprite_02.scale(SF.vector2(2, 2))
          @@selected_ore_sprite_02.position = SF.vector2(270, 0)
          end; end
+         Inventory_Ore.check_selected_ore
         end
       #------------------------------------------------------------------------------------------------------------------------------------------------------
       #----------------------------------------------------------Initialize----------------------------------------------------------------------------------
@@ -245,12 +246,14 @@ module Etc
         @@selected_ore_01 = @@nil_inventory_ore
         @@selected_ore_02 = @@nil_inventory_ore
         @@selected_ore_sprite_01 = Smelter_Nil_Sprite 
-        @@selected_ore_sprite_02 = Smelter_Nil_Sprite 
+        @@selected_ore_sprite_02 = Smelter_Nil_Sprite
+        @@result_ore = Smelter_Nil_Sprite   
        end
       #------------------------------------------------------------------------------------------------------------------------------------------------------
       #-----------------------------------------------------------Display------------------------------------------------------------------------------------
        def Inventory_Ore.display_metal_smelter(window)  
-        window.draw(@@selected_ore_sprite_01); window.draw(@@selected_ore_sprite_02)   
+        #Inventory_Ore.check_selected_ore
+        window.draw(@@selected_ore_sprite_01); window.draw(@@selected_ore_sprite_02); window.draw(@@result_ore)   
         if Inventory_Metal_Ore_Array.size >= 1
           metal_array_text_01 = Ore_amount_owned_text.dup
           metal_array_text_01.string = "x" + Inventory_Metal_Ore_Array[0].amount_owned.to_s
@@ -291,6 +294,57 @@ module Etc
           window.draw(Smelter_Ore_Sprite_Hash[Inventory_Metal_Ore_Array[4].name])
           window.draw(metal_array_text_05)
         end
+       end
+       def Inventory_Ore.check_selected_ore
+         @@result_ore = Smelter_Nil_Sprite  
+       #.............Copper...............
+        if @@selected_ore_01.name == "Copper" && @@selected_ore_02.name == "Nil"
+          @@result_ore = Copper_Ingot_Ore.dup
+          @@result_ore.position = SF.vector2(410, -25) 
+          @@result_ore.scale(SF.vector2(2, 2))
+       #..............Tin.................
+        else if @@selected_ore_01.name == "Tin" && @@selected_ore_02.name == "Nil"
+          @@result_ore = Tin_Ingot_Ore.dup
+          @@result_ore.position = SF.vector2(400, -5) 
+          @@result_ore.scale(SF.vector2(2, 2))
+       #..............Zinc................
+        else if @@selected_ore_01.name == "Zinc" && @@selected_ore_02.name == "Nil"
+          @@result_ore = Zinc_Ingot_Ore.dup
+          @@result_ore.position = SF.vector2(400, -5) 
+          @@result_ore.scale(SF.vector2(2, 2))
+       #..............Iron................
+        else if @@selected_ore_01.name == "Iron" && @@selected_ore_02.name == "Nil"
+          @@result_ore = Iron_Ingot_Ore.dup
+          @@result_ore.position = SF.vector2(400, -5) 
+          @@result_ore.scale(SF.vector2(2, 2))
+       #.............Bronze...............
+        else if @@selected_ore_01.name == "Copper" && @@selected_ore_02.name == "Tin"
+          @@result_ore = Bronze_Ingot_Ore.dup
+          @@result_ore.position = SF.vector2(400, -5) 
+          @@result_ore.scale(SF.vector2(2, 2))
+        else if @@selected_ore_01.name == "Tin" && @@selected_ore_02.name == "Copper"
+          @@result_ore = Bronze_Ingot_Ore.dup
+          @@result_ore.position = SF.vector2(400, -5) 
+          @@result_ore.scale(SF.vector2(2, 2))
+       #.............Brass...............
+        else if @@selected_ore_01.name == "Copper" && @@selected_ore_02.name == "Zinc"
+          @@result_ore = Brass_Ingot_Ore.dup
+          @@result_ore.position = SF.vector2(400, -5) 
+          @@result_ore.scale(SF.vector2(2, 2))
+        else if @@selected_ore_01.name == "Zinc" && @@selected_ore_02.name == "Copper"
+          @@result_ore = Brass_Ingot_Ore.dup
+          @@result_ore.position = SF.vector2(400, -5) 
+          @@result_ore.scale(SF.vector2(2, 2))
+       #.............Steel...............
+        else if @@selected_ore_01.name == "Carbon" && @@selected_ore_02.name == "Iron"
+          @@result_ore = Steel_Ingot_Ore.dup
+          @@result_ore.position = SF.vector2(400, -5) 
+          @@result_ore.scale(SF.vector2(2, 2))
+        else if @@selected_ore_01.name == "Iron" && @@selected_ore_02.name == "Carbon"
+          @@result_ore = Steel_Ingot_Ore.dup
+          @@result_ore.position = SF.vector2(400, -5) 
+          @@result_ore.scale(SF.vector2(2, 2))
+       end; end; end; end; end; end; end; end; end; end
        end
       #------------------------------------------------------------------------------------------------------------------------------------------------------
       #-------------------------------------------------------------Smelt------------------------------------------------------------------------------------
