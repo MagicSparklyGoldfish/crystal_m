@@ -180,7 +180,9 @@ module Etc
     #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
      @@selected_ore_01 : Inventory_Ore; @@selected_ore_01 = @@nil_inventory_ore; @@selected_ore_02 : Inventory_Ore; @@selected_ore_02 = @@nil_inventory_ore
      @@selected_ore_sprite_01 : SF::Sprite; @@selected_ore_sprite_01 = Smelter_Nil_Sprite; @@selected_ore_sprite_02 : SF::Sprite
-     @@selected_ore_sprite_02 = Smelter_Nil_Sprite; @@result_ore : SF::Sprite; @@result_ore = Smelter_Nil_Sprite; 
+     @@selected_ore_sprite_02 = Smelter_Nil_Sprite; @@result_ore : SF::Sprite; @@result_ore = Smelter_Nil_Sprite; @@ingot_text = SF::Text.new
+     @@ingot_text.font = FONT_COMMON; @@ingot_text.character_size = 20; @@ingot_text.color = SF::Color::Black; @@ingot_text.position = SF.vector2(350, -160) 
+     @@ingot_text.string = "  Smelt ores to make ingots!!!"
     #________________________________________________________________________________________________________________________________________________________
     #????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
     #?                                                               Methods                                                                                ?
@@ -247,12 +249,14 @@ module Etc
         @@selected_ore_02 = @@nil_inventory_ore
         @@selected_ore_sprite_01 = Smelter_Nil_Sprite 
         @@selected_ore_sprite_02 = Smelter_Nil_Sprite
-        @@result_ore = Smelter_Nil_Sprite   
+        @@result_ore = Smelter_Nil_Sprite  
+        @@ingot_text.string = "  Smelt ores to make ingots!!!" 
        end
       #------------------------------------------------------------------------------------------------------------------------------------------------------
       #-----------------------------------------------------------Display------------------------------------------------------------------------------------
        def Inventory_Ore.display_metal_smelter(window)  
         #Inventory_Ore.check_selected_ore
+        window.draw(@@ingot_text)
         window.draw(@@selected_ore_sprite_01); window.draw(@@selected_ore_sprite_02); window.draw(@@result_ore)   
         if Inventory_Metal_Ore_Array.size >= 1
           metal_array_text_01 = Ore_amount_owned_text.dup
@@ -297,53 +301,64 @@ module Etc
        end
        def Inventory_Ore.check_selected_ore
          @@result_ore = Smelter_Nil_Sprite  
+         @@ingot_text.string = "  Smelt ores to make ingots!!!"
        #.............Copper...............
         if @@selected_ore_01.name == "Copper" && @@selected_ore_02.name == "Nil"
           @@result_ore = Copper_Ingot_Ore.dup
           @@result_ore.position = SF.vector2(410, -25) 
           @@result_ore.scale(SF.vector2(2, 2))
+          @@ingot_text.string = "Copper ingot requires 10 copper \nore!!!"
        #..............Tin.................
         else if @@selected_ore_01.name == "Tin" && @@selected_ore_02.name == "Nil"
           @@result_ore = Tin_Ingot_Ore.dup
           @@result_ore.position = SF.vector2(400, -5) 
           @@result_ore.scale(SF.vector2(2, 2))
+          @@ingot_text.string = "Tin ingot requires 8 tin ore!!!"
        #..............Zinc................
         else if @@selected_ore_01.name == "Zinc" && @@selected_ore_02.name == "Nil"
           @@result_ore = Zinc_Ingot_Ore.dup
           @@result_ore.position = SF.vector2(400, -5) 
           @@result_ore.scale(SF.vector2(2, 2))
+          @@ingot_text.string = "Zinc ingot requires 6 zinc ore!!!"
        #..............Iron................
         else if @@selected_ore_01.name == "Iron" && @@selected_ore_02.name == "Nil"
           @@result_ore = Iron_Ingot_Ore.dup
           @@result_ore.position = SF.vector2(400, -5) 
           @@result_ore.scale(SF.vector2(2, 2))
+          @@ingot_text.string = "Iron ingot requires 10 iron ore!!!"
        #.............Bronze...............
         else if @@selected_ore_01.name == "Copper" && @@selected_ore_02.name == "Tin"
           @@result_ore = Bronze_Ingot_Ore.dup
           @@result_ore.position = SF.vector2(400, -5) 
           @@result_ore.scale(SF.vector2(2, 2))
+          @@ingot_text.string = "Bronze ingot requires 4 copper \n and 2 tin ore!!!"
         else if @@selected_ore_01.name == "Tin" && @@selected_ore_02.name == "Copper"
           @@result_ore = Bronze_Ingot_Ore.dup
           @@result_ore.position = SF.vector2(400, -5) 
           @@result_ore.scale(SF.vector2(2, 2))
+          @@ingot_text.string = "Bronze ingot requires 4 copper \n and 2 tin ore!!!"
        #.............Brass...............
         else if @@selected_ore_01.name == "Copper" && @@selected_ore_02.name == "Zinc"
           @@result_ore = Brass_Ingot_Ore.dup
           @@result_ore.position = SF.vector2(400, -5) 
           @@result_ore.scale(SF.vector2(2, 2))
+          @@ingot_text.string = "Brass ingot requires 3 copper \n and 4 zinc ore!!!"
         else if @@selected_ore_01.name == "Zinc" && @@selected_ore_02.name == "Copper"
           @@result_ore = Brass_Ingot_Ore.dup
           @@result_ore.position = SF.vector2(400, -5) 
           @@result_ore.scale(SF.vector2(2, 2))
+          @@ingot_text.string = "Brass ingot requires 3 copper \n and 4 zinc ore!!!"
        #.............Steel...............
         else if @@selected_ore_01.name == "Carbon" && @@selected_ore_02.name == "Iron"
           @@result_ore = Steel_Ingot_Ore.dup
           @@result_ore.position = SF.vector2(400, -5) 
           @@result_ore.scale(SF.vector2(2, 2))
+          @@ingot_text.string = "Steel ingot requires 4 carbon \n and 6 iron ore!!!"
         else if @@selected_ore_01.name == "Iron" && @@selected_ore_02.name == "Carbon"
           @@result_ore = Steel_Ingot_Ore.dup
           @@result_ore.position = SF.vector2(400, -5) 
           @@result_ore.scale(SF.vector2(2, 2))
+          @@ingot_text.string = "Steel ingot requires 4 carbon \n and 6 iron ore!!!"
        end; end; end; end; end; end; end; end; end; end
        end
       #------------------------------------------------------------------------------------------------------------------------------------------------------
