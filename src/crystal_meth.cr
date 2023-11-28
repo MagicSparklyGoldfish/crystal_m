@@ -230,11 +230,11 @@ extend self
    view2 = SF::View.new(SF.float_rect(0, 950, 1890, 140))
    view2.viewport = SF.float_rect(0, 0.85, 1, 0.15)
    window.view = view2
-   Player_Data::Stats.bars; 
+   Player_Data::Stats.bars 
    window.draw(Bottom_HUD); window.draw(System_Menu); window.draw(Text_System_Menu)
    window.draw(LVL_Box); window.draw(LVL_Bar); window.draw(LVL_Bar_Color); window.draw(EXP_Label); window.draw(MP_Bar) 
    window.draw(MP_Bar_Color); window.draw(MP_Label); window.draw(HP_Bar); 
-   window.draw(HP_Bar_Color); window.draw(HP_Label); window.draw(LVL_Label); 
+   window.draw(HP_Bar_Color); window.draw(HP_Label); window.draw(LVL_Label)
    if @@idle == true 
     @@idleframes += 1
     if @@idleframes >= 2200 && @@current_direction == "right"
@@ -419,6 +419,7 @@ extend self
     bounding_box2 = Test_Teleporter.global_bounds
     if bounding_box1.intersects? bounding_box2
       Window_Class.ore_test_initialize
+      Etc::Inventory_Ore.update_ore_inventory 
       @@map = "test_ore"
     end
   end
@@ -436,6 +437,7 @@ extend self
     if @@space.contains?(@@shape) == false #<----This is proabably a really fucking stupid way to do this, but it works and I'm tired of fucking with it
       @@space.add(@@shape)
       Enemy_Data::Test_Enemy.draw; NPCS::Test_Npcs.test_npc_initialize
+      Etc::Inventory_Ore.update_ore_inventory 
     end
     if @@space.contains?(@@pc_body) == false
       @@player_character_rendered_model.texture_rect = SF.int_rect(96, 128, 96, 128)
@@ -477,7 +479,7 @@ extend self
    bounding_box1 = @@player_character_rendered_model.global_bounds
    bounding_box2 = @@player_character_rendered_model.global_bounds
    ore_ground = Ground.dup; Ground.position = SF.vector2(-5000, 800); ore_platform = Ground.dup; ore_platform.scale = SF.vector2(0.5, 0.2)
-   ore_platform.position = SF.vector2(-100, 400)
+   ore_platform.position = SF.vector2(-100, 400); window.draw(Test_Smelter)
    window.draw(ore_ground); window.draw(@@player_character_rendered_model); window.draw(Test_Teleporter); window.draw(Test_Ladder)
    window.draw(Test_Platform_01); window.draw(Test_Platform_02); window.draw(@@test_ladder_02) #window.draw(Feet_Bounding_Box)
  end
@@ -1230,8 +1232,20 @@ def Window_Class.hud_keypresses(window)
         if (x >= 1020 && x <= 1190) && (y >= 490 && y <= 590)
           @@popup = "none"
            end
+      when "smelter"  #---------------------------------------------------------Smelter Menu
+        if (x >= 1280 && x <= 1330) && (y >= 140 && y <= 200)
+          Harvestables::Ore.stop_smelt
+          Etc::Inventory_Ore.initialize_smelter
+          @@popup = "none"     
+          Player_Data::Player_Physics.mobilize_player
+         end
+        if (x >= 585 && x <= 635) && (y >= 140 && y <= 200)
+          All_Audio::SFX.select1
+          cubby_number = 0
+          Etc::Inventory_Ore.select_ore_one(window, cubby_number)
+         end
       when "Stats_Menu" #---------------------------------------------------------Stats Menu
-        if (x >= 1240 && x <= 1290) && (y >= 210 && y <= 260)
+        if (x >= 1280 && x <= 1330) && (y >= 210 && y <= 260)
           @@popup = "none"
           @@tab = "none"
           @@player_character_rendered_model.scale = SF.vector2(1.0, 1.0)
@@ -1705,7 +1719,15 @@ def Window_Class.hud_keypresses(window)
           NPCS::Test_Npcs.click(window, @@player_character_rendered_model)
           Window_Class.space_test_map
         when "test_ore"
+          player = @@player_character_rendered_model.global_bounds
           Window_Class.teleport_test_ore_map; Window_Class.ladder_test_ore_map
+          Harvestables::Ore.smelt(window, player)
+          if player.intersects? Test_Smelter.global_bounds
+            Player_Data::Player_Physics.immobilize_player
+            @@popup = "smelter"
+          else
+            Player_Data::Player_Physics.mobilize_player
+          end
         end
 
       when SF::Keyboard::D

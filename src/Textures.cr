@@ -2161,12 +2161,12 @@
   #''''''''''''''''''''''''''''''''''''''''''''''''''''''Carbon'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
    CARBON_TEXTURE = SF::Texture.from_file("graphics/metals/Carbon_Ore.png")
    Carbon_Ore = SF::Sprite.new(CARBON_TEXTURE); Carbon_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
-   Carbon_Ore.position = SF.vector2(0, 100)
+   Carbon_Ore.position = SF.vector2(0, 102)
   #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
   #''''''''''''''''''''''''''''''''''''''''''''''''''''''Copper'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
    COPPER_TEXTURE = SF::Texture.from_file("graphics/metals/Copper_Ore.png")
    Copper_Ore = SF::Sprite.new(COPPER_TEXTURE); Copper_Ore.texture_rect = SF.int_rect(0, 0, 100, 100)
-   Copper_Ore.position = SF.vector2(200, 100)
+   Copper_Ore.position = SF.vector2(200, 102)
   #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
 #______________________________________________________________________________________________________________________________________
 Testing_Text = SF::Text.new; Testing_Text.font = FONT_PIXEL; 
@@ -2179,3 +2179,21 @@ Testing_Text.character_size = 20; Testing_Text.color = SF::Color::White; Testing
 
  Test_Ladder = SF::RectangleShape.new(SF.vector2(40, 400)); Test_Teleporter.fill_color = SF.color(50, 150, 255)
  Test_Ladder.position = SF.vector2(0, 400);
+
+ Test_Smelter = SF::RectangleShape.new(SF.vector2(120, 80)); Test_Smelter.fill_color = SF.color(50, 150, 155)
+ Test_Smelter.position = SF.vector2(400, 125);
+
+#--------------------------------------------------------------------------------------------------------------------------------------
+#                                                       Smelter
+#-------------------------------------------------------------------------------------------------------------------------------------- 
+ 
+  SMELTER_TEXTURE = SF::Texture.from_file("graphics/smelter.png")
+  Test_Smelter_Menu = SF::Sprite.new(SMELTER_TEXTURE); #SF::RectangleShape.new(SF.vector2(800, 500)); 
+  #Test_Smelter_Menu.fill_color = SF.color(150, 150, 155)
+  Test_Smelter_Menu.position = SF.vector2(0, -200);
+  #''''''''''''''''''''''''''''''''''''''''''''''''''''''Carbon'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+   CARBON_SMELTER_TEXTURE = SF::Texture.from_file("graphics/metals/Carbon_Smelter.png")
+   Carbon_Smelter_Ore = SF::Sprite.new(CARBON_SMELTER_TEXTURE)
+
+   Smelter_Nil_Sprite = SF::Sprite.new(COPPER_TEXTURE)
+   Smelter_Nil_Sprite.color = SF.color(0, 0, 0, 0) 

@@ -128,8 +128,8 @@ module Etc
  # _________________________________________________________________________________________________________________________________________________________
  #|                                                              Etc Variables                                                                              |
  #|_________________________________________________________________________________________________________________________________________________________|
-   Inventory_Ore_Array = [] of Inventory_Ore; 
-   Ore_Array = [] of Inventory_Ore
+   Inventory_Ore_Array = [] of Inventory_Ore; Inventory_Metal_Ore_Array = [] of Inventory_Ore; 
+   Ore_Array = [] of Inventory_Ore; Smelter_Ore_Sprite_Hash = Hash(String, SF::Sprite).new
 
   class Inventory_Ore
    #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -173,6 +173,9 @@ module Etc
    #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
    #+                                                              Variables                                                                               +
    #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    @@selected_ore_01 : Inventory_Ore; @@selected_ore_01 = @@nil_inventory_ore; @@selected_ore_02 : Inventory_Ore; @@selected_ore_02 = @@nil_inventory_ore
+    @@selected_ore_sprite_01 : SF::Sprite; @@selected_ore_sprite_01 = Smelter_Nil_Sprite; @@selected_ore_sprite_02 : SF::Sprite
+    @@selected_ore_sprite_02 = Smelter_Nil_Sprite  
    #________________________________________________________________________________________________________________________________________________________
    #????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
    #?                                                               Methods                                                                                ?
@@ -202,6 +205,41 @@ module Etc
         Inventory_Ore_Array.push(Ore_Array[x])
       end
       x += 1
+    end
+   end
+   def Inventory_Ore.sort_metal(window)
+    s = Inventory_Ore_Array.size - 1; x = 0
+    while x <= s
+      if Inventory_Ore_Array[x].element == "none"
+       Inventory_Metal_Ore_Array.push(Inventory_Ore_Array[x])
+      end
+      x += 1
+    end
+   end
+   def Inventory_Ore.select_ore_one(window, cubby_number)
+    if @@selected_ore_01 == @@nil_inventory_ore
+    @@selected_ore_01 = Inventory_Metal_Ore_Array[cubby_number]
+    @@selected_ore_sprite_01 = @@selected_ore_01.sprite.dup
+    @@selected_ore_sprite_01.scale(SF.vector2(2, 2))
+    @@selected_ore_sprite_01.position = SF.vector2(120, 0)
+    else if @@selected_ore_01 != Inventory_Metal_Ore_Array[cubby_number]
+      @@selected_ore_02 = Inventory_Metal_Ore_Array[cubby_number]
+      @@selected_ore_sprite_02 = @@selected_ore_02.sprite.dup
+      @@selected_ore_sprite_02.scale(SF.vector2(2, 2))
+      @@selected_ore_sprite_02.position = SF.vector2(220, 0)
+    end; end
+   end
+   def Inventory_Ore.initialize_smelter
+    @@selected_ore_01 = @@nil_inventory_ore
+    @@selected_ore_02 = @@nil_inventory_ore
+    @@selected_ore_sprite_01 = Smelter_Nil_Sprite 
+    @@selected_ore_sprite_02 = Smelter_Nil_Sprite 
+   end
+   def Inventory_Ore.display_metal_smelter(window)  
+    window.draw(@@selected_ore_sprite_01); window.draw(@@selected_ore_02.sprite)   
+    if Inventory_Metal_Ore_Array.size >= 1
+      Smelter_Ore_Sprite_Hash[Inventory_Metal_Ore_Array[0].name].position = SF.vector2(25, -175)
+      window.draw(Smelter_Ore_Sprite_Hash[Inventory_Metal_Ore_Array[0].name])
     end
    end
    def Inventory_Ore.display_ore(window, page) 
@@ -403,7 +441,7 @@ module Etc
           end
         when 4
           if Inventory_Ore_Array.size >= 60
-           Inventory_Ore_Array[69].sprite.position = SF.vector2(1305, 310);
+           Inventory_Ore_Array[59].sprite.position = SF.vector2(1305, 310);
            ore_array_text_60 = Ore_amount_owned_text.dup
            ore_array_text_60.position = Inventory_Ore_Array[59].sprite.position + SF.vector2(100, -5)
            ore_array_text_60.string = "x" + Inventory_Ore_Array[59].amount_owned.to_s
@@ -435,6 +473,14 @@ module Etc
           ore_array_text_43.string = "x" + Inventory_Ore_Array[42].amount_owned.to_s
           window.draw(Inventory_Ore_Array[42].sprite); window.draw(ore_array_text_43)
          end
+        when 4
+          if Inventory_Ore_Array.size >= 61
+           Inventory_Ore_Array[60].sprite.position = SF.vector2(555, 460);
+           ore_array_text_61 = Ore_amount_owned_text.dup
+           ore_array_text_61.position = Inventory_Ore_Array[60].sprite.position + SF.vector2(100, -5)
+           ore_array_text_61.string = "x" + Inventory_Ore_Array[60].amount_owned.to_s
+           window.draw(Inventory_Ore_Array[60].sprite); window.draw(ore_array_text_61)
+          end
        end; end
     #----------------------------------------------------slot 8-------------------------------------------
      if Inventory_Ore_Array.size >= 8
@@ -460,6 +506,14 @@ module Etc
            ore_array_text_44.position = Inventory_Ore_Array[43].sprite.position + SF.vector2(100, -5)
            ore_array_text_44.string = "x" + Inventory_Ore_Array[43].amount_owned.to_s
            window.draw(Inventory_Ore_Array[43].sprite); window.draw(ore_array_text_44)
+          end
+        when 4
+          if Inventory_Ore_Array.size >= 62
+           Inventory_Ore_Array[61].sprite.position = SF.vector2(710, 460);
+           ore_array_text_62 = Ore_amount_owned_text.dup
+           ore_array_text_62.position = Inventory_Ore_Array[61].sprite.position + SF.vector2(100, -5)
+           ore_array_text_62.string = "x" + Inventory_Ore_Array[61].amount_owned.to_s
+           window.draw(Inventory_Ore_Array[61].sprite); window.draw(ore_array_text_62)
           end
        end; end
     #----------------------------------------------------slot 9-------------------------------------------
@@ -487,6 +541,14 @@ module Etc
           ore_array_text_45.string = "x" + Inventory_Ore_Array[44].amount_owned.to_s
           window.draw(Inventory_Ore_Array[44].sprite); window.draw(ore_array_text_45)
          end
+        when 4
+          if Inventory_Ore_Array.size >= 63
+           Inventory_Ore_Array[62].sprite.position = SF.vector2(855, 460);
+           ore_array_text_63 = Ore_amount_owned_text.dup
+           ore_array_text_63.position = Inventory_Ore_Array[62].sprite.position + SF.vector2(100, -5)
+           ore_array_text_63.string = "x" + Inventory_Ore_Array[62].amount_owned.to_s
+           window.draw(Inventory_Ore_Array[62].sprite); window.draw(ore_array_text_63)
+          end
        end; end
     #----------------------------------------------------slot 10------------------------------------------
      if Inventory_Ore_Array.size >= 10
@@ -513,6 +575,14 @@ module Etc
           ore_array_text_46.string = "x" + Inventory_Ore_Array[45].amount_owned.to_s
           window.draw(Inventory_Ore_Array[45].sprite); window.draw(ore_array_text_46)
          end
+        when 4
+          if Inventory_Ore_Array.size >= 64
+           Inventory_Ore_Array[63].sprite.position = SF.vector2(1005, 460);
+           ore_array_text_64 = Ore_amount_owned_text.dup
+           ore_array_text_64.position = Inventory_Ore_Array[63].sprite.position + SF.vector2(100, -5)
+           ore_array_text_64.string = "x" + Inventory_Ore_Array[63].amount_owned.to_s
+           window.draw(Inventory_Ore_Array[63].sprite); window.draw(ore_array_text_64)
+          end
       end; end
     #----------------------------------------------------slot 11------------------------------------------
      if Inventory_Ore_Array.size >= 11
@@ -539,6 +609,14 @@ module Etc
           ore_array_text_47.string = "x" + Inventory_Ore_Array[46].amount_owned.to_s
           window.draw(Inventory_Ore_Array[46].sprite); window.draw(ore_array_text_47)
          end
+        when 4
+          if Inventory_Ore_Array.size >= 65
+           Inventory_Ore_Array[64].sprite.position = SF.vector2(1155, 460);
+           ore_array_text_65 = Ore_amount_owned_text.dup
+           ore_array_text_65.position = Inventory_Ore_Array[64].sprite.position + SF.vector2(100, -5)
+           ore_array_text_65.string = "x" + Inventory_Ore_Array[64].amount_owned.to_s
+           window.draw(Inventory_Ore_Array[64].sprite); window.draw(ore_array_text_65)
+          end
        end; end
     #----------------------------------------------------slot 12------------------------------------------
      if Inventory_Ore_Array.size >= 12
@@ -564,6 +642,14 @@ module Etc
          ore_array_text_48.position = Inventory_Ore_Array[47].sprite.position + SF.vector2(100, -5)
          ore_array_text_48.string = "x" + Inventory_Ore_Array[47].amount_owned.to_s
          window.draw(Inventory_Ore_Array[47].sprite); window.draw(ore_array_text_48)
+        end
+       when 4
+        if Inventory_Ore_Array.size >= 66
+         Inventory_Ore_Array[65].sprite.position = SF.vector2(1305, 460);
+         ore_array_text_66 = Ore_amount_owned_text.dup
+         ore_array_text_66.position = Inventory_Ore_Array[65].sprite.position + SF.vector2(100, -5)
+         ore_array_text_66.string = "x" + Inventory_Ore_Array[65].amount_owned.to_s
+         window.draw(Inventory_Ore_Array[65].sprite); window.draw(ore_array_text_66)
         end
       end; end
     #----------------------------------------------------slot 13------------------------------------------
@@ -591,6 +677,14 @@ module Etc
          ore_array_text_49.string = "x" + Inventory_Ore_Array[48].amount_owned.to_s
          window.draw(Inventory_Ore_Array[48].sprite); window.draw(ore_array_text_49)
         end
+       when 4
+        if Inventory_Ore_Array.size >= 67
+         Inventory_Ore_Array[66].sprite.position = SF.vector2(555, 610);
+         ore_array_text_67 = Ore_amount_owned_text.dup
+         ore_array_text_67.position = Inventory_Ore_Array[66].sprite.position + SF.vector2(100, -5)
+         ore_array_text_67.string = "x" + Inventory_Ore_Array[66].amount_owned.to_s
+         window.draw(Inventory_Ore_Array[66].sprite); window.draw(ore_array_text_67)
+        end
      end; end
     #----------------------------------------------------slot 14------------------------------------------
      if Inventory_Ore_Array.size >= 14
@@ -616,6 +710,14 @@ module Etc
          ore_array_text_50.position = Inventory_Ore_Array[49].sprite.position + SF.vector2(100, -5)
          ore_array_text_50.string = "x" + Inventory_Ore_Array[49].amount_owned.to_s
          window.draw(Inventory_Ore_Array[49].sprite); window.draw(ore_array_text_50)
+        end
+       when 4
+        if Inventory_Ore_Array.size >= 68
+         Inventory_Ore_Array[67].sprite.position = SF.vector2(710, 610);
+         ore_array_text_68 = Ore_amount_owned_text.dup
+         ore_array_text_68.position = Inventory_Ore_Array[67].sprite.position + SF.vector2(100, -5)
+         ore_array_text_68.string = "x" + Inventory_Ore_Array[67].amount_owned.to_s
+         window.draw(Inventory_Ore_Array[67].sprite); window.draw(ore_array_text_68)
         end
      end; end
     #----------------------------------------------------slot 15------------------------------------------
@@ -643,6 +745,14 @@ module Etc
          ore_array_text_51.string = "x" + Inventory_Ore_Array[50].amount_owned.to_s
          window.draw(Inventory_Ore_Array[50].sprite); window.draw(ore_array_text_51)
         end
+       when 4
+        if Inventory_Ore_Array.size >= 69
+         Inventory_Ore_Array[68].sprite.position = SF.vector2(855, 610);
+         ore_array_text_69 = Ore_amount_owned_text.dup
+         ore_array_text_69.position = Inventory_Ore_Array[68].sprite.position + SF.vector2(100, -5)
+         ore_array_text_69.string = "x" + Inventory_Ore_Array[68].amount_owned.to_s
+         window.draw(Inventory_Ore_Array[68].sprite); window.draw(ore_array_text_69)
+        end
      end; end
     #----------------------------------------------------slot 16------------------------------------------
       if Inventory_Ore_Array.size >= 16
@@ -669,6 +779,14 @@ module Etc
           ore_array_text_52.string = "x" + Inventory_Ore_Array[51].amount_owned.to_s
           window.draw(Inventory_Ore_Array[51].sprite); window.draw(ore_array_text_52)
          end
+        when 4
+          if Inventory_Ore_Array.size >= 70
+           Inventory_Ore_Array[69].sprite.position = SF.vector2(1005, 610);
+           ore_array_text_70 = Ore_amount_owned_text.dup
+           ore_array_text_70.position = Inventory_Ore_Array[69].sprite.position + SF.vector2(100, -5)
+           ore_array_text_70.string = "x" + Inventory_Ore_Array[69].amount_owned.to_s
+           window.draw(Inventory_Ore_Array[69].sprite); window.draw(ore_array_text_70)
+          end
        end; end
     #----------------------------------------------------slot 17------------------------------------------
       if Inventory_Ore_Array.size >= 17
@@ -694,6 +812,14 @@ module Etc
            ore_array_text_53.position = Inventory_Ore_Array[52].sprite.position + SF.vector2(100, -5)
            ore_array_text_53.string = "x" + Inventory_Ore_Array[52].amount_owned.to_s
            window.draw(Inventory_Ore_Array[52].sprite); window.draw(ore_array_text_53)
+          end
+        when 4
+          if Inventory_Ore_Array.size >= 71
+           Inventory_Ore_Array[70].sprite.position = SF.vector2(1155, 610);
+           ore_array_text_71 = Ore_amount_owned_text.dup
+           ore_array_text_71.position = Inventory_Ore_Array[70].sprite.position + SF.vector2(100, -5)
+           ore_array_text_71.string = "x" + Inventory_Ore_Array[70].amount_owned.to_s
+           window.draw(Inventory_Ore_Array[70].sprite); window.draw(ore_array_text_71)
           end
       end; end
     #----------------------------------------------------slot 18------------------------------------------
@@ -721,12 +847,21 @@ module Etc
            ore_array_text_54.string = "x" + Inventory_Ore_Array[53].amount_owned.to_s
            window.draw(Inventory_Ore_Array[53].sprite); window.draw(ore_array_text_54)
           end
+        when 4
+          if Inventory_Ore_Array.size >= 72
+           Inventory_Ore_Array[71].sprite.position = SF.vector2(1305, 610);
+           ore_array_text_72 = Ore_amount_owned_text.dup
+           ore_array_text_72.position = Inventory_Ore_Array[71].sprite.position + SF.vector2(100, -5)
+           ore_array_text_72.string = "x" + Inventory_Ore_Array[71].amount_owned.to_s
+           window.draw(Inventory_Ore_Array[71].sprite); window.draw(ore_array_text_72)
+          end
      end; end
    end                
    #________________________________________________________________________________________________________________________________________________________
    #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
    #/                                                               Entities                                                                               /
    #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     @@nil_inventory_ore = Inventory_Ore.new("Nil", 0, Smelter_Nil_Sprite, 0, "clear", "nil", "nil", 0)
     #///////////////////////////////////////////////////////////////Minerals\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
      #--------------------------------------------------------------Bloodstone------------------------------------------------------------------------------
       @@bloodstone_inventory_ore = Inventory_Ore.new("Bloodstone", 1, Bloodstone_Inventory_Ore, 1, "red", "earth", "hp+", 70)
@@ -888,11 +1023,11 @@ module Etc
     #////////////////////////////////////////////////////////////////Metals\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
      #---------------------------------------------------------------Carbon--------------------------------------------------------------------------------- 
       @@carbon = Inventory_Ore.new("Carbon", 1000, Carbon_Inventory_Ore, 1, "black", "none", "none", 70)
-      Ore_Array.push(@@carbon)
+      Ore_Array.push(@@carbon); Smelter_Ore_Sprite_Hash["Carbon"] = Carbon_Smelter_Ore
      #---------------------------------------------------------------Carbon--------------------------------------------------------------------------------- 
       @@copper = Inventory_Ore.new("Copper", 1001, Copper_Inventory_Ore, 1, "brown", "none", "none", 70)
       Ore_Array.push(@@copper)
-   #________________________________________________________________________________________________________________________________________________________
+   #____________________________________________________________________________________@note____________________________________________________________________
   end
 end 
 
@@ -921,7 +1056,7 @@ module Harvestables
    #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
    #+                                                              Variables                                                                               +
    #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-   @@ore_animation_frame = 0; @@ore_reset = 0; @@ore_break_iterator = 0
+   @@ore_animation_frame = 0; @@ore_reset = 0; @@ore_break_iterator = 0; @@is_smelting : Bool; @@is_smelting = false
    #________________________________________________________________________________________________________________________________________________________
    #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
    #!                                                              Initialize                                                                              !
@@ -1025,6 +1160,15 @@ module Harvestables
         x += 1
       end
     end
+     end
+    def Ore.smelt(window, player)
+      if player.intersects? Test_Smelter.global_bounds
+        Etc::Inventory_Ore.sort_metal(window)
+      @@is_smelting = true
+       end
+     end
+    def Ore.stop_smelt
+      @@is_smelting = false
      end
     #..............................................................Animations...............................................................................
      def Ore.animation_harvest(this, ore)
@@ -1132,8 +1276,12 @@ module Harvestables
       window.draw(@@grape_agate01.sprite); window.draw(@@jade01.sprite); window.draw(@@diamond01.sprite); window.draw(@@emerald01.sprite)
       window.draw(@@painite01.sprite); window.draw(@@bumblebee_jasper01.sprite); window.draw(@@blood_jasper01.sprite); window.draw(@@mook_jasper01.sprite)
       window.draw(@@red_jasper01.sprite); window.draw(@@carbon01.sprite); window.draw(@@copper01.sprite)
+      if @@is_smelting == true
+        page = 1
+        window.draw(Test_Smelter_Menu); Etc::Inventory_Ore.update_ore_inventory; Etc::Inventory_Ore.display_metal_smelter(window)  
+      end
     end
-   #________________________________________________________________________________________________________________________________________________________
+   #____________________________________________________________________________________________________@@is_smelting____________________________________________________
    #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
    #/                                                               Entities                                                                               /
    #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1601,7 +1749,7 @@ module Harvestables
   end
   def sprite
     @sprite
-  end
+  end 
   def is_broke
     @is_broke
   end
