@@ -282,8 +282,9 @@ module Etc
         case @@selected_ore_01.name
          when "Copper"
           Inventory_Ore.smelt_copper
-        end
-       end
+         when "Tin"
+          Inventory_Ore.smelt_tin
+       end; end
        def Inventory_Ore.smelt_copper
         case @@selected_ore_02.name
          when "Nil"
@@ -291,6 +292,19 @@ module Etc
             amount = 10
             @@copper.remove_ore(amount)
          ingot = "copper"
+          Inventory_Ingot.smelt_ingot(ingot)
+          else
+            All_Audio::SFX.light_bonk
+          end
+        end
+       end
+       def Inventory_Ore.smelt_tin
+        case @@selected_ore_02.name
+        when "Nil"
+          if @@tin.amount_owned >= 8
+            amount = 8
+            @@tin.remove_ore(amount)
+         ingot = "tin"
           Inventory_Ingot.smelt_ingot(ingot)
           else
             All_Audio::SFX.light_bonk
@@ -1086,7 +1100,7 @@ module Etc
       #---------------------------------------------------------------Copper--------------------------------------------------------------------------------- 
        @@copper = Inventory_Ore.new("Copper", 1001, Copper_Inventory_Ore, 1, "brown", "none", "none", 70)
        Ore_Array.push(@@copper); Smelter_Ore_Sprite_Hash["Copper"] = Copper_Smelter_Ore
-      #---------------------------------------------------------------Copper--------------------------------------------------------------------------------- 
+      #----------------------------------------------------------------Tin----------------------------------------------------------------------------------- 
        @@tin = Inventory_Ore.new("Tin", 1002, Tin_Inventory_Ore, 1, "white", "none", "none", 70)
        Ore_Array.push(@@tin); Smelter_Ore_Sprite_Hash["Tin"] = Tin_Smelter_Ore
      #________________________________________________________________________________________________________________________________________________________
@@ -1200,9 +1214,11 @@ module Etc
       a = 0; r = 0
       case ingot
        when "copper"
-        difficulty = 1; ingot = @@copper_ingot
+        difficulty = 2; ingot = @@copper_ingot
         Inventory_Ingot.determine_ingots_smelted(difficulty, ingot)
-        
+      when "tin"
+        difficulty = 1; ingot = @@tin_ingot
+        Inventory_Ingot.determine_ingots_smelted(difficulty, ingot)
        end
      end
      def Inventory_Ingot.determine_ingots_smelted(difficulty, ingot)
@@ -1222,6 +1238,7 @@ module Etc
         @@smelting_exp += 5
       end
       ingot.amount_owned += a
+      Inventory_Ingot.initialize_inventory
       end
    #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
    #/                                                               Entities                                                                               /

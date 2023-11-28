@@ -2224,7 +2224,7 @@ Testing_Text.character_size = 20; Testing_Text.color = SF::Color::White; Testing
     Tin_Smelter_Ore = SF::Sprite.new(TIN_SMELTER_TEXTURE)
    #.....................................................Ingot.........................................................................
     TIN_INGOT_TEXTURE = SF::Texture.from_file("graphics/metals/Tin_Ingot.png")
-    Tin_Ingot_Ore = SF::Sprite.new(COPPER_INGOT_TEXTURE)
+    Tin_Ingot_Ore = SF::Sprite.new(TIN_INGOT_TEXTURE)
  #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
 
    Smelter_Nil_Sprite = SF::Sprite.new(COPPER_TEXTURE)
