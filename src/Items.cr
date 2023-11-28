@@ -296,6 +296,17 @@ module Etc
           else
             All_Audio::SFX.light_bonk
           end
+        when "Tin"
+          if @@copper.amount_owned >= 4 && @@tin.amount_owned >= 2
+            amount = 4
+            @@copper.remove_ore(amount)
+            amount = 2
+            @@tin.remove_ore(amount)
+         ingot = "bronze"
+          Inventory_Ingot.smelt_ingot(ingot)
+          else
+            All_Audio::SFX.light_bonk
+          end
         end
        end
        def Inventory_Ore.smelt_tin
@@ -305,6 +316,17 @@ module Etc
             amount = 8
             @@tin.remove_ore(amount)
          ingot = "tin"
+          Inventory_Ingot.smelt_ingot(ingot)
+          else
+            All_Audio::SFX.light_bonk
+          end
+        when "Copper"
+          if @@copper.amount_owned >= 4 && @@tin.amount_owned >= 2
+            amount = 4
+            @@copper.remove_ore(amount)
+            amount = 2
+            @@tin.remove_ore(amount)
+         ingot = "bronze"
           Inventory_Ingot.smelt_ingot(ingot)
           else
             All_Audio::SFX.light_bonk
@@ -1219,6 +1241,9 @@ module Etc
       when "tin"
         difficulty = 1; ingot = @@tin_ingot
         Inventory_Ingot.determine_ingots_smelted(difficulty, ingot)
+      when "bronze"
+        difficulty = 2; ingot = @@bronze_ingot
+        Inventory_Ingot.determine_ingots_smelted(difficulty, ingot)
        end
      end
      def Inventory_Ingot.determine_ingots_smelted(difficulty, ingot)
@@ -1249,6 +1274,9 @@ module Etc
     #----------------------------------------------------------------Tin--------------------------------------------------------------------------------- 
      @@tin_ingot = Inventory_Ingot.new("Tin", 0, Tin_Ingot_Ore, 0, 10)
      Ingot_Array.push(@@tin_ingot)
+    #--------------------------------------------------------------Bronze-------------------------------------------------------------------------------- 
+     @@bronze_ingot = Inventory_Ingot.new("Bronze", 0, Bronze_Ingot_Ore, 0, 10)
+     Ingot_Array.push(@@bronze_ingot)
    end
 end 
 

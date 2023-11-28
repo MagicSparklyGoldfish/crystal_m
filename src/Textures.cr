@@ -2220,12 +2220,17 @@ Testing_Text.character_size = 20; Testing_Text.color = SF::Color::White; Testing
   #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
   #'''''''''''''''''''''''''''''''''''''''''''''''''''''''Tin'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
    #......................................................Ore..........................................................................
-    TIN_SMELTER_TEXTURE = SF::Texture.from_file("graphics/metals/Tin_Smelter.png")
-    Tin_Smelter_Ore = SF::Sprite.new(TIN_SMELTER_TEXTURE)
-   #.....................................................Ingot.........................................................................
-    TIN_INGOT_TEXTURE = SF::Texture.from_file("graphics/metals/Tin_Ingot.png")
-    Tin_Ingot_Ore = SF::Sprite.new(TIN_INGOT_TEXTURE)
- #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+     TIN_SMELTER_TEXTURE = SF::Texture.from_file("graphics/metals/Tin_Smelter.png")
+     Tin_Smelter_Ore = SF::Sprite.new(TIN_SMELTER_TEXTURE)
+    #.....................................................Ingot.........................................................................
+     TIN_INGOT_TEXTURE = SF::Texture.from_file("graphics/metals/Tin_Ingot.png")
+     Tin_Ingot_Ore = SF::Sprite.new(TIN_INGOT_TEXTURE)
+   #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+   #'''''''''''''''''''''''''''''''''''''''''''''''''''''Bronze''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+    #.....................................................Ingot.........................................................................
+     BRONZE_INGOT_TEXTURE = SF::Texture.from_file("graphics/metals/Bronze_Ingot.png")
+     Bronze_Ingot_Ore = SF::Sprite.new(BRONZE_INGOT_TEXTURE)
+   #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
 
    Smelter_Nil_Sprite = SF::Sprite.new(COPPER_TEXTURE)
    Smelter_Nil_Sprite.color = SF.color(0, 0, 0, 0) 
