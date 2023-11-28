@@ -1239,9 +1239,16 @@ def Window_Class.hud_keypresses(window)
           @@popup = "none"     
           Player_Data::Player_Physics.mobilize_player
          end
-        if (x >= 585 && x <= 635) && (y >= 140 && y <= 200)
+        if (x >= 760 && x <= 950) && (y >= 625 && y <= 690)
           All_Audio::SFX.select1
+          Etc::Inventory_Ore.initialize_smelter
+        end
+        if (x >= 585 && x <= 635) && (y >= 140 && y <= 200)
           cubby_number = 0
+          Etc::Inventory_Ore.select_ore_one(window, cubby_number)
+         end
+        if (x >= 635 && x <= 685) && (y >= 140 && y <= 200)
+          cubby_number = 1
           Etc::Inventory_Ore.select_ore_one(window, cubby_number)
          end
       when "Stats_Menu" #---------------------------------------------------------Stats Menu
@@ -1725,6 +1732,7 @@ def Window_Class.hud_keypresses(window)
           if player.intersects? Test_Smelter.global_bounds
             Player_Data::Player_Physics.immobilize_player
             @@popup = "smelter"
+            @@player_character_rendered_model.position = SF.vector2(400, 75)
           else
             Player_Data::Player_Physics.mobilize_player
           end

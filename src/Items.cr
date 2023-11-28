@@ -218,15 +218,15 @@ module Etc
    end
    def Inventory_Ore.select_ore_one(window, cubby_number)
     if @@selected_ore_01 == @@nil_inventory_ore
-    @@selected_ore_01 = Inventory_Metal_Ore_Array[cubby_number]
-    @@selected_ore_sprite_01 = @@selected_ore_01.sprite.dup
-    @@selected_ore_sprite_01.scale(SF.vector2(2, 2))
-    @@selected_ore_sprite_01.position = SF.vector2(120, 0)
+     @@selected_ore_01 = Inventory_Metal_Ore_Array[cubby_number]
+     @@selected_ore_sprite_01 = @@selected_ore_01.sprite.dup
+     @@selected_ore_sprite_01.scale(SF.vector2(2, 2))
+     @@selected_ore_sprite_01.position = SF.vector2(120, 0)
     else if @@selected_ore_01 != Inventory_Metal_Ore_Array[cubby_number]
       @@selected_ore_02 = Inventory_Metal_Ore_Array[cubby_number]
       @@selected_ore_sprite_02 = @@selected_ore_02.sprite.dup
       @@selected_ore_sprite_02.scale(SF.vector2(2, 2))
-      @@selected_ore_sprite_02.position = SF.vector2(220, 0)
+      @@selected_ore_sprite_02.position = SF.vector2(270, 0)
     end; end
    end
    def Inventory_Ore.initialize_smelter
@@ -236,10 +236,14 @@ module Etc
     @@selected_ore_sprite_02 = Smelter_Nil_Sprite 
    end
    def Inventory_Ore.display_metal_smelter(window)  
-    window.draw(@@selected_ore_sprite_01); window.draw(@@selected_ore_02.sprite)   
+    window.draw(@@selected_ore_sprite_01); window.draw(@@selected_ore_sprite_02)   
     if Inventory_Metal_Ore_Array.size >= 1
-      Smelter_Ore_Sprite_Hash[Inventory_Metal_Ore_Array[0].name].position = SF.vector2(25, -175)
+      Smelter_Ore_Sprite_Hash[Inventory_Metal_Ore_Array[0].name].position = SF.vector2(25, -170)
       window.draw(Smelter_Ore_Sprite_Hash[Inventory_Metal_Ore_Array[0].name])
+    end
+    if Inventory_Metal_Ore_Array.size >= 2
+      Smelter_Ore_Sprite_Hash[Inventory_Metal_Ore_Array[1].name].position = SF.vector2(85, -170)
+      window.draw(Smelter_Ore_Sprite_Hash[Inventory_Metal_Ore_Array[1].name])
     end
    end
    def Inventory_Ore.display_ore(window, page) 
@@ -1026,7 +1030,7 @@ module Etc
       Ore_Array.push(@@carbon); Smelter_Ore_Sprite_Hash["Carbon"] = Carbon_Smelter_Ore
      #---------------------------------------------------------------Carbon--------------------------------------------------------------------------------- 
       @@copper = Inventory_Ore.new("Copper", 1001, Copper_Inventory_Ore, 1, "brown", "none", "none", 70)
-      Ore_Array.push(@@copper)
+      Ore_Array.push(@@copper); Smelter_Ore_Sprite_Hash["Copper"] = Copper_Smelter_Ore
    #____________________________________________________________________________________@note____________________________________________________________________
   end
 end 

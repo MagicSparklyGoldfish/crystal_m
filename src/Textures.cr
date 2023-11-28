@@ -2194,6 +2194,9 @@ Testing_Text.character_size = 20; Testing_Text.color = SF::Color::White; Testing
   #''''''''''''''''''''''''''''''''''''''''''''''''''''''Carbon'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
    CARBON_SMELTER_TEXTURE = SF::Texture.from_file("graphics/metals/Carbon_Smelter.png")
    Carbon_Smelter_Ore = SF::Sprite.new(CARBON_SMELTER_TEXTURE)
+  #''''''''''''''''''''''''''''''''''''''''''''''''''''''Carbon'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+   COPPER_SMELTER_TEXTURE = SF::Texture.from_file("graphics/metals/Copper_Smelter.png")
+   Copper_Smelter_Ore = SF::Sprite.new(COPPER_SMELTER_TEXTURE)
 
    Smelter_Nil_Sprite = SF::Sprite.new(COPPER_TEXTURE)
    Smelter_Nil_Sprite.color = SF.color(0, 0, 0, 0) 
