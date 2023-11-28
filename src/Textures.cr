@@ -381,10 +381,16 @@
   Inventory_arrow_up2.fill_color = SF.color(255, 100, 100)
   Inventory_arrow_down2 = SF::RectangleShape.new(SF.vector2(50, 90)); Inventory_arrow_down2.position = SF.vector2(400, 550);
   Inventory_arrow_down2.fill_color = SF.color(255, 100, 100)
+
   Ore_Button = SF::RectangleShape.new(SF.vector2(90, 50)); Ore_Button.position = SF.vector2(555, 245);
   Ore_Button.fill_color = SF.color(100, 255, 100)
   Ore_Button_Text = SF::Text.new; Ore_Button_Text.font = FONT_BOLD_OUTLINE; Ore_Button_Text.character_size = 30;
   Ore_Button_Text.color = SF::Color::White; Ore_Button_Text.position = SF.vector2(575, 250); Ore_Button_Text.string = "Ores";
+
+  Ingot_Button = SF::RectangleShape.new(SF.vector2(90, 50)); Ingot_Button.position = SF.vector2(655, 245);
+  Ingot_Button.fill_color = SF.color(100, 255, 100)
+  Ingot_Button_Text = SF::Text.new; Ingot_Button_Text.font = FONT_BOLD_OUTLINE; Ingot_Button_Text.character_size = 30;
+  Ingot_Button_Text.color = SF::Color::White; Ingot_Button_Text.position = SF.vector2(670, 250); Ingot_Button_Text.string = "Ingots";
 
   Test_Rectangle_01 = SF::RectangleShape.new(SF.vector2(140, 140));
   Test_Rectangle_01.fill_color = SF.color(155, 155, 255); Test_Rectangle_01.position = SF.vector2(555, 310);

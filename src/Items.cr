@@ -1079,7 +1079,7 @@ module Etc
  #II                                                               Ingot Class                                                                            II
  #IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
  #IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
-   Ingot_Array = [] of Inventory_Ingot
+   Ingot_Array = [] of Inventory_Ingot; Owned_Ingot_Array = [] of Inventory_Ingot
   class Inventory_Ingot
    #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
    #!                                                              Initialize                                                                              !
@@ -1118,6 +1118,32 @@ module Etc
    #????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
    #?                                                               Methods                                                                                ?
    #????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
+    #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++Display+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+     def Inventory_Ingot.initialize_inventory
+      s = Ingot_Array.size; i = 0
+      while i < s
+        if Ingot_Array[i].amount_owned > 0
+          Owned_Ingot_Array.push(Ingot_Array[i])
+        end
+        i += 1
+        puts Owned_Ingot_Array
+      end
+     end
+
+     def Inventory_Ingot.display_ingot(window, page)
+      Owned_Ingot_Array.uniq!
+      #----------------------------------------------------slot 1-------------------------------------------
+       if Owned_Ingot_Array.size >= 1
+        case page
+         when 1   
+          Owned_Ingot_Array[0].sprite.position = SF.vector2(555, 310);
+          ore_array_text_01 = Ore_amount_owned_text.dup
+          ore_array_text_01.position = Owned_Ingot_Array[0].sprite.position + SF.vector2(100, -5)
+          ore_array_text_01.string = "x" + Owned_Ingot_Array[0].amount_owned.to_s
+          window.draw(Owned_Ingot_Array[0].sprite); window.draw(ore_array_text_01)
+         end
+        end
+     end
     #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++Player Skill+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++Amount Owned Methods++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
      def Inventory_Ingot.smelt_ingot(ingot)
@@ -1151,7 +1177,7 @@ module Etc
    #/                                                               Entities                                                                               /
    #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     #---------------------------------------------------------------Copper--------------------------------------------------------------------------------- 
-     @@copper_ingot = Inventory_Ingot.new("Copper", 0, Copper_Ingot_Ore, 0, 10)
+     @@copper_ingot = Inventory_Ingot.new("Copper", 0, Copper_Ingot_Ore, 1, 10)
      Ingot_Array.push(@@copper_ingot)
    end
 end 
