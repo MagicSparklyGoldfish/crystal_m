@@ -258,7 +258,7 @@ module Etc
           metal_array_text_01.position =  Smelter_Ore_Sprite_Hash[Inventory_Metal_Ore_Array[0].name].position + SF.vector2(5, 25)
           window.draw(Smelter_Ore_Sprite_Hash[Inventory_Metal_Ore_Array[0].name])
           window.draw(metal_array_text_01)
-        end
+         end
         if Inventory_Metal_Ore_Array.size >= 2
           metal_array_text_02 = Ore_amount_owned_text.dup
           metal_array_text_02.string = "x" + Inventory_Metal_Ore_Array[1].amount_owned.to_s
@@ -266,7 +266,7 @@ module Etc
           metal_array_text_02.position =  Smelter_Ore_Sprite_Hash[Inventory_Metal_Ore_Array[1].name].position + SF.vector2(5, 25)
           window.draw(Smelter_Ore_Sprite_Hash[Inventory_Metal_Ore_Array[1].name])
           window.draw(metal_array_text_02)
-        end
+         end
         if Inventory_Metal_Ore_Array.size >= 3
           metal_array_text_03 = Ore_amount_owned_text.dup
           metal_array_text_03.string = "x" + Inventory_Metal_Ore_Array[2].amount_owned.to_s
@@ -274,65 +274,116 @@ module Etc
           metal_array_text_03.position =  Smelter_Ore_Sprite_Hash[Inventory_Metal_Ore_Array[2].name].position + SF.vector2(5, 25)
           window.draw(Smelter_Ore_Sprite_Hash[Inventory_Metal_Ore_Array[2].name])
           window.draw(metal_array_text_03)
+         end
+        if Inventory_Metal_Ore_Array.size >= 4
+          metal_array_text_04 = Ore_amount_owned_text.dup
+          metal_array_text_04.string = "x" + Inventory_Metal_Ore_Array[3].amount_owned.to_s
+          Smelter_Ore_Sprite_Hash[Inventory_Metal_Ore_Array[3].name].position = SF.vector2(175, -170)
+          metal_array_text_04.position =  Smelter_Ore_Sprite_Hash[Inventory_Metal_Ore_Array[3].name].position + SF.vector2(5, 25)
+          window.draw(Smelter_Ore_Sprite_Hash[Inventory_Metal_Ore_Array[3].name])
+          window.draw(metal_array_text_04)
         end
        end
       #------------------------------------------------------------------------------------------------------------------------------------------------------
       #-------------------------------------------------------------Smelt------------------------------------------------------------------------------------
-       def Inventory_Ore.smelt
-        case @@selected_ore_01.name
-         when "Copper"
-          Inventory_Ore.smelt_copper
-         when "Tin"
-          Inventory_Ore.smelt_tin
-       end; end
-       def Inventory_Ore.smelt_copper
-        case @@selected_ore_02.name
+         def Inventory_Ore.smelt
+          case @@selected_ore_01.name
+           when "Copper"
+            Inventory_Ore.smelt_copper
+           when "Tin"
+            Inventory_Ore.smelt_tin
+           when "Zinc"
+            Inventory_Ore.smelt_zinc
+         end; end
+       #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Copper'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+         def Inventory_Ore.smelt_copper
+          case @@selected_ore_02.name
+           when "Nil"
+            if @@copper.amount_owned >= 10
+              amount = 10
+              @@copper.remove_ore(amount)
+           ingot = "copper"
+            Inventory_Ingot.smelt_ingot(ingot)
+            else
+              All_Audio::SFX.light_bonk
+            end
+          when "Tin"
+            if @@copper.amount_owned >= 4 && @@tin.amount_owned >= 2
+              amount = 4
+              @@copper.remove_ore(amount)
+              amount = 2
+              @@tin.remove_ore(amount)
+           ingot = "bronze"
+            Inventory_Ingot.smelt_ingot(ingot)
+            else
+              All_Audio::SFX.light_bonk
+            end
+          when "Zinc"
+            if @@copper.amount_owned >= 3 && @@zinc.amount_owned >= 4
+              amount = 3
+              @@copper.remove_ore(amount)
+              amount = 4
+              @@tin.remove_ore(amount)
+           ingot = "bronze"
+            Inventory_Ingot.smelt_ingot(ingot)
+            else
+              All_Audio::SFX.light_bonk
+            end
+          end
+         end
+       #_____________________________________________________________________________________________________________________________________________________
+       #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Tin'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+         def Inventory_Ore.smelt_tin
+          case @@selected_ore_02.name
+          when "Nil"
+            if @@tin.amount_owned >= 8
+              amount = 8
+              @@tin.remove_ore(amount)
+           ingot = "tin"
+            Inventory_Ingot.smelt_ingot(ingot)
+            else
+              All_Audio::SFX.light_bonk
+            end
+          when "Copper"
+            if @@copper.amount_owned >= 4 && @@tin.amount_owned >= 2
+              amount = 4
+              @@copper.remove_ore(amount)
+              amount = 2
+              @@tin.remove_ore(amount)
+           ingot = "bronze"
+            Inventory_Ingot.smelt_ingot(ingot)
+            else
+              All_Audio::SFX.light_bonk
+            end
+          end
+         end
+       #_____________________________________________________________________________________________________________________________________________________
+       #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Zinc''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+        def Inventory_Ore.smelt_zinc
+         case @@selected_ore_02.name
          when "Nil"
-          if @@copper.amount_owned >= 10
-            amount = 10
-            @@copper.remove_ore(amount)
-         ingot = "copper"
-          Inventory_Ingot.smelt_ingot(ingot)
-          else
-            All_Audio::SFX.light_bonk
-          end
-        when "Tin"
-          if @@copper.amount_owned >= 4 && @@tin.amount_owned >= 2
-            amount = 4
-            @@copper.remove_ore(amount)
-            amount = 2
-            @@tin.remove_ore(amount)
-         ingot = "bronze"
-          Inventory_Ingot.smelt_ingot(ingot)
-          else
-            All_Audio::SFX.light_bonk
-          end
+           if @@zinc.amount_owned >= 6
+             amount = 6
+             @@zinc.remove_ore(amount)
+          ingot = "zinc"
+           Inventory_Ingot.smelt_ingot(ingot)
+           else
+             All_Audio::SFX.light_bonk
+           end
+         when "Copper"
+           if @@copper.amount_owned >= 3 && @@zinc.amount_owned >= 4
+             amount = 3
+             @@copper.remove_ore(amount)
+             amount = 4
+             @@zinc.remove_ore(amount)
+          ingot = "bronze"
+           Inventory_Ingot.smelt_ingot(ingot)
+           else
+             All_Audio::SFX.light_bonk
+           end
+         end
         end
-       end
-       def Inventory_Ore.smelt_tin
-        case @@selected_ore_02.name
-        when "Nil"
-          if @@tin.amount_owned >= 8
-            amount = 8
-            @@tin.remove_ore(amount)
-         ingot = "tin"
-          Inventory_Ingot.smelt_ingot(ingot)
-          else
-            All_Audio::SFX.light_bonk
-          end
-        when "Copper"
-          if @@copper.amount_owned >= 4 && @@tin.amount_owned >= 2
-            amount = 4
-            @@copper.remove_ore(amount)
-            amount = 2
-            @@tin.remove_ore(amount)
-         ingot = "bronze"
-          Inventory_Ingot.smelt_ingot(ingot)
-          else
-            All_Audio::SFX.light_bonk
-          end
-        end
-       end
+       #_____________________________________________________________________________________________________________________________________________________
       #------------------------------------------------------------------------------------------------------------------------------------------------------
      #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
      #++++++++++++++++++++++++++++++++++++++++++++++++++++++Inventory Ore Display++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -1125,6 +1176,9 @@ module Etc
       #----------------------------------------------------------------Tin----------------------------------------------------------------------------------- 
        @@tin = Inventory_Ore.new("Tin", 1002, Tin_Inventory_Ore, 1, "white", "none", "none", 70)
        Ore_Array.push(@@tin); Smelter_Ore_Sprite_Hash["Tin"] = Tin_Smelter_Ore
+      #----------------------------------------------------------------Tin----------------------------------------------------------------------------------- 
+       @@zinc = Inventory_Ore.new("Zinc", 1003, Zinc_Inventory_Ore, 1, "white", "none", "none", 70)
+       Ore_Array.push(@@zinc); Smelter_Ore_Sprite_Hash["Zinc"] = Zinc_Smelter_Ore
      #________________________________________________________________________________________________________________________________________________________
    end
  #IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
@@ -1229,6 +1283,17 @@ module Etc
            window.draw(Owned_Ingot_Array[3].sprite); window.draw(ore_array_text_04)
           end
         end
+      #----------------------------------------------------slot 5-------------------------------------------
+      if Owned_Ingot_Array.size >= 5
+        case page
+         when 1   
+           Owned_Ingot_Array[4].sprite.position = SF.vector2(1155, 310);
+          ore_array_text_05 = Ore_amount_owned_text.dup
+          ore_array_text_05.position = Owned_Ingot_Array[4].sprite.position + SF.vector2(100, -5)
+          ore_array_text_05.string = "x" + Owned_Ingot_Array[4].amount_owned.to_s
+          window.draw(Owned_Ingot_Array[4].sprite); window.draw(ore_array_text_05)
+         end
+       end
      end
     #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++Player Skill+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++Amount Owned Methods++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -1243,6 +1308,9 @@ module Etc
         Inventory_Ingot.determine_ingots_smelted(difficulty, ingot)
       when "bronze"
         difficulty = 2; ingot = @@bronze_ingot
+        Inventory_Ingot.determine_ingots_smelted(difficulty, ingot)
+      when "zinc"
+        difficulty = 1; ingot = @@zinc_ingot
         Inventory_Ingot.determine_ingots_smelted(difficulty, ingot)
        end
      end
@@ -1277,6 +1345,9 @@ module Etc
     #--------------------------------------------------------------Bronze-------------------------------------------------------------------------------- 
      @@bronze_ingot = Inventory_Ingot.new("Bronze", 0, Bronze_Ingot_Ore, 0, 10)
      Ingot_Array.push(@@bronze_ingot)
+    #---------------------------------------------------------------Zinc--------------------------------------------------------------------------------- 
+     @@zinc_ingot = Inventory_Ingot.new("Zinc", 0, Zinc_Ingot_Ore, 0, 10)
+     Ingot_Array.push(@@zinc_ingot)
    end
 end 
 
@@ -1290,7 +1361,7 @@ module Harvestables
     @@azurite01, @@howlite01, @@angelite01, @@blue_lace_agate01, @@iolite01, @@sodalite01, @@kyanite01, @@sunstone01, @@bony_amber01, @@blue_amber01,
     @@blue_spinel01, @@red_spinel01, @@fire_opal01, @@garnet01, @@ruby01, @@cherry_quartz01, @@lemon_quartz01, @@turquoise01, @@tigers_eye01,
     @@orange_calcite01, @@grape_agate01, @@jade01, @@diamond01, @@emerald01, @@painite01, @@bumblebee_jasper01, @@blood_jasper01, @@mook_jasper01,
-    @@red_jasper01, @@carbon01, @@copper01, @@tin01]
+    @@red_jasper01, @@carbon01, @@copper01, @@tin01, @@zinc01]
 
     Test_Ore_Sprite_Array = [@@bloodstone_01.sprite, @@bloodstone_02.sprite, @@bloodstone_03.sprite, @@moss_agate_01.sprite, @@amber01.sprite, 
     @@wavellite01.sprite,  @@topaz01.sprite, @@amethyst01.sprite, @@smokey_quartz01.sprite, @@sapphire01.sprite, @@black_opal01.sprite,
@@ -1301,7 +1372,7 @@ module Harvestables
     @@red_spinel01.sprite, @@fire_opal01.sprite, @@garnet01.sprite, @@ruby01.sprite, @@cherry_quartz01.sprite, @@lemon_quartz01.sprite,
     @@turquoise01.sprite, @@tigers_eye01.sprite, @@orange_calcite01.sprite, @@grape_agate01.sprite, @@jade01.sprite, @@diamond01.sprite, @@emerald01.sprite,
     @@painite01.sprite, @@bumblebee_jasper01.sprite, @@blood_jasper01.sprite, @@mook_jasper01.sprite, @@red_jasper01.sprite, @@carbon01.sprite, 
-    @@copper01.sprite, @@tin01.sprite]
+    @@copper01.sprite, @@tin01.sprite, @@zinc01.sprite]
    #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
    #+                                                              Variables                                                                               +
    #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -1525,6 +1596,7 @@ module Harvestables
       window.draw(@@grape_agate01.sprite); window.draw(@@jade01.sprite); window.draw(@@diamond01.sprite); window.draw(@@emerald01.sprite)
       window.draw(@@painite01.sprite); window.draw(@@bumblebee_jasper01.sprite); window.draw(@@blood_jasper01.sprite); window.draw(@@mook_jasper01.sprite)
       window.draw(@@red_jasper01.sprite); window.draw(@@carbon01.sprite); window.draw(@@copper01.sprite); window.draw(@@tin01.sprite)
+      window.draw(@@zinc01.sprite)
       if @@is_smelting == true
         page = 1
         window.draw(Test_Smelter_Menu); Etc::Inventory_Ore.update_ore_inventory; Etc::Inventory_Ore.display_metal_smelter(window)  
@@ -1982,8 +2054,22 @@ module Harvestables
      @@copper11 = Ore.new("Copper", 3023, "brown", 0, 300, "copper", Copper_Ore.dup, false, 300)
      @@copper12 = Ore.new("Copper", 3024, "brown", 0, 300, "copper", Copper_Ore.dup, false, 300)
     #........................................................................................................................................................
-    #.................................................................Copper.................................................................................
-     @@tin01 = Ore.new("Tin", 3012, "white", 0, 200, "tin", Tin_Ore.dup, false, 200)
+    #..................................................................Tin...................................................................................
+     @@tin01 = Ore.new("Tin", 3024, "white", 0, 200, "tin", Tin_Ore.dup, false, 200)
+     @@tin02 = Ore.new("Tin", 3025, "white", 0, 200, "tin", Tin_Ore.dup, false, 200)
+     @@tin03 = Ore.new("Tin", 3026, "white", 0, 200, "tin", Tin_Ore.dup, false, 200)
+     @@tin04 = Ore.new("Tin", 3027, "white", 0, 200, "tin", Tin_Ore.dup, false, 200)
+     @@tin05 = Ore.new("Tin", 3028, "white", 0, 200, "tin", Tin_Ore.dup, false, 200)
+     @@tin06 = Ore.new("Tin", 3029, "white", 0, 200, "tin", Tin_Ore.dup, false, 200)
+     @@tin07 = Ore.new("Tin", 3030, "white", 0, 200, "tin", Tin_Ore.dup, false, 200)
+     @@tin08 = Ore.new("Tin", 3031, "white", 0, 200, "tin", Tin_Ore.dup, false, 200)
+     @@tin09 = Ore.new("Tin", 3032, "white", 0, 200, "tin", Tin_Ore.dup, false, 200)
+     @@tin10 = Ore.new("Tin", 3033, "white", 0, 200, "tin", Tin_Ore.dup, false, 200)
+     @@tin11 = Ore.new("Tin", 3034, "white", 0, 200, "tin", Tin_Ore.dup, false, 200)
+     @@tin12 = Ore.new("Tin", 3035, "white", 0, 200, "tin", Tin_Ore.dup, false, 200)
+    #........................................................................................................................................................
+    #..................................................................Tin...................................................................................
+     @@zinc01 = Ore.new("Zinc", 3036, "white", 0, 100, "zinc", Zinc_Ore.dup, false, 100)
   end
   class Herbs
   def initialize(name : String, id : Int32, color : String, hp : Int32, drop_item : String, sprite : SF::Sprite, is_broke : Bool)
