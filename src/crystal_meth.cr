@@ -741,7 +741,7 @@ end
 #                                                        Initialization
 #---------------------------------------------------------------------------------------------------------------------------------------+
  window = SF::RenderWindow.new(SF::VideoMode.new(1920, 1080), "Crystal Meth!", SF::Style::Fullscreen) #initializes window
- window.vertical_sync_enabled = false 
+ window.vertical_sync_enabled = false; #window.framerate_limit = 120
 
 
  debug_draw = SFMLDebugDraw.new(window, SF::RenderStates.new( #--------------------------------initializes crystal chipmunk draw area

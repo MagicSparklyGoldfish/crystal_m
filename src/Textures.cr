@@ -2210,8 +2210,9 @@ Testing_Text.character_size = 20; Testing_Text.color = SF::Color::White; Testing
  Test_Ladder = SF::RectangleShape.new(SF.vector2(40, 400)); Test_Teleporter.fill_color = SF.color(50, 150, 255)
  Test_Ladder.position = SF.vector2(0, 400);
 
- Test_Smelter = SF::RectangleShape.new(SF.vector2(120, 80)); Test_Smelter.fill_color = SF.color(50, 150, 155)
- Test_Smelter.position = SF.vector2(400, 125);
+ SMELTER_RECTANGLE_TEXTURE = SF::Texture.from_file("graphics/Smelter_Sprite.png")
+ Test_Smelter = SF::RectangleShape.new(SF.vector2(120, 80)); Test_Smelter.set_texture(SMELTER_RECTANGLE_TEXTURE, reset_rect: false)
+ Test_Smelter.position = SF.vector2(400, 125); #Test_Smelter.fill_color = SF.color(50, 150, 155);
 
 #--------------------------------------------------------------------------------------------------------------------------------------
 #                                                       Smelter
