@@ -323,8 +323,8 @@ module Etc
               amount = 3
               @@copper.remove_ore(amount)
               amount = 4
-              @@tin.remove_ore(amount)
-           ingot = "bronze"
+              @@zinc.remove_ore(amount)
+           ingot = "brass"
             Inventory_Ingot.smelt_ingot(ingot)
             else
               All_Audio::SFX.light_bonk
@@ -376,7 +376,7 @@ module Etc
              @@copper.remove_ore(amount)
              amount = 4
              @@zinc.remove_ore(amount)
-          ingot = "bronze"
+          ingot = "brass"
            Inventory_Ingot.smelt_ingot(ingot)
            else
              All_Audio::SFX.light_bonk
@@ -1176,7 +1176,7 @@ module Etc
       #----------------------------------------------------------------Tin----------------------------------------------------------------------------------- 
        @@tin = Inventory_Ore.new("Tin", 1002, Tin_Inventory_Ore, 1, "white", "none", "none", 70)
        Ore_Array.push(@@tin); Smelter_Ore_Sprite_Hash["Tin"] = Tin_Smelter_Ore
-      #----------------------------------------------------------------Tin----------------------------------------------------------------------------------- 
+      #---------------------------------------------------------------Zinc----------------------------------------------------------------------------------- 
        @@zinc = Inventory_Ore.new("Zinc", 1003, Zinc_Inventory_Ore, 1, "white", "none", "none", 70)
        Ore_Array.push(@@zinc); Smelter_Ore_Sprite_Hash["Zinc"] = Zinc_Smelter_Ore
      #________________________________________________________________________________________________________________________________________________________
@@ -1284,16 +1284,27 @@ module Etc
           end
         end
       #----------------------------------------------------slot 5-------------------------------------------
-      if Owned_Ingot_Array.size >= 5
-        case page
-         when 1   
-           Owned_Ingot_Array[4].sprite.position = SF.vector2(1155, 310);
-          ore_array_text_05 = Ore_amount_owned_text.dup
-          ore_array_text_05.position = Owned_Ingot_Array[4].sprite.position + SF.vector2(100, -5)
-          ore_array_text_05.string = "x" + Owned_Ingot_Array[4].amount_owned.to_s
-          window.draw(Owned_Ingot_Array[4].sprite); window.draw(ore_array_text_05)
-         end
-       end
+       if Owned_Ingot_Array.size >= 5
+         case page
+          when 1   
+            Owned_Ingot_Array[4].sprite.position = SF.vector2(1155, 310);
+           ore_array_text_05 = Ore_amount_owned_text.dup
+           ore_array_text_05.position = Owned_Ingot_Array[4].sprite.position + SF.vector2(100, -5)
+           ore_array_text_05.string = "x" + Owned_Ingot_Array[4].amount_owned.to_s
+           window.draw(Owned_Ingot_Array[4].sprite); window.draw(ore_array_text_05)
+          end
+        end
+      #----------------------------------------------------slot 6-------------------------------------------
+       if Owned_Ingot_Array.size >= 6
+         case page
+          when 1   
+            Owned_Ingot_Array[5].sprite.position = SF.vector2(1305, 310);
+           ore_array_text_06 = Ore_amount_owned_text.dup
+           ore_array_text_06.position = Owned_Ingot_Array[5].sprite.position + SF.vector2(100, -5)
+           ore_array_text_06.string = "x" + Owned_Ingot_Array[5].amount_owned.to_s
+           window.draw(Owned_Ingot_Array[5].sprite); window.draw(ore_array_text_06)
+          end
+        end
      end
     #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++Player Skill+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++Amount Owned Methods++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -1311,6 +1322,9 @@ module Etc
         Inventory_Ingot.determine_ingots_smelted(difficulty, ingot)
       when "zinc"
         difficulty = 1; ingot = @@zinc_ingot
+        Inventory_Ingot.determine_ingots_smelted(difficulty, ingot)
+      when "brass"
+        difficulty = 2; ingot = @@brass_ingot
         Inventory_Ingot.determine_ingots_smelted(difficulty, ingot)
        end
      end
@@ -1348,6 +1362,9 @@ module Etc
     #---------------------------------------------------------------Zinc--------------------------------------------------------------------------------- 
      @@zinc_ingot = Inventory_Ingot.new("Zinc", 0, Zinc_Ingot_Ore, 0, 10)
      Ingot_Array.push(@@zinc_ingot)
+    #---------------------------------------------------------------Brass--------------------------------------------------------------------------------- 
+     @@brass_ingot = Inventory_Ingot.new("Brass", 0, Brass_Ingot_Ore, 0, 10)
+     Ingot_Array.push(@@brass_ingot)
    end
 end 
 
@@ -2068,8 +2085,20 @@ module Harvestables
      @@tin11 = Ore.new("Tin", 3034, "white", 0, 200, "tin", Tin_Ore.dup, false, 200)
      @@tin12 = Ore.new("Tin", 3035, "white", 0, 200, "tin", Tin_Ore.dup, false, 200)
     #........................................................................................................................................................
-    #..................................................................Tin...................................................................................
+    #.................................................................Zinc...................................................................................
      @@zinc01 = Ore.new("Zinc", 3036, "white", 0, 100, "zinc", Zinc_Ore.dup, false, 100)
+     @@zinc02 = Ore.new("Zinc", 3037, "white", 0, 100, "zinc", Zinc_Ore.dup, false, 100)
+     @@zinc03 = Ore.new("Zinc", 3038, "white", 0, 100, "zinc", Zinc_Ore.dup, false, 100)
+     @@zinc04 = Ore.new("Zinc", 3039, "white", 0, 100, "zinc", Zinc_Ore.dup, false, 100)
+     @@zinc05 = Ore.new("Zinc", 3040, "white", 0, 100, "zinc", Zinc_Ore.dup, false, 100)
+     @@zinc06 = Ore.new("Zinc", 3041, "white", 0, 100, "zinc", Zinc_Ore.dup, false, 100)
+     @@zinc07 = Ore.new("Zinc", 3042, "white", 0, 100, "zinc", Zinc_Ore.dup, false, 100)
+     @@zinc08 = Ore.new("Zinc", 3043, "white", 0, 100, "zinc", Zinc_Ore.dup, false, 100)
+     @@zinc09 = Ore.new("Zinc", 3044, "white", 0, 100, "zinc", Zinc_Ore.dup, false, 100)
+     @@zinc10 = Ore.new("Zinc", 3045, "white", 0, 100, "zinc", Zinc_Ore.dup, false, 100)
+     @@zinc11 = Ore.new("Zinc", 3046, "white", 0, 100, "zinc", Zinc_Ore.dup, false, 100)
+     @@zinc12 = Ore.new("Zinc", 3047, "white", 0, 100, "zinc", Zinc_Ore.dup, false, 100)
+    #........................................................................................................................................................
   end
   class Herbs
   def initialize(name : String, id : Int32, color : String, hp : Int32, drop_item : String, sprite : SF::Sprite, is_broke : Bool)

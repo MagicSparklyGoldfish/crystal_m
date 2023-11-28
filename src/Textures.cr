@@ -2247,6 +2247,11 @@ Testing_Text.character_size = 20; Testing_Text.color = SF::Color::White; Testing
     ZINC_INGOT_TEXTURE = SF::Texture.from_file("graphics/metals/Zinc_Ingot.png")
     Zinc_Ingot_Ore = SF::Sprite.new(ZINC_INGOT_TEXTURE)
  #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+ #''''''''''''''''''''''''''''''''''''''''''''''''''''''Brass''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+  #.....................................................Ingot.........................................................................
+    BRASS_INGOT_TEXTURE = SF::Texture.from_file("graphics/metals/Brass_Ingot.png")
+    Brass_Ingot_Ore = SF::Sprite.new(BRASS_INGOT_TEXTURE)
+ #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
 
    Smelter_Nil_Sprite = SF::Sprite.new(COPPER_TEXTURE)
    Smelter_Nil_Sprite.color = SF.color(0, 0, 0, 0) 
