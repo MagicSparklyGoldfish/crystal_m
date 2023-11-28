@@ -279,8 +279,14 @@ module Etc
        def Inventory_Ore.smelt_copper
         case @@selected_ore_02.name
          when "Nil"
+          if @@copper.amount_owned >= 10
+            amount = 10
+            @@copper.remove_ore(amount)
          ingot = "copper"
           Inventory_Ingot.smelt_ingot(ingot)
+          else
+            All_Audio::SFX.light_bonk
+          end
         end
        end
       #------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -1142,6 +1148,39 @@ module Etc
           ore_array_text_01.string = "x" + Owned_Ingot_Array[0].amount_owned.to_s
           window.draw(Owned_Ingot_Array[0].sprite); window.draw(ore_array_text_01)
          end
+        end
+      #----------------------------------------------------slot 2-------------------------------------------
+       if Owned_Ingot_Array.size >= 2
+        case page
+         when 1   
+          Owned_Ingot_Array[1].sprite.position = SF.vector2(710, 310);
+          ore_array_text_02 = Ore_amount_owned_text.dup
+          ore_array_text_02.position = Owned_Ingot_Array[1].sprite.position + SF.vector2(100, -5)
+          ore_array_text_02.string = "x" + Owned_Ingot_Array[1].amount_owned.to_s
+          window.draw(Owned_Ingot_Array[1].sprite); window.draw(ore_array_text_02)
+         end
+        end
+      #----------------------------------------------------slot 3-------------------------------------------
+        if Owned_Ingot_Array.size >= 3
+         case page
+          when 1   
+            Owned_Ingot_Array[2].sprite.position = SF.vector2(855, 310);
+           ore_array_text_03 = Ore_amount_owned_text.dup
+           ore_array_text_03.position = Owned_Ingot_Array[2].sprite.position + SF.vector2(100, -5)
+           ore_array_text_03.string = "x" + Owned_Ingot_Array[2].amount_owned.to_s
+           window.draw(Owned_Ingot_Array[2].sprite); window.draw(ore_array_text_03)
+          end
+         end
+      #----------------------------------------------------slot 4-------------------------------------------
+        if Owned_Ingot_Array.size >= 4
+         case page
+          when 1   
+            Owned_Ingot_Array[3].sprite.position = SF.vector2(1005, 310);
+           ore_array_text_04 = Ore_amount_owned_text.dup
+           ore_array_text_04.position = Owned_Ingot_Array[3].sprite.position + SF.vector2(100, -5)
+           ore_array_text_04.string = "x" + Owned_Ingot_Array[3].amount_owned.to_s
+           window.draw(Owned_Ingot_Array[3].sprite); window.draw(ore_array_text_04)
+          end
         end
      end
     #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++Player Skill+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
