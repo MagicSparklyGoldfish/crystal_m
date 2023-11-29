@@ -237,9 +237,9 @@ extend self
    window.draw(HP_Bar_Color); window.draw(HP_Label); window.draw(LVL_Label)
    if @@idle == true 
     @@idleframes += 1
-    if @@idleframes >= 2200 && @@current_direction == "right"
+    if @@idleframes >= 50 && @@current_direction == "right"
     Window_Class.idle_animation_right(window)
-    else if @@idleframes >= 2200 && @@current_direction == "left"
+    else if @@idleframes >= 50 && @@current_direction == "left"
       Window_Class.idle_animation_left(window)
     end
     end
@@ -741,7 +741,7 @@ end
 #                                                        Initialization
 #---------------------------------------------------------------------------------------------------------------------------------------+
  window = SF::RenderWindow.new(SF::VideoMode.new(1920, 1080), "Crystal Meth!", SF::Style::Fullscreen) #@note initializes window
- window.vertical_sync_enabled = false; #window.framerate_limit = 120
+ window.vertical_sync_enabled = true; #window.framerate_limit = 2000
 
 
  debug_draw = SFMLDebugDraw.new(window, SF::RenderStates.new( #--------------------------------initializes crystal chipmunk draw area
@@ -2173,7 +2173,7 @@ end; end; end; end; end; end
        @@gravity_clock.restart    
      else
        @@is_player_airborne = true
-       if gravity >= SF.seconds(0.01)
+       if gravity >= SF.seconds(0.05)
          @@player_character_rendered_model.position += SF.vector2(0, 0.95)
          if SF::Keyboard.key_pressed?(SF::Keyboard::A)
           @@player_character_rendered_model.position -= SF.vector2(0.01, 0)
