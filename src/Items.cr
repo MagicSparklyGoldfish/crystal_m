@@ -52,41 +52,54 @@ module Equipment
       player.draw(@@current_weapon_object.sprite)
     end
    def Equipment.display_equipment_inventory(window, page)
-    if WEAPON_INVENTORY_ARRAY.size >= 1
-      case page
-      when 1   
-       WEAPON_INVENTORY_ARRAY[0].rectangle.position = SF.vector2(555, 310);
-       window.draw(WEAPON_INVENTORY_ARRAY[0].rectangle)
-      end
-    end
-    if WEAPON_INVENTORY_ARRAY.size >= 2
-      case page
-      when 1   
-       WEAPON_INVENTORY_ARRAY[1].rectangle.position = SF.vector2(710, 310);
-       window.draw(WEAPON_INVENTORY_ARRAY[1].rectangle)
-      end
-    end
-    if WEAPON_INVENTORY_ARRAY.size >= 3
-      case page
-      when 1   
-       WEAPON_INVENTORY_ARRAY[2].rectangle.position = SF.vector2(855, 310);
-       window.draw(WEAPON_INVENTORY_ARRAY[2].rectangle)
-      end
-    end
-    if WEAPON_INVENTORY_ARRAY.size >= 4
-      case page
-      when 1   
-       WEAPON_INVENTORY_ARRAY[3].rectangle.position = SF.vector2(1005, 310);
-       window.draw(WEAPON_INVENTORY_ARRAY[3].rectangle)
-      end
-    end
-    if WEAPON_INVENTORY_ARRAY.size >= 5
-      case page
-      when 1   
-       WEAPON_INVENTORY_ARRAY[4].rectangle.position = SF.vector2(1155, 310);
-       window.draw(WEAPON_INVENTORY_ARRAY[4].rectangle)
-      end
-    end
+    #----------------------Slot 1--------------------------
+     if WEAPON_INVENTORY_ARRAY.size >= 1
+       case page
+       when 1   
+        WEAPON_INVENTORY_ARRAY[0].rectangle.position = SF.vector2(555, 310);
+        window.draw(WEAPON_INVENTORY_ARRAY[0].rectangle)
+       end
+     end
+    #----------------------Slot 2--------------------------
+     if WEAPON_INVENTORY_ARRAY.size >= 2
+       case page
+       when 1   
+        WEAPON_INVENTORY_ARRAY[1].rectangle.position = SF.vector2(710, 310);
+        window.draw(WEAPON_INVENTORY_ARRAY[1].rectangle)
+       end
+     end
+    #----------------------Slot 3--------------------------
+     if WEAPON_INVENTORY_ARRAY.size >= 3
+       case page
+       when 1   
+        WEAPON_INVENTORY_ARRAY[2].rectangle.position = SF.vector2(855, 310);
+        window.draw(WEAPON_INVENTORY_ARRAY[2].rectangle)
+       end
+     end
+    #----------------------Slot 4--------------------------
+     if WEAPON_INVENTORY_ARRAY.size >= 4
+       case page
+       when 1   
+        WEAPON_INVENTORY_ARRAY[3].rectangle.position = SF.vector2(1005, 310);
+        window.draw(WEAPON_INVENTORY_ARRAY[3].rectangle)
+       end
+     end
+    #----------------------Slot 5--------------------------
+     if WEAPON_INVENTORY_ARRAY.size >= 5
+       case page
+       when 1   
+        WEAPON_INVENTORY_ARRAY[4].rectangle.position = SF.vector2(1155, 310);
+        window.draw(WEAPON_INVENTORY_ARRAY[4].rectangle)
+       end
+     end
+    #----------------------Slot 6--------------------------
+     if WEAPON_INVENTORY_ARRAY.size >= 6
+       case page
+       when 1   
+        WEAPON_INVENTORY_ARRAY[5].rectangle.position = SF.vector2(1305, 310);
+        window.draw(WEAPON_INVENTORY_ARRAY[5].rectangle)
+       end
+     end
    end
    def Equipment.play_swing_sound
     @@current_weapon_object.swing_sound.play
@@ -160,9 +173,9 @@ module Equipment
  def Stick.test(window, page)
         window.draw(Weapon_Rectangle_01)
     end
-    WEAPON_OBJECT_ARRAY.push(@@stick01, @@zinc_stick, @@tin_stick, @@copper_stick, @@brass_stick, @@bronze_stick)
+    WEAPON_OBJECT_ARRAY.push(@@stick01, @@zinc_stick, @@tin_stick, @@copper_stick, @@brass_stick, @@bronze_stick, @@iron_stick )
     #WEAPON_INVENTORY_ARRAY.push(@@nil_stick)
-    WEAPON_INVENTORY_ARRAY.push(@@zinc_stick, @@tin_stick, @@copper_stick, @@brass_stick, @@bronze_stick)
+    WEAPON_INVENTORY_ARRAY.push(@@zinc_stick, @@tin_stick, @@copper_stick, @@brass_stick, @@bronze_stick, @@iron_stick )
  @@nil_stick = Stick.new("", -1, false, false, false, 1.5, ["none"], ["none"], WEAPSOUND_01, WEAPSOUND_02, Weapon_Rectangle_01, false, Stick01)
  @@stick01 = Stick.new("Stick", 0, true, false, false, 1.5, ["none"], ["none"], WEAPSOUND_01, WEAPSOUND_02, Weapon_Rectangle_01, false, Stick01)
  @@zinc_stick = Stick.new("Zinc Stick", 0, true, false, false, 1.75, ["none"], ["none"], WEAPSOUND_01, WEAPSOUND_02, Zinc_Stick_Display, false, Zinc_Stick)
@@ -170,6 +183,7 @@ module Equipment
  @@copper_stick = Stick.new("Copper Stick", 0, true, false, false, 4, ["none"], ["none"], WEAPSOUND_01, WEAPSOUND_02, Copper_Stick_Display, false, Copper_Stick)
  @@brass_stick = Stick.new("Brass Stick", 0, true, false, false, 2.5, ["none"], ["none"], WEAPSOUND_01, WEAPSOUND_02, Brass_Stick_Display, false, Brass_Stick)
  @@bronze_stick = Stick.new("Bronze Stick", 0, true, false, false, 3, ["none"], ["none"], WEAPSOUND_01, WEAPSOUND_02, Bronze_Stick_Display, false, Bronze_Stick)
+ @@iron_stick = Stick.new("Iron Stick", 0, true, false, false, 3, ["none"], ["none"], WEAPSOUND_01, WEAPSOUND_02, Iron_Stick_Display, false, Iron_Stick)
  end
 end
 
