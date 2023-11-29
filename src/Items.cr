@@ -21,7 +21,7 @@ module Equipment
  # ____________________________________________________________________________________________________________________________________
  #|                                                     Equipment Variables                                                            |
  #|____________________________________________________________________________________________________________________________________|
-   @@nil_stick = Stick.new("", -1, false, false, false, 1.5, ["none"], ["none"], WEAPSOUND_01, WEAPSOUND_02, Weapon_Rectangle_01, false)
+   @@nil_stick = Stick.new("", -1, false, false, false, 1.5, ["none"], ["none"], WEAPSOUND_01, WEAPSOUND_02, Weapon_Rectangle_01, false, Stick01)
    @@current_weapon : Int32
    @@current_weapon = -1
    @@current_weapon_object : Stick 
@@ -35,20 +35,45 @@ module Equipment
  #|                                                     Equipment Methods                                                              |
  #|____________________________________________________________________________________________________________________________________|
    def Equipment.equip_weapon(this)
-    size = WEAPON_INVENTORY_ARRAY.size - 1
+    size = WEAPON_INVENTORY_ARRAY.size 
      if this > size
        All_Audio::SFX.light_bonk
       else 
-     if @@current_weapon_object != Nil
+     if @@current_weapon_object != Nil || @@nil_stick
        WEAPON_INVENTORY_ARRAY.push(@@current_weapon_object)
-      end
-     if size != 0
        @@current_weapon = WEAPON_INVENTORY_ARRAY[this].number
        @@current_weapon_object = WEAPON_INVENTORY_ARRAY[this]
        WEAPON_INVENTORY_ARRAY.delete(@@current_weapon_object)
+       puts "equip" + this.to_s
       end
       end
     end
+    def Equipment.draw_current_weapon(player)
+      player.draw(@@current_weapon_object.sprite)
+    end
+   def Equipment.display_equipment_inventory(window, page)
+    if WEAPON_INVENTORY_ARRAY.size >= 1
+      case page
+      when 1   
+       WEAPON_INVENTORY_ARRAY[0].rectangle.position = SF.vector2(555, 310);
+       window.draw(WEAPON_INVENTORY_ARRAY[0].rectangle)
+      end
+    end
+    if WEAPON_INVENTORY_ARRAY.size >= 2
+      case page
+      when 1   
+       WEAPON_INVENTORY_ARRAY[1].rectangle.position = SF.vector2(710, 310);
+       window.draw(WEAPON_INVENTORY_ARRAY[1].rectangle)
+      end
+    end
+    if WEAPON_INVENTORY_ARRAY.size >= 3
+      case page
+      when 1   
+       WEAPON_INVENTORY_ARRAY[2].rectangle.position = SF.vector2(855, 310);
+       window.draw(WEAPON_INVENTORY_ARRAY[2].rectangle)
+      end
+    end
+   end
    def Equipment.play_swing_sound
     @@current_weapon_object.swing_sound.play
    end
@@ -61,7 +86,7 @@ module Equipment
    end
  #======================================================================================================================================
  class Stick
- def initialize(name : String, number : Int32, can_swing : Bool, can_stab : Bool, can_shoot : Bool, atk_power : Float64, elements : Array(String), special_effects : Array(String), swing_sound : SF::Sound, hit_sound : SF::Sound, rectangle : SF::RectangleShape, is_equipped : Bool)
+ def initialize(name : String, number : Int32, can_swing : Bool, can_stab : Bool, can_shoot : Bool, atk_power : Float64, elements : Array(String), special_effects : Array(String), swing_sound : SF::Sound, hit_sound : SF::Sound, rectangle : SF::RectangleShape, is_equipped : Bool, sprite : SF::Sprite)
     @name = name
     @number = number
     @can_swing = can_swing
@@ -74,6 +99,7 @@ module Equipment
     @hit_sound = hit_sound
     @rectangle = rectangle
     @is_equipped = is_equipped
+    @sprite = sprite
   end
  def name
    @name
@@ -114,14 +140,18 @@ module Equipment
  def is_equipped
     @is_equipped
   end
+ def sprite
+    @sprite
+  end
  def Stick.test(window, page)
         window.draw(Weapon_Rectangle_01)
     end
-    WEAPON_OBJECT_ARRAY.push(@@stick01)
-    WEAPON_INVENTORY_ARRAY.push(@@nil_stick)
-    WEAPON_INVENTORY_ARRAY.push(@@stick01)
- @@nil_stick = Stick.new("", -1, false, false, false, 1.5, ["none"], ["none"], WEAPSOUND_01, WEAPSOUND_02, Weapon_Rectangle_01, false)
- @@stick01 = Stick.new("Stick", 0, true, false, false, 1.5, ["none"], ["none"], WEAPSOUND_01, WEAPSOUND_02, Weapon_Rectangle_01, false)
+    WEAPON_OBJECT_ARRAY.push(@@stick01, @@zinc_stick)
+    #WEAPON_INVENTORY_ARRAY.push(@@nil_stick)
+    WEAPON_INVENTORY_ARRAY.push(@@zinc_stick)
+ @@nil_stick = Stick.new("", -1, false, false, false, 1.5, ["none"], ["none"], WEAPSOUND_01, WEAPSOUND_02, Weapon_Rectangle_01, false, Stick01)
+ @@stick01 = Stick.new("Stick", 0, true, false, false, 1.5, ["none"], ["none"], WEAPSOUND_01, WEAPSOUND_02, Weapon_Rectangle_01, false, Stick01)
+ @@zinc_stick = Stick.new("Zinc Stick", 0, true, false, false, 1.75, ["none"], ["none"], WEAPSOUND_01, WEAPSOUND_02, Zinc_Stick_Display, false, Zinc_Stick)
  end
 end
 
@@ -377,21 +407,22 @@ module Etc
             Inventory_Ore.smelt_iron
          end; end
        #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Carbon'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-       def Inventory_Ore.smelt_carbon
-        case @@selected_ore_02.name
-         when "Iron"
-          if @@carbon.amount_owned >= 4 && @@iron.amount_owned >= 6
-            amount = 4
-            @@carbon.remove_ore(amount)
-            amount = 6
-            @@iron.remove_ore(amount)
-         ingot = "steel"
-          Inventory_Ingot.smelt_ingot(ingot)
-          else
-            All_Audio::SFX.light_bonk
+        def Inventory_Ore.smelt_carbon
+         case @@selected_ore_02.name
+          when "Iron"
+           if @@carbon.amount_owned >= 4 && @@iron.amount_owned >= 6
+             amount = 4
+             @@carbon.remove_ore(amount)
+             amount = 6
+             @@iron.remove_ore(amount)
+          ingot = "steel"
+           Inventory_Ingot.smelt_ingot(ingot)
+           else
+             All_Audio::SFX.light_bonk
+           end
           end
          end
-        end
+       #_____________________________________________________________________________________________________________________________________________________
        #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Copper'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
          def Inventory_Ore.smelt_copper
           case @@selected_ore_02.name
@@ -482,30 +513,30 @@ module Etc
         end
        #_____________________________________________________________________________________________________________________________________________________
        #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Iron''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-       def Inventory_Ore.smelt_iron
-        case @@selected_ore_02.name
-        when "Nil"
-          if @@iron.amount_owned >= 10
-            amount = 10
-            @@iron.remove_ore(amount)
-         ingot = "iron"
-          Inventory_Ingot.smelt_ingot(ingot)
-          else
-            All_Audio::SFX.light_bonk
-          end
-        when "Carbon"
-          if @@carbon.amount_owned >= 4 && @@iron.amount_owned >= 6
-            amount = 4
-            @@carbon.remove_ore(amount)
-            amount = 6
-            @@iron.remove_ore(amount)
-         ingot = "steel"
-          Inventory_Ingot.smelt_ingot(ingot)
-          else
-            All_Audio::SFX.light_bonk
-          end
+        def Inventory_Ore.smelt_iron
+         case @@selected_ore_02.name
+         when "Nil"
+           if @@iron.amount_owned >= 10
+             amount = 10
+             @@iron.remove_ore(amount)
+          ingot = "iron"
+           Inventory_Ingot.smelt_ingot(ingot)
+           else
+             All_Audio::SFX.light_bonk
+           end
+         when "Carbon"
+           if @@carbon.amount_owned >= 4 && @@iron.amount_owned >= 6
+             amount = 4
+             @@carbon.remove_ore(amount)
+             amount = 6
+             @@iron.remove_ore(amount)
+          ingot = "steel"
+           Inventory_Ingot.smelt_ingot(ingot)
+           else
+             All_Audio::SFX.light_bonk
+           end
+         end
         end
-       end
       #_____________________________________________________________________________________________________________________________________________________
       #------------------------------------------------------------------------------------------------------------------------------------------------------
      #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -1611,15 +1642,15 @@ module Harvestables
           end
          end; end
        #,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Test Map,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-       def global_bounds
-        @global_bounds
-       end
-       def Ore.harvest2(attack, this, ore)
-        time = Ore_Clock_01.elapsed_time
-        attack2 = Player_Attack_Bounding_Box.global_bounds
-       if attack2.intersects? this
-       if ore.hp > 0
-       if time >= SF.seconds(0.35) && attack == true
+        def global_bounds
+         @global_bounds
+        end
+        def Ore.harvest2(attack, this, ore)
+         time = Ore_Clock_01.elapsed_time
+         attack2 = Player_Attack_Bounding_Box.global_bounds
+        if attack2.intersects? this
+        if ore.hp > 0
+        if time >= SF.seconds(0.35) && attack == true
          Equipment.play_hit_sound
          ore.hp_subtract(10)
          Ore.animation_harvest(this, ore)

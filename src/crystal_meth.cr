@@ -91,7 +91,9 @@ extend self
     @@player_character_model.clear(SF::Color::Transparent) #@note player customization happens here
     @@player_character_model.draw(SKIN_ARRAY[@@current_skin])
     if @@has_weapon == true && @@current_direction == "left"
-      @@player_character_model.draw(WEAPON_ARRAY[@@current_weapon])
+      player = @@player_character_model
+      Equipment.draw_current_weapon(player)
+      #@@player_character_model.draw(WEAPON_ARRAY[@@current_weapon])
     end
     @@player_character_model.draw(SHOES_ARRAY[@@current_shoes])
     @@player_character_model.draw(FACE_ARRAY[@@current_face])
@@ -100,7 +102,9 @@ extend self
     @@player_character_model.draw(SHIRT_ARRAY[@@current_shirt])
     @@player_character_model.draw(GLOVE_ARRAY[@@current_gloves])
     if @@has_weapon == true && @@current_direction == "right"
-      @@player_character_model.draw(WEAPON_ARRAY[@@current_weapon])
+      player = @@player_character_model
+      Equipment.draw_current_weapon(player)
+      #@@player_character_model.draw(WEAPON_ARRAY[@@current_weapon])
     end
     @@player_character_model.create(672, 1024, false)
     @@player_character_model.display
@@ -342,7 +346,8 @@ extend self
   window.draw(Inventory_arrow_down2)
   if @@tab == "Equipment"
     page = @@page
-    Equipment::Stick.test(window, page)
+    Equipment.display_equipment_inventory(window, page)
+    #Equipment::Stick.test(window, page)
   else if @@tab == "Etc"
     window.draw(Ore_Button); window.draw(Ore_Button_Text); window.draw(Ingot_Button); window.draw(Ingot_Button_Text)
     page = @@page
@@ -620,6 +625,7 @@ def Window_Class.ladder_test_ore_map
    end
   def Window_Class.equip_weapon(this2)
     @@current_weapon = this2
+    puts this2
     @@has_weapon = true
     Window_Class.player_model_initialize(@@current_shoes, @@current_gloves, @@current_shirt, @@current_pants, @@current_hair) 
   end
@@ -1100,12 +1106,21 @@ def Window_Class.hud_keypresses(window)
          end
       case @@tab
       when "Equipment"
-        if (x >= 550 && x <= 700) && (y >= 300 && y <= 450)
+        if (x >= 555 && x <= 710) && (y >= 310 && y <= 450)
           All_Audio::SFX.light_bonk
           this = 0
           Equipment.equip_weapon(this)
           this2 = @@current_weapon
           Gui::Window_Class.equip_weapon(this2)
+          puts @@current_weapon
+        end
+        if (x >= 710 && x <= 855) && (y >= 310 && y <= 450)
+          All_Audio::SFX.light_bonk
+          this = 1
+          Equipment.equip_weapon(this)
+          this2 = @@current_weapon
+          Gui::Window_Class.equip_weapon(this2)
+          puts @@current_weapon
         end
       when "Etc"
         if (x >= 555 && x <= 645) && (y >= 245 && y <= 295)
