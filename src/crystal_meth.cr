@@ -1165,7 +1165,14 @@ def Window_Class.hud_keypresses(window)
           Equipment.equip_weapon(this)
           this2 = @@current_weapon
           Gui::Window_Class.equip_weapon(this2)
-         end
+          end
+         if (x >= 855 && x <= 1005) && (y >= 460 && y <= 610)
+          All_Audio::SFX.light_bonk
+          this = 8
+          Equipment.equip_weapon(this)
+          this2 = @@current_weapon
+          Gui::Window_Class.equip_weapon(this2)
+          end
       when "Etc"
         if (x >= 555 && x <= 645) && (y >= 245 && y <= 295)
           All_Audio::SFX.light_bonk

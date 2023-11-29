@@ -444,6 +444,13 @@
      IRON_STICK_DISPLAY_TEXTURE = SF::Texture.from_file("graphics/weapons/Iron_Stick_Display.png")
      Iron_Stick_Display = SF::RectangleShape.new(SF.vector2(140, 140)); 
      Iron_Stick_Display.set_texture(IRON_STICK_DISPLAY_TEXTURE, reset_rect: false);
+   #..................................................Steel Stick...................................................................
+    #---------------------------------------------------Sprite----------------------------------------------------------------------
+     STEEL_STICK_TEXTURE = SF::Texture.from_file("graphics/weapons/Steel_Stick.png"); Steel_Stick = SF::Sprite.new(STEEL_STICK_TEXTURE)
+    #---------------------------------------------------Display---------------------------------------------------------------------
+     STEEL_STICK_DISPLAY_TEXTURE = SF::Texture.from_file("graphics/weapons/Steel_Stick_Display.png")
+     Steel_Stick_Display = SF::RectangleShape.new(SF.vector2(140, 140)); 
+     Steel_Stick_Display.set_texture(STEEL_STICK_DISPLAY_TEXTURE, reset_rect: false);
   #--------------------------------------------------ETC item Textures--------------------------------------------------------------
    #......................................................Rocks.....................................................................
      Ore_amount_owned_text = SF::Text.new; Ore_amount_owned_text.font = FONT_COMMON; Ore_amount_owned_text.character_size = 20
