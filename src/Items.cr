@@ -153,14 +153,15 @@ module Equipment
  def Stick.test(window, page)
         window.draw(Weapon_Rectangle_01)
     end
-    WEAPON_OBJECT_ARRAY.push(@@stick01, @@zinc_stick, @@tin_stick, @@copper_stick)
+    WEAPON_OBJECT_ARRAY.push(@@stick01, @@zinc_stick, @@tin_stick, @@copper_stick, @@brass_stick)
     #WEAPON_INVENTORY_ARRAY.push(@@nil_stick)
-    WEAPON_INVENTORY_ARRAY.push(@@zinc_stick, @@tin_stick, @@copper_stick)
+    WEAPON_INVENTORY_ARRAY.push(@@zinc_stick, @@tin_stick, @@copper_stick, @@brass_stick)
  @@nil_stick = Stick.new("", -1, false, false, false, 1.5, ["none"], ["none"], WEAPSOUND_01, WEAPSOUND_02, Weapon_Rectangle_01, false, Stick01)
  @@stick01 = Stick.new("Stick", 0, true, false, false, 1.5, ["none"], ["none"], WEAPSOUND_01, WEAPSOUND_02, Weapon_Rectangle_01, false, Stick01)
  @@zinc_stick = Stick.new("Zinc Stick", 0, true, false, false, 1.75, ["none"], ["none"], WEAPSOUND_01, WEAPSOUND_02, Zinc_Stick_Display, false, Zinc_Stick)
  @@tin_stick = Stick.new("Tin Stick", 0, true, false, false, 2, ["none"], ["none"], WEAPSOUND_01, WEAPSOUND_02, Tin_Stick_Display, false, Tin_Stick)
  @@copper_stick = Stick.new("Copper Stick", 0, true, false, false, 4, ["none"], ["none"], WEAPSOUND_01, WEAPSOUND_02, Copper_Stick_Display, false, Copper_Stick)
+ @@brass_stick = Stick.new("Brass Stick", 0, true, false, false, 2.5, ["none"], ["none"], WEAPSOUND_01, WEAPSOUND_02, Brass_Stick_Display, false, Brass_Stick)
  end
 end
 

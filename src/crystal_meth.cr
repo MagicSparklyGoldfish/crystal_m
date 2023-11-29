@@ -1113,7 +1113,7 @@ def Window_Class.hud_keypresses(window)
           this2 = @@current_weapon
           Gui::Window_Class.equip_weapon(this2)
           puts @@current_weapon
-        end
+         end
         if (x >= 710 && x <= 855) && (y >= 310 && y <= 450)
           All_Audio::SFX.light_bonk
           this = 1
@@ -1121,10 +1121,18 @@ def Window_Class.hud_keypresses(window)
           this2 = @@current_weapon
           Gui::Window_Class.equip_weapon(this2)
           puts @@current_weapon
-        end
+         end
         if (x >= 855 && x <= 1005) && (y >= 310 && y <= 450)
           All_Audio::SFX.light_bonk
           this = 2
+          Equipment.equip_weapon(this)
+          this2 = @@current_weapon
+          Gui::Window_Class.equip_weapon(this2)
+          puts @@current_weapon
+        end
+        if (x >= 1005 && x <= 1155) && (y >= 310 && y <= 450)
+          All_Audio::SFX.light_bonk
+          this = 3
           Equipment.equip_weapon(this)
           this2 = @@current_weapon
           Gui::Window_Class.equip_weapon(this2)
