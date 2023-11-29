@@ -2329,3 +2329,11 @@ Testing_Text.character_size = 20; Testing_Text.color = SF::Color::White; Testing
 
    Smelter_Nil_Sprite = SF::Sprite.new(COPPER_TEXTURE)
    Smelter_Nil_Sprite.color = SF.color(0, 0, 0, 0) 
+
+#--------------------------------------------------------------------------------------------------------------------------------------
+#                                                        Forge
+#-------------------------------------------------------------------------------------------------------------------------------------- 
+ FORGE_TEXTURE = SF::Texture.from_file("graphics/Forge.png")
+ Test_Forge_Menu = SF::Sprite.new(FORGE_TEXTURE); #SF::RectangleShape.new(SF.vector2(800, 500)); 
+ #Test_Smelter_Menu.fill_color = SF.color(150, 150, 155)
+ Test_Forge_Menu.position = SF.vector2(0, -200);

@@ -481,14 +481,14 @@ extend self
    if @@attacking == true
     Window_Class.player_attack_bounding_box(window)
     end
-
    bounding_box1 = @@player_character_rendered_model.global_bounds
    bounding_box2 = @@player_character_rendered_model.global_bounds
    ore_ground = Ground.dup; Ground.position = SF.vector2(-5000, 800); ore_platform = Ground.dup; ore_platform.scale = SF.vector2(0.5, 0.2)
-   ore_platform.position = SF.vector2(-100, 400); window.draw(Test_Smelter)
+   ore_platform.position = SF.vector2(-100, 400); window.draw(Test_Smelter); window.draw(Test_Forge)
    window.draw(ore_ground); window.draw(@@player_character_rendered_model); window.draw(Test_Teleporter); window.draw(Test_Ladder)
    window.draw(Test_Platform_01); window.draw(Test_Platform_02); window.draw(@@test_ladder_02) #window.draw(Feet_Bounding_Box)
-   window.draw(Test_Forge)
+
+   
  end
  def Window_Class.attack_check_test_ore_map
    Harvestables::Ore.harvest(@@attacking)
@@ -646,7 +646,6 @@ end
     when "test"
       Window_Class.test_map(debug_draw, window, @@space)
       Window_Class.attack_check_test_map
-     # Harvestables::Ore.draw_ores(window)
       Player_Data::Player_Physics.gravity(@@player_character_rendered_model, window)
       Window_Class.hud(window)
   when "test_ore"
@@ -654,6 +653,9 @@ end
     Window_Class.attack_check_test_ore_map
     Harvestables::Ore.draw_ores(window)
     Player_Data::Player_Physics.gravity(@@player_character_rendered_model, window)
+    if @@popup == "forge"
+      Equipment::Weapon_Crafting.diplay_forge(window)
+    end
     Window_Class.hud(window)
   end
    end
@@ -1827,6 +1829,14 @@ def Window_Class.hud_keypresses(window)
             Player_Data::Player_Physics.immobilize_player
             @@popup = "smelter"
             @@player_character_rendered_model.position = SF.vector2(400, 75)
+          else
+            Player_Data::Player_Physics.mobilize_player
+          end
+          if player.intersects? Test_Forge.global_bounds
+            Player_Data::Player_Physics.immobilize_player
+            @@popup = "forge"
+
+            @@player_character_rendered_model.position = SF.vector2(600, 75)
           else
             Player_Data::Player_Physics.mobilize_player
           end

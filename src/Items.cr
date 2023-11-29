@@ -215,6 +215,7 @@ module Equipment
  end
  class Weapon_Crafting
   def Weapon_Crafting.diplay_forge(window)
+      window.draw(Test_Forge_Menu)
   end
  end
 end
@@ -1863,6 +1864,7 @@ module Harvestables
         page = 1
         window.draw(Test_Smelter_Menu); Etc::Inventory_Ore.update_ore_inventory; Etc::Inventory_Ore.display_metal_smelter(window)  
       end
+      
     end
    #________________________________________________________________________________________________________________________________________________________
    #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
