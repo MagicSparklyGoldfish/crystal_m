@@ -740,7 +740,7 @@ end
 #---------------------------------------------------------------------------------------------------------------------------------------+
 #                                                        Initialization
 #---------------------------------------------------------------------------------------------------------------------------------------+
- window = SF::RenderWindow.new(SF::VideoMode.new(1920, 1080), "Crystal Meth!", SF::Style::Fullscreen) #initializes window
+ window = SF::RenderWindow.new(SF::VideoMode.new(1920, 1080), "Crystal Meth!", SF::Style::Fullscreen) #@note initializes window
  window.vertical_sync_enabled = false; #window.framerate_limit = 120
 
 
@@ -1788,18 +1788,15 @@ def Window_Class.hud_keypresses(window)
         @@idleframes = 0
         @@attacking = false
         Player_Data::Player_Physics.wasd_up(@@player_character_rendered_model, window)
-        window.draw(@@player_character_rendered_model)
 
       when SF::Keyboard::S
         @@idleframes = 0
         @@attacking = false
         Player_Data::Player_Physics.wasd_down(@@player_character_rendered_model, window)
-        window.draw(@@player_character_rendered_model)
 
         
       when SF::Keyboard::W && SF::Keyboard::D
         Player_Data::Player_Physics.wasd_up(@@player_character_rendered_model, window)
-        window.draw(@@player_character_rendered_model)
 
 #___________________________________________________________________________________________________________________________________________
 #|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
@@ -2158,8 +2155,9 @@ end; end; end; end; end; end
    #==================================================================================================================================+
 
    #=============================================Gravity==============================================================================+
-    @@gravity_iterator : Int32; @@gravity_iterator = 0
+    @@gravity_iterator : Int32; @@gravity_iterator = 0; @@gravity_clock = SF::Clock.new; @@jump_clock = SF::Clock.new;
     def Player_Physics.gravity(@@player_character_rendered_model, window)
+       gravity = @@gravity_clock.elapsed_time
      #-------------------------------------------Variables-----------------------------------------------------------------------------+  
       ground_box = Ground.global_bounds; test_platform_box = Test_Platform_01.global_bounds
       test_platform_box_2 = Test_Platform_02.global_bounds
@@ -2171,19 +2169,21 @@ end; end; end; end; end; end
      if @@player_bounding_box.intersects? test_platform_array[@@gravity_iterator] #ground_box
        @@player_jumped = false
        @@is_player_airborne = false
-       @@fallrate = 0
-
+       @@fallrate = 0  
+       @@gravity_clock.restart    
      else
        @@is_player_airborne = true
-   
-       if @@fallrate >= 30
+       if gravity >= SF.seconds(0.01)
          @@player_character_rendered_model.position += SF.vector2(0, 0.95)
          if SF::Keyboard.key_pressed?(SF::Keyboard::A)
-           @@player_character_rendered_model.position -= SF.vector2(1, 0)
+          @@player_character_rendered_model.position -= SF.vector2(0.01, 0)
+          Player_Physics.wasd_left(@@player_character_rendered_model)
          end
          if SF::Keyboard.key_pressed?(SF::Keyboard::D)
-           @@player_character_rendered_model.position += SF.vector2(1, 0)
+           @@player_character_rendered_model.position += SF.vector2(0.01, 0)
+           Player_Physics.wasd_right(@@player_character_rendered_model)
          end
+         @@gravity_clock.restart
          @@fallrate = 0  
        else
          @@fallrate += 1
@@ -2227,30 +2227,27 @@ end; end; end; end; end; end
     #---------------------------------------------------------------------------------------------------------------------------------+ 
     #----------------------------------------------Up---------------------------------------------------------------------------------+
      def Player_Physics.wasd_up(@@player_character_rendered_model, window) #f(x) = ax² + bx + c
+      jump_time = @@jump_clock.elapsed_time
         if @@player_jumped == false && @@can_player_move_at_all == true
-         a = 0; b = 100000
-        while a != 900000
-          a += 1; b += 1
-          if b >= 100000
-       @@player_character_rendered_model.position -= SF.vector2(0, 10)
-       @@player_jumped = true
-         if SF::Keyboard.key_pressed?(SF::Keyboard::A)
-          @@player_character_rendered_model.position -= SF.vector2(5, 0)
-         end
-         if SF::Keyboard.key_pressed?(SF::Keyboard::D)
-          @@player_character_rendered_model.position += SF.vector2(5, 0)
-         end
-         b = 0
-       @@fallrate = -1000 
-       window.draw(@@player_character_rendered_model)
-        end; end; end; end
-      if SF::Keyboard.key_pressed?(SF::Keyboard::A)
-        Player_Physics.wasd_left(@@player_character_rendered_model)
-      end
-      if SF::Keyboard.key_pressed?(SF::Keyboard::D)
-       SF::Event::KeyPressed
-        Player_Physics.wasd_right(@@player_character_rendered_model)
-     end
+          @@jump_clock.restart
+       #  if jump_time <= SF.seconds(3)
+            @@player_character_rendered_model.position += SF.vector2(0, -150)
+            @@player_jumped = true
+        #  end
+    #      if SF::Keyboard.key_pressed?(SF::Keyboard::A)
+    #       @@player_character_rendered_model.position -= SF.vector2(5, 0)
+    #      end
+    #      if SF::Keyboard.key_pressed?(SF::Keyboard::D)
+    #       @@player_character_rendered_model.position += SF.vector2(5, 0)
+    #      end
+    #    window.draw(@@player_character_rendered_model)
+    #     end; end
+       if SF::Keyboard.key_pressed?(SF::Keyboard::A)
+         Player_Physics.wasd_left(@@player_character_rendered_model)
+       end
+       if SF::Keyboard.key_pressed?(SF::Keyboard::D)
+         Player_Physics.wasd_right(@@player_character_rendered_model)
+      end; end; end
      def Player_Physics.wasd_down(@@player_character_rendered_model, window)
       if @@player_bounding_box.intersects? Ground.global_bounds
         @@player_jumped = false
