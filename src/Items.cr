@@ -30,6 +30,7 @@ module Equipment
    property = @@current_weapon_object
    WEAPON_OBJECT_ARRAY = [] of Stick
    WEAPON_INVENTORY_ARRAY = [] of Stick
+   MOLD_ARRAY = [] of Mold
  #======================================================================================================================================
  # ____________________________________________________________________________________________________________________________________
  #|                                                     Equipment Methods                                                              |
@@ -193,6 +194,24 @@ module Equipment
  @@bronze_stick = Stick.new("Bronze Stick", 0, true, false, false, 3, ["none"], ["none"], WEAPSOUND_01, WEAPSOUND_02, Bronze_Stick_Display, false, Bronze_Stick)
  @@iron_stick = Stick.new("Iron Stick", 0, true, false, false, 4, ["none"], ["none"], WEAPSOUND_01, WEAPSOUND_02, Iron_Stick_Display, false, Iron_Stick)
  @@steel_stick = Stick.new("Steel Stick", 0, true, false, false, 5, ["none"], ["none"], WEAPSOUND_01, WEAPSOUND_02, Steel_Stick_Display, false, Steel_Stick)
+ end
+ struct Mold
+  def initialize(name : String, sockets : Int32, lvl_req : Int32)
+    @name = name
+    @sockets = sockets
+    @lvl_req = lvl_req
+   end
+  def name
+    @name
+   end
+  def sockets
+    @sockets
+   end
+  def lvl_req
+    @lvl_req
+   end
+ @@stick_mold = Mold.new("Stick Mold", 2, 0)  
+  MOLD_ARRAY.push(@@stick_mold) 
  end
 end
 
