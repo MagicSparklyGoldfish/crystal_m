@@ -430,6 +430,13 @@
      BRASS_STICK_DISPLAY_TEXTURE = SF::Texture.from_file("graphics/weapons/Brass_Stick_Display.png")
      Brass_Stick_Display = SF::RectangleShape.new(SF.vector2(140, 140)); 
      Brass_Stick_Display.set_texture(BRASS_STICK_DISPLAY_TEXTURE, reset_rect: false);
+   #..................................................Bronze Stick..................................................................
+    #---------------------------------------------------Sprite----------------------------------------------------------------------
+     BRONZE_STICK_TEXTURE = SF::Texture.from_file("graphics/weapons/Bronze_Stick.png"); Bronze_Stick = SF::Sprite.new(BRONZE_STICK_TEXTURE)
+    #---------------------------------------------------Display---------------------------------------------------------------------
+     BRONZE_STICK_DISPLAY_TEXTURE = SF::Texture.from_file("graphics/weapons/Bronze_Stick_Display.png")
+     Bronze_Stick_Display = SF::RectangleShape.new(SF.vector2(140, 140)); 
+     Bronze_Stick_Display.set_texture(BRONZE_STICK_DISPLAY_TEXTURE, reset_rect: false);
   #--------------------------------------------------ETC item Textures--------------------------------------------------------------
    #......................................................Rocks.....................................................................
      Ore_amount_owned_text = SF::Text.new; Ore_amount_owned_text.font = FONT_COMMON; Ore_amount_owned_text.character_size = 20
