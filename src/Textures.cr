@@ -2287,6 +2287,9 @@ Testing_Text.character_size = 20; Testing_Text.color = SF::Color::White; Testing
    #.....................................................Ingot.........................................................................
     COPPER_INGOT_TEXTURE = SF::Texture.from_file("graphics/metals/Copper_Ingot.png")
     Copper_Ingot_Ore = SF::Sprite.new(COPPER_INGOT_TEXTURE)
+   #..................................................Forge Ingot......................................................................
+    FORGE_COPPER_TEXTURE = SF::Texture.from_file("graphics/metals/Forge_Copper.png")
+    Forge_Copper_Ingot = SF::Sprite.new(FORGE_COPPER_TEXTURE)
   #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
   #'''''''''''''''''''''''''''''''''''''''''''''''''''''''Tin'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
    #......................................................Ore..........................................................................
@@ -2295,11 +2298,17 @@ Testing_Text.character_size = 20; Testing_Text.color = SF::Color::White; Testing
    #.....................................................Ingot.........................................................................
      TIN_INGOT_TEXTURE = SF::Texture.from_file("graphics/metals/Tin_Ingot.png")
      Tin_Ingot_Ore = SF::Sprite.new(TIN_INGOT_TEXTURE)
+   #..................................................Forge Ingot......................................................................
+    FORGE_TIN_TEXTURE = SF::Texture.from_file("graphics/metals/Forge_Tin.png")
+    Forge_Tin_Ingot = SF::Sprite.new(FORGE_TIN_TEXTURE)
   #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
   #'''''''''''''''''''''''''''''''''''''''''''''''''''''Bronze''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
     #...................................................Ingot...........................................................................
      BRONZE_INGOT_TEXTURE = SF::Texture.from_file("graphics/metals/Bronze_Ingot.png")
      Bronze_Ingot_Ore = SF::Sprite.new(BRONZE_INGOT_TEXTURE)
+   #..................................................Forge Ingot......................................................................
+    FORGE_BRONZE_TEXTURE = SF::Texture.from_file("graphics/metals/Forge_Bronze.png")
+    Forge_Bronze_Ingot = SF::Sprite.new(FORGE_BRONZE_TEXTURE)
   #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
   #''''''''''''''''''''''''''''''''''''''''''''''''''''''Zinc''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
    #......................................................Ore..........................................................................
@@ -2308,11 +2317,17 @@ Testing_Text.character_size = 20; Testing_Text.color = SF::Color::White; Testing
    #.....................................................Ingot.........................................................................
     ZINC_INGOT_TEXTURE = SF::Texture.from_file("graphics/metals/Zinc_Ingot.png")
     Zinc_Ingot_Ore = SF::Sprite.new(ZINC_INGOT_TEXTURE)
+   #..................................................Forge Ingot......................................................................
+    FORGE_ZINC_TEXTURE = SF::Texture.from_file("graphics/metals/Forge_Zinc.png")
+    Forge_Zinc_Ingot = SF::Sprite.new(FORGE_ZINC_TEXTURE)
   #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
   #''''''''''''''''''''''''''''''''''''''''''''''''''''''Brass''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
    #.....................................................Ingot.........................................................................
      BRASS_INGOT_TEXTURE = SF::Texture.from_file("graphics/metals/Brass_Ingot.png")
      Brass_Ingot_Ore = SF::Sprite.new(BRASS_INGOT_TEXTURE)
+   #..................................................Forge Ingot......................................................................
+    FORGE_BRASS_TEXTURE = SF::Texture.from_file("graphics/metals/Forge_Brass.png")
+    Forge_Brass_Ingot = SF::Sprite.new(FORGE_BRASS_TEXTURE)
   #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
   #''''''''''''''''''''''''''''''''''''''''''''''''''''''Iron''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
    #......................................................Ore..........................................................................
@@ -2321,10 +2336,17 @@ Testing_Text.character_size = 20; Testing_Text.color = SF::Color::White; Testing
    #.....................................................Ingot.........................................................................
     IRON_INGOT_TEXTURE = SF::Texture.from_file("graphics/metals/Iron_Ingot.png")
     Iron_Ingot_Ore = SF::Sprite.new(IRON_INGOT_TEXTURE)
+   #..................................................Forge Ingot......................................................................
+    FORGE_IRON_TEXTURE = SF::Texture.from_file("graphics/metals/Forge_Iron.png")
+    Forge_Iron_Ingot = SF::Sprite.new(FORGE_IRON_TEXTURE)
+  #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
   #''''''''''''''''''''''''''''''''''''''''''''''''''''''Steel''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
    #.....................................................Ingot.........................................................................
-   STEEL_INGOT_TEXTURE = SF::Texture.from_file("graphics/metals/Steel_Ingot.png")
-   Steel_Ingot_Ore = SF::Sprite.new(STEEL_INGOT_TEXTURE)
+    STEEL_INGOT_TEXTURE = SF::Texture.from_file("graphics/metals/Steel_Ingot.png")
+    Steel_Ingot_Ore = SF::Sprite.new(STEEL_INGOT_TEXTURE)
+   #..................................................Forge Ingot......................................................................
+    FORGE_STEEL_TEXTURE = SF::Texture.from_file("graphics/metals/Forge_Steel.png")
+    Forge_Steel_Ingot = SF::Sprite.new(FORGE_STEEL_TEXTURE)
   #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
 
    Smelter_Nil_Sprite = SF::Sprite.new(COPPER_TEXTURE)
