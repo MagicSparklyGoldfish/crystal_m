@@ -1710,19 +1710,19 @@ module Harvestables
             All_Audio::SFX.dig_02
            a = 0; b = 200; x = 100; y = 100
            broken.sprite_change_square(a, b, x, y)
-     else if time >= SF.milliseconds(500) && time < SF.milliseconds(1000)
+     else if time >= SF.milliseconds(400) && time < SF.milliseconds(800)
            a = 100; b = 200; x = 100; y = 100
            broken.sprite_change_square(a, b, x, y)
-     else if time >= SF.milliseconds(1500) && time < SF.milliseconds(2000)
+     else if time >= SF.milliseconds(800) && time < SF.milliseconds(1200)
            a = 200; b = 200; x = 100; y = 100
            broken.sprite_change_square(a, b, x, y)
-     else if time >= SF.milliseconds(2000) && time < SF.milliseconds(2500)
+     else if time >= SF.milliseconds(1200) && time < SF.milliseconds(1600)
            a = 300; b = 200; x = 100; y = 100
            broken.sprite_change_square(a, b, x, y)
-     else if time >= SF.milliseconds(2500) && time < SF.milliseconds(3000)
+     else if time >= SF.milliseconds(1600) && time < SF.milliseconds(2000)
             a = 400; b = 200; x = 100; y = 100
             broken.sprite_change_square(a, b, x, y)
-     else if time >= SF.milliseconds(3000) && time < SF.milliseconds(3500)
+     else if time >= SF.milliseconds(2000) #&& time < SF.milliseconds(3500)
       broken.is_broke_toggle   
       @@ore_reset = 0
       if time > SF.milliseconds(30)  #@note this only works with microseconds and milliseconds, not seconds. I don't know why, there wasn't a typo
