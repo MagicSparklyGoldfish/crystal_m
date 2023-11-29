@@ -402,6 +402,8 @@
     Weapon_Rectangle_01 = SF::RectangleShape.new(SF.vector2(140, 140));
     Weapon_Rectangle_01.set_texture(WEAPON_DISPLAY_TEXTURE_01, reset_rect: false);  Weapon_Rectangle_01.position = SF.vector2(555, 310);
     Weapon_Rectangle_01.texture_rect = SF.int_rect(0, 0, 140, 140);
+   #...................................................Zinc Stick...................................................................
+    ZINC_STICK_TEXTURE = SF::Texture.from_file("graphics/weapons/Zinc_Stick.png"); Zinc_Stick = SF::Sprite.new(ZINC_STICK_TEXTURE)
   #--------------------------------------------------ETC item Textures--------------------------------------------------------------
    #......................................................Rocks.....................................................................
      Ore_amount_owned_text = SF::Text.new; Ore_amount_owned_text.font = FONT_COMMON; Ore_amount_owned_text.character_size = 20
