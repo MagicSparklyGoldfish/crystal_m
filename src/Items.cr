@@ -213,6 +213,10 @@ module Equipment
  @@stick_mold = Mold.new("Stick Mold", 2, 0)  
   MOLD_ARRAY.push(@@stick_mold) 
  end
+ class Weapon_Crafting
+  def Weapon_Crafting.diplay_forge(window)
+  end
+ end
 end
 
 module Etc
