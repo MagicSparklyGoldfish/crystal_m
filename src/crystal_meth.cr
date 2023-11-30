@@ -490,7 +490,7 @@ extend self
 
    
  end
- def Window_Class.attack_check_test_ore_map
+ def Window_Class.attack_check_test_ore_map #@note harvest ores
    Harvestables::Ore.harvest(@@attacking)
    event = "mining_ore"
    Window_Class.check_attacking(event)
@@ -631,6 +631,7 @@ def Window_Class.ladder_test_ore_map
     Window_Class.player_model_initialize(@@current_shoes, @@current_gloves, @@current_shirt, @@current_pants, @@current_hair) 
   end
   def Window_Class.check_attacking(event)
+    Player_Data::Stats.check_attack
     if @@attacking == true
       attack = true
     end
@@ -2241,6 +2242,10 @@ end; end; end; end; end; end
      LVL_Label.string = @@lvl.to_s;
      Stats_Window_Name_Text.string = @@name
     end
+   def Stats.check_attack
+    base_attack = 10 + @@current_str
+    Equipment.attack_strength(base_attack)
+   end
    end
   class Player_Physics < Stats
    #==========================================Class Variables=========================================================================+

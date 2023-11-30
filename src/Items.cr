@@ -110,6 +110,10 @@ module Equipment
       end
     end
    end
+   def Equipment.attack_strength(base_attack) #@note attack strength 
+    attack_strength = base_attack + @@current_weapon_object.atk_power
+    Harvestables::Ore.set_attack_strength(attack_strength)
+   end
    def Equipment.play_swing_sound
     @@current_weapon_object.swing_sound.play
    end
@@ -192,7 +196,7 @@ module Equipment
   end
  def Stick.test(window, page)
         window.draw(Weapon_Rectangle_01)
-    end 
+    end
     WEAPON_OBJECT_ARRAY.push(@@stick01, @@zinc_stick, @@tin_stick, @@copper_stick, @@brass_stick, @@bronze_stick, @@iron_stick, @@steel_stick)
     #WEAPON_INVENTORY_ARRAY.push(@@nil_stick)
    # WEAPON_INVENTORY_ARRAY.push(@@zinc_stick, @@tin_stick, @@copper_stick, @@brass_stick, @@bronze_stick, @@iron_stick, @@steel_stick)
@@ -1762,12 +1766,13 @@ module Harvestables
    #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
    #+                                                              Variables                                                                               +
    #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-   @@ore_animation_frame = 0; @@ore_reset = 0; @@ore_break_iterator = 0; @@is_smelting : Bool; @@is_smelting = false
+   @@ore_animation_frame = 0; @@ore_reset = 0; @@ore_break_iterator = 0; @@is_smelting : Bool; @@is_smelting = false; @@attack_strength : Float64
+   @@attack_strength = 10
    #________________________________________________________________________________________________________________________________________________________
    #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
    #!                                                              Initialize                                                                              !
    #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    def initialize(name : String, id : Int32, color : String, hardness : Int32, hp : Int32, drop_item : String, sprite : SF::Sprite, is_broke : Bool, max_hp : Int32)
+    def initialize(name : String, id : Int32, color : String, hardness : Int32, hp : Float64, drop_item : String, sprite : SF::Sprite, is_broke : Bool, max_hp : Int32)
       @name = name
       @id = id
       @color = color
@@ -1808,6 +1813,9 @@ module Harvestables
       end
     #_______________________________________________________________________________________________________________________________________________________
     #..........................................................HP Class Functions...........................................................................
+     def Ore.set_attack_strength(attack_strength)
+      @@attack_strength = attack_strength
+     end 
      def hp_subtract(damage)
        @hp -= damage
       end
@@ -1840,7 +1848,7 @@ module Harvestables
         if ore.hp > 0
         if time >= SF.seconds(0.35) && attack == true
          Equipment.play_hit_sound
-         ore.hp_subtract(10)
+         ore.hp_subtract(@@attack_strength)
          Ore.animation_harvest(this, ore)
          Ore_Clock_01.restart
         end; end; end
@@ -1966,8 +1974,9 @@ module Harvestables
       else
         @@ore_break_iterator = 0
       end
-      Testing_Text.string = @@bloodstone_01.hp.to_s + Ore_Clock_Break.elapsed_time.to_s
+      Testing_Text.string = @@black_opal01.hp.to_s + Ore_Clock_Break.elapsed_time.to_s
       @@bloodstone_02.sprite.position = SF.vector2(4500, 702); @@bloodstone_01.sprite.position = SF.vector2(300, 702)
+      window.draw(Testing_Text)
       window.draw(@@bloodstone_01.sprite); window.draw(@@bloodstone_02.sprite); window.draw(@@moss_agate_01.sprite); window.draw(@@amber01.sprite); 
       window.draw(@@wavellite01.sprite); window.draw(@@topaz01.sprite); window.draw(@@amethyst01.sprite); window.draw(@@smokey_quartz01.sprite); 
       window.draw(@@sapphire01.sprite); window.draw(@@black_opal01.sprite); window.draw(@@ajoite01.sprite); window.draw(@@rhodolite01.sprite); 
