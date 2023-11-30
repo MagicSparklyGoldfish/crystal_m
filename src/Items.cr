@@ -1773,6 +1773,61 @@ include Equipment
      @@steel_ingot = Inventory_Ingot.new("Steel", 7, Steel_Ingot_Ore, 1, 10, Forge_Steel_Ingot)
      Ingot_Array.push(@@steel_ingot)
    end
+ #GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG
+ #GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG
+ #GG                                                             Gem Class                                                                                   GG
+ #GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG
+ #GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG
+ GEM_ARRAY = [] of Gem
+ class Gem
+  #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  #!                                                              Initialize                                                                              !
+  #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+   def initialize(name : String, inventory_sprite : SF::Sprite, weapon_inventory_sprite : SF::Sprite, weapon_sprite : SF::Sprite, cut : String,
+    amount_owned : Int32, color : String, sell_price : Int32, element : String, effect : String)
+    @name = name
+    @inventory_sprite = inventory_sprite
+    @weapon_inventory_sprite = weapon_inventory_sprite
+    @weapon_sprite = weapon_sprite
+    @cut = cut
+    @amount_owned = amount_owned
+    @color = color
+    @sell_price = sell_price
+    @element = element
+    @effect = effect
+    end
+   def name
+     @name
+    end
+   def inventory_sprite
+     @inventory_sprite
+    end
+   def weapon_inventory_sprite
+     @weapon_inventory_sprite
+    end
+   def weapon_sprite
+     @weapon_sprite
+    end
+   def cut
+     @cut
+    end
+   def amount_owned
+     @amount_owned
+    end
+   def color
+     @color
+    end
+   def sell_price
+     @sell_price
+    end
+   def element
+     @element
+    end
+   def effect
+     @effect
+    end
+  #________________________________________________________________________________________________________________________________________________________
+ end
 end 
 
 
