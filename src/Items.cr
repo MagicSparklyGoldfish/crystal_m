@@ -1783,12 +1783,11 @@ include Equipment
   #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   #!                                                              Initialize                                                                              !
   #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-   def initialize(name : String, inventory_sprite : SF::Sprite, weapon_inventory_sprite : SF::Sprite, weapon_sprite : SF::Sprite, cut : String,
-    amount_owned : Int32, color : String, sell_price : Int32, element : String, effect : String)
+   def initialize(name : String, inventory_sprite : SF::Sprite, weapon_inventory_sprite : SF::Sprite, cut : String, amount_owned : Int32, 
+    color : String, sell_price : Int32, element : String, effect : String)
     @name = name
     @inventory_sprite = inventory_sprite
     @weapon_inventory_sprite = weapon_inventory_sprite
-    @weapon_sprite = weapon_sprite
     @cut = cut
     @amount_owned = amount_owned
     @color = color
@@ -1804,9 +1803,6 @@ include Equipment
     end
    def weapon_inventory_sprite
      @weapon_inventory_sprite
-    end
-   def weapon_sprite
-     @weapon_sprite
     end
    def cut
      @cut
@@ -1826,6 +1822,11 @@ include Equipment
    def effect
      @effect
     end
+  #________________________________________________________________________________________________________________________________________________________
+  #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  #/                                                               Entities                                                                               /
+  #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+   @@bloodstone_gem = Gem.new("Bloodstone", Bloodstone_Inventory_Square, Bloodstone_Inventory_Square_Slot_01, "square", 0, "red", 60, "earth", "hp+")
   #________________________________________________________________________________________________________________________________________________________
  end
 end 
