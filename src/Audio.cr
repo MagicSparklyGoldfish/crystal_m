@@ -71,6 +71,14 @@ require "../src/crystal_meth.cr"
  Dig_2 = SF::SoundBuffer.from_file("audio/Dig_2.wav")
  ENVIROSOUND_02 = SF::Sound.new
  ENVIROSOUND_02.buffer = Dig_2
+
+ Smelter_1 = SF::SoundBuffer.from_file("audio/Smelter.wav")
+ ENVIROSOUND_03 = SF::Sound.new
+ ENVIROSOUND_03.buffer = Smelter_1
+
+ Forge_1 = SF::SoundBuffer.from_file("audio/Forge.wav")
+ ENVIROSOUND_04 = SF::Sound.new
+ ENVIROSOUND_04.buffer = Forge_1
 #_________________________________________________________________________________________________________________________________________________________
 
 # =======================================================================================================================================================
@@ -136,6 +144,12 @@ module All_Audio
         end
         def SFX.dig_02
             ENVIROSOUND_02.play
+        end
+        def SFX.smelter_01
+            ENVIROSOUND_03.play
+        end
+        def SFX.forge_01
+            ENVIROSOUND_04.play
         end
     end #sfx class end
   class MUSIC

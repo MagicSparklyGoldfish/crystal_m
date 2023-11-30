@@ -1319,7 +1319,7 @@ def Window_Class.hud_keypresses(window)
           Etc::Inventory_Ore.initialize_smelter
         end
         if (x >= 970 && x <= 1160) && (y >= 625 && y <= 690)
-          All_Audio::SFX.dig_01 #All_Audio::SFX.select1
+          All_Audio::SFX.smelter_01 #All_Audio::SFX.select1
           Etc::Inventory_Ore.smelt
         end
         if (x >= 585 && x <= 635) && (y >= 140 && y <= 200)
