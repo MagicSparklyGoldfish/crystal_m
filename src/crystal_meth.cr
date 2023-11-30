@@ -655,6 +655,9 @@ end
     Player_Data::Player_Physics.gravity(@@player_character_rendered_model, window)
     if @@popup == "forge"
       Equipment::Weapon_Crafting.diplay_forge(window)
+      if @@tab == "mold"
+        window.draw(Forge_Mold_Option_01)
+      end
     end
     Window_Class.hud(window)
   end
@@ -1353,9 +1356,21 @@ def Window_Class.hud_keypresses(window)
         end
         if (x >= 805 && x <= 960) && (y >= 555 && y <= 630) #forge
           All_Audio::SFX.forge_01
+          Equipment::Weapon_Crafting.forge_weapon
         end
         if (x >= 1010 && x <= 1120) && (y >= 160 && y <= 230) #molds
+          if @@tab != "mold"
           All_Audio::SFX.light_bonk
+          @@tab = "mold"
+        else if @@tab == "mold"
+            All_Audio::SFX.light_bonk
+            @@tab = "none"
+            end; end
+        end
+        if (x >= 1010 && x <= 1120) && (y >= 230 && y <= 300) #stick mold
+          All_Audio::SFX.light_bonk
+          mold = 1
+          Equipment::Weapon_Crafting.choose_mold(mold)
         end
         if (x >= 1125 && x <= 1150) && (y >= 110 && y <= 140) #exit
           @@popup = "none"
@@ -1365,37 +1380,37 @@ def Window_Class.hud_keypresses(window)
         if (x >= 405 && x <= 455) && (y >= 160 && y <= 230)
           slot = 0
           Etc::Inventory_Ingot.select_forge_ingot(slot)
-        end
+         end
        #........................slot 2.............................
        if (x >= 455 && x <= 505) && (y >= 160 && y <= 230)
-        slot = 1
-        Etc::Inventory_Ingot.select_forge_ingot(slot)
-      end
+         slot = 1
+         Etc::Inventory_Ingot.select_forge_ingot(slot)
+        end
        #........................slot 3.............................
        if (x >= 505 && x <= 555) && (y >= 160 && y <= 230)
-        slot = 2
-        Etc::Inventory_Ingot.select_forge_ingot(slot)
-      end
+         slot = 2
+         Etc::Inventory_Ingot.select_forge_ingot(slot)
+        end
        #........................slot 4.............................
        if (x >= 555 && x <= 605) && (y >= 160 && y <= 230)
-        slot = 3
-        Etc::Inventory_Ingot.select_forge_ingot(slot)
+         slot = 3
+         Etc::Inventory_Ingot.select_forge_ingot(slot)
         end
        #........................slot 5.............................
        if (x >= 605 && x <= 655) && (y >= 160 && y <= 230)
-        slot = 4
-        Etc::Inventory_Ingot.select_forge_ingot(slot)
-      end
+         slot = 4
+         Etc::Inventory_Ingot.select_forge_ingot(slot)
+        end
        #........................slot 6.............................
        if (x >= 405 && x <= 455) && (y >= 230 && y <= 300)
-        slot = 5
-        Etc::Inventory_Ingot.select_forge_ingot(slot)
-      end
+         slot = 5
+         Etc::Inventory_Ingot.select_forge_ingot(slot)
+        end
        #........................slot 7.............................
        if (x >= 455 && x <= 505) && (y >= 230 && y <= 300)
-        slot = 6
-        Etc::Inventory_Ingot.select_forge_ingot(slot)
-      end
+         slot = 6
+         Etc::Inventory_Ingot.select_forge_ingot(slot)
+        end
       when "Stats_Menu" #---------------------------------------------------------Stats Menu
         if (x >= 1280 && x <= 1330) && (y >= 210 && y <= 260)
           @@popup = "none"

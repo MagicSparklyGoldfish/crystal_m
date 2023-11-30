@@ -2361,3 +2361,12 @@ Testing_Text.character_size = 20; Testing_Text.color = SF::Color::White; Testing
  Test_Forge_Menu = SF::Sprite.new(FORGE_TEXTURE); #SF::RectangleShape.new(SF.vector2(800, 500)); 
  #Test_Smelter_Menu.fill_color = SF.color(150, 150, 155)
  Test_Forge_Menu.position = SF.vector2(0, -200);
+
+ FORGE_MOLD_OPTION_TEXTURE_01 = SF::Texture.from_file("graphics/Menu_Stick_Mold.png")
+ Forge_Mold_Option_01 = SF::Sprite.new(FORGE_MOLD_OPTION_TEXTURE_01)
+ Forge_Mold_Option_01.position = SF.vector2(650, -95);
+
+ NIL_STICK_DISPLAY_TEXTURE = SF::Texture.from_file("graphics/weapons/Iron_Stick_Display.png")
+ Nil_Stick_Display = SF::RectangleShape.new(SF.vector2(140, 140)); 
+ Nil_Stick_Display.set_texture(IRON_STICK_DISPLAY_TEXTURE, reset_rect: false);
+ Nil_Stick_Display.fill_color = SF.color(0, 0, 0, 0) 

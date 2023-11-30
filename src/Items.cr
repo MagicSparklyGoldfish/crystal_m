@@ -120,6 +120,17 @@ module Equipment
     @@current_weapon_object.swing_sound.stop
     @@current_weapon_object.hit_sound.play
    end
+   def Equipment.forge_weapon(weapon)
+    s = WEAPON_OBJECT_ARRAY.size; i = 0
+    puts WEAPON_OBJECT_ARRAY[i]
+    while s > i
+      if weapon == WEAPON_OBJECT_ARRAY[i].number 
+        WEAPON_INVENTORY_ARRAY.push(WEAPON_OBJECT_ARRAY[i])
+        puts WEAPON_OBJECT_ARRAY[i]
+      end
+      i += 1
+    end
+   end
  #======================================================================================================================================
  class Stick
  def initialize(name : String, number : Int32, can_swing : Bool, can_stab : Bool, can_shoot : Bool, atk_power : Float64, elements : Array(String), special_effects : Array(String), swing_sound : SF::Sound, hit_sound : SF::Sound, rectangle : SF::RectangleShape, is_equipped : Bool, sprite : SF::Sprite)
@@ -181,20 +192,20 @@ module Equipment
   end
  def Stick.test(window, page)
         window.draw(Weapon_Rectangle_01)
-    end
+    end 
     WEAPON_OBJECT_ARRAY.push(@@stick01, @@zinc_stick, @@tin_stick, @@copper_stick, @@brass_stick, @@bronze_stick, @@iron_stick, @@steel_stick)
     #WEAPON_INVENTORY_ARRAY.push(@@nil_stick)
-    WEAPON_INVENTORY_ARRAY.push(@@zinc_stick, @@tin_stick, @@copper_stick, @@brass_stick, @@bronze_stick, @@iron_stick, @@steel_stick)
+   # WEAPON_INVENTORY_ARRAY.push(@@zinc_stick, @@tin_stick, @@copper_stick, @@brass_stick, @@bronze_stick, @@iron_stick, @@steel_stick)
  #-------------------------------------------------------------Entities----------------------------------------------------------------------------------------
   @@nil_stick = Stick.new("", -1, false, false, false, 1.5, ["none"], ["none"], WEAPSOUND_01, WEAPSOUND_02, Weapon_Rectangle_01, false, Stick01)
   @@stick01 = Stick.new("Stick", 0, true, false, false, 1.5, ["none"], ["none"], WEAPSOUND_01, WEAPSOUND_02, Weapon_Rectangle_01, false, Stick01)
-  @@zinc_stick = Stick.new("Zinc Stick", 0, true, false, false, 1.75, ["none"], ["none"], WEAPSOUND_01, WEAPSOUND_02, Zinc_Stick_Display, false, Zinc_Stick)
-  @@tin_stick = Stick.new("Tin Stick", 0, true, false, false, 2, ["none"], ["none"], WEAPSOUND_01, WEAPSOUND_02, Tin_Stick_Display, false, Tin_Stick)
-  @@copper_stick = Stick.new("Copper Stick", 0, true, false, false, 4, ["none"], ["none"], WEAPSOUND_01, WEAPSOUND_02, Copper_Stick_Display, false, Copper_Stick)
-  @@brass_stick = Stick.new("Brass Stick", 0, true, false, false, 2.5, ["none"], ["none"], WEAPSOUND_01, WEAPSOUND_02, Brass_Stick_Display, false, Brass_Stick)
-  @@bronze_stick = Stick.new("Bronze Stick", 0, true, false, false, 3, ["none"], ["none"], WEAPSOUND_01, WEAPSOUND_02, Bronze_Stick_Display, false, Bronze_Stick)
-  @@iron_stick = Stick.new("Iron Stick", 0, true, false, false, 4, ["none"], ["none"], WEAPSOUND_01, WEAPSOUND_02, Iron_Stick_Display, false, Iron_Stick)
-  @@steel_stick = Stick.new("Steel Stick", 0, true, false, false, 5, ["none"], ["none"], WEAPSOUND_01, WEAPSOUND_02, Steel_Stick_Display, false, Steel_Stick)
+  @@zinc_stick = Stick.new("Zinc Stick", 4, true, false, false, 1.75, ["none"], ["none"], WEAPSOUND_01, WEAPSOUND_02, Zinc_Stick_Display, false, Zinc_Stick)
+  @@tin_stick = Stick.new("Tin Stick", 2, true, false, false, 2, ["none"], ["none"], WEAPSOUND_01, WEAPSOUND_02, Tin_Stick_Display, false, Tin_Stick)
+  @@copper_stick = Stick.new("Copper Stick", 1, true, false, false, 4, ["none"], ["none"], WEAPSOUND_01, WEAPSOUND_02, Copper_Stick_Display, false, Copper_Stick)
+  @@brass_stick = Stick.new("Brass Stick", 5, true, false, false, 2.5, ["none"], ["none"], WEAPSOUND_01, WEAPSOUND_02, Brass_Stick_Display, false, Brass_Stick)
+  @@bronze_stick = Stick.new("Bronze Stick", 3, true, false, false, 3, ["none"], ["none"], WEAPSOUND_01, WEAPSOUND_02, Bronze_Stick_Display, false, Bronze_Stick)
+  @@iron_stick = Stick.new("Iron Stick", 6, true, false, false, 4, ["none"], ["none"], WEAPSOUND_01, WEAPSOUND_02, Iron_Stick_Display, false, Iron_Stick)
+  @@steel_stick = Stick.new("Steel Stick", 7, true, false, false, 5, ["none"], ["none"], WEAPSOUND_01, WEAPSOUND_02, Steel_Stick_Display, false, Steel_Stick)
  #_____________________________________________________________________________________________________________________________________________________________
  end
  class Mold
@@ -215,14 +226,55 @@ module Equipment
  @@stick_mold = Mold.new("Stick Mold", 2, 0)  
   MOLD_ARRAY.push(@@stick_mold) 
  end
+
  class Weapon_Crafting < Mold
-  @@chosen_ingot : Int32; @@chosen_ingot = 0
+  @@chosen_ingot : Int32; @@chosen_ingot = 0; @@chosen_mold : Mold; @@chosen_mold = @@stick_mold
+  @@craft_weapon : Int32; @@craft_weapon = 0
   def Weapon_Crafting.choose_ingot(ingot)
     @@chosen_ingot = ingot
+  end 
+  def Weapon_Crafting.forge_weapon
+    weapon = @@craft_weapon
+    Equipment.forge_weapon(weapon)
   end
   def Weapon_Crafting.diplay_forge(window)
       window.draw(Test_Forge_Menu)
       Etc::Inventory_Ingot.display_forge_ingots(window)
+      Weapon_Crafting.current_mold(window)
+  end
+  def Weapon_Crafting.current_mold(window)
+    weapon = Nil_Stick_Display.dup
+    if  @@chosen_mold == @@stick_mold
+      case @@chosen_ingot
+       when 1
+        weapon = Copper_Stick_Display.dup
+        @@craft_weapon = 1      
+       when 2
+        weapon = Tin_Stick_Display.dup
+        @@craft_weapon = 2
+       when 3
+        weapon = Bronze_Stick_Display.dup
+        @@craft_weapon = 3
+       when 4
+        weapon = Zinc_Stick_Display.dup
+        @@craft_weapon = 4
+       when 5
+        weapon = Brass_Stick_Display.dup
+        @@craft_weapon = 5
+      when 6
+        weapon = Iron_Stick_Display.dup
+        @@craft_weapon = 6
+      when 7
+        weapon = Steel_Stick_Display.dup
+        @@craft_weapon = 7
+     end; end
+     weapon.position = SF.vector2(250, 150)
+     window.draw(weapon)
+  end
+  def Weapon_Crafting.choose_mold(mold)
+    if mold == 1
+      @@chosen_mold = @@stick_mold
+    end
   end
  end
 end
@@ -610,7 +662,7 @@ include Equipment
            end
          end
         end
-      #_____________________________________________________________________________________________________________________________________________________
+     #_____________________________________________________________________________________________________________________________________________________
       #------------------------------------------------------------------------------------------------------------------------------------------------------
      #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
      #++++++++++++++++++++++++++++++++++++++++++++++++++++++Inventory Ore Display++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -1481,7 +1533,6 @@ include Equipment
             Owned_Ingot_Array.push(Ingot_Array[i])
           end
           i += 1
-          puts Owned_Ingot_Array
          end; end
       #--------------------------------------------------------Forge Inventory------------------------------------------------------------------------------
        def Inventory_Ingot.initialize_forge_ingots
@@ -1523,6 +1574,11 @@ include Equipment
           Owned_Ingot_Array[5].forge_sprite.position = SF.vector2(50, -100)
           window.draw(Owned_Ingot_Array[5].forge_sprite)
          end
+      #----------------------------------------------------slot 6-------------------------------------------
+       if Owned_Ingot_Array.size >= 7
+         Owned_Ingot_Array[6].forge_sprite.position = SF.vector2(100, -100)
+         window.draw(Owned_Ingot_Array[6].forge_sprite)
+        end
        end
      def Inventory_Ingot.display_ingot(window, page)
       Owned_Ingot_Array.uniq!
@@ -1658,7 +1714,7 @@ include Equipment
      @@nil_ingot = Inventory_Ingot.new("", 0, Nil_Ingot_Ore, 0, 10, Forge_Copper_Ingot)
      Ingot_Array.push(@@copper_ingot)
     #---------------------------------------------------------------Copper--------------------------------------------------------------------------------- 
-     @@copper_ingot = Inventory_Ingot.new("Copper", 1, Copper_Ingot_Ore, 0, 10, Forge_Copper_Ingot)
+     @@copper_ingot = Inventory_Ingot.new("Copper", 1, Copper_Ingot_Ore, 1, 10, Forge_Copper_Ingot)
      Ingot_Array.push(@@copper_ingot)
     #----------------------------------------------------------------Tin--------------------------------------------------------------------------------- 
      @@tin_ingot = Inventory_Ingot.new("Tin", 2, Tin_Ingot_Ore, 1, 10, Forge_Tin_Ingot)
