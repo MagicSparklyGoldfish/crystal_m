@@ -1376,6 +1376,26 @@ def Window_Class.hud_keypresses(window)
         slot = 2
         Etc::Inventory_Ingot.select_forge_ingot(slot)
       end
+       #........................slot 4.............................
+       if (x >= 555 && x <= 605) && (y >= 160 && y <= 230)
+        slot = 3
+        Etc::Inventory_Ingot.select_forge_ingot(slot)
+        end
+       #........................slot 5.............................
+       if (x >= 605 && x <= 655) && (y >= 160 && y <= 230)
+        slot = 4
+        Etc::Inventory_Ingot.select_forge_ingot(slot)
+      end
+       #........................slot 6.............................
+       if (x >= 405 && x <= 455) && (y >= 230 && y <= 300)
+        slot = 5
+        Etc::Inventory_Ingot.select_forge_ingot(slot)
+      end
+       #........................slot 7.............................
+       if (x >= 455 && x <= 505) && (y >= 230 && y <= 300)
+        slot = 6
+        Etc::Inventory_Ingot.select_forge_ingot(slot)
+      end
       when "Stats_Menu" #---------------------------------------------------------Stats Menu
         if (x >= 1280 && x <= 1330) && (y >= 210 && y <= 260)
           @@popup = "none"
