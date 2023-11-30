@@ -21,7 +21,7 @@ module Equipment
  # ____________________________________________________________________________________________________________________________________
  #|                                                     Equipment Variables                                                            |
  #|____________________________________________________________________________________________________________________________________|
-   @@nil_stick = Stick.new("", -1, false, false, false, 1.5, ["none"], ["none"], WEAPSOUND_01, WEAPSOUND_02, Weapon_Rectangle_01, false, Stick01)
+   @@nil_stick = Stick.new("", -1, false, false, false, 1.5, ["none"], ["none"], WEAPSOUND_01, WEAPSOUND_02, Weapon_Rectangle_01, false, Stick01, "none", "none", "none")
    @@current_weapon : Int32
    @@current_weapon = -1
    @@current_weapon_object : Stick 
@@ -49,6 +49,19 @@ module Equipment
       end
       end
     end
+   def Equipment.show_weapon_info(this)
+      size = WEAPON_INVENTORY_ARRAY.size 
+       if this > size
+         All_Audio::SFX.light_bonk
+        else 
+       if @@current_weapon_object != Nil || @@nil_stick
+         WEAPON_INVENTORY_ARRAY.push(@@current_weapon_object)
+         @@current_weapon = WEAPON_INVENTORY_ARRAY[this].number
+         @@current_weapon_object = WEAPON_INVENTORY_ARRAY[this]
+         WEAPON_INVENTORY_ARRAY.delete(@@current_weapon_object)
+        end
+        end
+      end
     def Equipment.draw_current_weapon(player)
       player.draw(@@current_weapon_object.sprite)
     end
@@ -114,6 +127,13 @@ module Equipment
     attack_strength = base_attack + @@current_weapon_object.atk_power
     Harvestables::Ore.set_attack_strength(attack_strength)
    end
+   def Equipment.check_stats(slot)
+    if WEAPON_INVENTORY_ARRAY.size > slot
+      Weapon_Info_Text.string = " Name: " + WEAPON_INVENTORY_ARRAY[slot].name + "\n Attack: " + WEAPON_INVENTORY_ARRAY[slot].atk_power.to_s 
+    else
+      Weapon_Info_Text.string = ""
+    end
+   end
    def Equipment.play_swing_sound
     @@current_weapon_object.swing_sound.play
    end
@@ -129,7 +149,7 @@ module Equipment
     puts WEAPON_OBJECT_ARRAY[i]
     while s > i
       if weapon == WEAPON_OBJECT_ARRAY[i].number 
-        WEAPON_INVENTORY_ARRAY.push(WEAPON_OBJECT_ARRAY[i])
+        WEAPON_INVENTORY_ARRAY.push(WEAPON_OBJECT_ARRAY[i].dup)
         puts WEAPON_OBJECT_ARRAY[i]
       end
       i += 1
@@ -137,7 +157,9 @@ module Equipment
    end
  #======================================================================================================================================
  class Stick
- def initialize(name : String, number : Int32, can_swing : Bool, can_stab : Bool, can_shoot : Bool, atk_power : Float64, elements : Array(String), special_effects : Array(String), swing_sound : SF::Sound, hit_sound : SF::Sound, rectangle : SF::RectangleShape, is_equipped : Bool, sprite : SF::Sprite)
+ def initialize(name : String, number : Int32, can_swing : Bool, can_stab : Bool, can_shoot : Bool, atk_power : Float64, elements : Array(String), 
+  special_effects : Array(String), swing_sound : SF::Sound, hit_sound : SF::Sound, rectangle : SF::RectangleShape, is_equipped : Bool, sprite : SF::Sprite,
+  socket01 : String,  socket02 : String, socket03 : String)
     @name = name
     @number = number
     @can_swing = can_swing
@@ -151,6 +173,9 @@ module Equipment
     @rectangle = rectangle
     @is_equipped = is_equipped
     @sprite = sprite
+    @socket01 = socket01
+    @socket02 = socket02
+    @socket03 = socket03
   end
  def name
    @name
@@ -194,6 +219,15 @@ module Equipment
  def sprite
     @sprite
   end
+ def socket01
+    @socket01
+  end
+ def socket02
+    @socket02
+  end
+ def socket03
+    @socket03
+  end
  def Stick.test(window, page)
         window.draw(Weapon_Rectangle_01)
     end
@@ -201,15 +235,15 @@ module Equipment
     #WEAPON_INVENTORY_ARRAY.push(@@nil_stick)
    # WEAPON_INVENTORY_ARRAY.push(@@zinc_stick, @@tin_stick, @@copper_stick, @@brass_stick, @@bronze_stick, @@iron_stick, @@steel_stick)
  #-------------------------------------------------------------Entities----------------------------------------------------------------------------------------
-  @@nil_stick = Stick.new("", -1, false, false, false, 1.5, ["none"], ["none"], WEAPSOUND_01, WEAPSOUND_02, Weapon_Rectangle_01, false, Stick01)
-  @@stick01 = Stick.new("Stick", 0, true, false, false, 1.5, ["none"], ["none"], WEAPSOUND_01, WEAPSOUND_02, Weapon_Rectangle_01, false, Stick01)
-  @@zinc_stick = Stick.new("Zinc Stick", 4, true, false, false, 1.75, ["none"], ["none"], WEAPSOUND_01, WEAPSOUND_02, Zinc_Stick_Display, false, Zinc_Stick)
-  @@tin_stick = Stick.new("Tin Stick", 2, true, false, false, 2, ["none"], ["none"], WEAPSOUND_01, WEAPSOUND_02, Tin_Stick_Display, false, Tin_Stick)
-  @@copper_stick = Stick.new("Copper Stick", 1, true, false, false, 4, ["none"], ["none"], WEAPSOUND_01, WEAPSOUND_02, Copper_Stick_Display, false, Copper_Stick)
-  @@brass_stick = Stick.new("Brass Stick", 5, true, false, false, 2.5, ["none"], ["none"], WEAPSOUND_01, WEAPSOUND_02, Brass_Stick_Display, false, Brass_Stick)
-  @@bronze_stick = Stick.new("Bronze Stick", 3, true, false, false, 3, ["none"], ["none"], WEAPSOUND_01, WEAPSOUND_02, Bronze_Stick_Display, false, Bronze_Stick)
-  @@iron_stick = Stick.new("Iron Stick", 6, true, false, false, 4, ["none"], ["none"], WEAPSOUND_01, WEAPSOUND_02, Iron_Stick_Display, false, Iron_Stick)
-  @@steel_stick = Stick.new("Steel Stick", 7, true, false, false, 5, ["none"], ["none"], WEAPSOUND_01, WEAPSOUND_02, Steel_Stick_Display, false, Steel_Stick)
+  @@nil_stick = Stick.new("", -1, false, false, false, 1.5, ["none"], ["none"], WEAPSOUND_01, WEAPSOUND_02, Weapon_Rectangle_01, false, Stick01, "none", "none", "none")
+  @@stick01 = Stick.new("Stick", 0, true, false, false, 1.5, ["none"], ["none"], WEAPSOUND_01, WEAPSOUND_02, Weapon_Rectangle_01, false, Stick01, "none", "none", "none")
+  @@zinc_stick = Stick.new("Zinc Stick", 4, true, false, false, 1.75, ["none"], ["none"], WEAPSOUND_01, WEAPSOUND_02, Zinc_Stick_Display, false, Zinc_Stick, "none", "none", "none")
+  @@tin_stick = Stick.new("Tin Stick", 2, true, false, false, 2, ["none"], ["none"], WEAPSOUND_01, WEAPSOUND_02, Tin_Stick_Display, false, Tin_Stick, "none", "none", "none")
+  @@copper_stick = Stick.new("Copper Stick", 1, true, false, false, 4, ["none"], ["none"], WEAPSOUND_01, WEAPSOUND_02, Copper_Stick_Display, false, Copper_Stick, "empty", "none", "none")
+  @@brass_stick = Stick.new("Brass Stick", 5, true, false, false, 2.5, ["none"], ["none"], WEAPSOUND_01, WEAPSOUND_02, Brass_Stick_Display, false, Brass_Stick, "empty", "empty", "none")
+  @@bronze_stick = Stick.new("Bronze Stick", 3, true, false, false, 3, ["none"], ["none"], WEAPSOUND_01, WEAPSOUND_02, Bronze_Stick_Display, false, Bronze_Stick, "empty", "none", "none")
+  @@iron_stick = Stick.new("Iron Stick", 6, true, false, false, 4, ["none"], ["none"], WEAPSOUND_01, WEAPSOUND_02, Iron_Stick_Display, false, Iron_Stick, "empty", "empty", "none")
+  @@steel_stick = Stick.new("Steel Stick", 7, true, false, false, 5, ["none"], ["none"], WEAPSOUND_01, WEAPSOUND_02, Steel_Stick_Display, false, Steel_Stick, "empty", "empty", "empty")
  #_____________________________________________________________________________________________________________________________________________________________
  end
  class Mold

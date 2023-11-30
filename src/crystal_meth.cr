@@ -52,6 +52,7 @@ extend self
   @@salon = "none"
   @@page : Int32 = 1
   @@category = "ore"
+  @@info_box = "none"
  #_______________________________________________________________________________________________________________________________________+
  #-------------------------------------------------------Game State Variables------------------------------------------------------------+
   @@dialog : Bool; @@dialog = false;
@@ -337,25 +338,28 @@ extend self
     window.draw(salon_confirm_box); window.draw(salon_option_1); window.draw(salon_option_2); window.draw(salon_confirm_text)
     window.draw(salon_confirm_option_1)
    end
- def Window_Class.inventory(window)
-  view5 = SF::View.new(SF.float_rect(0, 0, 1920, 1080))
-  view5.viewport = SF.float_rect(0, 0, 1, 1)
-  window.view = view5
-  window.draw(Inventory_Window); window.draw(Weapon_Tab); window.draw(Use_Tab); window.draw(Etc_Tab)
-  window.draw(Weapon_Tab_Text); window.draw(Use_Tab_Text); window.draw(Etc_Tab_Text); window.draw(Inventory_arrow_up2)
-  window.draw(Inventory_arrow_down2)
-  if @@tab == "Equipment"
-    page = @@page
-    Equipment.display_equipment_inventory(window, page)
-    #Equipment::Stick.test(window, page)
-  else if @@tab == "Etc"
-    window.draw(Ore_Button); window.draw(Ore_Button_Text); window.draw(Ingot_Button); window.draw(Ingot_Button_Text)
-    page = @@page
-    case @@category
-     when "ore"
-      Etc::Inventory_Ore.display_ore(window, page) 
-     when "ingot"
-      Etc::Inventory_Ingot.display_ingot(window, page)
+  def Window_Class.inventory(window)
+   view5 = SF::View.new(SF.float_rect(0, 0, 1920, 1080))
+   view5.viewport = SF.float_rect(0, 0, 1, 1)
+   window.view = view5
+   window.draw(Inventory_Window); window.draw(Weapon_Tab); window.draw(Use_Tab); window.draw(Etc_Tab)
+   window.draw(Weapon_Tab_Text); window.draw(Use_Tab_Text); window.draw(Etc_Tab_Text); window.draw(Inventory_arrow_up2)
+   window.draw(Inventory_arrow_down2)
+   if @@tab == "Equipment"
+    if @@info_box == "equipment"
+      window.draw(Weapon_Info_Box);  window.draw(Weapon_Info_Text)
+    end
+     page = @@page
+     Equipment.display_equipment_inventory(window, page)
+     #Equipment::Stick.test(window, page)
+   else if @@tab == "Etc"
+     window.draw(Ore_Button); window.draw(Ore_Button_Text); window.draw(Ingot_Button); window.draw(Ingot_Button_Text)
+     page = @@page
+     case @@category
+      when "ore"
+       Etc::Inventory_Ore.display_ore(window, page) 
+      when "ingot"
+       Etc::Inventory_Ingot.display_ingot(window, page)
   end; end
   end
  end
@@ -1072,6 +1076,30 @@ def Window_Class.char_creation_menu_keypresses(window)
 #------------------------------------------------------------------------------------------------------------------------------------------+
 def Window_Class.hud_keypresses(window)
   while (event = window.poll_event)
+   #-------------------------------------------------------------Right Mouse Button---------------------------------------------------------
+    if SF::Mouse.button_pressed?(SF::Mouse::Right)
+      mouse_position = SF::Mouse.position
+      x = mouse_position.x
+      y = mouse_position.y
+    case @@tab
+    when "Equipment"
+      if (x >= 555 && x <= 710) && (y >= 310 && y <= 460)
+        Weapon_Info_Box.position = SF.vector2(525, 460) 
+        Weapon_Info_Text.position = Weapon_Info_Box.position 
+        if @@info_box != "equipment"
+         @@info_box = "equipment"
+         slot = 0
+         Equipment.check_stats(slot)
+        else if @@info_box == "equipment"
+          @@info_box = "none"
+         end; end
+         
+        # Equipment.equip_weapon(this)
+        # this2 = @@current_weapon
+        # Gui::Window_Class.equip_weapon(this2)
+       end
+    end
+    end
     if SF::Mouse.button_pressed?(SF::Mouse::Left)
       mouse_position = SF::Mouse.position
       x = mouse_position.x

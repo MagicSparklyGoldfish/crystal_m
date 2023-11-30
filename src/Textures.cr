@@ -394,6 +394,12 @@
 
   Test_Rectangle_01 = SF::RectangleShape.new(SF.vector2(140, 140));
   Test_Rectangle_01.fill_color = SF.color(155, 155, 255); Test_Rectangle_01.position = SF.vector2(555, 310);
+  #--------------------------------------------------Weapon Info Box---------------------------------------------------------------
+   Weapon_Info_Box = SF::RectangleShape.new(SF.vector2(200, 100)); Weapon_Info_Box.fill_color = SF.color(200, 200, 200)
+   Weapon_Info_Box.position = SF.vector2(200, 150) 
+   Weapon_Info_Text = SF::Text.new; Weapon_Info_Text.font = FONT_COMMON; Weapon_Info_Text.character_size = 20
+   Weapon_Info_Text.color = SF::Color::Black; Weapon_Info_Text.position = Weapon_Info_Box.position 
+   Weapon_Info_Text.string = ""
   #--------------------------------------------------Weapon Textures---------------------------------------------------------------
    WEAPON_DISPLAY_TEXTURE_01 = SF::Texture.from_file("graphics/Weapons_display.png"); STICK_TEXTURE = SF::Texture.from_file("graphics/Stick01.png");
    Stick01 = SF::Sprite.new(STICK_TEXTURE)
