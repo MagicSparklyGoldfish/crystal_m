@@ -2275,6 +2275,8 @@ Testing_Text.character_size = 20; Testing_Text.color = SF::Color::White; Testing
   Test_Smelter_Menu = SF::Sprite.new(SMELTER_TEXTURE); #SF::RectangleShape.new(SF.vector2(800, 500)); 
   #Test_Smelter_Menu.fill_color = SF.color(150, 150, 155)
   Test_Smelter_Menu.position = SF.vector2(0, -200);
+  #'''''''''''''''''''''''''''''''''''''''''''''''''''''''Nil''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+   Nil_Ingot_Ore = SF::Sprite.new(COPPER_INGOT_TEXTURE); Nil_Ingot_Ore.color = SF.color(0, 0, 0, 0)
   #''''''''''''''''''''''''''''''''''''''''''''''''''''''Carbon'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
    #......................................................Ore..........................................................................
     CARBON_SMELTER_TEXTURE = SF::Texture.from_file("graphics/metals/Carbon_Smelter.png")

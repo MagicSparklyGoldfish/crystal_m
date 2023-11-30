@@ -1281,7 +1281,7 @@ def Window_Class.hud_keypresses(window)
       when "System_Popup_Menu" #-------------------------------------------------System clicks
           if (x >= 1730 && x <= 1880) && (y >= 930 && y <= 990)
            @@popup = "none"
-          end
+           end
           if (x >= 1730 && x <= 1880) && (y >= 900 && y <= 940)
             All_Audio::SFX.char_create_sideways
             @@popup = "Quit_Menu"
@@ -1347,6 +1347,35 @@ def Window_Class.hud_keypresses(window)
           cubby_number = 4
           Etc::Inventory_Ore.select_ore_one(window, cubby_number)
          end
+      when "forge" #--------------------------------------------------------------Forge Menu
+        if (x >= 400 && x <= 560) && (y >= 555 && y <= 630) #clear
+          All_Audio::SFX.light_bonk
+        end
+        if (x >= 805 && x <= 960) && (y >= 555 && y <= 630) #forge
+          All_Audio::SFX.forge_01
+        end
+        if (x >= 1010 && x <= 1120) && (y >= 160 && y <= 230) #molds
+          All_Audio::SFX.light_bonk
+        end
+        if (x >= 1125 && x <= 1150) && (y >= 110 && y <= 140) #exit
+          @@popup = "none"
+          Player_Data::Player_Physics.mobilize_player
+        end
+       #........................slot 1.............................
+        if (x >= 405 && x <= 455) && (y >= 160 && y <= 230)
+          slot = 0
+          Etc::Inventory_Ingot.select_forge_ingot(slot)
+        end
+       #........................slot 2.............................
+       if (x >= 455 && x <= 505) && (y >= 160 && y <= 230)
+        slot = 1
+        Etc::Inventory_Ingot.select_forge_ingot(slot)
+      end
+       #........................slot 3.............................
+       if (x >= 505 && x <= 555) && (y >= 160 && y <= 230)
+        slot = 2
+        Etc::Inventory_Ingot.select_forge_ingot(slot)
+      end
       when "Stats_Menu" #---------------------------------------------------------Stats Menu
         if (x >= 1280 && x <= 1330) && (y >= 210 && y <= 260)
           @@popup = "none"
@@ -1835,7 +1864,7 @@ def Window_Class.hud_keypresses(window)
           if player.intersects? Test_Forge.global_bounds
             Player_Data::Player_Physics.immobilize_player
             @@popup = "forge"
-
+            Etc::Inventory_Ingot.initialize_inventory
             @@player_character_rendered_model.position = SF.vector2(600, 75)
           else
             Player_Data::Player_Physics.mobilize_player

@@ -79,6 +79,10 @@ require "../src/crystal_meth.cr"
  Forge_1 = SF::SoundBuffer.from_file("audio/Forge.wav")
  ENVIROSOUND_04 = SF::Sound.new
  ENVIROSOUND_04.buffer = Forge_1
+
+ Metal_Hit_1 = SF::SoundBuffer.from_file("audio/Metal_Hit_01.wav")
+ ENVIROSOUND_05 = SF::Sound.new
+ ENVIROSOUND_05.buffer = Metal_Hit_1
 #_________________________________________________________________________________________________________________________________________________________
 
 # =======================================================================================================================================================
@@ -151,6 +155,10 @@ module All_Audio
         def SFX.forge_01
             ENVIROSOUND_04.play
         end
+        def SFX.metal_hit_01
+            ENVIROSOUND_05.play
+        end
+        
     end #sfx class end
   class MUSIC
    def MUSIC.test_song
