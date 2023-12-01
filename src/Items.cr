@@ -2015,6 +2015,12 @@ include Equipment
 
    @@wavellite_gem = Gem.new("Wavellite", 4, Wavellite_Inventory_Tablecut, "table", 1, "green", 60, "earth", "mp+")
    GEM_ARRAY.push(@@wavellite_gem)
+
+   @@topaz_gem = Gem.new("Topaz", 5, Topaz_Inventory_Tablecut, "table", 1, "yellow", 60, "fire", "INT+")
+   GEM_ARRAY.push(@@topaz_gem)
+
+   @@amethyst_gem = Gem.new("Amethyst", 6, Amethyst_Inventory_Tablecut, "table", 1, "purple", 60, "air", "INT+")
+   GEM_ARRAY.push(@@amethyst_gem)
   #________________________________________________________________________________________________________________________________________________________
  end
 end 

@@ -676,36 +676,68 @@
       Moss_Agate_Inventory_Tablecut = SF::Sprite.new(MOSS_AGATE_INVENTORY_TABLECUT_TEXTURE) 
     #''''''''''''''''''''''''''''''''''''''''''''''''''''Amber''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      #---------------------------------------------------Square---------------------------------------------------------------------
-     AMBER_INVENTORY_SQUARE_TEXTURE = SF::Texture.from_file("graphics/minerals/Amber_Inventory_Squarecut.png")
-     Amber_Inventory_Square = SF::Sprite.new(AMBER_INVENTORY_SQUARE_TEXTURE) 
-    #----------------------------------------------------Pear----------------------------------------------------------------------
-     AMBER_INVENTORY_PEAR_TEXTURE = SF::Texture.from_file("graphics/minerals/Amber_Inventory_Pearcut.png")
-     Amber_Inventory_Pear = SF::Sprite.new(AMBER_INVENTORY_PEAR_TEXTURE) 
-    #--------------------------------------------------Brilliant--------------------------------------------------------------------
-     AMBER_INVENTORY_BRILLIANT_TEXTURE = SF::Texture.from_file("graphics/minerals/Amber_Inventory_Brilliantcut.png")
-     Amber_Inventory_Brilliant = SF::Sprite.new(AMBER_INVENTORY_BRILLIANT_TEXTURE) 
-    #---------------------------------------------------Dropcut---------------------------------------------------------------------
-     AMBER_INVENTORY_DROPCUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Amber_Inventory_Drop.png")
-     Amber_Inventory_Dropcut = SF::Sprite.new(AMBER_INVENTORY_DROPCUT_TEXTURE) 
-    #--------------------------------------------------Tablecut---------------------------------------------------------------------
-     AMBER_INVENTORY_TABLECUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Amber_Inventory_Table.png")
-     Amber_Inventory_Tablecut = SF::Sprite.new(AMBER_INVENTORY_TABLECUT_TEXTURE) 
+      AMBER_INVENTORY_SQUARE_TEXTURE = SF::Texture.from_file("graphics/minerals/Amber_Inventory_Squarecut.png")
+      Amber_Inventory_Square = SF::Sprite.new(AMBER_INVENTORY_SQUARE_TEXTURE) 
+     #----------------------------------------------------Pear----------------------------------------------------------------------
+      AMBER_INVENTORY_PEAR_TEXTURE = SF::Texture.from_file("graphics/minerals/Amber_Inventory_Pearcut.png")
+      Amber_Inventory_Pear = SF::Sprite.new(AMBER_INVENTORY_PEAR_TEXTURE) 
+     #--------------------------------------------------Brilliant--------------------------------------------------------------------
+      AMBER_INVENTORY_BRILLIANT_TEXTURE = SF::Texture.from_file("graphics/minerals/Amber_Inventory_Brilliantcut.png")
+      Amber_Inventory_Brilliant = SF::Sprite.new(AMBER_INVENTORY_BRILLIANT_TEXTURE) 
+     #---------------------------------------------------Dropcut---------------------------------------------------------------------
+      AMBER_INVENTORY_DROPCUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Amber_Inventory_Drop.png")
+      Amber_Inventory_Dropcut = SF::Sprite.new(AMBER_INVENTORY_DROPCUT_TEXTURE) 
+     #--------------------------------------------------Tablecut---------------------------------------------------------------------
+      AMBER_INVENTORY_TABLECUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Amber_Inventory_Table.png")
+      Amber_Inventory_Tablecut = SF::Sprite.new(AMBER_INVENTORY_TABLECUT_TEXTURE) 
     #''''''''''''''''''''''''''''''''''''''''''''''''''Wavellite''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      #---------------------------------------------------Square---------------------------------------------------------------------
       WAVELLITE_INVENTORY_SQUARE_TEXTURE = SF::Texture.from_file("graphics/minerals/Wavellite_Inventory_Square.png")
       Wavellite_Inventory_Square = SF::Sprite.new(WAVELLITE_INVENTORY_SQUARE_TEXTURE) 
      #----------------------------------------------------Pear----------------------------------------------------------------------
       WAVELLITE_INVENTORY_PEAR_TEXTURE = SF::Texture.from_file("graphics/minerals/Wavellite_Inventory_Pear.png")
-      WAvellite_Inventory_Pear = SF::Sprite.new(AMBER_INVENTORY_PEAR_TEXTURE) 
-     #--------------------------------------------------Brilliant--------------------------------------------------------------------
+      Wavellite_Inventory_Pear = SF::Sprite.new(AMBER_INVENTORY_PEAR_TEXTURE) 
+     #--------------------------------------------------Brilliant-------------------------------------------------------------------
       WAVELLITE_INVENTORY_BRILLIANT_TEXTURE = SF::Texture.from_file("graphics/minerals/Wavellite_Inventory_Brilliant.png")
       Wavellite_Inventory_Brilliant = SF::Sprite.new(WAVELLITE_INVENTORY_BRILLIANT_TEXTURE) 
-     #---------------------------------------------------Dropcut---------------------------------------------------------------------
+     #---------------------------------------------------Dropcut--------------------------------------------------------------------
       WAVELLITE_INVENTORY_DROPCUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Wavellite_Inventory_Drop.png")
       Wavellite_Inventory_Dropcut = SF::Sprite.new(WAVELLITE_INVENTORY_DROPCUT_TEXTURE) 
-     #--------------------------------------------------Tablecut---------------------------------------------------------------------
+     #--------------------------------------------------Tablecut--------------------------------------------------------------------
       WAVELLITE_INVENTORY_TABLECUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Wavellite_Inventory_Table.png")
       Wavellite_Inventory_Tablecut = SF::Sprite.new(WAVELLITE_INVENTORY_TABLECUT_TEXTURE) 
+    #''''''''''''''''''''''''''''''''''''''''''''''''''''Topaz''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     #---------------------------------------------------Square---------------------------------------------------------------------
+      TOPAZ_INVENTORY_SQUARE_TEXTURE = SF::Texture.from_file("graphics/minerals/Topaz_Inventory_Square.png")
+      Topaz_Inventory_Square = SF::Sprite.new(TOPAZ_INVENTORY_SQUARE_TEXTURE) 
+     #----------------------------------------------------Pear----------------------------------------------------------------------
+      TOPAZ_INVENTORY_PEAR_TEXTURE = SF::Texture.from_file("graphics/minerals/Topaz_Inventory_Pear.png")
+      Topaz_Inventory_Pear = SF::Sprite.new(TOPAZ_INVENTORY_SQUARE_TEXTURE) 
+     #--------------------------------------------------Brilliant--------------------------------------------------------------------
+      TOPAZ_INVENTORY_BRILLIANT_TEXTURE = SF::Texture.from_file("graphics/minerals/Topaz_Inventory_Brilliant.png")
+      Topaz_Inventory_Brilliant = SF::Sprite.new(TOPAZ_INVENTORY_BRILLIANT_TEXTURE) 
+     #---------------------------------------------------Dropcut---------------------------------------------------------------------
+      TOPAZ_INVENTORY_DROPCUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Topaz_Inventory_Drop.png")
+      Topaz_Inventory_Dropcut = SF::Sprite.new(TOPAZ_INVENTORY_DROPCUT_TEXTURE) 
+     #--------------------------------------------------Tablecut---------------------------------------------------------------------
+      TOPAZ_INVENTORY_TABLECUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Topaz_Inventory_Table.png")
+      Topaz_Inventory_Tablecut = SF::Sprite.new(TOPAZ_INVENTORY_TABLECUT_TEXTURE) 
+    #'''''''''''''''''''''''''''''''''''''''''''''''''''Amethyst'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     #---------------------------------------------------Square---------------------------------------------------------------------
+      AMETHYST_INVENTORY_SQUARE_TEXTURE = SF::Texture.from_file("graphics/minerals/Amethyst_Inventory_Square.png")
+      Amethyst_Inventory_Square = SF::Sprite.new(AMETHYST_INVENTORY_SQUARE_TEXTURE) 
+     #----------------------------------------------------Pear----------------------------------------------------------------------
+      AMETHYST_INVENTORY_PEAR_TEXTURE = SF::Texture.from_file("graphics/minerals/Amethyst_Inventory_Pear.png")
+      Amethyst_Inventory_Pear = SF::Sprite.new(AMETHYST_INVENTORY_SQUARE_TEXTURE) 
+     #--------------------------------------------------Brilliant--------------------------------------------------------------------
+      AMETHYST_INVENTORY_BRILLIANT_TEXTURE = SF::Texture.from_file("graphics/minerals/Amethyst_Inventory_Brilliant.png")
+      Amethyst_Inventory_Brilliant = SF::Sprite.new(AMETHYST_INVENTORY_BRILLIANT_TEXTURE) 
+     #---------------------------------------------------Dropcut---------------------------------------------------------------------
+      AMETHYST_INVENTORY_DROPCUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Amethyst_Inventory_Drop.png")
+      Amethyst_Inventory_Dropcut = SF::Sprite.new(AMETHYST_INVENTORY_DROPCUT_TEXTURE) 
+     #--------------------------------------------------Tablecut---------------------------------------------------------------------
+      AMETHYST_INVENTORY_TABLECUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Amethyst_Inventory_Table.png")
+      Amethyst_Inventory_Tablecut = SF::Sprite.new(AMETHYST_INVENTORY_TABLECUT_TEXTURE) 
 #----------------------------------------------------------------------------------------------------------------------------------- 
 #                                                    Character Model
 #-----------------------------------------------------------------------------------------------------------------------------------
