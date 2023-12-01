@@ -1785,13 +1785,14 @@ include Equipment
  #GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG
  #GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG
  GEM_ARRAY = [] of Gem; Owned_Gem_Array = [] of Gem
- class Gem
+ class Gem < Inventory_Ore
   #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   #!                                                              Initialize                                                                              !
   #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-   def initialize(name : String, sprite : SF::Sprite, cut : String, amount_owned : Int32, color : String, sell_price : Int32, 
+   def initialize(name : String, id : Int32, sprite : SF::Sprite, cut : String, amount_owned : Int32, color : String, sell_price : Int32, 
     element : String, effect : String)
     @name = name
+    @id = id
     @sprite = sprite
     @cut = cut
     @amount_owned = amount_owned
@@ -1802,6 +1803,9 @@ include Equipment
     end
    def name
      @name
+    end
+   def id
+    @id
     end
    def sprite
      @sprite
@@ -1994,16 +1998,23 @@ include Equipment
             window.draw(Owned_Gem_Array[12].sprite); window.draw(ore_array_text_13)
            end
           end
-   end
+     end
+   #--------------------------------------------------------Gem Cutter Display-----------------------------------------------------------------------------
   #________________________________________________________________________________________________________________________________________________________
   #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   #/                                                               Entities                                                                               /
   #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-   @@bloodstone_gem = Gem.new("Bloodstone", Bloodstone_Inventory_Tablecut, "table", 1, "red", 60, "earth", "hp+")
+   @@bloodstone_gem = Gem.new("Bloodstone", 1, Bloodstone_Inventory_Tablecut, "table", 1, "red", 60, "earth", "hp+")
    GEM_ARRAY.push(@@bloodstone_gem)
 
-   @@moss_agate_gem = Gem.new("Moss Agate", Moss_Agate_Inventory_Tablecut, "table", 1, "white", 60, "earth", "passive mp regen")
+   @@moss_agate_gem = Gem.new("Moss Agate", 2, Moss_Agate_Inventory_Tablecut, "table", 1, "white", 60, "earth", "passive mp regen")
    GEM_ARRAY.push(@@moss_agate_gem)
+
+   @@amber_gem = Gem.new("Amber", 3, Amber_Inventory_Tablecut, "table", 1, "yellow", 60, "fire", "passive hp regen")
+   GEM_ARRAY.push(@@amber_gem)
+
+   @@wavellite_gem = Gem.new("Wavellite", 4, Wavellite_Inventory_Tablecut, "table", 1, "green", 60, "earth", "mp+")
+   GEM_ARRAY.push(@@wavellite_gem)
   #________________________________________________________________________________________________________________________________________________________
  end
 end 
