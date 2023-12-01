@@ -158,6 +158,7 @@ module Equipment
    end
    def Equipment.check_gem_element_current_weapon
     gem1 = WEAPON_OBJECT_ARRAY[@@current_weapon].socket01
+    Etc::Gem.check_element(gem1)
    end
  #======================================================================================================================================
  class Stick
@@ -1779,7 +1780,7 @@ include Equipment
    end
  #GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG
  #GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG
- #GG                                                             Gem Class                                                                                   GG
+ #GG                                                         #@note Gem Class                                                                                   GG
  #GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG
  #GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG
  GEM_ARRAY = [] of Gem
@@ -1787,8 +1788,8 @@ include Equipment
   #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   #!                                                              Initialize                                                                              !
   #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-   def initialize(name : String, inventory_sprite : SF::Sprite, weapon_inventory_sprite : SF::Sprite, cut : String, amount_owned : Int32, 
-    color : String, sell_price : Int32, element : String, effect : String)
+   def initialize(name : String, inventory_sprite : SF::Sprite, cut : String, amount_owned : Int32, color : String, sell_price : Int32, 
+    element : String, effect : String)
     @name = name
     @inventory_sprite = inventory_sprite
     @weapon_inventory_sprite = weapon_inventory_sprite
@@ -1804,9 +1805,6 @@ include Equipment
     end
    def inventory_sprite
      @inventory_sprite
-    end
-   def weapon_inventory_sprite
-     @weapon_inventory_sprite
     end
    def cut
      @cut
@@ -1830,11 +1828,20 @@ include Equipment
   #????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
   #?                                                               Methods                                                                                ?
   #????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
+    def Gem.check_element(gem1)
+      s = GEM_ARRAY.size; i = 0
+      while s > i
+        if gem1 == GEM_ARRAY[i].name
+          element = GEM_ARRAY[i].element
+        end
+        i += 1
+      end
+    end
   #________________________________________________________________________________________________________________________________________________________
   #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   #/                                                               Entities                                                                               /
   #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-   @@bloodstone_gem = Gem.new("Bloodstone", Bloodstone_Inventory_Square, Bloodstone_Inventory_Square_Slot_01, "square", 0, "red", 60, "earth", "hp+")
+   @@bloodstone_gem = Gem.new("Bloodstone", Bloodstone_Inventory_Square, "square", 0, "red", 60, "earth", "hp+")
    GEM_ARRAY.push(@@bloodstone_gem)
   #________________________________________________________________________________________________________________________________________________________
  end

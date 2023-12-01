@@ -639,18 +639,20 @@
    #......................................................Gems......................................................................
     #''''''''''''''''''''''''''''''''''''''''''''''''''Bloodstone'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      #---------------------------------------------------Square---------------------------------------------------------------------
-      #................................................Inventory....................................................................
        BLOODSTONE_INVENTORY_SQUARE_TEXTURE = SF::Texture.from_file("graphics/minerals/Bloodstone_Inventory_Squarecut.png")
        Bloodstone_Inventory_Square = SF::Sprite.new(BLOODSTONE_INVENTORY_SQUARE_TEXTURE) 
-      #..............................................Slot Inventory.................................................................
-       BLOODSTONE_INVENTORY_SQUARE_SLOT_01_TEXTURE = SF::Texture.from_file("graphics/minerals/Bloodstone_Square_Stick_Slot_01.png")
-       Bloodstone_Inventory_Square_Slot_01 = SF::Sprite.new(BLOODSTONE_INVENTORY_SQUARE_SLOT_01_TEXTURE) 
-
-       BLOODSTONE_INVENTORY_SQUARE_SLOT_02_TEXTURE = SF::Texture.from_file("graphics/minerals/Bloodstone_Square_Stick_Slot_02.png")
-       Bloodstone_Inventory_Square_Slot_02 = SF::Sprite.new(BLOODSTONE_INVENTORY_SQUARE_SLOT_02_TEXTURE) 
-
-       BLOODSTONE_INVENTORY_SQUARE_SLOT_03_TEXTURE = SF::Texture.from_file("graphics/minerals/Bloodstone_Square_Stick_Slot_03.png")
-       Bloodstone_Inventory_Square_Slot_03 = SF::Sprite.new(BLOODSTONE_INVENTORY_SQUARE_SLOT_03_TEXTURE) 
+     #----------------------------------------------------Pear----------------------------------------------------------------------
+       BLOODSTONE_INVENTORY_PEAR_TEXTURE = SF::Texture.from_file("graphics/minerals/Bloodstone_Inventory_Pearcut.png")
+       Bloodstone_Inventory_Pear = SF::Sprite.new(BLOODSTONE_INVENTORY_PEAR_TEXTURE) 
+     #--------------------------------------------------Brilliant--------------------------------------------------------------------
+       BLOODSTONE_INVENTORY_BRILLIANT_TEXTURE = SF::Texture.from_file("graphics/minerals/Bloodstone_Inventory_Brilliantcut.png")
+       Bloodstone_Inventory_Brilliant = SF::Sprite.new(BLOODSTONE_INVENTORY_BRILLIANT_TEXTURE) 
+     #---------------------------------------------------Dropcut---------------------------------------------------------------------
+       BLOODSTONE_INVENTORY_DROPCUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Bloodstone_Inventory_Dropcut.png")
+       Bloodstone_Inventory_Dropcut = SF::Sprite.new(BLOODSTONE_INVENTORY_DROPCUT_TEXTURE) 
+     #--------------------------------------------------Tablecut---------------------------------------------------------------------
+       BLOODSTONE_INVENTORY_TABLECUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Bloodstone_Inventory_Tablecut.png")
+       Bloodstone_Inventory_Tablecut = SF::Sprite.new(BLOODSTONE_INVENTORY_TABLECUT_TEXTURE) 
 #----------------------------------------------------------------------------------------------------------------------------------- 
 #                                                    Character Model
 #-----------------------------------------------------------------------------------------------------------------------------------
@@ -2395,3 +2397,7 @@ Testing_Text.character_size = 20; Testing_Text.color = SF::Color::White; Testing
  Nil_Stick_Display = SF::RectangleShape.new(SF.vector2(140, 140)); 
  Nil_Stick_Display.set_texture(IRON_STICK_DISPLAY_TEXTURE, reset_rect: false);
  Nil_Stick_Display.fill_color = SF.color(0, 0, 0, 0) 
+
+#--------------------------------------------------------------------------------------------------------------------------------------
+#                                                      Gem Cutter
+#-------------------------------------------------------------------------------------------------------------------------------------- 
