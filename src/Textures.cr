@@ -738,6 +738,22 @@
      #--------------------------------------------------Tablecut---------------------------------------------------------------------
       AMETHYST_INVENTORY_TABLECUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Amethyst_Inventory_Table.png")
       Amethyst_Inventory_Tablecut = SF::Sprite.new(AMETHYST_INVENTORY_TABLECUT_TEXTURE) 
+    #'''''''''''''''''''''''''''''''''''''''''''''''''Smokey Quartz''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     #---------------------------------------------------Square---------------------------------------------------------------------
+      SMOKEY_QUARTZ_INVENTORY_SQUARE_TEXTURE = SF::Texture.from_file("graphics/minerals/Smokey_Quartz_Inventory_Square.png")
+      Smokey_Quartz_Inventory_Square = SF::Sprite.new(SMOKEY_QUARTZ_INVENTORY_SQUARE_TEXTURE) 
+     #----------------------------------------------------Pear----------------------------------------------------------------------
+      SMOKEY_QUARTZ_INVENTORY_PEAR_TEXTURE = SF::Texture.from_file("graphics/minerals/Smokey_Quartz_Inventory_Pear.png")
+      Smokey_Quartz_Inventory_Pear = SF::Sprite.new(SMOKEY_QUARTZ_INVENTORY_PEAR_TEXTURE) 
+     #--------------------------------------------------Brilliant--------------------------------------------------------------------
+      SMOKEY_QUARTZ_INVENTORY_BRILLIANT_TEXTURE = SF::Texture.from_file("graphics/minerals/Smokey_Quartz_Inventory_Brilliant.png")
+      Smokey_Quartz_Inventory_Brilliant = SF::Sprite.new(SMOKEY_QUARTZ_INVENTORY_BRILLIANT_TEXTURE) 
+     #---------------------------------------------------Dropcut---------------------------------------------------------------------
+      SMOKEY_QUARTZ_INVENTORY_DROPCUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Smokey_Quartz_Inventory_Drop.png")
+      Smokey_Quartz_Inventory_Dropcut = SF::Sprite.new(SMOKEY_QUARTZ_INVENTORY_DROPCUT_TEXTURE) 
+     #--------------------------------------------------Tablecut---------------------------------------------------------------------
+      SMOKEY_QUARTZ_INVENTORY_TABLECUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Smokey_Quartz_Inventory_Table.png")
+      Smokey_Quartz_Inventory_Tablecut = SF::Sprite.new(SMOKEY_QUARTZ_INVENTORY_TABLECUT_TEXTURE) 
 #----------------------------------------------------------------------------------------------------------------------------------- 
 #                                                    Character Model
 #-----------------------------------------------------------------------------------------------------------------------------------

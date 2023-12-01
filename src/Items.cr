@@ -2021,6 +2021,9 @@ include Equipment
 
    @@amethyst_gem = Gem.new("Amethyst", 6, Amethyst_Inventory_Tablecut, "table", 1, "purple", 60, "air", "INT+")
    GEM_ARRAY.push(@@amethyst_gem)
+
+   @@smoky_quartz_gem = Gem.new("Smoky Quartz", 7, Smokey_Quartz_Inventory_Tablecut, "table", 1, "clear", 60, "earth", "STR+")   
+   GEM_ARRAY.push(@@smoky_quartz_gem)
   #________________________________________________________________________________________________________________________________________________________
  end
 end 
