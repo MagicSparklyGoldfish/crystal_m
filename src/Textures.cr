@@ -653,6 +653,22 @@
      #--------------------------------------------------Tablecut---------------------------------------------------------------------
        BLOODSTONE_INVENTORY_TABLECUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Bloodstone_Inventory_Tablecut.png")
        Bloodstone_Inventory_Tablecut = SF::Sprite.new(BLOODSTONE_INVENTORY_TABLECUT_TEXTURE) 
+    #'''''''''''''''''''''''''''''''''''''''''''''''''''Moss Agate'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     #---------------------------------------------------Square---------------------------------------------------------------------
+      MOSS_AGATE_INVENTORY_SQUARE_TEXTURE = SF::Texture.from_file("graphics/minerals/Moss_Agate_Inventory_Squarecut.png")
+      Moss_Agate_Inventory_Square = SF::Sprite.new(MOSS_AGATE_INVENTORY_SQUARE_TEXTURE) 
+     #----------------------------------------------------Pear----------------------------------------------------------------------
+      MOSS_AGATE_INVENTORY_PEAR_TEXTURE = SF::Texture.from_file("graphics/minerals/Moss_Agate_Inventory_Pearcut.png")
+      Moss_Agate_Inventory_Pear = SF::Sprite.new(MOSS_AGATE_INVENTORY_PEAR_TEXTURE) 
+     #--------------------------------------------------Brilliant--------------------------------------------------------------------
+      MOSS_AGATE_INVENTORY_BRILLIANT_TEXTURE = SF::Texture.from_file("graphics/minerals/Moss_Agate_Inventory_Brilliantcut.png")
+      Moss_Agate_Inventory_Brilliant = SF::Sprite.new(MOSS_AGATE_INVENTORY_BRILLIANT_TEXTURE) 
+     #---------------------------------------------------Dropcut---------------------------------------------------------------------
+      MOSS_AGATE_INVENTORY_DROPCUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Moss_Agate_Inventory_Dropcut.png")
+      Moss_Agate_Inventory_Dropcut = SF::Sprite.new(MOSS_AGATE_INVENTORY_DROPCUT_TEXTURE) 
+     #--------------------------------------------------Tablecut---------------------------------------------------------------------
+      MOSS_AGATE_INVENTORY_TABLECUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Moss_Agate_Inventory_Tablecut.png")
+      Moss_Agate_Inventory_Tablecut = SF::Sprite.new(MOSS_AGATE_INVENTORY_TABLECUT_TEXTURE) 
 #----------------------------------------------------------------------------------------------------------------------------------- 
 #                                                    Character Model
 #-----------------------------------------------------------------------------------------------------------------------------------
