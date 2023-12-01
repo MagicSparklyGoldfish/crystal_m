@@ -392,6 +392,11 @@
   Ingot_Button_Text = SF::Text.new; Ingot_Button_Text.font = FONT_BOLD_OUTLINE; Ingot_Button_Text.character_size = 30;
   Ingot_Button_Text.color = SF::Color::White; Ingot_Button_Text.position = SF.vector2(670, 250); Ingot_Button_Text.string = "Ingots";
 
+  Gem_Button = SF::RectangleShape.new(SF.vector2(90, 50)); Gem_Button.position = SF.vector2(755, 245);
+  Gem_Button.fill_color = SF.color(100, 255, 100)
+  Gem_Button_Text = SF::Text.new; Gem_Button_Text.font = FONT_BOLD_OUTLINE; Gem_Button_Text.character_size = 30;
+  Gem_Button_Text.color = SF::Color::White; Gem_Button_Text.position = SF.vector2(775, 250); Gem_Button_Text.string = "Gems";
+
   Test_Rectangle_01 = SF::RectangleShape.new(SF.vector2(140, 140));
   Test_Rectangle_01.fill_color = SF.color(155, 155, 255); Test_Rectangle_01.position = SF.vector2(555, 310);
   #--------------------------------------------------Weapon Info Box---------------------------------------------------------------

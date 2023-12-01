@@ -354,12 +354,15 @@ extend self
      #Equipment::Stick.test(window, page)
    else if @@tab == "Etc"
      window.draw(Ore_Button); window.draw(Ore_Button_Text); window.draw(Ingot_Button); window.draw(Ingot_Button_Text)
+     window.draw(Gem_Button); window.draw(Gem_Button_Text)
      page = @@page
      case @@category
       when "ore"
        Etc::Inventory_Ore.display_ore(window, page) 
       when "ingot"
        Etc::Inventory_Ingot.display_ingot(window, page)
+      when "gem"
+       Etc::Gem.display_gem(window, page)
   end; end
   end
  end
@@ -1340,14 +1343,19 @@ def Window_Class.hud_keypresses(window)
         if (x >= 555 && x <= 645) && (y >= 245 && y <= 295)
           All_Audio::SFX.light_bonk
           @@category = "ore"
-        end
+         end
         if (x >= 655 && x <= 745) && (y >= 245 && y <= 295)
           All_Audio::SFX.light_bonk
           Etc::Inventory_Ingot.initialize_inventory
           @@category = "ingot"
-        end
+         end
+        if (x >= 755 && x <= 845) && (y >= 245 && y <= 295)
+          All_Audio::SFX.light_bonk
+          Etc::Gem.initialize_gem_inventory
+          @@category = "gem"
+         end
       end
-      when "Salon" #-------------------------------------------------------------Salon clicks
+      when "Salon" #-------------------------------------------------------------Salon clicks   
         if (x >= 750 && x <= 900) && (y >= 530 && y <= 600) && @@tab == "salon_confirm" #yes
           All_Audio::SFX.select_2
           hair_slot = @@hair_choice

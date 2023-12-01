@@ -159,6 +159,7 @@ module Equipment
    def Equipment.check_gem_element_current_weapon
     gem1 = WEAPON_OBJECT_ARRAY[@@current_weapon].socket01
     Etc::Gem.check_element(gem1)
+    elements = [gem1]
    end
  #======================================================================================================================================
  class Stick
@@ -1780,19 +1781,18 @@ include Equipment
    end
  #GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG
  #GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG
- #GG                                                         #@note Gem Class                                                                                   GG
+ #GG                                                         #@note Gem Class                                                                                GG
  #GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG
  #GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG
- GEM_ARRAY = [] of Gem
+ GEM_ARRAY = [] of Gem; Owned_Gem_Array = [] of Gem
  class Gem
   #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   #!                                                              Initialize                                                                              !
   #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-   def initialize(name : String, inventory_sprite : SF::Sprite, cut : String, amount_owned : Int32, color : String, sell_price : Int32, 
+   def initialize(name : String, sprite : SF::Sprite, cut : String, amount_owned : Int32, color : String, sell_price : Int32, 
     element : String, effect : String)
     @name = name
-    @inventory_sprite = inventory_sprite
-    @weapon_inventory_sprite = weapon_inventory_sprite
+    @sprite = sprite
     @cut = cut
     @amount_owned = amount_owned
     @color = color
@@ -1803,8 +1803,8 @@ include Equipment
    def name
      @name
     end
-   def inventory_sprite
-     @inventory_sprite
+   def sprite
+     @sprite
     end
    def cut
      @cut
@@ -1828,6 +1828,7 @@ include Equipment
   #????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
   #?                                                               Methods                                                                                ?
   #????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
+   #------------------------------------------------------------Check Element------------------------------------------------------------------------------
     def Gem.check_element(gem1)
       s = GEM_ARRAY.size; i = 0
       while s > i
@@ -1837,12 +1838,172 @@ include Equipment
         i += 1
       end
     end
+   #--------------------------------------------------------Initialize Inventory---------------------------------------------------------------------------
+    def Gem.initialize_gem_inventory
+      s = GEM_ARRAY.size; i = 0
+      while s > i
+        if GEM_ARRAY[i].amount_owned
+          Owned_Gem_Array.push(GEM_ARRAY[i])
+        end
+        i += 1
+      end
+    end
+   #---------------------------------------------------------Display Inventory-----------------------------------------------------------------------------
+    def Gem.display_gem(window, page)
+      Owned_Gem_Array.uniq!
+      #----------------------------------------------------slot 1-------------------------------------------
+       if Owned_Gem_Array.size >= 1
+        case page
+         when 1   
+          Owned_Gem_Array[0].sprite.position = SF.vector2(555, 310);
+          ore_array_text_01 = Ore_amount_owned_text.dup
+          ore_array_text_01.position = Owned_Gem_Array[0].sprite.position + SF.vector2(100, -5)
+          ore_array_text_01.string = "x" + Owned_Gem_Array[0].amount_owned.to_s
+          window.draw(Owned_Gem_Array[0].sprite); window.draw(ore_array_text_01)
+         end
+        end
+      #----------------------------------------------------slot 2-------------------------------------------
+       if Owned_Gem_Array.size >= 2
+        case page
+         when 1   
+          Owned_Gem_Array[1].sprite.position = SF.vector2(710, 310);
+          ore_array_text_02 = Ore_amount_owned_text.dup
+          ore_array_text_02.position = Owned_Gem_Array[1].sprite.position + SF.vector2(100, -5)
+          ore_array_text_02.string = "x" + Owned_Gem_Array[1].amount_owned.to_s
+          window.draw(Owned_Gem_Array[1].sprite); window.draw(ore_array_text_02)
+         end
+        end
+      #----------------------------------------------------slot 3-------------------------------------------
+        if Owned_Gem_Array.size >= 3
+         case page
+          when 1   
+            Owned_Gem_Array[2].sprite.position = SF.vector2(855, 310);
+           ore_array_text_03 = Ore_amount_owned_text.dup
+           ore_array_text_03.position = Owned_Gem_Array[2].sprite.position + SF.vector2(100, -5)
+           ore_array_text_03.string = "x" + Owned_Gem_Array[2].amount_owned.to_s
+           window.draw(Owned_Gem_Array[2].sprite); window.draw(ore_array_text_03)
+          end
+         end
+      #----------------------------------------------------slot 4-------------------------------------------
+        if Owned_Gem_Array.size >= 4
+         case page
+          when 1   
+            Owned_Gem_Array[3].sprite.position = SF.vector2(1005, 310);
+           ore_array_text_04 = Ore_amount_owned_text.dup
+           ore_array_text_04.position = Owned_Gem_Array[3].sprite.position + SF.vector2(100, -5)
+           ore_array_text_04.string = "x" + Owned_Gem_Array[3].amount_owned.to_s
+           window.draw(Owned_Gem_Array[3].sprite); window.draw(ore_array_text_04)
+          end
+        end
+      #----------------------------------------------------slot 5-------------------------------------------
+       if Owned_Gem_Array.size >= 5
+         case page
+          when 1   
+            Owned_Gem_Array[4].sprite.position = SF.vector2(1155, 310);
+           ore_array_text_05 = Ore_amount_owned_text.dup
+           ore_array_text_05.position = Owned_Gem_Array[4].sprite.position + SF.vector2(100, -5)
+           ore_array_text_05.string = "x" + Owned_Gem_Array[4].amount_owned.to_s
+           window.draw(Owned_Gem_Array[4].sprite); window.draw(ore_array_text_05)
+          end
+        end
+      #----------------------------------------------------slot 6-------------------------------------------
+       if Owned_Gem_Array.size >= 6
+         case page
+          when 1   
+            Owned_Gem_Array[5].sprite.position = SF.vector2(1305, 310);
+           ore_array_text_06 = Ore_amount_owned_text.dup
+           ore_array_text_06.position = Owned_Gem_Array[5].sprite.position + SF.vector2(100, -5)
+           ore_array_text_06.string = "x" + Owned_Gem_Array[5].amount_owned.to_s
+           window.draw(Owned_Gem_Array[5].sprite); window.draw(ore_array_text_06)
+          end
+        end
+      #----------------------------------------------------slot 7-------------------------------------------
+        if Owned_Gem_Array.size >= 7
+          case page
+           when 1   
+            Owned_Gem_Array[6].sprite.position = SF.vector2(555, 460);
+            ore_array_text_07 = Ore_amount_owned_text.dup
+            ore_array_text_07.position = Owned_Gem_Array[6].sprite.position + SF.vector2(100, -5)
+            ore_array_text_07.string = "x" + Owned_Gem_Array[6].amount_owned.to_s
+            window.draw(Owned_Gem_Array[6].sprite); window.draw(ore_array_text_07)
+           end
+          end
+      #----------------------------------------------------slot 8-------------------------------------------
+        if Owned_Gem_Array.size >= 8
+          case page
+           when 1   
+            Owned_Gem_Array[7].sprite.position = SF.vector2(710, 460);
+            ore_array_text_08 = Ore_amount_owned_text.dup
+            ore_array_text_08.position = Owned_Gem_Array[7].sprite.position + SF.vector2(100, -5)
+            ore_array_text_08.string = "x" + Owned_Gem_Array[7].amount_owned.to_s
+            window.draw(Owned_Gem_Array[7].sprite); window.draw(ore_array_text_08)
+           end
+          end
+      #----------------------------------------------------slot 9-------------------------------------------
+        if Owned_Gem_Array.size >= 9
+          case page
+           when 1   
+            Owned_Gem_Array[8].sprite.position = SF.vector2(855, 460);
+            ore_array_text_09 = Ore_amount_owned_text.dup
+            ore_array_text_09.position = Owned_Gem_Array[8].sprite.position + SF.vector2(100, -5)
+            ore_array_text_09.string = "x" + Owned_Gem_Array[8].amount_owned.to_s
+            window.draw(Owned_Gem_Array[8].sprite); window.draw(ore_array_text_09)
+           end
+          end
+      #----------------------------------------------------slot 10------------------------------------------
+        if Owned_Gem_Array.size >= 10
+          case page
+           when 1   
+            Owned_Gem_Array[9].sprite.position = SF.vector2(1005, 460);
+            ore_array_text_10 = Ore_amount_owned_text.dup
+            ore_array_text_10.position = Owned_Gem_Array[9].sprite.position + SF.vector2(100, -5)
+            ore_array_text_10.string = "x" + Owned_Gem_Array[9].amount_owned.to_s
+            window.draw(Owned_Gem_Array[9].sprite); window.draw(ore_array_text_10)
+           end
+          end
+      #----------------------------------------------------slot 11------------------------------------------
+        if Owned_Gem_Array.size >= 11
+          case page
+           when 1   
+            Owned_Gem_Array[10].sprite.position = SF.vector2(1155, 460);
+            ore_array_text_11 = Ore_amount_owned_text.dup
+            ore_array_text_11.position = Owned_Gem_Array[10].sprite.position + SF.vector2(100, -5)
+            ore_array_text_11.string = "x" + Owned_Gem_Array[10].amount_owned.to_s
+            window.draw(Owned_Gem_Array[10].sprite); window.draw(ore_array_text_11)
+           end
+          end
+      #----------------------------------------------------slot 12------------------------------------------
+        if Owned_Gem_Array.size >= 12
+          case page
+           when 1   
+            Owned_Gem_Array[11].sprite.position = SF.vector2(1305, 460);
+            ore_array_text_12 = Ore_amount_owned_text.dup
+            ore_array_text_12.position = Owned_Gem_Array[11].sprite.position + SF.vector2(100, -5)
+            ore_array_text_12.string = "x" + Owned_Gem_Array[11].amount_owned.to_s
+            window.draw(Owned_Gem_Array[11].sprite); window.draw(ore_array_text_12)
+           end
+          end
+      #----------------------------------------------------slot 13------------------------------------------
+        if Owned_Gem_Array.size >= 13
+          case page
+           when 1   
+            Owned_Gem_Array[12].sprite.position = SF.vector2(555, 610);
+            ore_array_text_13 = Ore_amount_owned_text.dup
+            ore_array_text_13.position = Owned_Gem_Array[12].sprite.position + SF.vector2(100, -5)
+            ore_array_text_13.string = "x" + Owned_Gem_Array[12].amount_owned.to_s
+            window.draw(Owned_Gem_Array[12].sprite); window.draw(ore_array_text_13)
+           end
+          end
+   end
   #________________________________________________________________________________________________________________________________________________________
   #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   #/                                                               Entities                                                                               /
   #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-   @@bloodstone_gem = Gem.new("Bloodstone", Bloodstone_Inventory_Square, "square", 0, "red", 60, "earth", "hp+")
+   @@bloodstone_gem = Gem.new("Bloodstone", Bloodstone_Inventory_Tablecut, "table", 1, "red", 60, "earth", "hp+")
    GEM_ARRAY.push(@@bloodstone_gem)
+
+   @@moss_agate_gem = Gem.new("Moss Agate", Moss_Agate_Inventory_Tablecut, "table", 1, "white", 60, "earth", "passive mp regen")
+   GEM_ARRAY.push(@@moss_agate_gem)
   #________________________________________________________________________________________________________________________________________________________
  end
 end 
