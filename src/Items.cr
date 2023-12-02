@@ -2004,26 +2004,33 @@ include Equipment
   #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   #/                                                               Entities                                                                               /
   #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-   @@bloodstone_gem = Gem.new("Bloodstone", 1, Bloodstone_Inventory_Tablecut, "table", 1, "red", 60, "earth", "hp+")
-   GEM_ARRAY.push(@@bloodstone_gem)
-
-   @@moss_agate_gem = Gem.new("Moss Agate", 2, Moss_Agate_Inventory_Tablecut, "table", 1, "white", 60, "earth", "passive mp regen")
-   GEM_ARRAY.push(@@moss_agate_gem)
-
-   @@amber_gem = Gem.new("Amber", 3, Amber_Inventory_Tablecut, "table", 1, "yellow", 60, "fire", "passive hp regen")
-   GEM_ARRAY.push(@@amber_gem)
-
-   @@wavellite_gem = Gem.new("Wavellite", 4, Wavellite_Inventory_Tablecut, "table", 1, "green", 60, "earth", "mp+")
-   GEM_ARRAY.push(@@wavellite_gem)
-
-   @@topaz_gem = Gem.new("Topaz", 5, Topaz_Inventory_Tablecut, "table", 1, "yellow", 60, "fire", "INT+")
-   GEM_ARRAY.push(@@topaz_gem)
-
-   @@amethyst_gem = Gem.new("Amethyst", 6, Amethyst_Inventory_Tablecut, "table", 1, "purple", 60, "air", "INT+")
-   GEM_ARRAY.push(@@amethyst_gem)
-
-   @@smoky_quartz_gem = Gem.new("Smoky Quartz", 7, Smokey_Quartz_Inventory_Tablecut, "table", 1, "clear", 60, "earth", "STR+")   
-   GEM_ARRAY.push(@@smoky_quartz_gem)
+   #..............................................................Bloodstone...............................................................................
+    @@bloodstone_gem = Gem.new("Bloodstone", 1, Bloodstone_Inventory_Tablecut, "table", 1, "red", 60, "earth", "hp+")
+    GEM_ARRAY.push(@@bloodstone_gem)
+   #..............................................................Moss Agate...............................................................................
+    @@moss_agate_gem = Gem.new("Moss Agate", 2, Moss_Agate_Inventory_Tablecut, "table", 1, "white", 60, "earth", "passive mp regen")
+    GEM_ARRAY.push(@@moss_agate_gem)
+   #.................................................................Amber.................................................................................
+    @@amber_gem = Gem.new("Amber", 3, Amber_Inventory_Tablecut, "table", 1, "yellow", 60, "fire", "passive hp regen")
+    GEM_ARRAY.push(@@amber_gem)
+   #..............................................................Wavellite................................................................................
+    @@wavellite_gem = Gem.new("Wavellite", 4, Wavellite_Inventory_Tablecut, "table", 1, "green", 60, "earth", "mp+")
+    GEM_ARRAY.push(@@wavellite_gem)
+   #................................................................Topaz..................................................................................
+    @@topaz_gem = Gem.new("Topaz", 5, Topaz_Inventory_Tablecut, "table", 1, "yellow", 60, "fire", "INT+")
+    GEM_ARRAY.push(@@topaz_gem)
+   #...............................................................Amethyst................................................................................
+    @@amethyst_gem = Gem.new("Amethyst", 6, Amethyst_Inventory_Tablecut, "table", 1, "purple", 60, "air", "INT+")
+    GEM_ARRAY.push(@@amethyst_gem)
+   #.............................................................Smoky Quartz..............................................................................
+    @@smoky_quartz_gem = Gem.new("Smoky Quartz", 7, Smokey_Quartz_Inventory_Tablecut, "table", 1, "clear", 60, "earth", "STR+")   
+    GEM_ARRAY.push(@@smoky_quartz_gem)
+   #...............................................................Sapphire................................................................................
+    @@sapphire_gem = Gem.new("Sapphire", 8, Sapphire_Inventory_Tablecut, "table", 1, "blue", 60, "water", "EXP++")   
+    GEM_ARRAY.push(@@sapphire_gem)
+   #..............................................................Black Opal...............................................................................
+    @@black_opal_gem = Gem.new("Black Opal", 9, Black_Opal_Inventory_Tablecut, "table", 1, "black", 60, "water", "LUK+")   
+    GEM_ARRAY.push(@@black_opal_gem)
   #________________________________________________________________________________________________________________________________________________________
  end
 end 

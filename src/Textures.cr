@@ -754,22 +754,38 @@
      #--------------------------------------------------Tablecut---------------------------------------------------------------------
       SMOKEY_QUARTZ_INVENTORY_TABLECUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Smokey_Quartz_Inventory_Table.png")
       Smokey_Quartz_Inventory_Tablecut = SF::Sprite.new(SMOKEY_QUARTZ_INVENTORY_TABLECUT_TEXTURE) 
-    #'''''''''''''''''''''''''''''''''''''''''''''''''Smokey Quartz''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    #'''''''''''''''''''''''''''''''''''''''''''''''''''Sapphire''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      #---------------------------------------------------Square---------------------------------------------------------------------
       SAPPHIRE_INVENTORY_SQUARE_TEXTURE = SF::Texture.from_file("graphics/minerals/Sapphire_Inventory_Square.png")
-      Sapphire_Inventory_Square = SF::Sprite.new(SMOKEY_QUARTZ_INVENTORY_SQUARE_TEXTURE) 
+      Sapphire_Inventory_Square = SF::Sprite.new(SAPPHIRE_INVENTORY_SQUARE_TEXTURE) 
      #----------------------------------------------------Pear----------------------------------------------------------------------
-      SAPPHIRE_QUARTZ_INVENTORY_PEAR_TEXTURE = SF::Texture.from_file("graphics/minerals/Sapphire_Inventory_Pear.png")
-      Sapphire_Inventory_Pear = SF::Sprite.new(SMOKEY_QUARTZ_INVENTORY_PEAR_TEXTURE) 
+      SAPPHIRE_INVENTORY_PEAR_TEXTURE = SF::Texture.from_file("graphics/minerals/Sapphire_Inventory_Pear.png")
+      Sapphire_Inventory_Pear = SF::Sprite.new(SAPPHIRE_INVENTORY_PEAR_TEXTURE) 
+     #--------------------------------------------------Brilliant-------------------------------------------------------------------
+      SAPPHIRE_INVENTORY_BRILLIANT_TEXTURE = SF::Texture.from_file("graphics/minerals/Sapphire_Inventory_Brilliant.png")
+      Sapphire_Inventory_Brilliant = SF::Sprite.new(SAPPHIRE_INVENTORY_BRILLIANT_TEXTURE) 
+     #---------------------------------------------------Dropcut--------------------------------------------------------------------
+      SAPPHIRE_INVENTORY_DROPCUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Sapphire_Inventory_Drop.png")
+      Sapphire_Inventory_Dropcut = SF::Sprite.new(SAPPHIRE_INVENTORY_DROPCUT_TEXTURE) 
+     #--------------------------------------------------Tablecut--------------------------------------------------------------------
+      SAPPHIRE_INVENTORY_TABLECUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Sapphire_Inventory_Table.png")
+      Sapphire_Inventory_Tablecut = SF::Sprite.new(SAPPHIRE_INVENTORY_TABLECUT_TEXTURE) 
+    #''''''''''''''''''''''''''''''''''''''''''''''''''Black Opal'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     #---------------------------------------------------Square---------------------------------------------------------------------
+      BLACK_OPAL_INVENTORY_SQUARE_TEXTURE = SF::Texture.from_file("graphics/minerals/Black_Opal_Inventory_Square.png")
+      Black_Opal_Inventory_Square = SF::Sprite.new(BLACK_OPAL_INVENTORY_SQUARE_TEXTURE) 
+     #----------------------------------------------------Pear----------------------------------------------------------------------
+      BLACK_OPAL_INVENTORY_PEAR_TEXTURE = SF::Texture.from_file("graphics/minerals/Black_Opal_Inventory_Pear.png")
+      Black_Opal_Inventory_Pear = SF::Sprite.new(BLACK_OPAL_INVENTORY_PEAR_TEXTURE) 
      #--------------------------------------------------Brilliant--------------------------------------------------------------------
-      SAPPHIRE_QUARTZ_INVENTORY_BRILLIANT_TEXTURE = SF::Texture.from_file("graphics/minerals/Sapphire_Inventory_Brilliant.png")
-      Sapphire_Inventory_Brilliant = SF::Sprite.new(SMOKEY_QUARTZ_INVENTORY_BRILLIANT_TEXTURE) 
+      BLACK_OPAL_INVENTORY_BRILLIANT_TEXTURE = SF::Texture.from_file("graphics/minerals/Black_Opal_Inventory_Brilliant.png")
+      Black_Opal_Inventory_Brilliant = SF::Sprite.new(BLACK_OPAL_INVENTORY_BRILLIANT_TEXTURE) 
      #---------------------------------------------------Dropcut---------------------------------------------------------------------
-      SAPPHIRE_QUARTZ_INVENTORY_DROPCUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Sapphire_Inventory_Drop.png")
-      Sapphire_Inventory_Dropcut = SF::Sprite.new(SMOKEY_QUARTZ_INVENTORY_DROPCUT_TEXTURE) 
+      BLACK_OPAL_INVENTORY_DROPCUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Black_Opal_Inventory_Drop.png")
+      Black_Opal_Inventory_Dropcut = SF::Sprite.new(BLACK_OPAL_INVENTORY_DROPCUT_TEXTURE) 
      #--------------------------------------------------Tablecut---------------------------------------------------------------------
-      SAPPHIRE_QUARTZ_INVENTORY_TABLECUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Sapphire_Inventory_Table.png")
-      Sapphire_Inventory_Tablecut = SF::Sprite.new(SMOKEY_QUARTZ_INVENTORY_TABLECUT_TEXTURE) 
+      BLACK_OPAL_INVENTORY_TABLECUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Black_Opal_Inventory_Table.png")
+      Black_Opal_Inventory_Tablecut = SF::Sprite.new(BLACK_OPAL_INVENTORY_TABLECUT_TEXTURE) 
 #----------------------------------------------------------------------------------------------------------------------------------- 
 #                                                    Character Model
 #-----------------------------------------------------------------------------------------------------------------------------------
