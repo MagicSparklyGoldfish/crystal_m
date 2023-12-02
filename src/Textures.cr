@@ -809,15 +809,31 @@
      #----------------------------------------------------Pear----------------------------------------------------------------------
       RHODOLITE_INVENTORY_PEAR_TEXTURE = SF::Texture.from_file("graphics/minerals/Rhodolite_Inventory_Pear.png")
       Rhodolite_Inventory_Pear = SF::Sprite.new(RHODOLITE_INVENTORY_PEAR_TEXTURE) 
-     #--------------------------------------------------Brilliant--------------------------------------------------------------------
+     #--------------------------------------------------Brilliant-------------------------------------------------------------------
       RHODOLITE_INVENTORY_BRILLIANT_TEXTURE = SF::Texture.from_file("graphics/minerals/Rhodolite_Inventory_Brilliant.png")
       Rhodolite_Inventory_Brilliant = SF::Sprite.new(RHODOLITE_INVENTORY_BRILLIANT_TEXTURE) 
-     #---------------------------------------------------Dropcut---------------------------------------------------------------------
+     #---------------------------------------------------Dropcut--------------------------------------------------------------------
       RHODOLITE_INVENTORY_DROPCUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Rhodolite_Inventory_Drop.png")
       Rhodolite_Inventory_Dropcut = SF::Sprite.new(RHODOLITE_INVENTORY_DROPCUT_TEXTURE) 
-     #--------------------------------------------------Tablecut---------------------------------------------------------------------
+     #--------------------------------------------------Tablecut--------------------------------------------------------------------
       RHODOLITE_INVENTORY_TABLECUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Rhodolite_Inventory_Table.png")
       Rhodolite_Inventory_Tablecut = SF::Sprite.new(RHODOLITE_INVENTORY_TABLECUT_TEXTURE) 
+    #'''''''''''''''''''''''''''''''''''''''''''''''''Chalcanthite''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     #---------------------------------------------------Square---------------------------------------------------------------------
+      CHALCANTHITE_INVENTORY_SQUARE_TEXTURE = SF::Texture.from_file("graphics/minerals/Chalcanthite_Inventory_Square.png")
+      Chalcanthite_Inventory_Square = SF::Sprite.new(CHALCANTHITE_INVENTORY_SQUARE_TEXTURE) 
+     #----------------------------------------------------Pear----------------------------------------------------------------------
+      CHALCANTHITE_INVENTORY_PEAR_TEXTURE = SF::Texture.from_file("graphics/minerals/Chalcanthite_Inventory_Pear.png")
+      Chalcanthite_Inventory_Pear = SF::Sprite.new(CHALCANTHITE_INVENTORY_SQUARE_TEXTURE) 
+     #--------------------------------------------------Brilliant--------------------------------------------------------------------
+      CHALCANTHITE_INVENTORY_BRILLIANT_TEXTURE = SF::Texture.from_file("graphics/minerals/Chalcanthite_Inventory_Brilliant.png")
+      Chalcanthite_Inventory_Brilliant = SF::Sprite.new(CHALCANTHITE_INVENTORY_SQUARE_TEXTURE) 
+     #---------------------------------------------------Dropcut---------------------------------------------------------------------
+      CHALCANTHITE_INVENTORY_DROPCUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Chalcanthite_Inventory_Drop.png")
+      Chalcanthite_Inventory_Dropcut = SF::Sprite.new(CHALCANTHITE_INVENTORY_SQUARE_TEXTURE) 
+     #--------------------------------------------------Tablecut---------------------------------------------------------------------
+      CHALCANTHITE_INVENTORY_TABLECUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Chalcanthite_Inventory_Table.png")
+      Chalcanthite_Inventory_Tablecut = SF::Sprite.new(CHALCANTHITE_INVENTORY_SQUARE_TEXTURE) 
 #----------------------------------------------------------------------------------------------------------------------------------- 
 #                                                    Character Model
 #-----------------------------------------------------------------------------------------------------------------------------------
