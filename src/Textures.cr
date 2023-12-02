@@ -841,15 +841,31 @@
      #----------------------------------------------------Pear----------------------------------------------------------------------
       FLOURITE_INVENTORY_PEAR_TEXTURE = SF::Texture.from_file("graphics/minerals/Flourite_Inventory_Pear.png")
       Flourite_Inventory_Pear = SF::Sprite.new(FLOURITE_INVENTORY_PEAR_TEXTURE) 
-     #--------------------------------------------------Brilliant--------------------------------------------------------------------
+     #--------------------------------------------------Brilliant-------------------------------------------------------------------
       FLOURITE_INVENTORY_BRILLIANT_TEXTURE = SF::Texture.from_file("graphics/minerals/Flourite_Inventory_Brilliant.png")
       Flourite_Inventory_Brilliant = SF::Sprite.new(FLOURITE_INVENTORY_BRILLIANT_TEXTURE) 
-     #---------------------------------------------------Dropcut---------------------------------------------------------------------
+     #---------------------------------------------------Dropcut--------------------------------------------------------------------
       FLOURITE_INVENTORY_DROPCUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Flourite_Inventory_Drop.png")
       Flourite_Inventory_Dropcut = SF::Sprite.new(FLOURITE_INVENTORY_DROPCUT_TEXTURE) 
-     #--------------------------------------------------Tablecut---------------------------------------------------------------------
+     #--------------------------------------------------Tablecut--------------------------------------------------------------------
       FLOURITE_INVENTORY_TABLECUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Flourite_Inventory_Table.png")
       Flourite_Inventory_Tablecut = SF::Sprite.new(FLOURITE_INVENTORY_TABLECUT_TEXTURE) 
+    #'''''''''''''''''''''''''''''''''''''''''''''''''''Amorite'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     #---------------------------------------------------Square---------------------------------------------------------------------
+     AMORITE_INVENTORY_SQUARE_TEXTURE = SF::Texture.from_file("graphics/minerals/Amorite_Inventory_Square.png")
+     Amorite_Inventory_Square = SF::Sprite.new(AMORITE_INVENTORY_SQUARE_TEXTURE) 
+    #----------------------------------------------------Pear----------------------------------------------------------------------
+     AMORITE_INVENTORY_PEAR_TEXTURE = SF::Texture.from_file("graphics/minerals/Amorite_Inventory_Pear.png")
+     Amorite_Inventory_Pear = SF::Sprite.new(AMORITE_INVENTORY_PEAR_TEXTURE) 
+    #--------------------------------------------------Brilliant--------------------------------------------------------------------
+     AMORITE_INVENTORY_BRILLIANT_TEXTURE = SF::Texture.from_file("graphics/minerals/Amorite_Inventory_Brilliant.png")
+     Amorite_Inventory_Brilliant = SF::Sprite.new(AMORITE_INVENTORY_BRILLIANT_TEXTURE) 
+    #---------------------------------------------------Dropcut---------------------------------------------------------------------
+     AMORITE_INVENTORY_DROPCUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Amorite_Inventory_Drop.png")
+     Amorite_Inventory_Dropcut = SF::Sprite.new(AMORITE_INVENTORY_DROPCUT_TEXTURE) 
+    #--------------------------------------------------Tablecut---------------------------------------------------------------------
+     AMORITE_INVENTORY_TABLECUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Amorite_Inventory_Table.png")
+     Amorite_Inventory_Tablecut = SF::Sprite.new(AMORITE_INVENTORY_TABLECUT_TEXTURE) 
 #----------------------------------------------------------------------------------------------------------------------------------- 
 #                                                    Character Model
 #-----------------------------------------------------------------------------------------------------------------------------------
