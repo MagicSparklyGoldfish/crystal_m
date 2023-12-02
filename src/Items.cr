@@ -1860,10 +1860,10 @@ include Equipment
         case page
          when 1   
           Owned_Gem_Array[0].sprite.position = SF.vector2(555, 310);
-          ore_array_text_01 = Ore_amount_owned_text.dup
-          ore_array_text_01.position = Owned_Gem_Array[0].sprite.position + SF.vector2(100, -5)
-          ore_array_text_01.string = "x" + Owned_Gem_Array[0].amount_owned.to_s
-          window.draw(Owned_Gem_Array[0].sprite); window.draw(ore_array_text_01)
+          gem_array_text_01 = Ore_amount_owned_text.dup
+          gem_array_text_01.position = Owned_Gem_Array[0].sprite.position + SF.vector2(100, -5)
+          gem_array_text_01.string = "x" + Owned_Gem_Array[0].amount_owned.to_s
+          window.draw(Owned_Gem_Array[0].sprite); window.draw(gem_array_text_01)
          end
         end
       #----------------------------------------------------slot 2-------------------------------------------
@@ -2101,6 +2101,9 @@ include Equipment
    #...............................................................Amorite.................................................................................
     @@amorite_gem = Gem.new("Amorite", 14, Amorite_Inventory_Tablecut, "table", 1, "white", 60, "water", "INT+")   
     GEM_ARRAY.push(@@amorite_gem)
+   #.............................................................Lapis Lazuli..............................................................................
+   @@lapis_lazuli_gem = Gem.new("Lapis Lazuli", 15, Lapis_Lazuli_Inventory_Tablecut, "table", 1, "blue", 60, "water", "STR+")   
+   GEM_ARRAY.push(@@lapis_lazuli_gem)
   #________________________________________________________________________________________________________________________________________________________
  end
 end   
