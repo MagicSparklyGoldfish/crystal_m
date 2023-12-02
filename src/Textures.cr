@@ -873,15 +873,31 @@
      #----------------------------------------------------Pear----------------------------------------------------------------------
       LAPIS_LAZULI_IINVENTORY_PEAR_TEXTURE = SF::Texture.from_file("graphics/minerals/Lapis_Lazuli_Inventory_Pear.png")
       Lapis_Lazuli_Inventory_Pear = SF::Sprite.new(LAPIS_LAZULI_IINVENTORY_PEAR_TEXTURE) 
-     #--------------------------------------------------Brilliant--------------------------------------------------------------------
+     #--------------------------------------------------Brilliant-------------------------------------------------------------------
       LAPIS_LAZULI_IINVENTORY_BRILLIANT_TEXTURE = SF::Texture.from_file("graphics/minerals/Lapis_Lazuli_Inventory_Brilliant.png")
       Lapis_Lazuli_Inventory_Brilliant = SF::Sprite.new(LAPIS_LAZULI_IINVENTORY_BRILLIANT_TEXTURE) 
-     #---------------------------------------------------Dropcut---------------------------------------------------------------------
+     #---------------------------------------------------Dropcut--------------------------------------------------------------------
       LAPIS_LAZULI_IINVENTORY_DROPCUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Lapis_Lazuli_Inventory_Drop.png")
       Lapis_Lazuli_Inventory_Dropcut = SF::Sprite.new(LAPIS_LAZULI_IINVENTORY_DROPCUT_TEXTURE) 
-     #--------------------------------------------------Tablecut---------------------------------------------------------------------
+     #--------------------------------------------------Tablecut--------------------------------------------------------------------
       LAPIS_LAZULI_IINVENTORY_TABLECUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Lapis_Lazuli_Inventory_Table.png")
       Lapis_Lazuli_Inventory_Tablecut = SF::Sprite.new(LAPIS_LAZULI_IINVENTORY_TABLECUT_TEXTURE) 
+    #'''''''''''''''''''''''''''''''''''''''''''''''''''Moonstone'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     #---------------------------------------------------Square---------------------------------------------------------------------
+     MOONSTONE_INVENTORY_SQUARE_TEXTURE = SF::Texture.from_file("graphics/minerals/Moonstone_Inventory_Square.png")
+     Moonstone_Inventory_Square = SF::Sprite.new(MOONSTONE_INVENTORY_SQUARE_TEXTURE) 
+    #----------------------------------------------------Pear----------------------------------------------------------------------
+     MOONSTONE_INVENTORY_PEAR_TEXTURE = SF::Texture.from_file("graphics/minerals/Moonstone_Inventory_Pear.png")
+     Moonstone_Inventory_Pear = SF::Sprite.new(MOONSTONE_INVENTORY_SQUARE_TEXTURE) 
+    #--------------------------------------------------Brilliant-------------------------------------------------------------------
+     MOONSTONE_INVENTORY_BRILLIANT_TEXTURE = SF::Texture.from_file("graphics/minerals/Moonstone_Inventory_Brilliant.png")
+     Moonstone_Inventory_Brilliant = SF::Sprite.new(MOONSTONE_INVENTORY_BRILLIANT_TEXTURE) 
+    #---------------------------------------------------Dropcut--------------------------------------------------------------------
+     MOONSTONE_INVENTORY_DROPCUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Moonstone_Inventory_Drop.png")
+     Moonstone_Inventory_Dropcut = SF::Sprite.new(MOONSTONE_INVENTORY_DROPCUT_TEXTURE) 
+    #--------------------------------------------------Tablecut--------------------------------------------------------------------
+     MOONSTONE_INVENTORY_TABLECUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Moonstone_Inventory_Table.png")
+     Moonstone_Inventory_Tablecut = SF::Sprite.new(MOONSTONE_INVENTORY_TABLECUT_TEXTURE) 
 #----------------------------------------------------------------------------------------------------------------------------------- 
 #                                                    Character Model
 #-----------------------------------------------------------------------------------------------------------------------------------

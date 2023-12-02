@@ -2103,8 +2103,11 @@ include Equipment
     @@amorite_gem = Gem.new("Amorite", 14, Amorite_Inventory_Tablecut, "table", 1, "white", 60, "water", "INT+")   
     GEM_ARRAY.push(@@amorite_gem)
    #.............................................................Lapis Lazuli..............................................................................
-   @@lapis_lazuli_gem = Gem.new("Lapis Lazuli", 15, Lapis_Lazuli_Inventory_Tablecut, "table", 1, "blue", 60, "water", "STR+")   
-   GEM_ARRAY.push(@@lapis_lazuli_gem)
+    @@lapis_lazuli_gem = Gem.new("Lapis Lazuli", 15, Lapis_Lazuli_Inventory_Tablecut, "table", 1, "blue", 60, "water", "STR+")   
+    GEM_ARRAY.push(@@lapis_lazuli_gem)
+   #...............................................................Moonstone...............................................................................
+    @@moonstone_gem = Gem.new("Moonstone", 15, Moonstone_Inventory_Tablecut, "table", 1, "white", 60, "water", "DEX+")   
+    GEM_ARRAY.push(@@moonstone_gem)
   #________________________________________________________________________________________________________________________________________________________
  end
 end   
