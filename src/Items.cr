@@ -2095,6 +2095,9 @@ include Equipment
    #.............................................................Chalcanthite..............................................................................
     @@chalcanthite_gem = Gem.new("Chalcanthite", 12, Chalcanthite_Inventory_Tablecut, "table", 1, "blue", 60, "water", "poison")   
     GEM_ARRAY.push(@@chalcanthite_gem)
+   #...............................................................Flourite................................................................................
+    @@flourite_gem = Gem.new("Flourite", 13, Flourite_Inventory_Tablecut, "table", 1, "clear", 60, "water", "INT+")   
+    GEM_ARRAY.push(@@flourite_gem)
   #________________________________________________________________________________________________________________________________________________________
  end
 end   

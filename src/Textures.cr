@@ -824,16 +824,32 @@
       Chalcanthite_Inventory_Square = SF::Sprite.new(CHALCANTHITE_INVENTORY_SQUARE_TEXTURE) 
      #----------------------------------------------------Pear----------------------------------------------------------------------
       CHALCANTHITE_INVENTORY_PEAR_TEXTURE = SF::Texture.from_file("graphics/minerals/Chalcanthite_Inventory_Pear.png")
-      Chalcanthite_Inventory_Pear = SF::Sprite.new(CHALCANTHITE_INVENTORY_SQUARE_TEXTURE) 
+      Chalcanthite_Inventory_Pear = SF::Sprite.new(CHALCANTHITE_INVENTORY_PEAR_TEXTURE) 
      #--------------------------------------------------Brilliant--------------------------------------------------------------------
       CHALCANTHITE_INVENTORY_BRILLIANT_TEXTURE = SF::Texture.from_file("graphics/minerals/Chalcanthite_Inventory_Brilliant.png")
-      Chalcanthite_Inventory_Brilliant = SF::Sprite.new(CHALCANTHITE_INVENTORY_SQUARE_TEXTURE) 
+      Chalcanthite_Inventory_Brilliant = SF::Sprite.new(CHALCANTHITE_INVENTORY_BRILLIANT_TEXTURE) 
      #---------------------------------------------------Dropcut---------------------------------------------------------------------
       CHALCANTHITE_INVENTORY_DROPCUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Chalcanthite_Inventory_Drop.png")
-      Chalcanthite_Inventory_Dropcut = SF::Sprite.new(CHALCANTHITE_INVENTORY_SQUARE_TEXTURE) 
+      Chalcanthite_Inventory_Dropcut = SF::Sprite.new(CHALCANTHITE_INVENTORY_DROPCUT_TEXTURE) 
      #--------------------------------------------------Tablecut---------------------------------------------------------------------
       CHALCANTHITE_INVENTORY_TABLECUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Chalcanthite_Inventory_Table.png")
-      Chalcanthite_Inventory_Tablecut = SF::Sprite.new(CHALCANTHITE_INVENTORY_SQUARE_TEXTURE) 
+      Chalcanthite_Inventory_Tablecut = SF::Sprite.new(CHALCANTHITE_INVENTORY_TABLECUT_TEXTURE) 
+    #'''''''''''''''''''''''''''''''''''''''''''''''''''Flourite''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     #---------------------------------------------------Square---------------------------------------------------------------------
+      FLOURITE_INVENTORY_SQUARE_TEXTURE = SF::Texture.from_file("graphics/minerals/Flourite_Inventory_Square.png")
+      Flourite_Inventory_Square = SF::Sprite.new(FLOURITE_INVENTORY_SQUARE_TEXTURE) 
+     #----------------------------------------------------Pear----------------------------------------------------------------------
+      FLOURITE_INVENTORY_PEAR_TEXTURE = SF::Texture.from_file("graphics/minerals/Flourite_Inventory_Pear.png")
+      Flourite_Inventory_Pear = SF::Sprite.new(FLOURITE_INVENTORY_PEAR_TEXTURE) 
+     #--------------------------------------------------Brilliant--------------------------------------------------------------------
+      FLOURITE_INVENTORY_BRILLIANT_TEXTURE = SF::Texture.from_file("graphics/minerals/Flourite_Inventory_Brilliant.png")
+      Flourite_Inventory_Brilliant = SF::Sprite.new(FLOURITE_INVENTORY_BRILLIANT_TEXTURE) 
+     #---------------------------------------------------Dropcut---------------------------------------------------------------------
+      FLOURITE_INVENTORY_DROPCUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Flourite_Inventory_Drop.png")
+      Flourite_Inventory_Dropcut = SF::Sprite.new(FLOURITE_INVENTORY_DROPCUT_TEXTURE) 
+     #--------------------------------------------------Tablecut---------------------------------------------------------------------
+      FLOURITE_INVENTORY_TABLECUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Flourite_Inventory_Table.png")
+      Flourite_Inventory_Tablecut = SF::Sprite.new(FLOURITE_INVENTORY_TABLECUT_TEXTURE) 
 #----------------------------------------------------------------------------------------------------------------------------------- 
 #                                                    Character Model
 #-----------------------------------------------------------------------------------------------------------------------------------
