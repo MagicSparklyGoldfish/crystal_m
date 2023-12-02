@@ -1998,6 +1998,61 @@ include Equipment
             window.draw(Owned_Gem_Array[12].sprite); window.draw(ore_array_text_13)
            end
           end
+      #----------------------------------------------------slot 14------------------------------------------
+       if Owned_Gem_Array.size >= 14
+         case page
+          when 1   
+           Owned_Gem_Array[13].sprite.position = SF.vector2(710, 610);
+           ore_array_text_14 = Ore_amount_owned_text.dup
+           ore_array_text_14.position = Owned_Gem_Array[13].sprite.position + SF.vector2(100, -5)
+           ore_array_text_14.string = "x" + Owned_Gem_Array[13].amount_owned.to_s
+           window.draw(Owned_Gem_Array[13].sprite); window.draw(ore_array_text_14)
+          end
+         end
+      #----------------------------------------------------slot 15------------------------------------------
+       if Owned_Gem_Array.size >= 15
+         case page
+          when 1   
+           Owned_Gem_Array[14].sprite.position = SF.vector2(855, 610);
+           ore_array_text_15 = Ore_amount_owned_text.dup
+           ore_array_text_15.position = Owned_Gem_Array[14].sprite.position + SF.vector2(100, -5)
+           ore_array_text_15.string = "x" + Owned_Gem_Array[14].amount_owned.to_s
+           window.draw(Owned_Gem_Array[14].sprite); window.draw(ore_array_text_15)
+          end
+         end
+      #----------------------------------------------------slot 16------------------------------------------
+       if Owned_Gem_Array.size >= 16
+         case page
+          when 1   
+           Owned_Gem_Array[15].sprite.position = SF.vector2(1005, 610);
+           ore_array_text_16 = Ore_amount_owned_text.dup
+           ore_array_text_16.position = Owned_Gem_Array[15].sprite.position + SF.vector2(100, -5)
+           ore_array_text_16.string = "x" + Owned_Gem_Array[15].amount_owned.to_s
+           window.draw(Owned_Gem_Array[15].sprite); window.draw(ore_array_text_16)
+          end
+         end
+      #----------------------------------------------------slot 17------------------------------------------
+       if Owned_Gem_Array.size >= 17
+         case page
+          when 1   
+           Owned_Gem_Array[16].sprite.position = SF.vector2(1155, 610);
+           ore_array_text_17 = Ore_amount_owned_text.dup
+           ore_array_text_17.position = Owned_Gem_Array[16].sprite.position + SF.vector2(100, -5)
+           ore_array_text_17.string = "x" + Owned_Gem_Array[16].amount_owned.to_s
+           window.draw(Owned_Gem_Array[16].sprite); window.draw(ore_array_text_17)
+          end
+         end
+      #----------------------------------------------------slot 18------------------------------------------
+       if Owned_Gem_Array.size >= 18
+         case page
+          when 1   
+           Owned_Gem_Array[17].sprite.position = SF.vector2(1305, 610);
+           ore_array_text_18 = Ore_amount_owned_text.dup
+           ore_array_text_18.position = Owned_Gem_Array[17].sprite.position + SF.vector2(100, -5)
+           ore_array_text_18.string = "x" + Owned_Gem_Array[17].amount_owned.to_s
+           window.draw(Owned_Gem_Array[17].sprite); window.draw(ore_array_text_18)
+          end
+         end
      end
    #--------------------------------------------------------Gem Cutter Display-----------------------------------------------------------------------------
   #________________________________________________________________________________________________________________________________________________________
@@ -2031,12 +2086,15 @@ include Equipment
    #..............................................................Black Opal...............................................................................
     @@black_opal_gem = Gem.new("Black Opal", 9, Black_Opal_Inventory_Tablecut, "table", 1, "black", 60, "water", "LUK+")   
     GEM_ARRAY.push(@@black_opal_gem)
-   #..............................................................Black Opal...............................................................................
+   #................................................................Ajoite.................................................................................
     @@ajoite_gem = Gem.new("Ajoite", 10, Ajoite_Inventory_Tablecut, "table", 1, "clear", 60, "water", "DEX+")   
     GEM_ARRAY.push(@@ajoite_gem)
+   #...............................................................Rhodolite...............................................................................
+    @@rhodolite_gem = Gem.new("Rhodolite", 11, Rhodolite_Inventory_Tablecut, "table", 1, "pink", 60, "water", "STR+")   
+    GEM_ARRAY.push(@@rhodolite_gem)
   #________________________________________________________________________________________________________________________________________________________
  end
-end 
+end   
 
 
 module Harvestables

@@ -788,20 +788,36 @@
       Black_Opal_Inventory_Tablecut = SF::Sprite.new(BLACK_OPAL_INVENTORY_TABLECUT_TEXTURE) 
     #''''''''''''''''''''''''''''''''''''''''''''''''''''Ajoite'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      #---------------------------------------------------Square---------------------------------------------------------------------
-     AJOITE_INVENTORY_SQUARE_TEXTURE = SF::Texture.from_file("graphics/minerals/Ajoite_Inventory_Square.png")
-     Ajoite_Inventory_Square = SF::Sprite.new(AJOITE_INVENTORY_SQUARE_TEXTURE) 
-    #----------------------------------------------------Pear----------------------------------------------------------------------
-     AJOITE_INVENTORY_PEAR_TEXTURE = SF::Texture.from_file("graphics/minerals/Ajoite_Inventory_Pear.png")
-     Ajoite_Inventory_Pear = SF::Sprite.new(AJOITE_INVENTORY_PEAR_TEXTURE) 
-    #--------------------------------------------------Brilliant--------------------------------------------------------------------
-     AJOITE_INVENTORY_BRILLIANT_TEXTURE = SF::Texture.from_file("graphics/minerals/Ajoite_Inventory_Brilliant.png")
-     Ajoite_Inventory_Brilliant = SF::Sprite.new(AJOITE_INVENTORY_BRILLIANT_TEXTURE) 
-    #---------------------------------------------------Dropcut---------------------------------------------------------------------
-     AJOITE_INVENTORY_DROPCUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Ajoite_Inventory_Drop.png")
-     Ajoite_Inventory_Dropcut = SF::Sprite.new(AJOITE_INVENTORY_DROPCUT_TEXTURE) 
-    #--------------------------------------------------Tablecut---------------------------------------------------------------------
-     AJOITE_INVENTORY_TABLECUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Ajoite_Inventory_Table.png")
-     Ajoite_Inventory_Tablecut = SF::Sprite.new(AJOITE_INVENTORY_TABLECUT_TEXTURE) 
+      AJOITE_INVENTORY_SQUARE_TEXTURE = SF::Texture.from_file("graphics/minerals/Ajoite_Inventory_Square.png")
+      Ajoite_Inventory_Square = SF::Sprite.new(AJOITE_INVENTORY_SQUARE_TEXTURE) 
+     #----------------------------------------------------Pear----------------------------------------------------------------------
+      AJOITE_INVENTORY_PEAR_TEXTURE = SF::Texture.from_file("graphics/minerals/Ajoite_Inventory_Pear.png")
+      Ajoite_Inventory_Pear = SF::Sprite.new(AJOITE_INVENTORY_PEAR_TEXTURE) 
+     #--------------------------------------------------Brilliant-------------------------------------------------------------------
+      AJOITE_INVENTORY_BRILLIANT_TEXTURE = SF::Texture.from_file("graphics/minerals/Ajoite_Inventory_Brilliant.png")
+      Ajoite_Inventory_Brilliant = SF::Sprite.new(AJOITE_INVENTORY_BRILLIANT_TEXTURE) 
+     #---------------------------------------------------Dropcut--------------------------------------------------------------------
+      AJOITE_INVENTORY_DROPCUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Ajoite_Inventory_Drop.png")
+      Ajoite_Inventory_Dropcut = SF::Sprite.new(AJOITE_INVENTORY_DROPCUT_TEXTURE) 
+     #--------------------------------------------------Tablecut--------------------------------------------------------------------
+      AJOITE_INVENTORY_TABLECUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Ajoite_Inventory_Table.png")
+      Ajoite_Inventory_Tablecut = SF::Sprite.new(AJOITE_INVENTORY_TABLECUT_TEXTURE) 
+    #''''''''''''''''''''''''''''''''''''''''''''''''''Rhodolite''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     #---------------------------------------------------Square---------------------------------------------------------------------
+      RHODOLITE_INVENTORY_SQUARE_TEXTURE = SF::Texture.from_file("graphics/minerals/Rhodolite_Inventory_Square.png")
+      Rhodolite_Inventory_Square = SF::Sprite.new(RHODOLITE_INVENTORY_SQUARE_TEXTURE) 
+     #----------------------------------------------------Pear----------------------------------------------------------------------
+      RHODOLITE_INVENTORY_PEAR_TEXTURE = SF::Texture.from_file("graphics/minerals/Rhodolite_Inventory_Pear.png")
+      Rhodolite_Inventory_Pear = SF::Sprite.new(RHODOLITE_INVENTORY_PEAR_TEXTURE) 
+     #--------------------------------------------------Brilliant--------------------------------------------------------------------
+      RHODOLITE_INVENTORY_BRILLIANT_TEXTURE = SF::Texture.from_file("graphics/minerals/Rhodolite_Inventory_Brilliant.png")
+      Rhodolite_Inventory_Brilliant = SF::Sprite.new(RHODOLITE_INVENTORY_BRILLIANT_TEXTURE) 
+     #---------------------------------------------------Dropcut---------------------------------------------------------------------
+      RHODOLITE_INVENTORY_DROPCUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Rhodolite_Inventory_Drop.png")
+      Rhodolite_Inventory_Dropcut = SF::Sprite.new(RHODOLITE_INVENTORY_DROPCUT_TEXTURE) 
+     #--------------------------------------------------Tablecut---------------------------------------------------------------------
+      RHODOLITE_INVENTORY_TABLECUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Rhodolite_Inventory_Table.png")
+      Rhodolite_Inventory_Tablecut = SF::Sprite.new(RHODOLITE_INVENTORY_TABLECUT_TEXTURE) 
 #----------------------------------------------------------------------------------------------------------------------------------- 
 #                                                    Character Model
 #-----------------------------------------------------------------------------------------------------------------------------------
