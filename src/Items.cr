@@ -2108,6 +2108,9 @@ include Equipment
    #...............................................................Moonstone...............................................................................
     @@moonstone_gem = Gem.new("Moonstone", 15, Moonstone_Inventory_Tablecut, "table", 1, "white", 60, "water", "DEX+")   
     GEM_ARRAY.push(@@moonstone_gem)
+   #..............................................................Blue Calcite.............................................................................
+    @@blue_calcite_gem = Gem.new("Blue Calcite", 16, Blue_Calcite_Inventory_Tablecut, "table", 1, "blue", 60, "water", "DEX+")   
+    GEM_ARRAY.push(@@blue_calcite_gem)
   #________________________________________________________________________________________________________________________________________________________
  end
 end   
