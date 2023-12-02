@@ -391,6 +391,7 @@ include Equipment
       end
       @@drop_iterator : Int32; @@drop_iterator = 0
        def Inventory_Ore.add_ore(amount, ore)
+        puts "harvest"
          s = Ore_Array.size; @@drop_iterator = 0
          while @@drop_iterator < s
            if Ore_Array[@@drop_iterator].name == ore
@@ -2292,13 +2293,14 @@ module Harvestables
       def Ore.break(broken)
         amount = rand(1..3)
         ore = broken.name
-        if broken.hp >= 0 && broken.is_broke == false
+    #    if broken.hp >= 0 && broken.is_broke == false
         if @@ore_reset == 0
+          puts "broke"
           Etc::Inventory_Ore.add_ore(amount, ore)
           Etc::Inventory_Ore.update_ore_inventory
           Ore_Clock_Break.restart
           @@ore_reset = 1
-        end; end
+        end;# end
            time = Ore_Clock_Break.elapsed_time
           if time >= SF.seconds(0.25) && time < SF.seconds(0.5)
             All_Audio::SFX.dig_02
