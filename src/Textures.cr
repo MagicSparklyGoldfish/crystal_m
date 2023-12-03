@@ -930,7 +930,7 @@
      #--------------------------------------------------Tablecut--------------------------------------------------------------------
       HIDDENITE_INVENTORY_TABLECUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Hiddenite_Inventory_Table.png")
       Hiddenite_Inventory_Tablecut = SF::Sprite.new(HIDDENITE_INVENTORY_TABLECUT_TEXTURE) 
-    #''''''''''''''''''''''''''''''''''''''''''''''''''Offretite'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    #'''''''''''''''''''''''''''''''''''''''''''''''''''Offretite'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      #---------------------------------------------------Square---------------------------------------------------------------------
       OFFRETITE_INVENTORY_SQUARE_TEXTURE = SF::Texture.from_file("graphics/minerals/Offretite_Inventory_Square.png")
       Offretite_Inventory_Square = SF::Sprite.new(OFFRETITE_INVENTORY_SQUARE_TEXTURE) 
@@ -946,7 +946,7 @@
      #--------------------------------------------------Tablecut--------------------------------------------------------------------
       OFFRETITE_INVENTORY_TABLECUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Offretite_Inventory_Table.png")
       Offretite_Inventory_Tablecut = SF::Sprite.new(OFFRETITE_INVENTORY_TABLECUT_TEXTURE) 
-    #''''''''''''''''''''''''''''''''''''''''''''''''''Holly_Blue_Agate'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    #'''''''''''''''''''''''''''''''''''''''''''''''Holly_Blue_Agate''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      #---------------------------------------------------Square---------------------------------------------------------------------
       HOLLY_BLUE_AGATE_INVENTORY_SQUARE_TEXTURE = SF::Texture.from_file("graphics/minerals/Holly_Blue_Agate_Inventory_Square.png")
       Holly_Blue_Agate_Inventory_Square = SF::Sprite.new(HOLLY_BLUE_AGATE_INVENTORY_SQUARE_TEXTURE) 
@@ -962,6 +962,22 @@
      #--------------------------------------------------Tablecut--------------------------------------------------------------------
       HOLLY_BLUE_AGATE_INVENTORY_TABLECUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Holly_Blue_Agate_Inventory_Table.png")
       Holly_Blue_Agate_Inventory_Tablecut = SF::Sprite.new(HOLLY_BLUE_AGATE_INVENTORY_TABLECUT_TEXTURE) 
+    #'''''''''''''''''''''''''''''''''''''''''''''''''''Ametrine''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     #---------------------------------------------------Square---------------------------------------------------------------------
+      AMETRINE_INVENTORY_SQUARE_TEXTURE = SF::Texture.from_file("graphics/minerals/Ametrine_Inventory_Square.png")
+      Ametrine_Inventory_Square = SF::Sprite.new(AMETRINE_INVENTORY_SQUARE_TEXTURE) 
+     #----------------------------------------------------Pear----------------------------------------------------------------------
+      AMETRINE_INVENTORY_PEAR_TEXTURE = SF::Texture.from_file("graphics/minerals/Ametrine_Inventory_Pear.png")
+      Ametrine_Inventory_Pear = SF::Sprite.new(AMETRINE_INVENTORY_PEAR_TEXTURE) 
+     #--------------------------------------------------Brilliant-------------------------------------------------------------------
+      AMETRINE_INVENTORY_BRILLIANT_TEXTURE = SF::Texture.from_file("graphics/minerals/Ametrine_Inventory_Brilliant.png")
+      Ametrine_Inventory_Brilliant = SF::Sprite.new(AMETRINE_INVENTORY_BRILLIANT_TEXTURE) 
+     #---------------------------------------------------Dropcut--------------------------------------------------------------------
+      AMETRINE_INVENTORY_DROPCUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Ametrine_Inventory_Drop.png")
+      Ametrine_Inventory_Dropcut = SF::Sprite.new(AMETRINE_INVENTORY_DROPCUT_TEXTURE) 
+     #--------------------------------------------------Tablecut--------------------------------------------------------------------
+      AMETRINE_INVENTORY_TABLECUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Ametrine_Inventory_Table.png")
+      Ametrine_Inventory_Tablecut = SF::Sprite.new(AMETRINE_INVENTORY_TABLECUT_TEXTURE) 
 #----------------------------------------------------------------------------------------------------------------------------------- 
 #                                                    Character Model
 #-----------------------------------------------------------------------------------------------------------------------------------

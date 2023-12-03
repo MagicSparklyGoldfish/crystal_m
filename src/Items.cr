@@ -2162,6 +2162,9 @@ include Equipment
    #............................................................Holly Blue Agate...........................................................................
     @@holly_blue_agate_gem = Gem.new("Holly Blue Agate", 20, Holly_Blue_Agate_Inventory_Tablecut, "table", 1, "blue", 60, "air", "STR+")   
     GEM_ARRAY.push(@@holly_blue_agate_gem)
+   #................................................................Ametrine...............................................................................
+    @@ametrine_gem = Gem.new("Ametrine", 20, Ametrine_Inventory_Tablecut, "table", 1, "purple", 60, "air", "STR+")   
+    GEM_ARRAY.push(@@ametrine_gem)
   #________________________________________________________________________________________________________________________________________________________
  end
 end   
