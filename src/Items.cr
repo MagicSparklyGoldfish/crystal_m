@@ -2154,8 +2154,11 @@ include Equipment
     @@blue_calcite_gem = Gem.new("Blue Calcite", 17, Blue_Calcite_Inventory_Tablecut, "table", 1, "blue", 60, "water", "DEX+")   
     GEM_ARRAY.push(@@blue_calcite_gem)
    #...............................................................Hiddenite...............................................................................
-    @@hiddenite_gem = Gem.new("Blue Calcite", 18, Hiddenite_Inventory_Tablecut, "table", 1, "green", 60, "water", "passive_hp_regen")   
+    @@hiddenite_gem = Gem.new("Hiddenite", 18, Hiddenite_Inventory_Tablecut, "table", 1, "green", 60, "water", "passive_hp_regen")   
     GEM_ARRAY.push(@@hiddenite_gem)
+   #...............................................................Hiddenite...............................................................................
+    @@offretite_gem = Gem.new("Offretite", 19, Offretite_Inventory_Tablecut, "table", 1, "clear", 60, "air", "INT+")   
+    GEM_ARRAY.push(@@offretite_gem)
   #________________________________________________________________________________________________________________________________________________________
  end
 end   

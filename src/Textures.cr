@@ -930,6 +930,22 @@
     #--------------------------------------------------Tablecut--------------------------------------------------------------------
      HIDDENITE_INVENTORY_TABLECUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Hiddenite_Inventory_Table.png")
      Hiddenite_Inventory_Tablecut = SF::Sprite.new(HIDDENITE_INVENTORY_TABLECUT_TEXTURE) 
+    #''''''''''''''''''''''''''''''''''''''''''''''''''Offretite'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     #---------------------------------------------------Square---------------------------------------------------------------------
+      OFFRETITE_INVENTORY_SQUARE_TEXTURE = SF::Texture.from_file("graphics/minerals/Offretite_Inventory_Square.png")
+      Offretite_Inventory_Square = SF::Sprite.new(OFFRETITE_INVENTORY_SQUARE_TEXTURE) 
+     #----------------------------------------------------Pear----------------------------------------------------------------------
+      OFFRETITE_INVENTORY_PEAR_TEXTURE = SF::Texture.from_file("graphics/minerals/Offretite_Inventory_Pear.png")
+      Offretite_Inventory_Pear = SF::Sprite.new(OFFRETITE_INVENTORY_PEAR_TEXTURE) 
+     #--------------------------------------------------Brilliant-------------------------------------------------------------------
+      OFFRETITE_INVENTORY_BRILLIANT_TEXTURE = SF::Texture.from_file("graphics/minerals/Offretite_Inventory_Brilliant.png")
+      Offretite_Inventory_Brilliant = SF::Sprite.new(OFFRETITE_INVENTORY_BRILLIANT_TEXTURE) 
+     #---------------------------------------------------Dropcut--------------------------------------------------------------------
+      OFFRETITE_INVENTORY_DROPCUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Offretite_Inventory_Drop.png")
+      Offretite_Inventory_Dropcut = SF::Sprite.new(OFFRETITE_INVENTORY_DROPCUT_TEXTURE) 
+     #--------------------------------------------------Tablecut--------------------------------------------------------------------
+      OFFRETITE_INVENTORY_TABLECUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Offretite_Inventory_Table.png")
+      Offretite_Inventory_Tablecut = SF::Sprite.new(OFFRETITE_INVENTORY_TABLECUT_TEXTURE) 
 #----------------------------------------------------------------------------------------------------------------------------------- 
 #                                                    Character Model
 #-----------------------------------------------------------------------------------------------------------------------------------
