@@ -978,6 +978,22 @@
      #--------------------------------------------------Tablecut--------------------------------------------------------------------
       AMETRINE_INVENTORY_TABLECUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Ametrine_Inventory_Table.png")
       Ametrine_Inventory_Tablecut = SF::Sprite.new(AMETRINE_INVENTORY_TABLECUT_TEXTURE) 
+    #'''''''''''''''''''''''''''''''''''''''''''''''''''Hemimorphite''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     #---------------------------------------------------Square---------------------------------------------------------------------
+      HEMIMORPHITE_INVENTORY_SQUARE_TEXTURE = SF::Texture.from_file("graphics/minerals/Hemimorphite_Inventory_Square.png")
+      Hemimorphite_Inventory_Square = SF::Sprite.new(HEMIMORPHITE_INVENTORY_SQUARE_TEXTURE) 
+     #----------------------------------------------------Pear----------------------------------------------------------------------
+      HEMIMORPHITE_INVENTORY_PEAR_TEXTURE = SF::Texture.from_file("graphics/minerals/Hemimorphite_Inventory_Pear.png")
+      Hemimorphite_Inventory_Pear = SF::Sprite.new(HEMIMORPHITE_INVENTORY_PEAR_TEXTURE) 
+     #--------------------------------------------------Brilliant-------------------------------------------------------------------
+      HEMIMORPHITE_INVENTORY_BRILLIANT_TEXTURE = SF::Texture.from_file("graphics/minerals/Hemimorphite_Inventory_Brilliant.png")
+      Hemimorphite_Inventory_Brilliant = SF::Sprite.new(HEMIMORPHITE_INVENTORY_BRILLIANT_TEXTURE) 
+     #---------------------------------------------------Dropcut--------------------------------------------------------------------
+      HEMIMORPHITE_INVENTORY_DROPCUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Hemimorphite_Inventory_Drop.png")
+      Hemimorphite_Inventory_Dropcut = SF::Sprite.new(HEMIMORPHITE_INVENTORY_DROPCUT_TEXTURE) 
+     #--------------------------------------------------Tablecut--------------------------------------------------------------------
+      HEMIMORPHITE_INVENTORY_TABLECUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Hemimorphite_Inventory_Table.png")
+      Hemimorphite_Inventory_Tablecut = SF::Sprite.new(HEMIMORPHITE_INVENTORY_TABLECUT_TEXTURE) 
 #----------------------------------------------------------------------------------------------------------------------------------- 
 #                                                    Character Model
 #-----------------------------------------------------------------------------------------------------------------------------------

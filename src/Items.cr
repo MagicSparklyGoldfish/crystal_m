@@ -1973,8 +1973,15 @@ include Equipment
             ore_array_text_07.position = Owned_Gem_Array[6].sprite.position + SF.vector2(100, -5)
             ore_array_text_07.string = "x" + Owned_Gem_Array[6].amount_owned.to_s
             window.draw(Owned_Gem_Array[6].sprite); window.draw(ore_array_text_07)
-           end
-          end
+           when 2 
+            if Owned_Gem_Array.size >= 25  
+             Owned_Gem_Array[24].sprite.position = SF.vector2(555, 460);
+             ore_array_text_25 = Ore_amount_owned_text.dup
+             ore_array_text_25.position = Owned_Gem_Array[24].sprite.position + SF.vector2(100, -5)
+             ore_array_text_25.string = "x" + Owned_Gem_Array[24].amount_owned.to_s
+             window.draw(Owned_Gem_Array[24].sprite); window.draw(ore_array_text_25)
+            end
+          end; end
       #----------------------------------------------------slot 8-------------------------------------------
         if Owned_Gem_Array.size >= 8
           case page
@@ -1984,8 +1991,15 @@ include Equipment
             ore_array_text_08.position = Owned_Gem_Array[7].sprite.position + SF.vector2(100, -5)
             ore_array_text_08.string = "x" + Owned_Gem_Array[7].amount_owned.to_s
             window.draw(Owned_Gem_Array[7].sprite); window.draw(ore_array_text_08)
-           end
-          end
+           when 2 
+            if Owned_Gem_Array.size >= 26  
+             Owned_Gem_Array[25].sprite.position = SF.vector2(710, 460);
+             ore_array_text_26 = Ore_amount_owned_text.dup
+             ore_array_text_26.position = Owned_Gem_Array[25].sprite.position + SF.vector2(100, -5)
+             ore_array_text_26.string = "x" + Owned_Gem_Array[25].amount_owned.to_s
+             window.draw(Owned_Gem_Array[25].sprite); window.draw(ore_array_text_26)
+            end
+           end; end
       #----------------------------------------------------slot 9-------------------------------------------
         if Owned_Gem_Array.size >= 9
           case page
@@ -2165,6 +2179,9 @@ include Equipment
    #................................................................Ametrine...............................................................................
     @@ametrine_gem = Gem.new("Ametrine", 20, Ametrine_Inventory_Tablecut, "table", 1, "purple", 60, "air", "STR+")   
     GEM_ARRAY.push(@@ametrine_gem)
+   #..............................................................Hemimorphite.............................................................................
+    @@hemimorphite_gem = Gem.new("Hemimorphite", 21, Hemimorphite_Inventory_Tablecut, "table", 1, "blue", 60, "air", "INT+")   
+    GEM_ARRAY.push(@@hemimorphite_gem)
   #________________________________________________________________________________________________________________________________________________________
  end
 end   
