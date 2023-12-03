@@ -914,6 +914,22 @@
      #--------------------------------------------------Tablecut--------------------------------------------------------------------
       BLUE_CALCITE_INVENTORY_TABLECUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Blue_Calcite_Inventory_Table.png")
       Blue_Calcite_Inventory_Tablecut = SF::Sprite.new(BLUE_CALCITE_INVENTORY_TABLECUT_TEXTURE) 
+    #'''''''''''''''''''''''''''''''''''''''''''''''''''Hiddenite'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     #---------------------------------------------------Square---------------------------------------------------------------------
+     HIDDENITE_INVENTORY_SQUARE_TEXTURE = SF::Texture.from_file("graphics/minerals/Hiddenite_Inventory_Square.png")
+     Hiddenite_Inventory_Square = SF::Sprite.new(HIDDENITE_INVENTORY_SQUARE_TEXTURE) 
+    #----------------------------------------------------Pear----------------------------------------------------------------------
+     HIDDENITE_INVENTORY_PEAR_TEXTURE = SF::Texture.from_file("graphics/minerals/Hiddenite_Inventory_Pear.png")
+     Hiddenite_Inventory_Pear = SF::Sprite.new(HIDDENITE_INVENTORY_PEAR_TEXTURE) 
+    #--------------------------------------------------Brilliant-------------------------------------------------------------------
+     HIDDENITE_INVENTORY_BRILLIANT_TEXTURE = SF::Texture.from_file("graphics/minerals/Hiddenite_Inventory_Brilliant.png")
+     Hiddenite_Inventory_Brilliant = SF::Sprite.new(HIDDENITE_INVENTORY_BRILLIANT_TEXTURE) 
+    #---------------------------------------------------Dropcut--------------------------------------------------------------------
+     HIDDENITE_INVENTORY_DROPCUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Hiddenite_Inventory_Drop.png")
+     Hiddenite_Inventory_Dropcut = SF::Sprite.new(HIDDENITE_INVENTORY_DROPCUT_TEXTURE) 
+    #--------------------------------------------------Tablecut--------------------------------------------------------------------
+     HIDDENITE_INVENTORY_TABLECUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Hiddenite_Inventory_Table.png")
+     Hiddenite_Inventory_Tablecut = SF::Sprite.new(HIDDENITE_INVENTORY_TABLECUT_TEXTURE) 
 #----------------------------------------------------------------------------------------------------------------------------------- 
 #                                                    Character Model
 #-----------------------------------------------------------------------------------------------------------------------------------
