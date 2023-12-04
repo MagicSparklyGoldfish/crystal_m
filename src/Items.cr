@@ -2459,6 +2459,9 @@ include Equipment
    #..............................................................Orange Calcite............................................................................
     @@orange_calcite_gem = Gem.new("Orange Calcite", 43, Orange_Calcite_Inventory_Tablecut, "table", 1, "orange", 60, "fire", "HP+")   
     GEM_ARRAY.push(@@orange_calcite_gem)
+   #...............................................................Grape Agate..............................................................................
+    @@grape_agate_gem = Gem.new("Grape Agate", 44, Grape_Agate_Inventory_Tablecut, "table", 1, "purple", 60, "earth", "INT+")   
+    GEM_ARRAY.push(@@grape_agate_gem)
   #________________________________________________________________________________________________________________________________________________________
  end
 end   

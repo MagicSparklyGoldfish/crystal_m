@@ -1330,6 +1330,22 @@
      #--------------------------------------------------Tablecut--------------------------------------------------------------------
       ORANGE_CALCITE_INVENTORY_TABLECUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Orange_Calcite_Inventory_Table.png")
       Orange_Calcite_Inventory_Tablecut = SF::Sprite.new(ORANGE_CALCITE_INVENTORY_TABLECUT_TEXTURE) 
+    #''''''''''''''''''''''''''''''''''''''''''''''''''Grape Agate''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     #---------------------------------------------------Square---------------------------------------------------------------------
+      GRAPE_AGATE_INVENTORY_SQUARE_TEXTURE = SF::Texture.from_file("graphics/minerals/Grape_Agate_Inventory_Square.png")
+      Grape_Agate_Inventory_Square = SF::Sprite.new(GRAPE_AGATE_INVENTORY_SQUARE_TEXTURE) 
+     #----------------------------------------------------Pear----------------------------------------------------------------------
+      GRAPE_AGATE_INVENTORY_PEAR_TEXTURE = SF::Texture.from_file("graphics/minerals/Grape_Agate_Inventory_Pear.png")
+      Grape_Agate_Inventory_Pear = SF::Sprite.new(GRAPE_AGATE_INVENTORY_PEAR_TEXTURE) 
+     #--------------------------------------------------Brilliant-------------------------------------------------------------------
+      GRAPE_AGATE_INVENTORY_BRILLIANT_TEXTURE = SF::Texture.from_file("graphics/minerals/Grape_Agate_Inventory_Brilliant.png")
+      Grape_Agate_Inventory_Brilliant = SF::Sprite.new(GRAPE_AGATE_INVENTORY_BRILLIANT_TEXTURE) 
+     #---------------------------------------------------Dropcut--------------------------------------------------------------------
+      GRAPE_AGATE_INVENTORY_DROPCUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Grape_Agate_Inventory_Drop.png")
+      Grape_Agate_Inventory_Dropcut = SF::Sprite.new(GRAPE_AGATE_INVENTORY_DROPCUT_TEXTURE) 
+     #--------------------------------------------------Tablecut--------------------------------------------------------------------
+      GRAPE_AGATE_INVENTORY_TABLECUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Grape_Agate_Inventory_Table.png")
+      Grape_Agate_Inventory_Tablecut = SF::Sprite.new(GRAPE_AGATE_INVENTORY_TABLECUT_TEXTURE) 
 #----------------------------------------------------------------------------------------------------------------------------------- 
 #                                                    Character Model
 #-----------------------------------------------------------------------------------------------------------------------------------
