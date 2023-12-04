@@ -1026,6 +1026,22 @@
      #--------------------------------------------------Tablecut--------------------------------------------------------------------
       AZURITE_INVENTORY_TABLECUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Azurite_Inventory_Table.png")
       Azurite_Inventory_Tablecut = SF::Sprite.new(AZURITE_INVENTORY_TABLECUT_TEXTURE) 
+    #'''''''''''''''''''''''''''''''''''''''''''''''''''Howlite'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     #---------------------------------------------------Square---------------------------------------------------------------------
+      HOWLITE_INVENTORY_SQUARE_TEXTURE = SF::Texture.from_file("graphics/minerals/Howlite_Inventory_Square.png")
+      Howlite_Inventory_Square = SF::Sprite.new(HOWLITE_INVENTORY_SQUARE_TEXTURE) 
+     #----------------------------------------------------Pear----------------------------------------------------------------------
+      HOWLITE_INVENTORY_PEAR_TEXTURE = SF::Texture.from_file("graphics/minerals/Howlite_Inventory_Pear.png")
+      Howlite_Inventory_Pear = SF::Sprite.new(HOWLITE_INVENTORY_PEAR_TEXTURE) 
+     #--------------------------------------------------Brilliant-------------------------------------------------------------------
+      HOWLITE_INVENTORY_BRILLIANT_TEXTURE = SF::Texture.from_file("graphics/minerals/Howlite_Inventory_Brilliant.png")
+      Howlite_Inventory_Brilliant = SF::Sprite.new(HOWLITE_INVENTORY_BRILLIANT_TEXTURE) 
+     #---------------------------------------------------Dropcut--------------------------------------------------------------------
+      HOWLITE_INVENTORY_DROPCUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Howlite_Inventory_Drop.png")
+      Howlite_Inventory_Dropcut = SF::Sprite.new(HOWLITE_INVENTORY_DROPCUT_TEXTURE) 
+     #--------------------------------------------------Tablecut--------------------------------------------------------------------
+      HOWLITE_INVENTORY_TABLECUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Howlite_Inventory_Table.png")
+      Howlite_Inventory_Tablecut = SF::Sprite.new(HOWLITE_INVENTORY_TABLECUT_TEXTURE) 
 #----------------------------------------------------------------------------------------------------------------------------------- 
 #                                                    Character Model
 #-----------------------------------------------------------------------------------------------------------------------------------
