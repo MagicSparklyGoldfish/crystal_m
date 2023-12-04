@@ -2474,6 +2474,9 @@ include Equipment
    #.................................................................Painite................................................................................
     @@painite_gem = Gem.new("Painite", 48, Painite_Inventory_Tablecut, "table", 1, "red", 60, "earth", "EXP+++")   
     GEM_ARRAY.push(@@painite_gem)
+   #.............................................................Bumblebee Jasper...........................................................................
+    @@bumblebee_jasper_gem = Gem.new("Bumblebee Jasper", 49, Bumblebee_Jasper_Inventory_Tablecut, "table", 1, "yellow", 60, "earth", "DEX+")   
+    GEM_ARRAY.push(@@bumblebee_jasper_gem)
   #________________________________________________________________________________________________________________________________________________________
  end
 end   

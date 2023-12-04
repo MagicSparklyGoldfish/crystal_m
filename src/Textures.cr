@@ -1410,6 +1410,22 @@
      #--------------------------------------------------Tablecut--------------------------------------------------------------------
       PAINITE_INVENTORY_TABLECUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Painite_Inventory_Table.png")
       Painite_Inventory_Tablecut = SF::Sprite.new(PAINITE_INVENTORY_TABLECUT_TEXTURE) 
+    #''''''''''''''''''''''''''''''''''''''''''''''''Bumblebee Jasper'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     #---------------------------------------------------Square---------------------------------------------------------------------
+      BUMBLEBEE_JASPER_INVENTORY_SQUARE_TEXTURE = SF::Texture.from_file("graphics/minerals/Bumblebee_Jasper_Inventory_Square.png")
+      Bumblebee_Jasper_Inventory_Square = SF::Sprite.new(BUMBLEBEE_JASPER_INVENTORY_SQUARE_TEXTURE) 
+     #----------------------------------------------------Pear----------------------------------------------------------------------
+      BUMBLEBEE_JASPER_INVENTORY_PEAR_TEXTURE = SF::Texture.from_file("graphics/minerals/Bumblebee_Jasper_Inventory_Pear.png")
+      Bumblebee_Jasper_Inventory_Pear = SF::Sprite.new(BUMBLEBEE_JASPER_INVENTORY_PEAR_TEXTURE) 
+     #--------------------------------------------------Brilliant-------------------------------------------------------------------
+      BUMBLEBEE_JASPER_INVENTORY_BRILLIANT_TEXTURE = SF::Texture.from_file("graphics/minerals/Bumblebee_Jasper_Inventory_Brilliant.png")
+      Bumblebee_Jasper_Inventory_Brilliant = SF::Sprite.new(BUMBLEBEE_JASPER_INVENTORY_BRILLIANT_TEXTURE) 
+     #---------------------------------------------------Dropcut--------------------------------------------------------------------
+      BUMBLEBEE_JASPER_INVENTORY_DROPCUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Bumblebee_Jasper_Inventory_Drop.png")
+      Bumblebee_Jasper_Inventory_Dropcut = SF::Sprite.new(BUMBLEBEE_JASPER_INVENTORY_DROPCUT_TEXTURE) 
+     #--------------------------------------------------Tablecut--------------------------------------------------------------------
+      BUMBLEBEE_JASPER_INVENTORY_TABLECUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Bumblebee_Jasper_Inventory_Table.png")
+      Bumblebee_Jasper_Inventory_Tablecut = SF::Sprite.new(BUMBLEBEE_JASPER_INVENTORY_TABLECUT_TEXTURE) 
 #----------------------------------------------------------------------------------------------------------------------------------- 
 #                                                    Character Model
 #-----------------------------------------------------------------------------------------------------------------------------------
