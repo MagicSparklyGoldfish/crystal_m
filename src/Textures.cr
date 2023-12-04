@@ -1170,6 +1170,22 @@
     #--------------------------------------------------Tablecut--------------------------------------------------------------------
      BLUE_AMBER_INVENTORY_TABLECUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Blue_Amber_Inventory_Table.png")
      Blue_Amber_Inventory_Tablecut = SF::Sprite.new(BLUE_AMBER_INVENTORY_TABLECUT_TEXTURE) 
+    #''''''''''''''''''''''''''''''''''''''''''''''''''Blue Spinel'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     #---------------------------------------------------Square---------------------------------------------------------------------
+      BLUE_SPINEL_INVENTORY_SQUARE_TEXTURE = SF::Texture.from_file("graphics/minerals/Blue_Spinel_Inventory_Square.png")
+      Blue_Spinel_Inventory_Square = SF::Sprite.new(BLUE_SPINEL_INVENTORY_SQUARE_TEXTURE) 
+     #----------------------------------------------------Pear----------------------------------------------------------------------
+      BLUE_SPINEL_INVENTORY_PEAR_TEXTURE = SF::Texture.from_file("graphics/minerals/Blue_Spinel_Inventory_Pear.png")
+      Blue_Spinel_Inventory_Pear = SF::Sprite.new(BLUE_SPINEL_INVENTORY_PEAR_TEXTURE) 
+     #--------------------------------------------------Brilliant-------------------------------------------------------------------
+      BLUE_SPINEL_INVENTORY_BRILLIANT_TEXTURE = SF::Texture.from_file("graphics/minerals/Blue_Spinel_Inventory_Brilliant.png")
+      Blue_Spinel_Inventory_Brilliant = SF::Sprite.new(BLUE_SPINEL_INVENTORY_BRILLIANT_TEXTURE) 
+     #---------------------------------------------------Dropcut--------------------------------------------------------------------
+      BLUE_SPINEL_INVENTORY_DROPCUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Blue_Spinel_Inventory_Drop.png")
+      Blue_Spinel_Inventory_Dropcut = SF::Sprite.new(BLUE_SPINEL_INVENTORY_DROPCUT_TEXTURE) 
+     #--------------------------------------------------Tablecut--------------------------------------------------------------------
+      BLUE_SPINEL_INVENTORY_TABLECUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Blue_Spinel_Inventory_Table.png")
+      Blue_Spinel_Inventory_Tablecut = SF::Sprite.new(BLUE_SPINEL_INVENTORY_TABLECUT_TEXTURE) 
 #----------------------------------------------------------------------------------------------------------------------------------- 
 #                                                    Character Model
 #-----------------------------------------------------------------------------------------------------------------------------------

@@ -2429,6 +2429,9 @@ include Equipment
    #................................................................Blue Amber.............................................................................
     @@blue_amber_gem = Gem.new("Blue Amber", 33, Blue_Amber_Inventory_Tablecut, "table", 1, "blue", 60, "fire", "passive_mp_regen")   
     GEM_ARRAY.push(@@blue_amber_gem)
+   #................................................................Blue Spinel.............................................................................
+    @@blue_spinel_gem = Gem.new("Blue Spinel", 34, Blue_Spinel_Inventory_Tablecut, "table", 1, "blue", 60, "fire", "DEX+")   
+    GEM_ARRAY.push(@@blue_spinel_gem)
   #________________________________________________________________________________________________________________________________________________________
  end
 end   
