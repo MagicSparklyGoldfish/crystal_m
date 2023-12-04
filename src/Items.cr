@@ -2450,12 +2450,15 @@ include Equipment
    #...............................................................Lemon Quartz.............................................................................
     @@lemon_quartz_gem = Gem.new("Lemon Quartz", 40, Lemon_Quartz_Inventory_Tablecut, "table", 1, "yellow", 60, "fire", "drop_rate+")   
     GEM_ARRAY.push(@@lemon_quartz_gem)
-   #...............................................................Lemon Quartz.............................................................................
+   #.................................................................Turquoise..............................................................................
     @@turquoise_gem = Gem.new("Turquoise", 41, Turquoise_Inventory_Tablecut, "table", 1, "green", 60, "fire", "LUK+")   
     GEM_ARRAY.push(@@turquoise_gem)
    #...............................................................Tiger's Eye..............................................................................
     @@tigers_eye_gem = Gem.new("Tiger's Eye", 42, Tigers_eye_Inventory_Tablecut, "table", 1, "orange", 60, "fire", "DEX+")   
     GEM_ARRAY.push(@@tigers_eye_gem)
+   #..............................................................Orange Calcite............................................................................
+    @@orange_calcite_gem = Gem.new("Orange Calcite", 43, Orange_Calcite_Inventory_Tablecut, "table", 1, "orange", 60, "fire", "HP+")   
+    GEM_ARRAY.push(@@orange_calcite_gem)
   #________________________________________________________________________________________________________________________________________________________
  end
 end   

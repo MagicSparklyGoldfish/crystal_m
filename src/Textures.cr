@@ -1314,6 +1314,22 @@
      #--------------------------------------------------Tablecut--------------------------------------------------------------------
       TIGERS_EYE_INVENTORY_TABLECUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Tiger's_Eye_Inventory_Table.png")
       Tigers_eye_Inventory_Tablecut = SF::Sprite.new(TIGERS_EYE_INVENTORY_TABLECUT_TEXTURE) 
+    #''''''''''''''''''''''''''''''''''''''''''''''''Orange Calcite'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     #---------------------------------------------------Square---------------------------------------------------------------------
+      ORANGE_CALCITE_INVENTORY_SQUARE_TEXTURE = SF::Texture.from_file("graphics/minerals/Orange_Calcite_Inventory_Square.png")
+      Orange_Calcite_Inventory_Square = SF::Sprite.new(ORANGE_CALCITE_INVENTORY_SQUARE_TEXTURE) 
+     #----------------------------------------------------Pear----------------------------------------------------------------------
+      ORANGE_CALCITE_INVENTORY_PEAR_TEXTURE = SF::Texture.from_file("graphics/minerals/Orange_Calcite_Inventory_Pear.png")
+      Orange_Calcite_Inventory_Pear = SF::Sprite.new(ORANGE_CALCITE_INVENTORY_PEAR_TEXTURE) 
+     #--------------------------------------------------Brilliant-------------------------------------------------------------------
+      ORANGE_CALCITE_INVENTORY_BRILLIANT_TEXTURE = SF::Texture.from_file("graphics/minerals/Orange_Calcite_Inventory_Brilliant.png")
+      Orange_Calcite_Inventory_Brilliant = SF::Sprite.new(ORANGE_CALCITE_INVENTORY_BRILLIANT_TEXTURE) 
+     #---------------------------------------------------Dropcut--------------------------------------------------------------------
+      ORANGE_CALCITE_INVENTORY_DROPCUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Orange_Calcite_Inventory_Drop.png")
+      Orange_Calcite_Inventory_Dropcut = SF::Sprite.new(ORANGE_CALCITE_INVENTORY_DROPCUT_TEXTURE) 
+     #--------------------------------------------------Tablecut--------------------------------------------------------------------
+      ORANGE_CALCITE_INVENTORY_TABLECUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Orange_Calcite_Inventory_Table.png")
+      Orange_Calcite_Inventory_Tablecut = SF::Sprite.new(ORANGE_CALCITE_INVENTORY_TABLECUT_TEXTURE) 
 #----------------------------------------------------------------------------------------------------------------------------------- 
 #                                                    Character Model
 #-----------------------------------------------------------------------------------------------------------------------------------
