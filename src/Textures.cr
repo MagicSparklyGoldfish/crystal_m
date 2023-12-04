@@ -1378,6 +1378,22 @@
      #--------------------------------------------------Tablecut--------------------------------------------------------------------
       DIAMOND_INVENTORY_TABLECUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Diamond_Inventory_Table.png")
       Diamond_Inventory_Tablecut = SF::Sprite.new(DIAMOND_INVENTORY_TABLECUT_TEXTURE) 
+    #''''''''''''''''''''''''''''''''''''''''''''''''''''Emerald''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     #---------------------------------------------------Square---------------------------------------------------------------------
+      EMERALD_INVENTORY_SQUARE_TEXTURE = SF::Texture.from_file("graphics/minerals/Emerald_Inventory_Square.png")
+      Emerald_Inventory_Square = SF::Sprite.new(EMERALD_INVENTORY_SQUARE_TEXTURE) 
+     #----------------------------------------------------Pear----------------------------------------------------------------------
+      EMERALD_INVENTORY_PEAR_TEXTURE = SF::Texture.from_file("graphics/minerals/Emerald_Inventory_Pear.png")
+      Emerald_Inventory_Pear = SF::Sprite.new(EMERALD_INVENTORY_PEAR_TEXTURE) 
+     #--------------------------------------------------Brilliant-------------------------------------------------------------------
+      EMERALD_INVENTORY_BRILLIANT_TEXTURE = SF::Texture.from_file("graphics/minerals/Emerald_Inventory_Brilliant.png")
+      Emerald_Inventory_Brilliant = SF::Sprite.new(EMERALD_INVENTORY_BRILLIANT_TEXTURE) 
+     #---------------------------------------------------Dropcut--------------------------------------------------------------------
+      EMERALD_INVENTORY_DROPCUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Emerald_Inventory_Drop.png")
+      Emerald_Inventory_Dropcut = SF::Sprite.new(EMERALD_INVENTORY_DROPCUT_TEXTURE) 
+     #--------------------------------------------------Tablecut--------------------------------------------------------------------
+      EMERALD_INVENTORY_TABLECUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Emerald_Inventory_Table.png")
+      Emerald_Inventory_Tablecut = SF::Sprite.new(EMERALD_INVENTORY_TABLECUT_TEXTURE) 
 #----------------------------------------------------------------------------------------------------------------------------------- 
 #                                                    Character Model
 #-----------------------------------------------------------------------------------------------------------------------------------
