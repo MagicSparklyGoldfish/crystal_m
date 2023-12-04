@@ -2247,23 +2247,26 @@ include Equipment
     @@holly_blue_agate_gem = Gem.new("Holly Blue Agate", 20, Holly_Blue_Agate_Inventory_Tablecut, "table", 1, "blue", 60, "air", "STR+")   
     GEM_ARRAY.push(@@holly_blue_agate_gem)
    #................................................................Ametrine...............................................................................
-    @@ametrine_gem = Gem.new("Ametrine", 20, Ametrine_Inventory_Tablecut, "table", 1, "purple", 60, "air", "STR+")   
+    @@ametrine_gem = Gem.new("Ametrine", 21, Ametrine_Inventory_Tablecut, "table", 1, "purple", 60, "air", "STR+")   
     GEM_ARRAY.push(@@ametrine_gem)
    #..............................................................Hemimorphite.............................................................................
-    @@hemimorphite_gem = Gem.new("Hemimorphite", 21, Hemimorphite_Inventory_Tablecut, "table", 1, "blue", 60, "air", "INT+")   
+    @@hemimorphite_gem = Gem.new("Hemimorphite", 22, Hemimorphite_Inventory_Tablecut, "table", 1, "blue", 60, "air", "INT+")   
     GEM_ARRAY.push(@@hemimorphite_gem)
    #..............................................................Tiffany Stone............................................................................
-    @@tiffany_stone_gem = Gem.new("Tiffany Stone", 22, Tiffany_Stone_Inventory_Tablecut, "table", 1, "purple", 60, "air", "LUK+")   
+    @@tiffany_stone_gem = Gem.new("Tiffany Stone", 23, Tiffany_Stone_Inventory_Tablecut, "table", 1, "purple", 60, "air", "LUK+")   
     GEM_ARRAY.push(@@tiffany_stone_gem)
    #................................................................Azurite................................................................................
-    @@azurite_gem = Gem.new("Azurite", 23, Azurite_Inventory_Tablecut, "table", 1, "blue", 60, "air", "DEX+")   
+    @@azurite_gem = Gem.new("Azurite", 24, Azurite_Inventory_Tablecut, "table", 1, "blue", 60, "air", "DEX+")   
     GEM_ARRAY.push(@@azurite_gem)
    #................................................................Howlite................................................................................
-    @@howlite_gem = Gem.new("Howlite", 24, Howlite_Inventory_Tablecut, "table", 1, "white", 60, "air", "DEX+")   
+    @@howlite_gem = Gem.new("Howlite", 25, Howlite_Inventory_Tablecut, "table", 1, "white", 60, "air", "DEX+")   
     GEM_ARRAY.push(@@howlite_gem)
    #................................................................Angelite...............................................................................
-    @@angelite_gem = Gem.new("Angelite", 25, Angelite_Inventory_Tablecut, "table", 1, "blue", 60, "air", "LUK+")   
+    @@angelite_gem = Gem.new("Angelite", 26, Angelite_Inventory_Tablecut, "table", 1, "blue", 60, "air", "LUK+")   
     GEM_ARRAY.push(@@angelite_gem)
+   #.............................................................Blue Lace Agate...........................................................................
+    @@blue_lace_agate_gem = Gem.new("Blue Lace Agate", 27, Blue_Lace_Agate_Inventory_Tablecut, "table", 1, "blue", 60, "air", "INT+")   
+    GEM_ARRAY.push(@@blue_lace_agate_gem)
   #________________________________________________________________________________________________________________________________________________________
  end
 end   

@@ -1058,6 +1058,22 @@
      #--------------------------------------------------Tablecut--------------------------------------------------------------------
       ANGELITE_INVENTORY_TABLECUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Angelite_Inventory_Table.png")
       Angelite_Inventory_Tablecut = SF::Sprite.new(ANGELITE_INVENTORY_TABLECUT_TEXTURE) 
+    #'''''''''''''''''''''''''''''''''''''''''''''''Blue Lace Agate'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     #---------------------------------------------------Square---------------------------------------------------------------------
+      BLUE_LACE_AGATE_INVENTORY_SQUARE_TEXTURE = SF::Texture.from_file("graphics/minerals/Blue_Lace_Agate_Inventory_Square.png")
+      Blue_Lace_Agate_Inventory_Square = SF::Sprite.new(BLUE_LACE_AGATE_INVENTORY_SQUARE_TEXTURE) 
+     #----------------------------------------------------Pear----------------------------------------------------------------------
+      BLUE_LACE_AGATE_INVENTORY_PEAR_TEXTURE = SF::Texture.from_file("graphics/minerals/Blue_Lace_Agate_Inventory_Pear.png")
+      Blue_Lace_Agate_Inventory_Pear = SF::Sprite.new(BLUE_LACE_AGATE_INVENTORY_PEAR_TEXTURE) 
+     #--------------------------------------------------Brilliant-------------------------------------------------------------------
+      BLUE_LACE_AGATE_INVENTORY_BRILLIANT_TEXTURE = SF::Texture.from_file("graphics/minerals/Blue_Lace_Agate_Inventory_Brilliant.png")
+      Blue_Lace_Agate_Inventory_Brilliant = SF::Sprite.new(BLUE_LACE_AGATE_INVENTORY_BRILLIANT_TEXTURE) 
+     #---------------------------------------------------Dropcut--------------------------------------------------------------------
+      BLUE_LACE_AGATE_INVENTORY_DROPCUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Blue_Lace_Agate_Inventory_Drop.png")
+      Blue_Lace_Agate_Inventory_Dropcut = SF::Sprite.new(BLUE_LACE_AGATE_INVENTORY_DROPCUT_TEXTURE) 
+     #--------------------------------------------------Tablecut--------------------------------------------------------------------
+      BLUE_LACE_AGATE_INVENTORY_TABLECUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Blue_Lace_Agate_Inventory_Table.png")
+      Blue_Lace_Agate_Inventory_Tablecut = SF::Sprite.new(BLUE_LACE_AGATE_INVENTORY_TABLECUT_TEXTURE) 
 #----------------------------------------------------------------------------------------------------------------------------------- 
 #                                                    Character Model
 #-----------------------------------------------------------------------------------------------------------------------------------
