@@ -1362,6 +1362,22 @@
      #--------------------------------------------------Tablecut--------------------------------------------------------------------
       JADE_INVENTORY_TABLECUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Jade_Inventory_Table.png")
       Jade_Inventory_Tablecut = SF::Sprite.new(JADE_INVENTORY_TABLECUT_TEXTURE) 
+    #''''''''''''''''''''''''''''''''''''''''''''''''''''Diamond''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     #---------------------------------------------------Square---------------------------------------------------------------------
+      DIAMOND_INVENTORY_SQUARE_TEXTURE = SF::Texture.from_file("graphics/minerals/Diamond_Inventory_Square.png")
+      Diamond_Inventory_Square = SF::Sprite.new(DIAMOND_INVENTORY_SQUARE_TEXTURE) 
+     #----------------------------------------------------Pear----------------------------------------------------------------------
+      DIAMOND_INVENTORY_PEAR_TEXTURE = SF::Texture.from_file("graphics/minerals/Diamond_Inventory_Pear.png")
+      Diamond_Inventory_Pear = SF::Sprite.new(DIAMOND_INVENTORY_PEAR_TEXTURE) 
+     #--------------------------------------------------Brilliant-------------------------------------------------------------------
+      DIAMOND_INVENTORY_BRILLIANT_TEXTURE = SF::Texture.from_file("graphics/minerals/Diamond_Inventory_Brilliant.png")
+      Diamond_Inventory_Brilliant = SF::Sprite.new(DIAMOND_INVENTORY_BRILLIANT_TEXTURE) 
+     #---------------------------------------------------Dropcut--------------------------------------------------------------------
+      DIAMOND_INVENTORY_DROPCUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Diamond_Inventory_Drop.png")
+      Diamond_Inventory_Dropcut = SF::Sprite.new(DIAMOND_INVENTORY_DROPCUT_TEXTURE) 
+     #--------------------------------------------------Tablecut--------------------------------------------------------------------
+      DIAMOND_INVENTORY_TABLECUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Diamond_Inventory_Table.png")
+      Diamond_Inventory_Tablecut = SF::Sprite.new(DIAMOND_INVENTORY_TABLECUT_TEXTURE) 
 #----------------------------------------------------------------------------------------------------------------------------------- 
 #                                                    Character Model
 #-----------------------------------------------------------------------------------------------------------------------------------
