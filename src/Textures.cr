@@ -1218,6 +1218,22 @@
      #--------------------------------------------------Tablecut--------------------------------------------------------------------
       FIRE_OPAL_INVENTORY_TABLECUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Fire_Opal_Inventory_Table.png")
       Fire_Opal_Inventory_Tablecut = SF::Sprite.new(FIRE_OPAL_INVENTORY_TABLECUT_TEXTURE) 
+    #''''''''''''''''''''''''''''''''''''''''''''''''''''Garnet'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     #---------------------------------------------------Square---------------------------------------------------------------------
+      GARNET_INVENTORY_SQUARE_TEXTURE = SF::Texture.from_file("graphics/minerals/Garnet_Inventory_Square.png")
+      Garnet_Inventory_Square = SF::Sprite.new(GARNET_INVENTORY_SQUARE_TEXTURE) 
+     #----------------------------------------------------Pear----------------------------------------------------------------------
+      GARNET_INVENTORY_PEAR_TEXTURE = SF::Texture.from_file("graphics/minerals/Garnet_Inventory_Pear.png")
+      Garnet_Inventory_Pear = SF::Sprite.new(GARNET_INVENTORY_PEAR_TEXTURE) 
+     #--------------------------------------------------Brilliant-------------------------------------------------------------------
+      GARNET_INVENTORY_BRILLIANT_TEXTURE = SF::Texture.from_file("graphics/minerals/Garnet_Inventory_Brilliant.png")
+      Garnet_Inventory_Brilliant = SF::Sprite.new(GARNET_INVENTORY_BRILLIANT_TEXTURE) 
+     #---------------------------------------------------Dropcut--------------------------------------------------------------------
+      GARNET_INVENTORY_DROPCUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Garnet_Inventory_Drop.png")
+      Garnet_Inventory_Dropcut = SF::Sprite.new(GARNET_INVENTORY_DROPCUT_TEXTURE) 
+     #--------------------------------------------------Tablecut--------------------------------------------------------------------
+      GARNET_INVENTORY_TABLECUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Garnet_Inventory_Table.png")
+      Garnet_Inventory_Tablecut = SF::Sprite.new(GARNET_INVENTORY_TABLECUT_TEXTURE) 
 #----------------------------------------------------------------------------------------------------------------------------------- 
 #                                                    Character Model
 #-----------------------------------------------------------------------------------------------------------------------------------
