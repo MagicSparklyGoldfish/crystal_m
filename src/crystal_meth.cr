@@ -71,6 +71,7 @@ extend self
   @@idle_animation_frames = 0
   @@is_walking : Bool; @@is_walking = false
   WALK_TIMER = SF::Clock.new
+  IDLE_TIMER = SF::Clock.new
   @@airborn : Bool; @@airborn = false
  #_______________________________________________________________________________________________________________________________________+
  #-----------------------------------------------------Character Model Variables---------------------------------------------------------+
@@ -244,11 +245,15 @@ extend self
    window.draw(MP_Bar_Color); window.draw(MP_Label); window.draw(HP_Bar); 
    window.draw(HP_Bar_Color); window.draw(HP_Label); window.draw(LVL_Label)
    if @@idle == true && @@airborn == false
+    idletime = IDLE_TIMER.elapsed_time
     @@idleframes += 1
-    if @@idleframes >= 2200 && @@current_direction == "right"
+    if SF::Keyboard.key_pressed?(SF::Keyboard::D) || SF::Keyboard.key_pressed?(SF::Keyboard::A)
+      IDLE_TIMER.restart
+    end
+    if idletime > SF.seconds(0.5) && @@current_direction == "right"
       @@is_walking = false
     Window_Class.idle_animation_right(window)
-    else if @@idleframes >= 2200 && @@current_direction == "left"
+    else if idletime > SF.seconds(0.5) && @@current_direction == "left"
       @@is_walking = false
       Window_Class.idle_animation_left(window)
     end
@@ -2059,6 +2064,7 @@ def Window_Class.hud_keypresses(window)
       @@attacking = true
       @@idleframes = 0
       if @@has_weapon == true && WEAPON_OBJECT_ARRAY[@@current_weapon].can_swing == true
+        IDLE_TIMER.restart
         case @@current_direction
       when "left"
         @@attacking = true
@@ -2107,6 +2113,7 @@ def Window_Class.hud_keypresses(window)
         @@idleframes = 0
         @@attacking = false
         walking = true
+        IDLE_TIMER.restart
         Gui::Window_Class.is_walking(walking)
         #Player_Data::Player_Physics.wasd_right(@@player_character_rendered_model)
         if @@current_direction == "left"
@@ -2119,6 +2126,7 @@ def Window_Class.hud_keypresses(window)
         @@idleframes = 0
         @@attacking = false
         walking = true
+        IDLE_TIMER.restart
         Gui::Window_Class.is_walking(walking)
         #Player_Data::Player_Physics.wasd_left(@@player_character_rendered_model)
         if @@current_direction == "right"
@@ -2130,6 +2138,7 @@ def Window_Class.hud_keypresses(window)
         @@idleframes = 0
         @@attacking = false
         airborn = true
+        IDLE_TIMER.restart
         Gui::Window_Class.is_airborn(airborn)
         Player_Data::Player_Physics.wasd_up(@@player_character_rendered_model, window)
 
@@ -2528,10 +2537,12 @@ end; end; end; end; end; end
        if gravity >= SF.seconds(0.01)
          @@player_character_rendered_model.position += SF.vector2(0, 0.95)
          if SF::Keyboard.key_pressed?(SF::Keyboard::A)
+          IDLE_TIMER.restart
           @@player_character_rendered_model.position -= SF.vector2(0.01, 0)
           Player_Physics.wasd_left(@@player_character_rendered_model)
          end
          if SF::Keyboard.key_pressed?(SF::Keyboard::D)
+          IDLE_TIMER.restart
            @@player_character_rendered_model.position += SF.vector2(0.01, 0)
            Player_Physics.wasd_right(@@player_character_rendered_model)
          end
@@ -2582,6 +2593,7 @@ end; end; end; end; end; end
       jump_time = @@jump_clock.elapsed_time
         if @@player_jumped == false && @@can_player_move_at_all == true
           @@jump_clock.restart
+          IDLE_TIMER.restart
        #  if jump_time <= SF.seconds(3)
             @@player_character_rendered_model.position += SF.vector2(0, -150)
             @@player_jumped = true
@@ -2595,9 +2607,11 @@ end; end; end; end; end; end
     #    window.draw(@@player_character_rendered_model)
     #     end; end
        if SF::Keyboard.key_pressed?(SF::Keyboard::A)
+         IDLE_TIMER.restart
          Player_Physics.wasd_left(@@player_character_rendered_model)
        end
        if SF::Keyboard.key_pressed?(SF::Keyboard::D)
+         IDLE_TIMER.restart
          Player_Physics.wasd_right(@@player_character_rendered_model)
       end; end; end
      def Player_Physics.wasd_down(@@player_character_rendered_model, window)
