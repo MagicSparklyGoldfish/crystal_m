@@ -1873,6 +1873,14 @@ include Equipment
             ore_array_text_19.string = "x" + Owned_Gem_Array[18].amount_owned.to_s
             window.draw(Owned_Gem_Array[18].sprite); window.draw(ore_array_text_19)
           end
+         when 3 
+          if Owned_Gem_Array.size >= 37  
+           Owned_Gem_Array[36].sprite.position = SF.vector2(555, 310);
+           ore_array_text_37 = Ore_amount_owned_text.dup
+           ore_array_text_37.position = Owned_Gem_Array[36].sprite.position + SF.vector2(100, -5)
+           ore_array_text_37.string = "x" + Owned_Gem_Array[36].amount_owned.to_s
+           window.draw(Owned_Gem_Array[36].sprite); window.draw(ore_array_text_37)
+          end
         end; end
       #----------------------------------------------------slot 2-------------------------------------------
        if Owned_Gem_Array.size >= 2
@@ -1890,6 +1898,14 @@ include Equipment
            ore_array_text_20.position = Owned_Gem_Array[19].sprite.position + SF.vector2(100, -5)
            ore_array_text_20.string = "x" + Owned_Gem_Array[19].amount_owned.to_s
            window.draw(Owned_Gem_Array[19].sprite); window.draw(ore_array_text_20)
+          end
+         when 3 
+          if Owned_Gem_Array.size >= 38  
+           Owned_Gem_Array[37].sprite.position = SF.vector2(710, 310);
+           ore_array_text_38 = Ore_amount_owned_text.dup
+           ore_array_text_38.position = Owned_Gem_Array[37].sprite.position + SF.vector2(100, -5)
+           ore_array_text_38.string = "x" + Owned_Gem_Array[37].amount_owned.to_s
+           window.draw(Owned_Gem_Array[37].sprite); window.draw(ore_array_text_38)
           end
         end; end
       #----------------------------------------------------slot 3-------------------------------------------
@@ -1909,6 +1925,14 @@ include Equipment
             ore_array_text_21.string = "x" + Owned_Gem_Array[20].amount_owned.to_s
             window.draw(Owned_Gem_Array[20].sprite); window.draw(ore_array_text_21)
            end
+          when 3 
+           if Owned_Gem_Array.size >= 39  
+            Owned_Gem_Array[38].sprite.position = SF.vector2(855, 310);
+            ore_array_text_39 = Ore_amount_owned_text.dup
+            ore_array_text_39.position = Owned_Gem_Array[38].sprite.position + SF.vector2(100, -5)
+            ore_array_text_39.string = "x" + Owned_Gem_Array[38].amount_owned.to_s
+            window.draw(Owned_Gem_Array[38].sprite); window.draw(ore_array_text_39)
+           end
           end; end
       #----------------------------------------------------slot 4-------------------------------------------
         if Owned_Gem_Array.size >= 4
@@ -1927,6 +1951,14 @@ include Equipment
             ore_array_text_22.string = "x" + Owned_Gem_Array[21].amount_owned.to_s
             window.draw(Owned_Gem_Array[21].sprite); window.draw(ore_array_text_22)
            end
+          when 3 
+            if Owned_Gem_Array.size >= 40  
+             Owned_Gem_Array[39].sprite.position = SF.vector2(1005, 310);
+             ore_array_text_40 = Ore_amount_owned_text.dup
+             ore_array_text_40.position = Owned_Gem_Array[39].sprite.position + SF.vector2(100, -5)
+             ore_array_text_40.string = "x" + Owned_Gem_Array[39].amount_owned.to_s
+             window.draw(Owned_Gem_Array[39].sprite); window.draw(ore_array_text_40)
+            end
           end; end
       #----------------------------------------------------slot 5-------------------------------------------
        if Owned_Gem_Array.size >= 5
@@ -1945,6 +1977,14 @@ include Equipment
             ore_array_text_23.string = "x" + Owned_Gem_Array[22].amount_owned.to_s
             window.draw(Owned_Gem_Array[22].sprite); window.draw(ore_array_text_23)
            end
+          when 3 
+            if Owned_Gem_Array.size >= 41  
+             Owned_Gem_Array[40].sprite.position = SF.vector2(1155, 310);
+             ore_array_text_41 = Ore_amount_owned_text.dup
+             ore_array_text_41.position = Owned_Gem_Array[40].sprite.position + SF.vector2(100, -5)
+             ore_array_text_41.string = "x" + Owned_Gem_Array[40].amount_owned.to_s
+             window.draw(Owned_Gem_Array[40].sprite); window.draw(ore_array_text_41)
+            end
           end; end
       #----------------------------------------------------slot 6-------------------------------------------
        if Owned_Gem_Array.size >= 6
@@ -1963,6 +2003,14 @@ include Equipment
             ore_array_text_24.string = "x" + Owned_Gem_Array[23].amount_owned.to_s
             window.draw(Owned_Gem_Array[23].sprite); window.draw(ore_array_text_24)
            end
+          when 3 
+            if Owned_Gem_Array.size >= 42  
+             Owned_Gem_Array[41].sprite.position = SF.vector2(1305, 310);
+             ore_array_text_42 = Ore_amount_owned_text.dup
+             ore_array_text_42.position = Owned_Gem_Array[41].sprite.position + SF.vector2(100, -5)
+             ore_array_text_42.string = "x" + Owned_Gem_Array[41].amount_owned.to_s
+             window.draw(Owned_Gem_Array[41].sprite); window.draw(ore_array_text_42)
+            end
           end; end
       #----------------------------------------------------slot 7-------------------------------------------
         if Owned_Gem_Array.size >= 7
@@ -1980,6 +2028,14 @@ include Equipment
              ore_array_text_25.position = Owned_Gem_Array[24].sprite.position + SF.vector2(100, -5)
              ore_array_text_25.string = "x" + Owned_Gem_Array[24].amount_owned.to_s
              window.draw(Owned_Gem_Array[24].sprite); window.draw(ore_array_text_25)
+            end
+           when 3 
+            if Owned_Gem_Array.size >= 43  
+             Owned_Gem_Array[42].sprite.position = SF.vector2(555, 460);
+             ore_array_text_43 = Ore_amount_owned_text.dup
+             ore_array_text_43.position = Owned_Gem_Array[42].sprite.position + SF.vector2(100, -5)
+             ore_array_text_43.string = "x" + Owned_Gem_Array[42].amount_owned.to_s
+             window.draw(Owned_Gem_Array[42].sprite); window.draw(ore_array_text_43)
             end
           end; end
       #----------------------------------------------------slot 8-------------------------------------------
@@ -1999,6 +2055,14 @@ include Equipment
              ore_array_text_26.string = "x" + Owned_Gem_Array[25].amount_owned.to_s
              window.draw(Owned_Gem_Array[25].sprite); window.draw(ore_array_text_26)
             end
+           when 3 
+            if Owned_Gem_Array.size >= 44  
+             Owned_Gem_Array[43].sprite.position = SF.vector2(710, 460);
+             ore_array_text_44 = Ore_amount_owned_text.dup
+             ore_array_text_44.position = Owned_Gem_Array[43].sprite.position + SF.vector2(100, -5)
+             ore_array_text_44.string = "x" + Owned_Gem_Array[43].amount_owned.to_s
+             window.draw(Owned_Gem_Array[43].sprite); window.draw(ore_array_text_44)
+            end
            end; end
       #----------------------------------------------------slot 9-------------------------------------------
         if Owned_Gem_Array.size >= 9
@@ -2016,6 +2080,14 @@ include Equipment
              ore_array_text_27.position = Owned_Gem_Array[26].sprite.position + SF.vector2(100, -5)
              ore_array_text_27.string = "x" + Owned_Gem_Array[26].amount_owned.to_s
              window.draw(Owned_Gem_Array[26].sprite); window.draw(ore_array_text_27)
+            end
+           when 3 
+            if Owned_Gem_Array.size >= 45  
+             Owned_Gem_Array[44].sprite.position = SF.vector2(855, 460);
+             ore_array_text_45 = Ore_amount_owned_text.dup
+             ore_array_text_45.position = Owned_Gem_Array[44].sprite.position + SF.vector2(100, -5)
+             ore_array_text_45.string = "x" + Owned_Gem_Array[44].amount_owned.to_s
+             window.draw(Owned_Gem_Array[44].sprite); window.draw(ore_array_text_45)
             end
            end; end
       #----------------------------------------------------slot 10------------------------------------------
@@ -2035,6 +2107,14 @@ include Equipment
              ore_array_text_28.string = "x" + Owned_Gem_Array[27].amount_owned.to_s
              window.draw(Owned_Gem_Array[27].sprite); window.draw(ore_array_text_28)
             end
+           when 3 
+            if Owned_Gem_Array.size >= 46  
+             Owned_Gem_Array[45].sprite.position = SF.vector2(1005, 460);
+             ore_array_text_46 = Ore_amount_owned_text.dup
+             ore_array_text_46.position = Owned_Gem_Array[45].sprite.position + SF.vector2(100, -5)
+             ore_array_text_46.string = "x" + Owned_Gem_Array[45].amount_owned.to_s
+             window.draw(Owned_Gem_Array[45].sprite); window.draw(ore_array_text_46)
+            end
            end; end
       #----------------------------------------------------slot 11------------------------------------------
         if Owned_Gem_Array.size >= 11
@@ -2052,6 +2132,14 @@ include Equipment
              ore_array_text_29.position = Owned_Gem_Array[28].sprite.position + SF.vector2(100, -5)
              ore_array_text_29.string = "x" + Owned_Gem_Array[28].amount_owned.to_s
              window.draw(Owned_Gem_Array[28].sprite); window.draw(ore_array_text_29)
+            end
+           when 3 
+            if Owned_Gem_Array.size >= 47  
+             Owned_Gem_Array[46].sprite.position = SF.vector2(1155, 460);
+             ore_array_text_47 = Ore_amount_owned_text.dup
+             ore_array_text_47.position = Owned_Gem_Array[46].sprite.position + SF.vector2(100, -5)
+             ore_array_text_47.string = "x" + Owned_Gem_Array[46].amount_owned.to_s
+             window.draw(Owned_Gem_Array[46].sprite); window.draw(ore_array_text_47)
             end
            end; end
       #----------------------------------------------------slot 12------------------------------------------
@@ -2071,6 +2159,14 @@ include Equipment
              ore_array_text_30.string = "x" + Owned_Gem_Array[29].amount_owned.to_s
              window.draw(Owned_Gem_Array[29].sprite); window.draw(ore_array_text_30)
             end
+           when 3 
+            if Owned_Gem_Array.size >= 48  
+             Owned_Gem_Array[47].sprite.position = SF.vector2(1305, 460);
+             ore_array_text_48 = Ore_amount_owned_text.dup
+             ore_array_text_48.position = Owned_Gem_Array[47].sprite.position + SF.vector2(100, -5)
+             ore_array_text_48.string = "x" + Owned_Gem_Array[47].amount_owned.to_s
+             window.draw(Owned_Gem_Array[47].sprite); window.draw(ore_array_text_48)
+            end
            end; end
       #----------------------------------------------------slot 13------------------------------------------
         if Owned_Gem_Array.size >= 13
@@ -2088,6 +2184,14 @@ include Equipment
              ore_array_text_31.position = Owned_Gem_Array[30].sprite.position + SF.vector2(100, -5)
              ore_array_text_31.string = "x" + Owned_Gem_Array[30].amount_owned.to_s
              window.draw(Owned_Gem_Array[30].sprite); window.draw(ore_array_text_31)
+            end
+           when 3 
+            if Owned_Gem_Array.size >= 49  
+             Owned_Gem_Array[48].sprite.position = SF.vector2(555, 610);
+             ore_array_text_49 = Ore_amount_owned_text.dup
+             ore_array_text_49.position = Owned_Gem_Array[48].sprite.position + SF.vector2(100, -5)
+             ore_array_text_49.string = "x" + Owned_Gem_Array[48].amount_owned.to_s
+             window.draw(Owned_Gem_Array[48].sprite); window.draw(ore_array_text_49)
             end
            end; end
       #----------------------------------------------------slot 14------------------------------------------
@@ -2107,6 +2211,14 @@ include Equipment
             ore_array_text_32.string = "x" + Owned_Gem_Array[31].amount_owned.to_s
             window.draw(Owned_Gem_Array[31].sprite); window.draw(ore_array_text_32)
            end
+          when 3 
+            if Owned_Gem_Array.size >= 50  
+             Owned_Gem_Array[49].sprite.position = SF.vector2(710, 610);
+             ore_array_text_50 = Ore_amount_owned_text.dup
+             ore_array_text_50.position = Owned_Gem_Array[49].sprite.position + SF.vector2(100, -5)
+             ore_array_text_50.string = "x" + Owned_Gem_Array[49].amount_owned.to_s
+             window.draw(Owned_Gem_Array[49].sprite); window.draw(ore_array_text_50)
+            end
           end; end
       #----------------------------------------------------slot 15------------------------------------------
        if Owned_Gem_Array.size >= 15
@@ -2125,6 +2237,14 @@ include Equipment
             ore_array_text_33.string = "x" + Owned_Gem_Array[32].amount_owned.to_s
             window.draw(Owned_Gem_Array[32].sprite); window.draw(ore_array_text_33)
            end
+          when 3 
+            if Owned_Gem_Array.size >= 51  
+             Owned_Gem_Array[50].sprite.position = SF.vector2(855, 610);
+             ore_array_text_51 = Ore_amount_owned_text.dup
+             ore_array_text_51.position = Owned_Gem_Array[50].sprite.position + SF.vector2(100, -5)
+             ore_array_text_51.string = "x" + Owned_Gem_Array[50].amount_owned.to_s
+             window.draw(Owned_Gem_Array[50].sprite); window.draw(ore_array_text_51)
+            end
           end; end
       #----------------------------------------------------slot 16------------------------------------------
        if Owned_Gem_Array.size >= 16
@@ -2137,12 +2257,20 @@ include Equipment
            window.draw(Owned_Gem_Array[15].sprite); window.draw(ore_array_text_16)
           when 2 
            if Owned_Gem_Array.size >= 34  
-            Owned_Gem_Array[33].sprite.position = SF.vector2(855, 610);
+            Owned_Gem_Array[33].sprite.position = SF.vector2(1005, 610);
             ore_array_text_34 = Ore_amount_owned_text.dup
             ore_array_text_34.position = Owned_Gem_Array[33].sprite.position + SF.vector2(100, -5)
             ore_array_text_34.string = "x" + Owned_Gem_Array[33].amount_owned.to_s
             window.draw(Owned_Gem_Array[33].sprite); window.draw(ore_array_text_34)
            end
+          when 3 
+            if Owned_Gem_Array.size >= 52  
+             Owned_Gem_Array[51].sprite.position = SF.vector2(1005, 610);
+             ore_array_text_52 = Ore_amount_owned_text.dup
+             ore_array_text_52.position = Owned_Gem_Array[51].sprite.position + SF.vector2(100, -5)
+             ore_array_text_52.string = "x" + Owned_Gem_Array[51].amount_owned.to_s
+             window.draw(Owned_Gem_Array[51].sprite); window.draw(ore_array_text_52)
+            end
           end; end
       #----------------------------------------------------slot 17------------------------------------------
        if Owned_Gem_Array.size >= 17
@@ -2161,6 +2289,14 @@ include Equipment
             ore_array_text_35.string = "x" + Owned_Gem_Array[34].amount_owned.to_s
             window.draw(Owned_Gem_Array[34].sprite); window.draw(ore_array_text_35)
            end
+          when 3 
+            if Owned_Gem_Array.size >= 53  
+             Owned_Gem_Array[52].sprite.position = SF.vector2(1155, 610);
+             ore_array_text_53 = Ore_amount_owned_text.dup
+             ore_array_text_53.position = Owned_Gem_Array[52].sprite.position + SF.vector2(100, -5)
+             ore_array_text_53.string = "x" + Owned_Gem_Array[52].amount_owned.to_s
+             window.draw(Owned_Gem_Array[52].sprite); window.draw(ore_array_text_53)
+            end
           end; end
       #----------------------------------------------------slot 18------------------------------------------
        if Owned_Gem_Array.size >= 18
@@ -2179,6 +2315,14 @@ include Equipment
             ore_array_text_36.string = "x" + Owned_Gem_Array[35].amount_owned.to_s
             window.draw(Owned_Gem_Array[35].sprite); window.draw(ore_array_text_36)
            end
+          when 3 
+            if Owned_Gem_Array.size >= 54  
+             Owned_Gem_Array[53].sprite.position = SF.vector2(1305, 610);
+             ore_array_text_54 = Ore_amount_owned_text.dup
+             ore_array_text_54.position = Owned_Gem_Array[53].sprite.position + SF.vector2(100, -5)
+             ore_array_text_54.string = "x" + Owned_Gem_Array[53].amount_owned.to_s
+             window.draw(Owned_Gem_Array[53].sprite); window.draw(ore_array_text_54)
+            end
           end; end
      end
    #--------------------------------------------------------Gem Cutter Display-----------------------------------------------------------------------------
