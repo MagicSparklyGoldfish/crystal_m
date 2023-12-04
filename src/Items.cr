@@ -2483,6 +2483,9 @@ include Equipment
    #...............................................................Mook Jasper..............................................................................
     @@mook_jasper_gem = Gem.new("Mook Jasper", 51, Mook_Jasper_Inventory_Tablecut, "table", 1, "brown", 60, "earth", "LUK+")   
     GEM_ARRAY.push(@@mook_jasper_gem)
+   #...............................................................Mook Jasper..............................................................................
+    @@red_jasper_gem = Gem.new("Mook Jasper", 52, Red_Jasper_Inventory_Tablecut, "table", 1, "red", 60, "earth", "INT+")   
+    GEM_ARRAY.push(@@red_jasper_gem)
   #________________________________________________________________________________________________________________________________________________________
  end
 end   

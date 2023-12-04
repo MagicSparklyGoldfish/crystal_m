@@ -1444,20 +1444,36 @@
       Blood_Jasper_Inventory_Tablecut = SF::Sprite.new(BLOOD_JASPER_INVENTORY_TABLECUT_TEXTURE) 
     #''''''''''''''''''''''''''''''''''''''''''''''''''Mook Jasper''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      #---------------------------------------------------Square---------------------------------------------------------------------
-     MOOK_JASPER_INVENTORY_SQUARE_TEXTURE = SF::Texture.from_file("graphics/minerals/Mook_Jasper_Inventory_Square.png")
-     Mook_Jasper_Inventory_Square = SF::Sprite.new(MOOK_JASPER_INVENTORY_SQUARE_TEXTURE) 
-    #----------------------------------------------------Pear----------------------------------------------------------------------
-     MOOK_JASPER_INVENTORY_PEAR_TEXTURE = SF::Texture.from_file("graphics/minerals/Mook_Jasper_Inventory_Pear.png")
-     Mook_Jasper_Inventory_Pear = SF::Sprite.new(MOOK_JASPER_INVENTORY_PEAR_TEXTURE) 
-    #--------------------------------------------------Brilliant-------------------------------------------------------------------
-     MOOK_JASPER_INVENTORY_BRILLIANT_TEXTURE = SF::Texture.from_file("graphics/minerals/Mook_Jasper_Inventory_Brilliant.png")
-     Mook_Jasper_Inventory_Brilliant = SF::Sprite.new(MOOK_JASPER_INVENTORY_BRILLIANT_TEXTURE) 
-    #---------------------------------------------------Dropcut--------------------------------------------------------------------
-     MOOK_JASPER_INVENTORY_DROPCUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Mook_Jasper_Inventory_Drop.png")
-     Mook_Jasper_Inventory_Dropcut = SF::Sprite.new(MOOK_JASPER_INVENTORY_DROPCUT_TEXTURE) 
-    #--------------------------------------------------Tablecut--------------------------------------------------------------------
-     MOOK_JASPER_INVENTORY_TABLECUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Mook_Jasper_Inventory_Table.png")
-     Mook_Jasper_Inventory_Tablecut = SF::Sprite.new(MOOK_JASPER_INVENTORY_TABLECUT_TEXTURE) 
+      MOOK_JASPER_INVENTORY_SQUARE_TEXTURE = SF::Texture.from_file("graphics/minerals/Mook_Jasper_Inventory_Square.png")
+      Mook_Jasper_Inventory_Square = SF::Sprite.new(MOOK_JASPER_INVENTORY_SQUARE_TEXTURE) 
+     #----------------------------------------------------Pear----------------------------------------------------------------------
+      MOOK_JASPER_INVENTORY_PEAR_TEXTURE = SF::Texture.from_file("graphics/minerals/Mook_Jasper_Inventory_Pear.png")
+      Mook_Jasper_Inventory_Pear = SF::Sprite.new(MOOK_JASPER_INVENTORY_PEAR_TEXTURE) 
+     #--------------------------------------------------Brilliant-------------------------------------------------------------------
+      MOOK_JASPER_INVENTORY_BRILLIANT_TEXTURE = SF::Texture.from_file("graphics/minerals/Mook_Jasper_Inventory_Brilliant.png")
+      Mook_Jasper_Inventory_Brilliant = SF::Sprite.new(MOOK_JASPER_INVENTORY_BRILLIANT_TEXTURE) 
+     #---------------------------------------------------Dropcut--------------------------------------------------------------------
+      MOOK_JASPER_INVENTORY_DROPCUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Mook_Jasper_Inventory_Drop.png")
+      Mook_Jasper_Inventory_Dropcut = SF::Sprite.new(MOOK_JASPER_INVENTORY_DROPCUT_TEXTURE) 
+     #--------------------------------------------------Tablecut--------------------------------------------------------------------
+      MOOK_JASPER_INVENTORY_TABLECUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Mook_Jasper_Inventory_Table.png")
+      Mook_Jasper_Inventory_Tablecut = SF::Sprite.new(MOOK_JASPER_INVENTORY_TABLECUT_TEXTURE) 
+    #''''''''''''''''''''''''''''''''''''''''''''''''''Red Jasper''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     #---------------------------------------------------Square---------------------------------------------------------------------
+      RED_JASPER_INVENTORY_SQUARE_TEXTURE = SF::Texture.from_file("graphics/minerals/Red_Jasper_Inventory_Square.png")
+      Red_Jasper_Inventory_Square = SF::Sprite.new(RED_JASPER_INVENTORY_SQUARE_TEXTURE) 
+     #----------------------------------------------------Pear----------------------------------------------------------------------
+      RED_JASPER_INVENTORY_PEAR_TEXTURE = SF::Texture.from_file("graphics/minerals/Red_Jasper_Inventory_Pear.png")
+      Red_Jasper_Inventory_Pear = SF::Sprite.new(RED_JASPER_INVENTORY_PEAR_TEXTURE) 
+     #--------------------------------------------------Brilliant-------------------------------------------------------------------
+      RED_JASPER_INVENTORY_BRILLIANT_TEXTURE = SF::Texture.from_file("graphics/minerals/Red_Jasper_Inventory_Brilliant.png")
+      Red_Jasper_Inventory_Brilliant = SF::Sprite.new(RED_JASPER_INVENTORY_BRILLIANT_TEXTURE) 
+     #---------------------------------------------------Dropcut--------------------------------------------------------------------
+      RED_JASPER_INVENTORY_DROPCUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Red_Jasper_Inventory_Drop.png")
+      Red_Jasper_Inventory_Dropcut = SF::Sprite.new(RED_JASPER_INVENTORY_DROPCUT_TEXTURE) 
+     #--------------------------------------------------Tablecut--------------------------------------------------------------------
+      RED_JASPER_INVENTORY_TABLECUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Red_Jasper_Inventory_Table.png")
+      Red_Jasper_Inventory_Tablecut = SF::Sprite.new(RED_JASPER_INVENTORY_TABLECUT_TEXTURE) 
 #----------------------------------------------------------------------------------------------------------------------------------- 
 #                                                    Character Model
 #-----------------------------------------------------------------------------------------------------------------------------------
