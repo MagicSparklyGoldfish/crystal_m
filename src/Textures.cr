@@ -1122,6 +1122,22 @@
      #--------------------------------------------------Tablecut--------------------------------------------------------------------
       KYANITE_INVENTORY_TABLECUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Kyanite_Inventory_Table.png")
       Kyanite_Inventory_Tablecut = SF::Sprite.new(KYANITE_INVENTORY_TABLECUT_TEXTURE) 
+    #'''''''''''''''''''''''''''''''''''''''''''''''''''Sunstone''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     #---------------------------------------------------Square---------------------------------------------------------------------
+      SUNSTONE_INVENTORY_SQUARE_TEXTURE = SF::Texture.from_file("graphics/minerals/Sunstone_Inventory_Square.png")
+      Sunstone_Inventory_Square = SF::Sprite.new(SUNSTONE_INVENTORY_SQUARE_TEXTURE) 
+     #----------------------------------------------------Pear----------------------------------------------------------------------
+      SUNSTONE_INVENTORY_PEAR_TEXTURE = SF::Texture.from_file("graphics/minerals/Sunstone_Inventory_Pear.png")
+      Sunstone_Inventory_Pear = SF::Sprite.new(SUNSTONE_INVENTORY_PEAR_TEXTURE) 
+     #--------------------------------------------------Brilliant-------------------------------------------------------------------
+      SUNSTONE_INVENTORY_BRILLIANT_TEXTURE = SF::Texture.from_file("graphics/minerals/Sunstone_Inventory_Brilliant.png")
+      Sunstone_Inventory_Brilliant = SF::Sprite.new(SUNSTONE_INVENTORY_BRILLIANT_TEXTURE) 
+     #---------------------------------------------------Dropcut--------------------------------------------------------------------
+      SUNSTONE_INVENTORY_DROPCUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Sunstone_Inventory_Drop.png")
+      Sunstone_Inventory_Dropcut = SF::Sprite.new(SUNSTONE_INVENTORY_DROPCUT_TEXTURE) 
+     #--------------------------------------------------Tablecut--------------------------------------------------------------------
+      SUNSTONE_INVENTORY_TABLECUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Sunstone_Inventory_Table.png")
+      Sunstone_Inventory_Tablecut = SF::Sprite.new(SUNSTONE_INVENTORY_TABLECUT_TEXTURE) 
 #----------------------------------------------------------------------------------------------------------------------------------- 
 #                                                    Character Model
 #-----------------------------------------------------------------------------------------------------------------------------------
