@@ -1074,6 +1074,22 @@
      #--------------------------------------------------Tablecut--------------------------------------------------------------------
       BLUE_LACE_AGATE_INVENTORY_TABLECUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Blue_Lace_Agate_Inventory_Table.png")
       Blue_Lace_Agate_Inventory_Tablecut = SF::Sprite.new(BLUE_LACE_AGATE_INVENTORY_TABLECUT_TEXTURE) 
+    #''''''''''''''''''''''''''''''''''''''''''''''''''''Iolite'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     #---------------------------------------------------Square---------------------------------------------------------------------
+      IOLITE_INVENTORY_SQUARE_TEXTURE = SF::Texture.from_file("graphics/minerals/Iolite_Inventory_Square.png")
+      Iolite_Inventory_Square = SF::Sprite.new(IOLITE_INVENTORY_SQUARE_TEXTURE) 
+     #----------------------------------------------------Pear----------------------------------------------------------------------
+      IOLITE_INVENTORY_PEAR_TEXTURE = SF::Texture.from_file("graphics/minerals/Iolite_Inventory_Pear.png")
+      Iolite_Inventory_Pear = SF::Sprite.new(IOLITE_INVENTORY_PEAR_TEXTURE) 
+     #--------------------------------------------------Brilliant-------------------------------------------------------------------
+      IOLITE_INVENTORY_BRILLIANT_TEXTURE = SF::Texture.from_file("graphics/minerals/Iolite_Inventory_Brilliant.png")
+      Iolite_Inventory_Brilliant = SF::Sprite.new(IOLITE_INVENTORY_BRILLIANT_TEXTURE) 
+     #---------------------------------------------------Dropcut--------------------------------------------------------------------
+      IOLITE_INVENTORY_DROPCUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Iolite_Inventory_Drop.png")
+      Iolite_Inventory_Dropcut = SF::Sprite.new(IOLITE_INVENTORY_DROPCUT_TEXTURE) 
+     #--------------------------------------------------Tablecut--------------------------------------------------------------------
+      IOLITE_INVENTORY_TABLECUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Iolite_Inventory_Table.png")
+      Iolite_Inventory_Tablecut = SF::Sprite.new(IOLITE_INVENTORY_TABLECUT_TEXTURE) 
 #----------------------------------------------------------------------------------------------------------------------------------- 
 #                                                    Character Model
 #-----------------------------------------------------------------------------------------------------------------------------------

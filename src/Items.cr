@@ -2267,6 +2267,9 @@ include Equipment
    #.............................................................Blue Lace Agate...........................................................................
     @@blue_lace_agate_gem = Gem.new("Blue Lace Agate", 27, Blue_Lace_Agate_Inventory_Tablecut, "table", 1, "blue", 60, "air", "INT+")   
     GEM_ARRAY.push(@@blue_lace_agate_gem)
+   #.............................................................Blue Lace Agate...........................................................................
+    @@iolite_gem = Gem.new("Iolite", 28, Iolite_Inventory_Tablecut, "table", 1, "blue", 60, "air", "INT+")   
+    GEM_ARRAY.push(@@iolite_gem)
   #________________________________________________________________________________________________________________________________________________________
  end
 end   
