@@ -3115,6 +3115,10 @@ Testing_Text.character_size = 20; Testing_Text.color = SF::Color::White; Testing
  Test_Forge = SF::RectangleShape.new(SF.vector2(120, 80)); Test_Forge.set_texture(FORGE_RECTANGLE_TEXTURE, reset_rect: false)
  Test_Forge.position = SF.vector2(600, 120); #Test_Smelter.fill_color = SF.color(50, 150, 155);
 
+ GEM_CUTTER_RECTANGLE_TEXTURE = SF::Texture.from_file("graphics/Gem_Cutter_Sprite.png")
+ Test_Gem_Cutter = SF::RectangleShape.new(SF.vector2(120, 80)); Test_Gem_Cutter.set_texture(GEM_CUTTER_RECTANGLE_TEXTURE, reset_rect: false)
+ Test_Gem_Cutter.position = SF.vector2(800, 120);
+
 #--------------------------------------------------------------------------------------------------------------------------------------
 #                                                       Smelter
 #-------------------------------------------------------------------------------------------------------------------------------------- 

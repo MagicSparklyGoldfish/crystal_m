@@ -491,7 +491,7 @@ extend self
    bounding_box1 = @@player_character_rendered_model.global_bounds
    bounding_box2 = @@player_character_rendered_model.global_bounds
    ore_ground = Ground.dup; Ground.position = SF.vector2(-5000, 800); ore_platform = Ground.dup; ore_platform.scale = SF.vector2(0.5, 0.2)
-   ore_platform.position = SF.vector2(-100, 400); window.draw(Test_Smelter); window.draw(Test_Forge)
+   ore_platform.position = SF.vector2(-100, 400); window.draw(Test_Smelter); window.draw(Test_Forge); window.draw(Test_Gem_Cutter)
    window.draw(ore_ground); window.draw(@@player_character_rendered_model); window.draw(Test_Teleporter); window.draw(Test_Ladder)
    window.draw(Test_Platform_01); window.draw(Test_Platform_02); window.draw(@@test_ladder_02) #window.draw(Feet_Bounding_Box)
 
@@ -665,7 +665,10 @@ end
       Equipment::Weapon_Crafting.diplay_forge(window)
       if @@tab == "mold"
         window.draw(Forge_Mold_Option_01)
-      end
+      end 
+    end
+   if @@popup == "gem_cutter"
+      Equipment::Weapon_Crafting.diplay_forge(window)
     end
     Window_Class.hud(window)
   end
@@ -2066,6 +2069,14 @@ def Window_Class.hud_keypresses(window)
             @@popup = "forge"
             Etc::Inventory_Ingot.initialize_inventory
             @@player_character_rendered_model.position = SF.vector2(600, 75)
+          else
+            Player_Data::Player_Physics.mobilize_player
+          end
+          if player.intersects? Test_Gem_Cutter.global_bounds
+            Player_Data::Player_Physics.immobilize_player
+            @@popup = "gem_cutter"
+            Etc::Gem.initialize_gem_inventory
+            @@player_character_rendered_model.position = SF.vector2(800, 75)
           else
             Player_Data::Player_Physics.mobilize_player
           end
