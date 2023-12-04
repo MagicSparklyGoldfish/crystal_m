@@ -2477,9 +2477,12 @@ include Equipment
    #.............................................................Bumblebee Jasper...........................................................................
     @@bumblebee_jasper_gem = Gem.new("Bumblebee Jasper", 49, Bumblebee_Jasper_Inventory_Tablecut, "table", 1, "yellow", 60, "earth", "DEX+")   
     GEM_ARRAY.push(@@bumblebee_jasper_gem)
-   #.............................................................Blood Jasper...........................................................................
+   #...............................................................Blood Jasper.............................................................................
     @@blood_jasper_gem = Gem.new("Blood Jasper", 50, Blood_Jasper_Inventory_Tablecut, "table", 1, "green", 60, "earth", "STR+")   
     GEM_ARRAY.push(@@blood_jasper_gem)
+   #...............................................................Mook Jasper..............................................................................
+    @@mook_jasper_gem = Gem.new("Mook Jasper", 51, Mook_Jasper_Inventory_Tablecut, "table", 1, "brown", 60, "earth", "LUK+")   
+    GEM_ARRAY.push(@@mook_jasper_gem)
   #________________________________________________________________________________________________________________________________________________________
  end
 end   
