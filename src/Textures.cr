@@ -1250,6 +1250,22 @@
      #--------------------------------------------------Tablecut--------------------------------------------------------------------
       RUBY_INVENTORY_TABLECUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Ruby_Inventory_Table.png")
       Ruby_Inventory_Tablecut = SF::Sprite.new(RUBY_INVENTORY_TABLECUT_TEXTURE) 
+    #'''''''''''''''''''''''''''''''''''''''''''''''''Cherry Quartz'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     #---------------------------------------------------Square---------------------------------------------------------------------
+      CHERRY_QUARTZ_INVENTORY_SQUARE_TEXTURE = SF::Texture.from_file("graphics/minerals/Cherry_Quartz_Inventory_Square.png")
+      Cherry_Quartz_Inventory_Square = SF::Sprite.new(CHERRY_QUARTZ_INVENTORY_SQUARE_TEXTURE) 
+     #----------------------------------------------------Pear----------------------------------------------------------------------
+      CHERRY_QUARTZ_INVENTORY_PEAR_TEXTURE = SF::Texture.from_file("graphics/minerals/Cherry_Quartz_Inventory_Pear.png")
+      Cherry_Quartz_Inventory_Pear = SF::Sprite.new(CHERRY_QUARTZ_INVENTORY_PEAR_TEXTURE) 
+     #--------------------------------------------------Brilliant-------------------------------------------------------------------
+      CHERRY_QUARTZ_INVENTORY_BRILLIANT_TEXTURE = SF::Texture.from_file("graphics/minerals/Cherry_Quartz_Inventory_Brilliant.png")
+      Cherry_Quartz_Inventory_Brilliant = SF::Sprite.new(CHERRY_QUARTZ_INVENTORY_BRILLIANT_TEXTURE) 
+     #---------------------------------------------------Dropcut--------------------------------------------------------------------
+      CHERRY_QUARTZ_INVENTORY_DROPCUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Cherry_Quartz_Inventory_Drop.png")
+      Cherry_Quartz_Inventory_Dropcut = SF::Sprite.new(CHERRY_QUARTZ_INVENTORY_DROPCUT_TEXTURE) 
+     #--------------------------------------------------Tablecut--------------------------------------------------------------------
+      CHERRY_QUARTZ_INVENTORY_TABLECUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Cherry_Quartz_Inventory_Table.png")
+      Cherry_Quartz_Inventory_Tablecut = SF::Sprite.new(CHERRY_QUARTZ_INVENTORY_TABLECUT_TEXTURE) 
 #----------------------------------------------------------------------------------------------------------------------------------- 
 #                                                    Character Model
 #-----------------------------------------------------------------------------------------------------------------------------------
