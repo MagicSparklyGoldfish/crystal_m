@@ -1298,6 +1298,22 @@
      #--------------------------------------------------Tablecut--------------------------------------------------------------------
       TURQUOISE_INVENTORY_TABLECUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Turquoise_Inventory_Table.png")
       Turquoise_Inventory_Tablecut = SF::Sprite.new(TURQUOISE_INVENTORY_TABLECUT_TEXTURE) 
+    #''''''''''''''''''''''''''''''''''''''''''''''''''Tiger's Eye''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     #---------------------------------------------------Square---------------------------------------------------------------------
+      TIGERS_EYE_INVENTORY_SQUARE_TEXTURE = SF::Texture.from_file("graphics/minerals/Tiger's_Eye_Inventory_Square.png")
+      Tigers_eye_Inventory_Square = SF::Sprite.new(TIGERS_EYE_INVENTORY_SQUARE_TEXTURE) 
+     #----------------------------------------------------Pear----------------------------------------------------------------------
+      TIGERS_EYE_INVENTORY_PEAR_TEXTURE = SF::Texture.from_file("graphics/minerals/Tiger's_Eye_Inventory_Pear.png")
+      Tigers_eye_Inventory_Pear = SF::Sprite.new(TIGERS_EYE_INVENTORY_PEAR_TEXTURE) 
+     #--------------------------------------------------Brilliant-------------------------------------------------------------------
+      TIGERS_EYE_INVENTORY_BRILLIANT_TEXTURE = SF::Texture.from_file("graphics/minerals/Tiger's_Eye_Inventory_Brilliant.png")
+      Tigers_eye_Inventory_Brilliant = SF::Sprite.new(TIGERS_EYE_INVENTORY_BRILLIANT_TEXTURE) 
+     #---------------------------------------------------Dropcut--------------------------------------------------------------------
+      TIGERS_EYE_INVENTORY_DROPCUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Tiger's_Eye_Inventory_Drop.png")
+      Tigers_eye_Inventory_Dropcut = SF::Sprite.new(TIGERS_EYE_INVENTORY_DROPCUT_TEXTURE) 
+     #--------------------------------------------------Tablecut--------------------------------------------------------------------
+      TIGERS_EYE_INVENTORY_TABLECUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Tiger's_Eye_Inventory_Table.png")
+      Tigers_eye_Inventory_Tablecut = SF::Sprite.new(TIGERS_EYE_INVENTORY_TABLECUT_TEXTURE) 
 #----------------------------------------------------------------------------------------------------------------------------------- 
 #                                                    Character Model
 #-----------------------------------------------------------------------------------------------------------------------------------
