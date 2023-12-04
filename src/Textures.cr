@@ -1202,6 +1202,22 @@
      #--------------------------------------------------Tablecut--------------------------------------------------------------------
       RED_SPINEL_INVENTORY_TABLECUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Red_Spinel_Inventory_Table.png")
       Red_Spinel_Inventory_Tablecut = SF::Sprite.new(RED_SPINEL_INVENTORY_TABLECUT_TEXTURE) 
+    #''''''''''''''''''''''''''''''''''''''''''''''''''Fire Opal''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     #---------------------------------------------------Square---------------------------------------------------------------------
+      FIRE_OPAL_INVENTORY_SQUARE_TEXTURE = SF::Texture.from_file("graphics/minerals/Fire_Opal_Inventory_Square.png")
+      Fire_Opal_Inventory_Square = SF::Sprite.new(FIRE_OPAL_INVENTORY_SQUARE_TEXTURE) 
+     #----------------------------------------------------Pear----------------------------------------------------------------------
+      FIRE_OPAL_INVENTORY_PEAR_TEXTURE = SF::Texture.from_file("graphics/minerals/Fire_Opal_Inventory_Pear.png")
+      Fire_Opal_Inventory_Pear = SF::Sprite.new(FIRE_OPAL_INVENTORY_PEAR_TEXTURE) 
+     #--------------------------------------------------Brilliant-------------------------------------------------------------------
+      FIRE_OPAL_INVENTORY_BRILLIANT_TEXTURE = SF::Texture.from_file("graphics/minerals/Fire_Opal_Inventory_Brilliant.png")
+      Fire_Opal_Inventory_Brilliant = SF::Sprite.new(FIRE_OPAL_INVENTORY_BRILLIANT_TEXTURE) 
+     #---------------------------------------------------Dropcut--------------------------------------------------------------------
+      FIRE_OPAL_INVENTORY_DROPCUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Fire_Opal_Inventory_Drop.png")
+      Fire_Opal_Inventory_Dropcut = SF::Sprite.new(FIRE_OPAL_INVENTORY_DROPCUT_TEXTURE) 
+     #--------------------------------------------------Tablecut--------------------------------------------------------------------
+      FIRE_OPAL_INVENTORY_TABLECUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Fire_Opal_Inventory_Table.png")
+      Fire_Opal_Inventory_Tablecut = SF::Sprite.new(FIRE_OPAL_INVENTORY_TABLECUT_TEXTURE) 
 #----------------------------------------------------------------------------------------------------------------------------------- 
 #                                                    Character Model
 #-----------------------------------------------------------------------------------------------------------------------------------
