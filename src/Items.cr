@@ -2439,8 +2439,11 @@ include Equipment
     @@fire_opal_gem = Gem.new("Fire Opal", 36, Fire_Opal_Inventory_Tablecut, "table", 1, "orange", 60, "fire", "HP+")   
     GEM_ARRAY.push(@@fire_opal_gem)
    #..................................................................Garnet................................................................................
-    @@garnet_gem = Gem.new("Fire Opal", 37, Garnet_Inventory_Tablecut, "table", 1, "red", 60, "fire", "HP+")   
+    @@garnet_gem = Gem.new("Garnet", 37, Garnet_Inventory_Tablecut, "table", 1, "red", 60, "fire", "HP+")   
     GEM_ARRAY.push(@@garnet_gem)
+   #...................................................................Ruby.................................................................................
+    @@ruby_gem = Gem.new("Ruby", 38, Ruby_Inventory_Tablecut, "table", 1, "red", 60, "fire", "STR+")   
+    GEM_ARRAY.push(@@ruby_gem)
   #________________________________________________________________________________________________________________________________________________________
  end
 end   

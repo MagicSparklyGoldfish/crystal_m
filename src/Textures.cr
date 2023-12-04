@@ -1234,6 +1234,22 @@
      #--------------------------------------------------Tablecut--------------------------------------------------------------------
       GARNET_INVENTORY_TABLECUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Garnet_Inventory_Table.png")
       Garnet_Inventory_Tablecut = SF::Sprite.new(GARNET_INVENTORY_TABLECUT_TEXTURE) 
+    #'''''''''''''''''''''''''''''''''''''''''''''''''''''Ruby''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     #---------------------------------------------------Square---------------------------------------------------------------------
+      RUBY_INVENTORY_SQUARE_TEXTURE = SF::Texture.from_file("graphics/minerals/Ruby_Inventory_Square.png")
+      Ruby_Inventory_Square = SF::Sprite.new(RUBY_INVENTORY_SQUARE_TEXTURE) 
+     #----------------------------------------------------Pear----------------------------------------------------------------------
+      RUBY_INVENTORY_PEAR_TEXTURE = SF::Texture.from_file("graphics/minerals/Ruby_Inventory_Pear.png")
+      Ruby_Inventory_Pear = SF::Sprite.new(RUBY_INVENTORY_PEAR_TEXTURE) 
+     #--------------------------------------------------Brilliant-------------------------------------------------------------------
+      RUBY_INVENTORY_BRILLIANT_TEXTURE = SF::Texture.from_file("graphics/minerals/Ruby_Inventory_Brilliant.png")
+      Ruby_Inventory_Brilliant = SF::Sprite.new(RUBY_INVENTORY_BRILLIANT_TEXTURE) 
+     #---------------------------------------------------Dropcut--------------------------------------------------------------------
+      RUBY_INVENTORY_DROPCUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Ruby_Inventory_Drop.png")
+      Ruby_Inventory_Dropcut = SF::Sprite.new(RUBY_INVENTORY_DROPCUT_TEXTURE) 
+     #--------------------------------------------------Tablecut--------------------------------------------------------------------
+      RUBY_INVENTORY_TABLECUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Ruby_Inventory_Table.png")
+      Ruby_Inventory_Tablecut = SF::Sprite.new(RUBY_INVENTORY_TABLECUT_TEXTURE) 
 #----------------------------------------------------------------------------------------------------------------------------------- 
 #                                                    Character Model
 #-----------------------------------------------------------------------------------------------------------------------------------
