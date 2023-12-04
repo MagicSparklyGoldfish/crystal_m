@@ -1282,6 +1282,22 @@
      #--------------------------------------------------Tablecut--------------------------------------------------------------------
       LEMON_QUARTZ_INVENTORY_TABLECUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Lemon_Quartz_Inventory_Table.png")
       Lemon_Quartz_Inventory_Tablecut = SF::Sprite.new(LEMON_QUARTZ_INVENTORY_TABLECUT_TEXTURE) 
+    #'''''''''''''''''''''''''''''''''''''''''''''''''''Turquoise'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     #---------------------------------------------------Square---------------------------------------------------------------------
+      TURQUOISE_INVENTORY_SQUARE_TEXTURE = SF::Texture.from_file("graphics/minerals/Turquoise_Inventory_Square.png")
+      Turquoise_Inventory_Square = SF::Sprite.new(TURQUOISE_INVENTORY_SQUARE_TEXTURE) 
+     #----------------------------------------------------Pear----------------------------------------------------------------------
+      TURQUOISE_INVENTORY_PEAR_TEXTURE = SF::Texture.from_file("graphics/minerals/Turquoise_Inventory_Pear.png")
+      Turquoise_Inventory_Pear = SF::Sprite.new(TURQUOISE_INVENTORY_PEAR_TEXTURE) 
+     #--------------------------------------------------Brilliant-------------------------------------------------------------------
+      TURQUOISE_INVENTORY_BRILLIANT_TEXTURE = SF::Texture.from_file("graphics/minerals/Turquoise_Inventory_Brilliant.png")
+      Turquoise_Inventory_Brilliant = SF::Sprite.new(TURQUOISE_INVENTORY_BRILLIANT_TEXTURE) 
+     #---------------------------------------------------Dropcut--------------------------------------------------------------------
+      TURQUOISE_INVENTORY_DROPCUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Turquoise_Inventory_Drop.png")
+      Turquoise_Inventory_Dropcut = SF::Sprite.new(TURQUOISE_INVENTORY_DROPCUT_TEXTURE) 
+     #--------------------------------------------------Tablecut--------------------------------------------------------------------
+      TURQUOISE_INVENTORY_TABLECUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Turquoise_Inventory_Table.png")
+      Turquoise_Inventory_Tablecut = SF::Sprite.new(TURQUOISE_INVENTORY_TABLECUT_TEXTURE) 
 #----------------------------------------------------------------------------------------------------------------------------------- 
 #                                                    Character Model
 #-----------------------------------------------------------------------------------------------------------------------------------
