@@ -1090,6 +1090,22 @@
      #--------------------------------------------------Tablecut--------------------------------------------------------------------
       IOLITE_INVENTORY_TABLECUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Iolite_Inventory_Table.png")
       Iolite_Inventory_Tablecut = SF::Sprite.new(IOLITE_INVENTORY_TABLECUT_TEXTURE) 
+    #'''''''''''''''''''''''''''''''''''''''''''''''''''Sodalite''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     #---------------------------------------------------Square---------------------------------------------------------------------
+      SODALITE_INVENTORY_SQUARE_TEXTURE = SF::Texture.from_file("graphics/minerals/Sodalite_Inventory_Square.png")
+      Sodalite_Inventory_Square = SF::Sprite.new(SODALITE_INVENTORY_SQUARE_TEXTURE) 
+     #----------------------------------------------------Pear----------------------------------------------------------------------
+      SODALITE_INVENTORY_PEAR_TEXTURE = SF::Texture.from_file("graphics/minerals/Sodalite_Inventory_Pear.png")
+      Sodalite_Inventory_Pear = SF::Sprite.new(SODALITE_INVENTORY_PEAR_TEXTURE) 
+     #--------------------------------------------------Brilliant-------------------------------------------------------------------
+      SODALITE_INVENTORY_BRILLIANT_TEXTURE = SF::Texture.from_file("graphics/minerals/Sodalite_Inventory_Brilliant.png")
+      Sodalite_Inventory_Brilliant = SF::Sprite.new(SODALITE_INVENTORY_BRILLIANT_TEXTURE) 
+     #---------------------------------------------------Dropcut--------------------------------------------------------------------
+      SODALITE_INVENTORY_DROPCUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Sodalite_Inventory_Drop.png")
+      Sodalite_Inventory_Dropcut = SF::Sprite.new(SODALITE_INVENTORY_DROPCUT_TEXTURE) 
+     #--------------------------------------------------Tablecut--------------------------------------------------------------------
+      SODALITE_INVENTORY_TABLECUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Sodalite_Inventory_Table.png")
+      Sodalite_Inventory_Tablecut = SF::Sprite.new(SODALITE_INVENTORY_TABLECUT_TEXTURE) 
 #----------------------------------------------------------------------------------------------------------------------------------- 
 #                                                    Character Model
 #-----------------------------------------------------------------------------------------------------------------------------------
