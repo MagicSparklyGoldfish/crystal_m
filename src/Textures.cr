@@ -1010,6 +1010,22 @@
      #--------------------------------------------------Tablecut--------------------------------------------------------------------
       TIFFANY_STONE_INVENTORY_TABLECUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Tiffany_Stone_Inventory_Table.png")
       Tiffany_Stone_Inventory_Tablecut = SF::Sprite.new(TIFFANY_STONE_INVENTORY_TABLECUT_TEXTURE) 
+    #'''''''''''''''''''''''''''''''''''''''''''''''''''Azurite'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     #---------------------------------------------------Square---------------------------------------------------------------------
+      AZURITE_INVENTORY_SQUARE_TEXTURE = SF::Texture.from_file("graphics/minerals/Azurite_Inventory_Square.png")
+      Azurite_Inventory_Square = SF::Sprite.new(AZURITE_INVENTORY_SQUARE_TEXTURE) 
+     #----------------------------------------------------Pear----------------------------------------------------------------------
+      AZURITE_INVENTORY_PEAR_TEXTURE = SF::Texture.from_file("graphics/minerals/Azurite_Inventory_Pear.png")
+      Azurite_Inventory_Pear = SF::Sprite.new(AZURITE_INVENTORY_PEAR_TEXTURE) 
+     #--------------------------------------------------Brilliant-------------------------------------------------------------------
+      AZURITE_INVENTORY_BRILLIANT_TEXTURE = SF::Texture.from_file("graphics/minerals/Azurite_Inventory_Brilliant.png")
+      Azurite_Inventory_Brilliant = SF::Sprite.new(AZURITE_INVENTORY_BRILLIANT_TEXTURE) 
+     #---------------------------------------------------Dropcut--------------------------------------------------------------------
+      AZURITE_INVENTORY_DROPCUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Azurite_Inventory_Drop.png")
+      Azurite_Inventory_Dropcut = SF::Sprite.new(AZURITE_INVENTORY_DROPCUT_TEXTURE) 
+     #--------------------------------------------------Tablecut--------------------------------------------------------------------
+      AZURITE_INVENTORY_TABLECUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Azurite_Inventory_Table.png")
+      Azurite_Inventory_Tablecut = SF::Sprite.new(AZURITE_INVENTORY_TABLECUT_TEXTURE) 
 #----------------------------------------------------------------------------------------------------------------------------------- 
 #                                                    Character Model
 #-----------------------------------------------------------------------------------------------------------------------------------

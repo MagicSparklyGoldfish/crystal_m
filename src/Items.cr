@@ -2252,9 +2252,12 @@ include Equipment
    #..............................................................Hemimorphite.............................................................................
     @@hemimorphite_gem = Gem.new("Hemimorphite", 21, Hemimorphite_Inventory_Tablecut, "table", 1, "blue", 60, "air", "INT+")   
     GEM_ARRAY.push(@@hemimorphite_gem)
-   #..............................................................Tiffany_Stone.............................................................................
-    @@tiffany_stone_gem = Gem.new("Tiffany_Stone", 22, Tiffany_Stone_Inventory_Tablecut, "table", 1, "purple", 60, "air", "LUK+")   
+   #..............................................................Tiffany Stone............................................................................
+    @@tiffany_stone_gem = Gem.new("Tiffany Stone", 22, Tiffany_Stone_Inventory_Tablecut, "table", 1, "purple", 60, "air", "LUK+")   
     GEM_ARRAY.push(@@tiffany_stone_gem)
+   #................................................................Azurite................................................................................
+    @@azurite_gem = Gem.new("Azurite", 23, Azurite_Inventory_Tablecut, "table", 1, "blue", 60, "air", "DEX+")   
+    GEM_ARRAY.push(@@azurite_gem)
   #________________________________________________________________________________________________________________________________________________________
  end
 end   
