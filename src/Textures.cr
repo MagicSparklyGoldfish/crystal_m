@@ -1154,6 +1154,22 @@
      #--------------------------------------------------Tablecut--------------------------------------------------------------------
       BONY_AMBER_INVENTORY_TABLECUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Bony_Amber_Inventory_Table.png")
       Bony_Amber_Inventory_Tablecut = SF::Sprite.new(BONY_AMBER_INVENTORY_TABLECUT_TEXTURE) 
+    #''''''''''''''''''''''''''''''''''''''''''''''''''Blue Amber'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     #---------------------------------------------------Square---------------------------------------------------------------------
+     BLUE_AMBER_INVENTORY_SQUARE_TEXTURE = SF::Texture.from_file("graphics/minerals/Blue_Amber_Inventory_Square.png")
+     Blue_Amber_Inventory_Square = SF::Sprite.new(BLUE_AMBER_INVENTORY_SQUARE_TEXTURE) 
+    #----------------------------------------------------Pear----------------------------------------------------------------------
+     BLUE_AMBER_INVENTORY_PEAR_TEXTURE = SF::Texture.from_file("graphics/minerals/Blue_Amber_Inventory_Pear.png")
+     Blue_Amber_Inventory_Pear = SF::Sprite.new(BLUE_AMBER_INVENTORY_PEAR_TEXTURE) 
+    #--------------------------------------------------Brilliant-------------------------------------------------------------------
+     BLUE_AMBER_INVENTORY_BRILLIANT_TEXTURE = SF::Texture.from_file("graphics/minerals/Blue_Amber_Inventory_Brilliant.png")
+     Blue_Amber_Inventory_Brilliant = SF::Sprite.new(BLUE_AMBER_INVENTORY_BRILLIANT_TEXTURE) 
+    #---------------------------------------------------Dropcut--------------------------------------------------------------------
+     BLUE_AMBER_INVENTORY_DROPCUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Blue_Amber_Inventory_Drop.png")
+     Blue_Amber_Inventory_Dropcut = SF::Sprite.new(BLUE_AMBER_INVENTORY_DROPCUT_TEXTURE) 
+    #--------------------------------------------------Tablecut--------------------------------------------------------------------
+     BLUE_AMBER_INVENTORY_TABLECUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Blue_Amber_Inventory_Table.png")
+     Blue_Amber_Inventory_Tablecut = SF::Sprite.new(BLUE_AMBER_INVENTORY_TABLECUT_TEXTURE) 
 #----------------------------------------------------------------------------------------------------------------------------------- 
 #                                                    Character Model
 #-----------------------------------------------------------------------------------------------------------------------------------
