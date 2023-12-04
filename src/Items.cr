@@ -1475,7 +1475,7 @@ include Equipment
        @@emerald = Inventory_Ore.new("Emerald", 47, Emerald_Inventory_Ore, 1, "green", "earth", "EXP++", 70)
        Ore_Array.push(@@emerald)
       #---------------------------------------------------------------Painite------------------------------------------------------------------------------- 
-       @@painite = Inventory_Ore.new("Painite", 48, Painite_Inventory_Ore, 1, "green", "earth", "EXP+++", 70)
+       @@painite = Inventory_Ore.new("Painite", 48, Painite_Inventory_Ore, 1, "red", "earth", "EXP+++", 70)
        Ore_Array.push(@@painite)
       #----------------------------------------------------------Bumblebee Jasper--------------------------------------------------------------------------- 
        @@bumblebee_jasper = Inventory_Ore.new("Bumblebee Jasper", 49, Bumblebee_Jasper_Inventory_Ore, 1, "yellow", "earth", "DEX+", 70)
@@ -2468,9 +2468,12 @@ include Equipment
    #.................................................................Diamond................................................................................
     @@diamond_gem = Gem.new("Diamond", 46, Diamond_Inventory_Tablecut, "table", 1, "white", 60, "earth", "DROP+++")   
     GEM_ARRAY.push(@@diamond_gem)
-   #.................................................................Diamond................................................................................
-   @@emerald_gem = Gem.new("Emerald", 47, Emerald_Inventory_Tablecut, "table", 1, "green", 60, "earth", "EXP++")   
-   GEM_ARRAY.push(@@emerald_gem)
+   #.................................................................Emerald................................................................................
+    @@emerald_gem = Gem.new("Emerald", 47, Emerald_Inventory_Tablecut, "table", 1, "green", 60, "earth", "EXP++")   
+    GEM_ARRAY.push(@@emerald_gem)
+   #.................................................................Painite................................................................................
+    @@painite_gem = Gem.new("Painite", 48, Painite_Inventory_Tablecut, "table", 1, "red", 60, "earth", "EXP+++")   
+    GEM_ARRAY.push(@@painite_gem)
   #________________________________________________________________________________________________________________________________________________________
  end
 end   

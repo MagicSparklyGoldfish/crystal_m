@@ -1394,6 +1394,22 @@
      #--------------------------------------------------Tablecut--------------------------------------------------------------------
       EMERALD_INVENTORY_TABLECUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Emerald_Inventory_Table.png")
       Emerald_Inventory_Tablecut = SF::Sprite.new(EMERALD_INVENTORY_TABLECUT_TEXTURE) 
+    #''''''''''''''''''''''''''''''''''''''''''''''''''''Painite''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     #---------------------------------------------------Square---------------------------------------------------------------------
+      PAINITE_INVENTORY_SQUARE_TEXTURE = SF::Texture.from_file("graphics/minerals/Painite_Inventory_Square.png")
+      Painite_Inventory_Square = SF::Sprite.new(PAINITE_INVENTORY_SQUARE_TEXTURE) 
+     #----------------------------------------------------Pear----------------------------------------------------------------------
+      PAINITE_INVENTORY_PEAR_TEXTURE = SF::Texture.from_file("graphics/minerals/Painite_Inventory_Pear.png")
+      Painite_Inventory_Pear = SF::Sprite.new(PAINITE_INVENTORY_PEAR_TEXTURE) 
+     #--------------------------------------------------Brilliant-------------------------------------------------------------------
+      PAINITE_INVENTORY_BRILLIANT_TEXTURE = SF::Texture.from_file("graphics/minerals/Painite_Inventory_Brilliant.png")
+      Painite_Inventory_Brilliant = SF::Sprite.new(PAINITE_INVENTORY_BRILLIANT_TEXTURE) 
+     #---------------------------------------------------Dropcut--------------------------------------------------------------------
+      PAINITE_INVENTORY_DROPCUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Painite_Inventory_Drop.png")
+      Painite_Inventory_Dropcut = SF::Sprite.new(PAINITE_INVENTORY_DROPCUT_TEXTURE) 
+     #--------------------------------------------------Tablecut--------------------------------------------------------------------
+      PAINITE_INVENTORY_TABLECUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Painite_Inventory_Table.png")
+      Painite_Inventory_Tablecut = SF::Sprite.new(PAINITE_INVENTORY_TABLECUT_TEXTURE) 
 #----------------------------------------------------------------------------------------------------------------------------------- 
 #                                                    Character Model
 #-----------------------------------------------------------------------------------------------------------------------------------
