@@ -69,6 +69,9 @@ extend self
   @@attacking : Bool; @@attacking = false
   @@idleframes = 0
   @@idle_animation_frames = 0
+  @@is_walking : Bool; @@is_walking = false
+  WALK_TIMER = SF::Clock.new
+  @@airborn : Bool; @@airborn = false
  #_______________________________________________________________________________________________________________________________________+
  #-----------------------------------------------------Character Model Variables---------------------------------------------------------+
   @@player_character_model = SF::RenderTexture.new(672, 512)
@@ -240,11 +243,13 @@ extend self
    window.draw(LVL_Box); window.draw(LVL_Bar); window.draw(LVL_Bar_Color); window.draw(EXP_Label); window.draw(MP_Bar) 
    window.draw(MP_Bar_Color); window.draw(MP_Label); window.draw(HP_Bar); 
    window.draw(HP_Bar_Color); window.draw(HP_Label); window.draw(LVL_Label)
-   if @@idle == true 
+   if @@idle == true && @@airborn == false
     @@idleframes += 1
     if @@idleframes >= 2200 && @@current_direction == "right"
+      @@is_walking = false
     Window_Class.idle_animation_right(window)
     else if @@idleframes >= 2200 && @@current_direction == "left"
+      @@is_walking = false
       Window_Class.idle_animation_left(window)
     end
     end
@@ -645,11 +650,27 @@ def Window_Class.ladder_test_ore_map
     if @@attacking == false
       attack = false
     end
-end
-
+   end
+ def Window_Class.is_walking(walking)
+   @@is_walking = walking
+  end
+ def Window_Class.is_airborn(airborn)
+  @@airborn = airborn
+ end
 #/////////////////////////////////////////////////////////////Draw//////////////////////////////////////////////////////////////////////+
 
-  def Window_Class.map(debug_draw, window)
+  def Window_Class.map(debug_draw, window) #@note player movement
+    walk_time = WALK_TIMER.elapsed_time
+   if @@map != "none" && @@is_walking == true && walk_time > SF.seconds(0.025)
+    case @@current_direction
+      when "right"
+        Player_Data::Player_Physics.wasd_right(@@player_character_rendered_model)
+        WALK_TIMER.restart
+      when "left"
+        Player_Data::Player_Physics.wasd_left(@@player_character_rendered_model)
+        WALK_TIMER.restart
+     end
+    end
    case @@map
     when "test"
       Window_Class.test_map(debug_draw, window, @@space)
@@ -2085,7 +2106,9 @@ def Window_Class.hud_keypresses(window)
       when SF::Keyboard::D
         @@idleframes = 0
         @@attacking = false
-        Player_Data::Player_Physics.wasd_right(@@player_character_rendered_model)
+        walking = true
+        Gui::Window_Class.is_walking(walking)
+        #Player_Data::Player_Physics.wasd_right(@@player_character_rendered_model)
         if @@current_direction == "left"
         this = "right"
         Window_Class.change_direction(this)
@@ -2095,7 +2118,9 @@ def Window_Class.hud_keypresses(window)
       when SF::Keyboard::A
         @@idleframes = 0
         @@attacking = false
-        Player_Data::Player_Physics.wasd_left(@@player_character_rendered_model)
+        walking = true
+        Gui::Window_Class.is_walking(walking)
+        #Player_Data::Player_Physics.wasd_left(@@player_character_rendered_model)
         if @@current_direction == "right"
         this = "left"
         Window_Class.change_direction(this)
@@ -2104,6 +2129,8 @@ def Window_Class.hud_keypresses(window)
       when SF::Keyboard::W
         @@idleframes = 0
         @@attacking = false
+        airborn = true
+        Gui::Window_Class.is_airborn(airborn)
         Player_Data::Player_Physics.wasd_up(@@player_character_rendered_model, window)
 
       when SF::Keyboard::S
@@ -2488,12 +2515,16 @@ end; end; end; end; end; end
      #---------------------------------------------------------------------------------------------------------------------------------+
 
      if @@player_bounding_box.intersects? test_platform_array[@@gravity_iterator] #ground_box
+       airborn = false
+       Gui::Window_Class.is_airborn(airborn)
        @@player_jumped = false
        @@is_player_airborne = false
        @@fallrate = 0  
        @@gravity_clock.restart    
      else
        @@is_player_airborne = true
+       airborn = true
+       Gui::Window_Class.is_airborn(airborn)
        if gravity >= SF.seconds(0.01)
          @@player_character_rendered_model.position += SF.vector2(0, 0.95)
          if SF::Keyboard.key_pressed?(SF::Keyboard::A)
