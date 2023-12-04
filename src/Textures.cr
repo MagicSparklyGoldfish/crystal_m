@@ -1106,6 +1106,22 @@
      #--------------------------------------------------Tablecut--------------------------------------------------------------------
       SODALITE_INVENTORY_TABLECUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Sodalite_Inventory_Table.png")
       Sodalite_Inventory_Tablecut = SF::Sprite.new(SODALITE_INVENTORY_TABLECUT_TEXTURE) 
+    #''''''''''''''''''''''''''''''''''''''''''''''''''''Kyanite''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     #---------------------------------------------------Square---------------------------------------------------------------------
+      KYANITE_INVENTORY_SQUARE_TEXTURE = SF::Texture.from_file("graphics/minerals/Kyanite_Inventory_Square.png")
+      Kyanite_Inventory_Square = SF::Sprite.new(KYANITE_INVENTORY_SQUARE_TEXTURE) 
+     #----------------------------------------------------Pear----------------------------------------------------------------------
+      KYANITE_INVENTORY_PEAR_TEXTURE = SF::Texture.from_file("graphics/minerals/Kyanite_Inventory_Pear.png")
+      Kyanite_Inventory_Pear = SF::Sprite.new(KYANITE_INVENTORY_PEAR_TEXTURE) 
+     #--------------------------------------------------Brilliant-------------------------------------------------------------------
+      KYANITE_INVENTORY_BRILLIANT_TEXTURE = SF::Texture.from_file("graphics/minerals/Kyanite_Inventory_Brilliant.png")
+      Kyanite_Inventory_Brilliant = SF::Sprite.new(KYANITE_INVENTORY_BRILLIANT_TEXTURE) 
+     #---------------------------------------------------Dropcut--------------------------------------------------------------------
+      KYANITE_INVENTORY_DROPCUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Kyanite_Inventory_Drop.png")
+      Kyanite_Inventory_Dropcut = SF::Sprite.new(KYANITE_INVENTORY_DROPCUT_TEXTURE) 
+     #--------------------------------------------------Tablecut--------------------------------------------------------------------
+      KYANITE_INVENTORY_TABLECUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Kyanite_Inventory_Table.png")
+      Kyanite_Inventory_Tablecut = SF::Sprite.new(KYANITE_INVENTORY_TABLECUT_TEXTURE) 
 #----------------------------------------------------------------------------------------------------------------------------------- 
 #                                                    Character Model
 #-----------------------------------------------------------------------------------------------------------------------------------

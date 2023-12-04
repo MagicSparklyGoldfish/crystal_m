@@ -2271,8 +2271,11 @@ include Equipment
     @@iolite_gem = Gem.new("Iolite", 28, Iolite_Inventory_Tablecut, "table", 1, "blue", 60, "air", "INT+")   
     GEM_ARRAY.push(@@iolite_gem)
    #.................................................................Sodalite..............................................................................
-    @@sodalite_gem = Gem.new("Iolite", 29, Sodalite_Inventory_Tablecut, "table", 1, "blue", 60, "air", "passive_mp_regen")   
+    @@sodalite_gem = Gem.new("Sodalite", 29, Sodalite_Inventory_Tablecut, "table", 1, "blue", 60, "air", "passive_mp_regen")   
     GEM_ARRAY.push(@@sodalite_gem)
+   #.................................................................Sodalite..............................................................................
+    @@kyanite_gem = Gem.new("Kyanite", 30, Kyanite_Inventory_Tablecut, "table", 1, "blue", 60, "air", "LUK+")   
+    GEM_ARRAY.push(@@kyanite_gem)
   #________________________________________________________________________________________________________________________________________________________
  end
 end   
