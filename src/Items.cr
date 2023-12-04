@@ -2447,6 +2447,9 @@ include Equipment
    #...............................................................Cherry Quartz............................................................................
     @@cherry_quartz_gem = Gem.new("Cherry Quartz", 39, Cherry_Quartz_Inventory_Tablecut, "table", 1, "red", 60, "fire", "HP+")   
     GEM_ARRAY.push(@@cherry_quartz_gem)
+   #...............................................................Lemon Quartz.............................................................................
+    @@lemon_quartz_gem = Gem.new("Lemon Quartz", 39, Lemon_Quartz_Inventory_Tablecut, "table", 1, "yellow", 60, "fire", "drop_rate+")   
+    GEM_ARRAY.push(@@lemon_quartz_gem)
   #________________________________________________________________________________________________________________________________________________________
  end
 end   

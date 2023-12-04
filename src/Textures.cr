@@ -1266,6 +1266,22 @@
      #--------------------------------------------------Tablecut--------------------------------------------------------------------
       CHERRY_QUARTZ_INVENTORY_TABLECUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Cherry_Quartz_Inventory_Table.png")
       Cherry_Quartz_Inventory_Tablecut = SF::Sprite.new(CHERRY_QUARTZ_INVENTORY_TABLECUT_TEXTURE) 
+    #'''''''''''''''''''''''''''''''''''''''''''''''''Lemon Quartz'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     #---------------------------------------------------Square---------------------------------------------------------------------
+      LEMON_QUARTZ_INVENTORY_SQUARE_TEXTURE = SF::Texture.from_file("graphics/minerals/Lemon_Quartz_Inventory_Square.png")
+      Lemon_Quartz_Inventory_Square = SF::Sprite.new(LEMON_QUARTZ_INVENTORY_SQUARE_TEXTURE) 
+     #----------------------------------------------------Pear----------------------------------------------------------------------
+      LEMON_QUARTZ_INVENTORY_PEAR_TEXTURE = SF::Texture.from_file("graphics/minerals/Lemon_Quartz_Inventory_Pear.png")
+      Lemon_Quartz_Inventory_Pear = SF::Sprite.new(LEMON_QUARTZ_INVENTORY_PEAR_TEXTURE) 
+     #--------------------------------------------------Brilliant-------------------------------------------------------------------
+      LEMON_QUARTZ_INVENTORY_BRILLIANT_TEXTURE = SF::Texture.from_file("graphics/minerals/Lemon_Quartz_Inventory_Brilliant.png")
+      Lemon_Quartz_Inventory_Brilliant = SF::Sprite.new(LEMON_QUARTZ_INVENTORY_BRILLIANT_TEXTURE) 
+     #---------------------------------------------------Dropcut--------------------------------------------------------------------
+      LEMON_QUARTZ_INVENTORY_DROPCUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Lemon_Quartz_Inventory_Drop.png")
+      Lemon_Quartz_Inventory_Dropcut = SF::Sprite.new(LEMON_QUARTZ_INVENTORY_DROPCUT_TEXTURE) 
+     #--------------------------------------------------Tablecut--------------------------------------------------------------------
+      LEMON_QUARTZ_INVENTORY_TABLECUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Lemon_Quartz_Inventory_Table.png")
+      Lemon_Quartz_Inventory_Tablecut = SF::Sprite.new(LEMON_QUARTZ_INVENTORY_TABLECUT_TEXTURE) 
 #----------------------------------------------------------------------------------------------------------------------------------- 
 #                                                    Character Model
 #-----------------------------------------------------------------------------------------------------------------------------------
