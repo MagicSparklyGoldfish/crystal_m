@@ -1042,6 +1042,22 @@
      #--------------------------------------------------Tablecut--------------------------------------------------------------------
       HOWLITE_INVENTORY_TABLECUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Howlite_Inventory_Table.png")
       Howlite_Inventory_Tablecut = SF::Sprite.new(HOWLITE_INVENTORY_TABLECUT_TEXTURE) 
+    #'''''''''''''''''''''''''''''''''''''''''''''''''''Angelite'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     #---------------------------------------------------Square---------------------------------------------------------------------
+      ANGELITE_INVENTORY_SQUARE_TEXTURE = SF::Texture.from_file("graphics/minerals/Angelite_Inventory_Square.png")
+      Angelite_Inventory_Square = SF::Sprite.new(ANGELITE_INVENTORY_SQUARE_TEXTURE) 
+     #----------------------------------------------------Pear----------------------------------------------------------------------
+      ANGELITE_INVENTORY_PEAR_TEXTURE = SF::Texture.from_file("graphics/minerals/Angelite_Inventory_Pear.png")
+      Angelite_Inventory_Pear = SF::Sprite.new(ANGELITE_INVENTORY_PEAR_TEXTURE) 
+     #--------------------------------------------------Brilliant-------------------------------------------------------------------
+      ANGELITE_INVENTORY_BRILLIANT_TEXTURE = SF::Texture.from_file("graphics/minerals/Angelite_Inventory_Brilliant.png")
+      Angelite_Inventory_Brilliant = SF::Sprite.new(ANGELITE_INVENTORY_BRILLIANT_TEXTURE) 
+     #---------------------------------------------------Dropcut--------------------------------------------------------------------
+      ANGELITE_INVENTORY_DROPCUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Angelite_Inventory_Drop.png")
+      Angelite_Inventory_Dropcut = SF::Sprite.new(ANGELITE_INVENTORY_DROPCUT_TEXTURE) 
+     #--------------------------------------------------Tablecut--------------------------------------------------------------------
+      ANGELITE_INVENTORY_TABLECUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Angelite_Inventory_Table.png")
+      Angelite_Inventory_Tablecut = SF::Sprite.new(ANGELITE_INVENTORY_TABLECUT_TEXTURE) 
 #----------------------------------------------------------------------------------------------------------------------------------- 
 #                                                    Character Model
 #-----------------------------------------------------------------------------------------------------------------------------------
