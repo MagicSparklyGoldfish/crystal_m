@@ -2423,6 +2423,9 @@ include Equipment
    #.................................................................Sunstone..............................................................................
     @@sunstone_gem = Gem.new("Sunstone", 31, Sunstone_Inventory_Tablecut, "table", 1, "orange", 60, "fire", "LUK+")   
     GEM_ARRAY.push(@@sunstone_gem)
+   #................................................................Bony Amber.............................................................................
+    @@bony_amber_gem = Gem.new("Bony Amber", 32, Bony_Amber_Inventory_Tablecut, "table", 1, "orange", 60, "fire", "passive_hp_regen")   
+    GEM_ARRAY.push(@@bony_amber_gem)
   #________________________________________________________________________________________________________________________________________________________
  end
 end   
