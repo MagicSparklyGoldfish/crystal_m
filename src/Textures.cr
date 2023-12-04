@@ -1346,6 +1346,22 @@
      #--------------------------------------------------Tablecut--------------------------------------------------------------------
       GRAPE_AGATE_INVENTORY_TABLECUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Grape_Agate_Inventory_Table.png")
       Grape_Agate_Inventory_Tablecut = SF::Sprite.new(GRAPE_AGATE_INVENTORY_TABLECUT_TEXTURE) 
+    #'''''''''''''''''''''''''''''''''''''''''''''''''''''Jade''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     #---------------------------------------------------Square---------------------------------------------------------------------
+      JADE_INVENTORY_SQUARE_TEXTURE = SF::Texture.from_file("graphics/minerals/Jade_Inventory_Square.png")
+      Jade_Inventory_Square = SF::Sprite.new(JADE_INVENTORY_SQUARE_TEXTURE) 
+     #----------------------------------------------------Pear----------------------------------------------------------------------
+      JADE_INVENTORY_PEAR_TEXTURE = SF::Texture.from_file("graphics/minerals/Jade_Inventory_Pear.png")
+      Jade_Inventory_Pear = SF::Sprite.new(JADE_INVENTORY_PEAR_TEXTURE) 
+     #--------------------------------------------------Brilliant-------------------------------------------------------------------
+      JADE_INVENTORY_BRILLIANT_TEXTURE = SF::Texture.from_file("graphics/minerals/Jade_Inventory_Brilliant.png")
+      Jade_Inventory_Brilliant = SF::Sprite.new(JADE_INVENTORY_BRILLIANT_TEXTURE) 
+     #---------------------------------------------------Dropcut--------------------------------------------------------------------
+      JADE_INVENTORY_DROPCUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Jade_Inventory_Drop.png")
+      Jade_Inventory_Dropcut = SF::Sprite.new(JADE_INVENTORY_DROPCUT_TEXTURE) 
+     #--------------------------------------------------Tablecut--------------------------------------------------------------------
+      JADE_INVENTORY_TABLECUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Jade_Inventory_Table.png")
+      Jade_Inventory_Tablecut = SF::Sprite.new(JADE_INVENTORY_TABLECUT_TEXTURE) 
 #----------------------------------------------------------------------------------------------------------------------------------- 
 #                                                    Character Model
 #-----------------------------------------------------------------------------------------------------------------------------------
