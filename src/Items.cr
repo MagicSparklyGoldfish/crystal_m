@@ -1789,6 +1789,11 @@ include Equipment
  #GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG
  GEM_ARRAY = [] of Gem; Owned_Gem_Array = [] of Gem; Owned_Gem_Cutter_Ore_Array = [] of Inventory_Ore
  class Gem < Inventory_Ore
+  #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  #+                                                              Variables                                                                               +
+  #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+   @@current_style : String; @@current_style = "none"; @@current_gem : Inventory_Ore; @@current_gem = @@nil_inventory_ore
+  #________________________________________________________________________________________________________________________________________________________
   #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   #!                                                              Initialize                                                                              !
   #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -1858,6 +1863,10 @@ include Equipment
         end
         i += 1
       end
+    end
+   #-------------------------------------------------------------Add Gem-----------------------------------------------------------------------------------
+    def add_gem(amount)
+     @amount_owned += amount
     end
    #-------------------------------------------------Initialize Gem Cutter Ore Inventory-------------------------------------------------------------------
     def Gem.initialize_gem_cutter_ore_display
@@ -2341,10 +2350,25 @@ include Equipment
             end
           end; end
      end
+   #------------------------------------------------------------Select Gem---------------------------------------------------------------------------------
+    def Gem.select_cutter_gem(gem)
+      if Owned_Gem_Cutter_Ore_Array.size >= gem
+       @@current_gem = Owned_Gem_Cutter_Ore_Array[gem]
+      end
+    end
+   #-------------------------------------------------------Initialize Gem Cutter---------------------------------------------------------------------------
+    def Gem.initialize_gem_cutter
+      Gem.initialize_gem_inventory
+      @@current_gem = @@nil_inventory_ore
+      @@current_style = "none"
+     end
    #--------------------------------------------------------Gem Cutter Display-----------------------------------------------------------------------------
     def Gem.display_gem_cutter(window, page)
      Owned_Gem_Cutter_Ore_Array.uniq!
+     current_gem_sprite = @@current_gem.sprite.dup; current_gem_sprite.scale(SF.vector2(0.65, 0.65))
+     current_gem_sprite.position = SF.vector2(550, 55)
      window.draw(Test_Gem_Cutter_Menu); window.draw(Inventory_arrow_up3); window.draw(Inventory_arrow_down3)
+     window.draw(current_gem_sprite)
      case page
      when 1
      #----------------------------------------row 1-----------------------------------------------------------

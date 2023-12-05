@@ -1608,24 +1608,33 @@ def Window_Class.hud_keypresses(window)
          Etc::Inventory_Ingot.select_forge_ingot(slot)
         end
       when "gem_cutter" #---------------------------------------------------------gem cutter
-        if (x >= 1320 && x <= 1350) && (y >= 120 && y <= 155)
+        if (x >= 1320 && x <= 1350) && (y >= 120 && y <= 155) #--------exit
           @@popup = "none"
           @@tab = "none"
           @@page = 1
+          Etc::Gem.initialize_gem_cutter
           Player_Data::Player_Physics.mobilize_player
         end
-        if (x >= 460 && x <= 510) && (y >= 160 && y <= 280)
-         if @@page > 1
-          @@page -= 1
-         else
-          All_Audio::SFX.light_bonk
-         end
-        end
-        if (x >= 460 && x <= 510) && (y >= 280 && y <= 370)
-          if @@page < 2
-           @@page += 1
+        if (x >= 460 && x <= 510) && (y >= 160 && y <= 280) #--------page up
+          if @@page > 1
+           @@page -= 1
           else
            All_Audio::SFX.light_bonk
+          end
+         end
+        if (x >= 460 && x <= 510) && (y >= 280 && y <= 370) #-------page down
+           if @@page < 2
+            @@page += 1
+           else
+            All_Audio::SFX.light_bonk
+           end
+          end
+        if (x >= 605 && x <= 655) && (y >= 160 && y <= 230)
+          case @@page
+          when 1
+            All_Audio::SFX.dig_01
+            gem = 0
+            Etc::Gem.select_cutter_gem(gem)
           end
          end
       when "Stats_Menu" #---------------------------------------------------------Stats Menu
