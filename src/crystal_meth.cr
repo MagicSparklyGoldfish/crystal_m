@@ -1606,6 +1606,13 @@ def Window_Class.hud_keypresses(window)
          slot = 6
          Etc::Inventory_Ingot.select_forge_ingot(slot)
         end
+      when "gem_cutter" #---------------------------------------------------------gem cutter
+        if (x >= 1320 && x <= 1350) && (y >= 120 && y <= 155)
+          @@popup = "none"
+          @@tab = "none"
+          @@page = 1
+          Player_Data::Player_Physics.mobilize_player
+        end
       when "Stats_Menu" #---------------------------------------------------------Stats Menu
         if (x >= 1280 && x <= 1330) && (y >= 210 && y <= 260)
           @@popup = "none"
