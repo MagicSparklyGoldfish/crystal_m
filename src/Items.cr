@@ -2503,6 +2503,84 @@ include Equipment
         ore_array_text_22.string = "x" + Owned_Gem_Cutter_Ore_Array[21].amount_owned.to_s
         window.draw(Owned_Gem_Cutter_Ore_Array[21].craft_sprite); window.draw(ore_array_text_22)
        end
+    #----------------------------------------row 3-----------------------------------------------------------
+      if Owned_Gem_Cutter_Ore_Array.size >= 23
+        Owned_Gem_Cutter_Ore_Array[22].craft_sprite.position = SF.vector2(450, -50)
+        ore_array_text_23 = Ore_amount_owned_text.dup
+        ore_array_text_23.position = Owned_Gem_Cutter_Ore_Array[22].craft_sprite.position + SF.vector2(25, 25)
+        ore_array_text_23.string = "x" + Owned_Gem_Cutter_Ore_Array[22].amount_owned.to_s
+        window.draw(Owned_Gem_Cutter_Ore_Array[22].craft_sprite); window.draw(ore_array_text_23)
+       end
+      if Owned_Gem_Cutter_Ore_Array.size >= 24
+        Owned_Gem_Cutter_Ore_Array[23].craft_sprite.position = SF.vector2(500, -50)
+        ore_array_text_24 = Ore_amount_owned_text.dup
+        ore_array_text_24.position = Owned_Gem_Cutter_Ore_Array[23].craft_sprite.position + SF.vector2(25, 25)
+        ore_array_text_24.string = "x" + Owned_Gem_Cutter_Ore_Array[23].amount_owned.to_s
+        window.draw(Owned_Gem_Cutter_Ore_Array[23].craft_sprite); window.draw(ore_array_text_24)
+       end
+      if Owned_Gem_Cutter_Ore_Array.size >= 25
+        Owned_Gem_Cutter_Ore_Array[24].craft_sprite.position = SF.vector2(550, -50)
+        ore_array_text_25 = Ore_amount_owned_text.dup
+        ore_array_text_25.position = Owned_Gem_Cutter_Ore_Array[24].craft_sprite.position + SF.vector2(25, 25)
+        ore_array_text_25.string = "x" + Owned_Gem_Cutter_Ore_Array[24].amount_owned.to_s
+        window.draw(Owned_Gem_Cutter_Ore_Array[24].craft_sprite); window.draw(ore_array_text_25)
+       end
+      if Owned_Gem_Cutter_Ore_Array.size >= 26
+        Owned_Gem_Cutter_Ore_Array[25].craft_sprite.position = SF.vector2(600, -50)
+        ore_array_text_26 = Ore_amount_owned_text.dup
+        ore_array_text_26.position = Owned_Gem_Cutter_Ore_Array[25].craft_sprite.position + SF.vector2(25, 25)
+        ore_array_text_26.string = "x" + Owned_Gem_Cutter_Ore_Array[25].amount_owned.to_s
+        window.draw(Owned_Gem_Cutter_Ore_Array[25].craft_sprite); window.draw(ore_array_text_26)
+       end
+      if Owned_Gem_Cutter_Ore_Array.size >= 27
+        Owned_Gem_Cutter_Ore_Array[26].craft_sprite.position = SF.vector2(650, -50)
+        ore_array_text_27 = Ore_amount_owned_text.dup
+        ore_array_text_27.position = Owned_Gem_Cutter_Ore_Array[26].craft_sprite.position + SF.vector2(25, 25)
+        ore_array_text_27.string = "x" + Owned_Gem_Cutter_Ore_Array[26].amount_owned.to_s
+        window.draw(Owned_Gem_Cutter_Ore_Array[26].craft_sprite); window.draw(ore_array_text_27)
+       end
+      if Owned_Gem_Cutter_Ore_Array.size >= 28
+        Owned_Gem_Cutter_Ore_Array[27].craft_sprite.position = SF.vector2(700, -50)
+        ore_array_text_28 = Ore_amount_owned_text.dup
+        ore_array_text_28.position = Owned_Gem_Cutter_Ore_Array[27].craft_sprite.position + SF.vector2(25, 25)
+        ore_array_text_28.string = "x" + Owned_Gem_Cutter_Ore_Array[27].amount_owned.to_s
+        window.draw(Owned_Gem_Cutter_Ore_Array[27].craft_sprite); window.draw(ore_array_text_28)
+       end
+      if Owned_Gem_Cutter_Ore_Array.size >= 29
+        Owned_Gem_Cutter_Ore_Array[28].craft_sprite.position = SF.vector2(750, -50)
+        ore_array_text_29 = Ore_amount_owned_text.dup
+        ore_array_text_29.position = Owned_Gem_Cutter_Ore_Array[28].craft_sprite.position + SF.vector2(25, 25)
+        ore_array_text_29.string = "x" + Owned_Gem_Cutter_Ore_Array[28].amount_owned.to_s
+        window.draw(Owned_Gem_Cutter_Ore_Array[28].craft_sprite); window.draw(ore_array_text_29)
+       end
+      if Owned_Gem_Cutter_Ore_Array.size >= 30
+        Owned_Gem_Cutter_Ore_Array[29].craft_sprite.position = SF.vector2(800, -50)
+        ore_array_text_30 = Ore_amount_owned_text.dup
+        ore_array_text_30.position = Owned_Gem_Cutter_Ore_Array[29].craft_sprite.position + SF.vector2(25, 25)
+        ore_array_text_30.string = "x" + Owned_Gem_Cutter_Ore_Array[29].amount_owned.to_s
+        window.draw(Owned_Gem_Cutter_Ore_Array[29].craft_sprite); window.draw(ore_array_text_30)
+       end
+      if Owned_Gem_Cutter_Ore_Array.size >= 31
+        Owned_Gem_Cutter_Ore_Array[30].craft_sprite.position = SF.vector2(850, -50)
+        ore_array_text_31 = Ore_amount_owned_text.dup
+        ore_array_text_31.position = Owned_Gem_Cutter_Ore_Array[30].craft_sprite.position + SF.vector2(25, 25)
+        ore_array_text_31.string = "x" + Owned_Gem_Cutter_Ore_Array[30].amount_owned.to_s
+        window.draw(Owned_Gem_Cutter_Ore_Array[30].craft_sprite); window.draw(ore_array_text_31)
+       end
+      if Owned_Gem_Cutter_Ore_Array.size >= 32
+        Owned_Gem_Cutter_Ore_Array[31].craft_sprite.position = SF.vector2(900, -50)
+        ore_array_text_32 = Ore_amount_owned_text.dup
+        ore_array_text_32.position = Owned_Gem_Cutter_Ore_Array[31].craft_sprite.position + SF.vector2(25, 25)
+        ore_array_text_32.string = "x" + Owned_Gem_Cutter_Ore_Array[31].amount_owned.to_s
+        window.draw(Owned_Gem_Cutter_Ore_Array[31].craft_sprite); window.draw(ore_array_text_32)
+       end
+      if Owned_Gem_Cutter_Ore_Array.size >= 33
+        Owned_Gem_Cutter_Ore_Array[32].craft_sprite.position = SF.vector2(950, -50)
+        ore_array_text_33 = Ore_amount_owned_text.dup
+        ore_array_text_33.position = Owned_Gem_Cutter_Ore_Array[32].craft_sprite.position + SF.vector2(25, 25)
+        ore_array_text_33.string = "x" + Owned_Gem_Cutter_Ore_Array[32].amount_owned.to_s
+        window.draw(Owned_Gem_Cutter_Ore_Array[32].craft_sprite); window.draw(ore_array_text_33)
+       end
      end
    end
   #________________________________________________________________________________________________________________________________________________________
