@@ -339,7 +339,7 @@ include Equipment
     #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     #!                                                              Initialize                                                                              !
     #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-     def initialize(name : String, id : Int32, sprite : SF::Sprite, amount_owned : Int32, color : String, element : String, effect : String, sell_price : Int32)
+     def initialize(name : String, id : Int32, sprite : SF::Sprite, amount_owned : Int32, color : String, element : String, effect : String, sell_price : Int32, craft_sprite : SF::Sprite)
        @name = name
        @id = id
        @sprite = sprite
@@ -348,6 +348,7 @@ include Equipment
        @element = element
        @effect = effect
        @sell_price = sell_price
+       @craft_sprite = craft_sprite
       end
      def name
        @name
@@ -372,6 +373,9 @@ include Equipment
       end
      def sell_price
        @sell_price
+      end
+     def craft_sprite
+      @craft_sprite
       end
     #________________________________________________________________________________________________________________________________________________________
     #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -1326,188 +1330,187 @@ include Equipment
              end
         end; end
       end    
-     #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++            
-      #________________________________________________________________________________________________________________________________________________________
-    #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    #/                                                               Entities                                                                               /
-    #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-      @@nil_inventory_ore = Inventory_Ore.new("Nil", 0, Smelter_Nil_Sprite, 0, "clear", "nil", "nil", 0)
-     #///////////////////////////////////////////////////////////////Minerals\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-      #--------------------------------------------------------------Bloodstone------------------------------------------------------------------------------
-       @@bloodstone_inventory_ore = Inventory_Ore.new("Bloodstone", 1, Bloodstone_Inventory_Ore, 1, "red", "earth", "hp+", 70)
+     #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++            
+      #______________________________________________________________________________________________________________________________________________________________
+    #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    #/                                                                   Entities                                                                                   /
+    #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+      @@nil_inventory_ore = Inventory_Ore.new("Nil", 0, Smelter_Nil_Sprite, 0, "clear", "nil", "nil", 0, Smelter_Nil_Sprite)                                                             
+     #///////////////////////////////////////////////////////////////Minerals\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+      #------------------------------------------------------------------Bloodstone----------------------------------------------------------------------------------
+       @@bloodstone_inventory_ore = Inventory_Ore.new("Bloodstone", 1, Bloodstone_Inventory_Ore, 1, "red", "earth", "hp+", 70, Bloodstone_Gem_Cutter_Ore)
        Ore_Array.push(@@bloodstone_inventory_ore)
-      #--------------------------------------------------------------Moss Agate------------------------------------------------------------------------------
-       @@moss_agate_inventory_ore = Inventory_Ore.new("Moss Agate", 2, Moss_Agate_Inventory_Ore, 1, "green", "earth", "passive_mp_regen", 60)
+      #------------------------------------------------------------------Moss Agate----------------------------------------------------------------------------------
+       @@moss_agate_inventory_ore = Inventory_Ore.new("Moss Agate", 2, Moss_Agate_Inventory_Ore, 1, "green", "earth", "passive_mp_regen", 60, Moss_Agate_Gem_Cutter_Ore)
        Ore_Array.push(@@moss_agate_inventory_ore)
-      #----------------------------------------------------------------Amber---------------------------------------------------------------------------------
-       @@amber_inventory_ore = Inventory_Ore.new("Amber", 3, Amber_Inventory_Ore, 1, "yellow", "fire", "passive_hp_regen", 55)
+      #--------------------------------------------------------------------Amber-------------------------------------------------------------------------------------
+       @@amber_inventory_ore = Inventory_Ore.new("Amber", 3, Amber_Inventory_Ore, 1, "yellow", "fire", "passive_hp_regen", 55, Amber_Gem_Cutter_Ore)
        Ore_Array.push(@@amber_inventory_ore)
-      #---------------------------------------------------------------Wavellite------------------------------------------------------------------------------ 
-       @@wavellite_inventory_ore = Inventory_Ore.new("Wavellite", 4, Wavellite_Inventory_Ore, 1, "green", "earth", "mp+", 75)
+      #------------------------------------------------------------------Wavellite----------------------------------------------------------------------------------- 
+       @@wavellite_inventory_ore = Inventory_Ore.new("Wavellite", 4, Wavellite_Inventory_Ore, 1, "green", "earth", "mp+", 75, Wavellite_Gem_Cutter_Ore)
        Ore_Array.push(@@wavellite_inventory_ore)
-      #-----------------------------------------------------------------Topaz-------------------------------------------------------------------------------- 
-       @@topaz_inventory_ore = Inventory_Ore.new("Topaz", 5, Topaz_Inventory_Ore, 1, "yellow", "fire", "INT+", 175)
+      #--------------------------------------------------------------------Topaz------------------------------------------------------------------------------------- 
+       @@topaz_inventory_ore = Inventory_Ore.new("Topaz", 5, Topaz_Inventory_Ore, 1, "yellow", "fire", "INT+", 175, Topaz_Gem_Cutter_Ore)
        Ore_Array.push(@@topaz_inventory_ore)
-      #---------------------------------------------------------------Amethyst------------------------------------------------------------------------------- 
-       @@amethyst_inventory_ore = Inventory_Ore.new("Amethyst", 6, Amethyst_Inventory_Ore, 1, "purple", "air", "INT+", 105)
+      #------------------------------------------------------------------Amethyst------------------------------------------------------------------------------------ 
+       @@amethyst_inventory_ore = Inventory_Ore.new("Amethyst", 6, Amethyst_Inventory_Ore, 1, "purple", "air", "INT+", 105, Amethyst_Gem_Cutter_Ore)
        Ore_Array.push(@@amethyst_inventory_ore) 
-      #-------------------------------------------------------------Smokey Quartz---------------------------------------------------------------------------- 
-       @@smokey_quartz_inventory_ore = Inventory_Ore.new("Smokey Quartz", 7, Smokey_Quartz_Inventory_Ore, 1, "clear", "earth", "STR+", 95)
+      #----------------------------------------------------------------Smokey Quartz--------------------------------------------------------------------------------- 
+       @@smokey_quartz_inventory_ore = Inventory_Ore.new("Smokey Quartz", 7, Smokey_Quartz_Inventory_Ore, 1, "clear", "earth", "STR+", 95, Smoky_Quartz_Gem_Cutter_Ore)
        Ore_Array.push(@@smokey_quartz_inventory_ore) 
-      #---------------------------------------------------------------Sapphire------------------------------------------------------------------------------- 
-       @@sapphire = Inventory_Ore.new("Sapphire", 8, Sapphire_Inventory_Ore, 1, "blue", "water", "EXP++", 950)
+      #------------------------------------------------------------------Sapphire------------------------------------------------------------------------------------ 
+       @@sapphire = Inventory_Ore.new("Sapphire", 8, Sapphire_Inventory_Ore, 1, "blue", "water", "EXP++", 950, Sapphire_Gem_Cutter_Ore)
        Ore_Array.push(@@sapphire) 
-      #--------------------------------------------------------------Black Opal------------------------------------------------------------------------------ 
-       @@black_opal = Inventory_Ore.new("Black Opal", 9, Black_Opal_Inventory_Ore, 1, "black", "water", "LUK+", 80)
+      #-----------------------------------------------------------------Black Opal----------------------------------------------------------------------------------- 
+       @@black_opal = Inventory_Ore.new("Black Opal", 9, Black_Opal_Inventory_Ore, 1, "black", "water", "LUK+", 80, Black_Opal_Gem_Cutter_Ore)
        Ore_Array.push(@@black_opal) 
-      #---------------------------------------------------------------Ajiote--------------------------------------------------------------------------------- 
-       @@ajiote = Inventory_Ore.new("Ajoite", 10, Ajoite_Inventory_Ore, 1, "clear", "water", "DEX+", 60)
+      #-------------------------------------------------------------------Ajiote------------------------------------------------------------------------------------- 
+       @@ajiote = Inventory_Ore.new("Ajoite", 10, Ajoite_Inventory_Ore, 1, "clear", "water", "DEX+", 60, Ajoite_Gem_Cutter_Ore)
        Ore_Array.push(@@ajiote) 
       #--------------------------------------------------------------Rhodolite------------------------------------------------------------------------------- 
-       @@rhodolite = Inventory_Ore.new("Rhodolite", 11, Rhodolite_Inventory_Ore, 1, "pink", "water", "STR+", 60)
+       @@rhodolite = Inventory_Ore.new("Rhodolite", 11, Rhodolite_Inventory_Ore, 1, "pink", "water", "STR+", 60, Rhodolite_Gem_Cutter_Ore)
        Ore_Array.push(@@rhodolite)
       #-------------------------------------------------------------Chalcanthite----------------------------------------------------------------------------- 
-       @@chalcanthite = Inventory_Ore.new("Chalcanthite", 12, Chalcanthite_Inventory_Ore, 1, "blue", "water", "poison", 30)
+       @@chalcanthite = Inventory_Ore.new("Chalcanthite", 12, Chalcanthite_Inventory_Ore, 1, "blue", "water", "poison", 30, Chalcanthite_Gem_Cutter_Ore)
        Ore_Array.push(@@chalcanthite)
       #---------------------------------------------------------------Flourite------------------------------------------------------------------------------- 
-       @@flourite = Inventory_Ore.new("Flourite", 13, Flourite_Inventory_Ore, 1, "clear", "water", "INT+", 40)
+       @@flourite = Inventory_Ore.new("Flourite", 13, Flourite_Inventory_Ore, 1, "clear", "water", "INT+", 40, Flourite_Gem_Cutter_Ore)
        Ore_Array.push(@@flourite)
       #---------------------------------------------------------------Amorite-------------------------------------------------------------------------------- 
-       @@amorite = Inventory_Ore.new("Amorite", 14, Amorite_Inventory_Ore, 1, "white", "water", "INT+", 40)
+       @@amorite = Inventory_Ore.new("Amorite", 14, Amorite_Inventory_Ore, 1, "white", "water", "INT+", 40, Amorite_Gem_Cutter_Ore)
        Ore_Array.push(@@amorite)
       #-------------------------------------------------------------Lapis Lazuli----------------------------------------------------------------------------- 
-       @@lapis_lazuli = Inventory_Ore.new("Lapis Lazuli", 15, Lapis_Lazuli_Inventory_Ore, 1, "blue", "water", "STR+", 70)
+       @@lapis_lazuli = Inventory_Ore.new("Lapis Lazuli", 15, Lapis_Lazuli_Inventory_Ore, 1, "blue", "water", "STR+", 70, Lapis_Lazuli_Gem_Cutter_Ore)
        Ore_Array.push(@@lapis_lazuli)
       #--------------------------------------------------------------Moonstone------------------------------------------------------------------------------- 
-       @@moonstone = Inventory_Ore.new("Moonstone", 16, Moonstone_Inventory_Ore, 1, "white", "water", "DEX+", 70)
+       @@moonstone = Inventory_Ore.new("Moonstone", 16, Moonstone_Inventory_Ore, 1, "white", "water", "DEX+", 70, Moonstone_Gem_Cutter_Ore)
        Ore_Array.push(@@moonstone)
       #-------------------------------------------------------------Blue Calcite----------------------------------------------------------------------------- 
-       @@blue_calcite = Inventory_Ore.new("Blue Calcite", 17, Blue_Calcite_Inventory_Ore, 1, "blue", "water", "DEX+", 70)
+       @@blue_calcite = Inventory_Ore.new("Blue Calcite", 17, Blue_Calcite_Inventory_Ore, 1, "blue", "water", "DEX+", 70, Blue_Calcite_Gem_Cutter_Ore)
        Ore_Array.push(@@blue_calcite)
       #--------------------------------------------------------------Hiddenite------------------------------------------------------------------------------- 
-       @@hiddenite = Inventory_Ore.new("Hiddenite", 18, Hiddenite_Inventory_Ore, 1, "green", "water", "passive_hp_regen", 70)
+       @@hiddenite = Inventory_Ore.new("Hiddenite", 18, Hiddenite_Inventory_Ore, 1, "green", "water", "passive_hp_regen", 70, Hiddenite_Gem_Cutter_Ore)
        Ore_Array.push(@@hiddenite)
       #--------------------------------------------------------------Offretite------------------------------------------------------------------------------- 
-       @@offretite = Inventory_Ore.new("Offretite", 19, Offretite_Inventory_Ore, 1, "clear", "air", "INT+", 70)
+       @@offretite = Inventory_Ore.new("Offretite", 19, Offretite_Inventory_Ore, 1, "clear", "air", "INT+", 70, Offretite_Gem_Cutter_Ore)
        Ore_Array.push(@@offretite)
       #-----------------------------------------------------------Holley Blue Agate-------------------------------------------------------------------------- 
-       @@holley_blue_agate = Inventory_Ore.new("Holley Blue Agate", 20, Holley_Blue_Agate_Inventory_Ore, 1, "blue", "air", "STR+", 70)
+       @@holley_blue_agate = Inventory_Ore.new("Holley Blue Agate", 20, Holley_Blue_Agate_Inventory_Ore, 1, "blue", "air", "STR+", 70, Holly_Blue_Agate_Gem_Cutter_Ore)
        Ore_Array.push(@@holley_blue_agate)
       #--------------------------------------------------------------Ametrine-------------------------------------------------------------------------------- 
-       @@ametrine = Inventory_Ore.new("Ametrine", 21, Ametrine_Inventory_Ore, 1, "purple", "air", "STR+", 70)
+       @@ametrine = Inventory_Ore.new("Ametrine", 21, Ametrine_Inventory_Ore, 1, "purple", "air", "STR+", 70, Ametrine_Gem_Cutter_Ore)
        Ore_Array.push(@@ametrine)
       #------------------------------------------------------------Hemimorphite------------------------------------------------------------------------------ 
-       @@hemimorphite = Inventory_Ore.new("Hemimorphite", 22, Hemimorphite_Inventory_Ore, 1, "purple", "air", "INT+", 70)
+       @@hemimorphite = Inventory_Ore.new("Hemimorphite", 22, Hemimorphite_Inventory_Ore, 1, "purple", "air", "INT+", 70, Hemimorphite_Gem_Cutter_Ore)
        Ore_Array.push(@@hemimorphite)
       #-----------------------------------------------------------Tiffany Stone------------------------------------------------------------------------------ 
-       @@tiffany_stone = Inventory_Ore.new("Tiffany Stone", 23, Tiffany_Stone_Inventory_Ore, 1, "purple", "air", "LUK+", 70)
+       @@tiffany_stone = Inventory_Ore.new("Tiffany Stone", 23, Tiffany_Stone_Inventory_Ore, 1, "purple", "air", "LUK+", 70, Tiffany_Stone_Gem_Cutter_Ore)
        Ore_Array.push(@@tiffany_stone)
       #--------------------------------------------------------------Azurite--------------------------------------------------------------------------------- 
-       @@azurite = Inventory_Ore.new("Azurite", 24, Azurite_Inventory_Ore, 1, "blue", "air", "DEX+", 70)
+       @@azurite = Inventory_Ore.new("Azurite", 24, Azurite_Inventory_Ore, 1, "blue", "air", "DEX+", 70, Azurite_Gem_Cutter_Ore)
        Ore_Array.push(@@azurite)
       #--------------------------------------------------------------Howlite--------------------------------------------------------------------------------- 
-       @@howlite = Inventory_Ore.new("Howlite", 25, Howlite_Inventory_Ore, 1, "white", "air", "DEX+", 70)
+       @@howlite = Inventory_Ore.new("Howlite", 25, Howlite_Inventory_Ore, 1, "white", "air", "DEX+", 70, Howlite_Gem_Cutter_Ore)
        Ore_Array.push(@@howlite)
       #--------------------------------------------------------------Angelite--------------------------------------------------------------------------------- 
-       @@angelite = Inventory_Ore.new("Angelite", 26, Angelite_Inventory_Ore, 1, "blue", "air", "LUK+", 70)
+       @@angelite = Inventory_Ore.new("Angelite", 26, Angelite_Inventory_Ore, 1, "blue", "air", "LUK+", 70, Angelite_Gem_Cutter_Ore)
        Ore_Array.push(@@angelite)
       #-----------------------------------------------------------Blue Lace Agate------------------------------------------------------------------------------ 
-       @@blue_lace_agate = Inventory_Ore.new("Blue Lace Agate", 27, Blue_Lace_Agate_Inventory_Ore, 1, "blue", "air", "INT+", 70)
+       @@blue_lace_agate = Inventory_Ore.new("Blue Lace Agate", 27, Blue_Lace_Agate_Inventory_Ore, 1, "blue", "air", "INT+", 70, Blue_Lace_Agate_Gem_Cutter_Ore)
        Ore_Array.push(@@blue_lace_agate)
       #---------------------------------------------------------------Iolite----------------------------------------------------------------------------------- 
-       @@iolite = Inventory_Ore.new("Iolite", 28, Iolite_Inventory_Ore, 1, "blue", "air", "INT+", 70)
+       @@iolite = Inventory_Ore.new("Iolite", 28, Iolite_Inventory_Ore, 1, "blue", "air", "INT+", 70, Iolite_Gem_Cutter_Ore)
        Ore_Array.push(@@iolite)
       #--------------------------------------------------------------Sodalite---------------------------------------------------------------------------------- 
-       @@sodalite = Inventory_Ore.new("Sodalite", 29, Sodalite_Inventory_Ore, 1, "blue", "air", "passive_mp_regen", 70)
+       @@sodalite = Inventory_Ore.new("Sodalite", 29, Sodalite_Inventory_Ore, 1, "blue", "air", "passive_mp_regen", 70, Sodalite_Gem_Cutter_Ore)
        Ore_Array.push(@@sodalite)
       #--------------------------------------------------------------Kyanite---------------------------------------------------------------------------------- 
-       @@kyanite = Inventory_Ore.new("Kyanite", 30, Kyanite_Inventory_Ore, 1, "blue", "air", "LUK+", 70)
+       @@kyanite = Inventory_Ore.new("Kyanite", 30, Kyanite_Inventory_Ore, 1, "blue", "air", "LUK+", 70, Kyanite_Gem_Cutter_Ore)
        Ore_Array.push(@@kyanite)
       #--------------------------------------------------------------Sunstone--------------------------------------------------------------------------------- 
-       @@sunstone = Inventory_Ore.new("Sunstone", 31, Sunstone_Inventory_Ore, 1, "orange", "fire", "LUK+", 70)
+       @@sunstone = Inventory_Ore.new("Sunstone", 31, Sunstone_Inventory_Ore, 1, "orange", "fire", "LUK+", 70, Sunstone_Gem_Cutter_Ore)
        Ore_Array.push(@@sunstone)
       #-------------------------------------------------------------Bony Amber-------------------------------------------------------------------------------- 
-       @@bony_amber = Inventory_Ore.new("Bony Amber", 32, Bony_Amber_Inventory_Ore, 1, "orange", "fire", "passive_hp_regen", 70)
+       @@bony_amber = Inventory_Ore.new("Bony Amber", 32, Bony_Amber_Inventory_Ore, 1, "orange", "fire", "passive_hp_regen", 70, Bony_Amber_Gem_Cutter_Ore)
        Ore_Array.push(@@bony_amber)
       #-------------------------------------------------------------Blue Amber-------------------------------------------------------------------------------- 
-       @@blue_amber = Inventory_Ore.new("Blue Amber", 33, Blue_Amber_Inventory_Ore, 1, "blue", "fire", "passive_mp_regen", 70)
+       @@blue_amber = Inventory_Ore.new("Blue Amber", 33, Blue_Amber_Inventory_Ore, 1, "blue", "fire", "passive_mp_regen", 70, Blue_Amber_Gem_Cutter_Ore)
        Ore_Array.push(@@blue_amber)
       #-------------------------------------------------------------Blue Spinel-------------------------------------------------------------------------------- 
-       @@blue_spinel = Inventory_Ore.new("Blue Spinel", 34, Blue_Spinel_Inventory_Ore, 1, "blue", "fire", "DEX+", 70)
+       @@blue_spinel = Inventory_Ore.new("Blue Spinel", 34, Blue_Spinel_Inventory_Ore, 1, "blue", "fire", "DEX+", 70, Blue_Spinel_Gem_Cutter_Ore)
        Ore_Array.push(@@blue_spinel)
       #-------------------------------------------------------------Red Spinel-------------------------------------------------------------------------------- 
-       @@red_spinel = Inventory_Ore.new("Red Spinel", 35, Red_Spinel_Inventory_Ore, 1, "red", "fire", "STR+", 70)
+       @@red_spinel = Inventory_Ore.new("Red Spinel", 35, Red_Spinel_Inventory_Ore, 1, "red", "fire", "STR+", 70, Red_Spinel_Gem_Cutter_Ore)
        Ore_Array.push(@@red_spinel)
       #--------------------------------------------------------------Fire Opal-------------------------------------------------------------------------------- 
-       @@fire_opal = Inventory_Ore.new("Fire Opal", 36, Fire_Opal_Inventory_Ore, 1, "orange", "fire", "HP+", 70)
+       @@fire_opal = Inventory_Ore.new("Fire Opal", 36, Fire_Opal_Inventory_Ore, 1, "orange", "fire", "HP+", 70, Fire_Opal_Gem_Cutter_Ore)
        Ore_Array.push(@@fire_opal)
       #---------------------------------------------------------------Garnet---------------------------------------------------------------------------------- 
-       @@garnet = Inventory_Ore.new("Garnet", 37, Garnet_Inventory_Ore, 1, "red", "fire", "HP+", 70)
+       @@garnet = Inventory_Ore.new("Garnet", 37, Garnet_Inventory_Ore, 1, "red", "fire", "HP+", 70, Garnet_Gem_Cutter_Ore)
        Ore_Array.push(@@garnet)
       #----------------------------------------------------------------Ruby----------------------------------------------------------------------------------- 
-       @@ruby = Inventory_Ore.new("Ruby", 38, Ruby_Inventory_Ore, 1, "red", "fire", "STR+", 70)
+       @@ruby = Inventory_Ore.new("Ruby", 38, Ruby_Inventory_Ore, 1, "red", "fire", "STR+", 70, Ruby_Gem_Cutter_Ore)
        Ore_Array.push(@@ruby)
       #------------------------------------------------------------Cherry Quartz------------------------------------------------------------------------------- 
-       @@cherry_quartz = Inventory_Ore.new("Cherry Quartz", 39, Cherry_Quartz_Inventory_Ore, 1, "red", "fire", "HP+", 70)
+       @@cherry_quartz = Inventory_Ore.new("Cherry Quartz", 39, Cherry_Quartz_Inventory_Ore, 1, "red", "fire", "HP+", 70, Cherry_Quartz_Gem_Cutter_Ore)
        Ore_Array.push(@@cherry_quartz)
       #------------------------------------------------------------Lemon Quartz------------------------------------------------------------------------------- 
-       @@lemon_quartz = Inventory_Ore.new("Lemon Quartz", 40, Lemon_Quartz_Inventory_Ore, 1, "yellow", "fire", "drop_rate+", 70)
+       @@lemon_quartz = Inventory_Ore.new("Lemon Quartz", 40, Lemon_Quartz_Inventory_Ore, 1, "yellow", "fire", "drop_rate+", 70, Lemon_Quartz_Gem_Cutter_Ore)
        Ore_Array.push(@@lemon_quartz)
       #--------------------------------------------------------------Turquoise-------------------------------------------------------------------------------- 
-       @@turquoise = Inventory_Ore.new("Turquoise", 41, Turquoise_Inventory_Ore, 1, "green", "fire", "LUK+", 70)
+       @@turquoise = Inventory_Ore.new("Turquoise", 41, Turquoise_Inventory_Ore, 1, "green", "fire", "LUK+", 70, Turquoise_Gem_Cutter_Ore)
        Ore_Array.push(@@turquoise)
       #-------------------------------------------------------------Tiger's Eye------------------------------------------------------------------------------- 
-       @@tigers_eye = Inventory_Ore.new("Tiger's Eye", 42, Tigers_Eye_Inventory_Ore, 1, "orange", "fire", "DEX+", 70)
+       @@tigers_eye = Inventory_Ore.new("Tiger's Eye", 42, Tigers_Eye_Inventory_Ore, 1, "orange", "fire", "DEX+", 70, Tigers_Eye_Gem_Cutter_Ore)
        Ore_Array.push(@@tigers_eye)
       #-------------------------------------------------------------Orange Calcite------------------------------------------------------------------------------- 
-       @@orange_calcite = Inventory_Ore.new("Orange Calcite", 43, Orange_Calcite_Inventory_Ore, 1, "orange", "fire", "HP+", 70)
+       @@orange_calcite = Inventory_Ore.new("Orange Calcite", 43, Orange_Calcite_Inventory_Ore, 1, "orange", "fire", "HP+", 70, Orange_Calcite_Gem_Cutter_Ore)
        Ore_Array.push(@@orange_calcite)
       #--------------------------------------------------------------Grape Agate-------------------------------------------------------------------------------- 
-       @@grape_agate = Inventory_Ore.new("Grape Agate", 44, Grape_Agate_Inventory_Ore, 1, "purple", "earth", "INT+", 70)
+       @@grape_agate = Inventory_Ore.new("Grape Agate", 44, Grape_Agate_Inventory_Ore, 1, "purple", "earth", "INT+", 70, Grape_Agate_Gem_Cutter_Ore)
        Ore_Array.push(@@grape_agate)
       #-----------------------------------------------------------------Jade-------------------------------------------------------------------------------- 
-       @@jade = Inventory_Ore.new("Jade", 45, Jade_Inventory_Ore, 1, "green", "earth", "LUK+", 70)
+       @@jade = Inventory_Ore.new("Jade", 45, Jade_Inventory_Ore, 1, "green", "earth", "LUK+", 70, Jade_Gem_Cutter_Ore)
        Ore_Array.push(@@jade)
       #---------------------------------------------------------------Diamond------------------------------------------------------------------------------- 
-       @@diamond = Inventory_Ore.new("Diamond", 46, Diamond_Inventory_Ore, 1, "white", "earth", "DROP+++", 70)
+       @@diamond = Inventory_Ore.new("Diamond", 46, Diamond_Inventory_Ore, 1, "white", "earth", "DROP+++", 70, Diamond_Gem_Cutter_Ore)
        Ore_Array.push(@@diamond)
       #---------------------------------------------------------------Emerald------------------------------------------------------------------------------- 
-       @@emerald = Inventory_Ore.new("Emerald", 47, Emerald_Inventory_Ore, 1, "green", "earth", "EXP++", 70)
+       @@emerald = Inventory_Ore.new("Emerald", 47, Emerald_Inventory_Ore, 1, "green", "earth", "EXP++", 70, Emerald_Gem_Cutter_Ore)
        Ore_Array.push(@@emerald)
       #---------------------------------------------------------------Painite------------------------------------------------------------------------------- 
-       @@painite = Inventory_Ore.new("Painite", 48, Painite_Inventory_Ore, 1, "red", "earth", "EXP+++", 70)
+       @@painite = Inventory_Ore.new("Painite", 48, Painite_Inventory_Ore, 1, "red", "earth", "EXP+++", 70, Painite_Gem_Cutter_Ore)
        Ore_Array.push(@@painite)
       #----------------------------------------------------------Bumblebee Jasper--------------------------------------------------------------------------- 
-       @@bumblebee_jasper = Inventory_Ore.new("Bumblebee Jasper", 49, Bumblebee_Jasper_Inventory_Ore, 1, "yellow", "earth", "DEX+", 70)
+       @@bumblebee_jasper = Inventory_Ore.new("Bumblebee Jasper", 49, Bumblebee_Jasper_Inventory_Ore, 1, "yellow", "earth", "DEX+", 70, Bumblebee_Jasper_Gem_Cutter_Ore)
        Ore_Array.push(@@bumblebee_jasper)
       #------------------------------------------------------------Blood Jasper----------------------------------------------------------------------------- 
-       @@blood_jasper = Inventory_Ore.new("Blood Jasper", 50, Blood_Jasper_Inventory_Ore, 1, "green", "earth", "STR+", 70)
+       @@blood_jasper = Inventory_Ore.new("Blood Jasper", 50, Blood_Jasper_Inventory_Ore, 1, "green", "earth", "STR+", 70, Blood_Jasper_Gem_Cutter_Ore)
        Ore_Array.push(@@blood_jasper)
       #------------------------------------------------------------Mook Jasper----------------------------------------------------------------------------- 
-       @@mook_jasper = Inventory_Ore.new("Mook Jasper", 51, Mook_Jasper_Inventory_Ore, 1, "brown", "earth", "LUK+", 70)
+       @@mook_jasper = Inventory_Ore.new("Mook Jasper", 51, Mook_Jasper_Inventory_Ore, 1, "brown", "earth", "LUK+", 70, Mook_Jasper_Gem_Cutter_Ore)
        Ore_Array.push(@@mook_jasper)
       #------------------------------------------------------------Red Jasper------------------------------------------------------------------------------ 
-       @@red_jasper = Inventory_Ore.new("Red Jasper", 52, Red_Jasper_Inventory_Ore, 1, "red", "earth", "INT+", 70)
+       @@red_jasper = Inventory_Ore.new("Red Jasper", 52, Red_Jasper_Inventory_Ore, 1, "red", "earth", "INT+", 70, Red_Jasper_Gem_Cutter_Ore)
        Ore_Array.push(@@red_jasper)
      #________________________________________________________________________________________________________________________________________________________
      #////////////////////////////////////////////////////////////////Metals\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
       #---------------------------------------------------------------Carbon--------------------------------------------------------------------------------- 
-       @@carbon = Inventory_Ore.new("Carbon", 1000, Carbon_Inventory_Ore, 1, "black", "none", "none", 70)
+       @@carbon = Inventory_Ore.new("Carbon", 1000, Carbon_Inventory_Ore, 1, "black", "none", "none", 70, Carbon_Smelter_Ore)
        Ore_Array.push(@@carbon); Smelter_Ore_Sprite_Hash["Carbon"] = Carbon_Smelter_Ore
       #---------------------------------------------------------------Copper--------------------------------------------------------------------------------- 
-       @@copper = Inventory_Ore.new("Copper", 1001, Copper_Inventory_Ore, 1, "brown", "none", "none", 70)
+       @@copper = Inventory_Ore.new("Copper", 1001, Copper_Inventory_Ore, 1, "brown", "none", "none", 70, Copper_Smelter_Ore)
        Ore_Array.push(@@copper); Smelter_Ore_Sprite_Hash["Copper"] = Copper_Smelter_Ore
       #----------------------------------------------------------------Tin----------------------------------------------------------------------------------- 
-       @@tin = Inventory_Ore.new("Tin", 1002, Tin_Inventory_Ore, 1, "white", "none", "none", 70)
+       @@tin = Inventory_Ore.new("Tin", 1002, Tin_Inventory_Ore, 1, "white", "none", "none", 70, Tin_Smelter_Ore)
        Ore_Array.push(@@tin); Smelter_Ore_Sprite_Hash["Tin"] = Tin_Smelter_Ore
       #---------------------------------------------------------------Zinc----------------------------------------------------------------------------------- 
-       @@zinc = Inventory_Ore.new("Zinc", 1003, Zinc_Inventory_Ore, 1, "white", "none", "none", 70)
+       @@zinc = Inventory_Ore.new("Zinc", 1003, Zinc_Inventory_Ore, 1, "white", "none", "none", 70, Zinc_Smelter_Ore)
        Ore_Array.push(@@zinc); Smelter_Ore_Sprite_Hash["Zinc"] = Zinc_Smelter_Ore
-      #_____________________________________________________________________________________________________________________________________________________
       #---------------------------------------------------------------Iron----------------------------------------------------------------------------------- 
-       @@iron = Inventory_Ore.new("Iron", 1004, Iron_Inventory_Ore, 1, "grey", "none", "none", 70)
+       @@iron = Inventory_Ore.new("Iron", 1004, Iron_Inventory_Ore, 1, "grey", "none", "none", 70, Iron_Smelter_Ore)
        Ore_Array.push(@@iron); Smelter_Ore_Sprite_Hash["Iron"] = Iron_Smelter_Ore
-      #_______________________________________________________________________________________________________________________________________________________
+     #________________________________________________________________________________________________________________________________________________________
    end
  #IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
  #IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
@@ -1791,7 +1794,7 @@ include Equipment
   #!                                                              Initialize                                                                              !
   #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
    def initialize(name : String, id : Int32, sprite : SF::Sprite, cut : String, amount_owned : Int32, color : String, sell_price : Int32, 
-    element : String, effect : String)
+    element : String, effect : String, craft_sprite : SF::Sprite)
     @name = name
     @id = id
     @sprite = sprite
@@ -1801,6 +1804,7 @@ include Equipment
     @sell_price = sell_price
     @element = element
     @effect = effect
+    @craft_sprite = craft_sprite
     end
    def name
      @name
@@ -1828,6 +1832,9 @@ include Equipment
     end
    def effect
      @effect
+    end
+   def craft_sprite
+     @craft_sprite
     end
   #________________________________________________________________________________________________________________________________________________________
   #????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
@@ -2334,160 +2341,160 @@ include Equipment
   #/                                                               Entities                                                                               /
   #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
    #..............................................................Bloodstone...............................................................................
-    @@bloodstone_gem = Gem.new("Bloodstone", 1, Bloodstone_Inventory_Tablecut, "table", 1, "red", 60, "earth", "hp+")
+    @@bloodstone_gem = Gem.new("Bloodstone", 1, Bloodstone_Inventory_Tablecut, "table", 1, "red", 60, "earth", "hp+", Bloodstone_Inventory_Tablecut)
     GEM_ARRAY.push(@@bloodstone_gem)
    #..............................................................Moss Agate...............................................................................
-    @@moss_agate_gem = Gem.new("Moss Agate", 2, Moss_Agate_Inventory_Tablecut, "table", 1, "white", 60, "earth", "passive mp regen")
+    @@moss_agate_gem = Gem.new("Moss Agate", 2, Moss_Agate_Inventory_Tablecut, "table", 1, "white", 60, "earth", "passive mp regen", Moss_Agate_Inventory_Tablecut)
     GEM_ARRAY.push(@@moss_agate_gem)
    #.................................................................Amber.................................................................................
-    @@amber_gem = Gem.new("Amber", 3, Amber_Inventory_Tablecut, "table", 1, "yellow", 60, "fire", "passive hp regen")
+    @@amber_gem = Gem.new("Amber", 3, Amber_Inventory_Tablecut, "table", 1, "yellow", 60, "fire", "passive hp regen", Amber_Inventory_Tablecut)
     GEM_ARRAY.push(@@amber_gem)
    #..............................................................Wavellite................................................................................
-    @@wavellite_gem = Gem.new("Wavellite", 4, Wavellite_Inventory_Tablecut, "table", 1, "green", 60, "earth", "mp+")
+    @@wavellite_gem = Gem.new("Wavellite", 4, Wavellite_Inventory_Tablecut, "table", 1, "green", 60, "earth", "mp+", Wavellite_Inventory_Tablecut)
     GEM_ARRAY.push(@@wavellite_gem)
    #................................................................Topaz..................................................................................
-    @@topaz_gem = Gem.new("Topaz", 5, Topaz_Inventory_Tablecut, "table", 1, "yellow", 60, "fire", "INT+")
+    @@topaz_gem = Gem.new("Topaz", 5, Topaz_Inventory_Tablecut, "table", 1, "yellow", 60, "fire", "INT+", Topaz_Inventory_Tablecut)
     GEM_ARRAY.push(@@topaz_gem)
    #...............................................................Amethyst................................................................................
-    @@amethyst_gem = Gem.new("Amethyst", 6, Amethyst_Inventory_Tablecut, "table", 1, "purple", 60, "air", "INT+")
+    @@amethyst_gem = Gem.new("Amethyst", 6, Amethyst_Inventory_Tablecut, "table", 1, "purple", 60, "air", "INT+", Amethyst_Inventory_Tablecut)
     GEM_ARRAY.push(@@amethyst_gem)
    #.............................................................Smoky Quartz..............................................................................
-    @@smoky_quartz_gem = Gem.new("Smoky Quartz", 7, Smokey_Quartz_Inventory_Tablecut, "table", 1, "clear", 60, "earth", "STR+")   
+    @@smoky_quartz_gem = Gem.new("Smoky Quartz", 7, Smokey_Quartz_Inventory_Tablecut, "table", 1, "clear", 60, "earth", "STR+", Smokey_Quartz_Inventory_Tablecut)   
     GEM_ARRAY.push(@@smoky_quartz_gem)
    #...............................................................Sapphire................................................................................
-    @@sapphire_gem = Gem.new("Sapphire", 8, Sapphire_Inventory_Tablecut, "table", 1, "blue", 60, "water", "EXP++")   
+    @@sapphire_gem = Gem.new("Sapphire", 8, Sapphire_Inventory_Tablecut, "table", 1, "blue", 60, "water", "EXP++", Sapphire_Inventory_Tablecut)   
     GEM_ARRAY.push(@@sapphire_gem)
    #..............................................................Black Opal...............................................................................
-    @@black_opal_gem = Gem.new("Black Opal", 9, Black_Opal_Inventory_Tablecut, "table", 1, "black", 60, "water", "LUK+")   
+    @@black_opal_gem = Gem.new("Black Opal", 9, Black_Opal_Inventory_Tablecut, "table", 1, "black", 60, "water", "LUK+", Black_Opal_Inventory_Tablecut)   
     GEM_ARRAY.push(@@black_opal_gem)
    #................................................................Ajoite.................................................................................
-    @@ajoite_gem = Gem.new("Ajoite", 10, Ajoite_Inventory_Tablecut, "table", 1, "clear", 60, "water", "DEX+")   
+    @@ajoite_gem = Gem.new("Ajoite", 10, Ajoite_Inventory_Tablecut, "table", 1, "clear", 60, "water", "DEX+", Ajoite_Inventory_Tablecut)   
     GEM_ARRAY.push(@@ajoite_gem)
    #...............................................................Rhodolite...............................................................................
-    @@rhodolite_gem = Gem.new("Rhodolite", 11, Rhodolite_Inventory_Tablecut, "table", 1, "pink", 60, "water", "STR+")   
+    @@rhodolite_gem = Gem.new("Rhodolite", 11, Rhodolite_Inventory_Tablecut, "table", 1, "pink", 60, "water", "STR+", Rhodolite_Inventory_Tablecut)   
     GEM_ARRAY.push(@@rhodolite_gem)
    #.............................................................Chalcanthite..............................................................................
-    @@chalcanthite_gem = Gem.new("Chalcanthite", 12, Chalcanthite_Inventory_Tablecut, "table", 1, "blue", 60, "water", "poison")   
+    @@chalcanthite_gem = Gem.new("Chalcanthite", 12, Chalcanthite_Inventory_Tablecut, "table", 1, "blue", 60, "water", "poison", Chalcanthite_Inventory_Tablecut)   
     GEM_ARRAY.push(@@chalcanthite_gem)
    #...............................................................Flourite................................................................................
-    @@flourite_gem = Gem.new("Flourite", 13, Flourite_Inventory_Tablecut, "table", 1, "clear", 60, "water", "INT+")   
+    @@flourite_gem = Gem.new("Flourite", 13, Flourite_Inventory_Tablecut, "table", 1, "clear", 60, "water", "INT+", Flourite_Inventory_Tablecut)   
     GEM_ARRAY.push(@@flourite_gem)
    #...............................................................Amorite.................................................................................
-    @@amorite_gem = Gem.new("Amorite", 14, Amorite_Inventory_Tablecut, "table", 1, "white", 60, "water", "INT+")   
+    @@amorite_gem = Gem.new("Amorite", 14, Amorite_Inventory_Tablecut, "table", 1, "white", 60, "water", "INT+", Amorite_Inventory_Tablecut)   
     GEM_ARRAY.push(@@amorite_gem)
    #.............................................................Lapis Lazuli..............................................................................
-    @@lapis_lazuli_gem = Gem.new("Lapis Lazuli", 15, Lapis_Lazuli_Inventory_Tablecut, "table", 1, "blue", 60, "water", "STR+")   
+    @@lapis_lazuli_gem = Gem.new("Lapis Lazuli", 15, Lapis_Lazuli_Inventory_Tablecut, "table", 1, "blue", 60, "water", "STR+", Lapis_Lazuli_Inventory_Tablecut)   
     GEM_ARRAY.push(@@lapis_lazuli_gem)
    #...............................................................Moonstone...............................................................................
-    @@moonstone_gem = Gem.new("Moonstone", 16, Moonstone_Inventory_Tablecut, "table", 1, "white", 60, "water", "DEX+")   
+    @@moonstone_gem = Gem.new("Moonstone", 16, Moonstone_Inventory_Tablecut, "table", 1, "white", 60, "water", "DEX+", Moonstone_Inventory_Tablecut)   
     GEM_ARRAY.push(@@moonstone_gem)
    #..............................................................Blue Calcite.............................................................................
-    @@blue_calcite_gem = Gem.new("Blue Calcite", 17, Blue_Calcite_Inventory_Tablecut, "table", 1, "blue", 60, "water", "DEX+")   
+    @@blue_calcite_gem = Gem.new("Blue Calcite", 17, Blue_Calcite_Inventory_Tablecut, "table", 1, "blue", 60, "water", "DEX+", Blue_Calcite_Inventory_Tablecut)   
     GEM_ARRAY.push(@@blue_calcite_gem)
    #...............................................................Hiddenite...............................................................................
-    @@hiddenite_gem = Gem.new("Hiddenite", 18, Hiddenite_Inventory_Tablecut, "table", 1, "green", 60, "water", "passive_hp_regen")   
+    @@hiddenite_gem = Gem.new("Hiddenite", 18, Hiddenite_Inventory_Tablecut, "table", 1, "green", 60, "water", "passive_hp_regen", Hiddenite_Inventory_Tablecut)   
     GEM_ARRAY.push(@@hiddenite_gem)
    #...............................................................Offretite...............................................................................
-    @@offretite_gem = Gem.new("Offretite", 19, Offretite_Inventory_Tablecut, "table", 1, "clear", 60, "air", "INT+")   
+    @@offretite_gem = Gem.new("Offretite", 19, Offretite_Inventory_Tablecut, "table", 1, "clear", 60, "air", "INT+", Offretite_Inventory_Tablecut)   
     GEM_ARRAY.push(@@offretite_gem)
    #............................................................Holly Blue Agate...........................................................................
-    @@holly_blue_agate_gem = Gem.new("Holly Blue Agate", 20, Holly_Blue_Agate_Inventory_Tablecut, "table", 1, "blue", 60, "air", "STR+")   
+    @@holly_blue_agate_gem = Gem.new("Holly Blue Agate", 20, Holly_Blue_Agate_Inventory_Tablecut, "table", 1, "blue", 60, "air", "STR+", Holly_Blue_Agate_Inventory_Tablecut)   
     GEM_ARRAY.push(@@holly_blue_agate_gem)
    #................................................................Ametrine...............................................................................
-    @@ametrine_gem = Gem.new("Ametrine", 21, Ametrine_Inventory_Tablecut, "table", 1, "purple", 60, "air", "STR+")   
+    @@ametrine_gem = Gem.new("Ametrine", 21, Ametrine_Inventory_Tablecut, "table", 1, "purple", 60, "air", "STR+", Ametrine_Inventory_Tablecut)   
     GEM_ARRAY.push(@@ametrine_gem)
    #..............................................................Hemimorphite.............................................................................
-    @@hemimorphite_gem = Gem.new("Hemimorphite", 22, Hemimorphite_Inventory_Tablecut, "table", 1, "blue", 60, "air", "INT+")   
+    @@hemimorphite_gem = Gem.new("Hemimorphite", 22, Hemimorphite_Inventory_Tablecut, "table", 1, "blue", 60, "air", "INT+", Hemimorphite_Inventory_Tablecut)   
     GEM_ARRAY.push(@@hemimorphite_gem)
    #..............................................................Tiffany Stone............................................................................
-    @@tiffany_stone_gem = Gem.new("Tiffany Stone", 23, Tiffany_Stone_Inventory_Tablecut, "table", 1, "purple", 60, "air", "LUK+")   
+    @@tiffany_stone_gem = Gem.new("Tiffany Stone", 23, Tiffany_Stone_Inventory_Tablecut, "table", 1, "purple", 60, "air", "LUK+", Tiffany_Stone_Inventory_Tablecut)   
     GEM_ARRAY.push(@@tiffany_stone_gem)
    #................................................................Azurite................................................................................
-    @@azurite_gem = Gem.new("Azurite", 24, Azurite_Inventory_Tablecut, "table", 1, "blue", 60, "air", "DEX+")   
+    @@azurite_gem = Gem.new("Azurite", 24, Azurite_Inventory_Tablecut, "table", 1, "blue", 60, "air", "DEX+", Azurite_Inventory_Tablecut)   
     GEM_ARRAY.push(@@azurite_gem)
    #................................................................Howlite................................................................................
-    @@howlite_gem = Gem.new("Howlite", 25, Howlite_Inventory_Tablecut, "table", 1, "white", 60, "air", "DEX+")   
+    @@howlite_gem = Gem.new("Howlite", 25, Howlite_Inventory_Tablecut, "table", 1, "white", 60, "air", "DEX+", Howlite_Inventory_Tablecut)   
     GEM_ARRAY.push(@@howlite_gem)
    #................................................................Angelite...............................................................................
-    @@angelite_gem = Gem.new("Angelite", 26, Angelite_Inventory_Tablecut, "table", 1, "blue", 60, "air", "LUK+")   
+    @@angelite_gem = Gem.new("Angelite", 26, Angelite_Inventory_Tablecut, "table", 1, "blue", 60, "air", "LUK+", Angelite_Inventory_Tablecut)   
     GEM_ARRAY.push(@@angelite_gem)
    #.............................................................Blue Lace Agate...........................................................................
-    @@blue_lace_agate_gem = Gem.new("Blue Lace Agate", 27, Blue_Lace_Agate_Inventory_Tablecut, "table", 1, "blue", 60, "air", "INT+")   
+    @@blue_lace_agate_gem = Gem.new("Blue Lace Agate", 27, Blue_Lace_Agate_Inventory_Tablecut, "table", 1, "blue", 60, "air", "INT+", Blue_Lace_Agate_Inventory_Tablecut)   
     GEM_ARRAY.push(@@blue_lace_agate_gem)
    #..................................................................Iolite...............................................................................
-    @@iolite_gem = Gem.new("Iolite", 28, Iolite_Inventory_Tablecut, "table", 1, "blue", 60, "air", "INT+")   
+    @@iolite_gem = Gem.new("Iolite", 28, Iolite_Inventory_Tablecut, "table", 1, "blue", 60, "air", "INT+", Iolite_Inventory_Tablecut)   
     GEM_ARRAY.push(@@iolite_gem)
    #.................................................................Sodalite..............................................................................
-    @@sodalite_gem = Gem.new("Sodalite", 29, Sodalite_Inventory_Tablecut, "table", 1, "blue", 60, "air", "passive_mp_regen")   
+    @@sodalite_gem = Gem.new("Sodalite", 29, Sodalite_Inventory_Tablecut, "table", 1, "blue", 60, "air", "passive_mp_regen", Sodalite_Inventory_Tablecut)   
     GEM_ARRAY.push(@@sodalite_gem)
    #.................................................................Kyanite...............................................................................
-    @@kyanite_gem = Gem.new("Kyanite", 30, Kyanite_Inventory_Tablecut, "table", 1, "blue", 60, "air", "LUK+")   
+    @@kyanite_gem = Gem.new("Kyanite", 30, Kyanite_Inventory_Tablecut, "table", 1, "blue", 60, "air", "LUK+", Kyanite_Inventory_Tablecut)   
     GEM_ARRAY.push(@@kyanite_gem)
    #.................................................................Sunstone..............................................................................
-    @@sunstone_gem = Gem.new("Sunstone", 31, Sunstone_Inventory_Tablecut, "table", 1, "orange", 60, "fire", "LUK+")   
+    @@sunstone_gem = Gem.new("Sunstone", 31, Sunstone_Inventory_Tablecut, "table", 1, "orange", 60, "fire", "LUK+", Sunstone_Inventory_Tablecut)   
     GEM_ARRAY.push(@@sunstone_gem)
    #................................................................Bony Amber.............................................................................
-    @@bony_amber_gem = Gem.new("Bony Amber", 32, Bony_Amber_Inventory_Tablecut, "table", 1, "orange", 60, "fire", "passive_hp_regen")   
+    @@bony_amber_gem = Gem.new("Bony Amber", 32, Bony_Amber_Inventory_Tablecut, "table", 1, "orange", 60, "fire", "passive_hp_regen", Bony_Amber_Inventory_Tablecut)   
     GEM_ARRAY.push(@@bony_amber_gem)
    #................................................................Blue Amber.............................................................................
-    @@blue_amber_gem = Gem.new("Blue Amber", 33, Blue_Amber_Inventory_Tablecut, "table", 1, "blue", 60, "fire", "passive_mp_regen")   
+    @@blue_amber_gem = Gem.new("Blue Amber", 33, Blue_Amber_Inventory_Tablecut, "table", 1, "blue", 60, "fire", "passive_mp_regen", Blue_Amber_Inventory_Tablecut)   
     GEM_ARRAY.push(@@blue_amber_gem)
    #................................................................Blue Spinel.............................................................................
-    @@blue_spinel_gem = Gem.new("Blue Spinel", 34, Blue_Spinel_Inventory_Tablecut, "table", 1, "blue", 60, "fire", "DEX+")   
+    @@blue_spinel_gem = Gem.new("Blue Spinel", 34, Blue_Spinel_Inventory_Tablecut, "table", 1, "blue", 60, "fire", "DEX+", Blue_Spinel_Inventory_Tablecut)   
     GEM_ARRAY.push(@@blue_spinel_gem)
    #................................................................Red Spinel..............................................................................
-    @@red_spinel_gem = Gem.new("Red Spinel", 35, Red_Spinel_Inventory_Tablecut, "table", 1, "red", 60, "fire", "STR+")   
+    @@red_spinel_gem = Gem.new("Red Spinel", 35, Red_Spinel_Inventory_Tablecut, "table", 1, "red", 60, "fire", "STR+", Red_Spinel_Inventory_Tablecut)   
     GEM_ARRAY.push(@@red_spinel_gem)
    #.................................................................Fire Opal..............................................................................
-    @@fire_opal_gem = Gem.new("Fire Opal", 36, Fire_Opal_Inventory_Tablecut, "table", 1, "orange", 60, "fire", "HP+")   
+    @@fire_opal_gem = Gem.new("Fire Opal", 36, Fire_Opal_Inventory_Tablecut, "table", 1, "orange", 60, "fire", "HP+", Fire_Opal_Inventory_Tablecut)   
     GEM_ARRAY.push(@@fire_opal_gem)
    #..................................................................Garnet................................................................................
-    @@garnet_gem = Gem.new("Garnet", 37, Garnet_Inventory_Tablecut, "table", 1, "red", 60, "fire", "HP+")   
+    @@garnet_gem = Gem.new("Garnet", 37, Garnet_Inventory_Tablecut, "table", 1, "red", 60, "fire", "HP+", Garnet_Inventory_Tablecut)   
     GEM_ARRAY.push(@@garnet_gem)
    #...................................................................Ruby.................................................................................
-    @@ruby_gem = Gem.new("Ruby", 38, Ruby_Inventory_Tablecut, "table", 1, "red", 60, "fire", "STR+")   
+    @@ruby_gem = Gem.new("Ruby", 38, Ruby_Inventory_Tablecut, "table", 1, "red", 60, "fire", "STR+", Ruby_Inventory_Tablecut)   
     GEM_ARRAY.push(@@ruby_gem)
    #...............................................................Cherry Quartz............................................................................
-    @@cherry_quartz_gem = Gem.new("Cherry Quartz", 39, Cherry_Quartz_Inventory_Tablecut, "table", 1, "red", 60, "fire", "HP+")   
+    @@cherry_quartz_gem = Gem.new("Cherry Quartz", 39, Cherry_Quartz_Inventory_Tablecut, "table", 1, "red", 60, "fire", "HP+", Cherry_Quartz_Inventory_Tablecut)   
     GEM_ARRAY.push(@@cherry_quartz_gem)
    #...............................................................Lemon Quartz.............................................................................
-    @@lemon_quartz_gem = Gem.new("Lemon Quartz", 40, Lemon_Quartz_Inventory_Tablecut, "table", 1, "yellow", 60, "fire", "drop_rate+")   
+    @@lemon_quartz_gem = Gem.new("Lemon Quartz", 40, Lemon_Quartz_Inventory_Tablecut, "table", 1, "yellow", 60, "fire", "drop_rate+", Lemon_Quartz_Inventory_Tablecut)   
     GEM_ARRAY.push(@@lemon_quartz_gem)
    #.................................................................Turquoise..............................................................................
-    @@turquoise_gem = Gem.new("Turquoise", 41, Turquoise_Inventory_Tablecut, "table", 1, "green", 60, "fire", "LUK+")   
+    @@turquoise_gem = Gem.new("Turquoise", 41, Turquoise_Inventory_Tablecut, "table", 1, "green", 60, "fire", "LUK+", Turquoise_Inventory_Tablecut)   
     GEM_ARRAY.push(@@turquoise_gem)
    #...............................................................Tiger's Eye..............................................................................
-    @@tigers_eye_gem = Gem.new("Tiger's Eye", 42, Tigers_eye_Inventory_Tablecut, "table", 1, "orange", 60, "fire", "DEX+")   
+    @@tigers_eye_gem = Gem.new("Tiger's Eye", 42, Tigers_eye_Inventory_Tablecut, "table", 1, "orange", 60, "fire", "DEX+", Tigers_eye_Inventory_Tablecut)   
     GEM_ARRAY.push(@@tigers_eye_gem)
    #..............................................................Orange Calcite............................................................................
-    @@orange_calcite_gem = Gem.new("Orange Calcite", 43, Orange_Calcite_Inventory_Tablecut, "table", 1, "orange", 60, "fire", "HP+")   
+    @@orange_calcite_gem = Gem.new("Orange Calcite", 43, Orange_Calcite_Inventory_Tablecut, "table", 1, "orange", 60, "fire", "HP+", Orange_Calcite_Inventory_Tablecut)   
     GEM_ARRAY.push(@@orange_calcite_gem)
    #...............................................................Grape Agate..............................................................................
-    @@grape_agate_gem = Gem.new("Grape Agate", 44, Grape_Agate_Inventory_Tablecut, "table", 1, "purple", 60, "earth", "INT+")   
+    @@grape_agate_gem = Gem.new("Grape Agate", 44, Grape_Agate_Inventory_Tablecut, "table", 1, "purple", 60, "earth", "INT+", Grape_Agate_Inventory_Tablecut)   
     GEM_ARRAY.push(@@grape_agate_gem)
    #..................................................................Jade..................................................................................
-    @@jade_gem = Gem.new("Jade", 45, Jade_Inventory_Tablecut, "table", 1, "green", 60, "earth", "LUK+")   
+    @@jade_gem = Gem.new("Jade", 45, Jade_Inventory_Tablecut, "table", 1, "green", 60, "earth", "LUK+", Jade_Inventory_Tablecut)   
     GEM_ARRAY.push(@@jade_gem)
    #.................................................................Diamond................................................................................
-    @@diamond_gem = Gem.new("Diamond", 46, Diamond_Inventory_Tablecut, "table", 1, "white", 60, "earth", "DROP+++")   
+    @@diamond_gem = Gem.new("Diamond", 46, Diamond_Inventory_Tablecut, "table", 1, "white", 60, "earth", "DROP+++", Diamond_Inventory_Tablecut)   
     GEM_ARRAY.push(@@diamond_gem)
    #.................................................................Emerald................................................................................
-    @@emerald_gem = Gem.new("Emerald", 47, Emerald_Inventory_Tablecut, "table", 1, "green", 60, "earth", "EXP++")   
+    @@emerald_gem = Gem.new("Emerald", 47, Emerald_Inventory_Tablecut, "table", 1, "green", 60, "earth", "EXP++", Emerald_Inventory_Tablecut)   
     GEM_ARRAY.push(@@emerald_gem)
    #.................................................................Painite................................................................................
-    @@painite_gem = Gem.new("Painite", 48, Painite_Inventory_Tablecut, "table", 1, "red", 60, "earth", "EXP+++")   
+    @@painite_gem = Gem.new("Painite", 48, Painite_Inventory_Tablecut, "table", 1, "red", 60, "earth", "EXP+++", Painite_Inventory_Tablecut)   
     GEM_ARRAY.push(@@painite_gem)
    #.............................................................Bumblebee Jasper...........................................................................
-    @@bumblebee_jasper_gem = Gem.new("Bumblebee Jasper", 49, Bumblebee_Jasper_Inventory_Tablecut, "table", 1, "yellow", 60, "earth", "DEX+")   
+    @@bumblebee_jasper_gem = Gem.new("Bumblebee Jasper", 49, Bumblebee_Jasper_Inventory_Tablecut, "table", 1, "yellow", 60, "earth", "DEX+", Bumblebee_Jasper_Inventory_Tablecut)   
     GEM_ARRAY.push(@@bumblebee_jasper_gem)
    #...............................................................Blood Jasper.............................................................................
-    @@blood_jasper_gem = Gem.new("Blood Jasper", 50, Blood_Jasper_Inventory_Tablecut, "table", 1, "green", 60, "earth", "STR+")   
+    @@blood_jasper_gem = Gem.new("Blood Jasper", 50, Blood_Jasper_Inventory_Tablecut, "table", 1, "green", 60, "earth", "STR+", Blood_Jasper_Inventory_Tablecut)   
     GEM_ARRAY.push(@@blood_jasper_gem)
    #...............................................................Mook Jasper..............................................................................
-    @@mook_jasper_gem = Gem.new("Mook Jasper", 51, Mook_Jasper_Inventory_Tablecut, "table", 1, "brown", 60, "earth", "LUK+")   
+    @@mook_jasper_gem = Gem.new("Mook Jasper", 51, Mook_Jasper_Inventory_Tablecut, "table", 1, "brown", 60, "earth", "LUK+", Mook_Jasper_Inventory_Tablecut)   
     GEM_ARRAY.push(@@mook_jasper_gem)
    #................................................................Red Jasper..............................................................................
-    @@red_jasper_gem = Gem.new("Mook Jasper", 52, Red_Jasper_Inventory_Tablecut, "table", 1, "red", 60, "earth", "INT+")   
+    @@red_jasper_gem = Gem.new("Mook Jasper", 52, Red_Jasper_Inventory_Tablecut, "table", 1, "red", 60, "earth", "INT+", Red_Jasper_Inventory_Tablecut)   
     GEM_ARRAY.push(@@red_jasper_gem)
   #________________________________________________________________________________________________________________________________________________________
  end
