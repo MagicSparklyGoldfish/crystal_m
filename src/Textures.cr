@@ -3348,5 +3348,17 @@ Testing_Text.character_size = 20; Testing_Text.color = SF::Color::White; Testing
    CHERRY_QUARTZ_CUTTER_TEXTURE = SF::Texture.from_file("graphics/minerals/Gem_Cutter_Cherry_Quartz.png")
    Cherry_Quartz_Gem_Cutter_Ore = SF::Sprite.new(CHERRY_QUARTZ_CUTTER_TEXTURE)
   #....................................................Lemon Quartz....................................................................
-   LEMON_QUARTZ_CUTTER_TEXTURE = SF::Texture.from_file("graphics/minerals/Gem_Cutter_Cherry_Quartz.png")
+   LEMON_QUARTZ_CUTTER_TEXTURE = SF::Texture.from_file("graphics/minerals/Gem_Cutter_Lemon_Quartz.png")
    Lemon_Quartz_Gem_Cutter_Ore = SF::Sprite.new(LEMON_QUARTZ_CUTTER_TEXTURE)
+  #.....................................................Turquoise......................................................................
+   TURQUOISE_CUTTER_TEXTURE = SF::Texture.from_file("graphics/minerals/Gem_Cutter_Turquoise.png")
+   Turquoise_Gem_Cutter_Ore = SF::Sprite.new(TURQUOISE_CUTTER_TEXTURE)
+  #....................................................Tiger's Eye.....................................................................
+   TIGERS_EYE_CUTTER_TEXTURE = SF::Texture.from_file("graphics/minerals/Gem_Cutter_Tiger's_Eye.png")
+   Tigers_Eye_Gem_Cutter_Ore = SF::Sprite.new(TIGERS_EYE_CUTTER_TEXTURE)
+  #...................................................Orange Calcite...................................................................
+   ORANGE_CALCITE_CUTTER_TEXTURE = SF::Texture.from_file("graphics/minerals/Gem_Cutter_Orange_Calcite.png")
+   Orange_Calcite_Gem_Cutter_Ore = SF::Sprite.new(ORANGE_CALCITE_CUTTER_TEXTURE)
+  #....................................................Grape Agate.....................................................................
+   GRAPE_AGATE_CUTTER_TEXTURE = SF::Texture.from_file("graphics/minerals/Gem_Cutter_Grape_Agate.png")
+   Grape_Agate_Gem_Cutter_Ore = SF::Sprite.new(GRAPE_AGATE_CUTTER_TEXTURE)
