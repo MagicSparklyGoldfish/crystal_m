@@ -694,7 +694,8 @@ def Window_Class.ladder_test_ore_map
       end 
     end
    if @@popup == "gem_cutter"
-    Etc::Gem.display_gem_cutter(window)
+    page = @@page
+    Etc::Gem.display_gem_cutter(window, page)
     end
     Window_Class.hud(window)
   end
