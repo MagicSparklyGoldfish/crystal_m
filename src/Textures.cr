@@ -3226,3 +3226,22 @@ Testing_Text.character_size = 20; Testing_Text.color = SF::Color::White; Testing
 #--------------------------------------------------------------------------------------------------------------------------------------
 #                                                      Gem Cutter
 #-------------------------------------------------------------------------------------------------------------------------------------- 
+  GEM_CUTTER_MENU_TEXTURE = SF::Texture.from_file("graphics/Gem_Cutter.png")
+  Test_Gem_Cutter_Menu = SF::Sprite.new(GEM_CUTTER_MENU_TEXTURE);
+  Test_Gem_Cutter_Menu.position = SF.vector2(400, -200);
+ #''''''''''''''''''''''''''''''''''''''''''''''''''''''Gem Ores'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+  #....................................................Bloodstone......................................................................
+   BLOODSTONE_GEM_CUTTER_TEXTURE = SF::Texture.from_file("graphics/minerals/Gem_Cutter_Bloodstone.png")
+   Bloodstone_Gem_Cutter_Ore = SF::Sprite.new(BLOODSTONE_GEM_CUTTER_TEXTURE)  
+  #....................................................Moss Agate......................................................................
+   MOSS_AGATE_GEM_CUTTER_TEXTURE = SF::Texture.from_file("graphics/minerals/Gem_Cutter_Moss_Agate.png")
+   Moss_Agate_Gem_Cutter_Ore = SF::Sprite.new(MOSS_AGATE_GEM_CUTTER_TEXTURE)
+  #......................................................Amber.........................................................................
+   AMBER_GEM_CUTTER_TEXTURE = SF::Texture.from_file("graphics/minerals/Gem_Cutter_Amber.png")
+   Amber_Gem_Cutter_Ore = SF::Sprite.new(AMBER_GEM_CUTTER_TEXTURE)
+  #....................................................Wavellite.......................................................................
+   WAVELLITE_CUTTER_TEXTURE = SF::Texture.from_file("graphics/minerals/Gem_Cutter_Wavellite.png")
+   Wavellite_Gem_Cutter_Ore = SF::Sprite.new(WAVELLITE_CUTTER_TEXTURE)
+  #......................................................Topaz.........................................................................
+   TOPAZ_CUTTER_TEXTURE = SF::Texture.from_file("graphics/minerals/Gem_Cutter_Topaz.png")
+   Topaz_Gem_Cutter_Ore = SF::Sprite.new(TOPAZ_CUTTER_TEXTURE)

@@ -250,10 +250,10 @@ extend self
     if SF::Keyboard.key_pressed?(SF::Keyboard::D) || SF::Keyboard.key_pressed?(SF::Keyboard::A)
       IDLE_TIMER.restart
     end
-    if idletime > SF.seconds(0.5) && @@current_direction == "right"
+    if idletime > SF.seconds(0.25) && @@current_direction == "right"
       @@is_walking = false
     Window_Class.idle_animation_right(window)
-    else if idletime > SF.seconds(0.5) && @@current_direction == "left"
+    else if idletime > SF.seconds(0.25) && @@current_direction == "left"
       @@is_walking = false
       Window_Class.idle_animation_left(window)
     end
@@ -694,7 +694,7 @@ def Window_Class.ladder_test_ore_map
       end 
     end
    if @@popup == "gem_cutter"
-      Equipment::Weapon_Crafting.diplay_forge(window)
+    Etc::Gem.display_gem_cutter(window)
     end
     Window_Class.hud(window)
   end
