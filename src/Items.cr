@@ -2353,7 +2353,10 @@ include Equipment
    #------------------------------------------------------------Select Gem---------------------------------------------------------------------------------
     def Gem.select_cutter_gem(gem)
       if Owned_Gem_Cutter_Ore_Array.size >= gem
+        All_Audio::SFX.dig_01
        @@current_gem = Owned_Gem_Cutter_Ore_Array[gem]
+      else
+        All_Audio::SFX.light_bonk
       end
     end
    #-------------------------------------------------------Initialize Gem Cutter---------------------------------------------------------------------------
@@ -2365,7 +2368,7 @@ include Equipment
    #--------------------------------------------------------Gem Cutter Display-----------------------------------------------------------------------------
     def Gem.display_gem_cutter(window, page)
      Owned_Gem_Cutter_Ore_Array.uniq!
-     current_gem_sprite = @@current_gem.sprite.dup; current_gem_sprite.scale(SF.vector2(0.65, 0.65))
+     current_gem_sprite = @@current_gem.craft_sprite.dup; current_gem_sprite.scale(SF.vector2(1.5, 1.5))
      current_gem_sprite.position = SF.vector2(550, 55)
      window.draw(Test_Gem_Cutter_Menu); window.draw(Inventory_arrow_up3); window.draw(Inventory_arrow_down3)
      window.draw(current_gem_sprite)

@@ -1614,7 +1614,14 @@ def Window_Class.hud_keypresses(window)
           @@page = 1
           Etc::Gem.initialize_gem_cutter
           Player_Data::Player_Physics.mobilize_player
-        end
+         end
+        if (x >= 1210 && x <= 1320) && (y >= 160 && y <= 230) #--------molds
+          All_Audio::SFX.light_bonk
+         end
+       if (x >= 600 && x <= 760) && (y >= 550 && y <= 625) #--------clear
+          All_Audio::SFX.light_bonk
+          Etc::Gem.initialize_gem_cutter
+         end
         if (x >= 460 && x <= 510) && (y >= 160 && y <= 280) #--------page up
           if @@page > 1
            @@page -= 1
@@ -1629,14 +1636,494 @@ def Window_Class.hud_keypresses(window)
             All_Audio::SFX.light_bonk
            end
           end
+    #---------------------------------------------------------
+    #-                 Select Crafting Gem                   -
+    #---------------------------------------------------------
+     #.....................Cubby One..........................
         if (x >= 605 && x <= 655) && (y >= 160 && y <= 230)
           case @@page
-          when 1
-            All_Audio::SFX.dig_01
+          when 1           
             gem = 0
+            Etc::Gem.select_cutter_gem(gem)
+          when 2           
+            gem = 44
             Etc::Gem.select_cutter_gem(gem)
           end
          end
+     #.....................Cubby Two..........................
+        if (x >= 655 && x <= 705) && (y >= 160 && y <= 230)
+          case @@page
+          when 1           
+            gem = 1
+            Etc::Gem.select_cutter_gem(gem)
+          when 2           
+            gem = 45
+            Etc::Gem.select_cutter_gem(gem)
+          end
+         end
+     #....................Cubby Three.........................
+        if (x >= 705 && x <= 755) && (y >= 160 && y <= 230)
+          case @@page
+          when 1           
+            gem = 2
+            Etc::Gem.select_cutter_gem(gem)
+          when 2           
+            gem = 46
+            Etc::Gem.select_cutter_gem(gem)
+          end
+         end
+     #....................Cubby Four..........................
+        if (x >= 755 && x <= 805) && (y >= 160 && y <= 230)
+         case @@page
+         when 1           
+           gem = 3
+           Etc::Gem.select_cutter_gem(gem)
+         when 2           
+           gem = 47
+           Etc::Gem.select_cutter_gem(gem)
+         end
+        end
+     #....................Cubby Five..........................
+        if (x >= 805 && x <= 855) && (y >= 160 && y <= 230)
+         case @@page
+         when 1           
+           gem = 4
+           Etc::Gem.select_cutter_gem(gem)
+         when 2           
+           gem = 48
+           Etc::Gem.select_cutter_gem(gem)
+         end
+        end
+     #.....................Cubby Six..........................
+        if (x >= 855 && x <= 905) && (y >= 160 && y <= 230)
+         case @@page
+         when 1           
+           gem = 5
+           Etc::Gem.select_cutter_gem(gem)
+         when 2           
+           gem = 49
+           Etc::Gem.select_cutter_gem(gem)
+         end
+        end
+     #....................Cubby Seven.........................
+        if (x >= 905 && x <= 955) && (y >= 160 && y <= 230)
+         case @@page
+         when 1           
+           gem = 6
+           Etc::Gem.select_cutter_gem(gem)
+         when 2           
+           gem = 50
+           Etc::Gem.select_cutter_gem(gem)
+         end
+        end
+     #....................Cubby Eight.........................
+        if (x >= 955 && x <= 1005) && (y >= 160 && y <= 230)
+         case @@page
+         when 1           
+           gem = 7
+           Etc::Gem.select_cutter_gem(gem)
+         when 2           
+           gem = 51
+           Etc::Gem.select_cutter_gem(gem)
+         end
+        end
+     #....................Cubby Nine..........................
+        if (x >= 1005 && x <= 1055) && (y >= 160 && y <= 230)
+         case @@page
+         when 1           
+           gem = 8
+           Etc::Gem.select_cutter_gem(gem)
+         when 2           
+           gem = 52
+           Etc::Gem.select_cutter_gem(gem)
+         end
+        end
+     #.....................Cubby Ten..........................
+        if (x >= 1055 && x <= 1105) && (y >= 160 && y <= 230)
+         case @@page
+         when 1           
+           gem = 9
+           Etc::Gem.select_cutter_gem(gem)
+          when 2           
+            gem = 53
+            Etc::Gem.select_cutter_gem(gem)
+         end
+        end
+     #....................Cubby Eleven........................
+        if (x >= 1105 && x <= 1155) && (y >= 160 && y <= 230)
+         case @@page
+         when 1           
+           gem = 10
+           Etc::Gem.select_cutter_gem(gem)
+         when 2           
+           gem = 54
+           Etc::Gem.select_cutter_gem(gem)
+         end
+        end
+     #....................Cubby Twelve........................
+        if (x >= 605 && x <= 655) && (y >= 230 && y <= 290)
+          case @@page
+          when 1           
+            gem = 11
+            Etc::Gem.select_cutter_gem(gem)
+          when 2           
+            gem = 55
+            Etc::Gem.select_cutter_gem(gem)
+          end
+         end
+     #...................Cubby Thirteen.......................
+        if (x >= 655 && x <= 705) && (y >= 230 && y <= 290)
+         case @@page
+         when 1           
+           gem = 12
+           Etc::Gem.select_cutter_gem(gem)
+         when 2           
+           gem = 56
+           Etc::Gem.select_cutter_gem(gem)
+         end
+        end
+     #...................Cubby Fourteen.......................
+        if (x >= 705 && x <= 755) && (y >= 230 && y <= 290)
+         case @@page
+         when 1           
+           gem = 13
+           Etc::Gem.select_cutter_gem(gem)
+         when 2           
+           gem = 57
+           Etc::Gem.select_cutter_gem(gem)
+         end
+        end
+     #...................Cubby Fifteen........................
+        if (x >= 755 && x <= 805) && (y >= 230 && y <= 290)
+         case @@page
+         when 1           
+           gem = 14
+           Etc::Gem.select_cutter_gem(gem)
+         when 2           
+           gem = 58
+           Etc::Gem.select_cutter_gem(gem)
+         end
+        end
+     #...................Cubby Sixteen........................
+        if (x >= 805 && x <= 855) && (y >= 230 && y <= 290)
+         case @@page
+         when 1           
+           gem = 15
+           Etc::Gem.select_cutter_gem(gem)
+         when 2           
+           gem = 59
+           Etc::Gem.select_cutter_gem(gem)
+         end
+        end
+     #..................Cubby Seventeen.......................
+        if (x >= 855 && x <= 905) && (y >= 230 && y <= 290)
+         case @@page
+         when 1           
+           gem = 16
+           Etc::Gem.select_cutter_gem(gem)
+         when 2           
+           gem = 60
+           Etc::Gem.select_cutter_gem(gem)
+         end
+        end
+     #..................Cubby Eighteen........................
+        if (x >= 905 && x <= 955) && (y >= 230 && y <= 290)
+         case @@page
+         when 1           
+           gem = 17
+           Etc::Gem.select_cutter_gem(gem)
+         when 2           
+           gem = 61
+           Etc::Gem.select_cutter_gem(gem)
+         end
+        end
+     #..................Cubby Nineteen........................
+        if (x >= 955 && x <= 1005) && (y >= 230 && y <= 290)
+         case @@page
+         when 1           
+           gem = 18
+           Etc::Gem.select_cutter_gem(gem)
+         when 2           
+           gem = 62
+           Etc::Gem.select_cutter_gem(gem)
+         end
+        end
+     #...................Cubby Twenty.........................
+        if (x >= 1005 && x <= 1055) && (y >= 230 && y <= 290)
+         case @@page
+         when 1           
+           gem = 19
+           Etc::Gem.select_cutter_gem(gem)
+         when 2           
+           gem = 63
+           Etc::Gem.select_cutter_gem(gem)
+         end
+        end
+     #.................Cubby Twenty-One.......................
+        if (x >= 1055 && x <= 1105) && (y >= 230 && y <= 290)
+         case @@page
+         when 1           
+           gem = 20
+           Etc::Gem.select_cutter_gem(gem)
+         when 2           
+           gem = 64
+           Etc::Gem.select_cutter_gem(gem)
+         end
+        end
+     #.................Cubby Twenty-Two.......................
+        if (x >= 1105 && x <= 1155) && (y >= 230 && y <= 290)
+         case @@page
+         when 1           
+           gem = 21
+           Etc::Gem.select_cutter_gem(gem)
+         when 2           
+           gem = 65
+           Etc::Gem.select_cutter_gem(gem)
+         end
+        end
+     #................Cubby Twenty-Three......................
+        if (x >= 605 && x <= 655) && (y >= 290 && y <= 360)
+         case @@page
+         when 1           
+           gem = 22
+           Etc::Gem.select_cutter_gem(gem)
+         when 2           
+           gem = 66
+           Etc::Gem.select_cutter_gem(gem)
+         end
+        end
+     #................Cubby Twenty-Four.......................
+        if (x >= 655 && x <= 705) && (y >= 290 && y <= 360)
+         case @@page
+         when 1           
+           gem = 23
+           Etc::Gem.select_cutter_gem(gem)
+         when 2           
+           gem = 67
+           Etc::Gem.select_cutter_gem(gem)
+         end
+        end
+     #................Cubby Twenty-Five.......................
+        if (x >= 705 && x <= 755) && (y >= 290 && y <= 360)
+         case @@page
+         when 1           
+           gem = 24
+           Etc::Gem.select_cutter_gem(gem)
+         when 2           
+           gem = 68
+           Etc::Gem.select_cutter_gem(gem)
+         end
+        end
+     #................Cubby Twenty-Six........................
+        if (x >= 755 && x <= 805) && (y >= 290 && y <= 360)
+         case @@page
+         when 1           
+           gem = 25
+           Etc::Gem.select_cutter_gem(gem)
+         when 2           
+           gem = 69
+           Etc::Gem.select_cutter_gem(gem)
+         end
+        end
+     #...............Cubby Twenty-Seven.......................
+        if (x >= 805 && x <= 855) && (y >= 290 && y <= 360)
+         case @@page
+         when 1           
+           gem = 26
+           Etc::Gem.select_cutter_gem(gem)
+         when 2           
+           gem = 70
+           Etc::Gem.select_cutter_gem(gem)
+         end
+        end
+     #...............Cubby Twenty-Eight.......................
+        if (x >= 855 && x <= 905) && (y >= 290 && y <= 360)
+         case @@page
+         when 1           
+           gem = 27
+           Etc::Gem.select_cutter_gem(gem)
+         when 2           
+           gem = 71
+           Etc::Gem.select_cutter_gem(gem)
+         end
+        end
+     #...............Cubby Twenty-Nine........................
+        if (x >= 905 && x <= 955) && (y >= 290 && y <= 360)
+         case @@page
+         when 1           
+           gem = 28
+           Etc::Gem.select_cutter_gem(gem)
+         when 2           
+           gem = 72
+           Etc::Gem.select_cutter_gem(gem)
+         end
+        end
+     #.................Cubby Thirty...........................
+        if (x >= 955 && x <= 1005) && (y >= 290 && y <= 360)
+         case @@page
+         when 1           
+           gem = 29
+           Etc::Gem.select_cutter_gem(gem)
+         when 2           
+           gem = 73
+           Etc::Gem.select_cutter_gem(gem)
+         end
+        end
+     #................Cubby Thirty-One........................
+        if (x >= 1005 && x <= 1055) && (y >= 290 && y <= 360)
+         case @@page
+         when 1           
+           gem = 30
+           Etc::Gem.select_cutter_gem(gem)
+         when 2           
+           gem = 74
+           Etc::Gem.select_cutter_gem(gem)
+         end
+        end
+     #................Cubby Thirty-Two........................
+        if (x >= 1055 && x <= 1105) && (y >= 290 && y <= 360)
+         case @@page
+         when 1           
+           gem = 31
+           Etc::Gem.select_cutter_gem(gem)
+         when 2           
+           gem = 75
+           Etc::Gem.select_cutter_gem(gem)
+         end
+        end
+     #................Cubby Thirty-Three........................
+        if (x >= 1105 && x <= 1155) && (y >= 290 && y <= 360)
+         case @@page
+         when 1           
+           gem = 32
+           Etc::Gem.select_cutter_gem(gem)
+         when 2           
+           gem = 76
+           Etc::Gem.select_cutter_gem(gem)
+         end
+        end
+     #................Cubby Thirty-Four......................
+        if (x >= 605 && x <= 655) && (y >= 360 && y <= 430)
+         case @@page
+         when 1           
+           gem = 33
+           Etc::Gem.select_cutter_gem(gem)
+         when 2           
+           gem = 77
+           Etc::Gem.select_cutter_gem(gem)
+         end
+        end
+     #................Cubby Thirty-Five......................
+        if (x >= 655 && x <= 705) && (y >= 360 && y <= 430)
+         case @@page
+         when 1           
+           gem = 34
+           Etc::Gem.select_cutter_gem(gem)
+         when 2           
+           gem = 78
+           Etc::Gem.select_cutter_gem(gem)
+         end
+        end
+     #................Cubby Thirty-Six......................
+        if (x >= 705 && x <= 755) && (y >= 360 && y <= 430)
+         case @@page
+         when 1           
+           gem = 35
+           Etc::Gem.select_cutter_gem(gem)
+         when 2           
+           gem = 79
+           Etc::Gem.select_cutter_gem(gem)
+         end
+        end
+     #................Cubby Thirty-Seven......................
+        if (x >= 755 && x <= 805) && (y >= 360 && y <= 430)
+         case @@page
+         when 1           
+           gem = 36
+           Etc::Gem.select_cutter_gem(gem)
+         when 2           
+           gem = 80
+           Etc::Gem.select_cutter_gem(gem)
+         end
+        end
+     #................Cubby Thirty-Eight......................
+        if (x >= 805 && x <= 855) && (y >= 360 && y <= 430)
+         case @@page
+         when 1           
+           gem = 37
+           Etc::Gem.select_cutter_gem(gem)
+         when 2           
+           gem = 81
+           Etc::Gem.select_cutter_gem(gem)
+         end
+        end
+     #................Cubby Thirty-Nine......................
+        if (x >= 855 && x <= 905) && (y >= 360 && y <= 430)
+         case @@page
+         when 1           
+           gem = 38
+           Etc::Gem.select_cutter_gem(gem)
+         when 2           
+           gem = 82
+           Etc::Gem.select_cutter_gem(gem)
+         end
+        end
+     #................Cubby Forty......................
+        if (x >= 905 && x <= 955) && (y >= 360 && y <= 430)
+         case @@page
+         when 1           
+           gem = 39
+           Etc::Gem.select_cutter_gem(gem)
+         when 2           
+           gem = 83
+           Etc::Gem.select_cutter_gem(gem)
+         end
+        end
+     #................Cubby Forty-One......................
+        if (x >= 955 && x <= 1005) && (y >= 360 && y <= 430)
+         case @@page
+         when 1           
+           gem = 40
+           Etc::Gem.select_cutter_gem(gem)
+         when 2           
+           gem = 84
+           Etc::Gem.select_cutter_gem(gem)
+         end
+        end
+     #................Cubby Forty-Two......................
+        if (x >= 1005 && x <= 1055) && (y >= 360 && y <= 430)
+         case @@page
+         when 1           
+           gem = 41
+           Etc::Gem.select_cutter_gem(gem)
+         when 2           
+           gem = 85
+           Etc::Gem.select_cutter_gem(gem)
+         end
+        end
+     #................Cubby Forty-Three......................
+        if (x >= 1055 && x <= 1105) && (y >= 360 && y <= 430)
+         case @@page
+         when 1           
+           gem = 42
+           Etc::Gem.select_cutter_gem(gem)
+         when 2           
+           gem = 86
+           Etc::Gem.select_cutter_gem(gem)
+         end
+        end
+     #................Cubby Forty-Four......................
+        if (x >= 1105 && x <= 1155) && (y >= 360 && y <= 430)
+         case @@page
+         when 1           
+           gem = 43
+           Etc::Gem.select_cutter_gem(gem)
+         when 2           
+           gem = 87
+           Etc::Gem.select_cutter_gem(gem)
+         end
+        end
+     #_______________________________________________________
       when "Stats_Menu" #---------------------------------------------------------Stats Menu
         if (x >= 1280 && x <= 1330) && (y >= 210 && y <= 260)
           @@popup = "none"
