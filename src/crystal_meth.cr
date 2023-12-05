@@ -2103,6 +2103,7 @@ def Window_Class.hud_keypresses(window)
             Player_Data::Player_Physics.immobilize_player
             @@popup = "gem_cutter"
             Etc::Gem.initialize_gem_inventory
+            Etc::Gem.initialize_gem_cutter_ore_display
             @@player_character_rendered_model.position = SF.vector2(800, 75)
           else
             Player_Data::Player_Physics.mobilize_player
