@@ -3229,6 +3229,11 @@ Testing_Text.character_size = 20; Testing_Text.color = SF::Color::White; Testing
   GEM_CUTTER_MENU_TEXTURE = SF::Texture.from_file("graphics/Gem_Cutter.png")
   Test_Gem_Cutter_Menu = SF::Sprite.new(GEM_CUTTER_MENU_TEXTURE);
   Test_Gem_Cutter_Menu.position = SF.vector2(400, -200);
+
+  Inventory_arrow_up3 = SF::RectangleShape.new(SF.vector2(50, 90)); Inventory_arrow_up3.position = SF.vector2(300, -150);
+  Inventory_arrow_up3.fill_color = SF.color(255, 100, 100)
+  Inventory_arrow_down3 = SF::RectangleShape.new(SF.vector2(50, 90)); Inventory_arrow_down3.position = SF.vector2(300, -50);
+  Inventory_arrow_down3.fill_color = SF.color(255, 100, 100)
  #''''''''''''''''''''''''''''''''''''''''''''''''''''''Gem Ores'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
   #....................................................Bloodstone......................................................................
    BLOODSTONE_GEM_CUTTER_TEXTURE = SF::Texture.from_file("graphics/minerals/Gem_Cutter_Bloodstone.png")

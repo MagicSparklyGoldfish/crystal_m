@@ -2344,7 +2344,7 @@ include Equipment
    #--------------------------------------------------------Gem Cutter Display-----------------------------------------------------------------------------
     def Gem.display_gem_cutter(window, page)
      Owned_Gem_Cutter_Ore_Array.uniq!
-     window.draw(Test_Gem_Cutter_Menu)
+     window.draw(Test_Gem_Cutter_Menu); window.draw(Inventory_arrow_up3); window.draw(Inventory_arrow_down3)
      case page
      when 1
      #----------------------------------------row 1-----------------------------------------------------------

@@ -524,6 +524,7 @@ def Window_Class.ladder_test_ore_map
   bounding_box1 = @@player_character_rendered_model.global_bounds
   bounding_box2 = @@ladder_array[@@ladder_iterator].global_bounds 
   if bounding_box1.intersects? bounding_box2
+    @@player_character_rendered_model.position.x = @@ladder_array[@@ladder_iterator].position.x
     @@player_character_rendered_model.position -= SF.vector2(0, 40)
   end 
    @@ladder_iterator += 1 
@@ -1613,6 +1614,20 @@ def Window_Class.hud_keypresses(window)
           @@page = 1
           Player_Data::Player_Physics.mobilize_player
         end
+        if (x >= 460 && x <= 510) && (y >= 160 && y <= 280)
+         if @@page > 1
+          @@page -= 1
+         else
+          All_Audio::SFX.light_bonk
+         end
+        end
+        if (x >= 460 && x <= 510) && (y >= 280 && y <= 370)
+          if @@page < 2
+           @@page += 1
+          else
+           All_Audio::SFX.light_bonk
+          end
+         end
       when "Stats_Menu" #---------------------------------------------------------Stats Menu
         if (x >= 1280 && x <= 1330) && (y >= 210 && y <= 260)
           @@popup = "none"
