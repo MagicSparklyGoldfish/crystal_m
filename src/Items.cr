@@ -4839,20 +4839,25 @@ include Etc
            end
          end
         #----------------------Slot 7--------------------------
-        if Weapon_Inventory_Array.size >= 7
-          case page
-          when 1   
-           Weapon_Inventory_Array[6].weapon_inventory_sprite.position = SF.vector2(555, 460);
-           window.draw(Weapon_Inventory_Array[6].weapon_inventory_sprite)
-          end
-        end
+         if Weapon_Inventory_Array.size >= 7
+           case page
+           when 1   
+            Weapon_Inventory_Array[6].weapon_inventory_sprite.position = SF.vector2(555, 460);
+            window.draw(Weapon_Inventory_Array[6].weapon_inventory_sprite)
+           end
+         end
+       end
+   #.............................................................Attack Strength................................................................................
+       def Weapon.attack_strength(base_attack) #@note attack strength 
+        attack_strength = base_attack * @@current_weapon.weapon_atk
+        Harvestables::Ore.set_attack_strength(attack_strength)
        end
   #________________________________________________________________________________________________________________________________________________________
   #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   #/                                                               Entities                                                                               /
   #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
    @@nil_stick = Weapon.new("", -1, "", 0, [""], [""], Nil_Ingot_Ore, Weapon_Rectangle_01, SYSSOUND_6, SYSSOUND_6, "")
-   @@stick = Weapon.new("Stick", 0, "stick", 1.25, ["none", "none", "none"], ["none", "none", "none"], Stick01, Weapon_Rectangle_01, WEAPSOUND_01, WEAPSOUND_02, "")
+   @@stick = Weapon.new("Stick", 0, "stick", 1.25, ["none", "none", "none"], ["none", "none", "none"], Stick01, Weapon_Rectangle_01, WEAPSOUND_01, WEAPSOUND_02, "Swing")
    @@zinc_stick = Weapon.new("Zinc Stick", 1, "stick", 1.5, ["empty", "none", "none"], ["empty", "none", "none"], Zinc_Stick, Zinc_Stick_Display, WEAPSOUND_01, WEAPSOUND_02, "Swing")
    Weapon_Inventory_Array.push(@@zinc_stick)
    @@tin_stick = Weapon.new("Tin Stick", 2, "stick", 1.75, ["empty", "none", "none"], ["empty", "none", "none"], Tin_Stick, Tin_Stick_Display, WEAPSOUND_01, WEAPSOUND_02, "Swing")

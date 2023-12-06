@@ -3308,7 +3308,7 @@ end; end; end; end; end; end
     end
    def Stats.check_attack
     base_attack = 10 + @@current_str
-    Equipment.attack_strength(base_attack)
+    Crafted_Items::Weapon.attack_strength(base_attack)
    end
    end
   class Player_Physics < Stats
