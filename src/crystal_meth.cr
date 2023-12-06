@@ -1604,7 +1604,7 @@ def Window_Class.hud_keypresses(window)
         if (x >= 555 && x <= 710) && (y >= 310 && y <= 460)
           All_Audio::SFX.light_bonk
           this = 0
-          Equipment.equip_weapon(this)
+          Crafted_Items::Weapon.equip_weapon(this)
           this2 = @@current_weapon
           Gui::Window_Class.equip_weapon(this2)
           puts @@current_weapon
@@ -1612,7 +1612,7 @@ def Window_Class.hud_keypresses(window)
         if (x >= 710 && x <= 855) && (y >= 310 && y <= 460)
           All_Audio::SFX.light_bonk
           this = 1
-          Equipment.equip_weapon(this)
+          Crafted_Items::Weapon.equip_weapon(this)
           this2 = @@current_weapon
           Gui::Window_Class.equip_weapon(this2)
           puts @@current_weapon
@@ -1620,7 +1620,7 @@ def Window_Class.hud_keypresses(window)
         if (x >= 855 && x <= 1005) && (y >= 310 && y <= 460)
           All_Audio::SFX.light_bonk
           this = 2
-          Equipment.equip_weapon(this)
+          Crafted_Items::Weapon.equip_weapon(this)
           this2 = @@current_weapon
           Gui::Window_Class.equip_weapon(this2)
           puts @@current_weapon
@@ -1628,7 +1628,7 @@ def Window_Class.hud_keypresses(window)
         if (x >= 1005 && x <= 1155) && (y >= 310 && y <= 460)
           All_Audio::SFX.light_bonk
           this = 3
-          Equipment.equip_weapon(this)
+          Crafted_Items::Weapon.equip_weapon(this)
           this2 = @@current_weapon
           Gui::Window_Class.equip_weapon(this2)
           puts @@current_weapon
@@ -1636,35 +1636,35 @@ def Window_Class.hud_keypresses(window)
         if (x >= 1155 && x <= 1305) && (y >= 310 && y <= 460)
           All_Audio::SFX.light_bonk
           this = 4
-          Equipment.equip_weapon(this)
+          Crafted_Items::Weapon.equip_weapon(this)
           this2 = @@current_weapon
           Gui::Window_Class.equip_weapon(this2)
          end
          if (x >= 1305 && x <= 1455) && (y >= 310 && y <= 460)
           All_Audio::SFX.light_bonk
           this = 5
-          Equipment.equip_weapon(this)
+          Crafted_Items::Weapon.equip_weapon(this)
           this2 = @@current_weapon
           Gui::Window_Class.equip_weapon(this2)
          end
         if (x >= 555 && x <= 710) && (y >= 460 && y <= 610)
           All_Audio::SFX.light_bonk
           this = 6
-          Equipment.equip_weapon(this)
+          Crafted_Items::Weapon.equip_weapon(this)
           this2 = @@current_weapon
           Gui::Window_Class.equip_weapon(this2)
          end
         if (x >= 710 && x <= 855) && (y >= 460 && y <= 610)
           All_Audio::SFX.light_bonk
           this = 7
-          Equipment.equip_weapon(this)
+          Crafted_Items::Weapon.equip_weapon(this)
           this2 = @@current_weapon
           Gui::Window_Class.equip_weapon(this2)
           end
          if (x >= 855 && x <= 1005) && (y >= 460 && y <= 610)
           All_Audio::SFX.light_bonk
           this = 8
-          Equipment.equip_weapon(this)
+          Crafted_Items::Weapon.equip_weapon(this)
           this2 = @@current_weapon
           Gui::Window_Class.equip_weapon(this2)
           end

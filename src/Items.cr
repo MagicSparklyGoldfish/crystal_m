@@ -4708,6 +4708,7 @@ end
 
 module Crafted_Items
 include Etc
+ Weapon_Inventory_Array = [] of Weapon
  class Weapon
   #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
   #+                                                              Variables                                                                               +
@@ -4765,16 +4766,41 @@ include Etc
      @weapon_motion
     end
   #________________________________________________________________________________________________________________________________________________________
+  #????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
+  #?                                                               Methods                                                                                ?
+  #????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
+   #.............................................................Draw Weapon...............................................................................
     def Weapon.draw_current_weapon(player) #@note draw current weapon
       #Equipment.check_gem_element_current_weapon
       player.draw(@@current_weapon.weapon_sprite)
     end
+   #.............................................................Equip Weapon...............................................................................
+    def Weapon.equip_weapon(this)
+      size = Weapon_Inventory_Array.size 
+       if this > size
+         All_Audio::SFX.light_bonk
+        else 
+       if @@current_weapon != Nil || @@nil_stick
+         Weapon_Inventory_Array.push(@@current_weapon)
+         @@current_weapon = Weapon_Inventory_Array[this]
+         Weapon_Inventory_Array.delete(@@current_weapon)
+         puts "equip" + this.to_s
+        end
+        end
+      end
+  #________________________________________________________________________________________________________________________________________________________
   #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   #/                                                               Entities                                                                               /
   #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
    @@nil_stick = Weapon.new("", -1, "", 0, [""], [""], Nil_Ingot_Ore, Weapon_Rectangle_01, SYSSOUND_6, SYSSOUND_6, "")
    @@stick = Weapon.new("Stick", 0, "stick", 1.25, ["none", "none", "none"], ["none", "none", "none"], Stick01, Weapon_Rectangle_01, WEAPSOUND_01, WEAPSOUND_02, "")
-   @@zinc_stick = Weapon.new("Stick", 0, "stick", 1.5, ["empty", "none", "none"], ["empty", "none", "none"], Zinc_Stick, Zinc_Stick_Display, WEAPSOUND_01, WEAPSOUND_02, "Swing")
+   @@zinc_stick = Weapon.new("Zinc Stick", 1, "stick", 1.5, ["empty", "none", "none"], ["empty", "none", "none"], Zinc_Stick, Zinc_Stick_Display, WEAPSOUND_01, WEAPSOUND_02, "Swing")
+   @@tin_stick = Weapon.new("Tin Stick", 2, "stick", 1.75, ["empty", "none", "none"], ["empty", "none", "none"], Tin_Stick, Tin_Stick_Display, WEAPSOUND_01, WEAPSOUND_02, "Swing")
+   @@copper_stick = Weapon.new("Copper Stick", 3, "stick", 2.5, ["empty", "none", "none"], ["empty", "none", "none"], Copper_Stick, Copper_Stick_Display, WEAPSOUND_01, WEAPSOUND_02, "Swing")
+   @@brass_stick = Weapon.new("Brass Stick", 4, "stick", 2, ["empty", "empty", "none"], ["empty", "empty", "none"], Brass_Stick, Brass_Stick_Display, WEAPSOUND_01, WEAPSOUND_02, "Swing")
+   @@bronze_stick = Weapon.new("Bronze Stick", 5, "stick", 2.25, ["empty", "empty", "none"], ["empty", "empty", "none"], Bronze_Stick, Bronze_Stick_Display, WEAPSOUND_01, WEAPSOUND_02, "Swing")
+   @@iron_stick = Weapon.new("Iron Stick", 6, "stick", 2.5, ["empty", "empty", "none"], ["empty", "empty", "none"], Iron_Stick, Iron_Stick_Display, WEAPSOUND_01, WEAPSOUND_02, "Swing")
+   @@steel_stick = Weapon.new("Steel Stick", 7, "stick", 3, ["empty", "empty", "empty"], ["empty", "empty", "empty"], Steel_Stick, Steel_Stick_Display, WEAPSOUND_01, WEAPSOUND_02, "Swing")
   #________________________________________________________________________________________________________________________________________________________
   end
 end
