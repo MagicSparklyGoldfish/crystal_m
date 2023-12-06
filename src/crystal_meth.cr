@@ -362,7 +362,7 @@ extend self
       window.draw(Weapon_Info_Box);  window.draw(Weapon_Info_Text)
     end
      page = @@page
-     Equipment.display_equipment_inventory(window, page)
+     Crafted_Items::Weapon.display_equipment_inventory(window, page)
      #Equipment::Stick.test(window, page)
    else if @@tab == "Etc"
      window.draw(Ore_Button); window.draw(Ore_Button_Text); window.draw(Ingot_Button); window.draw(Ingot_Button_Text)

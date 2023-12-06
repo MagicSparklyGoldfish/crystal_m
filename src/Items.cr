@@ -4788,6 +4788,65 @@ include Etc
         end
         end
       end
+   #.............................................................Draw Weapon................................................................................
+      def Weapon.display_equipment_inventory(window, page)
+        #----------------------Slot 1--------------------------
+         if Weapon_Inventory_Array.size >= 1
+           case page
+           when 1   
+            Weapon_Inventory_Array[0].weapon_inventory_sprite.position = SF.vector2(555, 310);
+            window.draw(Weapon_Inventory_Array[0].weapon_inventory_sprite)
+           end
+         end
+        #----------------------Slot 2--------------------------
+         if Weapon_Inventory_Array.size >= 2
+           case page
+           when 1   
+            Weapon_Inventory_Array[1].weapon_inventory_sprite.position = SF.vector2(710, 310);
+            window.draw(Weapon_Inventory_Array[1].weapon_inventory_sprite)
+           end
+         end
+        #----------------------Slot 3--------------------------
+         if Weapon_Inventory_Array.size >= 3
+           case page
+           when 1   
+            Weapon_Inventory_Array[2].weapon_inventory_sprite.position = SF.vector2(855, 310);
+            window.draw(Weapon_Inventory_Array[2].weapon_inventory_sprite)
+           end
+         end
+        #----------------------Slot 4--------------------------
+         if Weapon_Inventory_Array.size >= 4
+           case page
+           when 1   
+            Weapon_Inventory_Array[3].weapon_inventory_sprite.position = SF.vector2(1005, 310);
+            window.draw(Weapon_Inventory_Array[3].weapon_inventory_sprite)
+           end
+         end
+        #----------------------Slot 5--------------------------
+         if Weapon_Inventory_Array.size >= 5
+           case page
+           when 1   
+            Weapon_Inventory_Array[4].weapon_inventory_sprite.position = SF.vector2(1155, 310);
+            window.draw(Weapon_Inventory_Array[4].weapon_inventory_sprite)
+           end
+         end
+        #----------------------Slot 6--------------------------
+         if Weapon_Inventory_Array.size >= 6
+           case page
+           when 1   
+            Weapon_Inventory_Array[5].weapon_inventory_sprite.position = SF.vector2(1305, 310);
+            window.draw(Weapon_Inventory_Array[5].weapon_inventory_sprite)
+           end
+         end
+        #----------------------Slot 7--------------------------
+        if Weapon_Inventory_Array.size >= 7
+          case page
+          when 1   
+           Weapon_Inventory_Array[6].weapon_inventory_sprite.position = SF.vector2(555, 460);
+           window.draw(Weapon_Inventory_Array[6].weapon_inventory_sprite)
+          end
+        end
+       end
   #________________________________________________________________________________________________________________________________________________________
   #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   #/                                                               Entities                                                                               /
@@ -4795,6 +4854,7 @@ include Etc
    @@nil_stick = Weapon.new("", -1, "", 0, [""], [""], Nil_Ingot_Ore, Weapon_Rectangle_01, SYSSOUND_6, SYSSOUND_6, "")
    @@stick = Weapon.new("Stick", 0, "stick", 1.25, ["none", "none", "none"], ["none", "none", "none"], Stick01, Weapon_Rectangle_01, WEAPSOUND_01, WEAPSOUND_02, "")
    @@zinc_stick = Weapon.new("Zinc Stick", 1, "stick", 1.5, ["empty", "none", "none"], ["empty", "none", "none"], Zinc_Stick, Zinc_Stick_Display, WEAPSOUND_01, WEAPSOUND_02, "Swing")
+   Weapon_Inventory_Array.push(@@zinc_stick)
    @@tin_stick = Weapon.new("Tin Stick", 2, "stick", 1.75, ["empty", "none", "none"], ["empty", "none", "none"], Tin_Stick, Tin_Stick_Display, WEAPSOUND_01, WEAPSOUND_02, "Swing")
    @@copper_stick = Weapon.new("Copper Stick", 3, "stick", 2.5, ["empty", "none", "none"], ["empty", "none", "none"], Copper_Stick, Copper_Stick_Display, WEAPSOUND_01, WEAPSOUND_02, "Swing")
    @@brass_stick = Weapon.new("Brass Stick", 4, "stick", 2, ["empty", "empty", "none"], ["empty", "empty", "none"], Brass_Stick, Brass_Stick_Display, WEAPSOUND_01, WEAPSOUND_02, "Swing")
