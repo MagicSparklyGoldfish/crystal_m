@@ -1782,17 +1782,45 @@ include Equipment
      @@steel_ingot = Inventory_Ingot.new("Steel", 7, Steel_Ingot_Ore, 1, 10, Forge_Steel_Ingot)
      Ingot_Array.push(@@steel_ingot)
    end
+   class Cut
+    def initialize(name : String, is_owned : Bool, cutter_sprite : SF::Sprite)
+      @name = name
+      @is_owned = is_owned
+      @cutter_sprite = cutter_sprite
+     end
+    def name
+      @name
+     end
+    def is_owned
+      @is_owned
+     end
+    def cutter_sprite
+      @cutter_sprite
+     end
+   @@table_cut = Cut.new("Table Cut", true, Cutter_Mold_Option_01)
+   Cut_Array.push(@@table_cut)
+   @@square_cut = Cut.new("Square Cut", true, Cutter_Mold_Option_02)
+   Cut_Array.push(@@square_cut)
+   @@pear_cut = Cut.new("Pear Cut", true, Cutter_Mold_Option_03)
+   Cut_Array.push(@@pear_cut)
+   @@drop_cut = Cut.new("Drop Cut", true, Cutter_Mold_Option_04)
+   Cut_Array.push(@@drop_cut)
+   @@brilliant_cut = Cut.new("Brilliant Cut", true, Cutter_Mold_Option_05)
+   Cut_Array.push(@@brilliant_cut)
+  end
  #GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG
  #GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG
  #GG                                                         #@note Gem Class                                                                                GG
  #GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG
  #GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG
- GEM_ARRAY = [] of Gem; Owned_Gem_Array = [] of Gem; Owned_Gem_Cutter_Ore_Array = [] of Inventory_Ore
- class Gem < Inventory_Ore
+  GEM_ARRAY = [] of Gem; Owned_Gem_Array = [] of Gem; Owned_Gem_Cutter_Ore_Array = [] of Inventory_Ore; Cut_Array = [] of Cut; Known_Cut_Array = [] of Cut
+  class Gem < Inventory_Ore
+
   #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
   #+                                                              Variables                                                                               +
   #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
    @@current_style : String; @@current_style = "none"; @@current_gem : Inventory_Ore; @@current_gem = @@nil_inventory_ore
+   @@preview_gem : SF::Sprite; @@preview_gem = Smelter_Nil_Sprite
   #________________________________________________________________________________________________________________________________________________________
   #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   #!                                                              Initialize                                                                              !
@@ -1876,6 +1904,38 @@ include Equipment
           Owned_Gem_Cutter_Ore_Array.push(Inventory_Ore_Array[i])
         end
         i += 1
+      end
+    end
+   #-------------------------------------------------Initialize Gem Cutter Cut Inventory-------------------------------------------------------------------
+     def Gem.initialize_gem_cutter_cut_display
+      s = Cut_Array.size; i = 0
+      while s > i
+        if Cut_Array[i].is_owned == true
+          Known_Cut_Array.push(Cut_Array[i])
+        end
+        i += 1
+      end
+    end
+    def Gem.initialize_cutter_cut_display(window)
+      if Known_Cut_Array.size > 0
+       Known_Cut_Array[0].cutter_sprite.position = SF.vector2(1050, -95)
+       window.draw(Known_Cut_Array[0].cutter_sprite)
+      end
+      if Known_Cut_Array.size > 1
+        Known_Cut_Array[1].cutter_sprite.position = SF.vector2(1050, -45)
+        window.draw(Known_Cut_Array[1].cutter_sprite)
+      end
+      if Known_Cut_Array.size > 2
+        Known_Cut_Array[2].cutter_sprite.position = SF.vector2(1050, 5)
+        window.draw(Known_Cut_Array[2].cutter_sprite)
+      end
+      if Known_Cut_Array.size > 3
+        Known_Cut_Array[3].cutter_sprite.position = SF.vector2(1050, 55)
+        window.draw(Known_Cut_Array[3].cutter_sprite)
+      end
+      if Known_Cut_Array.size > 4
+        Known_Cut_Array[4].cutter_sprite.position = SF.vector2(1050, 105)
+        window.draw(Known_Cut_Array[4].cutter_sprite)
       end
     end
    #---------------------------------------------------------Display Inventory-----------------------------------------------------------------------------
@@ -2355,23 +2415,55 @@ include Equipment
       if Owned_Gem_Cutter_Ore_Array.size >= gem
         All_Audio::SFX.dig_01
        @@current_gem = Owned_Gem_Cutter_Ore_Array[gem]
+       Gem.determine_preview_gem
       else
         All_Audio::SFX.light_bonk
       end
     end
+   #------------------------------------------------------------Select Cut---------------------------------------------------------------------------------
+      def Gem.select_cutter_cut(cut)
+       if Known_Cut_Array.size >= cut
+         All_Audio::SFX.metal_hit_01
+        @@current_style = Known_Cut_Array[cut].name
+        Gem.determine_preview_gem
+       else
+         All_Audio::SFX.light_bonk
+       end
+     end
    #-------------------------------------------------------Initialize Gem Cutter---------------------------------------------------------------------------
     def Gem.initialize_gem_cutter
       Gem.initialize_gem_inventory
       @@current_gem = @@nil_inventory_ore
       @@current_style = "none"
      end
+   #------------------------------------------------------------Preview Gem--------------------------------------------------------------------------------
+    def Gem.determine_preview_gem
+      i = 0
+     case @@current_style
+      when "none"
+        @@preview_gem = Smelter_Nil_Sprite
+      when "Table Cut"
+       case @@current_gem.name
+        when "Bloodstone"
+          @@preview_gem = Bloodstone_Inventory_Tablecut
+        when "Moss Agate"
+          @@preview_gem = Moss_Agate_Inventory_Tablecut
+        end
+      end
+      @@preview_gem.position = SF.vector2(542, -15)
+      @@preview_gem.scale  = SF.vector2(2.5, 2.5)
+    end
    #--------------------------------------------------------Gem Cutter Display-----------------------------------------------------------------------------
-    def Gem.display_gem_cutter(window, page)
+    def Gem.display_gem_cutter(window, page, tab)
      Owned_Gem_Cutter_Ore_Array.uniq!
      current_gem_sprite = @@current_gem.craft_sprite.dup; current_gem_sprite.scale(SF.vector2(1.5, 1.5))
      current_gem_sprite.position = SF.vector2(550, 55)
      window.draw(Test_Gem_Cutter_Menu); window.draw(Inventory_arrow_up3); window.draw(Inventory_arrow_down3)
-     window.draw(current_gem_sprite)
+     window.draw(current_gem_sprite); window.draw(@@preview_gem)
+     if tab == "cuts"
+      window.draw(Cutter_Mold_Option_01)
+      Gem.initialize_cutter_cut_display(window)
+     end
      case page
      when 1
      #----------------------------------------row 1-----------------------------------------------------------
@@ -3005,6 +3097,9 @@ include Equipment
   #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   #/                                                               Entities                                                                               /
   #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+   #..............................................................Bloodstone...............................................................................
+    @@nil_gem = Gem.new("", 0, Smelter_Nil_Sprite, "table", 1, "red", 60, "earth", "hp+", Smelter_Nil_Sprite)
+    GEM_ARRAY.push(@@bloodstone_gem)
    #..............................................................Bloodstone...............................................................................
     @@bloodstone_gem = Gem.new("Bloodstone", 1, Bloodstone_Inventory_Tablecut, "table", 1, "red", 60, "earth", "hp+", Bloodstone_Inventory_Tablecut)
     GEM_ARRAY.push(@@bloodstone_gem)

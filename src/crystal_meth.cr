@@ -696,7 +696,8 @@ def Window_Class.ladder_test_ore_map
     end
    if @@popup == "gem_cutter"
     page = @@page
-    Etc::Gem.display_gem_cutter(window, page)
+    tab = @@tab
+    Etc::Gem.display_gem_cutter(window, page, tab)
     end
     Window_Class.hud(window)
   end
@@ -1615,8 +1616,13 @@ def Window_Class.hud_keypresses(window)
           Etc::Gem.initialize_gem_cutter
           Player_Data::Player_Physics.mobilize_player
          end
-        if (x >= 1210 && x <= 1320) && (y >= 160 && y <= 230) #--------molds
+        if (x >= 1210 && x <= 1320) && (y >= 160 && y <= 230) #--------cuts
           All_Audio::SFX.light_bonk
+          if @@tab == "none"
+            @@tab = "cuts"
+          else
+            @@tab = "none"
+          end
          end
        if (x >= 600 && x <= 760) && (y >= 550 && y <= 625) #--------clear
           All_Audio::SFX.light_bonk
@@ -1636,6 +1642,13 @@ def Window_Class.hud_keypresses(window)
             All_Audio::SFX.light_bonk
            end
           end
+    #---------------------------------------------------------
+    #-                      Select Cut                       -
+    #---------------------------------------------------------
+     if (x >= 1215 && x <= 1315) && (y >= 240 && y <= 300) && @@tab == "cuts"
+      cut = 0
+      Etc::Gem.select_cutter_cut(cut)
+     end
     #---------------------------------------------------------
     #-                 Select Crafting Gem                   -
     #---------------------------------------------------------
@@ -2624,6 +2637,7 @@ def Window_Class.hud_keypresses(window)
             Etc::Gem.initialize_gem_inventory
             Etc::Gem.initialize_gem_cutter_ore_display
             @@player_character_rendered_model.position = SF.vector2(800, 75)
+            Etc::Gem.initialize_gem_cutter_cut_display
           else
             Player_Data::Player_Physics.mobilize_player
           end

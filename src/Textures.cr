@@ -3234,6 +3234,26 @@ Testing_Text.character_size = 20; Testing_Text.color = SF::Color::White; Testing
   Inventory_arrow_up3.fill_color = SF.color(255, 100, 100)
   Inventory_arrow_down3 = SF::RectangleShape.new(SF.vector2(50, 90)); Inventory_arrow_down3.position = SF.vector2(300, -50);
   Inventory_arrow_down3.fill_color = SF.color(255, 100, 100)
+
+  CUTTER_MOLD_OPTION_TEXTURE_01 = SF::Texture.from_file("graphics/Table_Cut_Option.png")
+  Cutter_Mold_Option_01 = SF::Sprite.new(CUTTER_MOLD_OPTION_TEXTURE_01)
+  Cutter_Mold_Option_01.position = SF.vector2(1050, -95);
+
+  CUTTER_MOLD_OPTION_TEXTURE_02 = SF::Texture.from_file("graphics/Square_Cut_Option.png")
+  Cutter_Mold_Option_02 = SF::Sprite.new(CUTTER_MOLD_OPTION_TEXTURE_02)
+  Cutter_Mold_Option_02.position = SF.vector2(1050, -95);
+
+  CUTTER_MOLD_OPTION_TEXTURE_03 = SF::Texture.from_file("graphics/Pear_Cut_Option.png")
+  Cutter_Mold_Option_03 = SF::Sprite.new(CUTTER_MOLD_OPTION_TEXTURE_03)
+  Cutter_Mold_Option_03.position = SF.vector2(1050, -95);
+
+  CUTTER_MOLD_OPTION_TEXTURE_04 = SF::Texture.from_file("graphics/Drop_Cut_Option.png")
+  Cutter_Mold_Option_04 = SF::Sprite.new(CUTTER_MOLD_OPTION_TEXTURE_04)
+  Cutter_Mold_Option_04.position = SF.vector2(1050, -95);
+
+  CUTTER_MOLD_OPTION_TEXTURE_05 = SF::Texture.from_file("graphics/Brilliant_Cut_Option.png")
+  Cutter_Mold_Option_05 = SF::Sprite.new(CUTTER_MOLD_OPTION_TEXTURE_05)
+  Cutter_Mold_Option_05.position = SF.vector2(1050, -95);
  #''''''''''''''''''''''''''''''''''''''''''''''''''''''Gem Ores'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
   #....................................................Bloodstone......................................................................
    BLOODSTONE_GEM_CUTTER_TEXTURE = SF::Texture.from_file("graphics/minerals/Gem_Cutter_Bloodstone.png")
