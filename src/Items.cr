@@ -2554,6 +2554,113 @@ include Equipment
         when "Red Jasper"
           @@preview_gem = Red_Jasper_Inventory_Tablecut
         end
+      when "Square Cut"
+          case @@current_gem.name
+           when "Bloodstone"
+             @@preview_gem = Bloodstone_Inventory_Square
+           when "Moss Agate"
+             @@preview_gem = Moss_Agate_Inventory_Square
+           when "Amber"
+             @@preview_gem = Amber_Inventory_Square
+           when "Wavellite"
+             @@preview_gem = Wavellite_Inventory_Square
+           when "Topaz"
+             @@preview_gem = Topaz_Inventory_Square
+           when "Amethyst"
+             @@preview_gem = Amethyst_Inventory_Square
+           when "Smokey Quartz"
+             @@preview_gem = Smokey_Quartz_Inventory_Square
+           when "Sapphire"
+             @@preview_gem = Sapphire_Inventory_Square
+           when "Black Opal"
+             @@preview_gem = Black_Opal_Inventory_Square
+           when "Ajoite"
+             @@preview_gem = Ajoite_Inventory_Square
+           when "Rhodolite"
+             @@preview_gem = Rhodolite_Inventory_Square
+           when "Chalcanthite"
+             @@preview_gem = Chalcanthite_Inventory_Square
+           when "Flourite"
+             @@preview_gem = Flourite_Inventory_Square
+           when "Amorite"
+             @@preview_gem = Amorite_Inventory_Square
+           when "Lapis Lazuli"
+             @@preview_gem = Lapis_Lazuli_Inventory_Square
+           when "Moonstone"
+             @@preview_gem = Moonstone_Inventory_Square
+           when "Blue Calcite"
+             @@preview_gem = Blue_Calcite_Inventory_Square
+           when "Hiddenite"
+             @@preview_gem = Hiddenite_Inventory_Square
+           when "Offretite"
+             @@preview_gem = Offretite_Inventory_Square
+           when "Holley Blue Agate"
+             @@preview_gem = Holly_Blue_Agate_Inventory_Square
+           when "Ametrine"
+             @@preview_gem = Ametrine_Inventory_Square
+           when "Hemimorphite"
+             @@preview_gem = Hemimorphite_Inventory_Square
+           when "Tiffany Stone"
+             @@preview_gem = Tiffany_Stone_Inventory_Square
+           when "Azurite"
+             @@preview_gem = Azurite_Inventory_Square
+           when "Howlite"
+             @@preview_gem = Howlite_Inventory_Square
+           when "Angelite"
+             @@preview_gem = Angelite_Inventory_Square
+           when "Blue Lace Agate"
+             @@preview_gem = Blue_Lace_Agate_Inventory_Square
+           when "Iolite"
+             @@preview_gem = Iolite_Inventory_Square
+           when "Sodalite"
+             @@preview_gem = Sodalite_Inventory_Square
+           when "Kyanite"
+             @@preview_gem = Kyanite_Inventory_Square
+           when "Sunstone"
+             @@preview_gem = Sunstone_Inventory_Square
+           when "Bony Amber"
+             @@preview_gem = Bony_Amber_Inventory_Square
+           when "Blue Amber"
+             @@preview_gem = Blue_Amber_Inventory_Square
+           when "Blue Spinel"
+             @@preview_gem = Blue_Spinel_Inventory_Square
+           when "Red Spinel"
+             @@preview_gem = Red_Spinel_Inventory_Square
+           when "Fire Opal"
+             @@preview_gem = Fire_Opal_Inventory_Square
+           when "Garnet"
+             @@preview_gem = Garnet_Inventory_Square
+           when "Ruby"
+             @@preview_gem = Ruby_Inventory_Square
+           when "Cherry Quartz"
+             @@preview_gem = Cherry_Quartz_Inventory_Square
+           when "Lemon Quartz"
+             @@preview_gem = Lemon_Quartz_Inventory_Square
+           when "Turquoise"
+             @@preview_gem = Turquoise_Inventory_Square
+           when "Tiger's Eye"
+             @@preview_gem = Tigers_eye_Inventory_Square
+           when "Orange Calcite"
+             @@preview_gem = Orange_Calcite_Inventory_Square
+           when "Grape Agate"
+             @@preview_gem = Grape_Agate_Inventory_Square
+           when "Jade"
+             @@preview_gem = Jade_Inventory_Square
+           when "Diamond"
+             @@preview_gem = Diamond_Inventory_Square
+           when "Emerald"
+             @@preview_gem = Emerald_Inventory_Square
+           when "Painite"
+             @@preview_gem = Painite_Inventory_Square
+           when "Bumblebee Jasper"
+             @@preview_gem = Bumblebee_Jasper_Inventory_Square
+           when "Blood Jasper"
+             @@preview_gem = Blood_Jasper_Inventory_Square
+           when "Mook Jasper"
+             @@preview_gem = Mook_Jasper_Inventory_Square
+           when "Red Jasper"
+             @@preview_gem = Red_Jasper_Inventory_Square
+        end
       end
       @@preview_gem.position = SF.vector2(542, -15)
       @@preview_gem.scale  = SF.vector2(2.5, 2.5)
