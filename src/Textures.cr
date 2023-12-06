@@ -3260,19 +3260,19 @@ Testing_Text.character_size = 20; Testing_Text.color = SF::Color::White; Testing
   Cutter_Mold_Cut_Display_Option_01.position = SF.vector2(785, 20);
 
   CUTTER_CUT_DISPLAY_OPTION_TEXTURE_02 = SF::Texture.from_file("graphics/minerals/Square_Cut_Display.png")
-  Cutter_Mold_Cut_Display_Option_02 = SF::Sprite.new(CUTTER_CUT_DISPLAY_OPTION_TEXTURE_01)
+  Cutter_Mold_Cut_Display_Option_02 = SF::Sprite.new(CUTTER_CUT_DISPLAY_OPTION_TEXTURE_02)
   Cutter_Mold_Cut_Display_Option_02.position = SF.vector2(785, 20);
 
   CUTTER_CUT_DISPLAY_OPTION_TEXTURE_03 = SF::Texture.from_file("graphics/minerals/Pear_Cut_Display.png")
-  Cutter_Mold_Cut_Display_Option_03 = SF::Sprite.new(CUTTER_CUT_DISPLAY_OPTION_TEXTURE_01)
+  Cutter_Mold_Cut_Display_Option_03 = SF::Sprite.new(CUTTER_CUT_DISPLAY_OPTION_TEXTURE_03)
   Cutter_Mold_Cut_Display_Option_03.position = SF.vector2(785, 20);
 
   CUTTER_CUT_DISPLAY_OPTION_TEXTURE_04 = SF::Texture.from_file("graphics/minerals/Drop_Cut_Display.png")
-  Cutter_Mold_Cut_Display_Option_04 = SF::Sprite.new(CUTTER_CUT_DISPLAY_OPTION_TEXTURE_01)
+  Cutter_Mold_Cut_Display_Option_04 = SF::Sprite.new(CUTTER_CUT_DISPLAY_OPTION_TEXTURE_04)
   Cutter_Mold_Cut_Display_Option_04.position = SF.vector2(785, 20);
 
   CUTTER_CUT_DISPLAY_OPTION_TEXTURE_05 = SF::Texture.from_file("graphics/minerals/Brilliant_Cut_Display.png")
-  Cutter_Mold_Cut_Display_Option_05 = SF::Sprite.new(CUTTER_CUT_DISPLAY_OPTION_TEXTURE_01)
+  Cutter_Mold_Cut_Display_Option_05 = SF::Sprite.new(CUTTER_CUT_DISPLAY_OPTION_TEXTURE_05)
   Cutter_Mold_Cut_Display_Option_05.position = SF.vector2(785, 20);
  #''''''''''''''''''''''''''''''''''''''''''''''''''''''Gem Ores'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
   #....................................................Bloodstone......................................................................

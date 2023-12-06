@@ -2660,11 +2660,117 @@ include Equipment
              @@preview_gem = Mook_Jasper_Inventory_Square
            when "Red Jasper"
              @@preview_gem = Red_Jasper_Inventory_Square
-        end
-      end
+         end
+      when "Pear Cut"
+      case @@current_gem.name
+       when "Bloodstone"
+         @@preview_gem = Bloodstone_Inventory_Pear
+       when "Moss Agate"
+         @@preview_gem = Moss_Agate_Inventory_Pear
+       when "Amber"
+         @@preview_gem = Amber_Inventory_Pear
+       when "Wavellite"
+         @@preview_gem = Wavellite_Inventory_Pear
+       when "Topaz"
+         @@preview_gem = Topaz_Inventory_Pear
+       when "Amethyst"
+         @@preview_gem = Amethyst_Inventory_Pear
+       when "Smokey Quartz"
+         @@preview_gem = Smokey_Quartz_Inventory_Pear
+       when "Sapphire"
+         @@preview_gem = Sapphire_Inventory_Pear
+       when "Black Opal"
+         @@preview_gem = Black_Opal_Inventory_Pear
+       when "Ajoite"
+         @@preview_gem = Ajoite_Inventory_Pear
+       when "Rhodolite"
+         @@preview_gem = Rhodolite_Inventory_Pear
+       when "Chalcanthite"
+         @@preview_gem = Chalcanthite_Inventory_Pear
+       when "Flourite"
+         @@preview_gem = Flourite_Inventory_Pear
+       when "Amorite"
+         @@preview_gem = Amorite_Inventory_Pear
+       when "Lapis Lazuli"
+         @@preview_gem = Lapis_Lazuli_Inventory_Pear
+       when "Moonstone"
+         @@preview_gem = Moonstone_Inventory_Pear
+       when "Blue Calcite"
+         @@preview_gem = Blue_Calcite_Inventory_Pear
+       when "Hiddenite"
+         @@preview_gem = Hiddenite_Inventory_Pear
+       when "Offretite"
+         @@preview_gem = Offretite_Inventory_Pear
+       when "Holley Blue Agate"
+         @@preview_gem = Holly_Blue_Agate_Inventory_Pear
+       when "Ametrine"
+         @@preview_gem = Ametrine_Inventory_Pear
+       when "Hemimorphite"
+         @@preview_gem = Hemimorphite_Inventory_Pear
+       when "Tiffany Stone"
+         @@preview_gem = Tiffany_Stone_Inventory_Pear
+       when "Azurite"
+         @@preview_gem = Azurite_Inventory_Pear
+       when "Howlite"
+         @@preview_gem = Howlite_Inventory_Pear
+       when "Angelite"
+         @@preview_gem = Angelite_Inventory_Pear
+       when "Blue Lace Agate"
+         @@preview_gem = Blue_Lace_Agate_Inventory_Pear
+       when "Iolite"
+         @@preview_gem = Iolite_Inventory_Pear
+       when "Sodalite"
+         @@preview_gem = Sodalite_Inventory_Pear
+       when "Kyanite"
+         @@preview_gem = Kyanite_Inventory_Pear
+       when "Sunstone"
+         @@preview_gem = Sunstone_Inventory_Pear
+       when "Bony Amber"
+         @@preview_gem = Bony_Amber_Inventory_Pear
+       when "Blue Amber"
+         @@preview_gem = Blue_Amber_Inventory_Pear
+       when "Blue Spinel"
+         @@preview_gem = Blue_Spinel_Inventory_Pear
+       when "Red Spinel"
+         @@preview_gem = Red_Spinel_Inventory_Pear
+       when "Fire Opal"
+         @@preview_gem = Fire_Opal_Inventory_Pear
+       when "Garnet"
+         @@preview_gem = Garnet_Inventory_Pear
+       when "Ruby"
+         @@preview_gem = Ruby_Inventory_Pear
+       when "Cherry Quartz"
+         @@preview_gem = Cherry_Quartz_Inventory_Pear
+       when "Lemon Quartz"
+         @@preview_gem = Lemon_Quartz_Inventory_Pear
+       when "Turquoise"
+         @@preview_gem = Turquoise_Inventory_Pear
+       when "Tiger's Eye"
+         @@preview_gem = Tigers_eye_Inventory_Pear
+       when "Orange Calcite"
+         @@preview_gem = Orange_Calcite_Inventory_Pear
+       when "Grape Agate"
+         @@preview_gem = Grape_Agate_Inventory_Pear
+       when "Jade"
+         @@preview_gem = Jade_Inventory_Pear
+       when "Diamond"
+         @@preview_gem = Diamond_Inventory_Pear
+       when "Emerald"
+         @@preview_gem = Emerald_Inventory_Pear
+       when "Painite"
+         @@preview_gem = Painite_Inventory_Pear
+       when "Bumblebee Jasper"
+         @@preview_gem = Bumblebee_Jasper_Inventory_Pear
+       when "Blood Jasper"
+         @@preview_gem = Blood_Jasper_Inventory_Pear
+       when "Mook Jasper"
+         @@preview_gem = Mook_Jasper_Inventory_Pear
+       when "Red Jasper"
+         @@preview_gem = Red_Jasper_Inventory_Pear
+    end
       @@preview_gem.position = SF.vector2(542, -15)
       @@preview_gem.scale  = SF.vector2(2.5, 2.5)
-    end
+    end; end
    #--------------------------------------------------------Gem Cutter Display-----------------------------------------------------------------------------
     def Gem.display_gem_cutter(window, page, tab)
      Owned_Gem_Cutter_Ore_Array.uniq!
