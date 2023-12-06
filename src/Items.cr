@@ -1782,11 +1782,12 @@ include Equipment
      @@steel_ingot = Inventory_Ingot.new("Steel", 7, Steel_Ingot_Ore, 1, 10, Forge_Steel_Ingot)
      Ingot_Array.push(@@steel_ingot)
    end
-   class Cut
-    def initialize(name : String, is_owned : Bool, cutter_sprite : SF::Sprite)
+   class Cut 
+    def initialize(name : String, is_owned : Bool, cutter_sprite : SF::Sprite, display_sprite : SF::Sprite)
       @name = name
       @is_owned = is_owned
       @cutter_sprite = cutter_sprite
+      @display_sprite = display_sprite
      end
     def name
       @name
@@ -1797,15 +1798,18 @@ include Equipment
     def cutter_sprite
       @cutter_sprite
      end
-   @@table_cut = Cut.new("Table Cut", true, Cutter_Mold_Option_01)
+    def display_sprite
+      @display_sprite
+     end
+   @@table_cut = Cut.new("Table Cut", true, Cutter_Mold_Option_01, Cutter_Mold_Cut_Display_Option_01)
    Cut_Array.push(@@table_cut)
-   @@square_cut = Cut.new("Square Cut", true, Cutter_Mold_Option_02)
+   @@square_cut = Cut.new("Square Cut", true, Cutter_Mold_Option_02, Cutter_Mold_Cut_Display_Option_02)
    Cut_Array.push(@@square_cut)
-   @@pear_cut = Cut.new("Pear Cut", true, Cutter_Mold_Option_03)
+   @@pear_cut = Cut.new("Pear Cut", true, Cutter_Mold_Option_03, Cutter_Mold_Cut_Display_Option_03)
    Cut_Array.push(@@pear_cut)
-   @@drop_cut = Cut.new("Drop Cut", true, Cutter_Mold_Option_04)
+   @@drop_cut = Cut.new("Drop Cut", true, Cutter_Mold_Option_04, Cutter_Mold_Cut_Display_Option_04)
    Cut_Array.push(@@drop_cut)
-   @@brilliant_cut = Cut.new("Brilliant Cut", true, Cutter_Mold_Option_05)
+   @@brilliant_cut = Cut.new("Brilliant Cut", true, Cutter_Mold_Option_05, Cutter_Mold_Cut_Display_Option_05)
    Cut_Array.push(@@brilliant_cut)
   end
  #GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG
@@ -1820,7 +1824,7 @@ include Equipment
   #+                                                              Variables                                                                               +
   #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
    @@current_style : String; @@current_style = "none"; @@current_gem : Inventory_Ore; @@current_gem = @@nil_inventory_ore
-   @@preview_gem : SF::Sprite; @@preview_gem = Smelter_Nil_Sprite
+   @@preview_gem : SF::Sprite; @@preview_gem = Smelter_Nil_Sprite; @@current_cut : SF::Sprite; @@current_cut = Smelter_Nil_Sprite
   #________________________________________________________________________________________________________________________________________________________
   #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   #!                                                              Initialize                                                                              !
@@ -2425,6 +2429,7 @@ include Equipment
        if Known_Cut_Array.size >= cut
          All_Audio::SFX.metal_hit_01
         @@current_style = Known_Cut_Array[cut].name
+        @@current_cut = Known_Cut_Array[cut].display_sprite
         Gem.determine_preview_gem
        else
          All_Audio::SFX.light_bonk
@@ -2459,7 +2464,7 @@ include Equipment
      current_gem_sprite = @@current_gem.craft_sprite.dup; current_gem_sprite.scale(SF.vector2(1.5, 1.5))
      current_gem_sprite.position = SF.vector2(550, 55)
      window.draw(Test_Gem_Cutter_Menu); window.draw(Inventory_arrow_up3); window.draw(Inventory_arrow_down3)
-     window.draw(current_gem_sprite); window.draw(@@preview_gem)
+     window.draw(current_gem_sprite); window.draw(@@preview_gem); window.draw(@@current_cut)
      if tab == "cuts"
       window.draw(Cutter_Mold_Option_01)
       Gem.initialize_cutter_cut_display(window)
