@@ -894,7 +894,7 @@
       Moonstone_Inventory_Square = SF::Sprite.new(MOONSTONE_INVENTORY_SQUARE_TEXTURE) 
      #----------------------------------------------------Pear----------------------------------------------------------------------
       MOONSTONE_INVENTORY_PEAR_TEXTURE = SF::Texture.from_file("graphics/minerals/Moonstone_Inventory_Pear.png")
-      Moonstone_Inventory_Pear = SF::Sprite.new(MOONSTONE_INVENTORY_SQUARE_TEXTURE) 
+      Moonstone_Inventory_Pear = SF::Sprite.new(MOONSTONE_INVENTORY_PEAR_TEXTURE) 
      #--------------------------------------------------Brilliant-------------------------------------------------------------------
       MOONSTONE_INVENTORY_BRILLIANT_TEXTURE = SF::Texture.from_file("graphics/minerals/Moonstone_Inventory_Brilliant.png")
       Moonstone_Inventory_Brilliant = SF::Sprite.new(MOONSTONE_INVENTORY_BRILLIANT_TEXTURE) 
