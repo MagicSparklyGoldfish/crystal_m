@@ -582,7 +582,7 @@ include Equipment
            when "Iron"
             Inventory_Ore.smelt_iron
          end; end
-       #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Carbon'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+      #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Carbon'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
         def Inventory_Ore.smelt_carbon
          case @@selected_ore_02.name
           when "Iron"
@@ -1590,126 +1590,126 @@ include Equipment
        end
      #______________________________________________________________________________________________________________________________________________________
      #''''''''''''''''''''''''''''''''''''''''''''''''''''''''Display Forge Ingots''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-      def Inventory_Ingot.display_forge_ingots(window)
-        @@selected_ingot.sprite.position = SF.vector2(115, 45)
-        window.draw(@@selected_ingot.sprite)
+         def Inventory_Ingot.display_forge_ingots(window)
+           @@selected_ingot.sprite.position = SF.vector2(115, 45)
+           window.draw(@@selected_ingot.sprite)
+            Owned_Ingot_Array.uniq!
+         #----------------------------------------------------slot 1-------------------------------------------
+           if Owned_Ingot_Array.size >= 1
+             Owned_Ingot_Array[0].forge_sprite.position = SF.vector2(50, -150)
+             window.draw(Owned_Ingot_Array[0].forge_sprite)
+            end
+         #----------------------------------------------------slot 2-------------------------------------------
+           if Owned_Ingot_Array.size >= 2
+             Owned_Ingot_Array[1].forge_sprite.position = SF.vector2(100, -150)
+             window.draw(Owned_Ingot_Array[1].forge_sprite)
+            end
+         #----------------------------------------------------slot 3-------------------------------------------
+           if Owned_Ingot_Array.size >= 3
+             Owned_Ingot_Array[2].forge_sprite.position = SF.vector2(150, -150)
+             window.draw(Owned_Ingot_Array[2].forge_sprite)
+            end
+         #----------------------------------------------------slot 4-------------------------------------------
+           if Owned_Ingot_Array.size >= 4
+             Owned_Ingot_Array[3].forge_sprite.position = SF.vector2(200, -150)
+             window.draw(Owned_Ingot_Array[3].forge_sprite)
+            end
+         #----------------------------------------------------slot 5-------------------------------------------
+           if Owned_Ingot_Array.size >= 5
+             Owned_Ingot_Array[4].forge_sprite.position = SF.vector2(250, -150)
+             window.draw(Owned_Ingot_Array[4].forge_sprite)
+            end
+         #----------------------------------------------------slot 6-------------------------------------------
+           if Owned_Ingot_Array.size >= 6
+             Owned_Ingot_Array[5].forge_sprite.position = SF.vector2(50, -100)
+             window.draw(Owned_Ingot_Array[5].forge_sprite)
+            end
+         #----------------------------------------------------slot 6-------------------------------------------
+          if Owned_Ingot_Array.size >= 7
+            Owned_Ingot_Array[6].forge_sprite.position = SF.vector2(100, -100)
+            window.draw(Owned_Ingot_Array[6].forge_sprite)
+           end
+          end
+        def Inventory_Ingot.display_ingot(window, page)
          Owned_Ingot_Array.uniq!
-      #----------------------------------------------------slot 1-------------------------------------------
-        if Owned_Ingot_Array.size >= 1
-          Owned_Ingot_Array[0].forge_sprite.position = SF.vector2(50, -150)
-          window.draw(Owned_Ingot_Array[0].forge_sprite)
-         end
-      #----------------------------------------------------slot 2-------------------------------------------
-        if Owned_Ingot_Array.size >= 2
-          Owned_Ingot_Array[1].forge_sprite.position = SF.vector2(100, -150)
-          window.draw(Owned_Ingot_Array[1].forge_sprite)
-         end
-      #----------------------------------------------------slot 3-------------------------------------------
-        if Owned_Ingot_Array.size >= 3
-          Owned_Ingot_Array[2].forge_sprite.position = SF.vector2(150, -150)
-          window.draw(Owned_Ingot_Array[2].forge_sprite)
-         end
-      #----------------------------------------------------slot 4-------------------------------------------
-        if Owned_Ingot_Array.size >= 4
-          Owned_Ingot_Array[3].forge_sprite.position = SF.vector2(200, -150)
-          window.draw(Owned_Ingot_Array[3].forge_sprite)
-         end
-      #----------------------------------------------------slot 5-------------------------------------------
-        if Owned_Ingot_Array.size >= 5
-          Owned_Ingot_Array[4].forge_sprite.position = SF.vector2(250, -150)
-          window.draw(Owned_Ingot_Array[4].forge_sprite)
-         end
-      #----------------------------------------------------slot 6-------------------------------------------
-        if Owned_Ingot_Array.size >= 6
-          Owned_Ingot_Array[5].forge_sprite.position = SF.vector2(50, -100)
-          window.draw(Owned_Ingot_Array[5].forge_sprite)
-         end
-      #----------------------------------------------------slot 6-------------------------------------------
-       if Owned_Ingot_Array.size >= 7
-         Owned_Ingot_Array[6].forge_sprite.position = SF.vector2(100, -100)
-         window.draw(Owned_Ingot_Array[6].forge_sprite)
+         #----------------------------------------------------slot 1-------------------------------------------
+          if Owned_Ingot_Array.size >= 1
+           case page
+            when 1   
+             Owned_Ingot_Array[0].sprite.position = SF.vector2(555, 310);
+             ore_array_text_01 = Ore_amount_owned_text.dup
+             ore_array_text_01.position = Owned_Ingot_Array[0].sprite.position + SF.vector2(100, -5)
+             ore_array_text_01.string = "x" + Owned_Ingot_Array[0].amount_owned.to_s
+             window.draw(Owned_Ingot_Array[0].sprite); window.draw(ore_array_text_01)
+            end
+           end
+         #----------------------------------------------------slot 2-------------------------------------------
+          if Owned_Ingot_Array.size >= 2
+           case page
+            when 1   
+             Owned_Ingot_Array[1].sprite.position = SF.vector2(710, 310);
+             ore_array_text_02 = Ore_amount_owned_text.dup
+             ore_array_text_02.position = Owned_Ingot_Array[1].sprite.position + SF.vector2(100, -5)
+             ore_array_text_02.string = "x" + Owned_Ingot_Array[1].amount_owned.to_s
+             window.draw(Owned_Ingot_Array[1].sprite); window.draw(ore_array_text_02)
+            end
+           end
+         #----------------------------------------------------slot 3-------------------------------------------
+           if Owned_Ingot_Array.size >= 3
+            case page
+             when 1   
+               Owned_Ingot_Array[2].sprite.position = SF.vector2(855, 310);
+              ore_array_text_03 = Ore_amount_owned_text.dup
+              ore_array_text_03.position = Owned_Ingot_Array[2].sprite.position + SF.vector2(100, -5)
+              ore_array_text_03.string = "x" + Owned_Ingot_Array[2].amount_owned.to_s
+              window.draw(Owned_Ingot_Array[2].sprite); window.draw(ore_array_text_03)
+             end
+            end
+         #----------------------------------------------------slot 4-------------------------------------------
+           if Owned_Ingot_Array.size >= 4
+            case page
+             when 1   
+               Owned_Ingot_Array[3].sprite.position = SF.vector2(1005, 310);
+              ore_array_text_04 = Ore_amount_owned_text.dup
+              ore_array_text_04.position = Owned_Ingot_Array[3].sprite.position + SF.vector2(100, -5)
+              ore_array_text_04.string = "x" + Owned_Ingot_Array[3].amount_owned.to_s
+              window.draw(Owned_Ingot_Array[3].sprite); window.draw(ore_array_text_04)
+             end
+           end
+         #----------------------------------------------------slot 5-------------------------------------------
+          if Owned_Ingot_Array.size >= 5
+            case page
+             when 1   
+               Owned_Ingot_Array[4].sprite.position = SF.vector2(1155, 310);
+              ore_array_text_05 = Ore_amount_owned_text.dup
+              ore_array_text_05.position = Owned_Ingot_Array[4].sprite.position + SF.vector2(100, -5)
+              ore_array_text_05.string = "x" + Owned_Ingot_Array[4].amount_owned.to_s
+              window.draw(Owned_Ingot_Array[4].sprite); window.draw(ore_array_text_05)
+             end
+           end
+         #----------------------------------------------------slot 6-------------------------------------------
+          if Owned_Ingot_Array.size >= 6
+            case page
+             when 1   
+               Owned_Ingot_Array[5].sprite.position = SF.vector2(1305, 310);
+              ore_array_text_06 = Ore_amount_owned_text.dup
+              ore_array_text_06.position = Owned_Ingot_Array[5].sprite.position + SF.vector2(100, -5)
+              ore_array_text_06.string = "x" + Owned_Ingot_Array[5].amount_owned.to_s
+              window.draw(Owned_Ingot_Array[5].sprite); window.draw(ore_array_text_06)
+             end
+           end
+         #----------------------------------------------------slot 7-------------------------------------------
+           if Owned_Ingot_Array.size >= 7
+             case page
+              when 1   
+               Owned_Ingot_Array[6].sprite.position = SF.vector2(555, 460);
+               ore_array_text_07 = Ore_amount_owned_text.dup
+               ore_array_text_07.position = Owned_Ingot_Array[6].sprite.position + SF.vector2(100, -5)
+               ore_array_text_07.string = "x" + Owned_Ingot_Array[6].amount_owned.to_s
+               window.draw(Owned_Ingot_Array[6].sprite); window.draw(ore_array_text_07)
         end
        end
-     def Inventory_Ingot.display_ingot(window, page)
-      Owned_Ingot_Array.uniq!
-      #----------------------------------------------------slot 1-------------------------------------------
-       if Owned_Ingot_Array.size >= 1
-        case page
-         when 1   
-          Owned_Ingot_Array[0].sprite.position = SF.vector2(555, 310);
-          ore_array_text_01 = Ore_amount_owned_text.dup
-          ore_array_text_01.position = Owned_Ingot_Array[0].sprite.position + SF.vector2(100, -5)
-          ore_array_text_01.string = "x" + Owned_Ingot_Array[0].amount_owned.to_s
-          window.draw(Owned_Ingot_Array[0].sprite); window.draw(ore_array_text_01)
-         end
-        end
-      #----------------------------------------------------slot 2-------------------------------------------
-       if Owned_Ingot_Array.size >= 2
-        case page
-         when 1   
-          Owned_Ingot_Array[1].sprite.position = SF.vector2(710, 310);
-          ore_array_text_02 = Ore_amount_owned_text.dup
-          ore_array_text_02.position = Owned_Ingot_Array[1].sprite.position + SF.vector2(100, -5)
-          ore_array_text_02.string = "x" + Owned_Ingot_Array[1].amount_owned.to_s
-          window.draw(Owned_Ingot_Array[1].sprite); window.draw(ore_array_text_02)
-         end
-        end
-      #----------------------------------------------------slot 3-------------------------------------------
-        if Owned_Ingot_Array.size >= 3
-         case page
-          when 1   
-            Owned_Ingot_Array[2].sprite.position = SF.vector2(855, 310);
-           ore_array_text_03 = Ore_amount_owned_text.dup
-           ore_array_text_03.position = Owned_Ingot_Array[2].sprite.position + SF.vector2(100, -5)
-           ore_array_text_03.string = "x" + Owned_Ingot_Array[2].amount_owned.to_s
-           window.draw(Owned_Ingot_Array[2].sprite); window.draw(ore_array_text_03)
-          end
-         end
-      #----------------------------------------------------slot 4-------------------------------------------
-        if Owned_Ingot_Array.size >= 4
-         case page
-          when 1   
-            Owned_Ingot_Array[3].sprite.position = SF.vector2(1005, 310);
-           ore_array_text_04 = Ore_amount_owned_text.dup
-           ore_array_text_04.position = Owned_Ingot_Array[3].sprite.position + SF.vector2(100, -5)
-           ore_array_text_04.string = "x" + Owned_Ingot_Array[3].amount_owned.to_s
-           window.draw(Owned_Ingot_Array[3].sprite); window.draw(ore_array_text_04)
-          end
-        end
-      #----------------------------------------------------slot 5-------------------------------------------
-       if Owned_Ingot_Array.size >= 5
-         case page
-          when 1   
-            Owned_Ingot_Array[4].sprite.position = SF.vector2(1155, 310);
-           ore_array_text_05 = Ore_amount_owned_text.dup
-           ore_array_text_05.position = Owned_Ingot_Array[4].sprite.position + SF.vector2(100, -5)
-           ore_array_text_05.string = "x" + Owned_Ingot_Array[4].amount_owned.to_s
-           window.draw(Owned_Ingot_Array[4].sprite); window.draw(ore_array_text_05)
-          end
-        end
-      #----------------------------------------------------slot 6-------------------------------------------
-       if Owned_Ingot_Array.size >= 6
-         case page
-          when 1   
-            Owned_Ingot_Array[5].sprite.position = SF.vector2(1305, 310);
-           ore_array_text_06 = Ore_amount_owned_text.dup
-           ore_array_text_06.position = Owned_Ingot_Array[5].sprite.position + SF.vector2(100, -5)
-           ore_array_text_06.string = "x" + Owned_Ingot_Array[5].amount_owned.to_s
-           window.draw(Owned_Ingot_Array[5].sprite); window.draw(ore_array_text_06)
-          end
-        end
-      #----------------------------------------------------slot 7-------------------------------------------
-        if Owned_Ingot_Array.size >= 7
-          case page
-           when 1   
-            Owned_Ingot_Array[6].sprite.position = SF.vector2(555, 460);
-            ore_array_text_07 = Ore_amount_owned_text.dup
-            ore_array_text_07.position = Owned_Ingot_Array[6].sprite.position + SF.vector2(100, -5)
-            ore_array_text_07.string = "x" + Owned_Ingot_Array[6].amount_owned.to_s
-            window.draw(Owned_Ingot_Array[6].sprite); window.draw(ore_array_text_07)
-     end
-    end
-  end
+      end
     #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++Player Skill+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++Amount Owned Methods++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
      def Inventory_Ingot.smelt_ingot(ingot)
@@ -1784,37 +1784,43 @@ include Equipment
     #---------------------------------------------------------------Steel-------------------------------------------------------------------------------- 
      @@steel_ingot = Inventory_Ingot.new("Steel", 7, Steel_Ingot_Ore, 1, 10, Forge_Steel_Ingot)
      Ingot_Array.push(@@steel_ingot)
-   end
-   class Cut 
-    def initialize(name : String, is_owned : Bool, cutter_sprite : SF::Sprite, display_sprite : SF::Sprite)
-      @name = name
-      @is_owned = is_owned
-      @cutter_sprite = cutter_sprite
-      @display_sprite = display_sprite
-     end
-    def name
-      @name
-     end
-    def is_owned
-      @is_owned
-     end
-    def cutter_sprite
-      @cutter_sprite
-     end
-    def display_sprite
-      @display_sprite
-     end
-   @@table_cut = Cut.new("Table Cut", true, Cutter_Mold_Option_01, Cutter_Mold_Cut_Display_Option_01)
-   Cut_Array.push(@@table_cut)
-   @@square_cut = Cut.new("Square Cut", true, Cutter_Mold_Option_02, Cutter_Mold_Cut_Display_Option_02)
-   Cut_Array.push(@@square_cut)
-   @@pear_cut = Cut.new("Pear Cut", true, Cutter_Mold_Option_03, Cutter_Mold_Cut_Display_Option_03)
-   Cut_Array.push(@@pear_cut)
-   @@drop_cut = Cut.new("Drop Cut", true, Cutter_Mold_Option_04, Cutter_Mold_Cut_Display_Option_04)
-   Cut_Array.push(@@drop_cut)
-   @@brilliant_cut = Cut.new("Brilliant Cut", true, Cutter_Mold_Option_05, Cutter_Mold_Cut_Display_Option_05)
-   Cut_Array.push(@@brilliant_cut)
-  end
+    end
+ #CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+ #CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+ #C                                                        @note Cut Class                                                                               C
+ #CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+ #CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+     class Cut 
+      def initialize(name : String, is_owned : Bool, cutter_sprite : SF::Sprite, display_sprite : SF::Sprite)
+        @name = name
+        @is_owned = is_owned
+        @cutter_sprite = cutter_sprite
+        @display_sprite = display_sprite
+       end
+      def name
+        @name
+       end
+      def is_owned
+        @is_owned
+       end
+      def cutter_sprite
+        @cutter_sprite
+       end
+      def display_sprite
+        @display_sprite
+       end
+     @@table_cut = Cut.new("Table Cut", true, Cutter_Mold_Option_01, Cutter_Mold_Cut_Display_Option_01)
+     Cut_Array.push(@@table_cut)
+     @@square_cut = Cut.new("Square Cut", true, Cutter_Mold_Option_02, Cutter_Mold_Cut_Display_Option_02)
+     Cut_Array.push(@@square_cut)
+     @@pear_cut = Cut.new("Pear Cut", true, Cutter_Mold_Option_03, Cutter_Mold_Cut_Display_Option_03)
+     Cut_Array.push(@@pear_cut)
+     @@drop_cut = Cut.new("Drop Cut", true, Cutter_Mold_Option_04, Cutter_Mold_Cut_Display_Option_04)
+     Cut_Array.push(@@drop_cut)
+     @@brilliant_cut = Cut.new("Brilliant Cut", true, Cutter_Mold_Option_05, Cutter_Mold_Cut_Display_Option_05)
+     Cut_Array.push(@@brilliant_cut)
+    end
+ #_____________________________________________________________________________________________________________________________________________________________
  #GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG
  #GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG
  #GG                                                         #@note Gem Class                                                                                GG
@@ -1875,21 +1881,21 @@ include Equipment
    def craft_sprite
      @craft_sprite
     end
-    def sprite=(sprite)
-      @sprite= sprite
-     end
-    def cut=(cut)
-      @cut= cut
-     end
-    def name=(name)
-      @name= name
-     end
-    def effect=(effect)
-      @effect= effect
-     end
-    def element=(element)
-      @element= element
-     end
+   def sprite=(sprite)
+     @sprite= sprite
+    end
+   def cut=(cut)
+     @cut= cut
+    end
+   def name=(name)
+     @name= name
+    end
+   def effect=(effect)
+     @effect= effect
+    end
+   def element=(element)
+     @element= element
+    end
   #________________________________________________________________________________________________________________________________________________________
   #????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
   #?                                                               Methods                                                                                ?
@@ -3104,7 +3110,7 @@ include Equipment
               GEM_ARRAY[i].effect = effect
               GEM_ARRAY[i].element = element
              end
-          end
+         end
         end
         i += 1
       end
