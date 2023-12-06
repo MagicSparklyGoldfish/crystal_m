@@ -1123,7 +1123,7 @@ def Window_Class.hud_keypresses(window)
      when "Etc"  #----------------------------------Gem Info Boxes
       case @@category
        when "gem"
-       if (x >= 555 && x <= 710) && (y >= 310 && y <= 460)
+       if (x >= 555 && x <= 710) && (y >= 310 && y <= 460) #--slot one
         Gem_Info_Box.position = SF.vector2(500, 460) 
         Gem_Info_Text.position = Gem_Info_Box.position 
         if @@info_box != "gem"
@@ -1133,7 +1133,7 @@ def Window_Class.hud_keypresses(window)
         else if @@info_box == "gem"
          @@info_box = "none"
         end; end; end
-       if (x >= 710 && x <= 865) && (y >= 310 && y <= 460)
+       if (x >= 710 && x <= 865) && (y >= 310 && y <= 460) #--slot two
         Gem_Info_Box.position = SF.vector2(655, 460) 
         Gem_Info_Text.position = Gem_Info_Box.position 
          if @@info_box != "gem"
@@ -1143,7 +1143,7 @@ def Window_Class.hud_keypresses(window)
          else if @@info_box == "gem"
           @@info_box = "none"
           end; end; end
-       if (x >= 865 && x <= 1020) && (y >= 310 && y <= 460)
+       if (x >= 865 && x <= 1020) && (y >= 310 && y <= 460) #--slot three
         Gem_Info_Box.position = SF.vector2(800, 460) 
         Gem_Info_Text.position = Gem_Info_Box.position 
          if @@info_box != "gem"
@@ -1153,6 +1153,36 @@ def Window_Class.hud_keypresses(window)
         else if @@info_box == "gem"
           @@info_box = "none"
           end; end; end
+       if (x >= 1020 && x <= 1175) && (y >= 310 && y <= 460) #--slot four
+        Gem_Info_Box.position = SF.vector2(945, 460) 
+        Gem_Info_Text.position = Gem_Info_Box.position 
+         if @@info_box != "gem"
+           @@info_box = "gem"
+           slot = 3
+           Etc::Gem.check_stats(slot)
+           else if @@info_box == "gem"
+           @@info_box = "none"
+           end; end; end
+       if (x >= 1175 && x <= 1330) && (y >= 310 && y <= 460) #--slot four
+        Gem_Info_Box.position = SF.vector2(1100, 460) 
+        Gem_Info_Text.position = Gem_Info_Box.position 
+         if @@info_box != "gem"
+           @@info_box = "gem"
+           slot = 4
+           Etc::Gem.check_stats(slot)
+           else if @@info_box == "gem"
+           @@info_box = "none"
+           end; end; end
+       if (x >= 1330 && x <= 1485) && (y >= 310 && y <= 460) #--slot four
+        Gem_Info_Box.position = SF.vector2(1265, 460) 
+        Gem_Info_Text.position = Gem_Info_Box.position 
+         if @@info_box != "gem"
+           @@info_box = "gem"
+           slot = 5
+           Etc::Gem.check_stats(slot)
+           else if @@info_box == "gem"
+           @@info_box = "none"
+           end; end; end
        end
     when "Equipment" #----------------------------Weapon info boxes
      #---------------------Slot 1------------------------------
