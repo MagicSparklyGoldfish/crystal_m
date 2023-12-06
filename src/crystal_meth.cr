@@ -97,7 +97,8 @@ extend self
     @@player_character_model.draw(SKIN_ARRAY[@@current_skin])
     if @@has_weapon == true && @@current_direction == "left"
       player = @@player_character_model
-      Equipment.draw_current_weapon(player)
+      Crafted_Items::Weapon.draw_current_weapon(player)
+      #Equipment.draw_current_weapon(player)
       #@@player_character_model.draw(WEAPON_ARRAY[@@current_weapon])
     end
     @@player_character_model.draw(SHOES_ARRAY[@@current_shoes])
@@ -108,7 +109,8 @@ extend self
     @@player_character_model.draw(GLOVE_ARRAY[@@current_gloves])
     if @@has_weapon == true && @@current_direction == "right"
       player = @@player_character_model
-      Equipment.draw_current_weapon(player)
+      Crafted_Items::Weapon.draw_current_weapon(player)
+      #Equipment.draw_current_weapon(player)
       #@@player_character_model.draw(WEAPON_ARRAY[@@current_weapon])
     end
     @@player_character_model.create(672, 1024, false)
@@ -2960,7 +2962,6 @@ def Window_Class.hud_keypresses(window)
             Player_Data::Player_Physics.mobilize_player
           end
         end
-
       when SF::Keyboard::D
         @@idleframes = 0
         @@attacking = false

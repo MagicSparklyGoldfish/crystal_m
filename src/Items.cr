@@ -4706,6 +4706,78 @@ module Harvestables
   end
 end
 
+module Crafted_Items
+include Etc
+ class Weapon
+  #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  #+                                                              Variables                                                                               +
+  #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+   @@current_weapon : Weapon; @@current_weapon = @@nil_stick 
+  #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  #!                                                              Initialize                                                                              !
+  #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+   def initialize(@@weapon_name : String, @@weapon_id : Int32, @@weapon_type : String, @@weapon_atk : Float64, @@weapon_element : Array(String), 
+     @weapon_effect : Array(String), @@weapon_sprite : SF::Sprite, @@weapon_inventory_sprite : SF::RectangleShape, @@weapon_swing_sound : SF::Sound, 
+     @@weapon_hit_sound : SF::Sound, @@weapon_motion : String)
+     @weapon_name = weapon_name
+     @weapon_id = weapon_id
+     @weapon_type = weapon_type
+     @weapon_atk = weapon_atk
+     @weapon_element = weapon_element
+     @weapon_effect = weapon_effect
+     @weapon_sprite = weapon_sprite
+     @weapon_inventory_sprite = weapon_inventory_sprite
+     @weapon_swing_sound = weapon_swing_sound
+     @weapon_hit_sound = weapon_hit_sound
+     @weapon_motion = weapon_motion
+    end
+   def weapon_name
+     @weapon_name
+    end
+   def weapon_id
+     @weapon_id
+    end
+   def weapon_type
+     @weapon_type
+    end
+   def weapon_atk
+     @weapon_atk
+    end
+   def weapon_element
+     @weapon_element
+    end
+   def weapon_effect
+     @weapon_effect
+    end
+   def weapon_sprite
+     @weapon_sprite
+    end
+   def weapon_inventory_sprite
+     @weapon_inventory_sprite
+    end
+   def weapon_swing_sound
+     @weapon_swing_sound
+    end
+   def weapon_hit_sound
+      @weapon_hit_sound
+    end
+   def weapon_motion
+     @weapon_motion
+    end
+  #________________________________________________________________________________________________________________________________________________________
+    def Weapon.draw_current_weapon(player) #@note draw current weapon
+      #Equipment.check_gem_element_current_weapon
+      player.draw(@@current_weapon.weapon_sprite)
+    end
+  #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  #/                                                               Entities                                                                               /
+  #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+   @@nil_stick = Weapon.new("", -1, "", 0, [""], [""], Nil_Ingot_Ore, Weapon_Rectangle_01, SYSSOUND_6, SYSSOUND_6, "")
+   @@stick = Weapon.new("Stick", 0, "stick", 1.25, ["none", "none", "none"], ["none", "none", "none"], Stick01, Weapon_Rectangle_01, WEAPSOUND_01, WEAPSOUND_02, "")
+   @@zinc_stick = Weapon.new("Stick", 0, "stick", 1.5, ["empty", "none", "none"], ["empty", "none", "none"], Zinc_Stick, Zinc_Stick_Display, WEAPSOUND_01, WEAPSOUND_02, "Swing")
+  #________________________________________________________________________________________________________________________________________________________
+  end
+end
 # if time >= SF.seconds(0.35) && @@attacking == true
 #   Equipment.play_hit_sound
 #  # this.current_hp - 10
