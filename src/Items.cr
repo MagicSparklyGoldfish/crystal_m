@@ -2768,9 +2768,116 @@ include Equipment
        when "Red Jasper"
          @@preview_gem = Red_Jasper_Inventory_Pear
     end
+  when "Drop Cut"
+    case @@current_gem.name
+     when "Bloodstone"
+       @@preview_gem = Bloodstone_Inventory_Dropcut
+     when "Moss Agate"
+       @@preview_gem = Moss_Agate_Inventory_Dropcut
+     when "Amber"
+       @@preview_gem = Amber_Inventory_Dropcut
+     when "Wavellite"
+       @@preview_gem = Wavellite_Inventory_Dropcut
+     when "Topaz"
+       @@preview_gem = Topaz_Inventory_Dropcut
+     when "Amethyst"
+       @@preview_gem = Amethyst_Inventory_Dropcut
+     when "Smokey Quartz"
+       @@preview_gem = Smokey_Quartz_Inventory_Dropcut
+     when "Sapphire"
+       @@preview_gem = Sapphire_Inventory_Dropcut
+     when "Black Opal"
+       @@preview_gem = Black_Opal_Inventory_Dropcut
+     when "Ajoite"
+       @@preview_gem = Ajoite_Inventory_Dropcut
+     when "Rhodolite"
+       @@preview_gem = Rhodolite_Inventory_Dropcut
+     when "Chalcanthite"
+       @@preview_gem = Chalcanthite_Inventory_Dropcut
+     when "Flourite"
+       @@preview_gem = Flourite_Inventory_Dropcut
+     when "Amorite"
+       @@preview_gem = Amorite_Inventory_Dropcut
+     when "Lapis Lazuli"
+       @@preview_gem = Lapis_Lazuli_Inventory_Dropcut
+     when "Moonstone"
+       @@preview_gem = Moonstone_Inventory_Dropcut
+     when "Blue Calcite"
+       @@preview_gem = Blue_Calcite_Inventory_Dropcut
+     when "Hiddenite"
+       @@preview_gem = Hiddenite_Inventory_Dropcut
+     when "Offretite"
+       @@preview_gem = Offretite_Inventory_Dropcut
+     when "Holley Blue Agate"
+       @@preview_gem = Holly_Blue_Agate_Inventory_Dropcut
+     when "Ametrine"
+       @@preview_gem = Ametrine_Inventory_Dropcut
+     when "Hemimorphite"
+       @@preview_gem = Hemimorphite_Inventory_Dropcut
+     when "Tiffany Stone"
+       @@preview_gem = Tiffany_Stone_Inventory_Dropcut
+     when "Azurite"
+       @@preview_gem = Azurite_Inventory_Dropcut
+     when "Howlite"
+       @@preview_gem = Howlite_Inventory_Dropcut
+     when "Angelite"
+       @@preview_gem = Angelite_Inventory_Dropcut
+     when "Blue Lace Agate"
+       @@preview_gem = Blue_Lace_Agate_Inventory_Dropcut
+     when "Iolite"
+       @@preview_gem = Iolite_Inventory_Dropcut
+     when "Sodalite"
+       @@preview_gem = Sodalite_Inventory_Dropcut
+     when "Kyanite"
+       @@preview_gem = Kyanite_Inventory_Dropcut
+     when "Sunstone"
+       @@preview_gem = Sunstone_Inventory_Dropcut
+     when "Bony Amber"
+       @@preview_gem = Bony_Amber_Inventory_Dropcut
+     when "Blue Amber"
+       @@preview_gem = Blue_Amber_Inventory_Dropcut
+     when "Blue Spinel"
+       @@preview_gem = Blue_Spinel_Inventory_Dropcut
+     when "Red Spinel"
+       @@preview_gem = Red_Spinel_Inventory_Dropcut
+     when "Fire Opal"
+       @@preview_gem = Fire_Opal_Inventory_Dropcut
+     when "Garnet"
+       @@preview_gem = Garnet_Inventory_Dropcut
+     when "Ruby"
+       @@preview_gem = Ruby_Inventory_Dropcut
+     when "Cherry Quartz"
+       @@preview_gem = Cherry_Quartz_Inventory_Dropcut
+     when "Lemon Quartz"
+       @@preview_gem = Lemon_Quartz_Inventory_Dropcut
+     when "Turquoise"
+       @@preview_gem = Turquoise_Inventory_Dropcut
+     when "Tiger's Eye"
+       @@preview_gem = Tigers_eye_Inventory_Dropcut
+     when "Orange Calcite"
+       @@preview_gem = Orange_Calcite_Inventory_Dropcut
+     when "Grape Agate"
+       @@preview_gem = Grape_Agate_Inventory_Dropcut
+     when "Jade"
+       @@preview_gem = Jade_Inventory_Dropcut
+     when "Diamond"
+       @@preview_gem = Diamond_Inventory_Dropcut
+     when "Emerald"
+       @@preview_gem = Emerald_Inventory_Dropcut
+     when "Painite"
+       @@preview_gem = Painite_Inventory_Dropcut
+     when "Bumblebee Jasper"
+       @@preview_gem = Bumblebee_Jasper_Inventory_Dropcut
+     when "Blood Jasper"
+       @@preview_gem = Blood_Jasper_Inventory_Dropcut
+     when "Mook Jasper"
+       @@preview_gem = Mook_Jasper_Inventory_Dropcut
+     when "Red Jasper"
+       @@preview_gem = Red_Jasper_Inventory_Dropcut
+  end; end
       @@preview_gem.position = SF.vector2(542, -15)
       @@preview_gem.scale  = SF.vector2(2.5, 2.5)
-    end; end
+    end
    #--------------------------------------------------------Gem Cutter Display-----------------------------------------------------------------------------
     def Gem.display_gem_cutter(window, page, tab)
      Owned_Gem_Cutter_Ore_Array.uniq!
