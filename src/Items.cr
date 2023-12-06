@@ -1942,23 +1942,23 @@ include Equipment
       if Known_Cut_Array.size > 0
        Known_Cut_Array[0].cutter_sprite.position = SF.vector2(1050, -95)
        window.draw(Known_Cut_Array[0].cutter_sprite)
-      end
+       end
       if Known_Cut_Array.size > 1
         Known_Cut_Array[1].cutter_sprite.position = SF.vector2(1050, -45)
         window.draw(Known_Cut_Array[1].cutter_sprite)
-      end
+       end
       if Known_Cut_Array.size > 2
         Known_Cut_Array[2].cutter_sprite.position = SF.vector2(1050, 5)
         window.draw(Known_Cut_Array[2].cutter_sprite)
-      end
+       end
       if Known_Cut_Array.size > 3
         Known_Cut_Array[3].cutter_sprite.position = SF.vector2(1050, 55)
         window.draw(Known_Cut_Array[3].cutter_sprite)
-      end
+       end
       if Known_Cut_Array.size > 4
         Known_Cut_Array[4].cutter_sprite.position = SF.vector2(1050, 105)
         window.draw(Known_Cut_Array[4].cutter_sprite)
-      end
+       end
     end
    #---------------------------------------------------------Display Inventory-----------------------------------------------------------------------------
     def Gem.display_gem(window, page)
@@ -3015,6 +3015,24 @@ include Equipment
           when "none"
            All_Audio::SFX.light_bonk
           when "Table Cut"
+            if @@current_gem.amount_owned > 2
+              All_Audio::SFX.metal_hit_01
+              effect = GEM_ARRAY[i].effect
+              element = GEM_ARRAY[i].element
+              GEM_ARRAY[i].effect = GEM_ARRAY[i].effect
+              GEM_ARRAY[i].element = GEM_ARRAY[i].element
+              GEM_ARRAY[i].sprite = @@preview_gem.dup
+              GEM_ARRAY[i].sprite.scale  = SF.vector2(1, 1)
+              GEM_ARRAY[i].cut = @@current_style
+              GEM_ARRAY[i].amount_owned = 1
+              GEM_ARRAY[i].dup
+              Owned_Gem_Array.push(GEM_ARRAY[i].dup)
+              GEM_ARRAY[i].amount_owned = 0
+              @@current_gem.amount_owned -= 3
+              GEM_ARRAY[i].effect = effect
+              GEM_ARRAY[i].element = element
+             end
+          when "Square Cut"
             if @@current_gem.amount_owned > 4
               All_Audio::SFX.metal_hit_01
               effect = GEM_ARRAY[i].effect
@@ -3031,7 +3049,7 @@ include Equipment
               @@current_gem.amount_owned -= 5
               GEM_ARRAY[i].effect = effect
               GEM_ARRAY[i].element = element
-             end
+               end
           end
         end
         i += 1

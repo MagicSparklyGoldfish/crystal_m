@@ -1120,7 +1120,7 @@ def Window_Class.hud_keypresses(window)
       x = mouse_position.x
       y = mouse_position.y
     case @@tab
-     when "Etc"
+     when "Etc"  #----------------------------------Gem Info Boxes
       case @@category
        when "gem"
        if (x >= 555 && x <= 710) && (y >= 310 && y <= 460)
@@ -1133,6 +1133,26 @@ def Window_Class.hud_keypresses(window)
         else if @@info_box == "gem"
          @@info_box = "none"
         end; end; end
+       if (x >= 710 && x <= 865) && (y >= 310 && y <= 460)
+        Gem_Info_Box.position = SF.vector2(655, 460) 
+        Gem_Info_Text.position = Gem_Info_Box.position 
+         if @@info_box != "gem"
+          @@info_box = "gem"
+          slot = 1
+          Etc::Gem.check_stats(slot)
+         else if @@info_box == "gem"
+          @@info_box = "none"
+          end; end; end
+       if (x >= 865 && x <= 1020) && (y >= 310 && y <= 460)
+        Gem_Info_Box.position = SF.vector2(800, 460) 
+        Gem_Info_Text.position = Gem_Info_Box.position 
+         if @@info_box != "gem"
+          @@info_box = "gem"
+          slot = 2
+          Etc::Gem.check_stats(slot)
+        else if @@info_box == "gem"
+          @@info_box = "none"
+          end; end; end
        end
     when "Equipment" #----------------------------Weapon info boxes
      #---------------------Slot 1------------------------------
