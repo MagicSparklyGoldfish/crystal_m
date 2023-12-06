@@ -3068,6 +3068,24 @@ include Equipment
               GEM_ARRAY[i].effect = effect
               GEM_ARRAY[i].element = element
              end
+          when "Drop Cut"
+            if @@current_gem.amount_owned > 9
+              All_Audio::SFX.metal_hit_01
+              effect = GEM_ARRAY[i].effect
+              element = GEM_ARRAY[i].element
+              GEM_ARRAY[i].effect = GEM_ARRAY[i].effect + "++" 
+              GEM_ARRAY[i].element = GEM_ARRAY[i].element
+              GEM_ARRAY[i].sprite = @@preview_gem.dup
+              GEM_ARRAY[i].sprite.scale  = SF.vector2(1, 1)
+              GEM_ARRAY[i].cut = @@current_style
+              GEM_ARRAY[i].amount_owned = 1
+              GEM_ARRAY[i].dup
+              Owned_Gem_Array.push(GEM_ARRAY[i].dup)
+              GEM_ARRAY[i].amount_owned = 0
+              @@current_gem.amount_owned -= 10
+              GEM_ARRAY[i].effect = effect
+              GEM_ARRAY[i].element = element
+             end
           end
         end
         i += 1
