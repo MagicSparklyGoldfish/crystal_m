@@ -373,6 +373,9 @@ extend self
        Etc::Inventory_Ingot.display_ingot(window, page)
       when "gem"
        Etc::Gem.display_gem(window, page)
+       if @@info_box == "gem"
+        window.draw(Gem_Info_Box);  window.draw(Gem_Info_Text)
+      end
   end; end
   end
  end
@@ -1117,6 +1120,20 @@ def Window_Class.hud_keypresses(window)
       x = mouse_position.x
       y = mouse_position.y
     case @@tab
+     when "Etc"
+      case @@category
+       when "gem"
+       if (x >= 555 && x <= 710) && (y >= 310 && y <= 460)
+        Gem_Info_Box.position = SF.vector2(500, 460) 
+        Gem_Info_Text.position = Gem_Info_Box.position 
+        if @@info_box != "gem"
+         @@info_box = "gem"
+         slot = 0
+         Etc::Gem.check_stats(slot)
+        else if @@info_box == "gem"
+         @@info_box = "none"
+        end; end; end
+       end
     when "Equipment" #----------------------------Weapon info boxes
      #---------------------Slot 1------------------------------
       if (x >= 555 && x <= 710) && (y >= 310 && y <= 460)

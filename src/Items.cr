@@ -1357,9 +1357,9 @@ include Equipment
       #------------------------------------------------------------------Amethyst------------------------------------------------------------------------------------ 
        @@amethyst_inventory_ore = Inventory_Ore.new("Amethyst", 6, Amethyst_Inventory_Ore, 1, "purple", "air", "INT+", 105, Amethyst_Gem_Cutter_Ore)
        Ore_Array.push(@@amethyst_inventory_ore) 
-      #----------------------------------------------------------------Smokey Quartz--------------------------------------------------------------------------------- 
-       @@smokey_quartz_inventory_ore = Inventory_Ore.new("Smokey Quartz", 7, Smokey_Quartz_Inventory_Ore, 1, "clear", "earth", "STR+", 95, Smoky_Quartz_Gem_Cutter_Ore)
-       Ore_Array.push(@@smokey_quartz_inventory_ore) 
+      #----------------------------------------------------------------Smoky Quartz--------------------------------------------------------------------------------- 
+       @@smoky_quartz_inventory_ore = Inventory_Ore.new("Smoky Quartz", 7, Smokey_Quartz_Inventory_Ore, 1, "clear", "earth", "STR+", 95, Smoky_Quartz_Gem_Cutter_Ore)
+       Ore_Array.push(@@smoky_quartz_inventory_ore) 
       #------------------------------------------------------------------Sapphire------------------------------------------------------------------------------------ 
        @@sapphire = Inventory_Ore.new("Sapphire", 8, Sapphire_Inventory_Ore, 1, "blue", "water", "EXP++", 950, Sapphire_Gem_Cutter_Ore)
        Ore_Array.push(@@sapphire) 
@@ -1396,9 +1396,9 @@ include Equipment
       #----------------------------------------------------------------Offretite------------------------------------------------------------------------------------- 
        @@offretite = Inventory_Ore.new("Offretite", 19, Offretite_Inventory_Ore, 1, "clear", "air", "INT+", 70, Offretite_Gem_Cutter_Ore)
        Ore_Array.push(@@offretite)
-      #------------------------------------------------------------Holley Blue Agate--------------------------------------------------------------------------------- 
-       @@holley_blue_agate = Inventory_Ore.new("Holley Blue Agate", 20, Holley_Blue_Agate_Inventory_Ore, 1, "blue", "air", "STR+", 70, Holly_Blue_Agate_Gem_Cutter_Ore)
-       Ore_Array.push(@@holley_blue_agate)
+      #------------------------------------------------------------Holly Blue Agate--------------------------------------------------------------------------------- 
+       @@holly_blue_agate = Inventory_Ore.new("Holly Blue Agate", 20, Holley_Blue_Agate_Inventory_Ore, 1, "blue", "air", "STR+", 70, Holly_Blue_Agate_Gem_Cutter_Ore)
+       Ore_Array.push(@@holly_blue_agate)
       #----------------------------------------------------------------Ametrine-------------------------------------------------------------------------------------- 
        @@ametrine = Inventory_Ore.new("Ametrine", 21, Ametrine_Inventory_Ore, 1, "purple", "air", "STR+", 70, Ametrine_Gem_Cutter_Ore)
        Ore_Array.push(@@ametrine)
@@ -1883,6 +1883,12 @@ include Equipment
      end
     def name=(name)
       @name= name
+     end
+    def effect=(effect)
+      @effect= effect
+     end
+    def element=(element)
+      @element= element
      end
   #________________________________________________________________________________________________________________________________________________________
   #????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
@@ -2475,7 +2481,7 @@ include Equipment
           @@preview_gem = Topaz_Inventory_Tablecut
         when "Amethyst"
           @@preview_gem = Amethyst_Inventory_Tablecut
-        when "Smokey Quartz"
+        when "Smoky Quartz"
           @@preview_gem = Smokey_Quartz_Inventory_Tablecut
         when "Sapphire"
           @@preview_gem = Sapphire_Inventory_Tablecut
@@ -2501,7 +2507,7 @@ include Equipment
           @@preview_gem = Hiddenite_Inventory_Tablecut
         when "Offretite"
           @@preview_gem = Offretite_Inventory_Tablecut
-        when "Holley Blue Agate"
+        when "Holly Blue Agate"
           @@preview_gem = Holly_Blue_Agate_Inventory_Tablecut
         when "Ametrine"
           @@preview_gem = Ametrine_Inventory_Tablecut
@@ -2582,7 +2588,7 @@ include Equipment
              @@preview_gem = Topaz_Inventory_Square
            when "Amethyst"
              @@preview_gem = Amethyst_Inventory_Square
-           when "Smokey Quartz"
+           when "Smoky Quartz"
              @@preview_gem = Smokey_Quartz_Inventory_Square
            when "Sapphire"
              @@preview_gem = Sapphire_Inventory_Square
@@ -2608,7 +2614,7 @@ include Equipment
              @@preview_gem = Hiddenite_Inventory_Square
            when "Offretite"
              @@preview_gem = Offretite_Inventory_Square
-           when "Holley Blue Agate"
+           when "Holly Blue Agate"
              @@preview_gem = Holly_Blue_Agate_Inventory_Square
            when "Ametrine"
              @@preview_gem = Ametrine_Inventory_Square
@@ -2689,7 +2695,7 @@ include Equipment
           @@preview_gem = Topaz_Inventory_Pear
         when "Amethyst"
           @@preview_gem = Amethyst_Inventory_Pear
-        when "Smokey Quartz"
+        when "Smoky Quartz"
           @@preview_gem = Smokey_Quartz_Inventory_Pear
         when "Sapphire"
           @@preview_gem = Sapphire_Inventory_Pear
@@ -2715,7 +2721,7 @@ include Equipment
           @@preview_gem = Hiddenite_Inventory_Pear
         when "Offretite"
           @@preview_gem = Offretite_Inventory_Pear
-        when "Holley Blue Agate"
+        when "Holly Blue Agate"
           @@preview_gem = Holly_Blue_Agate_Inventory_Pear
         when "Ametrine"
           @@preview_gem = Ametrine_Inventory_Pear
@@ -2796,7 +2802,7 @@ include Equipment
           @@preview_gem = Topaz_Inventory_Dropcut
         when "Amethyst"
           @@preview_gem = Amethyst_Inventory_Dropcut
-        when "Smokey Quartz"
+        when "Smoky Quartz"
           @@preview_gem = Smokey_Quartz_Inventory_Dropcut
         when "Sapphire"
           @@preview_gem = Sapphire_Inventory_Dropcut
@@ -2822,7 +2828,7 @@ include Equipment
           @@preview_gem = Hiddenite_Inventory_Dropcut
         when "Offretite"
           @@preview_gem = Offretite_Inventory_Dropcut
-        when "Holley Blue Agate"
+        when "Holly Blue Agate"
           @@preview_gem = Holly_Blue_Agate_Inventory_Dropcut
         when "Ametrine"
           @@preview_gem = Ametrine_Inventory_Dropcut
@@ -2903,7 +2909,7 @@ include Equipment
            @@preview_gem = Topaz_Inventory_Brilliant
          when "Amethyst"
            @@preview_gem = Amethyst_Inventory_Brilliant
-         when "Smokey Quartz"
+         when "Smoky Quartz"
            @@preview_gem = Smokey_Quartz_Inventory_Brilliant
          when "Sapphire"
            @@preview_gem = Sapphire_Inventory_Brilliant
@@ -2929,7 +2935,7 @@ include Equipment
            @@preview_gem = Hiddenite_Inventory_Brilliant
          when "Offretite"
            @@preview_gem = Offretite_Inventory_Brilliant
-         when "Holley Blue Agate"
+         when "Holly Blue Agate"
            @@preview_gem = Holly_Blue_Agate_Inventory_Brilliant
          when "Ametrine"
            @@preview_gem = Ametrine_Inventory_Brilliant
@@ -3004,18 +3010,39 @@ include Equipment
      def Gem.cut_gem
       i = 0
       while i < GEM_ARRAY.size
-        if @@current_gem.name == GEM_ARRAY[i].name && @@current_gem.amount_owned > 4
-          All_Audio::SFX.metal_hit_01
-          GEM_ARRAY[i].sprite = @@preview_gem.dup
-          GEM_ARRAY[i].sprite.scale  = SF.vector2(1, 1)
-          GEM_ARRAY[i].cut = @@current_style
-          GEM_ARRAY[i].amount_owned = 1
-          GEM_ARRAY[i].dup
-          Owned_Gem_Array.push(GEM_ARRAY[i].dup)
-          GEM_ARRAY[i].amount_owned = 0
-          @@current_gem.amount_owned -= 5
+        if @@current_gem.name == GEM_ARRAY[i].name 
+         case @@current_style
+          when "none"
+           All_Audio::SFX.light_bonk
+          when "Table Cut"
+            if @@current_gem.amount_owned > 4
+              All_Audio::SFX.metal_hit_01
+              effect = GEM_ARRAY[i].effect
+              element = GEM_ARRAY[i].element
+              GEM_ARRAY[i].effect = GEM_ARRAY[i].effect + "+"
+              GEM_ARRAY[i].element = GEM_ARRAY[i].element + "+"
+              GEM_ARRAY[i].sprite = @@preview_gem.dup
+              GEM_ARRAY[i].sprite.scale  = SF.vector2(1, 1)
+              GEM_ARRAY[i].cut = @@current_style
+              GEM_ARRAY[i].amount_owned = 1
+              GEM_ARRAY[i].dup
+              Owned_Gem_Array.push(GEM_ARRAY[i].dup)
+              GEM_ARRAY[i].amount_owned = 0
+              @@current_gem.amount_owned -= 5
+              GEM_ARRAY[i].effect = effect
+              GEM_ARRAY[i].element = element
+             end
+          end
         end
         i += 1
+      end
+     end
+   #-----------------------------------------------------------Gem Info Box--------------------------------------------------------------------------------
+     def Gem.check_stats(slot)
+      if Owned_Gem_Array.size > slot
+        Gem_Info_Text.string = " Name: " + Owned_Gem_Array[slot].name + "\n Cut: " + Owned_Gem_Array[slot].cut + "\n Effect: " + Owned_Gem_Array[slot].effect + "\n Element: " + Owned_Gem_Array[slot].element
+      else
+        Gem_Info_Text.string = ""
       end
      end
    #--------------------------------------------------------Gem Cutter Display-----------------------------------------------------------------------------
@@ -3684,8 +3711,8 @@ include Equipment
     @@amethyst_gem = Gem.new("Amethyst", 6, Amethyst_Inventory_Tablecut, "table", 0, "purple", 60, "air", "INT+", Amethyst_Inventory_Tablecut)
     GEM_ARRAY.push(@@amethyst_gem)
    #.............................................................Smoky Quartz..............................................................................
-    @@smokey_quartz_gem = Gem.new("Smoky Quartz", 7, Smokey_Quartz_Inventory_Tablecut, "table", 0, "clear", 60, "earth", "STR+", Smokey_Quartz_Inventory_Tablecut)   
-    GEM_ARRAY.push(@@smokey_quartz_gem)
+    @@smoky_quartz_gem = Gem.new("Smoky Quartz", 7, Smokey_Quartz_Inventory_Tablecut, "table", 0, "clear", 60, "earth", "STR+", Smokey_Quartz_Inventory_Tablecut)   
+    GEM_ARRAY.push(@@smoky_quartz_gem)
    #...............................................................Sapphire................................................................................
     @@sapphire_gem = Gem.new("Sapphire", 8, Sapphire_Inventory_Tablecut, "table", 0, "blue", 60, "water", "EXP++", Sapphire_Inventory_Tablecut)   
     GEM_ARRAY.push(@@sapphire_gem)
@@ -3723,8 +3750,8 @@ include Equipment
     @@offretite_gem = Gem.new("Offretite", 19, Offretite_Inventory_Tablecut, "table", 0, "clear", 60, "air", "INT+", Offretite_Inventory_Tablecut)   
     GEM_ARRAY.push(@@offretite_gem)
    #............................................................Holly Blue Agate...........................................................................
-    @@holley_blue_agate_gem = Gem.new("Holly Blue Agate", 20, Holly_Blue_Agate_Inventory_Tablecut, "table", 0, "blue", 60, "air", "STR+", Holly_Blue_Agate_Inventory_Tablecut)   
-    GEM_ARRAY.push(@@holley_blue_agate_gem)
+    @@holly_blue_agate_gem = Gem.new("Holly Blue Agate", 20, Holly_Blue_Agate_Inventory_Tablecut, "table", 0, "blue", 60, "air", "STR+", Holly_Blue_Agate_Inventory_Tablecut)   
+    GEM_ARRAY.push(@@holly_blue_agate_gem)
    #................................................................Ametrine...............................................................................
     @@ametrine_gem = Gem.new("Ametrine", 21, Ametrine_Inventory_Tablecut, "table", 0, "purple", 60, "air", "STR+", Ametrine_Inventory_Tablecut)   
     GEM_ARRAY.push(@@ametrine_gem)
@@ -3830,17 +3857,17 @@ module Harvestables
   extend self
   class Ore
     Test_Ore_Array = [@@bloodstone_01, @@bloodstone_02, @@bloodstone_03, @@moss_agate_01, @@amber01, @@wavellite01,  @@topaz01, @@amethyst01,
-    @@smokey_quartz01, @@sapphire01, @@black_opal01, @@ajoite01, @@rhodolite01, @@chalcanthite01, @@flourite01, @@amorite01, @@lapis_lazuli01,
-    @@moonstone01, @@blue_calcite01, @@hiddenite01, @@ofretite01, @@holley_blue_agate01, @@ametrine01, @@hemimorphite01, @@tiffany_stone01,
+    @@smoky_quartz01, @@sapphire01, @@black_opal01, @@ajoite01, @@rhodolite01, @@chalcanthite01, @@flourite01, @@amorite01, @@lapis_lazuli01,
+    @@moonstone01, @@blue_calcite01, @@hiddenite01, @@ofretite01, @@holly_blue_agate01, @@ametrine01, @@hemimorphite01, @@tiffany_stone01,
     @@azurite01, @@howlite01, @@angelite01, @@blue_lace_agate01, @@iolite01, @@sodalite01, @@kyanite01, @@sunstone01, @@bony_amber01, @@blue_amber01,
     @@blue_spinel01, @@red_spinel01, @@fire_opal01, @@garnet01, @@ruby01, @@cherry_quartz01, @@lemon_quartz01, @@turquoise01, @@tigers_eye01,
     @@orange_calcite01, @@grape_agate01, @@jade01, @@diamond01, @@emerald01, @@painite01, @@bumblebee_jasper01, @@blood_jasper01, @@mook_jasper01,
     @@red_jasper01, @@carbon01, @@copper01, @@tin01, @@zinc01, @@iron01]
 
     Test_Ore_Sprite_Array = [@@bloodstone_01.sprite, @@bloodstone_02.sprite, @@bloodstone_03.sprite, @@moss_agate_01.sprite, @@amber01.sprite, 
-    @@wavellite01.sprite,  @@topaz01.sprite, @@amethyst01.sprite, @@smokey_quartz01.sprite, @@sapphire01.sprite, @@black_opal01.sprite,
+    @@wavellite01.sprite,  @@topaz01.sprite, @@amethyst01.sprite, @@smoky_quartz01.sprite, @@sapphire01.sprite, @@black_opal01.sprite,
     @@ajoite01.sprite, @@rhodolite01.sprite, @@chalcanthite01.sprite, @@flourite01.sprite, @@amorite01.sprite, @@lapis_lazuli01.sprite,
-    @@moonstone01.sprite, @@blue_calcite01.sprite, @@hiddenite01.sprite, @@ofretite01.sprite, @@holley_blue_agate01.sprite, @@ametrine01.sprite,
+    @@moonstone01.sprite, @@blue_calcite01.sprite, @@hiddenite01.sprite, @@ofretite01.sprite, @@holly_blue_agate01.sprite, @@ametrine01.sprite,
     @@hemimorphite01.sprite, @@tiffany_stone01.sprite, @@azurite01.sprite, @@howlite01.sprite, @@angelite01.sprite, @@blue_lace_agate01.sprite,
     @@iolite01.sprite, @@sodalite01.sprite, @@kyanite01.sprite, @@sunstone01.sprite, @@bony_amber01.sprite, @@blue_amber01.sprite, @@blue_spinel01.sprite,
     @@red_spinel01.sprite, @@fire_opal01.sprite, @@garnet01.sprite, @@ruby01.sprite, @@cherry_quartz01.sprite, @@lemon_quartz01.sprite,
@@ -4063,11 +4090,11 @@ module Harvestables
       @@bloodstone_02.sprite.position = SF.vector2(4500, 702); @@bloodstone_01.sprite.position = SF.vector2(300, 702)
       window.draw(Testing_Text)
       window.draw(@@bloodstone_01.sprite); window.draw(@@bloodstone_02.sprite); window.draw(@@moss_agate_01.sprite); window.draw(@@amber01.sprite); 
-      window.draw(@@wavellite01.sprite); window.draw(@@topaz01.sprite); window.draw(@@amethyst01.sprite); window.draw(@@smokey_quartz01.sprite); 
+      window.draw(@@wavellite01.sprite); window.draw(@@topaz01.sprite); window.draw(@@amethyst01.sprite); window.draw(@@smoky_quartz01.sprite); 
       window.draw(@@sapphire01.sprite); window.draw(@@black_opal01.sprite); window.draw(@@ajoite01.sprite); window.draw(@@rhodolite01.sprite); 
       window.draw(@@chalcanthite01.sprite); window.draw(@@flourite01.sprite); window.draw(@@amorite01.sprite); window.draw(@@lapis_lazuli01.sprite); 
       window.draw(@@moonstone01.sprite); window.draw(@@blue_calcite01.sprite); window.draw(@@hiddenite01.sprite); window.draw(@@ofretite01.sprite); 
-      window.draw(@@holley_blue_agate01.sprite); window.draw(@@ametrine01.sprite); window.draw(@@hemimorphite01.sprite); window.draw(@@tiffany_stone01.sprite);
+      window.draw(@@holly_blue_agate01.sprite); window.draw(@@ametrine01.sprite); window.draw(@@hemimorphite01.sprite); window.draw(@@tiffany_stone01.sprite);
       window.draw(@@azurite01.sprite); window.draw(@@howlite01.sprite); window.draw(@@angelite01.sprite); window.draw(@@blue_lace_agate01.sprite)
       window.draw(@@iolite01.sprite); window.draw(@@sodalite01.sprite); window.draw(@@kyanite01.sprite); window.draw(@@sunstone01.sprite) 
       window.draw(@@bony_amber01.sprite); window.draw(@@blue_amber01.sprite); window.draw(@@blue_spinel01.sprite); window.draw(@@red_spinel01.sprite)
@@ -4137,13 +4164,13 @@ module Harvestables
      @@amethyst05 = Ore.new("Amethyst", 25, "purple", 7, 500, "amethyst", Amethyst_Ore.dup, false, 500)
      @@amethyst06 = Ore.new("Amethyst", 26, "purple", 7, 500, "amethyst", Amethyst_Ore.dup, false, 500)
     #.......................................................................................................................................................
-    #..............................................................Smokey Quartz...........................................................................
-     @@smokey_quartz01 = Ore.new("Smokey Quartz", 27, "clear", 7, 500, "smokey_quartz", Smokey_Quartz_Ore.dup, false, 500)
-     @@smokey_quartz02 = Ore.new("Smokey Quartz", 28, "clear", 7, 500, "smokey_quartz", Smokey_Quartz_Ore.dup, false, 500)
-     @@smokey_quartz03 = Ore.new("Smokey Quartz", 29, "clear", 7, 500, "smokey_quartz", Smokey_Quartz_Ore.dup, false, 500)
-     @@smokey_quartz04 = Ore.new("Smokey Quartz", 30, "clear", 7, 500, "smokey_quartz", Smokey_Quartz_Ore.dup, false, 500)
-     @@smokey_quartz05 = Ore.new("Smokey Quartz", 31, "clear", 7, 500, "smokey_quartz", Smokey_Quartz_Ore.dup, false, 500)
-     @@smokey_quartz06 = Ore.new("Smokey Quartz", 32, "clear", 7, 500, "smokey_quartz", Smokey_Quartz_Ore.dup, false, 500)
+    #..............................................................Smoky Quartz...........................................................................
+     @@smoky_quartz01 = Ore.new("Smoky Quartz", 27, "clear", 7, 500, "smoky_quartz", Smokey_Quartz_Ore.dup, false, 500)
+     @@smoky_quartz02 = Ore.new("Smoky Quartz", 28, "clear", 7, 500, "smoky_quartz", Smokey_Quartz_Ore.dup, false, 500)
+     @@smoky_quartz03 = Ore.new("Smoky Quartz", 29, "clear", 7, 500, "smoky_quartz", Smokey_Quartz_Ore.dup, false, 500)
+     @@smoky_quartz04 = Ore.new("Smoky Quartz", 30, "clear", 7, 500, "smoky_quartz", Smokey_Quartz_Ore.dup, false, 500)
+     @@smoky_quartz05 = Ore.new("Smoky Quartz", 31, "clear", 7, 500, "smoky_quartz", Smokey_Quartz_Ore.dup, false, 500)
+     @@smoky_quartz06 = Ore.new("Smoky Quartz", 32, "clear", 7, 500, "smoky_quartz", Smokey_Quartz_Ore.dup, false, 500)
     #.......................................................................................................................................................
     #................................................................Sapphire..............................................................................
      @@sapphire01 = Ore.new("Sapphire", 33, "clear", 9, 600, "sapphire", Sapphire_Ore.dup, false, 600)
@@ -4241,13 +4268,13 @@ module Harvestables
      @@ofretite05 = Ore.new("Offretite", 103, "clear", 5, 250, "offretite", Offretite_Ore.dup, false, 250)
      @@ofretite06 = Ore.new("Offretite", 104, "clear", 5, 250, "offretite", Offretite_Ore.dup, false, 250)
     #........................................................................................................................................................
-    #..............................................................Holley Blue Agate.........................................................................
-     @@holley_blue_agate01 = Ore.new("Holley Blue Agate", 105, "blue", 7, 350, "holley_blue_agate", Holley_Blue_Agate_Ore.dup, false, 350)
-     @@holley_blue_agate02 = Ore.new("Holley Blue Agate", 106, "blue", 7, 350, "holley_blue_agate", Holley_Blue_Agate_Ore.dup, false, 350)
-     @@holley_blue_agate03 = Ore.new("Holley Blue Agate", 107, "blue", 7, 350, "holley_blue_agate", Holley_Blue_Agate_Ore.dup, false, 350)
-     @@holley_blue_agate04 = Ore.new("Holley Blue Agate", 108, "blue", 7, 350, "holley_blue_agate", Holley_Blue_Agate_Ore.dup, false, 350)
-     @@holley_blue_agate05 = Ore.new("Holley Blue Agate", 109, "blue", 7, 350, "holley_blue_agate", Holley_Blue_Agate_Ore.dup, false, 350)
-     @@holley_blue_agate06 = Ore.new("Holley Blue Agate", 110, "blue", 7, 350, "holley_blue_agate", Holley_Blue_Agate_Ore.dup, false, 350)
+    #..............................................................Holly Blue Agate.........................................................................
+     @@holly_blue_agate01 = Ore.new("Holly Blue Agate", 105, "blue", 7, 350, "holly_blue_agate", Holley_Blue_Agate_Ore.dup, false, 350)
+     @@holly_blue_agate02 = Ore.new("Holly Blue Agate", 106, "blue", 7, 350, "holly_blue_agate", Holley_Blue_Agate_Ore.dup, false, 350)
+     @@holly_blue_agate03 = Ore.new("Holly Blue Agate", 107, "blue", 7, 350, "holly_blue_agate", Holley_Blue_Agate_Ore.dup, false, 350)
+     @@holly_blue_agate04 = Ore.new("Holly Blue Agate", 108, "blue", 7, 350, "holly_blue_agate", Holley_Blue_Agate_Ore.dup, false, 350)
+     @@holly_blue_agate05 = Ore.new("Holly Blue Agate", 109, "blue", 7, 350, "holly_blue_agate", Holley_Blue_Agate_Ore.dup, false, 350)
+     @@holly_blue_agate06 = Ore.new("Holly Blue Agate", 110, "blue", 7, 350, "holly_blue_agate", Holley_Blue_Agate_Ore.dup, false, 350)
     #........................................................................................................................................................
     #..................................................................Ametrine..............................................................................
      @@ametrine01 = Ore.new("Ametrine", 111, "purple", 7, 350, "ametrine", Ametrine_Ore.dup, false, 350)
