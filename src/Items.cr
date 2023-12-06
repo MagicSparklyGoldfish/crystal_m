@@ -3003,9 +3003,9 @@ include Equipment
    #---------------------------------------------------------Gem Cutter Cut!-------------------------------------------------------------------------------
      def Gem.cut_gem
       i = 0
-      All_Audio::SFX.metal_hit_01
       while i < GEM_ARRAY.size
-        if @@current_gem.name == GEM_ARRAY[i].name
+        if @@current_gem.name == GEM_ARRAY[i].name && @@current_gem.amount_owned > 4
+          All_Audio::SFX.metal_hit_01
           GEM_ARRAY[i].sprite = @@preview_gem.dup
           GEM_ARRAY[i].sprite.scale  = SF.vector2(1, 1)
           GEM_ARRAY[i].cut = @@current_style
@@ -3013,6 +3013,7 @@ include Equipment
           GEM_ARRAY[i].dup
           Owned_Gem_Array.push(GEM_ARRAY[i].dup)
           GEM_ARRAY[i].amount_owned = 0
+          @@current_gem.amount_owned -= 5
         end
         i += 1
       end
