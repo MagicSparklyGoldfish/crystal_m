@@ -1661,6 +1661,10 @@ def Window_Class.hud_keypresses(window)
       cut = 3
       Etc::Gem.select_cutter_cut(cut)
      end
+     if (x >= 1215 && x <= 1315) && (y >= 480 && y <= 540) && @@tab == "cuts"
+      cut = 4
+      Etc::Gem.select_cutter_cut(cut)
+     end
     #---------------------------------------------------------
     #-                 Select Crafting Gem                   -
     #---------------------------------------------------------

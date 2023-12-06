@@ -682,7 +682,7 @@
       AMBER_INVENTORY_PEAR_TEXTURE = SF::Texture.from_file("graphics/minerals/Amber_Inventory_Pearcut.png")
       Amber_Inventory_Pear = SF::Sprite.new(AMBER_INVENTORY_PEAR_TEXTURE) 
      #--------------------------------------------------Brilliant--------------------------------------------------------------------
-      AMBER_INVENTORY_BRILLIANT_TEXTURE = SF::Texture.from_file("graphics/minerals/Amber_Inventory_Brilliantcut.png")
+      AMBER_INVENTORY_BRILLIANT_TEXTURE = SF::Texture.from_file("graphics/minerals/Amber_Inventory_Brilliant.png")
       Amber_Inventory_Brilliant = SF::Sprite.new(AMBER_INVENTORY_BRILLIANT_TEXTURE) 
      #---------------------------------------------------Dropcut---------------------------------------------------------------------
       AMBER_INVENTORY_DROPCUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Amber_Inventory_Drop.png")
