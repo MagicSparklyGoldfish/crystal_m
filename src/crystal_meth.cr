@@ -2526,6 +2526,22 @@ def Window_Class.hud_keypresses(window)
          Player_Data::Player_Physics.mobilize_player
          Crafted_Items::Upgrade_Table.initialize_upgrade_table
         end
+        if (x >= 280 && x <= 330) && (y >= 165 && y <= 260) #--------up arrow 1
+          if @@page < 3
+            All_Audio::SFX.light_bonk
+          @@page += 1
+          else
+            All_Audio::SFX.char_create_up
+          end
+         end
+        if (x >= 280 && x <= 330) && (y >= 330 && y <= 425) #--------up arrow 1
+          if @@page > 0
+            All_Audio::SFX.light_bonk
+          @@page -= 1
+          else
+            All_Audio::SFX.char_create_up
+          end
+        end
       when "Stats_Menu" #---------------------------------------------------------Stats Menu
         if (x >= 1280 && x <= 1330) && (y >= 210 && y <= 260)
           @@popup = "none"

@@ -4854,21 +4854,48 @@ include Etc
        end
    #........................................................Draw Weapon Upgrade Table...........................................................................
      def Weapon.display_weapon_upgrade_table(window, page, page_02, page_03)
+      #---------------------weapon init------------------------------
+       weapon = Nil_Stick_Display
+       weapon2 = Nil_Stick_Display
+       weapon3 = Nil_Stick_Display
+       weapon4 = Nil_Stick_Display
+       weapon5 = Nil_Stick_Display
+       weapon6 = Nil_Stick_Display
+       weapon7 = Nil_Stick_Display
+       weapon8 = Nil_Stick_Display
+       weapon9 = Nil_Stick_Display
+       weapon10 = Nil_Stick_Display
+       weapon11 = Nil_Stick_Display
+       weapon12 = Nil_Stick_Display
+       weapon13 = Nil_Stick_Display
+       weapon14 = Nil_Stick_Display
+       weapon15 = Nil_Stick_Display
+       weapon16 = Nil_Stick_Display
+      #______________________________________________________________
       window.draw(@@current_upgrade_table_weapon.weapon_inventory_sprite)
       if Weapon_Inventory_Array.size >= 1
-        weapon = Weapon_Inventory_Array[0].weapon_inventory_sprite.dup
-        weapon.scale(SF.vector2(0.5, 0.5))
-        weapon.position = SF.vector2(440, -150);
-        window.draw(weapon)
+        case page
+          when 1
+           weapon = Weapon_Inventory_Array[0].weapon_inventory_sprite.dup
+          end
+           weapon.scale(SF.vector2(0.5, 0.5))
+           weapon.position = SF.vector2(440, -150);
+           window.draw(weapon)
        end
       if Weapon_Inventory_Array.size >= 2
-        weapon2 = Weapon_Inventory_Array[1].weapon_inventory_sprite.dup
+        case page
+         when 1
+           weapon2 = Weapon_Inventory_Array[1].weapon_inventory_sprite.dup
+          end
         weapon2.scale(SF.vector2(0.5, 0.5))
         weapon2.position = SF.vector2(490, -150);
         window.draw(weapon2)
        end
       if Weapon_Inventory_Array.size >= 3
+        case page
+        when 1
         weapon3 = Weapon_Inventory_Array[2].weapon_inventory_sprite.dup
+        end
         weapon3.scale(SF.vector2(0.5, 0.5))
         weapon3.position = SF.vector2(540, -150);
         window.draw(weapon3)
@@ -5028,6 +5055,9 @@ include Etc
      end
     def Upgrade_Table.display_upgrade_table(window)
       window.draw(Test_Upgrade_Table_Menu)
+      up_arrow_01 = Up_Arrow_01.dup; up_arrow_01.position = Test_Upgrade_Table_Menu.position + SF.vector2(-75, 50)
+      down_arrow_01 = Down_Arrow_01.dup; down_arrow_01.position = Test_Upgrade_Table_Menu.position + SF.vector2(-75, 175)
+      window.draw(up_arrow_01); window.draw(down_arrow_01)
     end
   end
 end
