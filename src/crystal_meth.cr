@@ -705,6 +705,11 @@ def Window_Class.ladder_test_ore_map
     tab = @@tab
     Etc::Gem.display_gem_cutter(window, page, tab)
     end
+   if @@popup == "upgrade_table"
+      page = @@page
+      tab = @@tab
+      Crafted_Items::Upgrade_Table.display_upgrade_table(window)
+      end
     Window_Class.hud(window)
   end
    end
@@ -3014,6 +3019,13 @@ def Window_Class.hud_keypresses(window)
             Etc::Gem.initialize_gem_cutter_ore_display
             @@player_character_rendered_model.position = SF.vector2(800, 75)
             Etc::Gem.initialize_gem_cutter_cut_display
+          else
+            Player_Data::Player_Physics.mobilize_player
+          end
+          if player.intersects? Test_Upgrade_Table_Menu.global_bounds
+            Player_Data::Player_Physics.immobilize_player
+            @@player_character_rendered_model.position = SF.vector2(1000, 75)
+            @@popup = "upgrade_table"
           else
             Player_Data::Player_Physics.mobilize_player
           end

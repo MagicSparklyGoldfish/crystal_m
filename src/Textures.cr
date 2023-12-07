@@ -3444,3 +3444,6 @@ Testing_Text.character_size = 20; Testing_Text.color = SF::Color::White; Testing
 #--------------------------------------------------------------------------------------------------------------------------------------
 #                                                     Upgrade Table
 #-------------------------------------------------------------------------------------------------------------------------------------- 
+ UPGRADE_TABLE_MENU_TEXTURE = SF::Texture.from_file("graphics/Upgrade_Table_Menu.png")
+ Test_Upgrade_Table_Menu = SF::Sprite.new(UPGRADE_TABLE_MENU_TEXTURE);
+ Test_Upgrade_Table_Menu.position = SF.vector2(400, -200);

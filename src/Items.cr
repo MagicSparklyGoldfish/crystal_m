@@ -4905,6 +4905,11 @@ include Etc
    Weapon_Template_Array.push(@@steel_stick)
   #________________________________________________________________________________________________________________________________________________________
   end
+  class Upgrade_Table
+    def Upgrade_Table.display_upgrade_table(window)
+      window.draw(Test_Upgrade_Table_Menu)
+    end
+  end
 end
 # if time >= SF.seconds(0.35) && @@attacking == true
 #   Weapon.play_hit_sound
