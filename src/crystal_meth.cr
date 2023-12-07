@@ -1417,144 +1417,199 @@ def Window_Class.hud_keypresses(window)
     when "Equipment" #----------------------------Weapon info boxes
      #---------------------Slot 1------------------------------
       if (x >= 555 && x <= 710) && (y >= 310 && y <= 460)
-        Weapon_Info_Box.position = SF.vector2(525, 460) 
+        Weapon_Info_Box.position = SF.vector2(475, 460) 
         Weapon_Info_Text.position = Weapon_Info_Box.position 
        if @@info_box != "equipment"
         @@info_box = "equipment"
         slot = 0
-        Equipment.check_stats(slot)
+        Crafted_Items::Weapon.check_stats(slot)
        else if @@info_box == "equipment"
         @@info_box = "none"
        end; end; end
      #---------------------Slot 2------------------------------
       if (x >= 710 && x <= 855) && (y >= 310 && y <= 460)
-        Weapon_Info_Box.position = SF.vector2(695, 460) 
+        Weapon_Info_Box.position = SF.vector2(630, 460) 
         Weapon_Info_Text.position = Weapon_Info_Box.position 
        if @@info_box != "equipment"
         @@info_box = "equipment"
         slot = 1
-        Equipment.check_stats(slot)
+        Crafted_Items::Weapon.check_stats(slot)
        else if @@info_box == "equipment"
         @@info_box = "none"
        end; end; end
      #---------------------Slot 3------------------------------
       if (x >= 855 && x <= 1005) && (y >= 310 && y <= 460)
-        Weapon_Info_Box.position = SF.vector2(840, 460) 
+        Weapon_Info_Box.position = SF.vector2(780, 460) 
         Weapon_Info_Text.position = Weapon_Info_Box.position 
        if @@info_box != "equipment"
         @@info_box = "equipment"
         slot = 2
-        Equipment.check_stats(slot)
+        Crafted_Items::Weapon.check_stats(slot)
        else if @@info_box == "equipment"
         @@info_box = "none"
        end; end; end
      #---------------------Slot 4------------------------------
       if (x >= 1005 && x <= 1155) && (y >= 310 && y <= 460)
-       Weapon_Info_Box.position = SF.vector2(990, 460) 
+       Weapon_Info_Box.position = SF.vector2(930, 460) 
        Weapon_Info_Text.position = Weapon_Info_Box.position 
       if @@info_box != "equipment"
        @@info_box = "equipment"
        slot = 3
-       Equipment.check_stats(slot)
+       Crafted_Items::Weapon.check_stats(slot)
       else if @@info_box == "equipment"
        @@info_box = "none"
       end; end; end
      #---------------------Slot 5------------------------------
-      if (x >= 1155 && x <= 1305) && (y >= 310 && y <= 460)
-       Weapon_Info_Box.position = SF.vector2(1100, 460) 
+      if (x >= 1155 && x <= 1310) && (y >= 310 && y <= 460)
+       Weapon_Info_Box.position = SF.vector2(1070, 460) 
        Weapon_Info_Text.position = Weapon_Info_Box.position 
       if @@info_box != "equipment"
        @@info_box = "equipment"
        slot = 4
-       Equipment.check_stats(slot)
+       Crafted_Items::Weapon.check_stats(slot)
       else if @@info_box == "equipment"
        @@info_box = "none"
       end; end; end
      #---------------------Slot 6------------------------------
-      if (x >= 1220 && x <= 1420) && (y >= 310 && y <= 460)
-       Weapon_Info_Box.position = SF.vector2(1205, 460) 
+      if (x >= 1310 && x <= 1420) && (y >= 310 && y <= 460)
+       Weapon_Info_Box.position = SF.vector2(1225, 460) 
        Weapon_Info_Text.position = Weapon_Info_Box.position 
       if @@info_box != "equipment"
        @@info_box = "equipment"
        slot = 5
-       Equipment.check_stats(slot)
+       Crafted_Items::Weapon.check_stats(slot)
       else if @@info_box == "equipment"
        @@info_box = "none"
       end; end; end
      #---------------------Slot 7------------------------------
       if (x >= 555 && x <= 710) && (y >= 460 && y <= 610)
-       Weapon_Info_Box.position = SF.vector2(525, 610) 
+       Weapon_Info_Box.position = SF.vector2(475, 610) 
        Weapon_Info_Text.position = Weapon_Info_Box.position 
       if @@info_box != "equipment"
        @@info_box = "equipment"
        slot = 6
-       Equipment.check_stats(slot)
+       Crafted_Items::Weapon.check_stats(slot)
       else if @@info_box == "equipment"
        @@info_box = "none"
       end; end; end
      #---------------------Slot 8------------------------------
       if (x >= 710 && x <= 855) && (y >= 460 && y <= 610)
-       Weapon_Info_Box.position = SF.vector2(695, 610) 
+       Weapon_Info_Box.position = SF.vector2(630, 610) 
        Weapon_Info_Text.position = Weapon_Info_Box.position 
       if @@info_box != "equipment"
        @@info_box = "equipment"
        slot = 7
-       Equipment.check_stats(slot)
+       Crafted_Items::Weapon.check_stats(slot)
       else if @@info_box == "equipment"
        @@info_box = "none"
       end; end; end
      #---------------------Slot 9------------------------------
       if (x >= 855 && x <= 1005) && (y >= 460 && y <= 610)
-       Weapon_Info_Box.position = SF.vector2(840, 610) 
+       Weapon_Info_Box.position = SF.vector2(780, 610) 
        Weapon_Info_Text.position = Weapon_Info_Box.position 
       if @@info_box != "equipment"
        @@info_box = "equipment"
        slot = 8
-       Equipment.check_stats(slot)
+       Crafted_Items::Weapon.check_stats(slot)
       else if @@info_box == "equipment"
        @@info_box = "none"
       end; end; end
      #---------------------Slot 10------------------------------
       if (x >= 1005 && x <= 1155) && (y >= 460 && y <= 610)
-       Weapon_Info_Box.position = SF.vector2(990, 610) 
+       Weapon_Info_Box.position = SF.vector2(930, 610) 
        Weapon_Info_Text.position = Weapon_Info_Box.position 
       if @@info_box != "equipment"
        @@info_box = "equipment"
        slot = 9
-       Equipment.check_stats(slot)
+       Crafted_Items::Weapon.check_stats(slot)
       else if @@info_box == "equipment"
        @@info_box = "none"
       end; end; end
      #---------------------Slot 11------------------------------
-      if (x >= 1155 && x <= 1305) && (y >= 460 && y <= 610)
-       Weapon_Info_Box.position = SF.vector2(1100, 610) 
+      if (x >= 1155 && x <= 1310) && (y >= 460 && y <= 610)
+       Weapon_Info_Box.position = SF.vector2(1070, 610) 
        Weapon_Info_Text.position = Weapon_Info_Box.position 
       if @@info_box != "equipment"
        @@info_box = "equipment"
        slot = 10
-       Equipment.check_stats(slot)
+       Crafted_Items::Weapon.check_stats(slot)
       else if @@info_box == "equipment"
        @@info_box = "none"
       end; end; end
      #---------------------Slot 12------------------------------
-      if (x >= 1220 && x <= 1420) && (y >= 460 && y <= 610)
-       Weapon_Info_Box.position = SF.vector2(1205, 610) 
+      if (x >= 1310 && x <= 1420) && (y >= 460 && y <= 610)
+       Weapon_Info_Box.position = SF.vector2(1225, 610) 
        Weapon_Info_Text.position = Weapon_Info_Box.position 
       if @@info_box != "equipment"
        @@info_box = "equipment"
        slot = 11
-       Equipment.check_stats(slot)
+       Crafted_Items::Weapon.check_stats(slot)
       else if @@info_box == "equipment"
        @@info_box = "none"
       end; end; end
      #---------------------Slot 13------------------------------
-      if (x >= 555 && x <= 710) && (y >= 610 && y <= 660)
-       Weapon_Info_Box.position = SF.vector2(525, 660) 
+      if (x >= 555 && x <= 710) && (y >= 610 && y <= 760)
+       Weapon_Info_Box.position = SF.vector2(475, 760) 
        Weapon_Info_Text.position = Weapon_Info_Box.position 
       if @@info_box != "equipment"
        @@info_box = "equipment"
        slot = 12
-       Equipment.check_stats(slot)
+       Crafted_Items::Weapon.check_stats(slot)
+      else if @@info_box == "equipment"
+       @@info_box = "none"
+      end; end; end
+     #---------------------Slot 14------------------------------
+      if (x >= 710 && x <= 855) && (y >= 610 && y <= 760)
+       Weapon_Info_Box.position = SF.vector2(630, 760) 
+       Weapon_Info_Text.position = Weapon_Info_Box.position 
+      if @@info_box != "equipment"
+       @@info_box = "equipment"
+       slot = 13
+       Crafted_Items::Weapon.check_stats(slot)
+      else if @@info_box == "equipment"
+       @@info_box = "none"
+      end; end; end
+     #---------------------Slot 15------------------------------
+      if (x >= 855 && x <= 1005) && (y >= 610 && y <= 760)
+       Weapon_Info_Box.position = SF.vector2(780, 760) 
+       Weapon_Info_Text.position = Weapon_Info_Box.position 
+      if @@info_box != "equipment"
+       @@info_box = "equipment"
+       slot = 14
+       Crafted_Items::Weapon.check_stats(slot)
+      else if @@info_box == "equipment"
+       @@info_box = "none"
+      end; end; end
+     #---------------------Slot 16------------------------------
+      if (x >= 1005 && x <= 1155) && (y >= 610 && y <= 760)
+       Weapon_Info_Box.position = SF.vector2(930, 760) 
+       Weapon_Info_Text.position = Weapon_Info_Box.position 
+      if @@info_box != "equipment"
+       @@info_box = "equipment"
+       slot = 14
+       Crafted_Items::Weapon.check_stats(slot)
+      else if @@info_box == "equipment"
+       @@info_box = "none"
+      end; end; end
+     #---------------------Slot 17------------------------------
+      if (x >= 1155 && x <= 1310) && (y >= 610 && y <= 760)
+       Weapon_Info_Box.position = SF.vector2(1070, 760) 
+       Weapon_Info_Text.position = Weapon_Info_Box.position 
+      if @@info_box != "equipment"
+       @@info_box = "equipment"
+       slot = 14
+       Crafted_Items::Weapon.check_stats(slot)
+      else if @@info_box == "equipment"
+       @@info_box = "none"
+      end; end; end
+     #---------------------Slot 18------------------------------
+      if (x >= 1310 && x <= 1420) && (y >= 610 && y <= 760)
+       Weapon_Info_Box.position = SF.vector2(1225, 760) 
+       Weapon_Info_Text.position = Weapon_Info_Box.position 
+      if @@info_box != "equipment"
+       @@info_box = "equipment"
+       slot = 14
+       Crafted_Items::Weapon.check_stats(slot)
       else if @@info_box == "equipment"
        @@info_box = "none"
       end; end; end

@@ -4852,6 +4852,39 @@ include Etc
         attack_strength = base_attack * @@current_weapon.weapon_atk
         Harvestables::Ore.set_attack_strength(attack_strength)
        end
+
+       def Crafted_Items::Weapon.check_stats(slot)
+        if Weapon_Inventory_Array.size > slot
+           Weapon_Info_Text.string = " Name: " + Weapon_Inventory_Array[slot].weapon_name + "\n Attack: " + 
+           Weapon_Inventory_Array[slot].weapon_atk.to_s + "\n Elements: " + Weapon_Inventory_Array[slot].weapon_element[0] + ", " +
+           Weapon_Inventory_Array[slot].weapon_element[1] + ", " + Weapon_Inventory_Array[slot].weapon_element[2] +
+           "\n Effects: " + Weapon_Inventory_Array[slot].weapon_effect[0] + ", " + Weapon_Inventory_Array[slot].weapon_effect[1] +
+           ", " + Weapon_Inventory_Array[slot].weapon_effect[2]
+         else
+          Weapon_Info_Text.string = ""
+        end
+       end
+       def Equipment.play_swing_sound
+        @@current_weapon_object.swing_sound.play
+       end
+       def Equipment.play_hit_sound
+        @@current_weapon_object.hit_sound.play
+       end
+       def Equipment.stop_swing_sound
+        @@current_weapon_object.swing_sound.stop
+        @@current_weapon_object.hit_sound.play
+       end
+       def Equipment.forge_weapon(weapon)
+        s = WEAPON_OBJECT_ARRAY.size; i = 0
+        puts WEAPON_OBJECT_ARRAY[i]
+        while s > i
+          if weapon == WEAPON_OBJECT_ARRAY[i].number 
+            WEAPON_INVENTORY_ARRAY.push(WEAPON_OBJECT_ARRAY[i].dup)
+            puts WEAPON_OBJECT_ARRAY[i]
+          end
+          i += 1
+        end
+       end
   #________________________________________________________________________________________________________________________________________________________
   #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   #/                                                               Entities                                                                               /
