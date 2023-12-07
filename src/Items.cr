@@ -138,7 +138,7 @@ module Equipment
    def Equipment.play_swing_sound
     @@current_weapon_object.swing_sound.play
    end
-   def Equipment.play_hit_sound
+   def Weapon.play_hit_sound
     @@current_weapon_object.hit_sound.play
    end
    def Equipment.stop_swing_sound
@@ -4036,7 +4036,7 @@ module Harvestables
         if attack2.intersects? this
         if ore.hp > 0
         if time >= SF.seconds(0.35) && attack == true
-         Equipment.play_hit_sound
+         Weapon.play_hit_sound
          ore.hp_subtract(@@attack_strength)
          Ore.animation_harvest(this, ore)
          Ore_Clock_01.restart
@@ -4713,7 +4713,7 @@ include Etc
   #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
   #+                                                              Variables                                                                               +
   #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-   @@current_weapon : Weapon; @@current_weapon = @@nil_stick 
+   @@current_equipped_weapon : Weapon; @@current_equipped_weapon = @@nil_stick 
   #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   #!                                                              Initialize                                                                              !
   #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -4772,7 +4772,7 @@ include Etc
    #.............................................................Draw Weapon...............................................................................
     def Weapon.draw_current_weapon(player) #@note draw current weapon
       #Equipment.check_gem_element_current_weapon
-      player.draw(@@current_weapon.weapon_sprite)
+      player.draw(@@current_equipped_weapon.weapon_sprite)
     end
    #.............................................................Equip Weapon...............................................................................
     def Weapon.equip_weapon(this)
@@ -4780,10 +4780,10 @@ include Etc
        if this > size
          All_Audio::SFX.light_bonk
         else 
-       if @@current_weapon != Nil || @@nil_stick
-         Weapon_Inventory_Array.push(@@current_weapon)
-         @@current_weapon = Weapon_Inventory_Array[this]
-         Weapon_Inventory_Array.delete(@@current_weapon)
+       if @@current_equipped_weapon != Nil || @@nil_stick
+         Weapon_Inventory_Array.push(@@current_equipped_weapon)
+         @@current_equipped_weapon = Weapon_Inventory_Array[this]
+         Weapon_Inventory_Array.delete(@@current_equipped_weapon)
          puts "equip" + this.to_s
         end
         end
@@ -4849,7 +4849,7 @@ include Etc
        end
    #.............................................................Attack Strength................................................................................
        def Weapon.attack_strength(base_attack) #@note attack strength 
-        attack_strength = base_attack * @@current_weapon.weapon_atk
+        attack_strength = base_attack * @@current_equipped_weapon.weapon_atk
         Harvestables::Ore.set_attack_strength(attack_strength)
        end
 
@@ -4864,15 +4864,15 @@ include Etc
           Weapon_Info_Text.string = ""
         end
        end
-       def Equipment.play_swing_sound
-        @@current_weapon_object.swing_sound.play
-       end
-       def Equipment.play_hit_sound
-        @@current_weapon_object.hit_sound.play
+       def Weapon.play_swing_sound
+         @@current_equipped_weapon.weapon_swing_sound.play
+        end
+       def Weapon.play_hit_sound
+        @@current_equipped_weapon.weapon_hit_sound.play
        end
        def Equipment.stop_swing_sound
-        @@current_weapon_object.swing_sound.stop
-        @@current_weapon_object.hit_sound.play
+        @@current_equipped_weapon.swing_sound.stop
+        @@current_equipped_weapon.hit_sound.play
        end
        def Equipment.forge_weapon(weapon)
         s = WEAPON_OBJECT_ARRAY.size; i = 0
@@ -4903,6 +4903,6 @@ include Etc
   end
 end
 # if time >= SF.seconds(0.35) && @@attacking == true
-#   Equipment.play_hit_sound
+#   Weapon.play_hit_sound
 #  # this.current_hp - 10
 #   Player_Attack_Clock.restart

@@ -602,7 +602,7 @@ def Window_Class.ladder_test_ore_map
      def Window_Class.attack_swing_left(@@player_character_rendered_model, window)
       @@frame += 1
       if @@frame  > 0 && @@frame  < 2
-       Equipment.play_swing_sound
+       Crafted_Items::Weapon.play_swing_sound
         @@player_character_rendered_model.texture_rect = SF.int_rect(0, 768, 96, 128)
       else if @@frame  > 3 && @@frame  < 5
         @@player_character_rendered_model.texture_rect = SF.int_rect(96, 768, 96, 128)
@@ -613,14 +613,14 @@ def Window_Class.ladder_test_ore_map
       else if @@frame  > 11
         @@frame = 0
       end; end; end; end; end
-     end
+     end        
     #----------------------------------------------------------------------------------------------------------------------------------+
     #------------------------------------------------------Right Swing-----------------------------------------------------------------+
      @@frame = 0
      def Window_Class.attack_swing_right(@@player_character_rendered_model, window)
       @@frame += 1
       if @@frame  > 0 && @@frame  < 2
-        Equipment.play_swing_sound
+        Crafted_Items::Weapon.play_swing_sound
         @@player_character_rendered_model.texture_rect = SF.int_rect(0, 512, 96, 128)
       else if @@frame  > 3 && @@frame  < 5
         @@player_character_rendered_model.texture_rect = SF.int_rect(96, 512, 96, 128)
@@ -3729,7 +3729,7 @@ module Enemy_Data # @note Enemy data is stored here
       attack = Player_Attack_Bounding_Box.global_bounds
       if this.intersects? attack
       if time >= SF.seconds(0.35) && @@attacking == true
-           Equipment.play_hit_sound
+           Weapon.play_hit_sound
           # this.current_hp - 10
            Player_Attack_Clock.restart
       end; end; end 
