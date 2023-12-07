@@ -4847,6 +4847,27 @@ include Etc
            end
          end
        end
+   #........................................................Draw Weapon Upgrade Table...........................................................................
+     def Weapon.display_weapon_upgrade_table(window, page, page_02, page_03)
+      if Weapon_Inventory_Array.size >= 1
+        weapon = Weapon_Inventory_Array[0].weapon_inventory_sprite.dup
+        weapon.scale(SF.vector2(0.5, 0.5))
+        weapon.position = SF.vector2(440, -150);
+        window.draw(weapon)
+       end
+      if Weapon_Inventory_Array.size >= 2
+        weapon2 = Weapon_Inventory_Array[1].weapon_inventory_sprite.dup
+        weapon2.scale(SF.vector2(0.5, 0.5))
+        weapon2.position = SF.vector2(490, -150);
+        window.draw(weapon2)
+       end
+      if Weapon_Inventory_Array.size >= 3
+        weapon3 = Weapon_Inventory_Array[2].weapon_inventory_sprite.dup
+        weapon3.scale(SF.vector2(0.5, 0.5))
+        weapon3.position = SF.vector2(540, -150);
+        window.draw(weapon3)
+       end
+      end
    #.............................................................Attack Strength................................................................................
        def Weapon.attack_strength(base_attack) #@note attack strength 
         attack_strength = base_attack * @@current_equipped_weapon.weapon_atk

@@ -50,7 +50,7 @@ extend self
   @@tab = "none"
   @@map = "none"
   @@salon = "none"
-  @@page : Int32 = 1
+  @@page : Int32 = 1; @@page_02 : Int32 = 1; @@page_03 : Int32 = 1
   @@category = "ore"
   @@info_box = "none"
  #_______________________________________________________________________________________________________________________________________+
@@ -706,9 +706,10 @@ def Window_Class.ladder_test_ore_map
     Etc::Gem.display_gem_cutter(window, page, tab)
     end
    if @@popup == "upgrade_table"
-      page = @@page
+      page = @@page; page_02 = @@page_02; page_03 = @@page_03
       tab = @@tab
       Crafted_Items::Upgrade_Table.display_upgrade_table(window)
+      Crafted_Items::Weapon.display_weapon_upgrade_table(window, page, page_02, page_03)
       end
     Window_Class.hud(window)
   end
@@ -3000,18 +3001,12 @@ def Window_Class.hud_keypresses(window)
             Player_Data::Player_Physics.immobilize_player
             @@popup = "smelter"
             @@player_character_rendered_model.position = SF.vector2(400, 75)
-          else
-            Player_Data::Player_Physics.mobilize_player
-          end
-          if player.intersects? Test_Forge.global_bounds
+        else if player.intersects? Test_Forge.global_bounds
             Player_Data::Player_Physics.immobilize_player
             @@popup = "forge"
             Etc::Inventory_Ingot.initialize_inventory
             @@player_character_rendered_model.position = SF.vector2(600, 75)
-          else
-            Player_Data::Player_Physics.mobilize_player
-          end
-          if player.intersects? Test_Gem_Cutter.global_bounds
+        else if player.intersects? Test_Gem_Cutter.global_bounds
             Player_Data::Player_Physics.immobilize_player
             @@popup = "gem_cutter"
             @@page = 1
@@ -3019,16 +3014,11 @@ def Window_Class.hud_keypresses(window)
             Etc::Gem.initialize_gem_cutter_ore_display
             @@player_character_rendered_model.position = SF.vector2(800, 75)
             Etc::Gem.initialize_gem_cutter_cut_display
-          else
-            Player_Data::Player_Physics.mobilize_player
-          end
-          if player.intersects? Test_Upgrade_Table_Menu.global_bounds
-            Player_Data::Player_Physics.immobilize_player
-            @@player_character_rendered_model.position = SF.vector2(1000, 75)
-            @@popup = "upgrade_table"
-          else
-            Player_Data::Player_Physics.mobilize_player
-          end
+        else if player.intersects? Test_Upgrade_Table_Menu.global_bounds
+             Player_Data::Player_Physics.immobilize_player
+             @@player_character_rendered_model.position = SF.vector2(1000, 75)
+             @@popup = "upgrade_table"
+           end; end; end; end
         end
       when SF::Keyboard::D
         @@idleframes = 0
