@@ -138,7 +138,7 @@ module Equipment
    def Equipment.play_swing_sound
     @@current_weapon_object.swing_sound.play
    end
-   def Weapon.play_hit_sound
+   def Equipment.play_hit_sound
     @@current_weapon_object.hit_sound.play
    end
    def Equipment.stop_swing_sound
@@ -279,7 +279,7 @@ module Equipment
   end 
   def Weapon_Crafting.forge_weapon
     weapon = @@craft_weapon
-    Equipment.forge_weapon(weapon)
+    Crafted_Items::Weapon.forge_weapon(weapon)
   end
   def Weapon_Crafting.diplay_forge(window)
       window.draw(Test_Forge_Menu)
@@ -4036,7 +4036,7 @@ module Harvestables
         if attack2.intersects? this
         if ore.hp > 0
         if time >= SF.seconds(0.35) && attack == true
-         Weapon.play_hit_sound
+          Crafted_Items::Weapon.play_hit_sound
          ore.hp_subtract(@@attack_strength)
          Ore.animation_harvest(this, ore)
          Ore_Clock_01.restart
@@ -4708,7 +4708,7 @@ end
 
 module Crafted_Items
 include Etc
- Weapon_Inventory_Array = [] of Weapon
+ Weapon_Inventory_Array = [] of Weapon; Weapon_Template_Array = [] of Weapon
  class Weapon
   #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
   #+                                                              Variables                                                                               +
@@ -4870,17 +4870,15 @@ include Etc
        def Weapon.play_hit_sound
         @@current_equipped_weapon.weapon_hit_sound.play
        end
-       def Equipment.stop_swing_sound
+       def Weapon.stop_swing_sound
         @@current_equipped_weapon.swing_sound.stop
         @@current_equipped_weapon.hit_sound.play
        end
-       def Equipment.forge_weapon(weapon)
-        s = WEAPON_OBJECT_ARRAY.size; i = 0
-        puts WEAPON_OBJECT_ARRAY[i]
+       def Weapon.forge_weapon(weapon)
+        s = Weapon_Template_Array.size; i = 0
         while s > i
-          if weapon == WEAPON_OBJECT_ARRAY[i].number 
-            WEAPON_INVENTORY_ARRAY.push(WEAPON_OBJECT_ARRAY[i].dup)
-            puts WEAPON_OBJECT_ARRAY[i]
+          if weapon == Weapon_Template_Array[i].weapon_id 
+            Weapon_Inventory_Array.push(Weapon_Template_Array[i].dup)
           end
           i += 1
         end
@@ -4891,14 +4889,20 @@ include Etc
   #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
    @@nil_stick = Weapon.new("", -1, "", 0, [""], [""], Nil_Ingot_Ore, Weapon_Rectangle_01, SYSSOUND_6, SYSSOUND_6, "")
    @@stick = Weapon.new("Stick", 0, "stick", 1.25, ["none", "none", "none"], ["none", "none", "none"], Stick01, Weapon_Rectangle_01, WEAPSOUND_01, WEAPSOUND_02, "Swing")
-   @@zinc_stick = Weapon.new("Zinc Stick", 1, "stick", 1.5, ["empty", "none", "none"], ["empty", "none", "none"], Zinc_Stick, Zinc_Stick_Display, WEAPSOUND_01, WEAPSOUND_02, "Swing")
-   Weapon_Inventory_Array.push(@@zinc_stick)
+   @@zinc_stick = Weapon.new("Zinc Stick", 4, "stick", 1.5, ["empty", "none", "none"], ["empty", "none", "none"], Zinc_Stick, Zinc_Stick_Display, WEAPSOUND_01, WEAPSOUND_02, "Swing")
+   Weapon_Inventory_Array.push(@@zinc_stick); Weapon_Template_Array.push(@@zinc_stick)
    @@tin_stick = Weapon.new("Tin Stick", 2, "stick", 1.75, ["empty", "none", "none"], ["empty", "none", "none"], Tin_Stick, Tin_Stick_Display, WEAPSOUND_01, WEAPSOUND_02, "Swing")
-   @@copper_stick = Weapon.new("Copper Stick", 3, "stick", 2.5, ["empty", "none", "none"], ["empty", "none", "none"], Copper_Stick, Copper_Stick_Display, WEAPSOUND_01, WEAPSOUND_02, "Swing")
-   @@brass_stick = Weapon.new("Brass Stick", 4, "stick", 2, ["empty", "empty", "none"], ["empty", "empty", "none"], Brass_Stick, Brass_Stick_Display, WEAPSOUND_01, WEAPSOUND_02, "Swing")
-   @@bronze_stick = Weapon.new("Bronze Stick", 5, "stick", 2.25, ["empty", "empty", "none"], ["empty", "empty", "none"], Bronze_Stick, Bronze_Stick_Display, WEAPSOUND_01, WEAPSOUND_02, "Swing")
+   Weapon_Template_Array.push(@@tin_stick)
+   @@copper_stick = Weapon.new("Copper Stick", 1, "stick", 2.5, ["empty", "none", "none"], ["empty", "none", "none"], Copper_Stick, Copper_Stick_Display, WEAPSOUND_01, WEAPSOUND_02, "Swing")
+   Weapon_Template_Array.push(@@copper_stick)
+   @@brass_stick = Weapon.new("Brass Stick", 5, "stick", 2, ["empty", "empty", "none"], ["empty", "empty", "none"], Brass_Stick, Brass_Stick_Display, WEAPSOUND_01, WEAPSOUND_02, "Swing")
+   Weapon_Template_Array.push(@@brass_stick)
+   @@bronze_stick = Weapon.new("Bronze Stick", 3, "stick", 2.25, ["empty", "empty", "none"], ["empty", "empty", "none"], Bronze_Stick, Bronze_Stick_Display, WEAPSOUND_01, WEAPSOUND_02, "Swing")
+   Weapon_Template_Array.push(@@bronze_stick)
    @@iron_stick = Weapon.new("Iron Stick", 6, "stick", 2.5, ["empty", "empty", "none"], ["empty", "empty", "none"], Iron_Stick, Iron_Stick_Display, WEAPSOUND_01, WEAPSOUND_02, "Swing")
+   Weapon_Template_Array.push(@@iron_stick)
    @@steel_stick = Weapon.new("Steel Stick", 7, "stick", 3, ["empty", "empty", "empty"], ["empty", "empty", "empty"], Steel_Stick, Steel_Stick_Display, WEAPSOUND_01, WEAPSOUND_02, "Swing")
+   Weapon_Template_Array.push(@@steel_stick)
   #________________________________________________________________________________________________________________________________________________________
   end
 end

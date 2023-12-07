@@ -3125,6 +3125,10 @@ Testing_Text.character_size = 20; Testing_Text.color = SF::Color::White; Testing
  Test_Gem_Cutter = SF::RectangleShape.new(SF.vector2(120, 80)); Test_Gem_Cutter.set_texture(GEM_CUTTER_RECTANGLE_TEXTURE, reset_rect: false)
  Test_Gem_Cutter.position = SF.vector2(800, 120);
 
+ UPGRADE_TABLE_RECTANGLE_TEXTURE = SF::Texture.from_file("graphics/Upgrade_Table.png")
+ Test_Upgrade_Table = SF::RectangleShape.new(SF.vector2(120, 80)); Test_Upgrade_Table.set_texture(UPGRADE_TABLE_RECTANGLE_TEXTURE, reset_rect: false)
+ Test_Upgrade_Table.position = SF.vector2(1000, 120);
+
 #--------------------------------------------------------------------------------------------------------------------------------------
 #                                                       Smelter
 #-------------------------------------------------------------------------------------------------------------------------------------- 
@@ -3437,3 +3441,6 @@ Testing_Text.character_size = 20; Testing_Text.color = SF::Color::White; Testing
   #.....................................................Red Jasper.....................................................................
    RED_JASPER_CUTTER_TEXTURE = SF::Texture.from_file("graphics/minerals/Gem_Cutter_Red_Jasper.png")
    Red_Jasper_Gem_Cutter_Ore = SF::Sprite.new(RED_JASPER_CUTTER_TEXTURE)
+#--------------------------------------------------------------------------------------------------------------------------------------
+#                                                     Upgrade Table
+#-------------------------------------------------------------------------------------------------------------------------------------- 

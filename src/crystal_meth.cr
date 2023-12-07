@@ -507,6 +507,7 @@ extend self
    bounding_box2 = @@player_character_rendered_model.global_bounds
    ore_ground = Ground.dup; Ground.position = SF.vector2(-5000, 800); ore_platform = Ground.dup; ore_platform.scale = SF.vector2(0.5, 0.2)
    ore_platform.position = SF.vector2(-100, 400); window.draw(Test_Smelter); window.draw(Test_Forge); window.draw(Test_Gem_Cutter)
+   window.draw(Test_Upgrade_Table);
    window.draw(ore_ground); window.draw(@@player_character_rendered_model); window.draw(Test_Teleporter); window.draw(Test_Ladder)
    window.draw(Test_Platform_01); window.draw(Test_Platform_02); window.draw(@@test_ladder_02) #window.draw(Feet_Bounding_Box)
 
