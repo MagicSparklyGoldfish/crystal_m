@@ -4713,13 +4713,14 @@ include Etc
   #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
   #+                                                              Variables                                                                               +
   #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-   @@current_equipped_weapon : Weapon; @@current_equipped_weapon = @@nil_stick 
+   @@current_equipped_weapon : Weapon; @@current_equipped_weapon = @@nil_stick; @@current_upgrade_table_weapon : Weapon 
+   @@current_upgrade_table_weapon = @@nil_stick
   #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   #!                                                              Initialize                                                                              !
   #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
    def initialize(@@weapon_name : String, @@weapon_id : Int32, @@weapon_type : String, @@weapon_atk : Float64, @@weapon_element : Array(String), 
      @weapon_effect : Array(String), @@weapon_sprite : SF::Sprite, @@weapon_inventory_sprite : SF::RectangleShape, @@weapon_swing_sound : SF::Sound, 
-     @@weapon_hit_sound : SF::Sound, @@weapon_motion : String)
+     @@weapon_hit_sound : SF::Sound, @@weapon_motion : String, @@weapon_upgrade_count : Int32)
      @weapon_name = weapon_name
      @weapon_id = weapon_id
      @weapon_type = weapon_type
@@ -4731,6 +4732,7 @@ include Etc
      @weapon_swing_sound = weapon_swing_sound
      @weapon_hit_sound = weapon_hit_sound
      @weapon_motion = weapon_motion
+     @weapon_upgrade_count = weapon_upgrade_count
     end
    def weapon_name
      @weapon_name
@@ -4764,6 +4766,9 @@ include Etc
     end
    def weapon_motion
      @weapon_motion
+    end
+   def weapon_upgrade_count
+    @weapon_upgrade_count
     end
   #________________________________________________________________________________________________________________________________________________________
   #????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
@@ -4849,6 +4854,7 @@ include Etc
        end
    #........................................................Draw Weapon Upgrade Table...........................................................................
      def Weapon.display_weapon_upgrade_table(window, page, page_02, page_03)
+      window.draw(@@current_upgrade_table_weapon.weapon_inventory_sprite)
       if Weapon_Inventory_Array.size >= 1
         weapon = Weapon_Inventory_Array[0].weapon_inventory_sprite.dup
         weapon.scale(SF.vector2(0.5, 0.5))
@@ -4867,7 +4873,89 @@ include Etc
         weapon3.position = SF.vector2(540, -150);
         window.draw(weapon3)
        end
+      if Weapon_Inventory_Array.size >= 4
+        weapon4 = Weapon_Inventory_Array[3].weapon_inventory_sprite.dup
+        weapon4.scale(SF.vector2(0.5, 0.5))
+        weapon4.position = SF.vector2(590, -150);
+        window.draw(weapon4)
+       end
+      if Weapon_Inventory_Array.size >= 5
+        weapon5 = Weapon_Inventory_Array[4].weapon_inventory_sprite.dup
+        weapon5.scale(SF.vector2(0.5, 0.5))
+        weapon5.position = SF.vector2(440, -100);
+        window.draw(weapon5)
+       end
+      if Weapon_Inventory_Array.size >= 6
+        weapon6 = Weapon_Inventory_Array[5].weapon_inventory_sprite.dup
+        weapon6.scale(SF.vector2(0.5, 0.5))
+        weapon6.position = SF.vector2(490, -100);
+        window.draw(weapon6)
+       end
+      if Weapon_Inventory_Array.size >= 7
+        weapon7 = Weapon_Inventory_Array[6].weapon_inventory_sprite.dup
+        weapon7.scale(SF.vector2(0.5, 0.5))
+        weapon7.position = SF.vector2(540, -100);
+        window.draw(weapon7)
+       end
+      if Weapon_Inventory_Array.size >= 8
+        weapon8 = Weapon_Inventory_Array[7].weapon_inventory_sprite.dup
+        weapon8.scale(SF.vector2(0.5, 0.5))
+        weapon8.position = SF.vector2(590, -100);
+        window.draw(weapon8)
+       end
+      if Weapon_Inventory_Array.size >= 9
+        weapon9 = Weapon_Inventory_Array[8].weapon_inventory_sprite.dup
+        weapon9.scale(SF.vector2(0.5, 0.5))
+        weapon9.position = SF.vector2(440, -50);
+        window.draw(weapon9)
+       end
+      if Weapon_Inventory_Array.size >= 10
+        weapon10 = Weapon_Inventory_Array[9].weapon_inventory_sprite.dup
+        weapon10.scale(SF.vector2(0.5, 0.5))
+        weapon10.position = SF.vector2(490, -50);
+        window.draw(weapon10)
+       end
+      if Weapon_Inventory_Array.size >= 11
+        weapon11 = Weapon_Inventory_Array[10].weapon_inventory_sprite.dup
+        weapon11.scale(SF.vector2(0.5, 0.5))
+        weapon11.position = SF.vector2(540, -50);
+        window.draw(weapon11)
+       end
+      if Weapon_Inventory_Array.size >= 12
+        weapon12 = Weapon_Inventory_Array[11].weapon_inventory_sprite.dup
+        weapon12.scale(SF.vector2(0.5, 0.5))
+        weapon12.position = SF.vector2(590, -50);
+        window.draw(weapon12)
+       end
+      if Weapon_Inventory_Array.size >= 13
+        weapon13 = Weapon_Inventory_Array[12].weapon_inventory_sprite.dup
+        weapon13.scale(SF.vector2(0.5, 0.5))
+        weapon13.position = SF.vector2(440, 0);
+        window.draw(weapon13)
+       end      
+      if Weapon_Inventory_Array.size >= 14
+        weapon14 = Weapon_Inventory_Array[13].weapon_inventory_sprite.dup
+        weapon14.scale(SF.vector2(0.5, 0.5))
+        weapon14.position = SF.vector2(490, 0);
+        window.draw(weapon14)
+       end     
+      if Weapon_Inventory_Array.size >= 15
+        weapon15 = Weapon_Inventory_Array[14].weapon_inventory_sprite.dup
+        weapon15.scale(SF.vector2(0.5, 0.5))
+        weapon15.position = SF.vector2(540, 0);
+        window.draw(weapon15)
+       end   
+      if Weapon_Inventory_Array.size >= 16
+        weapon16 = Weapon_Inventory_Array[15].weapon_inventory_sprite.dup
+        weapon16.scale(SF.vector2(0.5, 0.5))
+        weapon16.position = SF.vector2(590, 0);
+        window.draw(weapon16)
+       end  
       end
+   #........................................................Draw Weapon Upgrade Table...........................................................................
+    def Weapon.initialize_upgrade_table
+      @@current_upgrade_table_weapon = @@nil_stick
+     end
    #.............................................................Attack Strength................................................................................
        def Weapon.attack_strength(base_attack) #@note attack strength 
         attack_strength = base_attack * @@current_equipped_weapon.weapon_atk
@@ -4880,7 +4968,7 @@ include Etc
            Weapon_Inventory_Array[slot].weapon_atk.to_s + "\n Elements: " + Weapon_Inventory_Array[slot].weapon_element[0] + ", " +
            Weapon_Inventory_Array[slot].weapon_element[1] + ", " + Weapon_Inventory_Array[slot].weapon_element[2] +
            "\n Effects: " + Weapon_Inventory_Array[slot].weapon_effect[0] + ", " + Weapon_Inventory_Array[slot].weapon_effect[1] +
-           ", " + Weapon_Inventory_Array[slot].weapon_effect[2]
+           ", " + Weapon_Inventory_Array[slot].weapon_effect[2] + "\n Upgrade Count: " + Weapon_Inventory_Array[slot].weapon_upgrade_count.to_s
          else
           Weapon_Info_Text.string = ""
         end
@@ -4908,25 +4996,36 @@ include Etc
   #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   #/                                                               Entities                                                                               /
   #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-   @@nil_stick = Weapon.new("", -1, "", 0, [""], [""], Nil_Ingot_Ore, Weapon_Rectangle_01, SYSSOUND_6, SYSSOUND_6, "")
-   @@stick = Weapon.new("Stick", 0, "stick", 1.25, ["none", "none", "none"], ["none", "none", "none"], Stick01, Weapon_Rectangle_01, WEAPSOUND_01, WEAPSOUND_02, "Swing")
-   @@zinc_stick = Weapon.new("Zinc Stick", 4, "stick", 1.5, ["empty", "none", "none"], ["empty", "none", "none"], Zinc_Stick, Zinc_Stick_Display, WEAPSOUND_01, WEAPSOUND_02, "Swing")
+   @@nil_stick = Weapon.new("", -1, "", 0, [""], [""], Nil_Ingot_Ore, Weapon_Rectangle_01, SYSSOUND_6, SYSSOUND_6, "", 0)
+   @@stick = Weapon.new("Stick", 0, "stick", 1.25, ["none", "none", "none"], ["none", "none", "none"], Stick01, Weapon_Rectangle_01, WEAPSOUND_01, WEAPSOUND_02, "Swing", 0)
+   @@zinc_stick = Weapon.new("Zinc Stick", 4, "stick", 1.5, ["empty", "none", "none"], ["empty", "none", "none"], Zinc_Stick, Zinc_Stick_Display, WEAPSOUND_01, WEAPSOUND_02, "Swing", 0)
    Weapon_Inventory_Array.push(@@zinc_stick); Weapon_Template_Array.push(@@zinc_stick)
-   @@tin_stick = Weapon.new("Tin Stick", 2, "stick", 1.75, ["empty", "none", "none"], ["empty", "none", "none"], Tin_Stick, Tin_Stick_Display, WEAPSOUND_01, WEAPSOUND_02, "Swing")
+   @@tin_stick = Weapon.new("Tin Stick", 2, "stick", 1.75, ["empty", "none", "none"], ["empty", "none", "none"], Tin_Stick, Tin_Stick_Display, WEAPSOUND_01, WEAPSOUND_02, "Swing", 0)
    Weapon_Template_Array.push(@@tin_stick)
-   @@copper_stick = Weapon.new("Copper Stick", 1, "stick", 2.5, ["empty", "none", "none"], ["empty", "none", "none"], Copper_Stick, Copper_Stick_Display, WEAPSOUND_01, WEAPSOUND_02, "Swing")
+   @@copper_stick = Weapon.new("Copper Stick", 1, "stick", 2.5, ["empty", "none", "none"], ["empty", "none", "none"], Copper_Stick, Copper_Stick_Display, WEAPSOUND_01, WEAPSOUND_02, "Swing", 0)
    Weapon_Template_Array.push(@@copper_stick)
-   @@brass_stick = Weapon.new("Brass Stick", 5, "stick", 2, ["empty", "empty", "none"], ["empty", "empty", "none"], Brass_Stick, Brass_Stick_Display, WEAPSOUND_01, WEAPSOUND_02, "Swing")
+   @@brass_stick = Weapon.new("Brass Stick", 5, "stick", 2, ["empty", "empty", "none"], ["empty", "empty", "none"], Brass_Stick, Brass_Stick_Display, WEAPSOUND_01, WEAPSOUND_02, "Swing", 0)
    Weapon_Template_Array.push(@@brass_stick)
-   @@bronze_stick = Weapon.new("Bronze Stick", 3, "stick", 2.25, ["empty", "empty", "none"], ["empty", "empty", "none"], Bronze_Stick, Bronze_Stick_Display, WEAPSOUND_01, WEAPSOUND_02, "Swing")
+   @@bronze_stick = Weapon.new("Bronze Stick", 3, "stick", 2.25, ["empty", "empty", "none"], ["empty", "empty", "none"], Bronze_Stick, Bronze_Stick_Display, WEAPSOUND_01, WEAPSOUND_02, "Swing", 0)
    Weapon_Template_Array.push(@@bronze_stick)
-   @@iron_stick = Weapon.new("Iron Stick", 6, "stick", 2.5, ["empty", "empty", "none"], ["empty", "empty", "none"], Iron_Stick, Iron_Stick_Display, WEAPSOUND_01, WEAPSOUND_02, "Swing")
+   @@iron_stick = Weapon.new("Iron Stick", 6, "stick", 2.5, ["empty", "empty", "none"], ["empty", "empty", "none"], Iron_Stick, Iron_Stick_Display, WEAPSOUND_01, WEAPSOUND_02, "Swing", 0)
    Weapon_Template_Array.push(@@iron_stick)
-   @@steel_stick = Weapon.new("Steel Stick", 7, "stick", 3, ["empty", "empty", "empty"], ["empty", "empty", "empty"], Steel_Stick, Steel_Stick_Display, WEAPSOUND_01, WEAPSOUND_02, "Swing")
+   @@steel_stick = Weapon.new("Steel Stick", 7, "stick", 3, ["empty", "empty", "empty"], ["empty", "empty", "empty"], Steel_Stick, Steel_Stick_Display, WEAPSOUND_01, WEAPSOUND_02, "Swing", 0)
    Weapon_Template_Array.push(@@steel_stick)
   #________________________________________________________________________________________________________________________________________________________
   end
-  class Upgrade_Table
+ class Upgrade_Table
+  #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  #+                                                              Variables                                                                               +
+  #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+  #________________________________________________________________________________________________________________________________________________________
+  #????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
+  #?                                                               Methods                                                                                ?
+  #????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
+    def Upgrade_Table.initialize_upgrade_table
+      Crafted_Items::Weapon.initialize_upgrade_table
+     end
     def Upgrade_Table.display_upgrade_table(window)
       window.draw(Test_Upgrade_Table_Menu)
     end

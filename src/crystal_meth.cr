@@ -2524,6 +2524,7 @@ def Window_Class.hud_keypresses(window)
          @@tab = "none"
          @@page = 1; @@page_02 = 1; @@page_03 = 1
          Player_Data::Player_Physics.mobilize_player
+         Crafted_Items::Upgrade_Table.initialize_upgrade_table
         end
       when "Stats_Menu" #---------------------------------------------------------Stats Menu
         if (x >= 1280 && x <= 1330) && (y >= 210 && y <= 260)
