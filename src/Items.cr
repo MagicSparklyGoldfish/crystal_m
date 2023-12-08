@@ -4740,18 +4740,28 @@ include Etc
       def Weapon.display_equipment_inventory(window, page)
         #----------------------Slot 1--------------------------
          if Weapon_Inventory_Array.size >= 1
-           case page
+          case page
            when 1   
             Weapon_Inventory_Array[0].weapon_inventory_sprite.position = SF.vector2(555, 310);
             window.draw(Weapon_Inventory_Array[0].weapon_inventory_sprite)
+           when 2   
+            if Weapon_Inventory_Array.size >= 19
+              Weapon_Inventory_Array[18].weapon_inventory_sprite.position = SF.vector2(555, 310);
+              window.draw(Weapon_Inventory_Array[18].weapon_inventory_sprite)
+             end
            end
          end
         #----------------------Slot 2--------------------------
          if Weapon_Inventory_Array.size >= 2
-           case page
+          case page
            when 1   
             Weapon_Inventory_Array[1].weapon_inventory_sprite.position = SF.vector2(710, 310);
             window.draw(Weapon_Inventory_Array[1].weapon_inventory_sprite)
+           when 2   
+            if Weapon_Inventory_Array.size >= 20
+              Weapon_Inventory_Array[19].weapon_inventory_sprite.position = SF.vector2(710, 310);
+              window.draw(Weapon_Inventory_Array[19].weapon_inventory_sprite)
+             end
            end
          end
         #----------------------Slot 3--------------------------
@@ -4760,6 +4770,11 @@ include Etc
            when 1   
             Weapon_Inventory_Array[2].weapon_inventory_sprite.position = SF.vector2(855, 310);
             window.draw(Weapon_Inventory_Array[2].weapon_inventory_sprite)
+           when 2   
+            if Weapon_Inventory_Array.size >= 21
+              Weapon_Inventory_Array[20].weapon_inventory_sprite.position = SF.vector2(855, 310);
+              window.draw(Weapon_Inventory_Array[20].weapon_inventory_sprite)
+             end
            end
          end
         #----------------------Slot 4--------------------------
@@ -4768,6 +4783,11 @@ include Etc
            when 1   
             Weapon_Inventory_Array[3].weapon_inventory_sprite.position = SF.vector2(1005, 310);
             window.draw(Weapon_Inventory_Array[3].weapon_inventory_sprite)
+           when 2   
+            if Weapon_Inventory_Array.size >= 22
+              Weapon_Inventory_Array[21].weapon_inventory_sprite.position = SF.vector2(1005, 310);
+              window.draw(Weapon_Inventory_Array[21].weapon_inventory_sprite)
+             end
            end
          end
         #----------------------Slot 5--------------------------
@@ -4776,6 +4796,11 @@ include Etc
            when 1   
             Weapon_Inventory_Array[4].weapon_inventory_sprite.position = SF.vector2(1155, 310);
             window.draw(Weapon_Inventory_Array[4].weapon_inventory_sprite)
+           when 2   
+            if Weapon_Inventory_Array.size >= 23
+              Weapon_Inventory_Array[22].weapon_inventory_sprite.position = SF.vector2(1155, 310);
+              window.draw(Weapon_Inventory_Array[22].weapon_inventory_sprite)
+             end
            end
          end
         #----------------------Slot 6--------------------------
@@ -4784,6 +4809,11 @@ include Etc
            when 1   
             Weapon_Inventory_Array[5].weapon_inventory_sprite.position = SF.vector2(1305, 310);
             window.draw(Weapon_Inventory_Array[5].weapon_inventory_sprite)
+           when 2   
+            if Weapon_Inventory_Array.size >= 24
+              Weapon_Inventory_Array[23].weapon_inventory_sprite.position = SF.vector2(1305, 310);
+              window.draw(Weapon_Inventory_Array[23].weapon_inventory_sprite)
+             end
            end
          end
         #----------------------Slot 7--------------------------
@@ -4792,6 +4822,11 @@ include Etc
            when 1   
             Weapon_Inventory_Array[6].weapon_inventory_sprite.position = SF.vector2(555, 460);
             window.draw(Weapon_Inventory_Array[6].weapon_inventory_sprite)
+           when 2   
+            if Weapon_Inventory_Array.size >= 25
+              Weapon_Inventory_Array[24].weapon_inventory_sprite.position = SF.vector2(555, 460);
+              window.draw(Weapon_Inventory_Array[24].weapon_inventory_sprite)
+             end
            end
          end
         #----------------------Slot 8--------------------------
@@ -4800,6 +4835,11 @@ include Etc
            when 1   
             Weapon_Inventory_Array[7].weapon_inventory_sprite.position = SF.vector2(710, 460);
             window.draw(Weapon_Inventory_Array[7].weapon_inventory_sprite)
+           when 2   
+            if Weapon_Inventory_Array.size >= 26
+              Weapon_Inventory_Array[25].weapon_inventory_sprite.position = SF.vector2(710, 460);
+              window.draw(Weapon_Inventory_Array[25].weapon_inventory_sprite)
+             end
            end
          end
         #----------------------Slot 9--------------------------
@@ -4808,6 +4848,11 @@ include Etc
            when 1   
             Weapon_Inventory_Array[8].weapon_inventory_sprite.position = SF.vector2(855, 460);
             window.draw(Weapon_Inventory_Array[8].weapon_inventory_sprite)
+           when 2   
+            if Weapon_Inventory_Array.size >= 27
+              Weapon_Inventory_Array[26].weapon_inventory_sprite.position = SF.vector2(855, 460);
+              window.draw(Weapon_Inventory_Array[26].weapon_inventory_sprite)
+             end
            end
          end
         #----------------------Slot 10-------------------------
@@ -4816,6 +4861,11 @@ include Etc
            when 1   
             Weapon_Inventory_Array[9].weapon_inventory_sprite.position = SF.vector2(1005, 460);
             window.draw(Weapon_Inventory_Array[9].weapon_inventory_sprite)
+           when 2   
+            if Weapon_Inventory_Array.size >= 28
+              Weapon_Inventory_Array[27].weapon_inventory_sprite.position = SF.vector2(1005, 460);
+              window.draw(Weapon_Inventory_Array[27].weapon_inventory_sprite)
+             end
            end
          end
         #----------------------Slot 11-------------------------
@@ -4824,6 +4874,11 @@ include Etc
            when 1   
             Weapon_Inventory_Array[10].weapon_inventory_sprite.position = SF.vector2(1155, 460);
             window.draw(Weapon_Inventory_Array[10].weapon_inventory_sprite)
+           when 2   
+            if Weapon_Inventory_Array.size >= 29
+              Weapon_Inventory_Array[28].weapon_inventory_sprite.position = SF.vector2(1155, 460);
+              window.draw(Weapon_Inventory_Array[28].weapon_inventory_sprite)
+             end
            end
          end
         #----------------------Slot 12-------------------------
@@ -4832,6 +4887,11 @@ include Etc
            when 1   
             Weapon_Inventory_Array[11].weapon_inventory_sprite.position = SF.vector2(1305, 460);
             window.draw(Weapon_Inventory_Array[11].weapon_inventory_sprite)
+           when 2   
+            if Weapon_Inventory_Array.size >= 30
+              Weapon_Inventory_Array[29].weapon_inventory_sprite.position = SF.vector2(1305, 460);
+              window.draw(Weapon_Inventory_Array[29].weapon_inventory_sprite)
+             end
            end
          end
         #----------------------Slot 13-------------------------
@@ -4840,6 +4900,11 @@ include Etc
            when 1   
             Weapon_Inventory_Array[12].weapon_inventory_sprite.position = SF.vector2(555, 610);
             window.draw(Weapon_Inventory_Array[12].weapon_inventory_sprite)
+           when 2   
+            if Weapon_Inventory_Array.size >= 31
+              Weapon_Inventory_Array[30].weapon_inventory_sprite.position = SF.vector2(555, 610);
+              window.draw(Weapon_Inventory_Array[30].weapon_inventory_sprite)
+             end
            end
          end
         #----------------------Slot 14-------------------------
@@ -4848,6 +4913,11 @@ include Etc
            when 1   
             Weapon_Inventory_Array[13].weapon_inventory_sprite.position = SF.vector2(710, 610);
             window.draw(Weapon_Inventory_Array[13].weapon_inventory_sprite)
+           when 2   
+            if Weapon_Inventory_Array.size >= 32
+              Weapon_Inventory_Array[31].weapon_inventory_sprite.position = SF.vector2(710, 610);
+              window.draw(Weapon_Inventory_Array[31].weapon_inventory_sprite)
+             end
            end
          end
         #----------------------Slot 15-------------------------
@@ -4856,6 +4926,11 @@ include Etc
            when 1   
             Weapon_Inventory_Array[14].weapon_inventory_sprite.position = SF.vector2(855, 610);
             window.draw(Weapon_Inventory_Array[14].weapon_inventory_sprite)
+           when 2   
+            if Weapon_Inventory_Array.size >= 33
+              Weapon_Inventory_Array[32].weapon_inventory_sprite.position = SF.vector2(855, 610);
+              window.draw(Weapon_Inventory_Array[32].weapon_inventory_sprite)
+             end
            end
          end
         #----------------------Slot 16-------------------------
@@ -4864,22 +4939,37 @@ include Etc
            when 1   
             Weapon_Inventory_Array[15].weapon_inventory_sprite.position = SF.vector2(1005, 610);
             window.draw(Weapon_Inventory_Array[15].weapon_inventory_sprite)
+           when 2   
+            if Weapon_Inventory_Array.size >= 34
+              Weapon_Inventory_Array[33].weapon_inventory_sprite.position = SF.vector2(1005, 610);
+              window.draw(Weapon_Inventory_Array[33].weapon_inventory_sprite)
+             end
            end
          end
-        #----------------------Slot 16-------------------------
+        #----------------------Slot 17-------------------------
          if Weapon_Inventory_Array.size >= 17
            case page
            when 1   
             Weapon_Inventory_Array[16].weapon_inventory_sprite.position = SF.vector2(1155, 610);
             window.draw(Weapon_Inventory_Array[16].weapon_inventory_sprite)
+           when 2   
+            if Weapon_Inventory_Array.size >= 35
+              Weapon_Inventory_Array[34].weapon_inventory_sprite.position = SF.vector2(1155, 610);
+              window.draw(Weapon_Inventory_Array[34].weapon_inventory_sprite)
+             end
            end
          end
-        #----------------------Slot 17-------------------------
+        #----------------------Slot 18-------------------------
          if Weapon_Inventory_Array.size >= 18
            case page
            when 1   
             Weapon_Inventory_Array[17].weapon_inventory_sprite.position = SF.vector2(1305, 610);
             window.draw(Weapon_Inventory_Array[17].weapon_inventory_sprite)
+           when 2   
+            if Weapon_Inventory_Array.size >= 36
+              Weapon_Inventory_Array[35].weapon_inventory_sprite.position = SF.vector2(1305, 610);
+              window.draw(Weapon_Inventory_Array[35].weapon_inventory_sprite)
+             end
            end
          end
        end
