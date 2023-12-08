@@ -2557,6 +2557,10 @@ def Window_Class.hud_keypresses(window)
            weapon = 0
           when 2
            weapon = 16
+          when 3
+           weapon = 32
+          when 4
+           weapon = 48
            end
            Crafted_Items::Weapon.choose_upgrade_weapon(weapon)
          end
@@ -2567,6 +2571,10 @@ def Window_Class.hud_keypresses(window)
             weapon = 1
           when 2
             weapon = 17
+          when 3
+            weapon = 33
+          when 4
+            weapon = 49
           end
           Crafted_Items::Weapon.choose_upgrade_weapon(weapon)
          end
@@ -2577,6 +2585,10 @@ def Window_Class.hud_keypresses(window)
             weapon = 2
            when 2
             weapon = 18
+           when 3
+            weapon = 34
+           when 4
+            weapon = 50
           end
           Crafted_Items::Weapon.choose_upgrade_weapon(weapon)
          end
@@ -2587,6 +2599,10 @@ def Window_Class.hud_keypresses(window)
             weapon = 3
            when 2
             weapon = 19
+           when 3
+            weapon = 35
+           when 4
+            weapon = 51
            end
           Crafted_Items::Weapon.choose_upgrade_weapon(weapon)
          end
@@ -2595,8 +2611,12 @@ def Window_Class.hud_keypresses(window)
           case @@page
            when 1
             weapon = 4
-          when 2
-            weapon = 20
+           when 2
+             weapon = 20
+           when 3
+             weapon = 36
+           when 4
+             weapon = 52
           end
           Crafted_Items::Weapon.choose_upgrade_weapon(weapon)
          end
@@ -2607,6 +2627,10 @@ def Window_Class.hud_keypresses(window)
             weapon = 5
            when 2
             weapon = 21
+           when 3
+            weapon = 37
+           when 4
+            weapon = 53
            end
           Crafted_Items::Weapon.choose_upgrade_weapon(weapon)
          end
@@ -2617,6 +2641,8 @@ def Window_Class.hud_keypresses(window)
             weapon = 6
            when 2
             weapon = 22
+           when 3
+            weapon = 38
            end
           Crafted_Items::Weapon.choose_upgrade_weapon(weapon)
          end
@@ -2627,6 +2653,8 @@ def Window_Class.hud_keypresses(window)
             weapon = 7
            when 2
             weapon = 23
+           when 3
+            weapon = 39
            end
           Crafted_Items::Weapon.choose_upgrade_weapon(weapon)
          end
@@ -2637,6 +2665,8 @@ def Window_Class.hud_keypresses(window)
             weapon = 8
            when 2 
             weapon = 24
+           when 3
+            weapon = 40
            end
           Crafted_Items::Weapon.choose_upgrade_weapon(weapon)
          end
@@ -2647,6 +2677,8 @@ def Window_Class.hud_keypresses(window)
             weapon = 9
            when 2
             weapon = 25
+           when 3
+            weapon = 41
            end
           Crafted_Items::Weapon.choose_upgrade_weapon(weapon)
          end
@@ -2657,6 +2689,8 @@ def Window_Class.hud_keypresses(window)
             weapon = 10
            when 2
             weapon = 26
+           when 3
+            weapon = 42
            end
           Crafted_Items::Weapon.choose_upgrade_weapon(weapon)
          end
@@ -2667,6 +2701,8 @@ def Window_Class.hud_keypresses(window)
             weapon = 11
            when 2
             weapon = 27
+           when 3
+            weapon = 43
            end
           Crafted_Items::Weapon.choose_upgrade_weapon(weapon)
          end
@@ -2677,6 +2713,8 @@ def Window_Class.hud_keypresses(window)
             weapon = 12
            when 2
             weapon = 28
+           when 3
+            weapon = 44
            end
           Crafted_Items::Weapon.choose_upgrade_weapon(weapon)
          end
@@ -2687,6 +2725,8 @@ def Window_Class.hud_keypresses(window)
             weapon = 13
            when 2
             weapon = 29
+           when 3
+            weapon = 45
            end
           Crafted_Items::Weapon.choose_upgrade_weapon(weapon)
          end
@@ -2697,6 +2737,8 @@ def Window_Class.hud_keypresses(window)
             weapon = 14
            when 2
             weapon = 30
+           when 3
+            weapon = 46
            end
           Crafted_Items::Weapon.choose_upgrade_weapon(weapon)
          end
@@ -2707,6 +2749,8 @@ def Window_Class.hud_keypresses(window)
             weapon = 15
            when 2
             weapon = 31
+           when 3
+            weapon = 47
            end
           Crafted_Items::Weapon.choose_upgrade_weapon(weapon)
          end
