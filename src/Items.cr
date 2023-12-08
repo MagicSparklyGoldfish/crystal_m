@@ -1510,7 +1510,7 @@ include Equipment
       if slot < Owned_Ingot_Array.size
       @@selected_ingot = Owned_Ingot_Array[slot]
       ingot = Owned_Ingot_Array[slot].id
-      Equipment::Weapon_Crafting.choose_ingot(ingot)
+      Crafted_Items::Forge.choose_ingot(ingot)
       All_Audio::SFX.metal_hit_01
       else
         All_Audio::SFX.light_bonk
@@ -5083,7 +5083,10 @@ include Etc
        weapon15 = Nil_Stick_Display
        weapon16 = Nil_Stick_Display
       #______________________________________________________________
-      window.draw(@@current_upgrade_table_weapon.weapon_inventory_sprite)
+      current_weapon_upgrade_display = @@current_upgrade_table_weapon.weapon_inventory_sprite.dup
+      current_weapon_upgrade_display.position = SF.vector2(700, -175)
+      current_weapon_upgrade_display.scale(SF.vector2(1.5, 1.5))
+      window.draw(current_weapon_upgrade_display)
       if Weapon_Inventory_Array.size >= 1
        case page
          when 1
@@ -5385,6 +5388,12 @@ include Etc
     def Weapon.initialize_upgrade_table
       @@current_upgrade_table_weapon = @@nil_stick
      end
+   #..........................................................Choose Upgrade Weapon.............................................................................
+    def Weapon.choose_upgrade_weapon(weapon)
+      if Weapon_Inventory_Array.size < weapon
+     @@current_upgrade_table_weapon = Weapon_Inventory_Array[weapon]
+      end
+    end
    #.............................................................Attack Strength................................................................................
        def Weapon.attack_strength(base_attack) #@note attack strength 
         attack_strength = base_attack * @@current_equipped_weapon.weapon_atk
@@ -5413,6 +5422,7 @@ include Etc
         @@current_equipped_weapon.hit_sound.play
        end
        def Weapon.forge_weapon(weapon)
+        if Weapon_Inventory_Array.size < 54
         s = Weapon_Template_Array.size; i = 0
         while s > i
           if weapon == Weapon_Template_Array[i].weapon_id 
@@ -5420,6 +5430,9 @@ include Etc
           end
           i += 1
         end
+      else
+        All_Audio::SFX.char_create_up
+      end
        end
   #________________________________________________________________________________________________________________________________________________________
   #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -5462,7 +5475,79 @@ include Etc
       window.draw(up_arrow_01); window.draw(down_arrow_01)
     end
   end
+ class Mold
+   def initialize(name : String, id : Int32, is_owned : Bool, material_cost : Int32)
+     @name = name
+     @id = id
+     @is_owned = is_owned
+     @material_cost = material_cost
+    end
+   def name
+     @name
+    end
+   def id
+     @id
+    end
+   def is_owned
+     @is_owned
+    end
+   def material
+     @material
+    end
+    @@stick_mold = Mold.new("Stick Mold", 0, true, 3)
+  end
+ class Forge<Mold
+    @@chosen_ingot : Int32; @@chosen_ingot = 0; @@chosen_mold : Mold; @@chosen_mold = @@stick_mold
+    @@craft_weapon : Int32; @@craft_weapon = 0
+    def Forge.choose_ingot(ingot)
+      @@chosen_ingot = ingot
+    end 
+    def Forge.forge_weapon  #@todo moke forging use up ingots
+      weapon = @@craft_weapon
+      Crafted_Items::Weapon.forge_weapon(weapon)
+    end
+    def Forge.diplay_forge(window)
+        window.draw(Test_Forge_Menu)
+        Etc::Inventory_Ingot.display_forge_ingots(window)
+        Forge.current_mold(window)
+    end
+    def Forge.current_mold(window)
+      weapon = Nil_Stick_Display.dup
+      if  @@chosen_mold == @@stick_mold
+        case @@chosen_ingot
+         when 1
+          weapon = Copper_Stick_Display.dup
+          @@craft_weapon = 1      
+         when 2
+          weapon = Tin_Stick_Display.dup
+          @@craft_weapon = 2
+         when 3
+          weapon = Bronze_Stick_Display.dup
+          @@craft_weapon = 3
+         when 4
+          weapon = Zinc_Stick_Display.dup
+          @@craft_weapon = 4
+         when 5
+          weapon = Brass_Stick_Display.dup
+          @@craft_weapon = 5
+        when 6
+          weapon = Iron_Stick_Display.dup
+          @@craft_weapon = 6
+        when 7
+          weapon = Steel_Stick_Display.dup
+          @@craft_weapon = 7
+       end; end
+       weapon.position = SF.vector2(250, 150)
+       window.draw(weapon)
+    end
+    def Forge.choose_mold(mold)
+      if mold == 1
+        @@chosen_mold = @@stick_mold
+      end
+  end
 end
+end
+
 # if time >= SF.seconds(0.35) && @@attacking == true
 #   Weapon.play_hit_sound
 #  # this.current_hp - 10

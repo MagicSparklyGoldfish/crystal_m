@@ -695,7 +695,7 @@ def Window_Class.ladder_test_ore_map
     Harvestables::Ore.draw_ores(window)
     Player_Data::Player_Physics.gravity(@@player_character_rendered_model, window)
     if @@popup == "forge"
-      Equipment::Weapon_Crafting.diplay_forge(window)
+      Crafted_Items::Forge.diplay_forge(window)
       if @@tab == "mold"
         window.draw(Forge_Mold_Option_01)
       end 
@@ -1920,7 +1920,7 @@ def Window_Class.hud_keypresses(window)
         end
         if (x >= 805 && x <= 960) && (y >= 555 && y <= 630) #forge
           All_Audio::SFX.forge_01
-          Equipment::Weapon_Crafting.forge_weapon
+          Crafted_Items::Forge.forge_weapon
         end
         if (x >= 1010 && x <= 1120) && (y >= 160 && y <= 230) #molds
           if @@tab != "mold"
@@ -1934,7 +1934,7 @@ def Window_Class.hud_keypresses(window)
         if (x >= 1010 && x <= 1120) && (y >= 230 && y <= 300) #stick mold
           All_Audio::SFX.light_bonk
           mold = 1
-          Equipment::Weapon_Crafting.choose_mold(mold)
+          Crafted_Items::Forge.choose_mold(mold)
         end
         if (x >= 1125 && x <= 1150) && (y >= 110 && y <= 140) #exit
           @@popup = "none"
