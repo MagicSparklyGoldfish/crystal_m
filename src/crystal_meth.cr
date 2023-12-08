@@ -1648,7 +1648,7 @@ def Window_Class.hud_keypresses(window)
              All_Audio::SFX.char_create_down
            end
          when "Equipment"
-          if @@page < 4
+          if @@page < 3
             @@page += 1
           All_Audio::SFX.select1
           else
