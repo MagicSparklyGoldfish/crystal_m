@@ -5390,8 +5390,11 @@ include Etc
      end
    #..........................................................Choose Upgrade Weapon.............................................................................
     def Weapon.choose_upgrade_weapon(weapon)
-      if Weapon_Inventory_Array.size < weapon
-     @@current_upgrade_table_weapon = Weapon_Inventory_Array[weapon]
+      if Weapon_Inventory_Array.size > weapon
+        All_Audio::SFX.light_bonk
+        @@current_upgrade_table_weapon = Weapon_Inventory_Array[weapon]
+      else
+        All_Audio::SFX.char_create_up
       end
     end
    #.............................................................Attack Strength................................................................................

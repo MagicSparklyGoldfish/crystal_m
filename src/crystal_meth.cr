@@ -2549,7 +2549,167 @@ def Window_Class.hud_keypresses(window)
           else
             All_Audio::SFX.char_create_up
           end
-        end
+         end
+        if (x >= 405 && x <= 455) && (y >= 160 && y <= 230)#------select weapon
+          weapon = 0
+         case @@page
+          when 1
+           weapon = 0
+          when 2
+           weapon = 16
+           end
+           Crafted_Items::Weapon.choose_upgrade_weapon(weapon)
+         end
+        if (x >= 455 && x <= 505) && (y >= 160 && y <= 230)
+          weapon = 0
+          case @@page
+           when 1
+            weapon = 1
+          when 2
+            weapon = 17
+          end
+          Crafted_Items::Weapon.choose_upgrade_weapon(weapon)
+         end
+        if (x >= 505 && x <= 555) && (y >= 160 && y <= 230)
+          weapon = 0
+          case @@page
+           when 1
+            weapon = 2
+           when 2
+            weapon = 18
+          end
+          Crafted_Items::Weapon.choose_upgrade_weapon(weapon)
+         end
+        if (x >= 555 && x <= 605) && (y >= 160 && y <= 230)
+          weapon = 0
+          case @@page
+           when 1
+            weapon = 3
+           when 2
+            weapon = 19
+           end
+          Crafted_Items::Weapon.choose_upgrade_weapon(weapon)
+         end
+        if (x >= 405 && x <= 455) && (y >= 230 && y <= 300)
+          weapon = 0
+          case @@page
+           when 1
+            weapon = 4
+          when 2
+            weapon = 20
+          end
+          Crafted_Items::Weapon.choose_upgrade_weapon(weapon)
+         end
+        if (x >= 455 && x <= 505) && (y >= 230 && y <= 300)
+          weapon = 0
+          case @@page
+           when 1
+            weapon = 5
+           when 2
+            weapon = 21
+           end
+          Crafted_Items::Weapon.choose_upgrade_weapon(weapon)
+         end
+        if (x >= 505 && x <= 555) && (y >= 230 && y <= 300)
+          weapon = 0
+          case @@page
+           when 1
+            weapon = 6
+           when 2
+            weapon = 22
+           end
+          Crafted_Items::Weapon.choose_upgrade_weapon(weapon)
+         end
+        if (x >= 555 && x <= 605) && (y >= 230 && y <= 300)
+          weapon = 0
+          case @@page
+           when 1
+            weapon = 7
+           when 2
+            weapon = 23
+           end
+          Crafted_Items::Weapon.choose_upgrade_weapon(weapon)
+         end
+        if (x >= 405 && x <= 455) && (y >= 300 && y <= 370)
+          weapon = 0
+          case @@page
+           when 1
+            weapon = 8
+           when 2 
+            weapon = 24
+           end
+          Crafted_Items::Weapon.choose_upgrade_weapon(weapon)
+         end
+        if (x >= 455 && x <= 505) && (y >= 300 && y <= 370)
+          weapon = 0
+          case @@page
+           when 1
+            weapon = 9
+           when 2
+            weapon = 25
+           end
+          Crafted_Items::Weapon.choose_upgrade_weapon(weapon)
+         end
+        if (x >= 505 && x <= 555) && (y >= 300 && y <= 370)
+          weapon = 0
+          case @@page
+           when 1
+            weapon = 10
+           when 2
+            weapon = 26
+           end
+          Crafted_Items::Weapon.choose_upgrade_weapon(weapon)
+         end
+        if (x >= 555 && x <= 605) && (y >= 300 && y <= 370)
+          weapon = 0
+          case @@page
+           when 1
+            weapon = 11
+           when 2
+            weapon = 27
+           end
+          Crafted_Items::Weapon.choose_upgrade_weapon(weapon)
+         end
+        if (x >= 405 && x <= 455) && (y >= 370 && y <= 440)
+          weapon = 0
+          case @@page
+           when 1
+            weapon = 12
+           when 2
+            weapon = 28
+           end
+          Crafted_Items::Weapon.choose_upgrade_weapon(weapon)
+         end
+        if (x >= 455 && x <= 505) && (y >= 370 && y <= 440)
+          weapon = 0
+          case @@page
+           when 1
+            weapon = 13
+           when 2
+            weapon = 29
+           end
+          Crafted_Items::Weapon.choose_upgrade_weapon(weapon)
+         end
+        if (x >= 505 && x <= 555) && (y >= 370 && y <= 440)
+          weapon = 0
+          case @@page
+           when 1
+            weapon = 14
+           when 2
+            weapon = 30
+           end
+          Crafted_Items::Weapon.choose_upgrade_weapon(weapon)
+         end
+        if (x >= 555 && x <= 605) && (y >= 370 && y <= 440)
+          weapon = 0
+          case @@page
+           when 1
+            weapon = 15
+           when 2
+            weapon = 31
+           end
+          Crafted_Items::Weapon.choose_upgrade_weapon(weapon)
+         end
       when "Stats_Menu" #---------------------------------------------------------Stats Menu
         if (x >= 1280 && x <= 1330) && (y >= 210 && y <= 260)
           @@popup = "none"
