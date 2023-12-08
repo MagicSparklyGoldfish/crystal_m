@@ -4794,6 +4794,94 @@ include Etc
             window.draw(Weapon_Inventory_Array[6].weapon_inventory_sprite)
            end
          end
+        #----------------------Slot 8--------------------------
+         if Weapon_Inventory_Array.size >= 8
+           case page
+           when 1   
+            Weapon_Inventory_Array[7].weapon_inventory_sprite.position = SF.vector2(710, 460);
+            window.draw(Weapon_Inventory_Array[7].weapon_inventory_sprite)
+           end
+         end
+        #----------------------Slot 9--------------------------
+         if Weapon_Inventory_Array.size >= 9
+           case page
+           when 1   
+            Weapon_Inventory_Array[8].weapon_inventory_sprite.position = SF.vector2(855, 460);
+            window.draw(Weapon_Inventory_Array[8].weapon_inventory_sprite)
+           end
+         end
+        #----------------------Slot 10-------------------------
+         if Weapon_Inventory_Array.size >= 10
+           case page
+           when 1   
+            Weapon_Inventory_Array[9].weapon_inventory_sprite.position = SF.vector2(1005, 460);
+            window.draw(Weapon_Inventory_Array[9].weapon_inventory_sprite)
+           end
+         end
+        #----------------------Slot 11-------------------------
+         if Weapon_Inventory_Array.size >= 11
+           case page
+           when 1   
+            Weapon_Inventory_Array[10].weapon_inventory_sprite.position = SF.vector2(1155, 460);
+            window.draw(Weapon_Inventory_Array[10].weapon_inventory_sprite)
+           end
+         end
+        #----------------------Slot 12-------------------------
+         if Weapon_Inventory_Array.size >= 12
+           case page
+           when 1   
+            Weapon_Inventory_Array[11].weapon_inventory_sprite.position = SF.vector2(1305, 460);
+            window.draw(Weapon_Inventory_Array[11].weapon_inventory_sprite)
+           end
+         end
+        #----------------------Slot 13-------------------------
+         if Weapon_Inventory_Array.size >= 13
+           case page
+           when 1   
+            Weapon_Inventory_Array[12].weapon_inventory_sprite.position = SF.vector2(555, 610);
+            window.draw(Weapon_Inventory_Array[12].weapon_inventory_sprite)
+           end
+         end
+        #----------------------Slot 14-------------------------
+         if Weapon_Inventory_Array.size >= 14
+           case page
+           when 1   
+            Weapon_Inventory_Array[13].weapon_inventory_sprite.position = SF.vector2(710, 610);
+            window.draw(Weapon_Inventory_Array[13].weapon_inventory_sprite)
+           end
+         end
+        #----------------------Slot 15-------------------------
+         if Weapon_Inventory_Array.size >= 15
+           case page
+           when 1   
+            Weapon_Inventory_Array[14].weapon_inventory_sprite.position = SF.vector2(855, 610);
+            window.draw(Weapon_Inventory_Array[14].weapon_inventory_sprite)
+           end
+         end
+        #----------------------Slot 16-------------------------
+         if Weapon_Inventory_Array.size >= 16
+           case page
+           when 1   
+            Weapon_Inventory_Array[15].weapon_inventory_sprite.position = SF.vector2(1005, 610);
+            window.draw(Weapon_Inventory_Array[15].weapon_inventory_sprite)
+           end
+         end
+        #----------------------Slot 16-------------------------
+         if Weapon_Inventory_Array.size >= 17
+           case page
+           when 1   
+            Weapon_Inventory_Array[16].weapon_inventory_sprite.position = SF.vector2(1155, 610);
+            window.draw(Weapon_Inventory_Array[16].weapon_inventory_sprite)
+           end
+         end
+        #----------------------Slot 17-------------------------
+         if Weapon_Inventory_Array.size >= 18
+           case page
+           when 1   
+            Weapon_Inventory_Array[17].weapon_inventory_sprite.position = SF.vector2(1305, 610);
+            window.draw(Weapon_Inventory_Array[17].weapon_inventory_sprite)
+           end
+         end
        end
    #........................................................Draw Weapon Upgrade Table...........................................................................
      def Weapon.display_weapon_upgrade_table(window, page, page_02, page_03)
