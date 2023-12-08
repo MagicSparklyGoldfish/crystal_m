@@ -2543,7 +2543,7 @@ def Window_Class.hud_keypresses(window)
           end
          end
         if (x >= 280 && x <= 330) && (y >= 330 && y <= 425) #--------up arrow 1
-          if @@page < 3
+          if @@page < 4
             All_Audio::SFX.light_bonk
           @@page += 1
           else

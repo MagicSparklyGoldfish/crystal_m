@@ -5096,6 +5096,10 @@ include Etc
           if Weapon_Inventory_Array.size >= 33
           weapon = Weapon_Inventory_Array[32].weapon_inventory_sprite.dup
           end
+        when 4
+          if Weapon_Inventory_Array.size >= 49
+          weapon = Weapon_Inventory_Array[48].weapon_inventory_sprite.dup
+          end
          end
            weapon.scale(SF.vector2(0.5, 0.5))
            weapon.position = SF.vector2(440, -150);
@@ -5112,6 +5116,10 @@ include Etc
         when 3
           if Weapon_Inventory_Array.size >= 34
           weapon2 = Weapon_Inventory_Array[33].weapon_inventory_sprite.dup
+          end
+        when 4
+          if Weapon_Inventory_Array.size >= 50
+          weapon2 = Weapon_Inventory_Array[49].weapon_inventory_sprite.dup
           end
          end
         weapon2.scale(SF.vector2(0.5, 0.5))
@@ -5130,6 +5138,10 @@ include Etc
           if Weapon_Inventory_Array.size >= 35
           weapon3 = Weapon_Inventory_Array[34].weapon_inventory_sprite.dup
           end
+        when 4
+          if Weapon_Inventory_Array.size >= 51
+          weapon3 = Weapon_Inventory_Array[50].weapon_inventory_sprite.dup
+          end
         end
         weapon3.scale(SF.vector2(0.5, 0.5))
         weapon3.position = SF.vector2(540, -150);
@@ -5146,6 +5158,10 @@ include Etc
          when 3
            if Weapon_Inventory_Array.size >= 36
            weapon4 = Weapon_Inventory_Array[35].weapon_inventory_sprite.dup
+           end
+         when 4
+           if Weapon_Inventory_Array.size >= 52
+           weapon4 = Weapon_Inventory_Array[51].weapon_inventory_sprite.dup
            end
         end
         weapon4.scale(SF.vector2(0.5, 0.5))
@@ -5164,6 +5180,10 @@ include Etc
            if Weapon_Inventory_Array.size >= 37
            weapon5 = Weapon_Inventory_Array[36].weapon_inventory_sprite.dup
            end
+         when 4
+           if Weapon_Inventory_Array.size >= 53
+           weapon5 = Weapon_Inventory_Array[52].weapon_inventory_sprite.dup
+           end
         end
         weapon5.scale(SF.vector2(0.5, 0.5))
         weapon5.position = SF.vector2(440, -100);
@@ -5180,6 +5200,10 @@ include Etc
         when 3
           if Weapon_Inventory_Array.size >= 38
           weapon6 = Weapon_Inventory_Array[37].weapon_inventory_sprite.dup
+          end
+        when 4
+          if Weapon_Inventory_Array.size >= 54
+          weapon6 = Weapon_Inventory_Array[53].weapon_inventory_sprite.dup
           end
          end
         weapon6.scale(SF.vector2(0.5, 0.5))
