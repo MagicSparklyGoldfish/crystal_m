@@ -1639,13 +1639,21 @@ def Window_Class.hud_keypresses(window)
           end
          end
         if (x >= 400 && x <= 450) && (y >= 550 && y <= 640) #----page up
-          if @@page < 6
+        case @@tab
+         when "Etc"
+           if @@page < 6
+             @@page += 1
+           All_Audio::SFX.select1
+           else
+             All_Audio::SFX.char_create_down
+           end
+         when "Equipment"
+          if @@page < 4
             @@page += 1
           All_Audio::SFX.select1
           else
             All_Audio::SFX.char_create_down
-          end
-         end
+         end; end; end
         if (x >= 800 && x <= 1000) && (y >= 160 && y <= 230)
           All_Audio::SFX.select1
           Window_Class.weapon_tab(window)

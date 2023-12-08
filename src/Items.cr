@@ -4749,6 +4749,11 @@ include Etc
               Weapon_Inventory_Array[18].weapon_inventory_sprite.position = SF.vector2(555, 310);
               window.draw(Weapon_Inventory_Array[18].weapon_inventory_sprite)
              end
+           when 3   
+            if Weapon_Inventory_Array.size >= 37
+              Weapon_Inventory_Array[36].weapon_inventory_sprite.position = SF.vector2(1305, 610);
+              window.draw(Weapon_Inventory_Array[36].weapon_inventory_sprite)
+             end
            end
          end
         #----------------------Slot 2--------------------------
