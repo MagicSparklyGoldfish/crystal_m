@@ -66,64 +66,7 @@ module Equipment
       Equipment.check_gem_element_current_weapon
       player.draw(@@current_weapon_object.sprite)
     end
-   def Equipment.display_equipment_inventory(window, page)
-    #----------------------Slot 1--------------------------
-     if WEAPON_INVENTORY_ARRAY.size >= 1
-       case page
-       when 1   
-        WEAPON_INVENTORY_ARRAY[0].rectangle.position = SF.vector2(555, 310);
-        window.draw(WEAPON_INVENTORY_ARRAY[0].rectangle)
-       end
-     end
-    #----------------------Slot 2--------------------------
-     if WEAPON_INVENTORY_ARRAY.size >= 2
-       case page
-       when 1   
-        WEAPON_INVENTORY_ARRAY[1].rectangle.position = SF.vector2(710, 310);
-        window.draw(WEAPON_INVENTORY_ARRAY[1].rectangle)
-       end
-     end
-    #----------------------Slot 3--------------------------
-     if WEAPON_INVENTORY_ARRAY.size >= 3
-       case page
-       when 1   
-        WEAPON_INVENTORY_ARRAY[2].rectangle.position = SF.vector2(855, 310);
-        window.draw(WEAPON_INVENTORY_ARRAY[2].rectangle)
-       end
-     end
-    #----------------------Slot 4--------------------------
-     if WEAPON_INVENTORY_ARRAY.size >= 4
-       case page
-       when 1   
-        WEAPON_INVENTORY_ARRAY[3].rectangle.position = SF.vector2(1005, 310);
-        window.draw(WEAPON_INVENTORY_ARRAY[3].rectangle)
-       end
-     end
-    #----------------------Slot 5--------------------------
-     if WEAPON_INVENTORY_ARRAY.size >= 5
-       case page
-       when 1   
-        WEAPON_INVENTORY_ARRAY[4].rectangle.position = SF.vector2(1155, 310);
-        window.draw(WEAPON_INVENTORY_ARRAY[4].rectangle)
-       end
-     end
-    #----------------------Slot 6--------------------------
-     if WEAPON_INVENTORY_ARRAY.size >= 6
-       case page
-       when 1   
-        WEAPON_INVENTORY_ARRAY[5].rectangle.position = SF.vector2(1305, 310);
-        window.draw(WEAPON_INVENTORY_ARRAY[5].rectangle)
-       end
-     end
-    #----------------------Slot 7--------------------------
-    if WEAPON_INVENTORY_ARRAY.size >= 7
-      case page
-      when 1   
-       WEAPON_INVENTORY_ARRAY[6].rectangle.position = SF.vector2(555, 460);
-       window.draw(WEAPON_INVENTORY_ARRAY[6].rectangle)
-      end
-    end
-   end
+
    def Equipment.attack_strength(base_attack) #@note attack strength 
     attack_strength = base_attack + @@current_weapon_object.atk_power
     Harvestables::Ore.set_attack_strength(attack_strength)
@@ -5146,7 +5089,7 @@ include Etc
         window.draw(weapon16)
        end  
       end
-   #........................................................Draw Weapon Upgrade Table...........................................................................
+   #.....................................................Initialize Weapon Upgrade Table........................................................................
     def Weapon.initialize_upgrade_table
       @@current_upgrade_table_weapon = @@nil_stick
      end

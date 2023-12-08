@@ -358,11 +358,11 @@ extend self
    window.draw(Weapon_Tab_Text); window.draw(Use_Tab_Text); window.draw(Etc_Tab_Text); window.draw(Inventory_arrow_up2)
    window.draw(Inventory_arrow_down2)
    if @@tab == "Equipment"
+    page = @@page
+    Crafted_Items::Weapon.display_equipment_inventory(window, page)
     if @@info_box == "equipment"
       window.draw(Weapon_Info_Box);  window.draw(Weapon_Info_Text)
     end
-     page = @@page
-     Crafted_Items::Weapon.display_equipment_inventory(window, page)
      #Equipment::Stick.test(window, page)
    else if @@tab == "Etc"
      window.draw(Ore_Button); window.draw(Ore_Button_Text); window.draw(Ingot_Button); window.draw(Ingot_Button_Text)
