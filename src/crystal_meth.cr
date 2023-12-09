@@ -2042,6 +2042,7 @@ def Window_Class.hud_keypresses(window)
        #---------------------------------------------------------
         if (x >= 1010 && x <= 1165) && (y >= 550 && y <= 630)
           Etc::Gem.cut_gem
+          sleep 1.seconds
          end
        #---------------------------------------------------------
        #-                 Select Crafting Gem                   -

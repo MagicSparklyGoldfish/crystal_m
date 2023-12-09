@@ -3721,6 +3721,10 @@ include Equipment
       gem10 = Smelter_Nil_Sprite
       gem11 = Smelter_Nil_Sprite
       gem12 = Smelter_Nil_Sprite
+      gem13 = Smelter_Nil_Sprite
+      gem14 = Smelter_Nil_Sprite
+      gem15 = Smelter_Nil_Sprite
+      gem16 = Smelter_Nil_Sprite
      #__________________________
       if Owned_Gem_Array.size >= 1
         case page_02
@@ -3738,6 +3742,10 @@ include Equipment
         case page_02
           when 1
            gem2 = Owned_Gem_Array[1].sprite.dup
+          when 2
+            if Owned_Gem_Array.size >= 18
+             gem2 = Owned_Gem_Array[17].sprite.dup
+            end
           end
            gem2.position = SF.vector2(952, -200);
            window.draw(gem2)
@@ -3746,6 +3754,10 @@ include Equipment
         case page_02
           when 1
            gem3 = Owned_Gem_Array[2].sprite.dup
+          when 2
+            if Owned_Gem_Array.size >= 19
+             gem3 = Owned_Gem_Array[18].sprite.dup
+            end
           end
            gem3.position = SF.vector2(1002, -200);
            window.draw(gem3)
@@ -3754,6 +3766,10 @@ include Equipment
         case page_02
           when 1
            gem4 = Owned_Gem_Array[3].sprite.dup
+          when 2
+            if Owned_Gem_Array.size >= 20
+             gem4 = Owned_Gem_Array[19].sprite.dup
+            end
           end
            gem4.position = SF.vector2(1052, -200);
            window.draw(gem4)
@@ -3762,6 +3778,10 @@ include Equipment
         case page_02
           when 1
            gem5 = Owned_Gem_Array[4].sprite.dup
+          when 2
+            if Owned_Gem_Array.size >= 21
+             gem5 = Owned_Gem_Array[20].sprite.dup
+            end
           end
            gem5.position = SF.vector2(902, -150);
            window.draw(gem5)
@@ -3770,6 +3790,10 @@ include Equipment
         case page_02
           when 1
            gem6 = Owned_Gem_Array[5].sprite.dup
+          when 2
+           if Owned_Gem_Array.size >= 22
+            gem6 = Owned_Gem_Array[21].sprite.dup
+           end
           end
            gem6.position = SF.vector2(952, -150);
            window.draw(gem6)
@@ -3778,6 +3802,10 @@ include Equipment
         case page_02
           when 1
            gem7 = Owned_Gem_Array[6].sprite.dup
+          when 2
+           if Owned_Gem_Array.size >= 23
+            gem7 = Owned_Gem_Array[22].sprite.dup
+           end
           end
            gem7.position = SF.vector2(1002, -150);
            window.draw(gem7)
@@ -3786,6 +3814,10 @@ include Equipment
         case page_02
           when 1
            gem8 = Owned_Gem_Array[7].sprite.dup
+          when 2
+           if Owned_Gem_Array.size >= 24
+            gem8 = Owned_Gem_Array[23].sprite.dup
+           end
           end
            gem8.position = SF.vector2(1052, -150);
            window.draw(gem8)
@@ -3794,6 +3826,10 @@ include Equipment
         case page_02
           when 1
            gem9 = Owned_Gem_Array[8].sprite.dup
+          when 2
+           if Owned_Gem_Array.size >= 25
+            gem9 = Owned_Gem_Array[24].sprite.dup
+           end
           end
            gem9.position = SF.vector2(902, -100);
            window.draw(gem9)
@@ -3802,6 +3838,10 @@ include Equipment
         case page_02
           when 1
            gem10 = Owned_Gem_Array[9].sprite.dup
+          when 2
+            if Owned_Gem_Array.size >= 26
+             gem10 = Owned_Gem_Array[25].sprite.dup
+            end
           end
            gem10.position = SF.vector2(952, -100);
            window.draw(gem10)
@@ -3810,6 +3850,10 @@ include Equipment
         case page_02
           when 1
            gem11 = Owned_Gem_Array[10].sprite.dup
+          when 2
+            if Owned_Gem_Array.size >= 27
+             gem11 = Owned_Gem_Array[26].sprite.dup
+            end
           end
            gem11.position = SF.vector2(1002, -100);
            window.draw(gem11)
@@ -3818,6 +3862,10 @@ include Equipment
         case page_02
           when 1
            gem12 = Owned_Gem_Array[11].sprite.dup
+          when 2
+           if Owned_Gem_Array.size >= 28
+             gem12 = Owned_Gem_Array[27].sprite.dup
+            end
           end
            gem12.position = SF.vector2(1052, -100);
            window.draw(gem12)
@@ -3826,6 +3874,10 @@ include Equipment
         case page_02
           when 1
            gem13 = Owned_Gem_Array[12].sprite.dup
+          when 2
+           if Owned_Gem_Array.size >= 29
+             gem13 = Owned_Gem_Array[28].sprite.dup
+            end
           end
            gem13.position = SF.vector2(902, -50);
            window.draw(gem13)
@@ -3834,6 +3886,10 @@ include Equipment
         case page_02
           when 1
            gem14 = Owned_Gem_Array[13].sprite.dup
+          when 2
+           if Owned_Gem_Array.size >= 30
+             gem14 = Owned_Gem_Array[29].sprite.dup
+            end
           end
            gem14.position = SF.vector2(952, -50);
            window.draw(gem14)
@@ -3842,6 +3898,10 @@ include Equipment
         case page_02
           when 1
            gem15 = Owned_Gem_Array[14].sprite.dup
+          when 2
+           if Owned_Gem_Array.size >= 31
+             gem15 = Owned_Gem_Array[30].sprite.dup
+            end
           end
            gem15.position = SF.vector2(1002, -50);
            window.draw(gem15)
@@ -3850,6 +3910,10 @@ include Equipment
         case page_02
           when 1
            gem16 = Owned_Gem_Array[15].sprite.dup
+          when 2
+           if Owned_Gem_Array.size >= 32
+             gem16 = Owned_Gem_Array[31].sprite.dup
+            end
           end
            gem16.position = SF.vector2(1052, -50);
            window.draw(gem16)
