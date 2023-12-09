@@ -710,6 +710,7 @@ def Window_Class.ladder_test_ore_map
       tab = @@tab
       Crafted_Items::Upgrade_Table.display_upgrade_table(window)
       Crafted_Items::Weapon.display_weapon_upgrade_table(window, page, page_02, page_03)
+      Etc::Gem.display_upgrade_gems(window, page_02)
       end
     Window_Class.hud(window)
   end
@@ -2550,6 +2551,7 @@ def Window_Class.hud_keypresses(window)
             All_Audio::SFX.char_create_up
           end
          end
+      #--------------------Select Weapon----------------------
         if (x >= 405 && x <= 455) && (y >= 160 && y <= 230)#------select weapon
           weapon = 0
          case @@page
@@ -2754,6 +2756,7 @@ def Window_Class.hud_keypresses(window)
            end
           Crafted_Items::Weapon.choose_upgrade_weapon(weapon)
          end
+      #_______________________________________________________
       when "Stats_Menu" #---------------------------------------------------------Stats Menu
         if (x >= 1280 && x <= 1330) && (y >= 210 && y <= 260)
           @@popup = "none"

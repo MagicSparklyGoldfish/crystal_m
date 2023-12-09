@@ -3706,6 +3706,38 @@ include Equipment
         end
       end
     end
+   #--------------------------------------------------------Upgrade Table Gem Display----------------------------------------------------------------------
+    def Gem.display_upgrade_gems(window, page_02)
+     #-------Initialize---------
+      gem1 = Smelter_Nil_Sprite
+      gem2 = Smelter_Nil_Sprite
+      gem3 = Smelter_Nil_Sprite
+     #__________________________
+      if Owned_Gem_Array.size >= 1
+        case page_02
+          when 1
+           gem1 = Owned_Gem_Array[0].sprite.dup
+          end
+           gem1.position = SF.vector2(902, -200);
+           window.draw(gem1)
+        end
+      if Owned_Gem_Array.size >= 2
+        case page_02
+          when 1
+           gem2 = Owned_Gem_Array[1].sprite.dup
+          end
+           gem2.position = SF.vector2(952, -200);
+           window.draw(gem2)
+        end
+      if Owned_Gem_Array.size >= 3
+        case page_02
+          when 1
+           gem3 = Owned_Gem_Array[2].sprite.dup
+          end
+           gem3.position = SF.vector2(1002, -200);
+           window.draw(gem3)
+        end
+     end
   #________________________________________________________________________________________________________________________________________________________
   #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   #/                                                               Entities                                                                               /
@@ -5418,15 +5450,15 @@ include Etc
         end
        end
        def Weapon.play_swing_sound
-         @@current_equipped_weapon.weapon_swing_sound.play
-        end
+          @@current_equipped_weapon.weapon_swing_sound.play
+         end
        def Weapon.play_hit_sound
-        @@current_equipped_weapon.weapon_hit_sound.play
-       end
+         @@current_equipped_weapon.weapon_hit_sound.play
+        end
        def Weapon.stop_swing_sound
-        @@current_equipped_weapon.swing_sound.stop
-        @@current_equipped_weapon.hit_sound.play
-       end
+         @@current_equipped_weapon.swing_sound.stop
+         @@current_equipped_weapon.hit_sound.play
+        end
        def Weapon.forge_weapon(weapon)
         if Weapon_Inventory_Array.size < 54
         s = Weapon_Template_Array.size; i = 0

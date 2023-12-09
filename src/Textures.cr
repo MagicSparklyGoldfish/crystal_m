@@ -739,7 +739,7 @@
       Amethyst_Inventory_Square = SF::Sprite.new(AMETHYST_INVENTORY_SQUARE_TEXTURE) 
      #----------------------------------------------------Pear----------------------------------------------------------------------
       AMETHYST_INVENTORY_PEAR_TEXTURE = SF::Texture.from_file("graphics/minerals/Amethyst_Inventory_Pear.png")
-      Amethyst_Inventory_Pear = SF::Sprite.new(AMETHYST_INVENTORY_SQUARE_TEXTURE) 
+      Amethyst_Inventory_Pear = SF::Sprite.new(AMETHYST_INVENTORY_PEAR_TEXTURE) 
      #--------------------------------------------------Brilliant--------------------------------------------------------------------
       AMETHYST_INVENTORY_BRILLIANT_TEXTURE = SF::Texture.from_file("graphics/minerals/Amethyst_Inventory_Brilliant.png")
       Amethyst_Inventory_Brilliant = SF::Sprite.new(AMETHYST_INVENTORY_BRILLIANT_TEXTURE) 
