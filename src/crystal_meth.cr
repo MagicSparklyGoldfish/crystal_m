@@ -1889,6 +1889,7 @@ def Window_Class.hud_keypresses(window)
         if (x >= 970 && x <= 1160) && (y >= 625 && y <= 690)
           All_Audio::SFX.smelter_01 #All_Audio::SFX.select1
           Etc::Inventory_Ore.smelt
+          sleep 1.seconds
         end
         if (x >= 585 && x <= 635) && (y >= 140 && y <= 200)
           All_Audio::SFX.dig_02
@@ -1928,9 +1929,11 @@ def Window_Class.hud_keypresses(window)
           if @@tab != "mold"
           All_Audio::SFX.light_bonk
           @@tab = "mold"
+          sleep 1.seconds
         else if @@tab == "mold"
             All_Audio::SFX.light_bonk
             @@tab = "none"
+            sleep 1.seconds
             end; end
         end
         if (x >= 1010 && x <= 1120) && (y >= 230 && y <= 300) #stick mold
@@ -2544,7 +2547,7 @@ def Window_Class.hud_keypresses(window)
             All_Audio::SFX.char_create_up
           end
          end
-        if (x >= 280 && x <= 330) && (y >= 330 && y <= 425) #--------up arrow 1
+        if (x >= 280 && x <= 330) && (y >= 330 && y <= 425) #--------down arrow 1
           if @@page < 4
             All_Audio::SFX.light_bonk
           @@page += 1
@@ -2552,6 +2555,22 @@ def Window_Class.hud_keypresses(window)
             All_Audio::SFX.char_create_up
           end
          end
+        if (x >= 1190 && x <= 1240) && (y >= 165 && y <= 260) #--------up arrow 2
+         if @@page_02 > 1
+           All_Audio::SFX.light_bonk
+         @@page_02 -= 1
+         else
+           All_Audio::SFX.char_create_up
+         end
+         end
+        if (x >= 1190 && x <= 1240) && (y >= 330 && y <= 425) #--------down arrow 2
+          if @@page_02 < 6
+            All_Audio::SFX.light_bonk
+          @@page_02 += 1
+          else
+            All_Audio::SFX.char_create_up
+          end
+          end
       #--------------------Select Weapon----------------------
         if (x >= 405 && x <= 455) && (y >= 160 && y <= 230)#------select weapon
           weapon = 0
