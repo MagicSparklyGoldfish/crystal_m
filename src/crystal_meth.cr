@@ -1922,6 +1922,7 @@ def Window_Class.hud_keypresses(window)
         if (x >= 805 && x <= 960) && (y >= 555 && y <= 630) #forge
           All_Audio::SFX.forge_01
           Crafted_Items::Forge.forge_weapon
+          sleep 1.seconds
         end
         if (x >= 1010 && x <= 1120) && (y >= 160 && y <= 230) #molds
           if @@tab != "mold"

@@ -3716,6 +3716,11 @@ include Equipment
       gem5 = Smelter_Nil_Sprite
       gem6 = Smelter_Nil_Sprite
       gem7 = Smelter_Nil_Sprite
+      gem8 = Smelter_Nil_Sprite
+      gem9 = Smelter_Nil_Sprite
+      gem10 = Smelter_Nil_Sprite
+      gem11 = Smelter_Nil_Sprite
+      gem12 = Smelter_Nil_Sprite
      #__________________________
       if Owned_Gem_Array.size >= 1
         case page_02
@@ -3770,8 +3775,48 @@ include Equipment
           when 1
            gem7 = Owned_Gem_Array[6].sprite.dup
           end
-           gem7.position = SF.vector2(952, -150);
-           window.draw(gem6)
+           gem7.position = SF.vector2(1002, -150);
+           window.draw(gem7)
+        end
+      if Owned_Gem_Array.size >= 8
+        case page_02
+          when 1
+           gem8 = Owned_Gem_Array[7].sprite.dup
+          end
+           gem8.position = SF.vector2(1052, -150);
+           window.draw(gem8)
+        end
+      if Owned_Gem_Array.size >= 9
+        case page_02
+          when 1
+           gem9 = Owned_Gem_Array[8].sprite.dup
+          end
+           gem9.position = SF.vector2(902, -100);
+           window.draw(gem9)
+        end
+      if Owned_Gem_Array.size >= 10
+        case page_02
+          when 1
+           gem10 = Owned_Gem_Array[9].sprite.dup
+          end
+           gem10.position = SF.vector2(952, -100);
+           window.draw(gem10)
+        end
+      if Owned_Gem_Array.size >= 11
+        case page_02
+          when 1
+           gem11 = Owned_Gem_Array[10].sprite.dup
+          end
+           gem11.position = SF.vector2(1002, -100);
+           window.draw(gem11)
+        end
+      if Owned_Gem_Array.size >= 12
+        case page_02
+          when 1
+           gem12 = Owned_Gem_Array[11].sprite.dup
+          end
+           gem12.position = SF.vector2(1052, -100);
+           window.draw(gem12)
         end
      end
   #________________________________________________________________________________________________________________________________________________________
@@ -5546,8 +5591,8 @@ include Etc
       window.draw(Test_Upgrade_Table_Menu)
       up_arrow_01 = Up_Arrow_01.dup; up_arrow_01.position = Test_Upgrade_Table_Menu.position + SF.vector2(-75, 50)
       down_arrow_01 = Down_Arrow_01.dup; down_arrow_01.position = Test_Upgrade_Table_Menu.position + SF.vector2(-75, 175)
-      up_arrow_02 = Up_Arrow_01.dup; up_arrow_02.position = Test_Upgrade_Table_Menu.position + SF.vector2(750, 50)
-      down_arrow_02 = Down_Arrow_01.dup; down_arrow_02.position = Test_Upgrade_Table_Menu.position + SF.vector2(750, 175)
+      up_arrow_02 = Up_Arrow_01.dup; up_arrow_02.position = Test_Upgrade_Table_Menu.position + SF.vector2(820, 50)
+      down_arrow_02 = Down_Arrow_01.dup; down_arrow_02.position = Test_Upgrade_Table_Menu.position + SF.vector2(820, 175)
       window.draw(up_arrow_01); window.draw(down_arrow_01); window.draw(up_arrow_02); window.draw(down_arrow_02)
     end
   end
