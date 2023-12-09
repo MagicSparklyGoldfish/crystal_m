@@ -3715,6 +3715,7 @@ include Equipment
       gem4 = Smelter_Nil_Sprite
       gem5 = Smelter_Nil_Sprite
       gem6 = Smelter_Nil_Sprite
+      gem7 = Smelter_Nil_Sprite
      #__________________________
       if Owned_Gem_Array.size >= 1
         case page_02
@@ -3759,9 +3760,17 @@ include Equipment
       if Owned_Gem_Array.size >= 6
         case page_02
           when 1
-           gem5 = Owned_Gem_Array[5].sprite.dup
+           gem6 = Owned_Gem_Array[5].sprite.dup
           end
-           gem5.position = SF.vector2(952, -150);
+           gem6.position = SF.vector2(952, -150);
+           window.draw(gem6)
+        end
+      if Owned_Gem_Array.size >= 7
+        case page_02
+          when 1
+           gem7 = Owned_Gem_Array[6].sprite.dup
+          end
+           gem7.position = SF.vector2(952, -150);
            window.draw(gem6)
         end
      end

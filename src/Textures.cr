@@ -723,7 +723,7 @@
       Topaz_Inventory_Square = SF::Sprite.new(TOPAZ_INVENTORY_SQUARE_TEXTURE) 
      #----------------------------------------------------Pear----------------------------------------------------------------------
       TOPAZ_INVENTORY_PEAR_TEXTURE = SF::Texture.from_file("graphics/minerals/Topaz_Inventory_Pear.png")
-      Topaz_Inventory_Pear = SF::Sprite.new(TOPAZ_INVENTORY_SQUARE_TEXTURE) 
+      Topaz_Inventory_Pear = SF::Sprite.new(TOPAZ_INVENTORY_PEAR_TEXTURE) 
      #--------------------------------------------------Brilliant--------------------------------------------------------------------
       TOPAZ_INVENTORY_BRILLIANT_TEXTURE = SF::Texture.from_file("graphics/minerals/Topaz_Inventory_Brilliant.png")
       Topaz_Inventory_Brilliant = SF::Sprite.new(TOPAZ_INVENTORY_BRILLIANT_TEXTURE) 
