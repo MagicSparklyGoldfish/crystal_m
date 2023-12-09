@@ -707,7 +707,7 @@
       Wavellite_Inventory_Square = SF::Sprite.new(WAVELLITE_INVENTORY_SQUARE_TEXTURE) 
      #----------------------------------------------------Pear----------------------------------------------------------------------
       WAVELLITE_INVENTORY_PEAR_TEXTURE = SF::Texture.from_file("graphics/minerals/Wavellite_Inventory_Pear.png")
-      Wavellite_Inventory_Pear = SF::Sprite.new(AMBER_INVENTORY_PEAR_TEXTURE) 
+      Wavellite_Inventory_Pear = SF::Sprite.new(WAVELLITE_INVENTORY_PEAR_TEXTURE) 
      #--------------------------------------------------Brilliant-------------------------------------------------------------------
       WAVELLITE_INVENTORY_BRILLIANT_TEXTURE = SF::Texture.from_file("graphics/minerals/Wavellite_Inventory_Brilliant.png")
       Wavellite_Inventory_Brilliant = SF::Sprite.new(WAVELLITE_INVENTORY_BRILLIANT_TEXTURE) 

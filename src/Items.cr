@@ -3712,6 +3712,9 @@ include Equipment
       gem1 = Smelter_Nil_Sprite
       gem2 = Smelter_Nil_Sprite
       gem3 = Smelter_Nil_Sprite
+      gem4 = Smelter_Nil_Sprite
+      gem5 = Smelter_Nil_Sprite
+      gem6 = Smelter_Nil_Sprite
      #__________________________
       if Owned_Gem_Array.size >= 1
         case page_02
@@ -3736,6 +3739,30 @@ include Equipment
           end
            gem3.position = SF.vector2(1002, -200);
            window.draw(gem3)
+        end
+      if Owned_Gem_Array.size >= 4
+        case page_02
+          when 1
+           gem4 = Owned_Gem_Array[3].sprite.dup
+          end
+           gem4.position = SF.vector2(1052, -200);
+           window.draw(gem4)
+        end
+      if Owned_Gem_Array.size >= 5
+        case page_02
+          when 1
+           gem5 = Owned_Gem_Array[4].sprite.dup
+          end
+           gem5.position = SF.vector2(902, -150);
+           window.draw(gem5)
+        end
+      if Owned_Gem_Array.size >= 6
+        case page_02
+          when 1
+           gem5 = Owned_Gem_Array[5].sprite.dup
+          end
+           gem5.position = SF.vector2(952, -150);
+           window.draw(gem6)
         end
      end
   #________________________________________________________________________________________________________________________________________________________
@@ -5510,7 +5537,9 @@ include Etc
       window.draw(Test_Upgrade_Table_Menu)
       up_arrow_01 = Up_Arrow_01.dup; up_arrow_01.position = Test_Upgrade_Table_Menu.position + SF.vector2(-75, 50)
       down_arrow_01 = Down_Arrow_01.dup; down_arrow_01.position = Test_Upgrade_Table_Menu.position + SF.vector2(-75, 175)
-      window.draw(up_arrow_01); window.draw(down_arrow_01)
+      up_arrow_02 = Up_Arrow_01.dup; up_arrow_02.position = Test_Upgrade_Table_Menu.position + SF.vector2(750, 50)
+      down_arrow_02 = Down_Arrow_01.dup; down_arrow_02.position = Test_Upgrade_Table_Menu.position + SF.vector2(750, 175)
+      window.draw(up_arrow_01); window.draw(down_arrow_01); window.draw(up_arrow_02); window.draw(down_arrow_02)
     end
   end
  class Mold
