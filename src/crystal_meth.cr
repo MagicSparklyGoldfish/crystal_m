@@ -2185,6 +2185,7 @@ def Window_Class.hud_keypresses(window)
         if (x >= 1010 && x <= 1165) && (y >= 550 && y <= 630)
           Etc::Gem.cut_gem
           sleep 0.25.seconds
+          @@player_character_rendered_model.position = SF.vector2(800, 75)
          end
        #---------------------------------------------------------
        #-                 Select Crafting Gem                   -

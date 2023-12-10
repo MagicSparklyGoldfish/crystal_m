@@ -1518,6 +1518,10 @@ include Equipment
       end
     #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++Display++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
      #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Initialize''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+      #----------------------------------------------------------Remove Ingot-------------------------------------------------------------------------------
+       def Inventory_Ingot.subtract_amount_owned(ingot, amount)
+         ingot.amount_owned -= amount
+        end
       #--------------------------------------------------------Ingot Inventory------------------------------------------------------------------------------
        def Inventory_Ingot.initialize_inventory
         s = Ingot_Array.size; i = 0
@@ -5280,7 +5284,7 @@ include Etc
   #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
    def initialize(@@weapon_name : String, @@weapon_id : Int32, @@weapon_type : String, @@weapon_atk : Float64, @@weapon_element : Array(String), 
      @weapon_effect : Array(String), @@weapon_sprite : SF::Sprite, @@weapon_inventory_sprite : SF::RectangleShape, @@weapon_swing_sound : SF::Sound, 
-     @@weapon_hit_sound : SF::Sound, @@weapon_motion : String, @@weapon_upgrade_count : Int32)
+     @@weapon_hit_sound : SF::Sound, @@weapon_motion : String, @@weapon_upgrade_count : Int32, @@ingots_required : Int32)
      @weapon_name = weapon_name
      @weapon_id = weapon_id
      @weapon_type = weapon_type
@@ -5293,6 +5297,7 @@ include Etc
      @weapon_hit_sound = weapon_hit_sound
      @weapon_motion = weapon_motion
      @weapon_upgrade_count = weapon_upgrade_count
+     @ingots_required = ingots_required
     end
    def weapon_name
      @weapon_name
@@ -5330,6 +5335,9 @@ include Etc
    def weapon_upgrade_count
     @weapon_upgrade_count
     end
+   def ingots_required
+    @ingots_required
+   end
   #________________________________________________________________________________________________________________________________________________________
   #????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
   #?                                                               Methods                                                                                ?
@@ -6061,21 +6069,21 @@ include Etc
   #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   #/                                                               Entities                                                                               /
   #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-   @@nil_stick = Weapon.new("", -1, "", 0, [""], [""], Nil_Ingot_Ore, Weapon_Rectangle_01, SYSSOUND_6, SYSSOUND_6, "", 0)
-   @@stick = Weapon.new("Stick", 0, "stick", 1.25, ["none", "none", "none"], ["none", "none", "none"], Stick01, Weapon_Rectangle_01, WEAPSOUND_01, WEAPSOUND_02, "Swing", 0)
-   @@zinc_stick = Weapon.new("Zinc Stick", 4, "stick", 1.5, ["empty", "none", "none"], ["empty", "none", "none"], Zinc_Stick, Zinc_Stick_Display, WEAPSOUND_01, WEAPSOUND_02, "Swing", 0)
+   @@nil_stick = Weapon.new("", -1, "", 0, [""], [""], Nil_Ingot_Ore, Weapon_Rectangle_01, SYSSOUND_6, SYSSOUND_6, "", 0, 0)
+   @@stick = Weapon.new("Stick", 0, "stick", 1.25, ["none", "none", "none"], ["none", "none", "none"], Stick01, Weapon_Rectangle_01, WEAPSOUND_01, WEAPSOUND_02, "Swing", 0, 0)
+   @@zinc_stick = Weapon.new("Zinc Stick", 4, "stick", 1.5, ["empty", "none", "none"], ["empty", "none", "none"], Zinc_Stick, Zinc_Stick_Display, WEAPSOUND_01, WEAPSOUND_02, "Swing", 0, 2)
    Weapon_Inventory_Array.push(@@zinc_stick); Weapon_Template_Array.push(@@zinc_stick)
-   @@tin_stick = Weapon.new("Tin Stick", 2, "stick", 1.75, ["empty", "none", "none"], ["empty", "none", "none"], Tin_Stick, Tin_Stick_Display, WEAPSOUND_01, WEAPSOUND_02, "Swing", 0)
+   @@tin_stick = Weapon.new("Tin Stick", 2, "stick", 1.75, ["empty", "none", "none"], ["empty", "none", "none"], Tin_Stick, Tin_Stick_Display, WEAPSOUND_01, WEAPSOUND_02, "Swing", 0, 2)
    Weapon_Template_Array.push(@@tin_stick)
-   @@copper_stick = Weapon.new("Copper Stick", 1, "stick", 2.5, ["empty", "none", "none"], ["empty", "none", "none"], Copper_Stick, Copper_Stick_Display, WEAPSOUND_01, WEAPSOUND_02, "Swing", 0)
+   @@copper_stick = Weapon.new("Copper Stick", 1, "stick", 2.5, ["empty", "none", "none"], ["empty", "none", "none"], Copper_Stick, Copper_Stick_Display, WEAPSOUND_01, WEAPSOUND_02, "Swing", 0, 2)
    Weapon_Template_Array.push(@@copper_stick)
-   @@brass_stick = Weapon.new("Brass Stick", 5, "stick", 2, ["empty", "empty", "none"], ["empty", "empty", "none"], Brass_Stick, Brass_Stick_Display, WEAPSOUND_01, WEAPSOUND_02, "Swing", 0)
+   @@brass_stick = Weapon.new("Brass Stick", 5, "stick", 2, ["empty", "empty", "none"], ["empty", "empty", "none"], Brass_Stick, Brass_Stick_Display, WEAPSOUND_01, WEAPSOUND_02, "Swing", 0, 2)
    Weapon_Template_Array.push(@@brass_stick)
-   @@bronze_stick = Weapon.new("Bronze Stick", 3, "stick", 2.25, ["empty", "empty", "none"], ["empty", "empty", "none"], Bronze_Stick, Bronze_Stick_Display, WEAPSOUND_01, WEAPSOUND_02, "Swing", 0)
+   @@bronze_stick = Weapon.new("Bronze Stick", 3, "stick", 2.25, ["empty", "empty", "none"], ["empty", "empty", "none"], Bronze_Stick, Bronze_Stick_Display, WEAPSOUND_01, WEAPSOUND_02, "Swing", 0, 2)
    Weapon_Template_Array.push(@@bronze_stick)
-   @@iron_stick = Weapon.new("Iron Stick", 6, "stick", 2.5, ["empty", "empty", "none"], ["empty", "empty", "none"], Iron_Stick, Iron_Stick_Display, WEAPSOUND_01, WEAPSOUND_02, "Swing", 0)
+   @@iron_stick = Weapon.new("Iron Stick", 6, "stick", 2.5, ["empty", "empty", "none"], ["empty", "empty", "none"], Iron_Stick, Iron_Stick_Display, WEAPSOUND_01, WEAPSOUND_02, "Swing", 0, 2)
    Weapon_Template_Array.push(@@iron_stick)
-   @@steel_stick = Weapon.new("Steel Stick", 7, "stick", 3, ["empty", "empty", "empty"], ["empty", "empty", "empty"], Steel_Stick, Steel_Stick_Display, WEAPSOUND_01, WEAPSOUND_02, "Swing", 0)
+   @@steel_stick = Weapon.new("Steel Stick", 7, "stick", 3, ["empty", "empty", "empty"], ["empty", "empty", "empty"], Steel_Stick, Steel_Stick_Display, WEAPSOUND_01, WEAPSOUND_02, "Swing", 0, 2)
    Weapon_Template_Array.push(@@steel_stick)
   #________________________________________________________________________________________________________________________________________________________
   end
@@ -6129,7 +6137,12 @@ include Etc
     end 
     def Forge.forge_weapon  #@todo moke forging use up ingots
       weapon = @@craft_weapon
+      if Ingot_Array[weapon].amount_owned >= Weapon_Template_Array[weapon - 1].ingots_required
       Crafted_Items::Weapon.forge_weapon(weapon)
+      ingot = Ingot_Array[weapon]
+      amount = Weapon_Template_Array[weapon - 1].ingots_required
+      Etc::Inventory_Ingot.subtract_amount_owned(ingot, amount)
+      end
     end
     def Forge.diplay_forge(window)
         window.draw(Test_Forge_Menu)
