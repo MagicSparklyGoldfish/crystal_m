@@ -3414,8 +3414,8 @@ include Equipment
         if Owned_Gem_Cutter_Ore_Array.size >= 47
           Owned_Gem_Cutter_Ore_Array[46].craft_sprite.position = SF.vector2(550, -150)
           ore_array_text_47 = Ore_amount_owned_text.dup
-          ore_array_text_47.position = Owned_Gem_Cutter_Ore_Array[47].craft_sprite.position + SF.vector2(25, 25)
-          ore_array_text_47.string = "x" + Owned_Gem_Cutter_Ore_Array[47].amount_owned.to_s
+          ore_array_text_47.position = Owned_Gem_Cutter_Ore_Array[46].craft_sprite.position + SF.vector2(25, 25)
+          ore_array_text_47.string = "x" + Owned_Gem_Cutter_Ore_Array[46].amount_owned.to_s
           window.draw(Owned_Gem_Cutter_Ore_Array[46].craft_sprite); window.draw(ore_array_text_47)
          end
         if Owned_Gem_Cutter_Ore_Array.size >= 48
