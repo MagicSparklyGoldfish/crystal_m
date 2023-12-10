@@ -3742,6 +3742,10 @@ include Equipment
            if Owned_Gem_Array.size >= 49
              gem1 = Owned_Gem_Array[48].sprite.dup
             end
+          when 5
+           if Owned_Gem_Array.size >= 65
+             gem1 = Owned_Gem_Array[64].sprite.dup
+            end
           end
            gem1.position = SF.vector2(902, -200);
            window.draw(gem1)
@@ -3761,6 +3765,10 @@ include Equipment
           when 4
            if Owned_Gem_Array.size >= 50
              gem2 = Owned_Gem_Array[49].sprite.dup
+            end
+          when 5
+           if Owned_Gem_Array.size >= 66
+             gem2 = Owned_Gem_Array[65].sprite.dup
             end
           end
            gem2.position = SF.vector2(952, -200);
@@ -3782,6 +3790,10 @@ include Equipment
            if Owned_Gem_Array.size >= 51
              gem3 = Owned_Gem_Array[50].sprite.dup
             end
+          when 5
+           if Owned_Gem_Array.size >= 67
+             gem3 = Owned_Gem_Array[66].sprite.dup
+            end
           end
            gem3.position = SF.vector2(1002, -200);
            window.draw(gem3)
@@ -3801,6 +3813,10 @@ include Equipment
           when 4
            if Owned_Gem_Array.size >= 52
              gem4 = Owned_Gem_Array[51].sprite.dup
+            end
+          when 5
+           if Owned_Gem_Array.size >= 68
+             gem4 = Owned_Gem_Array[67].sprite.dup
             end
           end
            gem4.position = SF.vector2(1052, -200);
@@ -3822,6 +3838,10 @@ include Equipment
            if Owned_Gem_Array.size >= 53
              gem5 = Owned_Gem_Array[52].sprite.dup
             end
+          when 5
+           if Owned_Gem_Array.size >= 69
+             gem5 = Owned_Gem_Array[68].sprite.dup
+            end
           end
            gem5.position = SF.vector2(902, -150);
            window.draw(gem5)
@@ -3842,6 +3862,10 @@ include Equipment
            if Owned_Gem_Array.size >= 54
              gem6 = Owned_Gem_Array[53].sprite.dup
             end
+          when 5
+            if Owned_Gem_Array.size >= 70
+              gem6 = Owned_Gem_Array[69].sprite.dup
+             end
           end
            gem6.position = SF.vector2(952, -150);
            window.draw(gem6)
@@ -3861,6 +3885,10 @@ include Equipment
           when 4
            if Owned_Gem_Array.size >= 55
              gem7 = Owned_Gem_Array[54].sprite.dup
+            end
+          when 5
+           if Owned_Gem_Array.size >= 71
+             gem7 = Owned_Gem_Array[70].sprite.dup
             end
           end
            gem7.position = SF.vector2(1002, -150);
@@ -3882,6 +3910,10 @@ include Equipment
            if Owned_Gem_Array.size >= 56
              gem8 = Owned_Gem_Array[55].sprite.dup
             end
+          when 5
+           if Owned_Gem_Array.size >= 72
+             gem8 = Owned_Gem_Array[71].sprite.dup
+            end
           end
            gem8.position = SF.vector2(1052, -150);
            window.draw(gem8)
@@ -3901,6 +3933,10 @@ include Equipment
           when 4
            if Owned_Gem_Array.size >= 57
              gem9 = Owned_Gem_Array[56].sprite.dup
+            end
+          when 5
+           if Owned_Gem_Array.size >= 73
+             gem9 = Owned_Gem_Array[72].sprite.dup
             end
           end
            gem9.position = SF.vector2(902, -100);
@@ -3922,6 +3958,10 @@ include Equipment
            if Owned_Gem_Array.size >= 58
              gem10 = Owned_Gem_Array[57].sprite.dup
             end
+          when 5
+           if Owned_Gem_Array.size >= 74
+             gem10 = Owned_Gem_Array[73].sprite.dup
+            end
           end
            gem10.position = SF.vector2(952, -100);
            window.draw(gem10)
@@ -3941,6 +3981,10 @@ include Equipment
           when 4
            if Owned_Gem_Array.size >= 59
              gem11 = Owned_Gem_Array[58].sprite.dup
+            end
+          when 5
+           if Owned_Gem_Array.size >= 75
+             gem11 = Owned_Gem_Array[74].sprite.dup
             end
           end
            gem11.position = SF.vector2(1002, -100);
@@ -3962,6 +4006,10 @@ include Equipment
            if Owned_Gem_Array.size >= 60
              gem12 = Owned_Gem_Array[59].sprite.dup
             end
+          when 5
+           if Owned_Gem_Array.size >= 76
+             gem12 = Owned_Gem_Array[75].sprite.dup
+            end
           end
            gem12.position = SF.vector2(1052, -100);
            window.draw(gem12)
@@ -3981,6 +4029,10 @@ include Equipment
           when 4
            if Owned_Gem_Array.size >= 61
              gem13 = Owned_Gem_Array[60].sprite.dup
+            end
+          when 5
+           if Owned_Gem_Array.size >= 77
+             gem13 = Owned_Gem_Array[76].sprite.dup
             end
           end
            gem13.position = SF.vector2(902, -50);
@@ -4002,6 +4054,10 @@ include Equipment
            if Owned_Gem_Array.size >= 62
              gem14 = Owned_Gem_Array[61].sprite.dup
             end
+          when 5
+           if Owned_Gem_Array.size >= 78
+             gem14 = Owned_Gem_Array[77].sprite.dup
+            end
           end
            gem14.position = SF.vector2(952, -50);
            window.draw(gem14)
@@ -4022,6 +4078,10 @@ include Equipment
            if Owned_Gem_Array.size >= 63
              gem15 = Owned_Gem_Array[62].sprite.dup
             end
+          when 5
+           if Owned_Gem_Array.size >= 79
+             gem15 = Owned_Gem_Array[78].sprite.dup
+            end
           end
            gem15.position = SF.vector2(1002, -50);
            window.draw(gem15)
@@ -4041,6 +4101,10 @@ include Equipment
           when 4
            if Owned_Gem_Array.size >= 64
              gem16 = Owned_Gem_Array[63].sprite.dup
+            end
+          when 5
+           if Owned_Gem_Array.size >= 80
+             gem16 = Owned_Gem_Array[79].sprite.dup
             end
           end
            gem16.position = SF.vector2(1052, -50);
