@@ -1538,43 +1538,65 @@ include Equipment
      #______________________________________________________________________________________________________________________________________________________
      #''''''''''''''''''''''''''''''''''''''''''''''''''''''''Display Forge Ingots''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
          def Inventory_Ingot.display_forge_ingots(window)
-           @@selected_ingot.sprite.position = SF.vector2(115, 45)
-           window.draw(@@selected_ingot.sprite)
+           selected_ingot = @@selected_ingot.sprite.dup
+           selected_ingot.position = SF.vector2(115, 45)
+           window.draw(selected_ingot)
             Owned_Ingot_Array.uniq!
          #----------------------------------------------------slot 1-------------------------------------------
            if Owned_Ingot_Array.size >= 1
              Owned_Ingot_Array[0].forge_sprite.position = SF.vector2(50, -150)
-             window.draw(Owned_Ingot_Array[0].forge_sprite)
+             ingot_array_text_01 = Ore_amount_owned_text.dup
+             ingot_array_text_01.position = Owned_Ingot_Array[0].sprite.position + SF.vector2(50, -125)
+             ingot_array_text_01.string = "x" + Owned_Ingot_Array[0].amount_owned.to_s
+             window.draw(Owned_Ingot_Array[0].forge_sprite); window.draw(ingot_array_text_01)
             end
          #----------------------------------------------------slot 2-------------------------------------------
            if Owned_Ingot_Array.size >= 2
              Owned_Ingot_Array[1].forge_sprite.position = SF.vector2(100, -150)
-             window.draw(Owned_Ingot_Array[1].forge_sprite)
+             ingot_array_text_02 = Ore_amount_owned_text.dup
+             ingot_array_text_02.position = Owned_Ingot_Array[1].sprite.position + SF.vector2(100, -125)
+             ingot_array_text_02.string = "x" + Owned_Ingot_Array[1].amount_owned.to_s
+             window.draw(Owned_Ingot_Array[1].forge_sprite); window.draw(ingot_array_text_02)
             end
          #----------------------------------------------------slot 3-------------------------------------------
            if Owned_Ingot_Array.size >= 3
              Owned_Ingot_Array[2].forge_sprite.position = SF.vector2(150, -150)
-             window.draw(Owned_Ingot_Array[2].forge_sprite)
+             ingot_array_text_03 = Ore_amount_owned_text.dup
+             ingot_array_text_03.position = Owned_Ingot_Array[2].sprite.position + SF.vector2(150, -125)
+             ingot_array_text_03.string = "x" + Owned_Ingot_Array[2].amount_owned.to_s
+             window.draw(Owned_Ingot_Array[2].forge_sprite); window.draw(ingot_array_text_03)
             end
          #----------------------------------------------------slot 4-------------------------------------------
            if Owned_Ingot_Array.size >= 4
              Owned_Ingot_Array[3].forge_sprite.position = SF.vector2(200, -150)
-             window.draw(Owned_Ingot_Array[3].forge_sprite)
+             ingot_array_text_04 = Ore_amount_owned_text.dup
+             ingot_array_text_04.position = Owned_Ingot_Array[3].sprite.position + SF.vector2(200, -125)
+             ingot_array_text_04.string = "x" + Owned_Ingot_Array[3].amount_owned.to_s
+             window.draw(Owned_Ingot_Array[3].forge_sprite); window.draw(ingot_array_text_04)
             end
          #----------------------------------------------------slot 5-------------------------------------------
            if Owned_Ingot_Array.size >= 5
              Owned_Ingot_Array[4].forge_sprite.position = SF.vector2(250, -150)
-             window.draw(Owned_Ingot_Array[4].forge_sprite)
+             ingot_array_text_05 = Ore_amount_owned_text.dup
+             ingot_array_text_05.position = Owned_Ingot_Array[4].sprite.position + SF.vector2(250, -125)
+             ingot_array_text_05.string = "x" + Owned_Ingot_Array[4].amount_owned.to_s
+             window.draw(Owned_Ingot_Array[4].forge_sprite); window.draw(ingot_array_text_05)
             end
          #----------------------------------------------------slot 6-------------------------------------------
            if Owned_Ingot_Array.size >= 6
              Owned_Ingot_Array[5].forge_sprite.position = SF.vector2(50, -100)
-             window.draw(Owned_Ingot_Array[5].forge_sprite)
+             ingot_array_text_06 = Ore_amount_owned_text.dup
+             ingot_array_text_06.position = Owned_Ingot_Array[5].sprite.position + SF.vector2(50, -75)
+             ingot_array_text_06.string = "x" + Owned_Ingot_Array[5].amount_owned.to_s
+             window.draw(Owned_Ingot_Array[5].forge_sprite); window.draw(ingot_array_text_06)
             end
          #----------------------------------------------------slot 6-------------------------------------------
           if Owned_Ingot_Array.size >= 7
             Owned_Ingot_Array[6].forge_sprite.position = SF.vector2(100, -100)
-            window.draw(Owned_Ingot_Array[6].forge_sprite)
+            ingot_array_text_07 = Ore_amount_owned_text.dup
+            ingot_array_text_07.position = Owned_Ingot_Array[6].sprite.position + SF.vector2(100, -75)
+            ingot_array_text_07.string = "x" + Owned_Ingot_Array[6].amount_owned.to_s
+            window.draw(Owned_Ingot_Array[6].forge_sprite); window.draw(ingot_array_text_07)
            end
           end
         def Inventory_Ingot.display_ingot(window, page)
