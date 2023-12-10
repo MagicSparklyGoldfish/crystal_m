@@ -2184,7 +2184,7 @@ def Window_Class.hud_keypresses(window)
        #---------------------------------------------------------
         if (x >= 1010 && x <= 1165) && (y >= 550 && y <= 630)
           Etc::Gem.cut_gem
-          sleep 0.5.seconds
+          sleep 0.25.seconds
          end
        #---------------------------------------------------------
        #-                 Select Crafting Gem                   -
@@ -2707,7 +2707,7 @@ def Window_Class.hud_keypresses(window)
          end
          end
         if (x >= 1190 && x <= 1240) && (y >= 330 && y <= 425) #--------down arrow 2
-          if @@page_02 < 6
+          if @@page_02 < 4
             All_Audio::SFX.light_bonk
           @@page_02 += 1
           else
