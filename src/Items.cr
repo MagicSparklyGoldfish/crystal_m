@@ -2958,6 +2958,7 @@ include Equipment
    #---------------------------------------------------------Gem Cutter Cut!-------------------------------------------------------------------------------
      def Gem.cut_gem
       i = 0
+      if Owned_Gem_Array.size < 80
       while i < GEM_ARRAY.size
         if @@current_gem.name == GEM_ARRAY[i].name 
          case @@current_style
@@ -3057,6 +3058,9 @@ include Equipment
         end
         i += 1
       end
+    else
+      All_Audio::SFX.char_create_up
+     end
      end
    #-----------------------------------------------------------Gem Info Box--------------------------------------------------------------------------------
      def Gem.check_stats(slot)
