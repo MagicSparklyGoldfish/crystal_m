@@ -1214,6 +1214,8 @@ def Window_Class.hud_keypresses(window)
            slot = 0
           when 2
            slot = 18
+          when 3
+            slot = 36
           end
          Etc::Gem.check_stats(slot)
         else if @@info_box == "gem"
@@ -1230,6 +1232,8 @@ def Window_Class.hud_keypresses(window)
             slot = 1
            when 2
             slot = 19
+           when 3
+            slot = 37
            end
           Etc::Gem.check_stats(slot)
          else if @@info_box == "gem"
@@ -1246,6 +1250,8 @@ def Window_Class.hud_keypresses(window)
             slot = 2
            when 2
             slot = 20
+           when 3
+            slot = 38           
            end
           Etc::Gem.check_stats(slot)
         else if @@info_box == "gem"
@@ -1278,6 +1284,8 @@ def Window_Class.hud_keypresses(window)
              slot = 4
             when 2
              slot = 22
+            when 3
+             slot = 39  
             end
            Etc::Gem.check_stats(slot)
            else if @@info_box == "gem"
@@ -1294,6 +1302,8 @@ def Window_Class.hud_keypresses(window)
              slot = 5
             when 2
              slot = 23
+            when 3
+             slot = 40  
             end
            Etc::Gem.check_stats(slot)
            else if @@info_box == "gem"
@@ -1310,6 +1320,8 @@ def Window_Class.hud_keypresses(window)
              slot = 6
             when 2
              slot = 24
+            when 3
+             slot = 41  
             end
            Etc::Gem.check_stats(slot)
          else if @@info_box == "gem"
@@ -1326,6 +1338,8 @@ def Window_Class.hud_keypresses(window)
              slot = 7
             when 2
              slot = 25
+            when 3
+             slot = 42  
             end
            Etc::Gem.check_stats(slot)
          else if @@info_box == "gem"
@@ -1342,6 +1356,8 @@ def Window_Class.hud_keypresses(window)
              slot = 8
             when 2
               slot = 26
+            when 3
+              slot = 43  
             end
            Etc::Gem.check_stats(slot)
          else if @@info_box == "gem"
@@ -1358,6 +1374,8 @@ def Window_Class.hud_keypresses(window)
              slot = 9
             when 2
               slot = 27
+            when 3
+              slot = 44  
             end
            Etc::Gem.check_stats(slot)
          else if @@info_box == "gem"
@@ -1374,6 +1392,8 @@ def Window_Class.hud_keypresses(window)
             slot = 10
            when 2
             slot = 28
+           when 3
+            slot = 45  
            end
           Etc::Gem.check_stats(slot)
           else if @@info_box == "gem"
@@ -1390,6 +1410,8 @@ def Window_Class.hud_keypresses(window)
              slot = 11
             when 2
              slot = 29
+            when 3
+             slot = 46  
             end
            Etc::Gem.check_stats(slot)
            else if @@info_box == "gem"
@@ -1406,6 +1428,8 @@ def Window_Class.hud_keypresses(window)
              slot = 12
             when 2
              slot = 30
+            when 3
+             slot = 47  
             end
            Etc::Gem.check_stats(slot)
          else if @@info_box == "gem"
@@ -1422,6 +1446,8 @@ def Window_Class.hud_keypresses(window)
              slot = 13
             when 2
               slot = 31
+            when 3
+              slot = 48  
             end
            Etc::Gem.check_stats(slot)
          else if @@info_box == "gem"
@@ -1438,6 +1464,8 @@ def Window_Class.hud_keypresses(window)
               slot = 14
              when 2
               slot = 32
+             when 3
+              slot = 49  
              end
             Etc::Gem.check_stats(slot)
           else if @@info_box == "gem"
@@ -1454,6 +1482,8 @@ def Window_Class.hud_keypresses(window)
               slot = 15
              when 2
               slot = 33
+             when 3
+              slot = 50  
              end
             Etc::Gem.check_stats(slot)
           else if @@info_box == "gem"
@@ -1486,6 +1516,8 @@ def Window_Class.hud_keypresses(window)
               slot = 17
              when 2
               slot = 35
+             when 3
+              slot = 51  
              end
             Etc::Gem.check_stats(slot)
           else if @@info_box == "gem"
