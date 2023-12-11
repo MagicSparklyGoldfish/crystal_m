@@ -5882,6 +5882,22 @@ include Etc
       @@selected_gem_03 = GEM_ARRAY[0]
       @@current_upgrade_table_weapon = @@nil_stick
      end
+    def Upgrade_Table.upgrade
+      if @@current_upgrade_table_weapon != GEM_ARRAY[0]
+      All_Audio::SFX.metal_hit_01
+      @@selected_weapon_original_elements[0] = @@current_upgrade_table_weapon.weapon_element[0]
+      @@selected_weapon_original_effects[0] = @@current_upgrade_table_weapon.weapon_effect[0]      
+      @@selected_weapon_original_elements[1] = @@current_upgrade_table_weapon.weapon_element[1]
+      @@selected_weapon_original_effects[1] = @@current_upgrade_table_weapon.weapon_effect[1]
+      @@selected_weapon_original_elements[2] = @@current_upgrade_table_weapon.weapon_element[2]         
+      @@selected_weapon_original_effects[2] = @@current_upgrade_table_weapon.weapon_effect[2]   
+      @@selected_gem_01 = GEM_ARRAY[0]
+      @@selected_gem_02 = GEM_ARRAY[0]
+      @@selected_gem_03 = GEM_ARRAY[0]
+      else
+        All_Audio::SFX.char_create_up
+      end
+     end
     def Upgrade_Table.update_upgrade_table_string
       if @@current_upgrade_table_weapon != @@nil_stick
       @@upgrade_table_text.string = "  Name: " + @@current_upgrade_table_weapon.weapon_name +
@@ -5905,7 +5921,8 @@ include Etc
           @@current_gem_slot = 2
           Owned_Gem_Array.delete(Owned_Gem_Array[gem])
           else
-            All_Audio::SFX.char_create_up
+            @@current_gem_slot = 2
+            Upgrade_Table.select_gem(gem)
           end
          when 2
           if @@current_upgrade_table_weapon.weapon_element[1] == "empty"
@@ -5917,7 +5934,8 @@ include Etc
           @@current_gem_slot = 3
           Owned_Gem_Array.delete(Owned_Gem_Array[gem])
           else
-            All_Audio::SFX.char_create_up
+            @@current_gem_slot = 3
+            Upgrade_Table.select_gem(gem)
            end
          when 3
           if @@current_upgrade_table_weapon.weapon_element[2] == "empty"

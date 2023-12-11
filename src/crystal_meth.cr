@@ -2685,9 +2685,12 @@ def Window_Class.hud_keypresses(window)
          Player_Data::Player_Physics.mobilize_player
          Crafted_Items::Upgrade_Table.initialize_upgrade_table
         end
-        if (x >= 430 && x <= 580) && (y >= 620 && y <= 690) #--------clear
-          Crafted_Items::Upgrade_Table.initialize_upgrade_table
-         end
+       if (x >= 430 && x <= 580) && (y >= 620 && y <= 690) #--------clear
+         Crafted_Items::Upgrade_Table.initialize_upgrade_table
+        end
+       if (x >= 430 && x <= 580) && (y >= 485 && y <= 560) #--------upgrade
+         Crafted_Items::Upgrade_Table.upgrade
+        end
         if (x >= 280 && x <= 330) && (y >= 165 && y <= 260) #--------up arrow 1
           if @@page > 1
             All_Audio::SFX.light_bonk
