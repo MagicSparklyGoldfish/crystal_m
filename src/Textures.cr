@@ -1,6 +1,6 @@
 #|||||||||||||||||||||||||||||||||||||||||||||||||||||||Textures|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
   Ground = SF::RectangleShape.new(SF.vector2(10000, 500)); Ground.fill_color = SF.color(0, 255, 100)
-  Ground.position = SF.vector2(0, 800)
+  Ground.position = SF.vector2(-5000, 800)
 
   Test_Platform_01 = SF::RectangleShape.new(SF.vector2(5000, 5)); Test_Platform_01.fill_color = SF.color(0, 255, 100)
   Test_Platform_01.position = SF.vector2(0, 400)
@@ -3117,6 +3117,9 @@ Testing_Text.character_size = 20; Testing_Text.color = SF::Color::White; Testing
 #-------------------------------------------------------------------------------------------------------------------------------------- 
  Test_Teleporter = SF::RectangleShape.new(SF.vector2(100, 40)); Test_Teleporter.fill_color = SF.color(50, 150, 255)
  Test_Teleporter.position = SF.vector2(120, 762);
+
+ Test_Teleporter2 = SF::RectangleShape.new(SF.vector2(100, 40)); Test_Teleporter2.fill_color = SF.color(50, 150, 255)
+ Test_Teleporter2.position = SF.vector2(-120, 762);
 
  Test_Ladder = SF::RectangleShape.new(SF.vector2(40, 400)); Test_Teleporter.fill_color = SF.color(50, 150, 255)
  Test_Ladder.position = SF.vector2(0, 400);
