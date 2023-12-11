@@ -5846,7 +5846,7 @@ include Etc
   #?                                                               Methods                                                                                ?
   #????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
     def Upgrade_Table.initialize_upgrade_table
-      Crafted_Items::Upgrade_Table.initialize_upgrade_table
+      @@current_upgrade_table_weapon = @@nil_stick
       if @@selected_gem_01 != GEM_ARRAY[0]
       Owned_Gem_Array.push(@@selected_gem_01)
       end
@@ -5865,29 +5865,41 @@ include Etc
      if Owned_Gem_Array.size > gem
        case @@current_gem_slot
          when 1
+          if @@current_upgrade_table_weapon.weapon_element[0] == "empty"
           @@selected_gem_01 = Owned_Gem_Array[gem]
           @@selected_gem_01.craft_sprite.position = SF.vector2(670, -38)
           @@selected_gem_01.craft_sprite.scale = SF.vector2(0.85, 0.85)
           @@current_gem_slot = 2
           Owned_Gem_Array.delete(Owned_Gem_Array[gem])
+          else
+            All_Audio::SFX.char_create_up
+          end
          when 2
+          if @@current_upgrade_table_weapon.weapon_element[1] == "empty"
           @@selected_gem_02 = Owned_Gem_Array[gem]
           @@selected_gem_02.craft_sprite.position = SF.vector2(740, -38)
           @@selected_gem_02.craft_sprite.scale = SF.vector2(0.85, 0.85)
           @@current_gem_slot = 3
           Owned_Gem_Array.delete(Owned_Gem_Array[gem])
+          else
+            All_Audio::SFX.char_create_up
+           end
          when 3
+          if @@current_upgrade_table_weapon.weapon_element[2] == "empty"
           @@selected_gem_03 = Owned_Gem_Array[gem]
           @@selected_gem_03.craft_sprite.position = SF.vector2(810, -38)
           @@selected_gem_03.craft_sprite.scale = SF.vector2(0.85, 0.85)
           @@current_gem_slot = 4
           Owned_Gem_Array.delete(Owned_Gem_Array[gem])
+          else
+            All_Audio::SFX.char_create_up
+           end
          when 4
           All_Audio::SFX.char_create_up
         end
       end
     end
-       #........................................................Draw Weapon Upgrade Table...........................................................................
+     #........................................................Draw Weapon Upgrade Table...........................................................................
        def Upgrade_Table.display_weapon_upgrade_table(window, page, page_02, page_03)
         #---------------------weapon init------------------------------
          weapon = Nil_Stick_Display
@@ -6208,10 +6220,7 @@ include Etc
           window.draw(weapon16)
          end  
         end
-     #.....................................................Initialize Weapon Upgrade Table........................................................................
-      def Upgrade_Table.initialize_upgrade_table
-        @@current_upgrade_table_weapon = @@nil_stick
-       end
+
      #..........................................................Choose Upgrade Weapon.............................................................................
       def Upgrade_Table.choose_upgrade_weapon(weapon)
         if Weapon_Inventory_Array.size > weapon
