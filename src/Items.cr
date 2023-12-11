@@ -5812,7 +5812,7 @@ include Etc
   #________________________________________________________________________________________________________________________________________________________
   #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   #/                                                               Entities                                                                               /
-  #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  #///////////////////////////////////////////////////////////////////////////////////////////Atk/////////////////////////////////////////////////////////////
    @@nil_stick = Weapon.new("", -1, "", 0, [""], [""], Nil_Ingot_Ore, Nil_Rectangle_01, SYSSOUND_6, SYSSOUND_6, "", 0, 0)
    @@stick = Weapon.new("Stick", 0, "stick", 1.25, ["none", "none", "none"], ["none", "none", "none"], Stick01, Weapon_Rectangle_01, WEAPSOUND_01, WEAPSOUND_02, "Swing", 0, 0)
    @@zinc_stick = Weapon.new("Zinc Stick", 4, "stick", 1.5, ["empty", "none", "none"], ["empty", "none", "none"], Zinc_Stick, Zinc_Stick_Display, WEAPSOUND_01, WEAPSOUND_02, "Swing", 0, 2)
@@ -5836,16 +5836,23 @@ include Etc
   #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
   #+                                                              Variables                                                                               +
   #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  
-   @@nil_stick = Weapon.new("", -1, "", 0, [""], [""], Nil_Ingot_Ore, Nil_Rectangle_01, SYSSOUND_6, SYSSOUND_6, "", 0, 0) 
+   @@nil_stick = Weapon.new("", -1, "", 0, ["", "", ""], ["", "", ""], Nil_Ingot_Ore, Nil_Rectangle_01, SYSSOUND_6, SYSSOUND_6, "", 0, 0) 
    @@selected_gem_01 : Gem; @@selected_gem_01 = GEM_ARRAY[0]; @@selected_gem_01.craft_sprite.position = SF.vector2(650, -52)
    @@selected_gem_02 : Gem; @@selected_gem_02 = GEM_ARRAY[0]; @@selected_gem_02.craft_sprite.position = SF.vector2(725, -52)
    @@selected_gem_03 : Gem; @@selected_gem_03 = GEM_ARRAY[0]; @@selected_gem_03.craft_sprite.position = SF.vector2(805, -52)
+   @@selected_weapon_original_elements : Array(String); @@selected_weapon_original_elements = @@nil_stick.weapon_element 
+   @@selected_weapon_original_effects : Array(String); @@selected_weapon_original_effects = @@nil_stick.weapon_effect
+   @@selected_weapon_original_attack : Float64; @@selected_weapon_original_attack = @@nil_stick.weapon_atk
+   @@selected_weapon_original_upgrade_count : Int32; @@selected_weapon_original_upgrade_count = @@nil_stick.weapon_upgrade_count
    @@current_gem_slot : Int32; @@current_gem_slot = 1; @@current_upgrade_table_weapon : Weapon; @@current_upgrade_table_weapon = @@nil_stick
+   @@upgrade_table_text = SF::Text.new; @@upgrade_table_text.string = "  Upgrade Stuff Here!"; @@upgrade_table_text.position = SF.vector2(700, 55);
+   @@upgrade_table_text.font = FONT_MILITARY; @@upgrade_table_text.color = SF::Color::Black; @@upgrade_table_text.character_size = 15
   #________________________________________________________________________________________________________________________________________________________
   #????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
   #?                                                               Methods                                                                                ?
   #????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
     def Upgrade_Table.initialize_upgrade_table
+      @@upgrade_table_text.string = "Upgrade Stuff Here!"
       @@current_upgrade_table_weapon = @@nil_stick
       if @@selected_gem_01 != GEM_ARRAY[0]
       Owned_Gem_Array.push(@@selected_gem_01)
@@ -5856,11 +5863,29 @@ include Etc
       if @@selected_gem_03 != GEM_ARRAY[0]
       Owned_Gem_Array.push(@@selected_gem_03)
       end
+      @@current_gem_slot = 1
+      @@current_upgrade_table_weapon.weapon_element[0] = @@selected_weapon_original_elements[0]
+      @@current_upgrade_table_weapon.weapon_element[1] = @@selected_weapon_original_elements[1]
+      @@current_upgrade_table_weapon.weapon_element[2] = @@selected_weapon_original_elements[2]
+      @@current_upgrade_table_weapon.weapon_effect[0] = @@selected_weapon_original_effects[0]  
+      @@current_upgrade_table_weapon.weapon_effect[1] = @@selected_weapon_original_effects[1] 
+      @@current_upgrade_table_weapon.weapon_effect[2] = @@selected_weapon_original_effects[2] 
+      @@current_upgrade_table_weapon.weapon_atk = @@selected_weapon_original_attack
+      @@current_upgrade_table_weapon.weapon_upgrade_count = @@selected_weapon_original_upgrade_count
       @@selected_gem_01 = GEM_ARRAY[0]
       @@selected_gem_02 = GEM_ARRAY[0]
       @@selected_gem_03 = GEM_ARRAY[0]
-      @@current_gem_slot = 1
      end
+    def Upgrade_Table.update_upgrade_table_string
+      if @@current_upgrade_table_weapon != @@nil_stick
+      @@upgrade_table_text.string = "  Name: " + @@current_upgrade_table_weapon.weapon_name +
+      "\n  Atk: " + @@current_upgrade_table_weapon.weapon_atk.to_s + "\n  Elements: " +
+      @@current_upgrade_table_weapon.weapon_element[0] + ", \n" + @@current_upgrade_table_weapon.weapon_element[1] +
+      ", " + @@current_upgrade_table_weapon.weapon_element[2] + "\n  Effects: " + @@current_upgrade_table_weapon.weapon_effect[0] +
+      ", \n" + @@current_upgrade_table_weapon.weapon_effect[1] + ", " + @@current_upgrade_table_weapon.weapon_effect[2] +
+      "\n  Upgrade Count: " + @@current_upgrade_table_weapon.weapon_upgrade_count.to_s
+      end
+    end
     def Upgrade_Table.select_gem(gem)
      if Owned_Gem_Array.size > gem
        case @@current_gem_slot
@@ -5869,6 +5894,10 @@ include Etc
           @@selected_gem_01 = Owned_Gem_Array[gem]
           @@selected_gem_01.craft_sprite.position = SF.vector2(670, -38)
           @@selected_gem_01.craft_sprite.scale = SF.vector2(0.85, 0.85)
+          @@selected_weapon_original_elements[0] = @@current_upgrade_table_weapon.weapon_element[0]
+          @@current_upgrade_table_weapon.weapon_element[0] = @@selected_gem_01.element
+          @@selected_weapon_original_effects[0] = @@current_upgrade_table_weapon.weapon_effect[0]
+          @@current_upgrade_table_weapon.weapon_effect[0] = @@selected_gem_01.effect
           @@current_gem_slot = 2
           Owned_Gem_Array.delete(Owned_Gem_Array[gem])
           else
@@ -5879,6 +5908,10 @@ include Etc
           @@selected_gem_02 = Owned_Gem_Array[gem]
           @@selected_gem_02.craft_sprite.position = SF.vector2(740, -38)
           @@selected_gem_02.craft_sprite.scale = SF.vector2(0.85, 0.85)
+          @@selected_weapon_original_elements[1] = @@current_upgrade_table_weapon.weapon_element[1]
+          @@current_upgrade_table_weapon.weapon_element[1] = @@selected_gem_02.element
+          @@selected_weapon_original_effects[1] = @@current_upgrade_table_weapon.weapon_effect[1]
+          @@current_upgrade_table_weapon.weapon_effect[1] = @@selected_gem_02.effect
           @@current_gem_slot = 3
           Owned_Gem_Array.delete(Owned_Gem_Array[gem])
           else
@@ -5889,6 +5922,10 @@ include Etc
           @@selected_gem_03 = Owned_Gem_Array[gem]
           @@selected_gem_03.craft_sprite.position = SF.vector2(810, -38)
           @@selected_gem_03.craft_sprite.scale = SF.vector2(0.85, 0.85)
+          @@selected_weapon_original_elements[2] = @@current_upgrade_table_weapon.weapon_element[2]
+          @@current_upgrade_table_weapon.weapon_element[2] = @@selected_gem_03.element
+          @@selected_weapon_original_effects[2] = @@current_upgrade_table_weapon.weapon_effect[2]
+          @@current_upgrade_table_weapon.weapon_effect[2] = @@selected_gem_03.effect
           @@current_gem_slot = 4
           Owned_Gem_Array.delete(Owned_Gem_Array[gem])
           else
@@ -5897,6 +5934,7 @@ include Etc
          when 4
           All_Audio::SFX.char_create_up
         end
+        Upgrade_Table.update_upgrade_table_string
       end
     end
      #........................................................Draw Weapon Upgrade Table...........................................................................
@@ -6226,6 +6264,7 @@ include Etc
         if Weapon_Inventory_Array.size > weapon
           All_Audio::SFX.light_bonk
           @@current_upgrade_table_weapon = Weapon_Inventory_Array[weapon]
+          Upgrade_Table.update_upgrade_table_string                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
         else
           All_Audio::SFX.char_create_up
         end
@@ -6238,6 +6277,7 @@ include Etc
       down_arrow_02 = Down_Arrow_01.dup; down_arrow_02.position = Test_Upgrade_Table_Menu.position + SF.vector2(820, 175)
       window.draw(up_arrow_01); window.draw(down_arrow_01); window.draw(up_arrow_02); window.draw(down_arrow_02)
       window.draw(@@selected_gem_01.craft_sprite); window.draw(@@selected_gem_02.craft_sprite); window.draw(@@selected_gem_03.craft_sprite)
+      window.draw(@@upgrade_table_text)
     end
   end
  class Mold
