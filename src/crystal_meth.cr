@@ -253,9 +253,11 @@ extend self
       IDLE_TIMER.restart
     end
     if idletime > SF.seconds(0.25) && @@current_direction == "right"
+      Harvestables::Ore.stop_attack
       @@is_walking = false
     Window_Class.idle_animation_right(window)
     else if idletime > SF.seconds(0.25) && @@current_direction == "left"
+      Harvestables::Ore.stop_attack
       @@is_walking = false
       Window_Class.idle_animation_left(window)
     end

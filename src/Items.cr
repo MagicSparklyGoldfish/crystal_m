@@ -4551,7 +4551,7 @@ module Harvestables
    #+                                                              Variables                                                                               +
    #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
    @@ore_animation_frame = 0; @@ore_reset = 0; @@ore_break_iterator = 0; @@is_smelting : Bool; @@is_smelting = false; @@attack_strength : Float64
-   @@attack_strength = 10
+   @@attack_strength = 10; @@ore_hit_animation_clock = SF::Clock.new; @@is_ore_attacked : Bool; @@is_ore_attacked = false; @@ore : Ore; @@ore = @@bloodstone_01
    #________________________________________________________________________________________________________________________________________________________
    #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
    #!                                                              Initialize                                                                              !
@@ -4633,7 +4633,10 @@ module Harvestables
         if time >= SF.seconds(0.35) && attack == true
           Crafted_Items::Weapon.play_hit_sound
          ore.hp_subtract(@@attack_strength)
-         Ore.animation_harvest(this, ore)
+         @@ore = ore
+         @@is_ore_attacked = true
+         @@ore_hit_animation_clock.restart
+         #Ore.animation_harvest(this, ore)
          Ore_Clock_01.restart
         end; end; end
 
@@ -4646,6 +4649,10 @@ module Harvestables
    #?                                                               Methods                                                                                ?
    #????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
     Ore_Clock_01 = SF::Clock.new; Ore_Clock_Break = SF::Clock.new
+
+    def Ore.stop_attack
+      @@is_ore_attacked = false
+    end
     def Ore.harvest(attack)
       x = 0; y = Test_Ore_Array.size - 1
       while x <= y
@@ -4709,6 +4716,7 @@ module Harvestables
       def Ore.break(broken)
         amount = rand(1..3)
         ore = broken.name
+        @@is_ore_attacked = false
     #    if broken.hp >= 0 && broken.is_broke == false
         if @@ore_reset == 0
           puts "broke"
@@ -4749,6 +4757,45 @@ module Harvestables
        end; end; end; end; end; end; end; end
     #-------------------------------------------------------------------------------------------------------------------------------------------------     
     def Ore.draw_ores(window)
+      if @@is_ore_attacked == true
+       if @@ore_hit_animation_clock.elapsed_time >= SF.seconds(0.05) && @@ore_hit_animation_clock.elapsed_time <= SF.seconds(0.1) && @@ore.hp > @@ore.max_hp/2
+         a = 100; b = 0; x = 100; y = 100
+         @@ore.sprite_change_square(a, b, x, y)
+       else if @@ore_hit_animation_clock.elapsed_time >= SF.seconds(0.01) && @@ore_hit_animation_clock.elapsed_time <= SF.seconds(0.1) && @@ore.hp < @@ore.max_hp/2
+        a = 100; b = 100; x = 100; y = 100
+        @@ore.sprite_change_square(a, b, x, y)
+        end; end
+       if @@ore_hit_animation_clock.elapsed_time >= SF.seconds(0.1) && @@ore_hit_animation_clock.elapsed_time <= SF.seconds(0.2) && @@ore.hp > @@ore.max_hp/2
+         a = 200; b = 0; x = 100; y = 100
+         @@ore.sprite_change_square(a, b, x, y)
+       else if @@ore_hit_animation_clock.elapsed_time >= SF.seconds(0.1) && @@ore_hit_animation_clock.elapsed_time <= SF.seconds(0.2) && @@ore.hp < @@ore.max_hp/2
+        a = 200; b = 100; x = 100; y = 100
+        @@ore.sprite_change_square(a, b, x, y)
+        end; end
+       if @@ore_hit_animation_clock.elapsed_time >= SF.seconds(0.2) && @@ore_hit_animation_clock.elapsed_time <= SF.seconds(0.3) && @@ore.hp > @@ore.max_hp/2
+         a = 300; b = 0; x = 100; y = 100
+         @@ore.sprite_change_square(a, b, x, y)
+       else if @@ore_hit_animation_clock.elapsed_time >= SF.seconds(0.2) && @@ore_hit_animation_clock.elapsed_time <= SF.seconds(0.3) && @@ore.hp < @@ore.max_hp/2
+        a = 300; b = 100; x = 100; y = 100
+        @@ore.sprite_change_square(a, b, x, y)
+        end; end
+       if @@ore_hit_animation_clock.elapsed_time >= SF.seconds(0.3) && @@ore_hit_animation_clock.elapsed_time <= SF.seconds(0.4) && @@ore.hp > @@ore.max_hp/2
+         a = 400; b = 0; x = 100; y = 100
+         @@ore.sprite_change_square(a, b, x, y)
+       else if @@ore_hit_animation_clock.elapsed_time >= SF.seconds(0.3) && @@ore_hit_animation_clock.elapsed_time <= SF.seconds(0.4) && @@ore.hp < @@ore.max_hp/2
+        a = 400; b = 100; x = 100; y = 100
+        @@ore.sprite_change_square(a, b, x, y)
+        end; end
+      end
+      if @@is_ore_attacked == false
+        if @@ore.hp > @@ore.max_hp/2
+          a = 0; b = 0; x = 100; y = 100
+          @@ore.sprite_change_square(a, b, x, y)
+        else if @@ore.hp < @@ore.max_hp/2 && @@ore.hp > 0
+          a = 0; b = 100; x = 100; y = 100
+          @@ore.sprite_change_square(a, b, x, y)
+        end; end
+      end
       s = Test_Ore_Array.size - 1
       if Test_Ore_Array[@@ore_break_iterator].hp <= 0 && Test_Ore_Array[@@ore_break_iterator].is_broke == false
         broken = Test_Ore_Array[@@ore_break_iterator]
