@@ -6124,7 +6124,6 @@ include Etc
   #+                                                              Variables                                                                               +
   #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++   
    @@selected_gem_01 : Gem; @@selected_gem_01 = GEM_ARRAY[0]; @@selected_gem_01.craft_sprite.position = SF.vector2(650, -52)
-   @@selected_gem_01.craft_sprite.scale = SF.vector2(0.5, 0.5)
    @@selected_gem_02 : Gem; @@selected_gem_02 = GEM_ARRAY[0]; @@selected_gem_02.craft_sprite.position = SF.vector2(725, -52)
    @@selected_gem_03 : Gem; @@selected_gem_03 = GEM_ARRAY[0]; @@selected_gem_03.craft_sprite.position = SF.vector2(805, -52)
    @@current_gem_slot : Int32; @@current_gem_slot = 1
@@ -6153,16 +6152,20 @@ include Etc
        case @@current_gem_slot
          when 1
           @@selected_gem_01 = Owned_Gem_Array[gem]
-          @@selected_gem_01.craft_sprite.position = SF.vector2(700, -72)
-          @@selected_gem_01.craft_sprite.scale = SF.vector2(0.75, 0.75)
+          @@selected_gem_01.craft_sprite.position = SF.vector2(670, -38)
+          @@selected_gem_01.craft_sprite.scale = SF.vector2(0.85, 0.85)
           @@current_gem_slot = 2
           Owned_Gem_Array.delete(Owned_Gem_Array[gem])
          when 2
           @@selected_gem_02 = Owned_Gem_Array[gem]
+          @@selected_gem_02.craft_sprite.position = SF.vector2(740, -38)
+          @@selected_gem_02.craft_sprite.scale = SF.vector2(0.85, 0.85)
           @@current_gem_slot = 3
           Owned_Gem_Array.delete(Owned_Gem_Array[gem])
          when 3
           @@selected_gem_03 = Owned_Gem_Array[gem]
+          @@selected_gem_03.craft_sprite.position = SF.vector2(810, -38)
+          @@selected_gem_03.craft_sprite.scale = SF.vector2(0.85, 0.85)
           @@current_gem_slot = 4
           Owned_Gem_Array.delete(Owned_Gem_Array[gem])
          when 4
