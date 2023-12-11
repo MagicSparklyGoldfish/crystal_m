@@ -1853,6 +1853,9 @@ include Equipment
    def sprite=(sprite)
      @sprite= sprite
     end
+   def craft_sprite=(craft_sprite)
+     @craft_sprite= craft_sprite
+    end
    def cut=(cut)
      @cut= cut
     end
@@ -1865,6 +1868,7 @@ include Equipment
    def element=(element)
      @element= element
     end
+   def_clone
   #________________________________________________________________________________________________________________________________________________________
   #????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
   #?                                                               Methods                                                                                ?
@@ -3206,6 +3210,7 @@ include Equipment
               GEM_ARRAY[i].effect = GEM_ARRAY[i].effect
               GEM_ARRAY[i].element = GEM_ARRAY[i].element
               GEM_ARRAY[i].sprite = @@preview_gem.dup
+              GEM_ARRAY[i].craft_sprite = @@preview_gem.dup
               GEM_ARRAY[i].sprite.scale  = SF.vector2(1, 1)
               GEM_ARRAY[i].cut = @@current_style
               GEM_ARRAY[i].amount_owned = 1
@@ -3224,6 +3229,7 @@ include Equipment
               GEM_ARRAY[i].effect = GEM_ARRAY[i].effect + "+"
               GEM_ARRAY[i].element = GEM_ARRAY[i].element + "+"
               GEM_ARRAY[i].sprite = @@preview_gem.dup
+              GEM_ARRAY[i].craft_sprite = @@preview_gem.dup
               GEM_ARRAY[i].sprite.scale  = SF.vector2(1, 1)
               GEM_ARRAY[i].cut = @@current_style
               GEM_ARRAY[i].amount_owned = 1
@@ -3242,6 +3248,7 @@ include Equipment
               GEM_ARRAY[i].effect = GEM_ARRAY[i].effect 
               GEM_ARRAY[i].element = GEM_ARRAY[i].element + "++"
               GEM_ARRAY[i].sprite = @@preview_gem.dup
+              GEM_ARRAY[i].craft_sprite = @@preview_gem.dup
               GEM_ARRAY[i].sprite.scale  = SF.vector2(1, 1)
               GEM_ARRAY[i].cut = @@current_style
               GEM_ARRAY[i].amount_owned = 1
@@ -3260,6 +3267,7 @@ include Equipment
               GEM_ARRAY[i].effect = GEM_ARRAY[i].effect + "++" 
               GEM_ARRAY[i].element = GEM_ARRAY[i].element
               GEM_ARRAY[i].sprite = @@preview_gem.dup
+              GEM_ARRAY[i].craft_sprite = @@preview_gem.dup
               GEM_ARRAY[i].sprite.scale  = SF.vector2(1, 1)
               GEM_ARRAY[i].cut = @@current_style
               GEM_ARRAY[i].amount_owned = 1
@@ -3278,6 +3286,7 @@ include Equipment
               GEM_ARRAY[i].effect = GEM_ARRAY[i].effect + "++" 
               GEM_ARRAY[i].element = GEM_ARRAY[i].element + "++" 
               GEM_ARRAY[i].sprite = @@preview_gem.dup
+              GEM_ARRAY[i].craft_sprite = @@preview_gem.dup
               GEM_ARRAY[i].sprite.scale  = SF.vector2(1, 1)
               GEM_ARRAY[i].cut = @@current_style
               GEM_ARRAY[i].amount_owned = 1
@@ -4353,9 +4362,9 @@ include Equipment
   #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   #/                                                               Entities                                                                               /
   #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-   #..............................................................Bloodstone...............................................................................
-    @@nil_gem = Gem.new("", 0, Smelter_Nil_Sprite, "table", 1, "red", 60, "earth", "hp+", Smelter_Nil_Sprite)
-    #GEM_ARRAY.push(@@bloodstone_gem)
+   #..................................................................Nil..................................................................................
+    @@nil_gem = Gem.new("", 0, Smelter_Nil_Sprite, "", 0, "", 0, "", "", Smelter_Nil_Sprite)
+    GEM_ARRAY.push(@@nil_gem)
    #..............................................................Bloodstone...............................................................................
     @@bloodstone_gem = Gem.new("Bloodstone", 1, Bloodstone_Inventory_Tablecut, "table", 0, "red", 60, "earth", "hp+", Bloodstone_Inventory_Tablecut)
     GEM_ARRAY.push(@@bloodstone_gem)
@@ -6109,18 +6118,58 @@ include Etc
    Weapon_Template_Array.push(@@steel_stick)
   #________________________________________________________________________________________________________________________________________________________
   end
+  Upgrade_Gem_Array = GEM_ARRAY.clone
  class Upgrade_Table
   #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
   #+                                                              Variables                                                                               +
-  #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
+  #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++   
+   @@selected_gem_01 : Gem; @@selected_gem_01 = GEM_ARRAY[0]; @@selected_gem_01.craft_sprite.position = SF.vector2(650, -52)
+   @@selected_gem_01.craft_sprite.scale = SF.vector2(0.5, 0.5)
+   @@selected_gem_02 : Gem; @@selected_gem_02 = GEM_ARRAY[0]; @@selected_gem_02.craft_sprite.position = SF.vector2(725, -52)
+   @@selected_gem_03 : Gem; @@selected_gem_03 = GEM_ARRAY[0]; @@selected_gem_03.craft_sprite.position = SF.vector2(805, -52)
+   @@current_gem_slot : Int32; @@current_gem_slot = 1
   #________________________________________________________________________________________________________________________________________________________
   #????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
   #?                                                               Methods                                                                                ?
   #????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
     def Upgrade_Table.initialize_upgrade_table
       Crafted_Items::Weapon.initialize_upgrade_table
+      if @@selected_gem_01 != GEM_ARRAY[0]
+      Owned_Gem_Array.push(@@selected_gem_01)
+      end
+      if @@selected_gem_02 != GEM_ARRAY[0]
+      Owned_Gem_Array.push(@@selected_gem_02)
+      end
+      if @@selected_gem_03 != GEM_ARRAY[0]
+      Owned_Gem_Array.push(@@selected_gem_03)
+      end
+      @@selected_gem_01 = GEM_ARRAY[0]
+      @@selected_gem_02 = GEM_ARRAY[0]
+      @@selected_gem_03 = GEM_ARRAY[0]
+      @@current_gem_slot = 1
      end
+    def Upgrade_Table.select_gem(gem)
+     if Owned_Gem_Array.size > gem
+       case @@current_gem_slot
+         when 1
+          @@selected_gem_01 = Owned_Gem_Array[gem]
+          @@selected_gem_01.craft_sprite.position = SF.vector2(700, -72)
+          @@selected_gem_01.craft_sprite.scale = SF.vector2(0.75, 0.75)
+          @@current_gem_slot = 2
+          Owned_Gem_Array.delete(Owned_Gem_Array[gem])
+         when 2
+          @@selected_gem_02 = Owned_Gem_Array[gem]
+          @@current_gem_slot = 3
+          Owned_Gem_Array.delete(Owned_Gem_Array[gem])
+         when 3
+          @@selected_gem_03 = Owned_Gem_Array[gem]
+          @@current_gem_slot = 4
+          Owned_Gem_Array.delete(Owned_Gem_Array[gem])
+         when 4
+          All_Audio::SFX.char_create_up
+        end
+      end
+    end
     def Upgrade_Table.display_upgrade_table(window)
       window.draw(Test_Upgrade_Table_Menu)
       up_arrow_01 = Up_Arrow_01.dup; up_arrow_01.position = Test_Upgrade_Table_Menu.position + SF.vector2(-75, 50)
@@ -6128,6 +6177,7 @@ include Etc
       up_arrow_02 = Up_Arrow_01.dup; up_arrow_02.position = Test_Upgrade_Table_Menu.position + SF.vector2(820, 50)
       down_arrow_02 = Down_Arrow_01.dup; down_arrow_02.position = Test_Upgrade_Table_Menu.position + SF.vector2(820, 175)
       window.draw(up_arrow_01); window.draw(down_arrow_01); window.draw(up_arrow_02); window.draw(down_arrow_02)
+      window.draw(@@selected_gem_01.craft_sprite); window.draw(@@selected_gem_02.craft_sprite); window.draw(@@selected_gem_03.craft_sprite)
     end
   end
  class Mold
@@ -6157,7 +6207,7 @@ include Etc
     def Forge.choose_ingot(ingot)
       @@chosen_ingot = ingot
     end 
-    def Forge.forge_weapon  #@todo moke forging use up ingots
+    def Forge.forge_weapon  
       weapon = @@craft_weapon
       if Ingot_Array[weapon].amount_owned >= Weapon_Template_Array[weapon - 1].ingots_required
       Crafted_Items::Weapon.forge_weapon(weapon)

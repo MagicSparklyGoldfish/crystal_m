@@ -2920,6 +2920,15 @@ def Window_Class.hud_keypresses(window)
            end
           Crafted_Items::Weapon.choose_upgrade_weapon(weapon)
          end
+      #---------------------Select Gem------------------------
+      if (x >= 910 && x <= 960) && (y >= 160 && y <= 230)#------select gem
+        gem = 0
+        case @@page_02
+         when 1
+          gem = 0
+          Crafted_Items::Upgrade_Table.select_gem(gem)
+         end
+       end
       #_______________________________________________________
       when "Stats_Menu" #---------------------------------------------------------Stats Menu
         if (x >= 1280 && x <= 1330) && (y >= 210 && y <= 260)
