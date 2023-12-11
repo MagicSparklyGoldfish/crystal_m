@@ -428,6 +428,9 @@
     Weapon_Rectangle_01 = SF::RectangleShape.new(SF.vector2(140, 140));
     Weapon_Rectangle_01.set_texture(WEAPON_DISPLAY_TEXTURE_01, reset_rect: false);  Weapon_Rectangle_01.position = SF.vector2(555, 310);
     Weapon_Rectangle_01.texture_rect = SF.int_rect(0, 0, 140, 140);
+    Nil_Rectangle_01 = SF::RectangleShape.new(SF.vector2(140, 140));
+    Nil_Rectangle_01.set_texture(WEAPON_DISPLAY_TEXTURE_01, reset_rect: false);  Nil_Rectangle_01.position = SF.vector2(555, 310);
+    Nil_Rectangle_01.texture_rect = SF.int_rect(0, 0, 140, 140); Nil_Rectangle_01.fill_color = SF.color(0, 0, 0, 0)
    #...................................................Zinc Stick...................................................................
     #---------------------------------------------------Sprite----------------------------------------------------------------------
      ZINC_STICK_TEXTURE = SF::Texture.from_file("graphics/weapons/Zinc_Stick.png"); Zinc_Stick = SF::Sprite.new(ZINC_STICK_TEXTURE)

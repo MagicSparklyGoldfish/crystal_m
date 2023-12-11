@@ -781,7 +781,7 @@ def Window_Class.ladder_test_ore_map
       page = @@page; page_02 = @@page_02; page_03 = @@page_03
       tab = @@tab
       Crafted_Items::Upgrade_Table.display_upgrade_table(window)
-      Crafted_Items::Weapon.display_weapon_upgrade_table(window, page, page_02, page_03)
+      Crafted_Items::Upgrade_Table.display_weapon_upgrade_table(window, page, page_02, page_03)
       Etc::Gem.display_upgrade_gems(window, page_02)
       end
     Window_Class.hud(window)
@@ -2730,7 +2730,7 @@ def Window_Class.hud_keypresses(window)
           when 4
            weapon = 48
            end
-           Crafted_Items::Weapon.choose_upgrade_weapon(weapon)
+           Crafted_Items::Upgrade_Table.choose_upgrade_weapon(weapon)
          end
         if (x >= 455 && x <= 505) && (y >= 160 && y <= 230)
           weapon = 0
@@ -2744,7 +2744,7 @@ def Window_Class.hud_keypresses(window)
           when 4
             weapon = 49
           end
-          Crafted_Items::Weapon.choose_upgrade_weapon(weapon)
+          Crafted_Items::Upgrade_Table.choose_upgrade_weapon(weapon)
          end
         if (x >= 505 && x <= 555) && (y >= 160 && y <= 230)
           weapon = 0
@@ -2758,7 +2758,7 @@ def Window_Class.hud_keypresses(window)
            when 4
             weapon = 50
           end
-          Crafted_Items::Weapon.choose_upgrade_weapon(weapon)
+          Crafted_Items::Upgrade_Table.choose_upgrade_weapon(weapon)
          end
         if (x >= 555 && x <= 605) && (y >= 160 && y <= 230)
           weapon = 0
@@ -2772,7 +2772,7 @@ def Window_Class.hud_keypresses(window)
            when 4
             weapon = 51
            end
-          Crafted_Items::Weapon.choose_upgrade_weapon(weapon)
+          Crafted_Items::Upgrade_Table.choose_upgrade_weapon(weapon)
          end
         if (x >= 405 && x <= 455) && (y >= 230 && y <= 300)
           weapon = 0
@@ -2786,7 +2786,7 @@ def Window_Class.hud_keypresses(window)
            when 4
              weapon = 52
           end
-          Crafted_Items::Weapon.choose_upgrade_weapon(weapon)
+          Crafted_Items::Upgrade_Table.choose_upgrade_weapon(weapon)
          end
         if (x >= 455 && x <= 505) && (y >= 230 && y <= 300)
           weapon = 0
@@ -2800,7 +2800,7 @@ def Window_Class.hud_keypresses(window)
            when 4
             weapon = 53
            end
-          Crafted_Items::Weapon.choose_upgrade_weapon(weapon)
+          Crafted_Items::Upgrade_Table.choose_upgrade_weapon(weapon)
          end
         if (x >= 505 && x <= 555) && (y >= 230 && y <= 300)
           weapon = 0
@@ -2812,7 +2812,7 @@ def Window_Class.hud_keypresses(window)
            when 3
             weapon = 38
            end
-          Crafted_Items::Weapon.choose_upgrade_weapon(weapon)
+          Crafted_Items::Upgrade_Table.choose_upgrade_weapon(weapon)
          end
         if (x >= 555 && x <= 605) && (y >= 230 && y <= 300)
           weapon = 0
@@ -2824,7 +2824,7 @@ def Window_Class.hud_keypresses(window)
            when 3
             weapon = 39
            end
-          Crafted_Items::Weapon.choose_upgrade_weapon(weapon)
+          Crafted_Items::Upgrade_Table.choose_upgrade_weapon(weapon)
          end
         if (x >= 405 && x <= 455) && (y >= 300 && y <= 370)
           weapon = 0
@@ -2836,7 +2836,7 @@ def Window_Class.hud_keypresses(window)
            when 3
             weapon = 40
            end
-          Crafted_Items::Weapon.choose_upgrade_weapon(weapon)
+          Crafted_Items::Upgrade_Table.choose_upgrade_weapon(weapon)
          end
         if (x >= 455 && x <= 505) && (y >= 300 && y <= 370)
           weapon = 0
@@ -2848,7 +2848,7 @@ def Window_Class.hud_keypresses(window)
            when 3
             weapon = 41
            end
-          Crafted_Items::Weapon.choose_upgrade_weapon(weapon)
+          Crafted_Items::Upgrade_Table.choose_upgrade_weapon(weapon)
          end
         if (x >= 505 && x <= 555) && (y >= 300 && y <= 370)
           weapon = 0
@@ -2860,7 +2860,7 @@ def Window_Class.hud_keypresses(window)
            when 3
             weapon = 42
            end
-          Crafted_Items::Weapon.choose_upgrade_weapon(weapon)
+          Crafted_Items::Upgrade_Table.choose_upgrade_weapon(weapon)
          end
         if (x >= 555 && x <= 605) && (y >= 300 && y <= 370)
           weapon = 0
@@ -2872,7 +2872,7 @@ def Window_Class.hud_keypresses(window)
            when 3
             weapon = 43
            end
-          Crafted_Items::Weapon.choose_upgrade_weapon(weapon)
+          Crafted_Items::Upgrade_Table.choose_upgrade_weapon(weapon)
          end
         if (x >= 405 && x <= 455) && (y >= 370 && y <= 440)
           weapon = 0
@@ -2884,7 +2884,7 @@ def Window_Class.hud_keypresses(window)
            when 3
             weapon = 44
            end
-          Crafted_Items::Weapon.choose_upgrade_weapon(weapon)
+          Crafted_Items::Upgrade_Table.choose_upgrade_weapon(weapon)
          end
         if (x >= 455 && x <= 505) && (y >= 370 && y <= 440)
           weapon = 0
@@ -2896,7 +2896,7 @@ def Window_Class.hud_keypresses(window)
            when 3
             weapon = 45
            end
-          Crafted_Items::Weapon.choose_upgrade_weapon(weapon)
+          Crafted_Items::Upgrade_Table.choose_upgrade_weapon(weapon)
          end
         if (x >= 505 && x <= 555) && (y >= 370 && y <= 440)
           weapon = 0
@@ -2908,7 +2908,7 @@ def Window_Class.hud_keypresses(window)
            when 3
             weapon = 46
            end
-          Crafted_Items::Weapon.choose_upgrade_weapon(weapon)
+          Crafted_Items::Upgrade_Table.choose_upgrade_weapon(weapon)
          end
         if (x >= 555 && x <= 605) && (y >= 370 && y <= 440)
           weapon = 0
@@ -2920,7 +2920,7 @@ def Window_Class.hud_keypresses(window)
            when 3
             weapon = 47
            end
-          Crafted_Items::Weapon.choose_upgrade_weapon(weapon)
+          Crafted_Items::Upgrade_Table.choose_upgrade_weapon(weapon)
          end
       #---------------------Select Gem------------------------
       if (x >= 910 && x <= 960) && (y >= 160 && y <= 230)#------select gem
