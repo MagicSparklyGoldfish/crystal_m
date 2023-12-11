@@ -5415,6 +5415,12 @@ include Etc
    def ingots_required
     @ingots_required
    end
+   def weapon_atk=(this)
+    @weapon_atk
+   end
+   def weapon_upgrade_count=(this)
+    @weapon_upgrade_count
+   end
   #________________________________________________________________________________________________________________________________________________________
   #????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
   #?                                                               Methods                                                                                ?
@@ -5853,7 +5859,6 @@ include Etc
   #????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
     def Upgrade_Table.initialize_upgrade_table
       @@upgrade_table_text.string = "Upgrade Stuff Here!"
-      @@current_upgrade_table_weapon = @@nil_stick
       if @@selected_gem_01 != GEM_ARRAY[0]
       Owned_Gem_Array.push(@@selected_gem_01)
       end
@@ -5875,6 +5880,7 @@ include Etc
       @@selected_gem_01 = GEM_ARRAY[0]
       @@selected_gem_02 = GEM_ARRAY[0]
       @@selected_gem_03 = GEM_ARRAY[0]
+      @@current_upgrade_table_weapon = @@nil_stick
      end
     def Upgrade_Table.update_upgrade_table_string
       if @@current_upgrade_table_weapon != @@nil_stick
@@ -5894,9 +5900,7 @@ include Etc
           @@selected_gem_01 = Owned_Gem_Array[gem]
           @@selected_gem_01.craft_sprite.position = SF.vector2(670, -38)
           @@selected_gem_01.craft_sprite.scale = SF.vector2(0.85, 0.85)
-          @@selected_weapon_original_elements[0] = @@current_upgrade_table_weapon.weapon_element[0]
           @@current_upgrade_table_weapon.weapon_element[0] = @@selected_gem_01.element
-          @@selected_weapon_original_effects[0] = @@current_upgrade_table_weapon.weapon_effect[0]
           @@current_upgrade_table_weapon.weapon_effect[0] = @@selected_gem_01.effect
           @@current_gem_slot = 2
           Owned_Gem_Array.delete(Owned_Gem_Array[gem])
@@ -5908,10 +5912,8 @@ include Etc
           @@selected_gem_02 = Owned_Gem_Array[gem]
           @@selected_gem_02.craft_sprite.position = SF.vector2(740, -38)
           @@selected_gem_02.craft_sprite.scale = SF.vector2(0.85, 0.85)
-          @@selected_weapon_original_elements[1] = @@current_upgrade_table_weapon.weapon_element[1]
+          @@current_upgrade_table_weapon.weapon_effect[1] = @@selected_gem_02.effect   
           @@current_upgrade_table_weapon.weapon_element[1] = @@selected_gem_02.element
-          @@selected_weapon_original_effects[1] = @@current_upgrade_table_weapon.weapon_effect[1]
-          @@current_upgrade_table_weapon.weapon_effect[1] = @@selected_gem_02.effect
           @@current_gem_slot = 3
           Owned_Gem_Array.delete(Owned_Gem_Array[gem])
           else
@@ -5922,10 +5924,8 @@ include Etc
           @@selected_gem_03 = Owned_Gem_Array[gem]
           @@selected_gem_03.craft_sprite.position = SF.vector2(810, -38)
           @@selected_gem_03.craft_sprite.scale = SF.vector2(0.85, 0.85)
-          @@selected_weapon_original_elements[2] = @@current_upgrade_table_weapon.weapon_element[2]
           @@current_upgrade_table_weapon.weapon_element[2] = @@selected_gem_03.element
-          @@selected_weapon_original_effects[2] = @@current_upgrade_table_weapon.weapon_effect[2]
-          @@current_upgrade_table_weapon.weapon_effect[2] = @@selected_gem_03.effect
+          @@current_upgrade_table_weapon.weapon_effect[2] = @@selected_gem_03.effect  
           @@current_gem_slot = 4
           Owned_Gem_Array.delete(Owned_Gem_Array[gem])
           else
@@ -6264,7 +6264,13 @@ include Etc
         if Weapon_Inventory_Array.size > weapon
           All_Audio::SFX.light_bonk
           @@current_upgrade_table_weapon = Weapon_Inventory_Array[weapon]
-          Upgrade_Table.update_upgrade_table_string                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+          Upgrade_Table.update_upgrade_table_string       
+          @@selected_weapon_original_elements[0] = @@current_upgrade_table_weapon.weapon_element[0]
+          @@selected_weapon_original_effects[0] = @@current_upgrade_table_weapon.weapon_effect[0]      
+          @@selected_weapon_original_elements[1] = @@current_upgrade_table_weapon.weapon_element[1]
+          @@selected_weapon_original_effects[1] = @@current_upgrade_table_weapon.weapon_effect[1]
+          @@selected_weapon_original_elements[2] = @@current_upgrade_table_weapon.weapon_element[2]         
+          @@selected_weapon_original_effects[2] = @@current_upgrade_table_weapon.weapon_effect[2]                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
         else
           All_Audio::SFX.char_create_up
         end
