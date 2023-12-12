@@ -70,6 +70,7 @@ module Equipment
    def Equipment.attack_strength(base_attack) #@note attack strength 
     attack_strength = base_attack + @@current_weapon_object.atk_power
     Harvestables::Ore.set_attack_strength(attack_strength)
+    Harvestables::Herbs.set_attack_strength(attack_strength)
    end
    def Equipment.check_stats(slot)
     if WEAPON_INVENTORY_ARRAY.size > slot
@@ -5371,53 +5372,81 @@ include Use
   end
   Herb_Array = [] of Herbs
   class Herbs <  Ingredients
-  def initialize(name : String, id : Int32, color : String, hp : Int32, drop_item : Ingredients, sprite : SF::Sprite, is_broke : Bool, kind : String,
-    amount_owned : Int32, effects : Array(String))
-    @name = name
-    @id = id
-    @color = color
-    @hp = hp
-    @drop_item = drop_item
-    @sprite = sprite
-    @is_broke = is_broke
-    @kind = kind
-    @amount_owned = amount_owned
-    @effects = effects
-  end
-  def name
-    @name
-  end
-  def id
-    @id
-  end
-  def color
-    @color
-  end
-  def hp 
-    @hp
-  end
-  def drop_item
-    @drop_item
-  end
-  def sprite
-    @sprite
-  end 
-  def is_broke
-    @is_broke
-  end
-  def kind
-    @kind
-  end
-  def amount_owned
-    @amount_owned
-  end
-  def effects
-    @effects
-  end
+  #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  #+                                                              Variables                                                                               +
+  #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+   @@current_plant_attacked : Herbs; @@current_plant_attacked = @@blackberry_bush; @@is_plant_attacked : Bool; @@is_plant_attacked = false; 
+   @@attack_strength : Float64; @@attack_strength = 10; @@plant_reset : Int32; @@plant_reset = 0; @@plant_animation_frame : Int32;
+   @@plant_animation_frame = 0
+  #________________________________________________________________________________________________________________________________________________________
+  #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  #!                                                              Initialize                                                                              !
+  #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+   def initialize(name : String, id : Int32, color : String, hp : Float64, max_hp : Float64, drop_item : Ingredients, sprite : SF::Sprite, is_broke : Bool, 
+     kind : String, amount_owned : Int32, effects : Array(String))
+     @name = name
+     @id = id
+     @color = color
+     @hp = hp
+     @max_hp = max_hp
+     @drop_item = drop_item
+     @sprite = sprite
+     @is_broke = is_broke
+     @kind = kind
+     @amount_owned = amount_owned
+     @effects = effects
+   end
+   def name
+     @name
+   end
+   def id
+     @id
+   end
+   def color
+     @color
+   end
+   def hp 
+     @hp
+   end
+   def max_hp
+    @max_hp
+   end
+   def drop_item
+     @drop_item
+   end
+   def sprite
+     @sprite
+   end 
+   def is_broke
+     @is_broke
+   end
+   def kind
+     @kind
+   end
+   def amount_owned
+     @amount_owned
+   end
+   def effects
+     @effects
+   end
+  #________________________________________________________________________________________________________________________________________________________
   #????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
   #?                                                               Methods                                                                                ?
   #????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
-   Plant_Clock_01 = SF::Clock.new; Plant_Animation_Clock_01 = SF::Clock.new
+   Plant_Clock_01 = SF::Clock.new; Plant_Animation_Clock_01 = SF::Clock.new; Plant_Clock_Break = SF::Clock.new
+   #..........................................................HP Class Functions...........................................................................
+    def Herbs.set_attack_strength(attack_strength)
+     @@attack_strength = attack_strength
+    end 
+    def hp_subtract(damage)
+      @hp -= damage
+     end
+     def hp_add(healing)
+      @hp += healing
+     end
+    def hp_set(this)
+      @hp = this
+     end
    #---------------------------------------------------------------Harvest---------------------------------------------------------------------------------
     def Herbs.harvest(attack)
       b = Player_Attack_Bounding_Box.global_bounds
@@ -5434,24 +5463,119 @@ include Use
      if plant.hp > 0
      if time >= SF.seconds(0.35) && attack == true
        Crafted_Items::Weapon.play_hit_sound
-   #   ore.hp_subtract(@@attack_strength)
-   #   @@ore = ore
-   #   @@is_ore_attacked = true
-      Plant_Animation_Clock_01.restart
-      Plant_Clock_01.restart
+       plant.hp_subtract(@@attack_strength)
+       @@current_plant_attacked = plant
+       @@is_plant_attacked = true
+       Plant_Animation_Clock_01.restart
+       Plant_Clock_01.restart
      end; end; end; end
+   #.......................................................Animation Class Functions.......................................................................
+     def sprite_change_square(a, b, x, y)
+      @sprite.texture_rect = SF.int_rect(a, b, x, y)
+     end
+    def is_broke_toggle
+      if @is_broke == true
+        @is_broke = false
+     else if @is_broke == false
+      @is_broke = true
+      end
+     end; end
+     def Herbs.break(broken)
+      amount = rand(1..3)
+      plant = broken.drop_item
+      @@is_plant_attacked = false
+      if @@plant_reset == 0
+        #Etc::Inventory_Ore.add_ore(amount, ore)
+        #Etc::Inventory_Ore.update_ore_inventory
+        Plant_Clock_Break.restart
+        @@plant_reset = 1
+      end
+      time = Plant_Clock_Break.elapsed_time
+      if time >= SF.seconds(0.25) && time < SF.seconds(0.5)
+        All_Audio::SFX.dig_02
+       a = 0; b = 200; x = 100; y = 100
+       broken.sprite_change_square(a, b, x, y)
+ else if time >= SF.seconds(0.5) && time < SF.seconds(0.75)
+       a = 100; b = 200; x = 100; y = 100
+       broken.sprite_change_square(a, b, x, y)
+ else if time >= SF.seconds(0.75) && time < SF.seconds(1)
+       a = 200; b = 200; x = 100; y = 100
+       broken.sprite_change_square(a, b, x, y)
+ else if time >= SF.seconds(1) && time < SF.seconds(1.25)
+       a = 300; b = 200; x = 100; y = 100
+       broken.sprite_change_square(a, b, x, y)
+ else if time >= SF.seconds(1.25) && time < SF.seconds(1.5)
+        a = 400; b = 200; x = 100; y = 100
+        broken.sprite_change_square(a, b, x, y)
+ else if time >= SF.seconds(1.5) && time < SF.seconds(1.75)
+  broken.is_broke_toggle   
+  @@plant_reset = 0
+  if time > SF.milliseconds(30)  #@note this only works with microseconds and milliseconds, not seconds. I don't know why, there wasn't a typo
+    Plant_Clock_Break.restart
+       this = broken.max_hp
+       broken.hp_set(this)
+       a = 0; b = 0; x = 100; y = 100
+       broken.sprite_change_square(a, b, x, y)
+       this = broken.is_broke  
+       broken.is_broke_toggle 
+       Plant_Clock_Break.restart
+      end; end; end; end; end; end; end; end 
    #---------------------------------------------------------------Display---------------------------------------------------------------------------------
     def Herbs.display(window, map)
       case map
       when "test_garden"
       Herb_Array.map { |i| window.draw(i.sprite)}
       end
+      #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Animations'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+       if @@is_plant_attacked == true
+         if Plant_Animation_Clock_01.elapsed_time >= SF.seconds(0.05) && Plant_Animation_Clock_01.elapsed_time <= SF.seconds(0.1) && @@current_plant_attacked.hp > @@current_plant_attacked.max_hp/2
+           a = 100; b = 0; x = 100; y = 100
+           @@current_plant_attacked.sprite_change_square(a, b, x, y)
+         else if Plant_Animation_Clock_01.elapsed_time >= SF.seconds(0.01) && Plant_Animation_Clock_01.elapsed_time <= SF.seconds(0.1) && @@current_plant_attacked.hp < @@current_plant_attacked.max_hp/2
+          a = 100; b = 100; x = 100; y = 100
+          @@current_plant_attacked.sprite_change_square(a, b, x, y)
+          end; end
+         if Plant_Animation_Clock_01.elapsed_time >= SF.seconds(0.1) && Plant_Animation_Clock_01.elapsed_time <= SF.seconds(0.2) && @@current_plant_attacked.hp > @@current_plant_attacked.max_hp/2
+           a = 200; b = 0; x = 100; y = 100
+           @@current_plant_attacked.sprite_change_square(a, b, x, y)
+         else if Plant_Animation_Clock_01.elapsed_time >= SF.seconds(0.1) && Plant_Animation_Clock_01.elapsed_time <= SF.seconds(0.2) && @@current_plant_attacked.hp < @@current_plant_attacked.max_hp/2
+          a = 200; b = 100; x = 100; y = 100
+          @@current_plant_attacked.sprite_change_square(a, b, x, y)
+          end; end
+         if Plant_Animation_Clock_01.elapsed_time >= SF.seconds(0.2) && Plant_Animation_Clock_01.elapsed_time <= SF.seconds(0.3) && @@current_plant_attacked.hp > @@current_plant_attacked.max_hp/2
+           a = 300; b = 0; x = 100; y = 100
+           @@current_plant_attacked.sprite_change_square(a, b, x, y)
+         else if Plant_Animation_Clock_01.elapsed_time >= SF.seconds(0.2) && Plant_Animation_Clock_01.elapsed_time <= SF.seconds(0.3) && @@current_plant_attacked.hp < @@current_plant_attacked.max_hp/2
+          a = 300; b = 100; x = 100; y = 100
+          @@current_plant_attacked.sprite_change_square(a, b, x, y)
+          end; end
+         if Plant_Animation_Clock_01.elapsed_time >= SF.seconds(0.3) && Plant_Animation_Clock_01.elapsed_time <= SF.seconds(0.4) && @@current_plant_attacked.hp > @@current_plant_attacked.max_hp/2
+           a = 400; b = 0; x = 100; y = 100
+           @@current_plant_attacked.sprite_change_square(a, b, x, y)
+         else if Plant_Animation_Clock_01.elapsed_time >= SF.seconds(0.3) && Plant_Animation_Clock_01.elapsed_time <= SF.seconds(0.4) && @@current_plant_attacked.hp < @@current_plant_attacked.max_hp/2
+          a = 400; b = 100; x = 100; y = 100
+          @@current_plant_attacked.sprite_change_square(a, b, x, y)
+          end; end
+        end
+       if @@is_plant_attacked == false
+       if @@current_plant_attacked.hp > @@current_plant_attacked.max_hp/2
+            a = 0; b = 0; x = 100; y = 100
+            @@current_plant_attacked.sprite_change_square(a, b, x, y)
+          else if @@current_plant_attacked.hp < @@current_plant_attacked.max_hp/2 && @@current_plant_attacked.hp > 0
+            a = 0; b = 100; x = 100; y = 100
+            @@current_plant_attacked.sprite_change_square(a, b, x, y)
+          end; end
+       end
+       Herb_Array.map { |i| if i.hp <= 0 && i.is_broke == false
+       broken = i
+       Herbs.break(broken)
+      end}
     end
   #________________________________________________________________________________________________________________________________________________________
   #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   #/                                                               Entities                                                                               /
   #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-   @@blackberry_bush = Herbs.new("Blackberry Bush", 0, "black", 100, @@blackberries, Blackberry_Bush, false, "berry", 0, ["Hp+", "Mp+"])
+   @@blackberry_bush = Herbs.new("Blackberry Bush", 0, "black", 100, 100, @@blackberries, Blackberry_Bush, false, "berry", 0, ["Hp+", "Mp+"])
    Herb_Array.push(@@blackberry_bush)
   #________________________________________________________________________________________________________________________________________________________
   end
@@ -5888,6 +6012,7 @@ include Etc
        def Weapon.attack_strength(base_attack) #@note attack strength 
         attack_strength = base_attack * @@current_equipped_weapon.weapon_atk
         Harvestables::Ore.set_attack_strength(attack_strength)
+        Harvestables::Herbs.set_attack_strength(attack_strength)
        end
 
        def Crafted_Items::Weapon.check_stats(slot)
