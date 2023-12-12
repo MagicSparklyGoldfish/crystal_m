@@ -1507,6 +1507,9 @@
     #''''''''''''''''''''''''''''''''''''''''''''''''Black Currants'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      BLACK_CURRANT_TEXTURE = SF::Texture.from_file("graphics/plants/Black_Currants.png")
      Black_Currant = SF::Sprite.new(BLACK_CURRANT_TEXTURE)  
+    #'''''''''''''''''''''''''''''''''''''''''''''''''Blueberries'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     BLUEBERRY_TEXTURE = SF::Texture.from_file("graphics/plants/Blueberries.png")
+     Blueberry = SF::Sprite.new(BLUEBERRY_TEXTURE)  
 #----------------------------------------------------------------------------------------------------------------------------------- 
 #                                                    Character Model
 #-----------------------------------------------------------------------------------------------------------------------------------
@@ -3144,10 +3147,14 @@
    ELDERBERRY_BUSH_TEXTURE = SF::Texture.from_file("graphics/plants/Elderberry_Bush.png")
    Elderberry_Bush = SF::Sprite.new(ELDERBERRY_BUSH_TEXTURE); Elderberry_Bush.texture_rect = SF.int_rect(0, 0, 100, 100)
    Elderberry_Bush.position = SF.vector2(800, 702)
-  #''''''''''''''''''''''''''''''''''''''''''''''''''Elderberry Bush''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+  #'''''''''''''''''''''''''''''''''''''''''''''''''Black Currant Bush''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
    BLACK_CURRANT_BUSH_TEXTURE = SF::Texture.from_file("graphics/plants/Black_Currant_Bush.png")
    Black_Currant_Bush = SF::Sprite.new(BLACK_CURRANT_BUSH_TEXTURE); Black_Currant_Bush.texture_rect = SF.int_rect(0, 0, 100, 100)
    Black_Currant_Bush.position = SF.vector2(1000, 702)
+  #'''''''''''''''''''''''''''''''''''''''''''''''''''Blueberry Bush''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+   BLUEBERRY_BUSH_TEXTURE = SF::Texture.from_file("graphics/plants/Blueberry_Bush.png")
+   Blueberry_Bush = SF::Sprite.new(BLUEBERRY_BUSH_TEXTURE); Blueberry_Bush.texture_rect = SF.int_rect(0, 0, 100, 100)
+   Blueberry_Bush.position = SF.vector2(1200, 702)
 #______________________________________________________________________________________________________________________________________
 Testing_Text = SF::Text.new; Testing_Text.font = FONT_PIXEL; 
 Testing_Text.character_size = 20; Testing_Text.color = SF::Color::White; Testing_Text.position = SF.vector2(1800, 652)

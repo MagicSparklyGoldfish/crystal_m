@@ -364,6 +364,8 @@ end
      Ingredient_Array.push(@@elderberries)
      @@black_currants = Ingredients.new("Black Currants", 3, "berry", "black", Black_Currant, 0, ["Hp+", "Luk+"])
      Ingredient_Array.push(@@black_currants)
+     @@blueberries = Ingredients.new("Blueberries", 4, "berry", "blue", Blueberry, 0, ["Mp+", "Int+"])
+     Ingredient_Array.push(@@blueberries)
    #__________________________________________________________________________________________________________________________________________________________
    end
  end
@@ -5631,6 +5633,8 @@ include Use
     Herb_Array.push(@@elderberry_bush)
     @@black_currant_bush = Herbs.new("Black Currant Bush", 3, "black", 100, 100, @@black_currants, Black_Currant_Bush, false, "berry", 0, ["Hp+", "Luk+"])
     Herb_Array.push(@@black_currant_bush)
+    @@blueberry_bush = Herbs.new("Blueberry Bush", 4, "blue", 100, 100, @@blueberries, Blueberry_Bush, false, "berry", 0, ["Mp+", "Int+"])
+    Herb_Array.push(@@blueberry_bush)
   #________________________________________________________________________________________________________________________________________________________
   end
 end
