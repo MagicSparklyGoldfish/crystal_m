@@ -631,8 +631,9 @@ extend self
   if @@attacking == true
    Window_Class.player_attack_bounding_box(window)
    end
+  map = @@map
   window.draw(Ground); window.draw(@@player_character_rendered_model); window.draw(Test_Teleporter); window.draw(Test_Ladder)
-  window.draw(Test_Platform_01); window.draw(Test_Platform_02); window.draw(@@test_ladder_02)
+  window.draw(Test_Platform_01); window.draw(Test_Platform_02); window.draw(@@test_ladder_02); Harvestables::Herbs.display(window, map)
  end
  @@ladder_array = [Test_Ladder, @@test_ladder_02]; @@ladder_iterator : Int32; @@ladder_iterator = 0
  @@ladder_clock = SF::Clock.new
@@ -716,6 +717,11 @@ def Window_Class.ladder_test_garden_map
   if @@ladder_iterator >= @@ladder_array.size
    @@ladder_iterator = 0 
   end
+end
+def Window_Class.attack_check_test_garden_map #@note harvest plants
+  Harvestables::Herbs.harvest(@@attacking)
+  event = "harvest_plants"
+  Window_Class.check_attacking(event)
 end
  def Window_Class.teleport_test_garden_map
   bounding_box1 = @@player_character_rendered_model.global_bounds
@@ -878,6 +884,7 @@ end
    when "test_garden"
     Window_Class.test_garden(window)
     Player_Data::Player_Physics.gravity(@@player_character_rendered_model, window)
+    Window_Class.attack_check_test_garden_map
    when "test_ore"
      Window_Class.ore_test(window)
      Window_Class.attack_check_test_ore_map

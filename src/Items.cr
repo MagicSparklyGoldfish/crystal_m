@@ -265,6 +265,60 @@ module Equipment
   end
  end
 end
+#UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU
+#UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU
+#UU                                                                  Use                                                                                    UU
+#UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU
+#UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU
+ module Use
+  #IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  #IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  #II                                                            Ingredients                                                                                II
+  #IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+  #IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
+   class Ingredients
+   #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+   #!                                                               Initialize                                                                               !
+   #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    def initialize(name : String, id : Int32, kind : String, color : String, sprite : SF::Sprite, amount_owned : Int32, effects : Array(String))
+      @name = name
+      @id = id
+      @kind = kind
+      @color = color
+      @sprite = sprite
+      @amount_owned = amount_owned
+      @effects = effects
+     end
+    def name
+      @name
+     end
+    def id
+      @id
+     end
+    def kind
+      @kind
+     end
+    def color
+      @color
+     end
+    def sprite
+      @sprite
+     end
+    def amount_owned
+      @amount_owned
+     end
+    def effects
+      @effects
+     end
+   #__________________________________________________________________________________________________________________________________________________________
+   #//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+   #/                                                               Entities                                                                                 /
+   #//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    #...............................................................Berries...................................................................................
+     @@blackberries = Ingredients.new("Blackberries", 0, "berry", "black", Blackberries, 0, ["Hp+", "Mp+"])
+   #__________________________________________________________________________________________________________________________________________________________
+   end
+ end
 
 module Etc
 include Equipment
@@ -1754,11 +1808,11 @@ include Equipment
      @@steel_ingot = Inventory_Ingot.new("Steel", 7, Steel_Ingot_Ore, 1, 10, Forge_Steel_Ingot)
      Ingot_Array.push(@@steel_ingot)
     end
- #CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
- #CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
- #C                                                        @note Cut Class                                                                               C
- #CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
- #CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+ #CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+ #CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+ #C                                                           @note Cut Class                                                                              C
+ #CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+ #CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
      class Cut 
       def initialize(name : String, is_owned : Bool, cutter_sprite : SF::Sprite, display_sprite : SF::Sprite)
         @name = name
@@ -4527,6 +4581,7 @@ end
 
 
 module Harvestables
+include Use
   extend self
   class Ore
     Test_Ore_Array = [@@bloodstone_01, @@bloodstone_02, @@bloodstone_03, @@moss_agate_01, @@amber01, @@wavellite01,  @@topaz01, @@amethyst01,
@@ -5314,8 +5369,10 @@ module Harvestables
      @@iron01 = Ore.new("Iron", 3048, "grey", 0, 100, "iron", Iron_Ore.dup, false, 100)
     #........................................................................................................................................................
   end
-  class Herbs
-  def initialize(name : String, id : Int32, color : String, hp : Int32, drop_item : String, sprite : SF::Sprite, is_broke : Bool)
+  Herb_Array = [] of Herbs
+  class Herbs <  Ingredients
+  def initialize(name : String, id : Int32, color : String, hp : Int32, drop_item : Ingredients, sprite : SF::Sprite, is_broke : Bool, kind : String,
+    amount_owned : Int32, effects : Array(String))
     @name = name
     @id = id
     @color = color
@@ -5323,6 +5380,9 @@ module Harvestables
     @drop_item = drop_item
     @sprite = sprite
     @is_broke = is_broke
+    @kind = kind
+    @amount_owned = amount_owned
+    @effects = effects
   end
   def name
     @name
@@ -5345,9 +5405,54 @@ module Harvestables
   def is_broke
     @is_broke
   end
+  def kind
+    @kind
+  end
+  def amount_owned
+    @amount_owned
+  end
+  def effects
+    @effects
+  end
   #????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
   #?                                                               Methods                                                                                ?
   #????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
+   Plant_Clock_01 = SF::Clock.new; Plant_Animation_Clock_01 = SF::Clock.new
+   #---------------------------------------------------------------Harvest---------------------------------------------------------------------------------
+    def Herbs.harvest(attack)
+      b = Player_Attack_Bounding_Box.global_bounds
+      Herb_Array.map { |i| if b.intersects? i.sprite.global_bounds
+      this = i.sprite.global_bounds
+      plant = i
+      Herbs.harvest2(attack, this, plant)
+      end}
+    end
+    def Herbs.harvest2(attack, this, plant)
+      time = Plant_Clock_01.elapsed_time
+      attack2 = Player_Attack_Bounding_Box.global_bounds
+     if attack2.intersects? this
+     if plant.hp > 0
+     if time >= SF.seconds(0.35) && attack == true
+       Crafted_Items::Weapon.play_hit_sound
+   #   ore.hp_subtract(@@attack_strength)
+   #   @@ore = ore
+   #   @@is_ore_attacked = true
+      Plant_Animation_Clock_01.restart
+      Plant_Clock_01.restart
+     end; end; end; end
+   #---------------------------------------------------------------Display---------------------------------------------------------------------------------
+    def Herbs.display(window, map)
+      case map
+      when "test_garden"
+      Herb_Array.map { |i| window.draw(i.sprite)}
+      end
+    end
+  #________________________________________________________________________________________________________________________________________________________
+  #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  #/                                                               Entities                                                                               /
+  #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+   @@blackberry_bush = Herbs.new("Blackberry Bush", 0, "black", 100, @@blackberries, Blackberry_Bush, false, "berry", 0, ["Hp+", "Mp+"])
+   Herb_Array.push(@@blackberry_bush)
   #________________________________________________________________________________________________________________________________________________________
   end
 end
