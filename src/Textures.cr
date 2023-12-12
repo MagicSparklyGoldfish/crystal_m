@@ -1494,7 +1494,7 @@
       RED_JASPER_INVENTORY_TABLECUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Red_Jasper_Inventory_Table.png")
       Red_Jasper_Inventory_Tablecut = SF::Sprite.new(RED_JASPER_INVENTORY_TABLECUT_TEXTURE) 
   #------------------------------------------------Use item Textures----------------------------------------------------------------
-   #....................................................Berries.....................................................................
+   #....................................................Bushes......................................................................
     #''''''''''''''''''''''''''''''''''''''''''''''''Blackberries'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      BLACKBERRY_TEXTURE = SF::Texture.from_file("graphics/plants/Blackberries.png")
      Blackberries = SF::Sprite.new(BLACKBERRY_TEXTURE)  
@@ -1510,6 +1510,10 @@
     #'''''''''''''''''''''''''''''''''''''''''''''''''Blueberries'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      BLUEBERRY_TEXTURE = SF::Texture.from_file("graphics/plants/Blueberries.png")
      Blueberry = SF::Sprite.new(BLUEBERRY_TEXTURE)  
+   #.....................................................Trees......................................................................
+    #'''''''''''''''''''''''''''''''''''''''''''''''''Blueberries'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     SNOW_PEAR_TEXTURE = SF::Texture.from_file("graphics/plants/Snow_Pears.png")
+     Snow_Pear = SF::Sprite.new(SNOW_PEAR_TEXTURE)  
 #----------------------------------------------------------------------------------------------------------------------------------- 
 #                                                    Character Model
 #-----------------------------------------------------------------------------------------------------------------------------------
@@ -3155,6 +3159,11 @@
    BLUEBERRY_BUSH_TEXTURE = SF::Texture.from_file("graphics/plants/Blueberry_Bush.png")
    Blueberry_Bush = SF::Sprite.new(BLUEBERRY_BUSH_TEXTURE); Blueberry_Bush.texture_rect = SF.int_rect(0, 0, 100, 100)
    Blueberry_Bush.position = SF.vector2(1200, 702)
+ #///////////////////////////////////////////////////////Trees\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+  #''''''''''''''''''''''''''''''''''''''''''''''''''''Snow Pear Tree''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+   SNOW_PEAR_TREE_TEXTURE = SF::Texture.from_file("graphics/plants/Snow_Pear_Tree.png")
+   Snow_Pear_Tree = SF::Sprite.new(SNOW_PEAR_TREE_TEXTURE); Snow_Pear_Tree.texture_rect = SF.int_rect(0, 0, 100, 200)
+   Snow_Pear_Tree.position = SF.vector2(-200, 602)
 #______________________________________________________________________________________________________________________________________
 Testing_Text = SF::Text.new; Testing_Text.font = FONT_PIXEL; 
 Testing_Text.character_size = 20; Testing_Text.color = SF::Color::White; Testing_Text.position = SF.vector2(1800, 652)

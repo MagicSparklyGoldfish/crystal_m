@@ -355,7 +355,7 @@ end
    #//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
    #/                                                               Entities                                                                                 /
    #//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    #...............................................................Berries...................................................................................
+    #................................................................Bushes...................................................................................
      @@blackberries = Ingredients.new("Blackberries", 0, "berry", "black", Blackberries, 0, ["Hp+", "Mp+"])
      Ingredient_Array.push(@@blackberries)
      @@raspberries = Ingredients.new("Raspberries", 1, "berry", "red", Raspberries, 0, ["Hp+", "Str+"])
@@ -366,6 +366,9 @@ end
      Ingredient_Array.push(@@black_currants)
      @@blueberries = Ingredients.new("Blueberries", 4, "berry", "blue", Blueberry, 0, ["Mp+", "Int+"])
      Ingredient_Array.push(@@blueberries)
+    #................................................................Trees....................................................................................
+     @@snow_pears = Ingredients.new("Snow Pear", 100, "pome", "yellow", Snow_Pear, 0, ["Mp+", "Int+"])
+     Ingredient_Array.push(@@snow_pears)
    #__________________________________________________________________________________________________________________________________________________________
    end
  end
@@ -5546,18 +5549,48 @@ include Use
       if time >= SF.seconds(0.25) && time < SF.seconds(0.5)
         All_Audio::SFX.dig_02
        a = 0; b = 200; x = 100; y = 100
+       case @@current_plant_attacked.kind
+       when "bush"
+        a = 100; b = 200; x = 100; y = 100
+       when "tree"
+        a = 100; b = 400; x = 100; y = 200
+       end
        broken.sprite_change_square(a, b, x, y)
  else if time >= SF.seconds(0.5) && time < SF.seconds(0.75)
        a = 100; b = 200; x = 100; y = 100
+       case @@current_plant_attacked.kind
+       when "bush"
+        a = 100; b = 200; x = 100; y = 100
+       when "tree"
+        a = 100; b = 400; x = 100; y = 200
+       end
        broken.sprite_change_square(a, b, x, y)
  else if time >= SF.seconds(0.75) && time < SF.seconds(1)
        a = 200; b = 200; x = 100; y = 100
+       case @@current_plant_attacked.kind
+       when "bush"
+        a = 200; b = 200; x = 100; y = 100
+       when "tree"
+        a = 200; b = 400; x = 100; y = 200
+       end
        broken.sprite_change_square(a, b, x, y)
  else if time >= SF.seconds(1) && time < SF.seconds(1.25)
        a = 300; b = 200; x = 100; y = 100
+       case @@current_plant_attacked.kind
+       when "bush"
+        a = 300; b = 200; x = 100; y = 100
+       when "tree"
+        a = 300; b = 400; x = 100; y = 200
+       end
        broken.sprite_change_square(a, b, x, y)
  else if time >= SF.seconds(1.25) && time < SF.seconds(1.5)
         a = 400; b = 200; x = 100; y = 100
+        case @@current_plant_attacked.kind
+        when "bush"
+         a = 400; b = 200; x = 100; y = 100
+        when "tree"
+         a = 400; b = 400; x = 100; y = 200
+        end
         broken.sprite_change_square(a, b, x, y)
  else if time >= SF.seconds(1.5) && time < SF.seconds(1.75)
   broken.is_broke_toggle   
@@ -5581,40 +5614,100 @@ include Use
       #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Animations'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
        if @@is_plant_attacked == true
          if Plant_Animation_Clock_01.elapsed_time >= SF.seconds(0.05) && Plant_Animation_Clock_01.elapsed_time <= SF.seconds(0.1) && @@current_plant_attacked.hp > @@current_plant_attacked.max_hp/2
-           a = 100; b = 0; x = 100; y = 100
+          a = 100; b = 0; x = 100; y = 100
+          case @@current_plant_attacked.kind
+           when "bush"
+            a = 100; b = 0; x = 100; y = 100
+           when "tree"
+            a = 100; b = 0; x = 100; y = 200
+           end
            @@current_plant_attacked.sprite_change_square(a, b, x, y)
          else if Plant_Animation_Clock_01.elapsed_time >= SF.seconds(0.01) && Plant_Animation_Clock_01.elapsed_time <= SF.seconds(0.1) && @@current_plant_attacked.hp < @@current_plant_attacked.max_hp/2
           a = 100; b = 100; x = 100; y = 100
+          case @@current_plant_attacked.kind
+          when "bush"
+           a = 100; b = 100; x = 100; y = 100
+          when "tree"
+           a = 100; b = 200; x = 100; y = 200
+          end
           @@current_plant_attacked.sprite_change_square(a, b, x, y)
           end; end
          if Plant_Animation_Clock_01.elapsed_time >= SF.seconds(0.1) && Plant_Animation_Clock_01.elapsed_time <= SF.seconds(0.2) && @@current_plant_attacked.hp > @@current_plant_attacked.max_hp/2
            a = 200; b = 0; x = 100; y = 100
+           case @@current_plant_attacked.kind
+          when "bush"
+            a = 200; b = 0; x = 100; y = 100
+           when "tree"
+            a = 200; b = 0; x = 100; y = 200
+           end
            @@current_plant_attacked.sprite_change_square(a, b, x, y)
          else if Plant_Animation_Clock_01.elapsed_time >= SF.seconds(0.1) && Plant_Animation_Clock_01.elapsed_time <= SF.seconds(0.2) && @@current_plant_attacked.hp < @@current_plant_attacked.max_hp/2
           a = 200; b = 100; x = 100; y = 100
+          case @@current_plant_attacked.kind
+         when "bush"
+           a = 200; b = 100; x = 100; y = 100
+          when "tree"
+           a = 200; b = 200; x = 100; y = 200
+          end
           @@current_plant_attacked.sprite_change_square(a, b, x, y)
           end; end
          if Plant_Animation_Clock_01.elapsed_time >= SF.seconds(0.2) && Plant_Animation_Clock_01.elapsed_time <= SF.seconds(0.3) && @@current_plant_attacked.hp > @@current_plant_attacked.max_hp/2
            a = 300; b = 0; x = 100; y = 100
+           case @@current_plant_attacked.kind
+          when "bush"
+            a = 300; b = 0; x = 100; y = 100
+           when "tree"
+            a = 300; b = 0; x = 100; y = 200
+           end
            @@current_plant_attacked.sprite_change_square(a, b, x, y)
          else if Plant_Animation_Clock_01.elapsed_time >= SF.seconds(0.2) && Plant_Animation_Clock_01.elapsed_time <= SF.seconds(0.3) && @@current_plant_attacked.hp < @@current_plant_attacked.max_hp/2
           a = 300; b = 100; x = 100; y = 100
+          case @@current_plant_attacked.kind
+          when "bush"
+            a = 300; b = 100; x = 100; y = 100
+           when "tree"
+            a = 300; b = 200; x = 100; y = 200
+           end
           @@current_plant_attacked.sprite_change_square(a, b, x, y)
           end; end
          if Plant_Animation_Clock_01.elapsed_time >= SF.seconds(0.3) && Plant_Animation_Clock_01.elapsed_time <= SF.seconds(0.4) && @@current_plant_attacked.hp > @@current_plant_attacked.max_hp/2
            a = 400; b = 0; x = 100; y = 100
+           case @@current_plant_attacked.kind
+           when "bush"
+             a = 400; b = 0; x = 100; y = 100
+            when "tree"
+             a = 400; b = 0; x = 100; y = 200
+            end
            @@current_plant_attacked.sprite_change_square(a, b, x, y)
          else if Plant_Animation_Clock_01.elapsed_time >= SF.seconds(0.3) && Plant_Animation_Clock_01.elapsed_time <= SF.seconds(0.4) && @@current_plant_attacked.hp < @@current_plant_attacked.max_hp/2
           a = 400; b = 100; x = 100; y = 100
+          case @@current_plant_attacked.kind
+          when "bush"
+            a = 400; b = 100; x = 100; y = 100
+           when "tree"
+            a = 400; b = 200; x = 100; y = 200
+           end
           @@current_plant_attacked.sprite_change_square(a, b, x, y)
           end; end
         end
        if @@is_plant_attacked == false
        if @@current_plant_attacked.hp > @@current_plant_attacked.max_hp/2
             a = 0; b = 0; x = 100; y = 100
+            case @@current_plant_attacked.kind
+            when "bush"
+              a = 0; b = 0; x = 100; y = 100
+             when "tree"
+              a = 0; b = 0; x = 100; y = 200
+             end
             @@current_plant_attacked.sprite_change_square(a, b, x, y)
           else if @@current_plant_attacked.hp < @@current_plant_attacked.max_hp/2 && @@current_plant_attacked.hp > 0
             a = 0; b = 100; x = 100; y = 100
+            case @@current_plant_attacked.kind
+            when "bush"
+              a = 0; b = 0; x = 100; y = 100
+             when "tree"
+              a = 0; b = 0; x = 100; y = 200
+             end
             @@current_plant_attacked.sprite_change_square(a, b, x, y)
           end; end
        end
@@ -5627,17 +5720,20 @@ include Use
   #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   #/                                                               Entities                                                                               /
   #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-   #...............................................................Berries.................................................................................
-    @@blackberry_bush = Herbs.new("Blackberry Bush", 0, "black", 100, 100, @@blackberries, Blackberry_Bush, false, "berry", 0, ["Hp+", "Mp+"])
+   #................................................................Bushes.................................................................................
+    @@blackberry_bush = Herbs.new("Blackberry Bush", 0, "black", 100, 100, @@blackberries, Blackberry_Bush, false, "bush", 0, ["Hp+", "Mp+"])
     Herb_Array.push(@@blackberry_bush)
-    @@raspberry_bush = Herbs.new("Raspberry Bush", 1, "red", 100, 100, @@raspberries, Raspberry_Bush, false, "berry", 0, ["Hp+", "Str+"])
+    @@raspberry_bush = Herbs.new("Raspberry Bush", 1, "red", 100, 100, @@raspberries, Raspberry_Bush, false, "bush", 0, ["Hp+", "Str+"])
     Herb_Array.push(@@raspberry_bush)
-    @@elderberry_bush = Herbs.new("Elderberry Bush", 2, "black", 100, 100, @@elderberries, Elderberry_Bush, false, "berry", 0, ["Hp+", "Remove Poison"])
+    @@elderberry_bush = Herbs.new("Elderberry Bush", 2, "black", 100, 100, @@elderberries, Elderberry_Bush, false, "bush", 0, ["Hp+", "Remove Poison"])
     Herb_Array.push(@@elderberry_bush)
-    @@black_currant_bush = Herbs.new("Black Currant Bush", 3, "black", 100, 100, @@black_currants, Black_Currant_Bush, false, "berry", 0, ["Hp+", "Luk+"])
+    @@black_currant_bush = Herbs.new("Black Currant Bush", 3, "black", 100, 100, @@black_currants, Black_Currant_Bush, false, "bush", 0, ["Hp+", "Luk+"])
     Herb_Array.push(@@black_currant_bush)
-    @@blueberry_bush = Herbs.new("Blueberry Bush", 4, "blue", 100, 100, @@blueberries, Blueberry_Bush, false, "berry", 0, ["Mp+", "Int+"])
+    @@blueberry_bush = Herbs.new("Blueberry Bush", 4, "blue", 100, 100, @@blueberries, Blueberry_Bush, false, "bush", 0, ["Mp+", "Int+"])
     Herb_Array.push(@@blueberry_bush)
+   #................................................................Trees..................................................................................
+    @@snow_pear_tree = Herbs.new("Snow Pear Tree", 4, "yellow", 100, 100, @@snow_pears, Snow_Pear_Tree, false, "tree", 0, ["Mp+", "Int+"])
+    Herb_Array.push(@@snow_pear_tree)
   #________________________________________________________________________________________________________________________________________________________
   end
 end
