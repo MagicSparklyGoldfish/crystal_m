@@ -5529,6 +5529,9 @@ include Use
       @is_broke = true
       end
      end; end
+     def Herbs.stop_attack
+      @@is_plant_attacked = false
+    end
      def Herbs.break(broken)
       amount = rand(1..3)
       ingredient = broken.drop_item
