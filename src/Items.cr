@@ -362,6 +362,8 @@ end
      Ingredient_Array.push(@@raspberries)
      @@elderberries = Ingredients.new("Elderberries", 2, "berry", "black", Elderberries, 0, ["Hp+", "Remove Poison"])
      Ingredient_Array.push(@@elderberries)
+     @@black_currants = Ingredients.new("Black Currants", 3, "berry", "black", Black_Currant, 0, ["Hp+", "Luk+"])
+     Ingredient_Array.push(@@black_currants)
    #__________________________________________________________________________________________________________________________________________________________
    end
  end
@@ -5620,13 +5622,15 @@ include Use
   #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   #/                                                               Entities                                                                               /
   #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-   #...............................................................Bushes..................................................................................
+   #...............................................................Berries.................................................................................
     @@blackberry_bush = Herbs.new("Blackberry Bush", 0, "black", 100, 100, @@blackberries, Blackberry_Bush, false, "berry", 0, ["Hp+", "Mp+"])
     Herb_Array.push(@@blackberry_bush)
     @@raspberry_bush = Herbs.new("Raspberry Bush", 1, "red", 100, 100, @@raspberries, Raspberry_Bush, false, "berry", 0, ["Hp+", "Str+"])
     Herb_Array.push(@@raspberry_bush)
     @@elderberry_bush = Herbs.new("Elderberry Bush", 2, "black", 100, 100, @@elderberries, Elderberry_Bush, false, "berry", 0, ["Hp+", "Remove Poison"])
     Herb_Array.push(@@elderberry_bush)
+    @@black_currant_bush = Herbs.new("Black Currant Bush", 3, "black", 100, 100, @@black_currants, Black_Currant_Bush, false, "berry", 0, ["Hp+", "Luk+"])
+    Herb_Array.push(@@black_currant_bush)
   #________________________________________________________________________________________________________________________________________________________
   end
 end
