@@ -366,6 +366,13 @@ extend self
       window.draw(Weapon_Info_Box);  window.draw(Weapon_Info_Text)
     end
      #Equipment::Stick.test(window, page)
+   else if @@tab == "Use"
+    window.draw(Ingredient_Button); window.draw(Ingredient_Button_Text)
+    page = @@page
+    case @@category
+      when "Ingredients"
+       Use::Ingredients.display_inventory(window, page)
+     end
    else if @@tab == "Etc"
      window.draw(Ore_Button); window.draw(Ore_Button_Text); window.draw(Ingot_Button); window.draw(Ingot_Button_Text)
      window.draw(Gem_Button); window.draw(Gem_Button_Text)
@@ -380,7 +387,7 @@ extend self
        if @@info_box == "gem"
         window.draw(Gem_Info_Box);  window.draw(Gem_Info_Text)
       end
-  end; end
+  end; end; end
   end
  end
  def Window_Class.weapon_tab(window)
@@ -1916,6 +1923,13 @@ def Window_Class.hud_keypresses(window)
            else
              All_Audio::SFX.char_create_down
            end
+         when "Use"
+           if @@page < 6
+             @@page += 1
+           All_Audio::SFX.select1
+           else
+             All_Audio::SFX.char_create_down
+           end
          when "Equipment"
           if @@page < 3
             @@page += 1
@@ -2007,19 +2021,29 @@ def Window_Class.hud_keypresses(window)
           this2 = @@current_weapon
           Gui::Window_Class.equip_weapon(this2)
           end
+      when "Use"
+       if (x >= 555 && x <= 680) && (y >= 245 && y <= 295)
+        All_Audio::SFX.light_bonk
+        Use::Ingredients.initialize_inventory
+        @@page = 1
+        @@category = "Ingredients"
+       end
       when "Etc"
         if (x >= 555 && x <= 645) && (y >= 245 && y <= 295)
           All_Audio::SFX.light_bonk
+          @@page = 1
           @@category = "ore"
          end
         if (x >= 655 && x <= 745) && (y >= 245 && y <= 295)
           All_Audio::SFX.light_bonk
           Etc::Inventory_Ingot.initialize_inventory
+          @@page = 1
           @@category = "ingot"
          end
         if (x >= 755 && x <= 845) && (y >= 245 && y <= 295)
           All_Audio::SFX.light_bonk
           Etc::Gem.initialize_gem_inventory
+          @@page = 1
           @@category = "gem"
          end
       end

@@ -278,6 +278,7 @@ end
   #IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
   #IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII
    class Ingredients
+    Ingredient_Array = [] of Ingredients; Owned_Ingredient_Array = [] of Ingredients
    #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
    #!                                                               Initialize                                                                               !
    #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -312,11 +313,55 @@ end
       @effects
      end
    #__________________________________________________________________________________________________________________________________________________________
+   #??????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
+   #?                                                                Methods                                                                                 ?
+   #??????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
+    #-------------------------------------------------------------Amount Owned--------------------------------------------------------------------------------
+     def amount_owned=(value : Int32)
+       @amount_owned = value
+      end
+     def Ingredients.add_ingredient(amount, ingredient)
+      if ingredient.amount_owned == 0
+       ingredient.amount_owned += amount
+       Owned_Ingredient_Array.push(ingredient)
+      else
+        ingredient.amount_owned += amount
+      end
+     end 
+    #---------------------------------------------------------Ingredient Inventory----------------------------------------------------------------------------
+     def Ingredients.initialize_inventory
+       Ingredient_Array.map { |i| if i.amount_owned > 0
+       Owned_Ingredient_Array.push(i)
+       Owned_Ingredient_Array.uniq!
+       end}
+      end
+     def Ingredients.display_inventory(window, page)
+      current_position = SF.vector2(400, 310)
+      slot = 1; line = 1
+      Owned_Ingredient_Array.map { |i| 
+      if slot < 7
+      current_position += SF.vector2(155, 0)
+      else if slot = 7
+        slot = 1
+        line + 1
+      current_position += SF.vector2(-750, 150)
+      end; end
+      if line < 4 && page == 1
+      i.sprite.position = current_position
+      window.draw(i.sprite)
+      end}
+      end
+   #__________________________________________________________________________________________________________________________________________________________
    #//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
    #/                                                               Entities                                                                                 /
    #//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     #...............................................................Berries...................................................................................
      @@blackberries = Ingredients.new("Blackberries", 0, "berry", "black", Blackberries, 0, ["Hp+", "Mp+"])
+     Ingredient_Array.push(@@blackberries)
+     @@raspberries = Ingredients.new("Raspberries", 1, "berry", "red", Raspberries, 0, ["Hp+", "Str+"])
+     Ingredient_Array.push(@@raspberries)
+     @@elderberries = Ingredients.new("Elderberries", 2, "berry", "black", Elderberries, 0, ["Hp+", "Remove Poison"])
+     Ingredient_Array.push(@@elderberries)
    #__________________________________________________________________________________________________________________________________________________________
    end
  end
@@ -5482,10 +5527,10 @@ include Use
      end; end
      def Herbs.break(broken)
       amount = rand(1..3)
-      plant = broken.drop_item
+      ingredient = broken.drop_item
       @@is_plant_attacked = false
       if @@plant_reset == 0
-        #Etc::Inventory_Ore.add_ore(amount, ore)
+        Use::Ingredients.add_ingredient(amount, ingredient)
         #Etc::Inventory_Ore.update_ore_inventory
         Plant_Clock_Break.restart
         @@plant_reset = 1
@@ -5575,8 +5620,13 @@ include Use
   #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   #/                                                               Entities                                                                               /
   #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-   @@blackberry_bush = Herbs.new("Blackberry Bush", 0, "black", 100, 100, @@blackberries, Blackberry_Bush, false, "berry", 0, ["Hp+", "Mp+"])
-   Herb_Array.push(@@blackberry_bush)
+   #...............................................................Bushes..................................................................................
+    @@blackberry_bush = Herbs.new("Blackberry Bush", 0, "black", 100, 100, @@blackberries, Blackberry_Bush, false, "berry", 0, ["Hp+", "Mp+"])
+    Herb_Array.push(@@blackberry_bush)
+    @@raspberry_bush = Herbs.new("Raspberry Bush", 1, "red", 100, 100, @@raspberries, Raspberry_Bush, false, "berry", 0, ["Hp+", "Str+"])
+    Herb_Array.push(@@raspberry_bush)
+    @@elderberry_bush = Herbs.new("Elderberry Bush", 2, "black", 100, 100, @@elderberries, Elderberry_Bush, false, "berry", 0, ["Hp+", "Remove Poison"])
+    Herb_Array.push(@@elderberry_bush)
   #________________________________________________________________________________________________________________________________________________________
   end
 end

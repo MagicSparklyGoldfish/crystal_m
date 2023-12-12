@@ -402,6 +402,11 @@
   Gem_Button_Text = SF::Text.new; Gem_Button_Text.font = FONT_BOLD_OUTLINE; Gem_Button_Text.character_size = 30;
   Gem_Button_Text.color = SF::Color::White; Gem_Button_Text.position = SF.vector2(775, 250); Gem_Button_Text.string = "Gems";
 
+  Ingredient_Button = SF::RectangleShape.new(SF.vector2(130, 50)); Ingredient_Button.position = SF.vector2(555, 245);
+  Ingredient_Button.fill_color = SF.color(100, 255, 100)
+  Ingredient_Button_Text = SF::Text.new; Ingredient_Button_Text.font = FONT_BOLD_OUTLINE; Ingredient_Button_Text.character_size = 30;
+  Ingredient_Button_Text.color = SF::Color::White; Ingredient_Button_Text.position = SF.vector2(565, 250); Ingredient_Button_Text.string = "Ingredients";
+
   Test_Rectangle_01 = SF::RectangleShape.new(SF.vector2(140, 140));
   Test_Rectangle_01.fill_color = SF.color(155, 155, 255); Test_Rectangle_01.position = SF.vector2(555, 310);
   #--------------------------------------------------Weapon Info Box---------------------------------------------------------------
@@ -1493,6 +1498,12 @@
     #''''''''''''''''''''''''''''''''''''''''''''''''Blackberries'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      BLACKBERRY_TEXTURE = SF::Texture.from_file("graphics/plants/Blackberries.png")
      Blackberries = SF::Sprite.new(BLACKBERRY_TEXTURE)  
+    #'''''''''''''''''''''''''''''''''''''''''''''''''Raspberries'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     RASPBERRY_TEXTURE = SF::Texture.from_file("graphics/plants/Raspberries.png")
+     Raspberries = SF::Sprite.new(RASPBERRY_TEXTURE)  
+    #'''''''''''''''''''''''''''''''''''''''''''''''''Elderberries''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     ELDERBERRY_TEXTURE = SF::Texture.from_file("graphics/plants/Elderberries.png")
+     Elderberries = SF::Sprite.new(ELDERBERRY_TEXTURE)  
 #----------------------------------------------------------------------------------------------------------------------------------- 
 #                                                    Character Model
 #-----------------------------------------------------------------------------------------------------------------------------------
@@ -3122,6 +3133,14 @@
    BLACKBERRY_BUSH_TEXTURE = SF::Texture.from_file("graphics/plants/Blackberry_Bush.png")
    Blackberry_Bush = SF::Sprite.new(BLACKBERRY_BUSH_TEXTURE); Blackberry_Bush.texture_rect = SF.int_rect(0, 0, 100, 100)
    Blackberry_Bush.position = SF.vector2(400, 702)
+  #''''''''''''''''''''''''''''''''''''''''''''''''''Raspberry Bush'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+   RASPBERRY_BUSH_TEXTURE = SF::Texture.from_file("graphics/plants/Raspberry_Bush.png")
+   Raspberry_Bush = SF::Sprite.new(RASPBERRY_BUSH_TEXTURE); Raspberry_Bush.texture_rect = SF.int_rect(0, 0, 100, 100)
+   Raspberry_Bush.position = SF.vector2(600, 702)
+  #''''''''''''''''''''''''''''''''''''''''''''''''''Raspberry Bush'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+   ELDERBERRY_BUSH_TEXTURE = SF::Texture.from_file("graphics/plants/Elderberry_Bush.png")
+   Elderberry_Bush = SF::Sprite.new(ELDERBERRY_BUSH_TEXTURE); Elderberry_Bush.texture_rect = SF.int_rect(0, 0, 100, 100)
+   Elderberry_Bush.position = SF.vector2(800, 702)
 #______________________________________________________________________________________________________________________________________
 Testing_Text = SF::Text.new; Testing_Text.font = FONT_PIXEL; 
 Testing_Text.character_size = 20; Testing_Text.color = SF::Color::White; Testing_Text.position = SF.vector2(1800, 652)
