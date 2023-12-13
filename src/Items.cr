@@ -340,7 +340,7 @@ end
       slot = 1; line = 1
       Owned_Ingredient_Array.map { |i| 
       if slot < 7
-      current_position += SF.vector2(155, 0)
+      current_position += SF.vector2(150, 0)
       slot += 1
       else if slot = 7
         slot = 1
@@ -378,6 +378,8 @@ end
      Ingredient_Array.push(@@dusky_pear)
      @@dates = Ingredients.new("Dates", 104, "drupe", "brown", Dates, 0, ["Mp+", "Luk+"])
      Ingredient_Array.push(@@dates)
+     @@coconuts = Ingredients.new("Coconuts", 105, "drupe", "brown", Coconuts, 0, ["Hp+", "Str+"])
+     Ingredient_Array.push(@@coconuts)
    #__________________________________________________________________________________________________________________________________________________________
    end
  end
@@ -5751,6 +5753,8 @@ include Use
     Herb_Array.push(@@dusky_pear_tree)
     @@date_tree = Herbs.new("Date Tree", 104, "brown", 100, 100, @@dates, Date_Tree, false, "tree", 0, ["Hp+", "Dex+"])
     Herb_Array.push(@@date_tree)
+    @@coconut_tree = Herbs.new("Coconut Tree", 105, "brown", 100, 100, @@coconuts, Coconut_Tree, false, "tree", 0, ["Hp+", "Str+"])
+    Herb_Array.push(@@coconut_tree)
   #________________________________________________________________________________________________________________________________________________________
   end
 end
