@@ -1510,31 +1510,34 @@
     #'''''''''''''''''''''''''''''''''''''''''''''''''Blueberries'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      BLUEBERRY_TEXTURE = SF::Texture.from_file("graphics/plants/Blueberries.png")
      Blueberry = SF::Sprite.new(BLUEBERRY_TEXTURE)  
-    #'''''''''''''''''''''''''''''''''''''''''''''''''Blueberries'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    #'''''''''''''''''''''''''''''''''''''''''''''''Lemonade Berries''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      LEMONADE_BERRY_TEXTURE = SF::Texture.from_file("graphics/plants/Lemonade_Fruit.png")
      Lemonade_Berry = SF::Sprite.new(LEMONADE_BERRY_TEXTURE)  
    #.....................................................Trees......................................................................
-    #''''''''''''''''''''''''''''''''''''''''''''''''Snow Pear Tree'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    #''''''''''''''''''''''''''''''''''''''''''''''''''Snow Pear''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      SNOW_PEAR_TEXTURE = SF::Texture.from_file("graphics/plants/Snow_Pears.png")
      Snow_Pear = SF::Sprite.new(SNOW_PEAR_TEXTURE)  
-    #''''''''''''''''''''''''''''''''''''''''''''''''''Quince Tree''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    #'''''''''''''''''''''''''''''''''''''''''''''''''''Quince''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      QUINCE_TEXTURE = SF::Texture.from_file("graphics/plants/Quince.png")
      Quince = SF::Sprite.new(QUINCE_TEXTURE)  
-    #''''''''''''''''''''''''''''''''''''''''''''''''Butterfruit Tree'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    #'''''''''''''''''''''''''''''''''''''''''''''''''Butterfruit'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      BUTTERFRUIT_TEXTURE = SF::Texture.from_file("graphics/plants/Butterfruit.png")
      Butterfruit = SF::Sprite.new(BUTTERFRUIT_TEXTURE)  
-    #''''''''''''''''''''''''''''''''''''''''''''''''Dusky Pear Tree''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    #'''''''''''''''''''''''''''''''''''''''''''''''''Dusky Pear''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      DUSKY_PEAR_TEXTURE = SF::Texture.from_file("graphics/plants/Dusky_Pears.png")
      Dusky_Pears = SF::Sprite.new(DUSKY_PEAR_TEXTURE)  
-    #'''''''''''''''''''''''''''''''''''''''''''''''''''Date Tree'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    #''''''''''''''''''''''''''''''''''''''''''''''''''''Date'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      DATE_TEXTURE = SF::Texture.from_file("graphics/plants/Dates.png")
      Dates = SF::Sprite.new(DATE_TEXTURE)  
-    #'''''''''''''''''''''''''''''''''''''''''''''''''Coconut Tree''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    #''''''''''''''''''''''''''''''''''''''''''''''''''Coconut''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      COCONUT_TEXTURE = SF::Texture.from_file("graphics/plants/Coconuts.png")
      Coconuts = SF::Sprite.new(COCONUT_TEXTURE)  
-    #'''''''''''''''''''''''''''''''''''''''''''''Peanut Butter Fruit Tree''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    #'''''''''''''''''''''''''''''''''''''''''''''Peanut Butter Fruit'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      PEANUT_BUTTER_FRUIT_TEXTURE = SF::Texture.from_file("graphics/plants/Peanut_Butter_Fruit.png")
      Peanut_Butter_Fruit = SF::Sprite.new(PEANUT_BUTTER_FRUIT_TEXTURE)  
+    #''''''''''''''''''''''''''''''''''''''''''''''''''Lychee'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     LYCHEE_TEXTURE = SF::Texture.from_file("graphics/plants/Lychee.png")
+     Lychee = SF::Sprite.new(LYCHEE_TEXTURE)  
 #----------------------------------------------------------------------------------------------------------------------------------- 
 #                                                    Character Model
 #-----------------------------------------------------------------------------------------------------------------------------------
@@ -3213,6 +3216,10 @@
    PEANUT_BUTTER_FRUIT_TREE_TEXTURE = SF::Texture.from_file("graphics/plants/Peanut_Butter_Fruit_Tree.png")
    Peanut_Butter_Fruit_Tree = SF::Sprite.new(PEANUT_BUTTER_FRUIT_TREE_TEXTURE); Peanut_Butter_Fruit_Tree.texture_rect = SF.int_rect(0, 0, 100, 200)
    Peanut_Butter_Fruit_Tree.position = SF.vector2(-1400, 602)
+  #'''''''''''''''''''''''''''''''''''''''''''''Peanut Butter Fruit Tree'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+   LYCHEE_TREE_TEXTURE = SF::Texture.from_file("graphics/plants/Lychee_Tree.png")
+   Lychee_Tree = SF::Sprite.new(LYCHEE_TREE_TEXTURE); Lychee_Tree.texture_rect = SF.int_rect(0, 0, 100, 200)
+   Lychee_Tree.position = SF.vector2(-1600, 602)
 #______________________________________________________________________________________________________________________________________
 Testing_Text = SF::Text.new; Testing_Text.font = FONT_PIXEL; 
 Testing_Text.character_size = 20; Testing_Text.color = SF::Color::White; Testing_Text.position = SF.vector2(1800, 652)

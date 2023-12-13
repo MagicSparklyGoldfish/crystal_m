@@ -339,10 +339,10 @@ end
       current_position = SF.vector2(400, 310)
       slot = 1; line = 1
       Owned_Ingredient_Array.map { |i| 
-      if slot < 7
+      if slot < 6
       current_position += SF.vector2(150, 0)
       slot += 1
-      else if slot == 7
+      else if slot == 6
         slot = 1
         line += 1
       current_position += SF.vector2(-750, 150)
@@ -384,6 +384,8 @@ end
      Ingredient_Array.push(@@coconuts)
      @@peanut_butter_fruit = Ingredients.new("Peanut Butter Fruit", 106, "drupe", "red", Peanut_Butter_Fruit, 0, ["Hp+", "Luk+"])
      Ingredient_Array.push(@@peanut_butter_fruit)
+     @@lychee = Ingredients.new("Lychee", 107, "drupe", "red", Lychee, 0, ["Hp+", "Luk+"])
+     Ingredient_Array.push(@@lychee)
    #__________________________________________________________________________________________________________________________________________________________
    end
  end
@@ -5763,6 +5765,8 @@ include Use
     Herb_Array.push(@@coconut_tree)
     @@peanut_butter_fruit_tree = Herbs.new("Peanut Butter Fruit Tree", 106, "red", 100, 100, @@peanut_butter_fruit, Peanut_Butter_Fruit_Tree, false, "tree", 0, ["Hp+", "Luk+"])
     Herb_Array.push(@@peanut_butter_fruit_tree)
+    @@lychee_tree = Herbs.new("Lychee Tree", 107, "red", 100, 100, @@lychee, Lychee_Tree, false, "tree", 0, ["Hp+", "Luk+"])
+    Herb_Array.push(@@lychee_tree)
   #________________________________________________________________________________________________________________________________________________________
   end
 end
