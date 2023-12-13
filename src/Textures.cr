@@ -1522,6 +1522,9 @@
     #'''''''''''''''''''''''''''''''''''''''''''''''''Red Currant'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      RED_CURRANT_TEXTURE = SF::Texture.from_file("graphics/plants/Red_Currant.png")
      Red_Currant = SF::Sprite.new(RED_CURRANT_TEXTURE)  
+    #'''''''''''''''''''''''''''''''''''''''''''''''''Pomegranite'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     POMEGRANITE_TEXTURE = SF::Texture.from_file("graphics/plants/Pomegranite.png")
+     Pomegranite = SF::Sprite.new(POMEGRANITE_TEXTURE)  
    #.....................................................Trees......................................................................
     #''''''''''''''''''''''''''''''''''''''''''''''''''Snow Pear''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      SNOW_PEAR_TEXTURE = SF::Texture.from_file("graphics/plants/Snow_Pears.png")
@@ -3217,6 +3220,10 @@
    RED_CURRANT_BUSH_TEXTURE = SF::Texture.from_file("graphics/plants/Red_Currant_Bush.png")
    Red_Currant_Bush = SF::Sprite.new(RED_CURRANT_BUSH_TEXTURE); Red_Currant_Bush.texture_rect = SF.int_rect(0, 0, 100, 100)
    Red_Currant_Bush.position = SF.vector2(2000, 702)
+  #'''''''''''''''''''''''''''''''''''''''''''''''''''Pomegranite Bush''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+   POMEGRANITE_BUSH_TEXTURE = SF::Texture.from_file("graphics/plants/Pomegranite_Bush.png")
+   Pomegranite_Bush = SF::Sprite.new(POMEGRANITE_BUSH_TEXTURE); Pomegranite_Bush.texture_rect = SF.int_rect(0, 0, 100, 100)
+   Pomegranite_Bush.position = SF.vector2(2200, 702)
  #///////////////////////////////////////////////////////Trees\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
   #''''''''''''''''''''''''''''''''''''''''''''''''''Snow Pear Tree''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
    SNOW_PEAR_TREE_TEXTURE = SF::Texture.from_file("graphics/plants/Snow_Pear_Tree.png")
