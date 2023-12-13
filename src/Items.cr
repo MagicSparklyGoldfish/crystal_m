@@ -339,9 +339,9 @@ end
       current_position = SF.vector2(400, 310)
       slot = 1; line = 1
       Owned_Ingredient_Array.map { |i| 
-      if slot < 7
+      if slot < 6
       current_position += SF.vector2(155, 0)
-      else if slot = 7
+      else if slot = 6
         slot = 1
         line + 1
       current_position += SF.vector2(-750, 150)
@@ -369,6 +369,8 @@ end
     #................................................................Trees....................................................................................
      @@snow_pears = Ingredients.new("Snow Pear", 100, "pome", "yellow", Snow_Pear, 0, ["Mp+", "Int+"])
      Ingredient_Array.push(@@snow_pears)
+     @@quince = Ingredients.new("Quince", 101, "pome", "yellow", Quince, 0, ["Hp+", "Dex+"])
+     Ingredient_Array.push(@@quince)
    #__________________________________________________________________________________________________________________________________________________________
    end
  end
@@ -5732,8 +5734,10 @@ include Use
     @@blueberry_bush = Herbs.new("Blueberry Bush", 4, "blue", 100, 100, @@blueberries, Blueberry_Bush, false, "bush", 0, ["Mp+", "Int+"])
     Herb_Array.push(@@blueberry_bush)
    #................................................................Trees..................................................................................
-    @@snow_pear_tree = Herbs.new("Snow Pear Tree", 4, "yellow", 100, 100, @@snow_pears, Snow_Pear_Tree, false, "tree", 0, ["Mp+", "Int+"])
+    @@snow_pear_tree = Herbs.new("Snow Pear Tree", 100, "yellow", 100, 100, @@snow_pears, Snow_Pear_Tree, false, "tree", 0, ["Mp+", "Int+"])
     Herb_Array.push(@@snow_pear_tree)
+    @@quince_tree = Herbs.new("Qunice Tree", 101, "yellow", 100, 100, @@quince, Quince_Tree, false, "tree", 0, ["Hp+", "Dex+"])
+    Herb_Array.push(@@quince_tree)
   #________________________________________________________________________________________________________________________________________________________
   end
 end

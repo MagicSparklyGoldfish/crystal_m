@@ -1511,9 +1511,12 @@
      BLUEBERRY_TEXTURE = SF::Texture.from_file("graphics/plants/Blueberries.png")
      Blueberry = SF::Sprite.new(BLUEBERRY_TEXTURE)  
    #.....................................................Trees......................................................................
-    #'''''''''''''''''''''''''''''''''''''''''''''''''Blueberries'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    #''''''''''''''''''''''''''''''''''''''''''''''''Snow Pear Tree'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      SNOW_PEAR_TEXTURE = SF::Texture.from_file("graphics/plants/Snow_Pears.png")
      Snow_Pear = SF::Sprite.new(SNOW_PEAR_TEXTURE)  
+    #''''''''''''''''''''''''''''''''''''''''''''''''''Quince Tree''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     QUINCE_TEXTURE = SF::Texture.from_file("graphics/plants/Quince.png")
+     Quince = SF::Sprite.new(QUINCE_TEXTURE)  
 #----------------------------------------------------------------------------------------------------------------------------------- 
 #                                                    Character Model
 #-----------------------------------------------------------------------------------------------------------------------------------
@@ -3164,6 +3167,10 @@
    SNOW_PEAR_TREE_TEXTURE = SF::Texture.from_file("graphics/plants/Snow_Pear_Tree.png")
    Snow_Pear_Tree = SF::Sprite.new(SNOW_PEAR_TREE_TEXTURE); Snow_Pear_Tree.texture_rect = SF.int_rect(0, 0, 100, 200)
    Snow_Pear_Tree.position = SF.vector2(-200, 602)
+  #''''''''''''''''''''''''''''''''''''''''''''''''''''''Quince Tree'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+   QUINCE_TREE_TEXTURE = SF::Texture.from_file("graphics/plants/Quince_Tree.png")
+   Quince_Tree = SF::Sprite.new(QUINCE_TREE_TEXTURE); Quince_Tree.texture_rect = SF.int_rect(0, 0, 100, 200)
+   Quince_Tree.position = SF.vector2(-400, 602)
 #______________________________________________________________________________________________________________________________________
 Testing_Text = SF::Text.new; Testing_Text.font = FONT_PIXEL; 
 Testing_Text.character_size = 20; Testing_Text.color = SF::Color::White; Testing_Text.position = SF.vector2(1800, 652)
