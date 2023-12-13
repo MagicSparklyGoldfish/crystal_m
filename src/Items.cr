@@ -368,14 +368,16 @@ end
      @@blueberries = Ingredients.new("Blueberries", 4, "berry", "blue", Blueberry, 0, ["Mp+", "Int+"])
      Ingredient_Array.push(@@blueberries)
     #................................................................Trees....................................................................................
-     @@snow_pears = Ingredients.new("Snow Pear", 100, "pome", "yellow", Snow_Pear, 0, ["Mp+", "Int+"])
+     @@snow_pears = Ingredients.new("Snow Pears", 100, "pome", "yellow", Snow_Pear, 0, ["Mp+", "Int+"])
      Ingredient_Array.push(@@snow_pears)
      @@quince = Ingredients.new("Quince", 101, "pome", "yellow", Quince, 0, ["Hp+", "Dex+"])
      Ingredient_Array.push(@@quince)
-     @@butterfruit = Ingredients.new("Quince", 102, "drupe", "purple", Butterfruit, 0, ["Hp++", "Str+"])
+     @@butterfruit = Ingredients.new("Butterfruit", 102, "drupe", "purple", Butterfruit, 0, ["Hp++", "Str+"])
      Ingredient_Array.push(@@butterfruit)
-     @@dusky_pear = Ingredients.new("Dusky Pear", 103, "pome", "orange", Dusky_Pears, 0, ["Mp+", "Int+"])
+     @@dusky_pear = Ingredients.new("Dusky Pears", 103, "pome", "orange", Dusky_Pears, 0, ["Mp+", "Int+"])
      Ingredient_Array.push(@@dusky_pear)
+     @@dates = Ingredients.new("Dates", 104, "drupe", "brown", Dates, 0, ["Mp+", "Luk+"])
+     Ingredient_Array.push(@@dates)
    #__________________________________________________________________________________________________________________________________________________________
    end
  end
@@ -5747,6 +5749,8 @@ include Use
     Herb_Array.push(@@butterfruit_tree)
     @@dusky_pear_tree = Herbs.new("Dusky Pear Tree", 103, "orange", 100, 100, @@dusky_pear, Dusky_Pear_Tree, false, "tree", 0, ["Mp+", "Int+"])
     Herb_Array.push(@@dusky_pear_tree)
+    @@date_tree = Herbs.new("Date Tree", 104, "brown", 100, 100, @@dates, Date_Tree, false, "tree", 0, ["Hp+", "Dex+"])
+    Herb_Array.push(@@date_tree)
   #________________________________________________________________________________________________________________________________________________________
   end
 end

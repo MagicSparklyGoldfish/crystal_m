@@ -1523,6 +1523,9 @@
     #''''''''''''''''''''''''''''''''''''''''''''''''Dusky Pear Tree''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      DUSKY_PEAR_TEXTURE = SF::Texture.from_file("graphics/plants/Dusky_Pears.png")
      Dusky_Pears = SF::Sprite.new(DUSKY_PEAR_TEXTURE)  
+    #'''''''''''''''''''''''''''''''''''''''''''''''''''Date Tree'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     DATE_TEXTURE = SF::Texture.from_file("graphics/plants/Dates.png")
+     Dates = SF::Sprite.new(DATE_TEXTURE)  
 #----------------------------------------------------------------------------------------------------------------------------------- 
 #                                                    Character Model
 #-----------------------------------------------------------------------------------------------------------------------------------
@@ -3185,6 +3188,10 @@
    DUSKY_PEAR_TREE_TEXTURE = SF::Texture.from_file("graphics/plants/Dusky_Pear_Tree.png")
    Dusky_Pear_Tree = SF::Sprite.new(DUSKY_PEAR_TREE_TEXTURE); Dusky_Pear_Tree.texture_rect = SF.int_rect(0, 0, 100, 200)
    Dusky_Pear_Tree.position = SF.vector2(-800, 602)
+  #'''''''''''''''''''''''''''''''''''''''''''''''''''''Dusky Pear Tree''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+   DATE_TREE_TEXTURE = SF::Texture.from_file("graphics/plants/Date_Tree.png")
+   Date_Tree = SF::Sprite.new(DATE_TREE_TEXTURE); Date_Tree.texture_rect = SF.int_rect(0, 0, 100, 200)
+   Date_Tree.position = SF.vector2(-1000, 602)
 #______________________________________________________________________________________________________________________________________
 Testing_Text = SF::Text.new; Testing_Text.font = FONT_PIXEL; 
 Testing_Text.character_size = 20; Testing_Text.color = SF::Color::White; Testing_Text.position = SF.vector2(1800, 652)
