@@ -374,6 +374,8 @@ end
      Ingredient_Array.push(@@quince)
      @@butterfruit = Ingredients.new("Quince", 102, "drupe", "purple", Butterfruit, 0, ["Hp++", "Str+"])
      Ingredient_Array.push(@@butterfruit)
+     @@dusky_pear = Ingredients.new("Dusky Pear", 103, "pome", "orange", Dusky_Pears, 0, ["Mp+", "Int+"])
+     Ingredient_Array.push(@@dusky_pear)
    #__________________________________________________________________________________________________________________________________________________________
    end
  end
@@ -5739,10 +5741,12 @@ include Use
    #................................................................Trees..................................................................................
     @@snow_pear_tree = Herbs.new("Snow Pear Tree", 100, "yellow", 100, 100, @@snow_pears, Snow_Pear_Tree, false, "tree", 0, ["Mp+", "Int+"])
     Herb_Array.push(@@snow_pear_tree)
-    @@quince_tree = Herbs.new("Qunice Tree", 101, "yellow", 100, 100, @@quince, Quince_Tree, false, "tree", 0, ["Hp+", "Dex+"])
+    @@quince_tree = Herbs.new("Quince Tree", 101, "yellow", 100, 100, @@quince, Quince_Tree, false, "tree", 0, ["Hp+", "Dex+"])
     Herb_Array.push(@@quince_tree)
     @@butterfruit_tree = Herbs.new("Butterfruit Tree", 102, "purple", 100, 100, @@butterfruit, Butterfruit_Tree, false, "tree", 0, ["Hp++", "Dex+"])
     Herb_Array.push(@@butterfruit_tree)
+    @@dusky_pear_tree = Herbs.new("Dusky Pear Tree", 103, "orange", 100, 100, @@dusky_pear, Dusky_Pear_Tree, false, "tree", 0, ["Mp+", "Int+"])
+    Herb_Array.push(@@dusky_pear_tree)
   #________________________________________________________________________________________________________________________________________________________
   end
 end
