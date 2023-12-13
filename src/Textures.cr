@@ -1538,6 +1538,9 @@
     #''''''''''''''''''''''''''''''''''''''''''''''''''Lychee'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      LYCHEE_TEXTURE = SF::Texture.from_file("graphics/plants/Lychee.png")
      Lychee = SF::Sprite.new(LYCHEE_TEXTURE)  
+    #'''''''''''''''''''''''''''''''''''''''''''''''Black Cherry''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     BLACK_CHERRY_TEXTURE = SF::Texture.from_file("graphics/plants/Black_Cherry.png")
+     Black_Cherry = SF::Sprite.new(BLACK_CHERRY_TEXTURE)  
 #----------------------------------------------------------------------------------------------------------------------------------- 
 #                                                    Character Model
 #-----------------------------------------------------------------------------------------------------------------------------------
@@ -3216,10 +3219,14 @@
    PEANUT_BUTTER_FRUIT_TREE_TEXTURE = SF::Texture.from_file("graphics/plants/Peanut_Butter_Fruit_Tree.png")
    Peanut_Butter_Fruit_Tree = SF::Sprite.new(PEANUT_BUTTER_FRUIT_TREE_TEXTURE); Peanut_Butter_Fruit_Tree.texture_rect = SF.int_rect(0, 0, 100, 200)
    Peanut_Butter_Fruit_Tree.position = SF.vector2(-1400, 602)
-  #'''''''''''''''''''''''''''''''''''''''''''''Peanut Butter Fruit Tree'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+  #''''''''''''''''''''''''''''''''''''''''''''''''''''Lychee Tree'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
    LYCHEE_TREE_TEXTURE = SF::Texture.from_file("graphics/plants/Lychee_Tree.png")
    Lychee_Tree = SF::Sprite.new(LYCHEE_TREE_TEXTURE); Lychee_Tree.texture_rect = SF.int_rect(0, 0, 100, 200)
    Lychee_Tree.position = SF.vector2(-1600, 602)
+  #'''''''''''''''''''''''''''''''''''''''''''''''''Black Cherry Tree''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+   BLACK_CHERRY_TREE_TEXTURE = SF::Texture.from_file("graphics/plants/Black_Cherry_Tree.png")
+   Black_Cherry_Tree = SF::Sprite.new(BLACK_CHERRY_TREE_TEXTURE); Black_Cherry_Tree.texture_rect = SF.int_rect(0, 0, 100, 200)
+   Black_Cherry_Tree.position = SF.vector2(-1800, 602)
 #______________________________________________________________________________________________________________________________________
 Testing_Text = SF::Text.new; Testing_Text.font = FONT_PIXEL; 
 Testing_Text.character_size = 20; Testing_Text.color = SF::Color::White; Testing_Text.position = SF.vector2(1800, 652)

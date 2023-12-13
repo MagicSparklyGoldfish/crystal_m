@@ -342,8 +342,8 @@ end
       if slot < 6
       current_position += SF.vector2(150, 0)
       slot += 1
-      else if slot == 6
-        slot = 1
+      else if slot == 7
+        slot = 0
         line += 1
       current_position += SF.vector2(-750, 150)
       end; end
@@ -386,6 +386,8 @@ end
      Ingredient_Array.push(@@peanut_butter_fruit)
      @@lychee = Ingredients.new("Lychee", 107, "drupe", "red", Lychee, 0, ["Hp+", "Luk+"])
      Ingredient_Array.push(@@lychee)
+     @@black_cherry = Ingredients.new("Black Cherries", 108, "drupe", "black", Black_Cherry, 0, ["Hp+", "Luk+"])
+     Ingredient_Array.push(@@black_cherry)
    #__________________________________________________________________________________________________________________________________________________________
    end
  end
@@ -5767,6 +5769,8 @@ include Use
     Herb_Array.push(@@peanut_butter_fruit_tree)
     @@lychee_tree = Herbs.new("Lychee Tree", 107, "red", 100, 100, @@lychee, Lychee_Tree, false, "tree", 0, ["Hp+", "Luk+"])
     Herb_Array.push(@@lychee_tree)
+    @@black_cherry_tree = Herbs.new("Black Cherry Tree", 108, "black", 100, 100, @@black_cherry, Black_Cherry_Tree, false, "tree", 0, ["Hp+", "Luk+"])
+    Herb_Array.push(@@black_cherry_tree)
   #________________________________________________________________________________________________________________________________________________________
   end
 end
