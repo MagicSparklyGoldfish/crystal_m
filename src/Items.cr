@@ -339,7 +339,7 @@ end
       current_position = SF.vector2(400, 310)
       slot = 1; line = 1
       Owned_Ingredient_Array.map { |i| 
-      if slot < 6
+      if slot < 7
       current_position += SF.vector2(150, 0)
       slot += 1
       else if slot == 7
@@ -388,6 +388,8 @@ end
      Ingredient_Array.push(@@lychee)
      @@black_cherry = Ingredients.new("Black Cherries", 108, "drupe", "black", Black_Cherry, 0, ["Hp+", "Luk+"])
      Ingredient_Array.push(@@black_cherry)
+     @@red_cherry = Ingredients.new("Red Cherries", 109, "drupe", "red", Red_Cherry, 0, ["Hp+", "Luk+"])
+     Ingredient_Array.push(@@red_cherry)
    #__________________________________________________________________________________________________________________________________________________________
    end
  end
@@ -5771,6 +5773,8 @@ include Use
     Herb_Array.push(@@lychee_tree)
     @@black_cherry_tree = Herbs.new("Black Cherry Tree", 108, "black", 100, 100, @@black_cherry, Black_Cherry_Tree, false, "tree", 0, ["Hp+", "Luk+"])
     Herb_Array.push(@@black_cherry_tree)
+    @@red_cherry_tree = Herbs.new("Red Cherry Tree", 109, "red", 100, 100, @@red_cherry, Red_Cherry_Tree, false, "tree", 0, ["Hp+", "Luk+"])
+    Herb_Array.push(@@red_cherry_tree)
   #________________________________________________________________________________________________________________________________________________________
   end
 end

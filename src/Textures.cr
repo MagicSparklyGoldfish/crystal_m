@@ -1541,6 +1541,9 @@
     #'''''''''''''''''''''''''''''''''''''''''''''''Black Cherry''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      BLACK_CHERRY_TEXTURE = SF::Texture.from_file("graphics/plants/Black_Cherry.png")
      Black_Cherry = SF::Sprite.new(BLACK_CHERRY_TEXTURE)  
+    #''''''''''''''''''''''''''''''''''''''''''''''''Red Cherry'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     RED_CHERRY_TEXTURE = SF::Texture.from_file("graphics/plants/Red_Cherry.png")
+     Red_Cherry = SF::Sprite.new(RED_CHERRY_TEXTURE)  
 #----------------------------------------------------------------------------------------------------------------------------------- 
 #                                                    Character Model
 #-----------------------------------------------------------------------------------------------------------------------------------
@@ -3227,6 +3230,10 @@
    BLACK_CHERRY_TREE_TEXTURE = SF::Texture.from_file("graphics/plants/Black_Cherry_Tree.png")
    Black_Cherry_Tree = SF::Sprite.new(BLACK_CHERRY_TREE_TEXTURE); Black_Cherry_Tree.texture_rect = SF.int_rect(0, 0, 100, 200)
    Black_Cherry_Tree.position = SF.vector2(-1800, 602)
+  #''''''''''''''''''''''''''''''''''''''''''''''''''Red Cherry Tree'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+   RED_CHERRY_TREE_TEXTURE = SF::Texture.from_file("graphics/plants/Red_Cherry_Tree.png")
+   Red_Cherry_Tree = SF::Sprite.new(RED_CHERRY_TREE_TEXTURE); Red_Cherry_Tree.texture_rect = SF.int_rect(0, 0, 100, 200)
+   Red_Cherry_Tree.position = SF.vector2(-2000, 602)
 #______________________________________________________________________________________________________________________________________
 Testing_Text = SF::Text.new; Testing_Text.font = FONT_PIXEL; 
 Testing_Text.character_size = 20; Testing_Text.color = SF::Color::White; Testing_Text.position = SF.vector2(1800, 652)
