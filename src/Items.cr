@@ -339,11 +339,12 @@ end
       current_position = SF.vector2(400, 310)
       slot = 1; line = 1
       Owned_Ingredient_Array.map { |i| 
-      if slot < 6
+      if slot < 7
       current_position += SF.vector2(155, 0)
-      else if slot = 6
+      slot += 1
+      else if slot = 7
         slot = 1
-        line + 1
+        line += 1
       current_position += SF.vector2(-750, 150)
       end; end
       if line < 4 && page == 1
