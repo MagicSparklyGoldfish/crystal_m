@@ -345,12 +345,18 @@ end
       else if slot >= 6
         slot = 1
         line += 1
-      current_position += SF.vector2(-750, 150)
-      end; end
+      if line % 4 == 0
+        current_position = SF.vector2(550, 310)
+      else
+        current_position += SF.vector2(-750, 150)
+      end; end; end
       if line < 4 && page == 1
       i.sprite.position = current_position
       window.draw(i.sprite)
-      end}
+      else if line >= 4 && line < 8  && page == 2
+      i.sprite.position = current_position
+      window.draw(i.sprite)
+      end; end}
       end
    #__________________________________________________________________________________________________________________________________________________________
    #//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -381,6 +387,9 @@ end
      #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Hagberries'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
       @@hagberries = Ingredients.new("Hagberries", 7, "berry", "black", Hagberry, 0, ["Hp+", "Luk+"])
       Ingredient_Array.push(@@hagberries)
+     #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Red Currants''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+      @@red_currants = Ingredients.new("Red Currants", 8, "berry", "red", Red_Currant, 0, ["Hp+", "Luk+"])
+      Ingredient_Array.push(@@red_currants)
     #................................................................Trees....................................................................................
      #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Snow Pears'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
       @@snow_pears = Ingredients.new("Snow Pears", 100, "pome", "yellow", Snow_Pear, 0, ["Mp+", "Int+"])
@@ -5789,8 +5798,11 @@ include Use
      @@gooseberry_bush = Herbs.new("Gooseberry Bush", 6, "yellow", 100, 100, @@gooseberries, Gooseberry_Bush, false, "bush", 0, ["Hp+", "Dex+"])
      Herb_Array.push(@@gooseberry_bush)
     #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Hagberry Bush'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-     @@hagberry_bush = Herbs.new("Hagberry Bush", 6, "black", 100, 100, @@hagberries, Hagberry_Bush, false, "bush", 0, ["Hp+", "Dex+"])
+     @@hagberry_bush = Herbs.new("Hagberry Bush", 7, "black", 100, 100, @@hagberries, Hagberry_Bush, false, "bush", 0, ["Hp+", "Dex+"])
      Herb_Array.push(@@hagberry_bush)
+    #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Hagberry Bush'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     @@red_currant_bush = Herbs.new("Red Currant Bush", 8, "red", 100, 100, @@red_currants, Red_Currant_Bush, false, "bush", 0, ["Hp+", "Dex+"])
+     Herb_Array.push(@@red_currant_bush)
    #................................................................Trees..................................................................................
     #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Snow Pear Tree'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      @@snow_pear_tree = Herbs.new("Snow Pear Tree", 100, "yellow", 100, 100, @@snow_pears, Snow_Pear_Tree, false, "tree", 0, ["Mp+", "Int+"])
