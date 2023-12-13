@@ -342,8 +342,8 @@ end
       if slot < 6
       current_position += SF.vector2(150, 0)
       slot += 1
-      else if slot == 6
-        slot = 0
+      else if slot >= 6
+        slot = 1
         line += 1
       current_position += SF.vector2(-750, 150)
       end; end
@@ -412,6 +412,9 @@ end
      #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Red Cherry'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
       @@red_cherry = Ingredients.new("Red Cherries", 109, "drupe", "red", Red_Cherry, 0, ["Hp+", "Luk+"])
       Ingredient_Array.push(@@red_cherry)
+     #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Apricot'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+      @@apricot = Ingredients.new("Apricot", 110, "drupe", "yellow", Apricot, 0, ["Hp+", "Luk+"])
+      Ingredient_Array.push(@@apricot)
    #__________________________________________________________________________________________________________________________________________________________
    end
  end
@@ -5795,22 +5798,33 @@ include Use
     #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Quince Tree'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      @@quince_tree = Herbs.new("Quince Tree", 101, "yellow", 100, 100, @@quince, Quince_Tree, false, "tree", 0, ["Hp+", "Dex+"])
      Herb_Array.push(@@quince_tree)
+    #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Butterfruit Tree''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      @@butterfruit_tree = Herbs.new("Butterfruit Tree", 102, "purple", 100, 100, @@butterfruit, Butterfruit_Tree, false, "tree", 0, ["Hp++", "Dex+"])
      Herb_Array.push(@@butterfruit_tree)
+    #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Dusky Pear Tree'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      @@dusky_pear_tree = Herbs.new("Dusky Pear Tree", 103, "orange", 100, 100, @@dusky_pear, Dusky_Pear_Tree, false, "tree", 0, ["Mp+", "Int+"])
      Herb_Array.push(@@dusky_pear_tree)
+    #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Date Tree'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      @@date_tree = Herbs.new("Date Tree", 104, "brown", 100, 100, @@dates, Date_Tree, false, "tree", 0, ["Hp+", "Dex+"])
      Herb_Array.push(@@date_tree)
+    #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Coconut Tree'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      @@coconut_tree = Herbs.new("Coconut Tree", 105, "brown", 100, 100, @@coconuts, Coconut_Tree, false, "tree", 0, ["Hp+", "Str+"])
      Herb_Array.push(@@coconut_tree)
+    #'''''''''''''''''''''''''''''''''''''''''''''''''''''Peanut Butter Fruit Tree'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      @@peanut_butter_fruit_tree = Herbs.new("Peanut Butter Fruit Tree", 106, "red", 100, 100, @@peanut_butter_fruit, Peanut_Butter_Fruit_Tree, false, "tree", 0, ["Hp+", "Luk+"])
      Herb_Array.push(@@peanut_butter_fruit_tree)
+    #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Lychee Tree''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      @@lychee_tree = Herbs.new("Lychee Tree", 107, "red", 100, 100, @@lychee, Lychee_Tree, false, "tree", 0, ["Hp+", "Luk+"])
      Herb_Array.push(@@lychee_tree)
+    #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''Black Cherry Tree''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      @@black_cherry_tree = Herbs.new("Black Cherry Tree", 108, "black", 100, 100, @@black_cherry, Black_Cherry_Tree, false, "tree", 0, ["Hp+", "Luk+"])
      Herb_Array.push(@@black_cherry_tree)
+    #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Red Cherry Tree'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      @@red_cherry_tree = Herbs.new("Red Cherry Tree", 109, "red", 100, 100, @@red_cherry, Red_Cherry_Tree, false, "tree", 0, ["Hp+", "Luk+"])
      Herb_Array.push(@@red_cherry_tree)
+    #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Apricot Tree''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     @@apricot_tree = Herbs.new("Apricot Tree", 110, "yellow", 100, 100, @@apricot, Apricot_Tree, false, "tree", 0, ["Hp+", "Luk+"])
+     Herb_Array.push(@@apricot_tree)
   #________________________________________________________________________________________________________________________________________________________
   end
 end

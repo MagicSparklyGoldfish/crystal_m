@@ -1550,6 +1550,9 @@
     #''''''''''''''''''''''''''''''''''''''''''''''''Red Cherry'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      RED_CHERRY_TEXTURE = SF::Texture.from_file("graphics/plants/Red_Cherry.png")
      Red_Cherry = SF::Sprite.new(RED_CHERRY_TEXTURE)  
+    #'''''''''''''''''''''''''''''''''''''''''''''''''Apricot'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     APRICOT_TEXTURE = SF::Texture.from_file("graphics/plants/Apricot.png")
+     Apricot = SF::Sprite.new(APRICOT_TEXTURE)  
 #----------------------------------------------------------------------------------------------------------------------------------- 
 #                                                    Character Model
 #-----------------------------------------------------------------------------------------------------------------------------------
@@ -3248,6 +3251,10 @@
    RED_CHERRY_TREE_TEXTURE = SF::Texture.from_file("graphics/plants/Red_Cherry_Tree.png")
    Red_Cherry_Tree = SF::Sprite.new(RED_CHERRY_TREE_TEXTURE); Red_Cherry_Tree.texture_rect = SF.int_rect(0, 0, 100, 200)
    Red_Cherry_Tree.position = SF.vector2(-2000, 602)
+  #'''''''''''''''''''''''''''''''''''''''''''''''''''Apricot Tree'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+   APRICOT_TREE_TEXTURE = SF::Texture.from_file("graphics/plants/Apricot_Tree.png")
+   Apricot_Tree = SF::Sprite.new(APRICOT_TREE_TEXTURE); Apricot_Tree.texture_rect = SF.int_rect(0, 0, 100, 200)
+   Apricot_Tree.position = SF.vector2(-2200, 602)
 #______________________________________________________________________________________________________________________________________
 Testing_Text = SF::Text.new; Testing_Text.font = FONT_PIXEL; 
 Testing_Text.character_size = 20; Testing_Text.color = SF::Color::White; Testing_Text.position = SF.vector2(1800, 652)
