@@ -342,7 +342,7 @@ end
       if slot < 7
       current_position += SF.vector2(150, 0)
       slot += 1
-      else if slot == 7
+      else if slot == 6
         slot = 0
         line += 1
       current_position += SF.vector2(-750, 150)
@@ -357,18 +357,27 @@ end
    #/                                                               Entities                                                                                 /
    #//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     #................................................................Bushes...................................................................................
-     @@blackberries = Ingredients.new("Blackberries", 0, "berry", "black", Blackberries, 0, ["Hp+", "Mp+"])
-     Ingredient_Array.push(@@blackberries)
-     @@raspberries = Ingredients.new("Raspberries", 1, "berry", "red", Raspberries, 0, ["Hp+", "Str+"])
-     Ingredient_Array.push(@@raspberries)
-     @@elderberries = Ingredients.new("Elderberries", 2, "berry", "black", Elderberries, 0, ["Hp+", "Remove Poison"])
-     Ingredient_Array.push(@@elderberries)
-     @@black_currants = Ingredients.new("Black Currants", 3, "berry", "black", Black_Currant, 0, ["Hp+", "Luk+"])
-     Ingredient_Array.push(@@black_currants)
-     @@blueberries = Ingredients.new("Blueberries", 4, "berry", "blue", Blueberry, 0, ["Mp+", "Int+"])
-     Ingredient_Array.push(@@blueberries)
-     @@lemonade_berries = Ingredients.new("Lemonade Berries", 5, "drupe", "red", Lemonade_Berry, 0, ["Hp+", "Luk+"])
-     Ingredient_Array.push(@@lemonade_berries)
+     #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Blackberries''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+      @@blackberries = Ingredients.new("Blackberries", 0, "berry", "black", Blackberries, 0, ["Hp+", "Mp+"])
+      Ingredient_Array.push(@@blackberries)
+     #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Raspberries'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+      @@raspberries = Ingredients.new("Raspberries", 1, "berry", "red", Raspberries, 0, ["Hp+", "Str+"])
+      Ingredient_Array.push(@@raspberries)
+     #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Elderberries''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+      @@elderberries = Ingredients.new("Elderberries", 2, "berry", "black", Elderberries, 0, ["Hp+", "Remove Poison"])
+      Ingredient_Array.push(@@elderberries)
+     #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Black Currants'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+      @@black_currants = Ingredients.new("Black Currants", 3, "berry", "black", Black_Currant, 0, ["Hp+", "Luk+"])
+      Ingredient_Array.push(@@black_currants)
+     #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Blueberries'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+      @@blueberries = Ingredients.new("Blueberries", 4, "berry", "blue", Blueberry, 0, ["Mp+", "Int+"])
+      Ingredient_Array.push(@@blueberries)
+     #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Lemonade Berries''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+      @@lemonade_berries = Ingredients.new("Lemonade Berries", 5, "drupe", "red", Lemonade_Berry, 0, ["Hp+", "Luk+"])
+      Ingredient_Array.push(@@lemonade_berries)
+     #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Gooseberries''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+      @@gooseberries = Ingredients.new("Gooseberries", 6, "berry", "yellow", Gooseberry, 0, ["Hp+", "Luk+"])
+      Ingredient_Array.push(@@gooseberries)
     #................................................................Trees....................................................................................
      @@snow_pears = Ingredients.new("Snow Pears", 100, "pome", "yellow", Snow_Pear, 0, ["Mp+", "Int+"])
      Ingredient_Array.push(@@snow_pears)
@@ -5742,18 +5751,27 @@ include Use
   #/                                                               Entities                                                                               /
   #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
    #................................................................Bushes.................................................................................
-    @@blackberry_bush = Herbs.new("Blackberry Bush", 0, "black", 100, 100, @@blackberries, Blackberry_Bush, false, "bush", 0, ["Hp+", "Mp+"])
-    Herb_Array.push(@@blackberry_bush)
-    @@raspberry_bush = Herbs.new("Raspberry Bush", 1, "red", 100, 100, @@raspberries, Raspberry_Bush, false, "bush", 0, ["Hp+", "Str+"])
-    Herb_Array.push(@@raspberry_bush)
-    @@elderberry_bush = Herbs.new("Elderberry Bush", 2, "black", 100, 100, @@elderberries, Elderberry_Bush, false, "bush", 0, ["Hp+", "Remove Poison"])
-    Herb_Array.push(@@elderberry_bush)
-    @@black_currant_bush = Herbs.new("Black Currant Bush", 3, "black", 100, 100, @@black_currants, Black_Currant_Bush, false, "bush", 0, ["Hp+", "Luk+"])
-    Herb_Array.push(@@black_currant_bush)
-    @@blueberry_bush = Herbs.new("Blueberry Bush", 4, "blue", 100, 100, @@blueberries, Blueberry_Bush, false, "bush", 0, ["Mp+", "Int+"])
-    Herb_Array.push(@@blueberry_bush)
-    @@lemonade_berry_bush = Herbs.new("Lemonade Berry Bush", 5, "red", 100, 100, @@lemonade_berries, Lemonade_Berry_Bush, false, "bush", 0, ["Hp+", "Dex+"])
-    Herb_Array.push(@@lemonade_berry_bush)
+    #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Blackberry Bush''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     @@blackberry_bush = Herbs.new("Blackberry Bush", 0, "black", 100, 100, @@blackberries, Blackberry_Bush, false, "bush", 0, ["Hp+", "Mp+"])
+     Herb_Array.push(@@blackberry_bush)
+    #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Raspberry Bush'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     @@raspberry_bush = Herbs.new("Raspberry Bush", 1, "red", 100, 100, @@raspberries, Raspberry_Bush, false, "bush", 0, ["Hp+", "Str+"])
+     Herb_Array.push(@@raspberry_bush)
+    #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Elderberry Bush''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     @@elderberry_bush = Herbs.new("Elderberry Bush", 2, "black", 100, 100, @@elderberries, Elderberry_Bush, false, "bush", 0, ["Hp+", "Remove Poison"])
+     Herb_Array.push(@@elderberry_bush)
+    #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''Black Currant Bush'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     @@black_currant_bush = Herbs.new("Black Currant Bush", 3, "black", 100, 100, @@black_currants, Black_Currant_Bush, false, "bush", 0, ["Hp+", "Luk+"])
+     Herb_Array.push(@@black_currant_bush)
+    #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Blueberry Bush'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     @@blueberry_bush = Herbs.new("Blueberry Bush", 4, "blue", 100, 100, @@blueberries, Blueberry_Bush, false, "bush", 0, ["Mp+", "Int+"])
+     Herb_Array.push(@@blueberry_bush)
+    #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''Lemonade Berry Bush''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     @@lemonade_berry_bush = Herbs.new("Lemonade Berry Bush", 5, "red", 100, 100, @@lemonade_berries, Lemonade_Berry_Bush, false, "bush", 0, ["Hp+", "Dex+"])
+     Herb_Array.push(@@lemonade_berry_bush)
+    #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Gooseberry Bush''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     @@gooseberry_bush = Herbs.new("Gooseberry Bush", 6, "yellow", 100, 100, @@gooseberries, Gooseberry_Bush, false, "bush", 0, ["Hp+", "Dex+"])
+     Herb_Array.push(@@gooseberry_bush)
    #................................................................Trees..................................................................................
     @@snow_pear_tree = Herbs.new("Snow Pear Tree", 100, "yellow", 100, 100, @@snow_pears, Snow_Pear_Tree, false, "tree", 0, ["Mp+", "Int+"])
     Herb_Array.push(@@snow_pear_tree)
