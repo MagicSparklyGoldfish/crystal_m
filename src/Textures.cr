@@ -1526,9 +1526,12 @@
     #'''''''''''''''''''''''''''''''''''''''''''''''''''Date Tree'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      DATE_TEXTURE = SF::Texture.from_file("graphics/plants/Dates.png")
      Dates = SF::Sprite.new(DATE_TEXTURE)  
-    #'''''''''''''''''''''''''''''''''''''''''''''''''''Date Tree'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    #'''''''''''''''''''''''''''''''''''''''''''''''''Coconut Tree''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      COCONUT_TEXTURE = SF::Texture.from_file("graphics/plants/Coconuts.png")
      Coconuts = SF::Sprite.new(COCONUT_TEXTURE)  
+    #'''''''''''''''''''''''''''''''''''''''''''''Peanut Butter Fruit Tree''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     PEANUT_BUTTER_FRUIT_TEXTURE = SF::Texture.from_file("graphics/plants/Peanut_Butter_Fruit.png")
+     Peanut_Butter_Fruit = SF::Sprite.new(PEANUT_BUTTER_FRUIT_TEXTURE)  
 #----------------------------------------------------------------------------------------------------------------------------------- 
 #                                                    Character Model
 #-----------------------------------------------------------------------------------------------------------------------------------
@@ -3195,10 +3198,14 @@
    DATE_TREE_TEXTURE = SF::Texture.from_file("graphics/plants/Date_Tree.png")
    Date_Tree = SF::Sprite.new(DATE_TREE_TEXTURE); Date_Tree.texture_rect = SF.int_rect(0, 0, 100, 200)
    Date_Tree.position = SF.vector2(-1000, 602)
-  #''''''''''''''''''''''''''''''''''''''''''''''''''''Coconut Tree'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+  #''''''''''''''''''''''''''''''''''''''''''''''''''Coconut Tree''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
    COCONUT_TREE_TEXTURE = SF::Texture.from_file("graphics/plants/Coconut_Tree.png")
    Coconut_Tree = SF::Sprite.new(COCONUT_TREE_TEXTURE); Coconut_Tree.texture_rect = SF.int_rect(0, 0, 100, 200)
    Coconut_Tree.position = SF.vector2(-1200, 602)
+  #'''''''''''''''''''''''''''''''''''''''''''''Peanut Butter Fruit Tree'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+   PEANUT_BUTTER_FRUIT_TREE_TEXTURE = SF::Texture.from_file("graphics/plants/Peanut_Butter_Fruit_Tree.png")
+   Peanut_Butter_Fruit_Tree = SF::Sprite.new(PEANUT_BUTTER_FRUIT_TREE_TEXTURE); Peanut_Butter_Fruit_Tree.texture_rect = SF.int_rect(0, 0, 100, 200)
+   Peanut_Butter_Fruit_Tree.position = SF.vector2(-1400, 602)
 #______________________________________________________________________________________________________________________________________
 Testing_Text = SF::Text.new; Testing_Text.font = FONT_PIXEL; 
 Testing_Text.character_size = 20; Testing_Text.color = SF::Color::White; Testing_Text.position = SF.vector2(1800, 652)

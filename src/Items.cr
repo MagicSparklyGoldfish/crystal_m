@@ -380,6 +380,8 @@ end
      Ingredient_Array.push(@@dates)
      @@coconuts = Ingredients.new("Coconuts", 105, "drupe", "brown", Coconuts, 0, ["Hp+", "Str+"])
      Ingredient_Array.push(@@coconuts)
+     @@peanut_butter_fruit = Ingredients.new("Peanut Butter Fruit", 106, "drupe", "red", Peanut_Butter_Fruit, 0, ["Hp+", "Luk+"])
+     Ingredient_Array.push(@@peanut_butter_fruit)
    #__________________________________________________________________________________________________________________________________________________________
    end
  end
@@ -5755,6 +5757,8 @@ include Use
     Herb_Array.push(@@date_tree)
     @@coconut_tree = Herbs.new("Coconut Tree", 105, "brown", 100, 100, @@coconuts, Coconut_Tree, false, "tree", 0, ["Hp+", "Str+"])
     Herb_Array.push(@@coconut_tree)
+    @@peanut_butter_fruit_tree = Herbs.new("Peanut Butter Fruit Tree", 106, "red", 100, 100, @@peanut_butter_fruit, Peanut_Butter_Fruit_Tree, false, "tree", 0, ["Hp+", "Luk+"])
+    Herb_Array.push(@@peanut_butter_fruit_tree)
   #________________________________________________________________________________________________________________________________________________________
   end
 end
