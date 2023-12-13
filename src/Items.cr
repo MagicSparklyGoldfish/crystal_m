@@ -372,6 +372,8 @@ end
      Ingredient_Array.push(@@snow_pears)
      @@quince = Ingredients.new("Quince", 101, "pome", "yellow", Quince, 0, ["Hp+", "Dex+"])
      Ingredient_Array.push(@@quince)
+     @@butterfruit = Ingredients.new("Quince", 102, "drupe", "purple", Butterfruit, 0, ["Hp++", "Str+"])
+     Ingredient_Array.push(@@butterfruit)
    #__________________________________________________________________________________________________________________________________________________________
    end
  end
@@ -5739,6 +5741,8 @@ include Use
     Herb_Array.push(@@snow_pear_tree)
     @@quince_tree = Herbs.new("Qunice Tree", 101, "yellow", 100, 100, @@quince, Quince_Tree, false, "tree", 0, ["Hp+", "Dex+"])
     Herb_Array.push(@@quince_tree)
+    @@butterfruit_tree = Herbs.new("Butterfruit Tree", 102, "purple", 100, 100, @@butterfruit, Butterfruit_Tree, false, "tree", 0, ["Hp++", "Dex+"])
+    Herb_Array.push(@@butterfruit_tree)
   #________________________________________________________________________________________________________________________________________________________
   end
 end

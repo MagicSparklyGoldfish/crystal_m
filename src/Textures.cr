@@ -1517,6 +1517,9 @@
     #''''''''''''''''''''''''''''''''''''''''''''''''''Quince Tree''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      QUINCE_TEXTURE = SF::Texture.from_file("graphics/plants/Quince.png")
      Quince = SF::Sprite.new(QUINCE_TEXTURE)  
+    #''''''''''''''''''''''''''''''''''''''''''''''''Butterfruit Tree'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     BUTTERFRUIT_TEXTURE = SF::Texture.from_file("graphics/plants/Butterfruit.png")
+     Butterfruit = SF::Sprite.new(BUTTERFRUIT_TEXTURE)  
 #----------------------------------------------------------------------------------------------------------------------------------- 
 #                                                    Character Model
 #-----------------------------------------------------------------------------------------------------------------------------------
@@ -3171,6 +3174,10 @@
    QUINCE_TREE_TEXTURE = SF::Texture.from_file("graphics/plants/Quince_Tree.png")
    Quince_Tree = SF::Sprite.new(QUINCE_TREE_TEXTURE); Quince_Tree.texture_rect = SF.int_rect(0, 0, 100, 200)
    Quince_Tree.position = SF.vector2(-400, 602)
+  #''''''''''''''''''''''''''''''''''''''''''''''''''''''Quince Tree'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+  BUTTERFRUIT_TREE_TEXTURE = SF::Texture.from_file("graphics/plants/Butterfruit_Tree.png")
+  Butterfruit_Tree = SF::Sprite.new(BUTTERFRUIT_TREE_TEXTURE); Butterfruit_Tree.texture_rect = SF.int_rect(0, 0, 100, 200)
+  Butterfruit_Tree.position = SF.vector2(-600, 602)
 #______________________________________________________________________________________________________________________________________
 Testing_Text = SF::Text.new; Testing_Text.font = FONT_PIXEL; 
 Testing_Text.character_size = 20; Testing_Text.color = SF::Color::White; Testing_Text.position = SF.vector2(1800, 652)
