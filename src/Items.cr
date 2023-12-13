@@ -342,7 +342,7 @@ end
       if slot < 7
       current_position += SF.vector2(150, 0)
       slot += 1
-      else if slot = 7
+      else if slot == 7
         slot = 1
         line += 1
       current_position += SF.vector2(-750, 150)
@@ -367,6 +367,8 @@ end
      Ingredient_Array.push(@@black_currants)
      @@blueberries = Ingredients.new("Blueberries", 4, "berry", "blue", Blueberry, 0, ["Mp+", "Int+"])
      Ingredient_Array.push(@@blueberries)
+     @@lemonade_berries = Ingredients.new("Lemonade Berries", 5, "drupe", "red", Lemonade_Berry, 0, ["Hp+", "Luk+"])
+     Ingredient_Array.push(@@lemonade_berries)
     #................................................................Trees....................................................................................
      @@snow_pears = Ingredients.new("Snow Pears", 100, "pome", "yellow", Snow_Pear, 0, ["Mp+", "Int+"])
      Ingredient_Array.push(@@snow_pears)
@@ -5744,6 +5746,8 @@ include Use
     Herb_Array.push(@@black_currant_bush)
     @@blueberry_bush = Herbs.new("Blueberry Bush", 4, "blue", 100, 100, @@blueberries, Blueberry_Bush, false, "bush", 0, ["Mp+", "Int+"])
     Herb_Array.push(@@blueberry_bush)
+    @@lemonade_berry_bush = Herbs.new("Lemonade Berry Bush", 5, "red", 100, 100, @@lemonade_berries, Lemonade_Berry_Bush, false, "bush", 0, ["Hp+", "Dex+"])
+    Herb_Array.push(@@lemonade_berry_bush)
    #................................................................Trees..................................................................................
     @@snow_pear_tree = Herbs.new("Snow Pear Tree", 100, "yellow", 100, 100, @@snow_pears, Snow_Pear_Tree, false, "tree", 0, ["Mp+", "Int+"])
     Herb_Array.push(@@snow_pear_tree)

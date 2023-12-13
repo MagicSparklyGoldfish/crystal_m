@@ -1510,6 +1510,9 @@
     #'''''''''''''''''''''''''''''''''''''''''''''''''Blueberries'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      BLUEBERRY_TEXTURE = SF::Texture.from_file("graphics/plants/Blueberries.png")
      Blueberry = SF::Sprite.new(BLUEBERRY_TEXTURE)  
+    #'''''''''''''''''''''''''''''''''''''''''''''''''Blueberries'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     LEMONADE_BERRY_TEXTURE = SF::Texture.from_file("graphics/plants/Lemonade_Fruit.png")
+     Lemonade_Berry = SF::Sprite.new(LEMONADE_BERRY_TEXTURE)  
    #.....................................................Trees......................................................................
     #''''''''''''''''''''''''''''''''''''''''''''''''Snow Pear Tree'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      SNOW_PEAR_TEXTURE = SF::Texture.from_file("graphics/plants/Snow_Pears.png")
@@ -3177,6 +3180,10 @@
    BLUEBERRY_BUSH_TEXTURE = SF::Texture.from_file("graphics/plants/Blueberry_Bush.png")
    Blueberry_Bush = SF::Sprite.new(BLUEBERRY_BUSH_TEXTURE); Blueberry_Bush.texture_rect = SF.int_rect(0, 0, 100, 100)
    Blueberry_Bush.position = SF.vector2(1200, 702)
+  #'''''''''''''''''''''''''''''''''''''''''''''''''Lemonade berry Bush'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+   LEMONADE_BERRY_BUSH_TEXTURE = SF::Texture.from_file("graphics/plants/Lemonade_Berry_Bush.png")
+   Lemonade_Berry_Bush = SF::Sprite.new(LEMONADE_BERRY_BUSH_TEXTURE); Lemonade_Berry_Bush.texture_rect = SF.int_rect(0, 0, 100, 100)
+   Lemonade_Berry_Bush.position = SF.vector2(1400, 702)
  #///////////////////////////////////////////////////////Trees\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
   #''''''''''''''''''''''''''''''''''''''''''''''''''Snow Pear Tree''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
    SNOW_PEAR_TREE_TEXTURE = SF::Texture.from_file("graphics/plants/Snow_Pear_Tree.png")
