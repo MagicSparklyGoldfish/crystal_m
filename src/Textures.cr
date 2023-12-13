@@ -1516,6 +1516,9 @@
     #'''''''''''''''''''''''''''''''''''''''''''''''''Gooseberries''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      GOOSEBERRY_TEXTURE = SF::Texture.from_file("graphics/plants/Gooseberry.png")
      Gooseberry = SF::Sprite.new(GOOSEBERRY_TEXTURE)  
+    #''''''''''''''''''''''''''''''''''''''''''''''''''Hagberries'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     HAGBERRY_TEXTURE = SF::Texture.from_file("graphics/plants/Hagberry.png")
+     Hagberry = SF::Sprite.new(HAGBERRY_TEXTURE)  
    #.....................................................Trees......................................................................
     #''''''''''''''''''''''''''''''''''''''''''''''''''Snow Pear''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      SNOW_PEAR_TEXTURE = SF::Texture.from_file("graphics/plants/Snow_Pears.png")
@@ -3200,6 +3203,10 @@
    GOOSEBERRY_BUSH_TEXTURE = SF::Texture.from_file("graphics/plants/Gooseberry_Bush.png")
    Gooseberry_Bush = SF::Sprite.new(GOOSEBERRY_BUSH_TEXTURE); Gooseberry_Bush.texture_rect = SF.int_rect(0, 0, 100, 100)
    Gooseberry_Bush.position = SF.vector2(1600, 702)
+  #''''''''''''''''''''''''''''''''''''''''''''''''''''Hagberry Bush''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+   HAGBERRY_BUSH_TEXTURE = SF::Texture.from_file("graphics/plants/Hagberry_Bush.png")
+   Hagberry_Bush = SF::Sprite.new(HAGBERRY_BUSH_TEXTURE); Hagberry_Bush.texture_rect = SF.int_rect(0, 0, 100, 100)
+   Hagberry_Bush.position = SF.vector2(1800, 702)
  #///////////////////////////////////////////////////////Trees\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
   #''''''''''''''''''''''''''''''''''''''''''''''''''Snow Pear Tree''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
    SNOW_PEAR_TREE_TEXTURE = SF::Texture.from_file("graphics/plants/Snow_Pear_Tree.png")

@@ -337,9 +337,9 @@ end
       end
      def Ingredients.display_inventory(window, page)
       current_position = SF.vector2(400, 310)
-      slot = 1; line = 1
+      slot = 0; line = 1
       Owned_Ingredient_Array.map { |i| 
-      if slot < 7
+      if slot < 6
       current_position += SF.vector2(150, 0)
       slot += 1
       else if slot == 6
@@ -378,27 +378,40 @@ end
      #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Gooseberries''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
       @@gooseberries = Ingredients.new("Gooseberries", 6, "berry", "yellow", Gooseberry, 0, ["Hp+", "Luk+"])
       Ingredient_Array.push(@@gooseberries)
+     #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Hagberries'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+      @@hagberries = Ingredients.new("Hagberries", 7, "berry", "black", Hagberry, 0, ["Hp+", "Luk+"])
+      Ingredient_Array.push(@@hagberries)
     #................................................................Trees....................................................................................
-     @@snow_pears = Ingredients.new("Snow Pears", 100, "pome", "yellow", Snow_Pear, 0, ["Mp+", "Int+"])
-     Ingredient_Array.push(@@snow_pears)
-     @@quince = Ingredients.new("Quince", 101, "pome", "yellow", Quince, 0, ["Hp+", "Dex+"])
-     Ingredient_Array.push(@@quince)
-     @@butterfruit = Ingredients.new("Butterfruit", 102, "drupe", "purple", Butterfruit, 0, ["Hp++", "Str+"])
-     Ingredient_Array.push(@@butterfruit)
-     @@dusky_pear = Ingredients.new("Dusky Pears", 103, "pome", "orange", Dusky_Pears, 0, ["Mp+", "Int+"])
-     Ingredient_Array.push(@@dusky_pear)
-     @@dates = Ingredients.new("Dates", 104, "drupe", "brown", Dates, 0, ["Mp+", "Luk+"])
-     Ingredient_Array.push(@@dates)
-     @@coconuts = Ingredients.new("Coconuts", 105, "drupe", "brown", Coconuts, 0, ["Hp+", "Str+"])
-     Ingredient_Array.push(@@coconuts)
-     @@peanut_butter_fruit = Ingredients.new("Peanut Butter Fruit", 106, "drupe", "red", Peanut_Butter_Fruit, 0, ["Hp+", "Luk+"])
-     Ingredient_Array.push(@@peanut_butter_fruit)
-     @@lychee = Ingredients.new("Lychee", 107, "drupe", "red", Lychee, 0, ["Hp+", "Luk+"])
-     Ingredient_Array.push(@@lychee)
-     @@black_cherry = Ingredients.new("Black Cherries", 108, "drupe", "black", Black_Cherry, 0, ["Hp+", "Luk+"])
-     Ingredient_Array.push(@@black_cherry)
-     @@red_cherry = Ingredients.new("Red Cherries", 109, "drupe", "red", Red_Cherry, 0, ["Hp+", "Luk+"])
-     Ingredient_Array.push(@@red_cherry)
+     #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Snow Pears'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+      @@snow_pears = Ingredients.new("Snow Pears", 100, "pome", "yellow", Snow_Pear, 0, ["Mp+", "Int+"])
+      Ingredient_Array.push(@@snow_pears)
+     #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Quince'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+      @@quince = Ingredients.new("Quince", 101, "pome", "yellow", Quince, 0, ["Hp+", "Dex+"])
+      Ingredient_Array.push(@@quince)
+     #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Butterfruit''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+      @@butterfruit = Ingredients.new("Butterfruit", 102, "drupe", "purple", Butterfruit, 0, ["Hp++", "Str+"])
+      Ingredient_Array.push(@@butterfruit)
+     #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Dusky Pear'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+      @@dusky_pear = Ingredients.new("Dusky Pears", 103, "pome", "orange", Dusky_Pears, 0, ["Mp+", "Int+"])
+      Ingredient_Array.push(@@dusky_pear)
+     #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Dates''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+      @@dates = Ingredients.new("Dates", 104, "drupe", "brown", Dates, 0, ["Mp+", "Luk+"])
+      Ingredient_Array.push(@@dates)
+     #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Coconut'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+      @@coconuts = Ingredients.new("Coconuts", 105, "drupe", "brown", Coconuts, 0, ["Hp+", "Str+"])
+      Ingredient_Array.push(@@coconuts)
+     #''''''''''''''''''''''''''''''''''''''''''''''''''''''''Peanut Butter Fruit'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+      @@peanut_butter_fruit = Ingredients.new("Peanut Butter Fruit", 106, "drupe", "red", Peanut_Butter_Fruit, 0, ["Hp+", "Luk+"])
+      Ingredient_Array.push(@@peanut_butter_fruit)
+     #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Lychee''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+      @@lychee = Ingredients.new("Lychee", 107, "drupe", "red", Lychee, 0, ["Hp+", "Luk+"])
+      Ingredient_Array.push(@@lychee)
+     #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Black Cherry''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+      @@black_cherry = Ingredients.new("Black Cherries", 108, "drupe", "black", Black_Cherry, 0, ["Hp+", "Luk+"])
+      Ingredient_Array.push(@@black_cherry)
+     #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Red Cherry'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+      @@red_cherry = Ingredients.new("Red Cherries", 109, "drupe", "red", Red_Cherry, 0, ["Hp+", "Luk+"])
+      Ingredient_Array.push(@@red_cherry)
    #__________________________________________________________________________________________________________________________________________________________
    end
  end
@@ -5772,27 +5785,32 @@ include Use
     #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Gooseberry Bush''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      @@gooseberry_bush = Herbs.new("Gooseberry Bush", 6, "yellow", 100, 100, @@gooseberries, Gooseberry_Bush, false, "bush", 0, ["Hp+", "Dex+"])
      Herb_Array.push(@@gooseberry_bush)
+    #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Hagberry Bush'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     @@hagberry_bush = Herbs.new("Hagberry Bush", 6, "black", 100, 100, @@hagberries, Hagberry_Bush, false, "bush", 0, ["Hp+", "Dex+"])
+     Herb_Array.push(@@hagberry_bush)
    #................................................................Trees..................................................................................
-    @@snow_pear_tree = Herbs.new("Snow Pear Tree", 100, "yellow", 100, 100, @@snow_pears, Snow_Pear_Tree, false, "tree", 0, ["Mp+", "Int+"])
-    Herb_Array.push(@@snow_pear_tree)
-    @@quince_tree = Herbs.new("Quince Tree", 101, "yellow", 100, 100, @@quince, Quince_Tree, false, "tree", 0, ["Hp+", "Dex+"])
-    Herb_Array.push(@@quince_tree)
-    @@butterfruit_tree = Herbs.new("Butterfruit Tree", 102, "purple", 100, 100, @@butterfruit, Butterfruit_Tree, false, "tree", 0, ["Hp++", "Dex+"])
-    Herb_Array.push(@@butterfruit_tree)
-    @@dusky_pear_tree = Herbs.new("Dusky Pear Tree", 103, "orange", 100, 100, @@dusky_pear, Dusky_Pear_Tree, false, "tree", 0, ["Mp+", "Int+"])
-    Herb_Array.push(@@dusky_pear_tree)
-    @@date_tree = Herbs.new("Date Tree", 104, "brown", 100, 100, @@dates, Date_Tree, false, "tree", 0, ["Hp+", "Dex+"])
-    Herb_Array.push(@@date_tree)
-    @@coconut_tree = Herbs.new("Coconut Tree", 105, "brown", 100, 100, @@coconuts, Coconut_Tree, false, "tree", 0, ["Hp+", "Str+"])
-    Herb_Array.push(@@coconut_tree)
-    @@peanut_butter_fruit_tree = Herbs.new("Peanut Butter Fruit Tree", 106, "red", 100, 100, @@peanut_butter_fruit, Peanut_Butter_Fruit_Tree, false, "tree", 0, ["Hp+", "Luk+"])
-    Herb_Array.push(@@peanut_butter_fruit_tree)
-    @@lychee_tree = Herbs.new("Lychee Tree", 107, "red", 100, 100, @@lychee, Lychee_Tree, false, "tree", 0, ["Hp+", "Luk+"])
-    Herb_Array.push(@@lychee_tree)
-    @@black_cherry_tree = Herbs.new("Black Cherry Tree", 108, "black", 100, 100, @@black_cherry, Black_Cherry_Tree, false, "tree", 0, ["Hp+", "Luk+"])
-    Herb_Array.push(@@black_cherry_tree)
-    @@red_cherry_tree = Herbs.new("Red Cherry Tree", 109, "red", 100, 100, @@red_cherry, Red_Cherry_Tree, false, "tree", 0, ["Hp+", "Luk+"])
-    Herb_Array.push(@@red_cherry_tree)
+    #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Snow Pear Tree'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     @@snow_pear_tree = Herbs.new("Snow Pear Tree", 100, "yellow", 100, 100, @@snow_pears, Snow_Pear_Tree, false, "tree", 0, ["Mp+", "Int+"])
+     Herb_Array.push(@@snow_pear_tree)
+    #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Quince Tree'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     @@quince_tree = Herbs.new("Quince Tree", 101, "yellow", 100, 100, @@quince, Quince_Tree, false, "tree", 0, ["Hp+", "Dex+"])
+     Herb_Array.push(@@quince_tree)
+     @@butterfruit_tree = Herbs.new("Butterfruit Tree", 102, "purple", 100, 100, @@butterfruit, Butterfruit_Tree, false, "tree", 0, ["Hp++", "Dex+"])
+     Herb_Array.push(@@butterfruit_tree)
+     @@dusky_pear_tree = Herbs.new("Dusky Pear Tree", 103, "orange", 100, 100, @@dusky_pear, Dusky_Pear_Tree, false, "tree", 0, ["Mp+", "Int+"])
+     Herb_Array.push(@@dusky_pear_tree)
+     @@date_tree = Herbs.new("Date Tree", 104, "brown", 100, 100, @@dates, Date_Tree, false, "tree", 0, ["Hp+", "Dex+"])
+     Herb_Array.push(@@date_tree)
+     @@coconut_tree = Herbs.new("Coconut Tree", 105, "brown", 100, 100, @@coconuts, Coconut_Tree, false, "tree", 0, ["Hp+", "Str+"])
+     Herb_Array.push(@@coconut_tree)
+     @@peanut_butter_fruit_tree = Herbs.new("Peanut Butter Fruit Tree", 106, "red", 100, 100, @@peanut_butter_fruit, Peanut_Butter_Fruit_Tree, false, "tree", 0, ["Hp+", "Luk+"])
+     Herb_Array.push(@@peanut_butter_fruit_tree)
+     @@lychee_tree = Herbs.new("Lychee Tree", 107, "red", 100, 100, @@lychee, Lychee_Tree, false, "tree", 0, ["Hp+", "Luk+"])
+     Herb_Array.push(@@lychee_tree)
+     @@black_cherry_tree = Herbs.new("Black Cherry Tree", 108, "black", 100, 100, @@black_cherry, Black_Cherry_Tree, false, "tree", 0, ["Hp+", "Luk+"])
+     Herb_Array.push(@@black_cherry_tree)
+     @@red_cherry_tree = Herbs.new("Red Cherry Tree", 109, "red", 100, 100, @@red_cherry, Red_Cherry_Tree, false, "tree", 0, ["Hp+", "Luk+"])
+     Herb_Array.push(@@red_cherry_tree)
   #________________________________________________________________________________________________________________________________________________________
   end
 end
