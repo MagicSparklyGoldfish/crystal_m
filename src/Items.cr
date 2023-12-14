@@ -5616,7 +5616,7 @@ include Use
         @@plant_reset = 1
       end
       time = Plant_Clock_Break.elapsed_time
-      if time >= SF.seconds(0.25) && time < SF.seconds(0.5)
+      if time >= SF.seconds(0.1) && time < SF.seconds(0.2)
         All_Audio::SFX.dig_02
        a = 0; b = 200; x = 100; y = 100
        case @@current_plant_attacked.kind
@@ -5626,7 +5626,7 @@ include Use
         a = 100; b = 400; x = 100; y = 200
        end
        broken.sprite_change_square(a, b, x, y)
- else if time >= SF.seconds(0.5) && time < SF.seconds(0.75)
+ else if time >= SF.seconds(0.2) && time < SF.seconds(0.3)
        a = 100; b = 200; x = 100; y = 100
        case @@current_plant_attacked.kind
        when "bush"
@@ -5635,7 +5635,7 @@ include Use
         a = 100; b = 400; x = 100; y = 200
        end
        broken.sprite_change_square(a, b, x, y)
- else if time >= SF.seconds(0.75) && time < SF.seconds(1)
+ else if time >= SF.seconds(0.3) && time < SF.seconds(0.4)
        a = 200; b = 200; x = 100; y = 100
        case @@current_plant_attacked.kind
        when "bush"
@@ -5644,7 +5644,7 @@ include Use
         a = 200; b = 400; x = 100; y = 200
        end
        broken.sprite_change_square(a, b, x, y)
- else if time >= SF.seconds(1) && time < SF.seconds(1.25)
+ else if time >= SF.seconds(0.4) && time < SF.seconds(0.5)
        a = 300; b = 200; x = 100; y = 100
        case @@current_plant_attacked.kind
        when "bush"
@@ -5653,7 +5653,7 @@ include Use
         a = 300; b = 400; x = 100; y = 200
        end
        broken.sprite_change_square(a, b, x, y)
- else if time >= SF.seconds(1.25) && time < SF.seconds(1.5)
+ else if time >= SF.seconds(0.5) && time < SF.seconds(0.6)
         a = 400; b = 200; x = 100; y = 100
         case @@current_plant_attacked.kind
         when "bush"
@@ -5662,7 +5662,7 @@ include Use
          a = 400; b = 400; x = 100; y = 200
         end
         broken.sprite_change_square(a, b, x, y)
- else if time >= SF.seconds(1.5) && time < SF.seconds(1.75)
+ else if time >= SF.seconds(0.6) && time < SF.seconds(1.75)
   broken.is_broke_toggle   
   @@plant_reset = 0
   if time > SF.milliseconds(30)  #@note this only works with microseconds and milliseconds, not seconds. I don't know why, there wasn't a typo
