@@ -1544,33 +1544,36 @@
     #''''''''''''''''''''''''''''''''''''''''''''''''''''Date'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      DATE_TEXTURE = SF::Texture.from_file("graphics/plants/Dates.png")
      Dates = SF::Sprite.new(DATE_TEXTURE)  
-    #''''''''''''''''''''''''''''''''''''''''''''''''''Coconut''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    #'''''''''''''''''''''''''''''''''''''''''''''''''''Coconut'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      COCONUT_TEXTURE = SF::Texture.from_file("graphics/plants/Coconuts.png")
      Coconuts = SF::Sprite.new(COCONUT_TEXTURE)  
     #'''''''''''''''''''''''''''''''''''''''''''''Peanut Butter Fruit'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      PEANUT_BUTTER_FRUIT_TEXTURE = SF::Texture.from_file("graphics/plants/Peanut_Butter_Fruit.png")
      Peanut_Butter_Fruit = SF::Sprite.new(PEANUT_BUTTER_FRUIT_TEXTURE)  
-    #'''''''''''''''''''''''''''''''''''''''''''''''''''Lychee''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    #''''''''''''''''''''''''''''''''''''''''''''''''''''Lychee'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      LYCHEE_TEXTURE = SF::Texture.from_file("graphics/plants/Lychee.png")
      Lychee = SF::Sprite.new(LYCHEE_TEXTURE)  
-    #''''''''''''''''''''''''''''''''''''''''''''''''Black Cherry'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    #'''''''''''''''''''''''''''''''''''''''''''''''''Black Cherry''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      BLACK_CHERRY_TEXTURE = SF::Texture.from_file("graphics/plants/Black_Cherry.png")
      Black_Cherry = SF::Sprite.new(BLACK_CHERRY_TEXTURE)  
-    #'''''''''''''''''''''''''''''''''''''''''''''''''Red Cherry''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    #''''''''''''''''''''''''''''''''''''''''''''''''''Red Cherry'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      RED_CHERRY_TEXTURE = SF::Texture.from_file("graphics/plants/Red_Cherry.png")
      Red_Cherry = SF::Sprite.new(RED_CHERRY_TEXTURE)  
-    #''''''''''''''''''''''''''''''''''''''''''''''''''Apricot''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    #'''''''''''''''''''''''''''''''''''''''''''''''''''Apricot'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      APRICOT_TEXTURE = SF::Texture.from_file("graphics/plants/Apricot.png")
      Apricot = SF::Sprite.new(APRICOT_TEXTURE)  
     #''''''''''''''''''''''''''''''''''''''''''''''''''''Acai'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      ACAI_TEXTURE = SF::Texture.from_file("graphics/plants/Acai.png")
      Acai = SF::Sprite.new(ACAI_TEXTURE)  
-    #'''''''''''''''''''''''''''''''''''''''''''''''''''Peach'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    #''''''''''''''''''''''''''''''''''''''''''''''''''''Peach''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      PEACH_TEXTURE = SF::Texture.from_file("graphics/plants/Peach.png")
      Peach = SF::Sprite.new(PEACH_TEXTURE)  
-    #'''''''''''''''''''''''''''''''''''''''''''''''''''Mango'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    #''''''''''''''''''''''''''''''''''''''''''''''''''''Mango''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      MANGO_TEXTURE = SF::Texture.from_file("graphics/plants/Mangoes.png")
      Mango = SF::Sprite.new(MANGO_TEXTURE)  
+    #''''''''''''''''''''''''''''''''''''''''''''''''''''Lime'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     LIME_TEXTURE = SF::Texture.from_file("graphics/plants/Limes.png")
+     Lime = SF::Sprite.new(LIME_TEXTURE)  
 #----------------------------------------------------------------------------------------------------------------------------------- 
 #                                                    Character Model
 #-----------------------------------------------------------------------------------------------------------------------------------
@@ -3297,6 +3300,10 @@
    MANGO_TREE_TEXTURE = SF::Texture.from_file("graphics/plants/Mango_Tree.png")
    Mango_Tree = SF::Sprite.new(MANGO_TREE_TEXTURE); Mango_Tree.texture_rect = SF.int_rect(0, 0, 100, 200)
    Mango_Tree.position = SF.vector2(-2800, 602)
+  #''''''''''''''''''''''''''''''''''''''''''''''''''''Lime Tree'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+   LIME_TREE_TEXTURE = SF::Texture.from_file("graphics/plants/Lime_Tree.png")
+   Lime_Tree = SF::Sprite.new(LIME_TREE_TEXTURE); Lime_Tree.texture_rect = SF.int_rect(0, 0, 100, 200)
+   Lime_Tree.position = SF.vector2(-3000, 602)
 #______________________________________________________________________________________________________________________________________
 Testing_Text = SF::Text.new; Testing_Text.font = FONT_PIXEL; 
 Testing_Text.character_size = 20; Testing_Text.color = SF::Color::White; Testing_Text.position = SF.vector2(1800, 652)

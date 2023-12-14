@@ -439,6 +439,9 @@ end
      #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Mango''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
       @@mangoes = Ingredients.new("Mangoes", 113, "drupe", "orange", Mango, 0, ["Hp+", "Luk+"])
       Ingredient_Array.push(@@mangoes)
+     #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Mango''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+      @@limes = Ingredients.new("Limes", 114, "citrus", "green", Lime, 0, ["Hp+", "Luk+"])
+      Ingredient_Array.push(@@limes)
    #__________________________________________________________________________________________________________________________________________________________
    end
  end
@@ -5862,11 +5865,14 @@ include Use
      @@acai_tree = Herbs.new("Acai Tree", 111, "purple", 100, 100, @@acai, Acai_Tree, false, "tree", 0, ["Hp+", "Luk+"])
      Herb_Array.push(@@acai_tree)
     #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Peach Tree''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-     @@peach_tree = Herbs.new("Peach Tree", 111, "pink", 100, 100, @@peaches, Peach_Tree, false, "tree", 0, ["Hp+", "Luk+"])
+     @@peach_tree = Herbs.new("Peach Tree", 112, "pink", 100, 100, @@peaches, Peach_Tree, false, "tree", 0, ["Hp+", "Luk+"])
      Herb_Array.push(@@peach_tree)
     #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Mango Tree''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-     @@mango_tree = Herbs.new("Mango Tree", 112, "orange", 100, 100, @@mangoes, Mango_Tree, false, "tree", 0, ["Hp+", "Luk+"])
+     @@mango_tree = Herbs.new("Mango Tree", 113, "orange", 100, 100, @@mangoes, Mango_Tree, false, "tree", 0, ["Hp+", "Luk+"])
      Herb_Array.push(@@mango_tree)
+    #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Lime Tree''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     @@lime_tree = Herbs.new("Lime Tree", 114, "green", 100, 100, @@limes, Lime_Tree, false, "tree", 0, ["Hp+", "Luk+"])
+     Herb_Array.push(@@lime_tree)
   #________________________________________________________________________________________________________________________________________________________
   end
 end
