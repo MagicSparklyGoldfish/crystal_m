@@ -7,6 +7,9 @@
 
   Test_Platform_02 = SF::RectangleShape.new(SF.vector2(5000, 5)); Test_Platform_02.fill_color = SF.color(0, 255, 100)
   Test_Platform_02.position = SF.vector2(0, 200)
+
+  Test_Platform_03 = SF::RectangleShape.new(SF.vector2(5000, 5)); Test_Platform_03.fill_color = SF.color(0, 255, 100)
+  Test_Platform_03.position = SF.vector2(-5000, 400)
 #------------------------------------------------------------------------------------------------------------------------------------
 #                                                    Menu Textures
 #-----------------------------------------------------------------------------------------------------------------------------------

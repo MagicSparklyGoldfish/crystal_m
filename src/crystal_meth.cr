@@ -421,6 +421,7 @@ extend self
 #=======================================================================================================================================+
 #---------------------------------------------------------------------------------------------------------------------------------------+
 #========================================================Map Renderers==================================================================+
+  @@test_ladder_03 : SF::RectangleShape; @@test_ladder_03 = Test_Ladder.dup; @@test_ladder_03.position = SF.vector2(-4800, 400);
  #---------------------------------------------------------test-------------------------------------------------------------------------
    @@space : CP::Space; @@space = CP::Space.new
    Mass = 1.0
@@ -530,6 +531,7 @@ extend self
    window.draw(Test_Upgrade_Table);
    window.draw(ore_ground); window.draw(@@player_character_rendered_model); window.draw(Test_Teleporter); window.draw(Test_Ladder)
    window.draw(Test_Platform_01); window.draw(Test_Platform_02); window.draw(@@test_ladder_02) #window.draw(Feet_Bounding_Box)
+   
 
    
   end
@@ -545,7 +547,7 @@ extend self
      @@map = "test"
    end
  end
-  @@ladder_array = [Test_Ladder, @@test_ladder_02]; @@ladder_iterator : Int32; @@ladder_iterator = 0
+  @@ladder_array = [Test_Ladder, @@test_ladder_02, @@test_ladder_03]; @@ladder_iterator : Int32; @@ladder_iterator = 0
   @@ladder_clock = SF::Clock.new
  def Window_Class.ladder_test_ore_map
   bounding_box1 = @@player_character_rendered_model.global_bounds
@@ -642,9 +644,10 @@ extend self
    end
   map = @@map
   window.draw(Ground); window.draw(@@player_character_rendered_model); window.draw(Test_Teleporter); window.draw(Test_Ladder)
-  window.draw(Test_Platform_01); window.draw(Test_Platform_02); window.draw(@@test_ladder_02); Harvestables::Herbs.display(window, map)
+  window.draw(Test_Platform_01); window.draw(Test_Platform_02); window.draw(Test_Platform_03);
+  window.draw(@@test_ladder_02); window.draw(@@test_ladder_03); Harvestables::Herbs.display(window, map)
  end
- @@ladder_array = [Test_Ladder, @@test_ladder_02]; @@ladder_iterator : Int32; @@ladder_iterator = 0
+ @@ladder_array = [Test_Ladder, @@test_ladder_02, @@test_ladder_03]; @@ladder_iterator : Int32; @@ladder_iterator = 0
  @@ladder_clock = SF::Clock.new
 def Window_Class.ladder_test_garden_map
  bounding_box1 = @@player_character_rendered_model.global_bounds
@@ -4027,9 +4030,10 @@ end; end; end; end; end; end
      #-------------------------------------------Variables-----------------------------------------------------------------------------+  
       ground_box = Ground.global_bounds; test_platform_box = Test_Platform_01.global_bounds
       test_platform_box_2 = Test_Platform_02.global_bounds
+      test_platform_box_3 = Test_Platform_03.global_bounds
       @@player_bounding_box = Feet_Bounding_Box.global_bounds #@@player_character_rendered_model.global_bounds
       Feet_Bounding_Box.position = @@player_character_rendered_model.position + SF.vector2(25, 120)
-      test_platform_array = [ground_box, test_platform_box, test_platform_box_2]
+      test_platform_array = [ground_box, test_platform_box, test_platform_box_2, test_platform_box_3]
      #---------------------------------------------------------------------------------------------------------------------------------+
 
      if @@player_bounding_box.intersects? test_platform_array[@@gravity_iterator] #ground_box
