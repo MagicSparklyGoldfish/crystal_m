@@ -1574,6 +1574,9 @@
     #''''''''''''''''''''''''''''''''''''''''''''''''''''Lime'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      LIME_TEXTURE = SF::Texture.from_file("graphics/plants/Limes.png")
      Lime = SF::Sprite.new(LIME_TEXTURE)  
+    #'''''''''''''''''''''''''''''''''''''''''''''''''Blood Lime''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     BLOOD_LIME_TEXTURE = SF::Texture.from_file("graphics/plants/Blood_Limes.png")
+     Blood_Lime = SF::Sprite.new(BLOOD_LIME_TEXTURE)  
 #----------------------------------------------------------------------------------------------------------------------------------- 
 #                                                    Character Model
 #-----------------------------------------------------------------------------------------------------------------------------------
@@ -3304,6 +3307,10 @@
    LIME_TREE_TEXTURE = SF::Texture.from_file("graphics/plants/Lime_Tree.png")
    Lime_Tree = SF::Sprite.new(LIME_TREE_TEXTURE); Lime_Tree.texture_rect = SF.int_rect(0, 0, 100, 200)
    Lime_Tree.position = SF.vector2(-3000, 602)
+  #''''''''''''''''''''''''''''''''''''''''''''''''''''Lime Tree'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+   BLOOD_LIME_TREE_TEXTURE = SF::Texture.from_file("graphics/plants/Blood_Lime_Tree.png")
+   Blood_Lime_Tree = SF::Sprite.new(BLOOD_LIME_TREE_TEXTURE); Blood_Lime_Tree.texture_rect = SF.int_rect(0, 0, 100, 200)
+   Blood_Lime_Tree.position = SF.vector2(-3200, 602)
 #______________________________________________________________________________________________________________________________________
 Testing_Text = SF::Text.new; Testing_Text.font = FONT_PIXEL; 
 Testing_Text.character_size = 20; Testing_Text.color = SF::Color::White; Testing_Text.position = SF.vector2(1800, 652)
