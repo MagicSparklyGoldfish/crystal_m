@@ -362,6 +362,10 @@ end
    #//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
    #/                                                               Entities                                                                                 /
    #//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+     #@todo add: guava, pink banana, plantains, prickly pear, kiwifruit, golden kiwifruit, persimmon, miracle berry, Nectarines, pigeonplum, Rambutan,
+     #sand cherry, silver almond, wax apple, rumberry, sugarberry, desert almond, wild dilly, black plum, watergum, cherry plum, Clementine, desert lime,
+     #kumquat, cloudberry, mosaic fig, desert fig, Fig, Jackfruit, durian, saguaro, yellow dragon fruit, star fruit, winter huckleberry, Papaya,
+     #whortleberry cactus, queen palm
     #................................................................Bushes...................................................................................
      #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Blackberries''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
       @@blackberries = Ingredients.new("Blackberries", 0, "berry", "black", Blackberries, 0, ["Hp+", "Mp+"])
@@ -451,6 +455,9 @@ end
      #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Lemons''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
       @@lemons = Ingredients.new("Lemons", 116, "citrus", "yellow", Lemon, 0, ["Hp+", "Luk+"])
       Ingredient_Array.push(@@lemons)
+     #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Orange''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+      @@oranges = Ingredients.new("Oranges", 117, "citrus", "orange", Orange, 0, ["Hp+", "Luk+"])
+      Ingredient_Array.push(@@oranges)
    #__________________________________________________________________________________________________________________________________________________________
    end
  end
@@ -5891,6 +5898,9 @@ include Use
     #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Lemon Tree''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      @@lemon_tree = Herbs.new("Lemon Tree", 116, "yellow", 100, 100, @@lemons, Lemon_Tree, false, "tree", 0, ["Hp+", "Luk+"])
      Herb_Array.push(@@lemon_tree)
+    #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Lemon Tree''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     @@orange_tree = Herbs.new("Orange Tree", 117, "orange", 100, 100, @@oranges, Orange_Tree, false, "tree", 0, ["Hp+", "Luk+"])
+     Herb_Array.push(@@orange_tree)
   #________________________________________________________________________________________________________________________________________________________
   end
 end

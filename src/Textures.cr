@@ -1586,6 +1586,9 @@
     #''''''''''''''''''''''''''''''''''''''''''''''''''''Lemon''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      LEMON_TEXTURE = SF::Texture.from_file("graphics/plants/Lemons.png")
      Lemon = SF::Sprite.new(LEMON_TEXTURE)  
+    #''''''''''''''''''''''''''''''''''''''''''''''''''''Orange'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     ORANGE_TEXTURE = SF::Texture.from_file("graphics/plants/Oranges.png")
+     Orange = SF::Sprite.new(ORANGE_TEXTURE)  
 #----------------------------------------------------------------------------------------------------------------------------------- 
 #                                                    Character Model
 #-----------------------------------------------------------------------------------------------------------------------------------
@@ -3328,6 +3331,10 @@
    LEMON_TREE_TEXTURE = SF::Texture.from_file("graphics/plants/Lemon_Tree.png")
    Lemon_Tree = SF::Sprite.new(LEMON_TREE_TEXTURE); Lemon_Tree.texture_rect = SF.int_rect(0, 0, 100, 200)
    Lemon_Tree.position = SF.vector2(-3400, 602)
+  #'''''''''''''''''''''''''''''''''''''''''''''''''''Orange Tree''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+   ORANGE_TREE_TEXTURE = SF::Texture.from_file("graphics/plants/Orange_Tree.png")
+   Orange_Tree = SF::Sprite.new(ORANGE_TREE_TEXTURE); Orange_Tree.texture_rect = SF.int_rect(0, 0, 100, 200)
+   Orange_Tree.position = SF.vector2(-3600, 602)
 #______________________________________________________________________________________________________________________________________
 Testing_Text = SF::Text.new; Testing_Text.font = FONT_PIXEL; 
 Testing_Text.character_size = 20; Testing_Text.color = SF::Color::White; Testing_Text.position = SF.vector2(1800, 652)
