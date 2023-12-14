@@ -365,7 +365,7 @@ end
      #@todo add: guava, pink banana, plantains, prickly pear, kiwifruit, golden kiwifruit, persimmon, miracle berry, Nectarines, pigeonplum, Rambutan,
      #sand cherry, silver almond, wax apple, rumberry, sugarberry, desert almond, wild dilly, black plum, watergum, cherry plum, Clementine, desert lime,
      #kumquat, cloudberry, mosaic fig, desert fig, Fig, Jackfruit, durian, saguaro, yellow dragon fruit, star fruit, winter huckleberry, Papaya,
-     #whortleberry cactus, queen palm
+     #whortleberry cactus, queen palm, blood orange, Grapefruit
     #................................................................Bushes...................................................................................
      #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Blackberries''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
       @@blackberries = Ingredients.new("Blackberries", 0, "berry", "black", Blackberries, 0, ["Hp+", "Mp+"])
@@ -403,6 +403,9 @@ end
      #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Strawberry''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
       @@strawberries = Ingredients.new("Strawberries", 11, "berry", "red", Strawberry, 0, ["Hp+", "Luk+"])
       Ingredient_Array.push(@@strawberries)
+     #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Strawberry''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+      @@pineapples = Ingredients.new("Pineapples", 12, "fruit", "yellow", Pineapple, 0, ["Hp+", "Luk+"])
+      Ingredient_Array.push(@@pineapples)
     #................................................................Trees....................................................................................
      #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Snow Pears'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
       @@snow_pears = Ingredients.new("Snow Pears", 100, "pome", "yellow", Snow_Pear, 0, ["Mp+", "Int+"])
@@ -5846,6 +5849,9 @@ include Use
     #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Strawberry Bush'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      @@strawberry_bush = Herbs.new("Strawberry Bush", 11, "red", 100, 100, @@strawberries, Strawberry_Bush, false, "bush", 0, ["Hp+", "Dex+"])
      Herb_Array.push(@@strawberry_bush)
+    #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''pineapple Bush''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     @@pineapple_bush = Herbs.new("Pineapple Bush", 12, "yellow", 100, 100, @@pineapples, Pineapple_Bush, false, "bush", 0, ["Hp+", "Dex+"])
+     Herb_Array.push(@@pineapple_bush)
    #................................................................Trees..................................................................................
     #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Snow Pear Tree'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      @@snow_pear_tree = Herbs.new("Snow Pear Tree", 100, "yellow", 100, 100, @@snow_pears, Snow_Pear_Tree, false, "tree", 0, ["Mp+", "Int+"])
@@ -5898,7 +5904,7 @@ include Use
     #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Lemon Tree''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      @@lemon_tree = Herbs.new("Lemon Tree", 116, "yellow", 100, 100, @@lemons, Lemon_Tree, false, "tree", 0, ["Hp+", "Luk+"])
      Herb_Array.push(@@lemon_tree)
-    #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Lemon Tree''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Orange Tree'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      @@orange_tree = Herbs.new("Orange Tree", 117, "orange", 100, 100, @@oranges, Orange_Tree, false, "tree", 0, ["Hp+", "Luk+"])
      Herb_Array.push(@@orange_tree)
   #________________________________________________________________________________________________________________________________________________________
