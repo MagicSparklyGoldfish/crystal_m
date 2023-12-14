@@ -1525,6 +1525,9 @@
     #'''''''''''''''''''''''''''''''''''''''''''''''''Pomegranite'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      POMEGRANITE_TEXTURE = SF::Texture.from_file("graphics/plants/Pomegranite.png")
      Pomegranite = SF::Sprite.new(POMEGRANITE_TEXTURE)  
+    #'''''''''''''''''''''''''''''''''''''''''''''''''Dragonfruit'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     DRAGONFRUIT_TEXTURE = SF::Texture.from_file("graphics/plants/Dragonfruit.png")
+     Dragonfruit = SF::Sprite.new(DRAGONFRUIT_TEXTURE)  
    #.....................................................Trees......................................................................
     #''''''''''''''''''''''''''''''''''''''''''''''''''Snow Pear''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      SNOW_PEAR_TEXTURE = SF::Texture.from_file("graphics/plants/Snow_Pears.png")
@@ -3230,6 +3233,10 @@
    POMEGRANITE_BUSH_TEXTURE = SF::Texture.from_file("graphics/plants/Pomegranite_Bush.png")
    Pomegranite_Bush = SF::Sprite.new(POMEGRANITE_BUSH_TEXTURE); Pomegranite_Bush.texture_rect = SF.int_rect(0, 0, 100, 100)
    Pomegranite_Bush.position = SF.vector2(2200, 702)
+  #'''''''''''''''''''''''''''''''''''''''''''''''''''Dragonfruit Bush''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+   DRAGONFRUIT_BUSH_TEXTURE = SF::Texture.from_file("graphics/plants/Dragonfruit_Bush.png")
+   Dragonfruit_Bush = SF::Sprite.new(DRAGONFRUIT_BUSH_TEXTURE); Dragonfruit_Bush.texture_rect = SF.int_rect(0, 0, 100, 100)
+   Dragonfruit_Bush.position = SF.vector2(2400, 702)
  #///////////////////////////////////////////////////////Trees\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
   #''''''''''''''''''''''''''''''''''''''''''''''''''Snow Pear Tree''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
    SNOW_PEAR_TREE_TEXTURE = SF::Texture.from_file("graphics/plants/Snow_Pear_Tree.png")
@@ -3279,7 +3286,7 @@
    ACAI_TREE_TEXTURE = SF::Texture.from_file("graphics/plants/Acai_Tree.png")
    Acai_Tree = SF::Sprite.new(ACAI_TREE_TEXTURE); Acai_Tree.texture_rect = SF.int_rect(0, 0, 100, 200)
    Acai_Tree.position = SF.vector2(-2400, 602)
-  #''''''''''''''''''''''''''''''''''''''''''''''''''''Acai Tree'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+  #''''''''''''''''''''''''''''''''''''''''''''''''''''Peach Tree''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
    PEACH_TREE_TEXTURE = SF::Texture.from_file("graphics/plants/Peach_Tree.png")
    Peach_Tree = SF::Sprite.new(PEACH_TREE_TEXTURE); Peach_Tree.texture_rect = SF.int_rect(0, 0, 100, 200)
    Peach_Tree.position = SF.vector2(-2600, 602)
