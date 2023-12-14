@@ -1531,6 +1531,9 @@
     #'''''''''''''''''''''''''''''''''''''''''''''''''Dragonfruit'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      DRAGONFRUIT_TEXTURE = SF::Texture.from_file("graphics/plants/Dragonfruit.png")
      Dragonfruit = SF::Sprite.new(DRAGONFRUIT_TEXTURE)  
+    #'''''''''''''''''''''''''''''''''''''''''''''''''Strawberry''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     STRAWBERRY_TEXTURE = SF::Texture.from_file("graphics/plants/Strawberries.png")
+     Strawberry = SF::Sprite.new(STRAWBERRY_TEXTURE)  
    #.....................................................Trees......................................................................
     #''''''''''''''''''''''''''''''''''''''''''''''''''Snow Pear''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      SNOW_PEAR_TEXTURE = SF::Texture.from_file("graphics/plants/Snow_Pears.png")
@@ -3252,6 +3255,10 @@
    DRAGONFRUIT_BUSH_TEXTURE = SF::Texture.from_file("graphics/plants/Dragonfruit_Bush.png")
    Dragonfruit_Bush = SF::Sprite.new(DRAGONFRUIT_BUSH_TEXTURE); Dragonfruit_Bush.texture_rect = SF.int_rect(0, 0, 100, 100)
    Dragonfruit_Bush.position = SF.vector2(2400, 702)
+  #'''''''''''''''''''''''''''''''''''''''''''''''''''Strawberry Bush'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+   STRAWBERRY_BUSH_TEXTURE = SF::Texture.from_file("graphics/plants/Strawberry_Bush.png")
+   Strawberry_Bush = SF::Sprite.new(STRAWBERRY_BUSH_TEXTURE); Strawberry_Bush.texture_rect = SF.int_rect(0, 0, 100, 100)
+   Strawberry_Bush.position = SF.vector2(2600, 702)
  #///////////////////////////////////////////////////////Trees\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
   #''''''''''''''''''''''''''''''''''''''''''''''''''Snow Pear Tree''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
    SNOW_PEAR_TREE_TEXTURE = SF::Texture.from_file("graphics/plants/Snow_Pear_Tree.png")

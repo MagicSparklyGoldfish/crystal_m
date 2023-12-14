@@ -396,6 +396,9 @@ end
      #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Dragonfruit'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
       @@dragonfruit = Ingredients.new("Dragonfruit", 10, "berry", "pink", Dragonfruit, 0, ["Hp+", "Luk+"])
       Ingredient_Array.push(@@dragonfruit)
+     #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Strawberry''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+      @@strawberries = Ingredients.new("Strawberries", 11, "berry", "red", Strawberry, 0, ["Hp+", "Luk+"])
+      Ingredient_Array.push(@@strawberries)
     #................................................................Trees....................................................................................
      #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Snow Pears'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
       @@snow_pears = Ingredients.new("Snow Pears", 100, "pome", "yellow", Snow_Pear, 0, ["Mp+", "Int+"])
@@ -5828,11 +5831,14 @@ include Use
      @@red_currant_bush = Herbs.new("Red Currant Bush", 8, "red", 100, 100, @@red_currants, Red_Currant_Bush, false, "bush", 0, ["Hp+", "Dex+"])
      Herb_Array.push(@@red_currant_bush)
     #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Pomegranite Bush''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-     @@pomegranite_bush = Herbs.new("Pomegranite Bush", 8, "red", 100, 100, @@pomegranites, Pomegranite_Bush, false, "bush", 0, ["Hp+", "Dex+"])
+     @@pomegranite_bush = Herbs.new("Pomegranite Bush", 9, "red", 100, 100, @@pomegranites, Pomegranite_Bush, false, "bush", 0, ["Hp+", "Dex+"])
      Herb_Array.push(@@pomegranite_bush)
     #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Dragonfruit Bush''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-     @@dragonfruit_bush = Herbs.new("Dragonfruit Bush", 8, "pink", 100, 100, @@dragonfruit, Dragonfruit_Bush, false, "bush", 0, ["Hp+", "Dex+"])
+     @@dragonfruit_bush = Herbs.new("Dragonfruit Bush", 10, "pink", 100, 100, @@dragonfruit, Dragonfruit_Bush, false, "bush", 0, ["Hp+", "Dex+"])
      Herb_Array.push(@@dragonfruit_bush)
+    #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Strawberry Bush'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     @@strawberry_bush = Herbs.new("Strawberry Bush", 11, "red", 100, 100, @@strawberries, Strawberry_Bush, false, "bush", 0, ["Hp+", "Dex+"])
+     Herb_Array.push(@@strawberry_bush)
    #................................................................Trees..................................................................................
     #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Snow Pear Tree'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      @@snow_pear_tree = Herbs.new("Snow Pear Tree", 100, "yellow", 100, 100, @@snow_pears, Snow_Pear_Tree, false, "tree", 0, ["Mp+", "Int+"])
@@ -5882,7 +5888,7 @@ include Use
     #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Blood Lime Tree'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      @@blood_lime_tree = Herbs.new("Blood Lime Tree", 115, "red", 100, 100, @@blood_limes, Blood_Lime_Tree, false, "tree", 0, ["Hp+", "Luk+"])
      Herb_Array.push(@@blood_lime_tree)
-    #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Blood Lime Tree'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Lemon Tree''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      @@lemon_tree = Herbs.new("Lemon Tree", 116, "yellow", 100, 100, @@lemons, Lemon_Tree, false, "tree", 0, ["Hp+", "Luk+"])
      Herb_Array.push(@@lemon_tree)
   #________________________________________________________________________________________________________________________________________________________
