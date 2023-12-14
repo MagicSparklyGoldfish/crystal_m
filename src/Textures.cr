@@ -1559,6 +1559,9 @@
     #'''''''''''''''''''''''''''''''''''''''''''''''''Apricot'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      APRICOT_TEXTURE = SF::Texture.from_file("graphics/plants/Apricot.png")
      Apricot = SF::Sprite.new(APRICOT_TEXTURE)  
+    #''''''''''''''''''''''''''''''''''''''''''''''''''Acai'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     ACAI_TEXTURE = SF::Texture.from_file("graphics/plants/Acai.png")
+     Acai = SF::Sprite.new(ACAI_TEXTURE)  
 #----------------------------------------------------------------------------------------------------------------------------------- 
 #                                                    Character Model
 #-----------------------------------------------------------------------------------------------------------------------------------
@@ -3269,6 +3272,10 @@
    APRICOT_TREE_TEXTURE = SF::Texture.from_file("graphics/plants/Apricot_Tree.png")
    Apricot_Tree = SF::Sprite.new(APRICOT_TREE_TEXTURE); Apricot_Tree.texture_rect = SF.int_rect(0, 0, 100, 200)
    Apricot_Tree.position = SF.vector2(-2200, 602)
+  #''''''''''''''''''''''''''''''''''''''''''''''''''''Acai Tree'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+   ACAI_TREE_TEXTURE = SF::Texture.from_file("graphics/plants/Acai_Tree.png")
+   Acai_Tree = SF::Sprite.new(ACAI_TREE_TEXTURE); Acai_Tree.texture_rect = SF.int_rect(0, 0, 100, 200)
+   Acai_Tree.position = SF.vector2(-2400, 602)
 #______________________________________________________________________________________________________________________________________
 Testing_Text = SF::Text.new; Testing_Text.font = FONT_PIXEL; 
 Testing_Text.character_size = 20; Testing_Text.color = SF::Color::White; Testing_Text.position = SF.vector2(1800, 652)
