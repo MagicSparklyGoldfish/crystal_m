@@ -1580,6 +1580,9 @@
     #'''''''''''''''''''''''''''''''''''''''''''''''''Blood Lime''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      BLOOD_LIME_TEXTURE = SF::Texture.from_file("graphics/plants/Blood_Limes.png")
      Blood_Lime = SF::Sprite.new(BLOOD_LIME_TEXTURE)  
+    #''''''''''''''''''''''''''''''''''''''''''''''''''''Lemon''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     LEMON_TEXTURE = SF::Texture.from_file("graphics/plants/Lemons.png")
+     Lemon = SF::Sprite.new(LEMON_TEXTURE)  
 #----------------------------------------------------------------------------------------------------------------------------------- 
 #                                                    Character Model
 #-----------------------------------------------------------------------------------------------------------------------------------
@@ -3310,10 +3313,14 @@
    LIME_TREE_TEXTURE = SF::Texture.from_file("graphics/plants/Lime_Tree.png")
    Lime_Tree = SF::Sprite.new(LIME_TREE_TEXTURE); Lime_Tree.texture_rect = SF.int_rect(0, 0, 100, 200)
    Lime_Tree.position = SF.vector2(-3000, 602)
-  #''''''''''''''''''''''''''''''''''''''''''''''''''''Lime Tree'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+  #'''''''''''''''''''''''''''''''''''''''''''''''''Blood Lime Tree''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
    BLOOD_LIME_TREE_TEXTURE = SF::Texture.from_file("graphics/plants/Blood_Lime_Tree.png")
    Blood_Lime_Tree = SF::Sprite.new(BLOOD_LIME_TREE_TEXTURE); Blood_Lime_Tree.texture_rect = SF.int_rect(0, 0, 100, 200)
    Blood_Lime_Tree.position = SF.vector2(-3200, 602)
+  #'''''''''''''''''''''''''''''''''''''''''''''''''''Lemon Tree'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+   LEMON_TREE_TEXTURE = SF::Texture.from_file("graphics/plants/Lemon_Tree.png")
+   Lemon_Tree = SF::Sprite.new(LEMON_TREE_TEXTURE); Lemon_Tree.texture_rect = SF.int_rect(0, 0, 100, 200)
+   Lemon_Tree.position = SF.vector2(-3400, 602)
 #______________________________________________________________________________________________________________________________________
 Testing_Text = SF::Text.new; Testing_Text.font = FONT_PIXEL; 
 Testing_Text.character_size = 20; Testing_Text.color = SF::Color::White; Testing_Text.position = SF.vector2(1800, 652)
