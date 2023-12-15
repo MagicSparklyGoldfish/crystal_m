@@ -1615,6 +1615,9 @@
     #''''''''''''''''''''''''''''''''''''''''''''''''''''Oats'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      OATS_TEXTURE = SF::Texture.from_file("graphics/plants/Oats.png")
      Oats = SF::Sprite.new(OATS_TEXTURE)  
+    #''''''''''''''''''''''''''''''''''''''''''''''''''''Wheat''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     WHEAT_TEXTURE = SF::Texture.from_file("graphics/plants/Wheat.png")
+     Wheat = SF::Sprite.new(WHEAT_TEXTURE)  
 #----------------------------------------------------------------------------------------------------------------------------------- 
 #                                                    Character Model
 #-----------------------------------------------------------------------------------------------------------------------------------
@@ -3395,6 +3398,10 @@
    OATS_CROP_TEXTURE = SF::Texture.from_file("graphics/plants/Oat_Crop.png")
    Oats_Crop = SF::Sprite.new(OATS_CROP_TEXTURE); Oats_Crop.texture_rect = SF.int_rect(0, 0, 50, 100)
    Oats_Crop.position = SF.vector2(300, 102)
+  #''''''''''''''''''''''''''''''''''''''''''''''''''''Wheat Crop''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+   WHEAT_CROP_TEXTURE = SF::Texture.from_file("graphics/plants/Wheat_Crop.png")
+   Wheat_Crop = SF::Sprite.new(WHEAT_CROP_TEXTURE); Wheat_Crop.texture_rect = SF.int_rect(0, 0, 50, 100)
+   Wheat_Crop.position = SF.vector2(400, 102)
 #______________________________________________________________________________________________________________________________________
 Testing_Text = SF::Text.new; Testing_Text.font = FONT_PIXEL; 
 Testing_Text.character_size = 20; Testing_Text.color = SF::Color::White; Testing_Text.position = SF.vector2(1800, 652)
