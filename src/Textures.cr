@@ -1599,6 +1599,9 @@
     #'''''''''''''''''''''''''''''''''''''''''''''''''Purple Grape''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      PURPLE_GRAPE_TEXTURE = SF::Texture.from_file("graphics/plants/Purple_Grapes.png")
      Purple_Grapes = SF::Sprite.new(PURPLE_GRAPE_TEXTURE)  
+    #'''''''''''''''''''''''''''''''''''''''''''''''''Green Grape'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     GREEN_GRAPE_TEXTURE = SF::Texture.from_file("graphics/plants/Green_Grapes.png")
+     Green_Grapes = SF::Sprite.new(GREEN_GRAPE_TEXTURE)  
 #----------------------------------------------------------------------------------------------------------------------------------- 
 #                                                    Character Model
 #-----------------------------------------------------------------------------------------------------------------------------------
@@ -3358,6 +3361,10 @@
    PURPLE_GRAPE_VINE_TEXTURE = SF::Texture.from_file("graphics/plants/Purple_Grape_Vine.png")
    Purple_Grape_Vine = SF::Sprite.new(PURPLE_GRAPE_VINE_TEXTURE); Purple_Grape_Vine.texture_rect = SF.int_rect(0, 0, 100, 200)
    Purple_Grape_Vine.position = SF.vector2(400, 202)
+  #''''''''''''''''''''''''''''''''''''''''''''''''Green Grape Vine'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+   GREEN_GRAPE_VINE_TEXTURE = SF::Texture.from_file("graphics/plants/Green_Grape_Vine.png")
+   Green_Grape_Vine = SF::Sprite.new(GREEN_GRAPE_VINE_TEXTURE); Green_Grape_Vine.texture_rect = SF.int_rect(0, 0, 100, 200)
+   Green_Grape_Vine.position = SF.vector2(600, 202)
 #______________________________________________________________________________________________________________________________________
 Testing_Text = SF::Text.new; Testing_Text.font = FONT_PIXEL; 
 Testing_Text.character_size = 20; Testing_Text.color = SF::Color::White; Testing_Text.position = SF.vector2(1800, 652)

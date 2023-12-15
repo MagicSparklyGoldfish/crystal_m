@@ -469,6 +469,9 @@ end
      #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Purple Grapes''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
       @@purple_grapes = Ingredients.new("Purple Grapes", 201, "fruit", "purple", Purple_Grapes, 0, ["Hp+", "Luk+"])
       Ingredient_Array.push(@@purple_grapes)
+     #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Green Grapes'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+      @@green_grapes = Ingredients.new("Green Grapes", 202, "fruit", "green", Green_Grapes, 0, ["Hp+", "Luk+"])
+      Ingredient_Array.push(@@green_grapes)
    #__________________________________________________________________________________________________________________________________________________________
    end
  end
@@ -5958,6 +5961,9 @@ include Use
     #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''Purple Grape Vine''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      @@purple_grape_vine = Herbs.new("Purple Grape Vine", 201, "purple", 100, 100, @@purple_grapes, Purple_Grape_Vine, false, "vine", 0, ["Hp+", "Luk+"])
      Herb_Array.push(@@purple_grape_vine)
+    #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''Green Grape Vine'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     @@green_grape_vine = Herbs.new("Green Grape Vine", 202, "green", 100, 100, @@green_grapes, Green_Grape_Vine, false, "vine", 0, ["Hp+", "Luk+"])
+     Herb_Array.push(@@green_grape_vine)
   #________________________________________________________________________________________________________________________________________________________
   end
 end
