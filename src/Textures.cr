@@ -1609,6 +1609,12 @@
     #''''''''''''''''''''''''''''''''''''''''''''''''''''Corn'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      CORN_TEXTURE = SF::Texture.from_file("graphics/plants/Corn.png")
      Corn = SF::Sprite.new(CORN_TEXTURE)  
+    #''''''''''''''''''''''''''''''''''''''''''''''''''''Rice'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     RICE_TEXTURE = SF::Texture.from_file("graphics/plants/Rice.png")
+     Rice = SF::Sprite.new(RICE_TEXTURE)  
+    #''''''''''''''''''''''''''''''''''''''''''''''''''''Oats'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     OATS_TEXTURE = SF::Texture.from_file("graphics/plants/Oats.png")
+     Oats = SF::Sprite.new(OATS_TEXTURE)  
 #----------------------------------------------------------------------------------------------------------------------------------- 
 #                                                    Character Model
 #-----------------------------------------------------------------------------------------------------------------------------------
@@ -3381,6 +3387,14 @@
    CORN_CROP_TEXTURE = SF::Texture.from_file("graphics/plants/Corn_Crop.png")
    Corn_Crop = SF::Sprite.new(CORN_CROP_TEXTURE); Corn_Crop.texture_rect = SF.int_rect(0, 0, 50, 100)
    Corn_Crop.position = SF.vector2(100, 102)
+  #''''''''''''''''''''''''''''''''''''''''''''''''''''Rice Crop'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+   RICE_CROP_TEXTURE = SF::Texture.from_file("graphics/plants/Rice_Crop.png")
+   Rice_Crop = SF::Sprite.new(RICE_CROP_TEXTURE); Rice_Crop.texture_rect = SF.int_rect(0, 0, 50, 100)
+   Rice_Crop.position = SF.vector2(200, 102)
+  #''''''''''''''''''''''''''''''''''''''''''''''''''''Oats Crop'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+   OATS_CROP_TEXTURE = SF::Texture.from_file("graphics/plants/Oat_Crop.png")
+   Oats_Crop = SF::Sprite.new(OATS_CROP_TEXTURE); Oats_Crop.texture_rect = SF.int_rect(0, 0, 50, 100)
+   Oats_Crop.position = SF.vector2(300, 102)
 #______________________________________________________________________________________________________________________________________
 Testing_Text = SF::Text.new; Testing_Text.font = FONT_PIXEL; 
 Testing_Text.character_size = 20; Testing_Text.color = SF::Color::White; Testing_Text.position = SF.vector2(1800, 652)

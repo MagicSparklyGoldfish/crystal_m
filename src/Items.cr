@@ -345,18 +345,21 @@ end
       else if slot >= 6
         slot = 1
         line += 1
-      if line % 4 == 0
+      if line % 4 == 0 || line == 7
         current_position = SF.vector2(550, 310)
       else
         current_position += SF.vector2(-750, 150)
       end; end; end
       if line < 4 && page == 1
-      i.sprite.position = current_position
-      window.draw(i.sprite)
-      else if line >= 4 && line < 8  && page == 2
-      i.sprite.position = current_position
-      window.draw(i.sprite)
-      end; end}
+       i.sprite.position = current_position
+       window.draw(i.sprite)
+      else if line >= 4 && line < 7  && page == 2
+       i.sprite.position = current_position
+       window.draw(i.sprite)
+      else if line >= 7 && line < 12  && page == 3
+        i.sprite.position = current_position
+        window.draw(i.sprite)
+      end; end; end}
       end
    #__________________________________________________________________________________________________________________________________________________________
    #//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -479,6 +482,12 @@ end
      #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Corn'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
       @@corn = Ingredients.new("Corn", 300, "grain", "yellow", Corn, 0, ["Hp+", "Luk+"])
       Ingredient_Array.push(@@corn)
+     #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Rice'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+      @@rice = Ingredients.new("Rice", 301, "grain", "white", Rice, 0, ["Hp+", "Luk+"])
+      Ingredient_Array.push(@@rice)
+     #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Oats'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+      @@oats = Ingredients.new("Oats", 302, "grain", "brown", Oats, 0, ["Hp+", "Luk+"])
+      Ingredient_Array.push(@@oats)
    #__________________________________________________________________________________________________________________________________________________________
    end
  end
@@ -6009,9 +6018,15 @@ include Use
      @@green_grape_vine = Herbs.new("Green Grape Vine", 202, "green", 100, 100, @@green_grapes, Green_Grape_Vine, false, "vine", 0, ["Hp+", "Luk+"])
      Herb_Array.push(@@green_grape_vine)
    #................................................................Vines..................................................................................
-    #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''Green Grape Vine'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Corn Crop''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      @@corn_crop = Herbs.new("Corn Crop", 300, "yellow", 100, 100, @@corn, Corn_Crop, false, "crop", 0, ["Hp+", "Luk+"])
      Herb_Array.push(@@corn_crop)
+    #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Rice Crop''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     @@rice_crop = Herbs.new("Rice Crop", 301, "white", 100, 100, @@rice, Rice_Crop, false, "crop", 0, ["Hp+", "Luk+"])
+     Herb_Array.push(@@rice_crop)
+    #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Oats Crop''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     @@oats_crop = Herbs.new("Oats Crop", 302, "brown", 100, 100, @@oats, Oats_Crop, false, "crop", 0, ["Hp+", "Luk+"])
+     Herb_Array.push(@@oats_crop)
   #________________________________________________________________________________________________________________________________________________________
   end
 end
