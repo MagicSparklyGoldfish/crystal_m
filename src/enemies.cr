@@ -122,3 +122,69 @@ include Use
  @@test_humanoid = Test_Humanoids.new(500, 500, 10, "Test Enemy", 1, [@@pineapples], 0, @@test_enemy_rendered_model, WEAPSOUND_06, 1, "humanoid", "na", 0, ["na"])
  end
 end
+
+module Regular_Enemies
+include Use
+  class Humanoids < Ingredients
+   def initialize(hp : Float64, max_hp : Float64, atk_power : Float64, name : String, lvl : Int32, drop_array : Array(Ingredients), amount_killed : Int32, sprite : SF::Sprite, sfx : SF::Sound,
+    id : Int32, kind : String, color : String, amount_owned : Int32, effects : Array(String))
+     @hp = hp
+     @max_hp = max_hp
+     @atk_power = atk_power
+     @name = name
+     @lvl = lvl
+     @drop_array = drop_array
+     @amount_killed = amount_killed
+     @sprite = sprite
+     @sfx = sfx 
+    #------------drop item properties
+     @id = id
+     @kind = kind
+     @color = color
+     @amount_owned = amount_owned
+     @effects = effects
+    end
+   def hp
+      @hp
+    end
+   def max_hp
+     @max_hp
+    end
+   def atk_power
+      @power
+    end
+   def name
+      @name
+    end
+   def lvl
+      @lvl
+    end
+   def drop_array
+      @drop_array
+    end
+   def amount_killed
+      @amount_killed
+    end
+   def sprite
+      @sprite
+    end
+   def sfx
+     @sfx
+    end
+   def Humanoids.attack(attack)
+       b = Player_Attack_Bounding_Box.global_bounds
+       if b.intersects? @@test_humanoid.sprite.global_bounds
+       this = @@test_humanoid.sprite.global_bounds
+       enemy = @@test_humanoid
+       time = Enemy_Clock_01.elapsed_time
+       attack2 = Player_Attack_Bounding_Box.global_bounds
+      if attack2.intersects? this
+      if enemy.hp > 0
+      if time >= SF.seconds(0.35) && attack == true
+        Crafted_Items::Weapon.play_hit_sound
+        enemy.hp_subtract(@@attack_strength)
+        Enemy_Clock_01.restart
+      end; end; end
+     end; end
+ end
+end
