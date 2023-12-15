@@ -366,7 +366,7 @@ end
      #sand cherry, silver almond, wax apple, rumberry, sugarberry, desert almond, wild dilly, black plum, watergum, cherry plum, Clementine, desert lime,
      #kumquat, cloudberry, mosaic fig, desert fig, Fig, Jackfruit, durian, saguaro, yellow dragon fruit, star fruit, winter huckleberry, Papaya,
      #whortleberry cactus, queen palm, blood orange, Grapefruit, red passionflower, sea anemone passion flower, stinking passionflower, white passionflower,
-     #blue passionflower, blue honeysuckle, cranberry, honeysuckle, fox grape, nutmeg, vanilla, cacao tree 
+     #blue passionflower, blue honeysuckle, cranberry, honeysuckle, fox grape, nutmeg, vanilla, cacao tree, red banana 
     #................................................................Bushes...................................................................................
      #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Blackberries''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
       @@blackberries = Ingredients.new("Blackberries", 0, "berry", "black", Blackberries, 0, ["Hp+", "Mp+"])
@@ -475,6 +475,10 @@ end
      #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Green Grapes'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
       @@green_grapes = Ingredients.new("Green Grapes", 202, "fruit", "green", Green_Grapes, 0, ["Hp+", "Luk+"])
       Ingredient_Array.push(@@green_grapes)
+    #................................................................Crops....................................................................................
+     #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Corn'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+      @@corn = Ingredients.new("Corn", 300, "grain", "yellow", Corn, 0, ["Hp+", "Luk+"])
+      Ingredient_Array.push(@@corn)
    #__________________________________________________________________________________________________________________________________________________________
    end
  end
@@ -5657,11 +5661,13 @@ include Use
        a = 0; b = 200; x = 100; y = 100
        case @@current_plant_attacked.kind
        when "bush"
-        a = 100; b = 200; x = 100; y = 100
+        a = 0; b = 200; x = 100; y = 100
        when "tree"
-        a = 100; b = 400; x = 100; y = 200
+        a = 0; b = 400; x = 100; y = 200
        when "vine"
-        a = 100; b = 400; x = 100; y = 200
+        a = 0; b = 400; x = 100; y = 200
+      when "crop"
+        a = 0; b = 200; x = 50; y = 100
        end
        broken.sprite_change_square(a, b, x, y)
  else if time >= SF.seconds(0.2) && time < SF.seconds(0.3)
@@ -5673,6 +5679,8 @@ include Use
         a = 100; b = 400; x = 100; y = 200
        when "vine"
         a = 100; b = 400; x = 100; y = 200
+       when "crop"
+        a = 50; b = 200; x = 50; y = 100
        end
        broken.sprite_change_square(a, b, x, y)
  else if time >= SF.seconds(0.3) && time < SF.seconds(0.4)
@@ -5682,6 +5690,10 @@ include Use
         a = 200; b = 200; x = 100; y = 100
        when "tree"
         a = 200; b = 400; x = 100; y = 200
+       when "vine"
+        a = 200; b = 400; x = 100; y = 200
+       when "crop"
+        a = 100; b = 200; x = 50; y = 100
        end
        broken.sprite_change_square(a, b, x, y)
  else if time >= SF.seconds(0.4) && time < SF.seconds(0.5)
@@ -5693,6 +5705,8 @@ include Use
         a = 300; b = 400; x = 100; y = 200
        when "vine"
         a = 300; b = 400; x = 100; y = 200
+       when "crop"
+        a = 150; b = 200; x = 50; y = 100
        end
        broken.sprite_change_square(a, b, x, y)
  else if time >= SF.seconds(0.5) && time < SF.seconds(0.6)
@@ -5703,13 +5717,15 @@ include Use
         when "tree"
          a = 400; b = 400; x = 100; y = 200
         when "vine"
-          a = 400; b = 400; x = 100; y = 200
+         a = 400; b = 400; x = 100; y = 200
+        when "crop"
+         a = 200; b = 200; x = 50; y = 100
         end
         broken.sprite_change_square(a, b, x, y)
  else if time >= SF.seconds(0.6) && time < SF.seconds(1.75)
   broken.is_broke_toggle   
   @@plant_reset = 0
-  if time > SF.milliseconds(30)  #@note this only works with microseconds and milliseconds, not seconds. I don't know why, there wasn't a typo
+  if time > SF.milliseconds(3000)  #@note this only works with microseconds and milliseconds, not seconds. I don't know why, there wasn't a typo
     Plant_Clock_Break.restart
        this = broken.max_hp
        broken.hp_set(this)
@@ -5720,7 +5736,9 @@ include Use
        when "tree"
         a = 0; b = 0; x = 100; y = 200
        when "vine"
-         a = 0; b = 0; x = 100; y = 200
+        a = 0; b = 0; x = 100; y = 200
+       when "crop"
+        a = 0; b = 0; x = 50; y = 100
        end
        broken.sprite_change_square(a, b, x, y)
        this = broken.is_broke  
@@ -5744,6 +5762,8 @@ include Use
             a = 100; b = 0; x = 100; y = 200
            when "vine"
             a = 100; b = 0; x = 100; y = 200
+           when "crop"
+            a = 50; b = 0; x = 50; y = 100
            end
            @@current_plant_attacked.sprite_change_square(a, b, x, y)
          else if Plant_Animation_Clock_01.elapsed_time >= SF.seconds(0.01) && Plant_Animation_Clock_01.elapsed_time <= SF.seconds(0.1) && @@current_plant_attacked.hp < @@current_plant_attacked.max_hp/2
@@ -5755,6 +5775,8 @@ include Use
            a = 100; b = 200; x = 100; y = 200
           when "vine"
             a = 100; b = 200; x = 100; y = 200
+          when "crop"
+            a = 50; b = 100; x = 50; y = 100
           end
           @@current_plant_attacked.sprite_change_square(a, b, x, y)
           end; end
@@ -5767,6 +5789,8 @@ include Use
             a = 200; b = 0; x = 100; y = 200
            when "vine"
             a = 200; b = 0; x = 100; y = 200
+           when "crop"
+            a = 100; b = 0; x = 50; y = 100
            end
            @@current_plant_attacked.sprite_change_square(a, b, x, y)
          else if Plant_Animation_Clock_01.elapsed_time >= SF.seconds(0.1) && Plant_Animation_Clock_01.elapsed_time <= SF.seconds(0.2) && @@current_plant_attacked.hp < @@current_plant_attacked.max_hp/2
@@ -5778,6 +5802,8 @@ include Use
            a = 200; b = 200; x = 100; y = 200
           when "vine"
             a = 200; b = 200; x = 100; y = 200
+          when "crop"
+            a = 100; b = 100; x = 50; y = 100
           end
           @@current_plant_attacked.sprite_change_square(a, b, x, y)
           end; end
@@ -5790,6 +5816,8 @@ include Use
             a = 300; b = 0; x = 100; y = 200
            when "vine"
             a = 300; b = 0; x = 100; y = 200
+           when "crop"
+            a = 150; b = 0; x = 50; y = 100
            end
            @@current_plant_attacked.sprite_change_square(a, b, x, y)
          else if Plant_Animation_Clock_01.elapsed_time >= SF.seconds(0.2) && Plant_Animation_Clock_01.elapsed_time <= SF.seconds(0.3) && @@current_plant_attacked.hp < @@current_plant_attacked.max_hp/2
@@ -5801,6 +5829,8 @@ include Use
             a = 300; b = 200; x = 100; y = 200
            when "vine"
             a = 300; b = 200; x = 100; y = 200
+           when "crop"
+            a = 150; b = 100; x = 50; y = 100
            end
           @@current_plant_attacked.sprite_change_square(a, b, x, y)
           end; end
@@ -5812,7 +5842,9 @@ include Use
             when "tree"
              a = 400; b = 0; x = 100; y = 200
             when "vine"
-              a = 400; b = 0; x = 100; y = 200
+             a = 400; b = 0; x = 100; y = 200
+            when "crop"
+             a = 200; b = 0; x = 50; y = 100
             end
            @@current_plant_attacked.sprite_change_square(a, b, x, y)
          else if Plant_Animation_Clock_01.elapsed_time >= SF.seconds(0.3) && Plant_Animation_Clock_01.elapsed_time <= SF.seconds(0.4) && @@current_plant_attacked.hp < @@current_plant_attacked.max_hp/2
@@ -5824,6 +5856,8 @@ include Use
             a = 400; b = 200; x = 100; y = 200
           when "vine"
             a = 400; b = 200; x = 100; y = 200
+          when "crop"
+            a = 200; b = 100; x = 50; y = 100
            end
           @@current_plant_attacked.sprite_change_square(a, b, x, y)
           end; end
@@ -5834,10 +5868,12 @@ include Use
             case @@current_plant_attacked.kind
             when "bush"
               a = 0; b = 0; x = 100; y = 100
-             when "tree"
+            when "tree"
               a = 0; b = 0; x = 100; y = 200
             when "vine"
               a = 0; b = 0; x = 100; y = 200
+            when "crop"
+              a = 0; b = 0; x = 50; y = 100
              end
             @@current_plant_attacked.sprite_change_square(a, b, x, y)
           else if @@current_plant_attacked.hp < @@current_plant_attacked.max_hp/2 && @@current_plant_attacked.hp > 0
@@ -5845,10 +5881,12 @@ include Use
             case @@current_plant_attacked.kind
             when "bush"
               a = 0; b = 100; x = 100; y = 100
-             when "tree"
+            when "tree"
               a = 0; b = 200; x = 100; y = 200
             when "vine"
               a = 0; b = 200; x = 100; y = 200
+            when "crop"
+              a = 0; b = 100; x = 50; y = 100
              end
             @@current_plant_attacked.sprite_change_square(a, b, x, y)
           end; end
@@ -5957,7 +5995,7 @@ include Use
     #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Orange Tree'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      @@orange_tree = Herbs.new("Orange Tree", 117, "orange", 100, 100, @@oranges, Orange_Tree, false, "tree", 0, ["Hp+", "Luk+"])
      Herb_Array.push(@@orange_tree)
-    #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Orange Tree'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+    #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Banana Tree'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      @@banana_tree = Herbs.new("Banana Tree", 118, "yellow", 100, 100, @@bananas, Banana_Tree, false, "tree", 0, ["Hp+", "Luk+"])
      Herb_Array.push(@@banana_tree)
    #................................................................Vines..................................................................................
@@ -5970,6 +6008,10 @@ include Use
     #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''Green Grape Vine'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      @@green_grape_vine = Herbs.new("Green Grape Vine", 202, "green", 100, 100, @@green_grapes, Green_Grape_Vine, false, "vine", 0, ["Hp+", "Luk+"])
      Herb_Array.push(@@green_grape_vine)
+   #................................................................Vines..................................................................................
+    #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''Green Grape Vine'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     @@corn_crop = Herbs.new("Corn Crop", 300, "yellow", 100, 100, @@corn, Corn_Crop, false, "crop", 0, ["Hp+", "Luk+"])
+     Herb_Array.push(@@corn_crop)
   #________________________________________________________________________________________________________________________________________________________
   end
 end

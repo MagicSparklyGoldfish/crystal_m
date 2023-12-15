@@ -1496,7 +1496,7 @@
      #--------------------------------------------------Tablecut--------------------------------------------------------------------
       RED_JASPER_INVENTORY_TABLECUT_TEXTURE = SF::Texture.from_file("graphics/minerals/Red_Jasper_Inventory_Table.png")
       Red_Jasper_Inventory_Tablecut = SF::Sprite.new(RED_JASPER_INVENTORY_TABLECUT_TEXTURE) 
-  #------------------------------------------------Use item Textures----------------------------------------------------------------
+  #--------------------------------------------------Use item Textures--------------------------------------------------------------
    #....................................................Bushes......................................................................
     #''''''''''''''''''''''''''''''''''''''''''''''''Blackberries'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      BLACKBERRY_TEXTURE = SF::Texture.from_file("graphics/plants/Blackberries.png")
@@ -1605,6 +1605,10 @@
     #'''''''''''''''''''''''''''''''''''''''''''''''''Green Grape'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      GREEN_GRAPE_TEXTURE = SF::Texture.from_file("graphics/plants/Green_Grapes.png")
      Green_Grapes = SF::Sprite.new(GREEN_GRAPE_TEXTURE)  
+   #.....................................................Crops......................................................................
+    #''''''''''''''''''''''''''''''''''''''''''''''''''''Corn'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     CORN_TEXTURE = SF::Texture.from_file("graphics/plants/Corn.png")
+     Corn = SF::Sprite.new(CORN_TEXTURE)  
 #----------------------------------------------------------------------------------------------------------------------------------- 
 #                                                    Character Model
 #-----------------------------------------------------------------------------------------------------------------------------------
@@ -3368,10 +3372,15 @@
    PURPLE_GRAPE_VINE_TEXTURE = SF::Texture.from_file("graphics/plants/Purple_Grape_Vine.png")
    Purple_Grape_Vine = SF::Sprite.new(PURPLE_GRAPE_VINE_TEXTURE); Purple_Grape_Vine.texture_rect = SF.int_rect(0, 0, 100, 200)
    Purple_Grape_Vine.position = SF.vector2(400, 202)
-  #''''''''''''''''''''''''''''''''''''''''''''''''Green Grape Vine'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+  #''''''''''''''''''''''''''''''''''''''''''''''''Green Grape Vine''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
    GREEN_GRAPE_VINE_TEXTURE = SF::Texture.from_file("graphics/plants/Green_Grape_Vine.png")
    Green_Grape_Vine = SF::Sprite.new(GREEN_GRAPE_VINE_TEXTURE); Green_Grape_Vine.texture_rect = SF.int_rect(0, 0, 100, 200)
    Green_Grape_Vine.position = SF.vector2(600, 202)
+ #///////////////////////////////////////////////////////Crops\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+  #''''''''''''''''''''''''''''''''''''''''''''''''''''Corn Crop'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+   CORN_CROP_TEXTURE = SF::Texture.from_file("graphics/plants/Corn_Crop.png")
+   Corn_Crop = SF::Sprite.new(CORN_CROP_TEXTURE); Corn_Crop.texture_rect = SF.int_rect(0, 0, 50, 100)
+   Corn_Crop.position = SF.vector2(100, 102)
 #______________________________________________________________________________________________________________________________________
 Testing_Text = SF::Text.new; Testing_Text.font = FONT_PIXEL; 
 Testing_Text.character_size = 20; Testing_Text.color = SF::Color::White; Testing_Text.position = SF.vector2(1800, 652)
