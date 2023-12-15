@@ -4,6 +4,7 @@ require "crsfml/system"
 require "../src/Textures.cr"
 require "../src/Items.cr"
 require "../src/Custom_Body.cr"
+require "../src/enemies.cr"
 require "../src/Audio.cr"
 require "../src/Saves.cr"
 require "../src/Fonts.cr"
@@ -451,6 +452,8 @@ extend self
    end
   def Window_Class.attack_check_test_map
     # Harvestables::Ore.harvest(@@attacking)
+    attack = @@attacking
+    Test_Enemies::Test_Humanoids.attack(attack)
     event = "mining_ore"
     Window_Class.check_attacking(event)
   end
@@ -504,7 +507,7 @@ extend self
     end
 
 
-    window.draw(Ground);  Enemy_Data::Test_Enemy.maintain(window); NPCS::Test_Npcs.test_npc_maintain(window); 
+    window.draw(Ground); NPCS::Test_Npcs.test_npc_maintain(window); Test_Enemies::Test_Humanoids.draw_test_enemy(window)
     window.draw(@@player_character_rendered_model); window.draw(Test_Teleporter); window.draw(Test_Teleporter2)
     #window.draw(Bloodstone_Ore);
    end

@@ -479,6 +479,7 @@ end
       @@green_grapes = Ingredients.new("Green Grapes", 202, "fruit", "green", Green_Grapes, 0, ["Hp+", "Luk+"])
       Ingredient_Array.push(@@green_grapes)
     #................................................................Crops....................................................................................
+     #@todo add millet, amaranth, quinoa, chia, peanut, chickpea, pea, soybean, lentil, fava bean
      #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Corn'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
       @@corn = Ingredients.new("Corn", 300, "grain", "yellow", Corn, 0, ["Hp+", "Luk+"])
       Ingredient_Array.push(@@corn)
@@ -6469,6 +6470,7 @@ include Etc
         attack_strength = base_attack * @@current_equipped_weapon.weapon_atk
         Harvestables::Ore.set_attack_strength(attack_strength)
         Harvestables::Herbs.set_attack_strength(attack_strength)
+        Test_Enemies::Test_Humanoids.set_attack_strength(attack_strength)
        end
 
        def Crafted_Items::Weapon.check_stats(slot)
