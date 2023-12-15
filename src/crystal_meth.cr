@@ -488,7 +488,7 @@ extend self
     # window.draw(Player_Attack_Bounding_Box)
     if @@space.contains?(@@shape) == false #<----This is proabably a really fucking stupid way to do this, but it works and I'm tired of fucking with it
       @@space.add(@@shape)
-      Enemy_Data::Test_Enemy.draw; NPCS::Test_Npcs.test_npc_initialize
+      NPCS::Test_Npcs.test_npc_initialize
       Etc::Inventory_Ore.update_ore_inventory 
     end
     if @@space.contains?(@@pc_body) == false
@@ -4310,147 +4310,7 @@ module NPCS
     end #test npc class end
   end #module end
 
-#------------------------------------------------------------------------------------------------------------------------------------+
-#                                                   Enemy Data                                                                       +
-#------------------------------------------------------------------------------------------------------------------------------------+
-Player_Attack_Clock = SF::Clock.new
-module Enemy_Data # @note Enemy data is stored here 
-  include Gui
-  include Player_Data
-  extend self
-  class Enemy_Physics < Window_Class
 
-    def Enemy_Physics.gravity(this, this2)
-      ground_box =  Ground.global_bounds
-    if this.intersects? ground_box
-      fallrate = 0
-    else
-      this2.position += SF.vector2(0, 0.95)
-    end; end 
-
-    def Enemy_Physics.hit_enemy01(this)
-      event = "player_attacking"
-      Gui::Window_Class.check_attacking(event)
-     end
-    def Window_Class.hit_enemy02(this, @@attacking)
-      time = Player_Attack_Clock.elapsed_time
-      attack = Player_Attack_Bounding_Box.global_bounds
-      if this.intersects? attack
-      if time >= SF.seconds(0.35) && @@attacking == true
-           Weapon.play_hit_sound
-          # this.current_hp - 10
-           Player_Attack_Clock.restart
-      end; end; end 
-    end
-  class Test_Enemy < Enemy_Physics
-     def initialize(name : String, sprite : SF::Sprite, max_hp : Int32, current_hp : Int32)
-       @name = name
-       @sprite = sprite   
-       @max_hp = max_hp
-       @current_hp = max_hp
-     end
-    def name
-      @name
-     end
-    def sprite
-      @sprite
-     end
-    def max_hp
-      @max_hp
-     end
-    def current_hp
-      @current_hp
-     end
-    @@test_enemy_model : SF::RenderTexture 
-    @@test_enemy_model = SF::RenderTexture.new(672, 512)
-    @@test_enemy_model2 : SF::RenderTexture 
-    @@test_enemy_model2 = SF::RenderTexture.new(672, 512)
-    @@test_enemy_rendered_model = SF::Sprite.new
-    @@test_enemy_rendered_model2 = SF::Sprite.new
-    @@test_humanoid : Test_Enemy
-    @@test_humanoid = Test_Enemy.new("test enemy", @@test_enemy_rendered_model, 100, 100)
-    @@test_humanoid2 : Test_Enemy
-    @@test_humanoid2 = Test_Enemy.new("test enemy", @@test_enemy_rendered_model, 100, 100)
-
-    
-    def Test_Enemy.sprite #@todo streamline this
-      name = "test enemy"
-      skin_size = SKIN_ARRAY.size - 1; shoe_size = SHOES_ARRAY.size - 1; face_size = FACE_ARRAY.size - 1 #<-- .size counts the amount of entities in the array, not the highest index. Thus the -1
-      hair_size = HAIR_ARRAY.size - 1; pants_size = PANTS_ARRAY.size - 1; shirt_size = SHIRT_ARRAY.size - 1    
-      glove_size = GLOVE_ARRAY.size - 1    
-
-          skin_random = rand(0..skin_size); shoe_random = rand(0..shoe_size); face_random = rand(0..face_size)
-          hair_random = rand(0..hair_size); pants_random = rand(0..pants_size); shirt_random = rand(0..shirt_size)
-          glove_random = rand(0..glove_size)
-
-          @@test_enemy_model.clear(SF::Color::Transparent)
-          @@test_enemy_model.draw(SKIN_ARRAY[skin_random])
-          @@test_enemy_model.draw(SHOES_ARRAY[shoe_random])
-          @@test_enemy_model.draw(FACE_ARRAY[face_random])
-          @@test_enemy_model.draw(HAIR_ARRAY[hair_random])
-          @@test_enemy_model.draw(PANTS_ARRAY[pants_random])
-          @@test_enemy_model.draw(SHIRT_ARRAY[shirt_random])
-          @@test_enemy_model.draw(GLOVE_ARRAY[glove_random])
-          @@test_enemy_model.create(672, 512, false)
-          @@test_enemy_model.display
-          @@test_enemy_rendered_model.texture = @@test_enemy_model.texture
-          @@test_enemy_rendered_model.texture_rect = SF.int_rect(0, 0, 96, 128)
-          @@test_enemy_rendered_model.scale = SF.vector2(1.0, 1.0)
-          @@test_humanoid = Test_Enemy.new("test enemy", @@test_enemy_rendered_model, 100, 100)
-          
-
-          skin_random2 = rand(0..skin_size); shoe_random2 = rand(0..shoe_size); face_random2 = rand(0..face_size)
-          hair_random2 = rand(0..hair_size); pants_random2 = rand(0..pants_size); shirt_random2 = rand(0..shirt_size)
-          glove_random2 = rand(0..glove_size)
-
-          @@test_enemy_model2.clear(SF::Color::Transparent)
-          @@test_enemy_model2.draw(SKIN_ARRAY[skin_random2])
-          @@test_enemy_model2.draw(SHOES_ARRAY[shoe_random2])
-          @@test_enemy_model2.draw(FACE_ARRAY[face_random2])
-          @@test_enemy_model2.draw(HAIR_ARRAY[hair_random2])
-          @@test_enemy_model2.draw(PANTS_ARRAY[pants_random2])
-          @@test_enemy_model2.draw(SHIRT_ARRAY[shirt_random2])
-          @@test_enemy_model2.draw(GLOVE_ARRAY[glove_random2])
-          @@test_enemy_model2.create(672, 512, false)
-          @@test_enemy_model2.display
-          @@test_enemy_rendered_model2.texture = @@test_enemy_model2.texture
-          @@test_enemy_rendered_model2.texture_rect = SF.int_rect(0, 0, 96, 128)
-          @@test_enemy_rendered_model2.scale = SF.vector2(1.0, 1.0)
-          @@test_humanoid2 = Test_Enemy.new("test enemy", @@test_enemy_rendered_model2, 100, 100)
-    end
-    def Test_Enemy.draw
-      Test_Enemy.sprite
-      @@test_humanoid.sprite.position = SF.vector2(560, 655)
-      @@test_humanoid2.sprite.position = SF.vector2(800, 655)
-    end
-    def Test_Enemy.maintain(window) #@todo tidy this shit up
-     #---------------------------------------------test humanoid 1----------------------------------------------------------------------
-      window.draw(@@test_humanoid.sprite); #Enemy_Physics.hit_enemy01(@@test_humanoid.sprite.global_bounds)
-      name01 = Name_Box.dup; name01.position = @@test_humanoid.sprite.position + SF.vector2(-10, 130); window.draw(name01)
-      nametext01 = Name_Box_Text.dup; nametext01.string = "Test Humanoid"; nametext01.position = name01.position - SF.vector2(-3, 5)
-      window.draw(nametext01); health1 = Health_Bar.dup; health1.position = @@test_humanoid.sprite.position + SF.vector2(-5, 160)
-      x = @@test_humanoid.current_hp
-      health1.size = SF.vector2(x, 10); window.draw(health1)
-     #----------------------------------------------------------------------------------------------------------------------------------
-     #---------------------------------------------test humanoid 2----------------------------------------------------------------------
-      window.draw(@@test_humanoid2.sprite)
-      name02 = Name_Box.dup; name02.position = @@test_humanoid2.sprite.position + SF.vector2(0, 130); window.draw(name02)
-      nametext02 = Name_Box_Text.dup; nametext02.string = "Test Humanoid2"; nametext02.position = name02.position - SF.vector2(0, 5)
-      window.draw(nametext02); health2 = Health_Bar.dup; health2.position = @@test_humanoid2.sprite.position + SF.vector2(5, 160)
-      window.draw(health2)
-     #----------------------------------------------------------------------------------------------------------------------------------
-      entities = [@@test_humanoid, @@test_humanoid]
-      bounding_boxes = [@@test_humanoid.sprite.global_bounds, @@test_humanoid2.sprite.global_bounds]
-      sprites = [@@test_humanoid.sprite, @@test_humanoid2.sprite]
-      this = bounding_boxes[0]; this2 = sprites[0]; this3 = 
-      Enemy_Physics.hit_enemy01(this)
-      Enemy_Physics.gravity(this, this2)
-      this = bounding_boxes[1]; this2 = sprites[1]
-      Enemy_Physics.hit_enemy01(this)
-      Enemy_Physics.gravity(this, this2)
-    end     
-  end
-end
 
    
 module Data_Manager 
