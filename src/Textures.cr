@@ -1592,6 +1592,10 @@
     #''''''''''''''''''''''''''''''''''''''''''''''''''''Orange'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      ORANGE_TEXTURE = SF::Texture.from_file("graphics/plants/Oranges.png")
      Orange = SF::Sprite.new(ORANGE_TEXTURE)  
+   #.....................................................Vines......................................................................
+     #''''''''''''''''''''''''''''''''''''''''''''''''''''Orange'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+      RED_GRAPE_TEXTURE = SF::Texture.from_file("graphics/plants/Red_Grapes.png")
+      Red_Grapes = SF::Sprite.new(RED_GRAPE_TEXTURE)  
 #----------------------------------------------------------------------------------------------------------------------------------- 
 #                                                    Character Model
 #-----------------------------------------------------------------------------------------------------------------------------------
@@ -3342,6 +3346,11 @@
    ORANGE_TREE_TEXTURE = SF::Texture.from_file("graphics/plants/Orange_Tree.png")
    Orange_Tree = SF::Sprite.new(ORANGE_TREE_TEXTURE); Orange_Tree.texture_rect = SF.int_rect(0, 0, 100, 200)
    Orange_Tree.position = SF.vector2(-3600, 602)
+ #///////////////////////////////////////////////////////Vines\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+  #'''''''''''''''''''''''''''''''''''''''''''''''''Red Grape Vine'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+   RED_GRAPE_VINE_TEXTURE = SF::Texture.from_file("graphics/plants/Red_Grape_Vine.png")
+   Red_Grape_Vine = SF::Sprite.new(RED_GRAPE_VINE_TEXTURE); Red_Grape_Vine.texture_rect = SF.int_rect(0, 0, 100, 200)
+   Red_Grape_Vine.position = SF.vector2(200, 202)
 #______________________________________________________________________________________________________________________________________
 Testing_Text = SF::Text.new; Testing_Text.font = FONT_PIXEL; 
 Testing_Text.character_size = 20; Testing_Text.color = SF::Color::White; Testing_Text.position = SF.vector2(1800, 652)
