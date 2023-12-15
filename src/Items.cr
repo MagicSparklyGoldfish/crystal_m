@@ -366,7 +366,7 @@ end
      #sand cherry, silver almond, wax apple, rumberry, sugarberry, desert almond, wild dilly, black plum, watergum, cherry plum, Clementine, desert lime,
      #kumquat, cloudberry, mosaic fig, desert fig, Fig, Jackfruit, durian, saguaro, yellow dragon fruit, star fruit, winter huckleberry, Papaya,
      #whortleberry cactus, queen palm, blood orange, Grapefruit, red passionflower, sea anemone passion flower, stinking passionflower, white passionflower,
-     #blue passionflower, blue honeysuckle, cranberry 
+     #blue passionflower, blue honeysuckle, cranberry, honeysuckle, fox grape, nutmeg, vanilla, cacao tree 
     #................................................................Bushes...................................................................................
      #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Blackberries''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
       @@blackberries = Ingredients.new("Blackberries", 0, "berry", "black", Blackberries, 0, ["Hp+", "Mp+"])
@@ -462,6 +462,9 @@ end
      #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Orange''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
       @@oranges = Ingredients.new("Oranges", 117, "citrus", "orange", Orange, 0, ["Hp+", "Luk+"])
       Ingredient_Array.push(@@oranges)
+     #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Banana''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+      @@bananas = Ingredients.new("Bananas", 118, "fruit", "yellow", Banana, 0, ["Hp+", "Luk+"])
+      Ingredient_Array.push(@@bananas)
     #................................................................Vines....................................................................................
      #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Red Grapes''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
       @@red_grapes = Ingredients.new("Red Grapes", 200, "fruit", "red", Red_Grapes, 0, ["Hp+", "Luk+"])
@@ -5954,6 +5957,9 @@ include Use
     #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Orange Tree'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      @@orange_tree = Herbs.new("Orange Tree", 117, "orange", 100, 100, @@oranges, Orange_Tree, false, "tree", 0, ["Hp+", "Luk+"])
      Herb_Array.push(@@orange_tree)
+    #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Orange Tree'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     @@banana_tree = Herbs.new("Banana Tree", 118, "yellow", 100, 100, @@bananas, Banana_Tree, false, "tree", 0, ["Hp+", "Luk+"])
+     Herb_Array.push(@@banana_tree)
    #................................................................Vines..................................................................................
     #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Red Grape Vine''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      @@red_grape_vine = Herbs.new("Red Grape Vine", 200, "red", 100, 100, @@red_grapes, Red_Grape_Vine, false, "vine", 0, ["Hp+", "Luk+"])

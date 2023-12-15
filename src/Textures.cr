@@ -1592,6 +1592,9 @@
     #''''''''''''''''''''''''''''''''''''''''''''''''''''Orange'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      ORANGE_TEXTURE = SF::Texture.from_file("graphics/plants/Oranges.png")
      Orange = SF::Sprite.new(ORANGE_TEXTURE)  
+    #''''''''''''''''''''''''''''''''''''''''''''''''''''Banana'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     BANANA_TEXTURE = SF::Texture.from_file("graphics/plants/Bananas.png")
+     Banana = SF::Sprite.new(BANANA_TEXTURE) 
    #.....................................................Vines......................................................................
     #''''''''''''''''''''''''''''''''''''''''''''''''''Red Grape''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
      RED_GRAPE_TEXTURE = SF::Texture.from_file("graphics/plants/Red_Grapes.png")
@@ -3352,6 +3355,10 @@
    ORANGE_TREE_TEXTURE = SF::Texture.from_file("graphics/plants/Orange_Tree.png")
    Orange_Tree = SF::Sprite.new(ORANGE_TREE_TEXTURE); Orange_Tree.texture_rect = SF.int_rect(0, 0, 100, 200)
    Orange_Tree.position = SF.vector2(-3600, 602)
+  #'''''''''''''''''''''''''''''''''''''''''''''''''''Banana Tree''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+   BANANA_TREE_TEXTURE = SF::Texture.from_file("graphics/plants/Banana_Tree.png")
+   Banana_Tree = SF::Sprite.new(BANANA_TREE_TEXTURE); Banana_Tree.texture_rect = SF.int_rect(0, 0, 100, 200)
+   Banana_Tree.position = SF.vector2(-3800, 602)
  #///////////////////////////////////////////////////////Vines\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
   #'''''''''''''''''''''''''''''''''''''''''''''''''Red Grape Vine'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
    RED_GRAPE_VINE_TEXTURE = SF::Texture.from_file("graphics/plants/Red_Grape_Vine.png")
