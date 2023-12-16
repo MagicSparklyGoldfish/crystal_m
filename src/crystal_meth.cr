@@ -42,7 +42,7 @@ include Equipment
 include Map_Geometry
 extend self
 
- class Window_Class < Ladder
+ class Window_Class < Teleporter
 #----------------------------------------------------------------------------------------------------------------------------------------+
 #====================================================Window_Class Variables==============================================================+
   @@item_type = "Consumable"
@@ -439,379 +439,32 @@ extend self
       end
      map = @@map
      area = @@area
+     Harvestables::Ore.draw_ores(window, map)
+     Harvestables::Herbs.display(window, map)
      Map_Geometry::Teleporter.position_teleporters(area, map)
-     Map_Geometry::Ladder.position(map, area)
      Map_Geometry::Platform.set_positions(map)
+     Map_Geometry::Ladder.position(map, area)
      Map_Geometry::Teleporter.display_teleporters(window, area, map)
      Map_Geometry::Platform.display(map, window)
-     Map_Geometry::Ladder.display_doll_factory_01_ladders(window)
+     Map_Geometry::Ladder.display_ladders(window, map, area)
      window.draw(@@player_character_rendered_model); 
      window.draw(Ground); 
    
     end
  #-------------------------------------------------------teleporters---------------------------------------------------------------------
- #--------------------------------------------------------test stuff---------------------------------------------------------------------
-  @@test_ladder_03 : SF::RectangleShape; @@test_ladder_03 = Test_Ladder.dup; @@test_ladder_03.position = SF.vector2(-4800, 400);
- #------------------------------------------------------map object logic------------------------------------------------------------------
- #-----------------------------------------------------------test-------------------------------------------------------------------------
-   @@space : CP::Space; @@space = CP::Space.new
-   Mass = 1.0
-   Width = 50
-   Height = 50
-   @@pc_body : CP::Body; @@pc_body = CP::Body.new(8, 24); @@pc_skin : CP::Box; @@pc_skin = CP::Box.new(@@pc_body, 8, 24)
-   @@body : CP::Body; @@body = CP::Body.new(Mass); @@shape : CP::Shape::Poly; @@shape = CP::Shape::Poly.new(@@body, [
-    CP::Vect.new(-Width / 2, -Height / 2), CP::Vect.new(-Width / 2, Height / 2), CP::Vect.new(Width / 2, Height / 2),
-    CP::Vect.new(Width / 2, -Height / 2)
-  ])
-  def Window_Class.initialize_test_map(debug_draw, window, @@space) #<----does not seem to work right @note test map
-    @@space.iterations = 30
-    @@space.gravity = CP.v(0, -500)
-    @@space.sleep_time_threshold = 0.5
-    @@space.collision_slop = 0.5
-    @@pc_body = CP::Body.new(8, 24); @@pc_skin = CP::Box.new(@@pc_body, 8, 24)
-    @@body = CP::Body.new(Mass);
-    @@shape = CP::Shape::Poly.new(@@body, [
-      CP::Vect.new(-Width / 2, -Height / 2), CP::Vect.new(-Width / 2, Height / 2), CP::Vect.new(Width / 2, Height / 2),
-      CP::Vect.new(Width / 2, -Height / 2)
-    ])
-    @@body.position = CP.v(-5300, -40000)
-    @@pc_body.position = CP.v(-63, -40)
-    @@shape.friction = 1.0
-    @@space.add(@@shape, @@pc_body, @@pc_skin)
-    debug_draw.draw @@space
-   end
-  def Window_Class.attack_check_test_map
-    # Harvestables::Ore.harvest(@@attacking)
-    attack = @@attacking
-    Test_Enemies::Test_Humanoids.attack(attack)
-    event = "mining_ore"
-    Window_Class.check_attacking(event)
-  end
-  def Window_Class.space_test_map
-    bounding_box1 = @@player_character_rendered_model.global_bounds
-    bounding_box2 = Test_Teleporter.global_bounds
+  def Window_Class.teleport(window, map, area)
+    Teleporter_Array.map { |i| bounding_box1 = @@player_character_rendered_model.global_bounds
+    bounding_box2 = i.sprite.global_bounds
     if bounding_box1.intersects? bounding_box2
-      Window_Class.ore_test_initialize
-      Etc::Inventory_Ore.update_ore_inventory 
-      @@map = "test_ore"
-    end
-  end
-  def Window_Class.teleport_test_garden
-    bounding_box1 = @@player_character_rendered_model.global_bounds
-    bounding_box2 = Test_Teleporter2.global_bounds
-    if bounding_box1.intersects? bounding_box2
-      Window_Class.ore_test_initialize
-      Etc::Inventory_Ore.update_ore_inventory 
-      @@map = "test_garden"
-    end
-  end
-  def Window_Class.teleport_doll_factory_01
-    bounding_box1 = @@player_character_rendered_model.global_bounds
-    bounding_box2 = Test_Teleporter3.global_bounds
-    if bounding_box1.intersects? bounding_box2
-      Window_Class.ore_test_initialize
-      Etc::Inventory_Ore.update_ore_inventory 
-      @@map = "factory_map_01"
-      map = @@map
-      area = "doll factory"
+      @@area = i.destination_area
+      puts @@area
+      @@map = i.destination_map 
+      puts @@map
+      Map_Geometry::Teleporter.position_teleporters(area, map)
       Map_Geometry::Ladder.position(map, area)
-    end
-  end
-
-  def Window_Class.test_map(debug_draw, window, @@space)
-    window.clear(SF::Color::Transparent);
-    b = @@player_character_rendered_model.position
-    x = b[0]; y = b[1]
-    view1 = SF::View.new(SF.float_rect(0, 0, 1900, 700))
-    view1.center = SF.vector2(x, y)
-    view1.viewport = SF.float_rect(0, 0, 1, 0.85)
-    window.view = view1
-    # Player_Attack_Bounding_Box.position = @@player_character_rendered_model.position + SF.vector2(65, 25)
-    # window.draw(Player_Attack_Bounding_Box)
-    if @@space.contains?(@@shape) == false #<----This is proabably a really fucking stupid way to do this, but it works and I'm tired of fucking with it
-      @@space.add(@@shape)
-      NPCS::Test_Npcs.test_npc_initialize
-      Etc::Inventory_Ore.update_ore_inventory 
-    end
-    if @@space.contains?(@@pc_body) == false
-      @@player_character_rendered_model.texture_rect = SF.int_rect(96, 128, 96, 128)
-      @@player_character_rendered_model.position = SF.vector2(100, 650)
-      @@pc_body.position = CP.v(-60, -40)
-      @@space.add(@@pc_body)
-    end
-    if @@space.contains?(@@pc_skin) == false
-      @@space.add(@@pc_skin)
-    end
-    debug_draw.draw @@space
-    if @@attacking == true
-    Window_Class.player_attack_bounding_box(window)
-
-    end
-
-
-    window.draw(Ground); NPCS::Test_Npcs.test_npc_maintain(window); Test_Enemies::Test_Humanoids.draw_test_enemy(window)
-    window.draw(@@player_character_rendered_model); window.draw(Test_Teleporter); window.draw(Test_Teleporter2)
-    window.draw(Test_Teleporter3)
-    #window.draw(Bloodstone_Ore);
-   end
-#-----------------------------------------------------------ore test----------------------------------------------------------------------
-  @@test_ladder_02 : SF::RectangleShape; @@test_ladder_02 = Test_Ladder.dup; @@test_ladder_02.position = SF.vector2(1400, 0);
-  def Window_Class.ore_test_initialize
-    Moss_Agate_Ore.position = SF.vector2(500, 702)
-  end
-  def Window_Class.ore_test(window)
-   window.clear(SF::Color::Transparent);
-   b = @@player_character_rendered_model.position
-   x = b[0]; y = b[1]
-   view1 = SF::View.new(SF.float_rect(0, 0, 1900, 700))
-   view1.center = SF.vector2(x, y)
-   view1.viewport = SF.float_rect(0, 0, 1, 0.85)
-   window.view = view1
-   if @@attacking == true
-    Window_Class.player_attack_bounding_box(window)
-    end
-   bounding_box1 = @@player_character_rendered_model.global_bounds
-   bounding_box2 = @@player_character_rendered_model.global_bounds
-   ore_ground = Ground.dup; Ground.position = SF.vector2(-5000, 800); ore_platform = Ground.dup; ore_platform.scale = SF.vector2(0.5, 0.2)
-   ore_platform.position = SF.vector2(-100, 400); window.draw(Test_Smelter); window.draw(Test_Forge); window.draw(Test_Gem_Cutter)
-   window.draw(Test_Upgrade_Table);
-   window.draw(ore_ground); window.draw(@@player_character_rendered_model); window.draw(Test_Teleporter); window.draw(Test_Ladder)
-   window.draw(Test_Platform_01); window.draw(Test_Platform_02); window.draw(@@test_ladder_02) #window.draw(Feet_Bounding_Box)
-   
-
-   
-  end
-  def Window_Class.attack_check_test_ore_map #@note harvest ores
-    Harvestables::Ore.harvest(@@attacking)
-    event = "mining_ore"
-    Window_Class.check_attacking(event)
-  end
-  def Window_Class.teleport_test_ore_map
-   bounding_box1 = @@player_character_rendered_model.global_bounds
-   bounding_box2 = Test_Teleporter.global_bounds
-   if bounding_box1.intersects? bounding_box2
-     @@map = "test"
-   end
-  end
-   @@ladder_array = [Test_Ladder, @@test_ladder_02, @@test_ladder_03]; @@ladder_iterator : Int32; @@ladder_iterator = 0
-   @@ladder_clock = SF::Clock.new
-  def Window_Class.ladder_test_ore_map
-   bounding_box1 = @@player_character_rendered_model.global_bounds
-   bounding_box2 = @@ladder_array[@@ladder_iterator].global_bounds 
-   if bounding_box1.intersects? bounding_box2
-    if @@ladder_clock.elapsed_time > SF.seconds(0.05) && @@ladder_clock.elapsed_time < SF.seconds(0.1) && @@player_character_rendered_model.position.y > @@ladder_array[@@ladder_iterator].position.y + 280
-      @@player_character_rendered_model.position = @@ladder_array[@@ladder_iterator].position - SF.vector2(0, -280)
-     end
-    if @@ladder_clock.elapsed_time > SF.seconds(0.1) && @@ladder_clock.elapsed_time < SF.seconds(0.15) && @@player_character_rendered_model.position.y > @@ladder_array[@@ladder_iterator].position.y + 260
-      @@player_character_rendered_model.position = @@ladder_array[@@ladder_iterator].position - SF.vector2(0, -260)
-     end
-    if @@ladder_clock.elapsed_time > SF.seconds(0.15) && @@ladder_clock.elapsed_time < SF.seconds(0.2) && @@player_character_rendered_model.position.y > @@ladder_array[@@ladder_iterator].position.y + 240
-      @@player_character_rendered_model.position = @@ladder_array[@@ladder_iterator].position - SF.vector2(0, -240)
-     end
-    if @@ladder_clock.elapsed_time > SF.seconds(0.2) && @@ladder_clock.elapsed_time < SF.seconds(0.25) && @@player_character_rendered_model.position.y > @@ladder_array[@@ladder_iterator].position.y + 220
-      @@player_character_rendered_model.position = @@ladder_array[@@ladder_iterator].position - SF.vector2(0, -220)
-     end
-    if @@ladder_clock.elapsed_time > SF.seconds(0.25) && @@ladder_clock.elapsed_time < SF.seconds(0.3) && @@player_character_rendered_model.position.y > @@ladder_array[@@ladder_iterator].position.y + 200
-      @@player_character_rendered_model.position = @@ladder_array[@@ladder_iterator].position - SF.vector2(0, -200)
-     end
-    if @@ladder_clock.elapsed_time > SF.seconds(0.3) && @@ladder_clock.elapsed_time < SF.seconds(0.35) && @@player_character_rendered_model.position.y > @@ladder_array[@@ladder_iterator].position.y + 180
-      @@player_character_rendered_model.position = @@ladder_array[@@ladder_iterator].position - SF.vector2(0, -180)
-     end
-    if @@ladder_clock.elapsed_time > SF.seconds(0.35) && @@ladder_clock.elapsed_time < SF.seconds(0.4) && @@player_character_rendered_model.position.y > @@ladder_array[@@ladder_iterator].position.y + 160
-      @@player_character_rendered_model.position = @@ladder_array[@@ladder_iterator].position - SF.vector2(0, -160)
-     end
-    if @@ladder_clock.elapsed_time > SF.seconds(0.35) && @@ladder_clock.elapsed_time < SF.seconds(0.4)  && @@player_character_rendered_model.position.y > @@ladder_array[@@ladder_iterator].position.y + 140
-      @@player_character_rendered_model.position = @@ladder_array[@@ladder_iterator].position - SF.vector2(0, -140)
-     end
-    if @@ladder_clock.elapsed_time > SF.seconds(0.4) && @@ladder_clock.elapsed_time < SF.seconds(0.45)  && @@player_character_rendered_model.position.y > @@ladder_array[@@ladder_iterator].position.y + 120
-      @@player_character_rendered_model.position = @@ladder_array[@@ladder_iterator].position - SF.vector2(0, -120)
-     end
-    if @@ladder_clock.elapsed_time > SF.seconds(0.45) && @@ladder_clock.elapsed_time < SF.seconds(0.5) && @@player_character_rendered_model.position.y > @@ladder_array[@@ladder_iterator].position.y + 100
-      @@player_character_rendered_model.position = @@ladder_array[@@ladder_iterator].position - SF.vector2(0, -100)
-     end
-    if @@ladder_clock.elapsed_time > SF.seconds(0.5) && @@ladder_clock.elapsed_time < SF.seconds(0.55) && @@player_character_rendered_model.position.y > @@ladder_array[@@ladder_iterator].position.y + 80
-      @@player_character_rendered_model.position = @@ladder_array[@@ladder_iterator].position - SF.vector2(0, -80)
-     end
-    if @@ladder_clock.elapsed_time > SF.seconds(0.55) && @@ladder_clock.elapsed_time < SF.seconds(0.6) && @@player_character_rendered_model.position.y > @@ladder_array[@@ladder_iterator].position.y + 60
-      @@player_character_rendered_model.position = @@ladder_array[@@ladder_iterator].position - SF.vector2(0, -60)
-     end
-    if @@ladder_clock.elapsed_time > SF.seconds(0.6) && @@ladder_clock.elapsed_time < SF.seconds(0.65) && @@player_character_rendered_model.position.y > @@ladder_array[@@ladder_iterator].position.y + 40
-      @@player_character_rendered_model.position = @@ladder_array[@@ladder_iterator].position - SF.vector2(0, -40)
-     end
-    if @@ladder_clock.elapsed_time > SF.seconds(0.65) && @@ladder_clock.elapsed_time < SF.seconds(0.7) && @@player_character_rendered_model.position.y > @@ladder_array[@@ladder_iterator].position.y + 20
-      @@player_character_rendered_model.position = @@ladder_array[@@ladder_iterator].position - SF.vector2(0, -20)
-     end
-    if @@ladder_clock.elapsed_time > SF.seconds(0.7) && @@ladder_clock.elapsed_time < SF.seconds(0.75) && @@player_character_rendered_model.position.y > @@ladder_array[@@ladder_iterator].position.y
-      @@player_character_rendered_model.position = @@ladder_array[@@ladder_iterator].position - SF.vector2(0, 0)
-     end
-    if @@ladder_clock.elapsed_time > SF.seconds(0.75) && @@ladder_clock.elapsed_time < SF.seconds(0.8) && @@player_character_rendered_model.position.y > @@ladder_array[@@ladder_iterator].position.y + -20
-      @@player_character_rendered_model.position = @@ladder_array[@@ladder_iterator].position - SF.vector2(0, 20)
-     end
-    if @@ladder_clock.elapsed_time > SF.seconds(0.8) && @@ladder_clock.elapsed_time < SF.seconds(0.85) && @@player_character_rendered_model.position.y > @@ladder_array[@@ladder_iterator].position.y + -40
-      @@player_character_rendered_model.position = @@ladder_array[@@ladder_iterator].position - SF.vector2(0, 40)
-     end
-    if @@ladder_clock.elapsed_time > SF.seconds(0.85) && @@ladder_clock.elapsed_time < SF.seconds(0.9) && @@player_character_rendered_model.position.y > @@ladder_array[@@ladder_iterator].position.y + -60
-      @@player_character_rendered_model.position = @@ladder_array[@@ladder_iterator].position - SF.vector2(0, 60)
-     end
-    if @@ladder_clock.elapsed_time > SF.seconds(0.9) && @@ladder_clock.elapsed_time < SF.seconds(0.95) && @@player_character_rendered_model.position.y > @@ladder_array[@@ladder_iterator].position.y + -80
-      @@player_character_rendered_model.position = @@ladder_array[@@ladder_iterator].position - SF.vector2(0, 80)
-     end
-    if @@ladder_clock.elapsed_time > SF.seconds(0.95) && @@ladder_clock.elapsed_time < SF.seconds(1) && @@player_character_rendered_model.position.y > @@ladder_array[@@ladder_iterator].position.y + -100
-      @@player_character_rendered_model.position = @@ladder_array[@@ladder_iterator].position - SF.vector2(0, 100)
-     end
-    if @@ladder_clock.elapsed_time > SF.seconds(1) && @@ladder_clock.elapsed_time < SF.seconds(1.05) && @@player_character_rendered_model.position.y > @@ladder_array[@@ladder_iterator].position.y + -120
-      @@player_character_rendered_model.position = @@ladder_array[@@ladder_iterator].position - SF.vector2(0, 120)
-     end
-    if @@ladder_clock.elapsed_time > SF.seconds(1.05) && @@ladder_clock.elapsed_time < SF.seconds(1.1) && @@player_character_rendered_model.position.y > @@ladder_array[@@ladder_iterator].position.y + -140
-      @@player_character_rendered_model.position = @@ladder_array[@@ladder_iterator].position - SF.vector2(0, 140)
-     end
-    if @@ladder_clock.elapsed_time > SF.seconds(1.1) && @@player_character_rendered_model.position.y > @@ladder_array[@@ladder_iterator].position.y 
-      #@@player_character_rendered_model.position = @@ladder_array[@@ladder_iterator].position - SF.vector2(0, 10)
-      @@ladder_clock.restart
-     end
-     #@@player_character_rendered_model.position -= SF.vector2(0, 40)
+      Map_Geometry::Platform.set_positions(map)
+    end}
    end 
-    @@ladder_iterator += 1 
-    if @@ladder_iterator >= @@ladder_array.size
-     @@ladder_iterator = 0 
-    end
-  end
-#---------------------------------------------------------garden test---------------------------------------------------------------------
- def Window_Class.test_garden(window)
-  window.clear(SF::Color::Transparent);
-  b = @@player_character_rendered_model.position
-  x = b[0]; y = b[1]
-  view1 = SF::View.new(SF.float_rect(0, 0, 1900, 700))
-  view1.center = SF.vector2(x, y)
-  view1.viewport = SF.float_rect(0, 0, 1, 0.85)
-  window.view = view1
-  if @@attacking == true
-   Window_Class.player_attack_bounding_box(window)
-   end
-  map = @@map
-  window.draw(Ground); window.draw(@@player_character_rendered_model); window.draw(Test_Teleporter); window.draw(Test_Ladder)
-  window.draw(Test_Platform_01); window.draw(Test_Platform_02); window.draw(Test_Platform_03);
-  window.draw(@@test_ladder_02); window.draw(@@test_ladder_03); Harvestables::Herbs.display(window, map)
- end
- @@ladder_array = [Test_Ladder, @@test_ladder_02, @@test_ladder_03]; @@ladder_iterator : Int32; @@ladder_iterator = 0
- @@ladder_clock = SF::Clock.new
- def Window_Class.ladder_test_garden_map
-  bounding_box1 = @@player_character_rendered_model.global_bounds
-  bounding_box2 = @@ladder_array[@@ladder_iterator].global_bounds 
-  if bounding_box1.intersects? bounding_box2
-   if @@ladder_clock.elapsed_time > SF.seconds(0.01) && @@ladder_clock.elapsed_time < SF.seconds(0.1) && @@player_character_rendered_model.position.y > @@ladder_array[@@ladder_iterator].position.y + 280
-     @@player_character_rendered_model.position = @@ladder_array[@@ladder_iterator].position - SF.vector2(0, -280)
-    end
-   if @@ladder_clock.elapsed_time > SF.seconds(0.1) && @@ladder_clock.elapsed_time < SF.seconds(0.15) && @@player_character_rendered_model.position.y > @@ladder_array[@@ladder_iterator].position.y + 260
-     @@player_character_rendered_model.position = @@ladder_array[@@ladder_iterator].position - SF.vector2(0, -260)
-    end
-   if @@ladder_clock.elapsed_time > SF.seconds(0.15) && @@ladder_clock.elapsed_time < SF.seconds(0.2) && @@player_character_rendered_model.position.y > @@ladder_array[@@ladder_iterator].position.y + 240
-     @@player_character_rendered_model.position = @@ladder_array[@@ladder_iterator].position - SF.vector2(0, -240)
-    end
-   if @@ladder_clock.elapsed_time > SF.seconds(0.2) && @@ladder_clock.elapsed_time < SF.seconds(0.25) && @@player_character_rendered_model.position.y > @@ladder_array[@@ladder_iterator].position.y + 220
-     @@player_character_rendered_model.position = @@ladder_array[@@ladder_iterator].position - SF.vector2(0, -220)
-    end
-   if @@ladder_clock.elapsed_time > SF.seconds(0.25) && @@ladder_clock.elapsed_time < SF.seconds(0.3) && @@player_character_rendered_model.position.y > @@ladder_array[@@ladder_iterator].position.y + 200
-     @@player_character_rendered_model.position = @@ladder_array[@@ladder_iterator].position - SF.vector2(0, -200)
-    end
-   if @@ladder_clock.elapsed_time > SF.seconds(0.3) && @@ladder_clock.elapsed_time < SF.seconds(0.35) && @@player_character_rendered_model.position.y > @@ladder_array[@@ladder_iterator].position.y + 180
-     @@player_character_rendered_model.position = @@ladder_array[@@ladder_iterator].position - SF.vector2(0, -180)
-    end
-   if @@ladder_clock.elapsed_time > SF.seconds(0.35) && @@ladder_clock.elapsed_time < SF.seconds(0.4) && @@player_character_rendered_model.position.y > @@ladder_array[@@ladder_iterator].position.y + 160
-     @@player_character_rendered_model.position = @@ladder_array[@@ladder_iterator].position - SF.vector2(0, -160)
-    end
-   if @@ladder_clock.elapsed_time > SF.seconds(0.35) && @@ladder_clock.elapsed_time < SF.seconds(0.4)  && @@player_character_rendered_model.position.y > @@ladder_array[@@ladder_iterator].position.y + 140
-     @@player_character_rendered_model.position = @@ladder_array[@@ladder_iterator].position - SF.vector2(0, -140)
-    end
-   if @@ladder_clock.elapsed_time > SF.seconds(0.4) && @@ladder_clock.elapsed_time < SF.seconds(0.45)  && @@player_character_rendered_model.position.y > @@ladder_array[@@ladder_iterator].position.y + 120
-     @@player_character_rendered_model.position = @@ladder_array[@@ladder_iterator].position - SF.vector2(0, -120)
-    end
-   if @@ladder_clock.elapsed_time > SF.seconds(0.45) && @@ladder_clock.elapsed_time < SF.seconds(0.5) && @@player_character_rendered_model.position.y > @@ladder_array[@@ladder_iterator].position.y + 100
-     @@player_character_rendered_model.position = @@ladder_array[@@ladder_iterator].position - SF.vector2(0, -100)
-    end
-   if @@ladder_clock.elapsed_time > SF.seconds(0.5) && @@ladder_clock.elapsed_time < SF.seconds(0.55) && @@player_character_rendered_model.position.y > @@ladder_array[@@ladder_iterator].position.y + 80
-     @@player_character_rendered_model.position = @@ladder_array[@@ladder_iterator].position - SF.vector2(0, -80)
-    end
-   if @@ladder_clock.elapsed_time > SF.seconds(0.55) && @@ladder_clock.elapsed_time < SF.seconds(0.6) && @@player_character_rendered_model.position.y > @@ladder_array[@@ladder_iterator].position.y + 60
-     @@player_character_rendered_model.position = @@ladder_array[@@ladder_iterator].position - SF.vector2(0, -60)
-    end
-   if @@ladder_clock.elapsed_time > SF.seconds(0.6) && @@ladder_clock.elapsed_time < SF.seconds(0.65) && @@player_character_rendered_model.position.y > @@ladder_array[@@ladder_iterator].position.y + 40
-     @@player_character_rendered_model.position = @@ladder_array[@@ladder_iterator].position - SF.vector2(0, -40)
-    end
-   if @@ladder_clock.elapsed_time > SF.seconds(0.65) && @@ladder_clock.elapsed_time < SF.seconds(0.7) && @@player_character_rendered_model.position.y > @@ladder_array[@@ladder_iterator].position.y + 20
-     @@player_character_rendered_model.position = @@ladder_array[@@ladder_iterator].position - SF.vector2(0, -20)
-    end
-   if @@ladder_clock.elapsed_time > SF.seconds(0.7) && @@ladder_clock.elapsed_time < SF.seconds(0.75) && @@player_character_rendered_model.position.y > @@ladder_array[@@ladder_iterator].position.y
-     @@player_character_rendered_model.position = @@ladder_array[@@ladder_iterator].position - SF.vector2(0, 0)
-    end
-   if @@ladder_clock.elapsed_time > SF.seconds(0.75) && @@ladder_clock.elapsed_time < SF.seconds(0.8) && @@player_character_rendered_model.position.y > @@ladder_array[@@ladder_iterator].position.y + -20
-     @@player_character_rendered_model.position = @@ladder_array[@@ladder_iterator].position - SF.vector2(0, 20)
-    end
-   if @@ladder_clock.elapsed_time > SF.seconds(0.8) && @@ladder_clock.elapsed_time < SF.seconds(0.85) && @@player_character_rendered_model.position.y > @@ladder_array[@@ladder_iterator].position.y + -40
-     @@player_character_rendered_model.position = @@ladder_array[@@ladder_iterator].position - SF.vector2(0, 40)
-    end
-   if @@ladder_clock.elapsed_time > SF.seconds(0.85) && @@ladder_clock.elapsed_time < SF.seconds(0.9) && @@player_character_rendered_model.position.y > @@ladder_array[@@ladder_iterator].position.y + -60
-     @@player_character_rendered_model.position = @@ladder_array[@@ladder_iterator].position - SF.vector2(0, 60)
-    end
-   if @@ladder_clock.elapsed_time > SF.seconds(0.9) && @@ladder_clock.elapsed_time < SF.seconds(0.95) && @@player_character_rendered_model.position.y > @@ladder_array[@@ladder_iterator].position.y + -80
-     @@player_character_rendered_model.position = @@ladder_array[@@ladder_iterator].position - SF.vector2(0, 80)
-    end
-   if @@ladder_clock.elapsed_time > SF.seconds(0.95) && @@ladder_clock.elapsed_time < SF.seconds(1) && @@player_character_rendered_model.position.y > @@ladder_array[@@ladder_iterator].position.y + -100
-     @@player_character_rendered_model.position = @@ladder_array[@@ladder_iterator].position - SF.vector2(0, 100)
-    end
-   if @@ladder_clock.elapsed_time > SF.seconds(1) && @@ladder_clock.elapsed_time < SF.seconds(1.05) && @@player_character_rendered_model.position.y > @@ladder_array[@@ladder_iterator].position.y + -120
-     @@player_character_rendered_model.position = @@ladder_array[@@ladder_iterator].position - SF.vector2(0, 120)
-    end
-   if @@ladder_clock.elapsed_time > SF.seconds(1.05) && @@ladder_clock.elapsed_time < SF.seconds(1.1) && @@player_character_rendered_model.position.y > @@ladder_array[@@ladder_iterator].position.y + -140
-     @@player_character_rendered_model.position = @@ladder_array[@@ladder_iterator].position - SF.vector2(0, 140)
-    end
-   if @@ladder_clock.elapsed_time > SF.seconds(1.1) && @@player_character_rendered_model.position.y > @@ladder_array[@@ladder_iterator].position.y 
-     #@@player_character_rendered_model.position = @@ladder_array[@@ladder_iterator].position - SF.vector2(0, 10)
-     @@ladder_clock.restart
-    end
-    #@@player_character_rendered_model.position -= SF.vector2(0, 40)
-  end 
-   @@ladder_iterator += 1 
-   if @@ladder_iterator >= @@ladder_array.size
-    @@ladder_iterator = 0 
-   end
- end
- def Window_Class.attack_check_test_garden_map #@note harvest plants
-   Harvestables::Herbs.harvest(@@attacking)
-   event = "harvest_plants"
-   Window_Class.check_attacking(event)
- end
-  def Window_Class.teleport_test_garden_map
-   bounding_box1 = @@player_character_rendered_model.global_bounds
-   bounding_box2 = Test_Teleporter.global_bounds
-   if bounding_box1.intersects? bounding_box2
-     @@map = "test"
-   end
-   end
-#------------------------------------------------------------------------------------------------------------------------------------------------------------
-#                                                      Doll Factory Maps
-#------------------------------------------------------------------------------------------------------------------------------------------------------------
- #-------------------------------------------------------Factory Map 1---------------------------------------------------------------------------------------
-  def Window_Class.factory_map_01(window)
-   window.clear(SF::Color::Transparent);
-   b = @@player_character_rendered_model.position
-   x = b[0]; y = b[1]
-   view1 = SF::View.new(SF.float_rect(0, 0, 1900, 700))
-   view1.center = SF.vector2(x, y)
-   view1.viewport = SF.float_rect(0, 0, 1, 0.85)
-   window.view = view1
-   if @@attacking == true
-    Window_Class.player_attack_bounding_box(window)
-    end
-   map = @@map
-   Map_Geometry::Platform.set_positions(map)
-   Map_Geometry::Platform.display(map, window)
-   Map_Geometry::Ladder.display_doll_factory_01_ladders(window)
-   window.draw(@@player_character_rendered_model); 
-   window.draw(Ground); 
-
-  end
-#=======================================================================================================================================+
 #---------------------------------------------------------------------------------------------------------------------------------------+
 #==========================================================Animations===================================================================+
    #====================================================Idle Animations=================================================================+
@@ -947,7 +600,7 @@ extend self
  end
 #/////////////////////////////////////////////////////////////Draw//////////////////////////////////////////////////////////////////////+
 
-  def Window_Class.map(debug_draw, window) #@note player movement
+  def Window_Class.map(window) #@note player movement
     walk_time = WALK_TIMER.elapsed_time
    if @@map != "none" && @@is_walking == true && walk_time > SF.seconds(0.025)
     case @@current_direction
@@ -957,39 +610,6 @@ extend self
       when "left"
         Player_Data::Player_Physics.wasd_left(@@player_character_rendered_model)
         WALK_TIMER.restart
-     end
-    end
-   case @@map
-    #================================================================================================================================================+
-    #                                                          Doll Factory Maps                                                                     +
-    #================================================================================================================================================+
-     #-------------------------------------------------------------Map 01----------------------------------------------------------------------------
-      when "factory_map_01"
-       map = @@map
-       Window_Class.factory_map_01(window)
-       Player_Data::Player_Physics.gravity(@@player_character_rendered_model, window)
-       Window_Class.hud(window)
-    #_________________________________________________________________________________________________________________________________________________
-    when "test"
-     Window_Class.test_map(debug_draw, window, @@space)
-     Window_Class.attack_check_test_map
-     Player_Data::Player_Physics.gravity(@@player_character_rendered_model, window)
-     Window_Class.hud(window)
-   when "test_garden"
-    Window_Class.test_garden(window)
-    Player_Data::Player_Physics.gravity(@@player_character_rendered_model, window)
-    Window_Class.attack_check_test_garden_map
-   when "test_ore"
-     map = @@map
-     Window_Class.ore_test(window)
-     Window_Class.attack_check_test_ore_map
-     Harvestables::Ore.draw_ores(window, map)
-     Player_Data::Player_Physics.gravity(@@player_character_rendered_model, window)
-     if @@popup == "forge"
-       Crafted_Items::Forge.diplay_forge(window)
-       if @@tab == "mold"
-         window.draw(Forge_Mold_Option_01)
-       end 
      end
    if @@popup == "gem_cutter"
     page = @@page
@@ -1027,6 +647,7 @@ extend self
    when "HUD"
     Window_Class.draw_map(window)
     Window_Class.hud(window)
+    Player_Data::Player_Physics.gravity(@@player_character_rendered_model, window)
     if @@popup == "Salon"
       Window_Class.salon(window)
       if @@tab == "salon_confirm"
@@ -1100,21 +721,14 @@ extend self
  window = SF::RenderWindow.new(SF::VideoMode.new(1920, 1080), "Crystal Meth!", SF::Style::Fullscreen) #@note initializes window
  window.vertical_sync_enabled = false; #window.framerate_limit = 120
 
-
- debug_draw = SFMLDebugDraw.new(window, SF::RenderStates.new( #--------------------------------initializes crystal chipmunk draw area
- SF::Transform.new.translate(window.size / 2).scale(1, -1).scale(5, 5)
- ))
  Window_Class.player_model_initialize(@@current_shoes, @@current_gloves, @@current_shirt, @@current_pants, @@current_hair) 
-  case @@map
-  when "test"
-    Window_Class.initialize_test_map(debug_draw, window, @@space)
-  end
+
 #----------------------------------------------------------------------------------------------------------------------------------------+
 #                                                        This runs every frame
 #----------------------------------------------------------------------------------------------------------------------------------------+
  while window.open?
    Window_Class.keypresses(window)
-   Window_Class.map(debug_draw, window)
+   Window_Class.map(window)
    Window_Class.draw(window)
    
    window.display()
@@ -1154,6 +768,12 @@ def Window_Class.main_menu_keypresses(window)
     @@menu = "HUD"
     @@map = "test"
     @@area = "test"
+    area = @@area
+    map = @@map
+    @@player_character_rendered_model.position = SF.vector2(0, 600)
+    Map_Geometry::Teleporter.position_teleporters(area, map)
+    Map_Geometry::Ladder.position(map, area)
+    Map_Geometry::Platform.set_positions(map)
     @@player_character_rendered_model.scale = SF.vector2(1.0, 1.0)
     All_Audio::MUSIC.test_song
     #view2 = SF::View.new(SF.vector2(350, 300), SF.vector2(300, 200))
@@ -3664,55 +3284,64 @@ def Window_Class.hud_keypresses(window)
       when "left"
         @@attacking = true
         Window_Class.attack_swing_left(@@player_character_rendered_model, window)
+        attack = @@attacking
+        Harvestables::Ore.harvest(attack)
+        Harvestables::Herbs.harvest(attack)
       when "right"
         @@attacking = true
         Window_Class.attack_swing_right(@@player_character_rendered_model, window)
+        attack = @@attacking
+        Harvestables::Ore.harvest(attack)
+        Harvestables::Herbs.harvest(attack)
       end; end
 
       when SF::Keyboard::Space
         @@attacking = false
-        case @@map
+        map = @@map
+        area = @@area
+        Window_Class.teleport(window, map, area)
+     #   case @@map
          #===========================================================================================================================================
          #=                                                            Doll Factory                                                                 =
          #===========================================================================================================================================
           #---------------------------------------------------------Doll Factory Map 1---------------------------------------------------------------
-           when "factory_map_01"
+        #    when "factory_map_01"
 
-        when "test"
-          NPCS::Test_Npcs.click(window, @@player_character_rendered_model)
-          Window_Class.space_test_map
-          Window_Class.teleport_test_garden
-          Window_Class.teleport_doll_factory_01
-        when "test_garden"
-          Window_Class.teleport_test_garden_map
-          Window_Class.ladder_test_garden_map
-        when "test_ore"
-          player = @@player_character_rendered_model.global_bounds
-          Window_Class.teleport_test_ore_map; Window_Class.ladder_test_ore_map
-          Harvestables::Ore.smelt(window, player)
-          if player.intersects? Test_Smelter.global_bounds
-            Player_Data::Player_Physics.immobilize_player
-            @@popup = "smelter"
-            @@player_character_rendered_model.position = SF.vector2(400, 75)
-        else if player.intersects? Test_Forge.global_bounds
-            Player_Data::Player_Physics.immobilize_player
-            @@popup = "forge"
-            Etc::Inventory_Ingot.initialize_inventory
-            @@player_character_rendered_model.position = SF.vector2(600, 75)
-        else if player.intersects? Test_Gem_Cutter.global_bounds
-            Player_Data::Player_Physics.immobilize_player
-            @@popup = "gem_cutter"
-            @@page = 1
-            Etc::Gem.initialize_gem_inventory
-            Etc::Gem.initialize_gem_cutter_ore_display
-            @@player_character_rendered_model.position = SF.vector2(800, 75)
-            Etc::Gem.initialize_gem_cutter_cut_display
-        else if player.intersects? Test_Upgrade_Table_Menu.global_bounds
-             Player_Data::Player_Physics.immobilize_player
-             @@player_character_rendered_model.position = SF.vector2(1000, 75)
-             @@popup = "upgrade_table"
-           end; end; end; end
-        end
+        # when "test"
+        #   NPCS::Test_Npcs.click(window, @@player_character_rendered_model)
+        #   Window_Class.space_test_map
+        #   Window_Class.teleport_test_garden
+        #   Window_Class.teleport_doll_factory_01
+        # when "test_garden"
+        #   Window_Class.teleport_test_garden_map
+        #   Window_Class.ladder_test_garden_map
+        # when "test_ore"
+        #   player = @@player_character_rendered_model.global_bounds
+        #   Window_Class.teleport_test_ore_map; Window_Class.ladder_test_ore_map
+        #   Harvestables::Ore.smelt(window, player)
+        #   if player.intersects? Test_Smelter.global_bounds
+        #     Player_Data::Player_Physics.immobilize_player
+        #     @@popup = "smelter"
+        #     @@player_character_rendered_model.position = SF.vector2(400, 75)
+        # else if player.intersects? Test_Forge.global_bounds
+        #     Player_Data::Player_Physics.immobilize_player
+        #     @@popup = "forge"
+        #     Etc::Inventory_Ingot.initialize_inventory
+        #     @@player_character_rendered_model.position = SF.vector2(600, 75)
+        # else if player.intersects? Test_Gem_Cutter.global_bounds
+        #     Player_Data::Player_Physics.immobilize_player
+        #     @@popup = "gem_cutter"
+        #     @@page = 1
+        #     Etc::Gem.initialize_gem_inventory
+        #     Etc::Gem.initialize_gem_cutter_ore_display
+        #     @@player_character_rendered_model.position = SF.vector2(800, 75)
+        #     Etc::Gem.initialize_gem_cutter_cut_display
+        # else if player.intersects? Test_Upgrade_Table_Menu.global_bounds
+        #      Player_Data::Player_Physics.immobilize_player
+        #      @@player_character_rendered_model.position = SF.vector2(1000, 75)
+        #      @@popup = "upgrade_table"
+        #    end; end; end; end
+       # end
       when SF::Keyboard::D
         if @@is_on_ladder == false
         @@idleframes = 0

@@ -7121,13 +7121,17 @@ module Map_Geometry
       def Ladder.position_doll_factory_ladders(map, area)
         case map
         when "factory_map_01"
-       @@long_ladder_01.sprite.position = SF.vector2(0, 400)
+       @@long_ladder_01.sprite.position = SF.vector2(-4900, 400)
         end
       end
     #===============================================================Display=================================================================================
      #-----------------------------------------------------------Doll  Factory------------------------------------------------------------------------------
       def Ladder.display_ladders(window, map, area)
-      end
+       case area
+        when "test"
+        when "doll factory"
+          Ladder.display_doll_factory_01_ladders(window)
+      end; end
       def Ladder.display_doll_factory_01_ladders(window)
         window.draw(@@long_ladder_01.sprite);
        end
@@ -7182,8 +7186,8 @@ module Map_Geometry
           @@medium_platform_01.bounding_rectangle.position = SF.vector2(0, 400)
           @@medium_platform_01.display_rectangle.position = SF.vector2(0, 400)
         when "factory_map_01"
-          @@medium_platform_01.bounding_rectangle.position = SF.vector2(0, 400)
-          @@medium_platform_01.display_rectangle.position = SF.vector2(0, 400)
+          @@medium_platform_01.bounding_rectangle.position = SF.vector2(-4900, 400)
+          @@medium_platform_01.display_rectangle.position = SF.vector2(-4900, 400)
        end
      end
     def Platform.display(map, window)
@@ -7207,15 +7211,17 @@ module Map_Geometry
     @@medium_platform_01 = Platform.new(1, Test_Platform_01, Test_Platform_Cover_01); 
    #________________________________________________________________________________________________________________________________________________________
    end
- class Teleporter
+ class Teleporter < Ladder
   #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   #!                                                              Initialize                                                                              !
   #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-   def initialize(id : Int32, destination_map : String, destination_postion : Array(Float64), sprite : SF::Sprite)
+   def initialize(id : Int32, destination_map : String, destination_area : String, destination_postion : Array(Float64), sprite : SF::Sprite, length : Int32)
      @id = id
      @destination_map = destination_map
+     @destination_area = destination_area
      @destination_postion = destination_postion
      @sprite = sprite
+     @length = length
     end
    def id
      @id
@@ -7223,12 +7229,24 @@ module Map_Geometry
    def destination_map
      @destination_map
     end
+   def destination_area
+     @destination_area
+    end
    def destination_postion
      @destination_postion
     end
    def sprite
      @sprite
     end
+    def length
+      @length
+    end 
+   def destination_map=(this)
+     @destination_map = this
+    end
+   def destination_area=(this)
+    @destination_area= this
+   end
   #________________________________________________________________________________________________________________________________________________________
   #********************************************************************************************************************************************************
   #*                                                              Variables                                                                               *
@@ -7253,6 +7271,12 @@ module Map_Geometry
        @@teleporter_01.sprite.position = SF.vector2(120, 762)
        @@teleporter_02.sprite.position = SF.vector2(-120, 762)
        @@teleporter_03.sprite.position = SF.vector2(-320, 762)
+       @@teleporter_01.destination_map = "test_ore"
+       @@teleporter_02.destination_map = "test_garden"
+       @@teleporter_03.destination_map = "factory_map_01"
+       @@teleporter_01.destination_area = "test" 
+       @@teleporter_02.destination_area = "test" 
+       @@teleporter_03.destination_area = "doll factory"
      end
     end
     def Teleporter.position_doll_factory_teleporters(area, map)
@@ -7307,11 +7331,11 @@ module Map_Geometry
   #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   #/                                                               Entities                                                                               /
   #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-   @@teleporter_01 = Teleporter.new(1, "test", [0.0, 0.0], Teleporter_01.dup)
+   @@teleporter_01 = Teleporter.new(1, "test", "test", [0.0, 0.0], Teleporter_01.dup, 0)
    Teleporter_Array.push(@@teleporter_01)
-   @@teleporter_02 = Teleporter.new(2, "test", [0.0, 0.0], Teleporter_01.dup)
+   @@teleporter_02 = Teleporter.new(2, "test", "test", [0.0, 0.0], Teleporter_01.dup, 0)
    Teleporter_Array.push(@@teleporter_02)
-   @@teleporter_03 = Teleporter.new(3, "test", [0.0, 0.0], Teleporter_01.dup)
+   @@teleporter_03 = Teleporter.new(3, "test", "test", [0.0, 0.0], Teleporter_01.dup, 0)
    Teleporter_Array.push(@@teleporter_03)
   #________________________________________________________________________________________________________________________________________________________
   end
