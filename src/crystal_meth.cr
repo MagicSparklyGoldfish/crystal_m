@@ -51,6 +51,7 @@ extend self
   @@popup = "none"
   @@tab = "none"
   @@map = "none"
+  @@area = "none"
   @@salon = "none"
   @@page : Int32 = 1; @@page_02 : Int32 = 1; @@page_03 : Int32 = 1
   @@category = "ore"
@@ -423,7 +424,32 @@ extend self
    end
 #=======================================================================================================================================+
 #---------------------------------------------------------------------------------------------------------------------------------------+
-#========================================================Map Renderers==================================================================+
+#========================================================Map Renderer===================================================================+
+ #---------------------------------------------------------Draw Map----------------------------------------------------------------------
+   def Window_Class.draw_map(window)
+     window.clear(SF::Color::Transparent);
+     b = @@player_character_rendered_model.position
+     x = b[0]; y = b[1]
+     view1 = SF::View.new(SF.float_rect(0, 0, 1900, 700))
+     view1.center = SF.vector2(x, y)
+     view1.viewport = SF.float_rect(0, 0, 1, 0.85)
+     window.view = view1
+     if @@attacking == true
+      Window_Class.player_attack_bounding_box(window)
+      end
+     map = @@map
+     area = @@area
+     Map_Geometry::Teleporter.position_teleporters(area, map)
+     Map_Geometry::Ladder.position(map, area)
+     Map_Geometry::Platform.set_positions(map)
+     Map_Geometry::Teleporter.display_teleporters(window, area, map)
+     Map_Geometry::Platform.display(map, window)
+     Map_Geometry::Ladder.display_doll_factory_01_ladders(window)
+     window.draw(@@player_character_rendered_model); 
+     window.draw(Ground); 
+   
+    end
+ #-------------------------------------------------------teleporters---------------------------------------------------------------------
  #--------------------------------------------------------test stuff---------------------------------------------------------------------
   @@test_ladder_03 : SF::RectangleShape; @@test_ladder_03 = Test_Ladder.dup; @@test_ladder_03.position = SF.vector2(-4800, 400);
  #------------------------------------------------------map object logic------------------------------------------------------------------
@@ -485,8 +511,10 @@ extend self
     if bounding_box1.intersects? bounding_box2
       Window_Class.ore_test_initialize
       Etc::Inventory_Ore.update_ore_inventory 
-      Map_Geometry::Ladder.position_doll_factory_01_ladders
       @@map = "factory_map_01"
+      map = @@map
+      area = "doll factory"
+      Map_Geometry::Ladder.position(map, area)
     end
   end
 
@@ -776,9 +804,12 @@ extend self
     Window_Class.player_attack_bounding_box(window)
     end
    map = @@map
-   window.draw(@@player_character_rendered_model); window.draw(Ground); Map_Geometry::Ladder.display_doll_factory_01_ladders(window)
    Map_Geometry::Platform.set_positions(map)
    Map_Geometry::Platform.display(map, window)
+   Map_Geometry::Ladder.display_doll_factory_01_ladders(window)
+   window.draw(@@player_character_rendered_model); 
+   window.draw(Ground); 
+
   end
 #=======================================================================================================================================+
 #---------------------------------------------------------------------------------------------------------------------------------------+
@@ -949,9 +980,10 @@ extend self
     Player_Data::Player_Physics.gravity(@@player_character_rendered_model, window)
     Window_Class.attack_check_test_garden_map
    when "test_ore"
+     map = @@map
      Window_Class.ore_test(window)
      Window_Class.attack_check_test_ore_map
-     Harvestables::Ore.draw_ores(window)
+     Harvestables::Ore.draw_ores(window, map)
      Player_Data::Player_Physics.gravity(@@player_character_rendered_model, window)
      if @@popup == "forge"
        Crafted_Items::Forge.diplay_forge(window)
@@ -993,6 +1025,7 @@ extend self
       Window_Class.character_creation_popup(window)
      end
    when "HUD"
+    Window_Class.draw_map(window)
     Window_Class.hud(window)
     if @@popup == "Salon"
       Window_Class.salon(window)
@@ -1120,6 +1153,7 @@ def Window_Class.main_menu_keypresses(window)
   when SF::Keyboard::H #---------------for testing purposes, remove when testing done
     @@menu = "HUD"
     @@map = "test"
+    @@area = "test"
     @@player_character_rendered_model.scale = SF.vector2(1.0, 1.0)
     All_Audio::MUSIC.test_song
     #view2 = SF::View.new(SF.vector2(350, 300), SF.vector2(300, 200))

@@ -4987,7 +4987,7 @@ include Use
            Ore_Clock_Break.restart
        end; end; end; end; end; end; end; end
     #-------------------------------------------------------------------------------------------------------------------------------------------------     
-    def Ore.draw_ores(window)
+    def Ore.draw_ores(window, map)
       if @@is_ore_attacked == true
        if @@ore_hit_animation_clock.elapsed_time >= SF.seconds(0.05) && @@ore_hit_animation_clock.elapsed_time <= SF.seconds(0.1) && @@ore.hp > @@ore.max_hp/2
          a = 100; b = 0; x = 100; y = 100
@@ -5037,24 +5037,27 @@ include Use
       else
         @@ore_break_iterator = 0
       end
-      Testing_Text.string = @@black_opal01.hp.to_s + Ore_Clock_Break.elapsed_time.to_s
-      @@bloodstone_02.sprite.position = SF.vector2(4500, 702); @@bloodstone_01.sprite.position = SF.vector2(300, 702)
-      window.draw(Testing_Text)
-      window.draw(@@bloodstone_01.sprite); window.draw(@@bloodstone_02.sprite); window.draw(@@moss_agate_01.sprite); window.draw(@@amber01.sprite); 
-      window.draw(@@wavellite01.sprite); window.draw(@@topaz01.sprite); window.draw(@@amethyst01.sprite); window.draw(@@smoky_quartz01.sprite); 
-      window.draw(@@sapphire01.sprite); window.draw(@@black_opal01.sprite); window.draw(@@ajoite01.sprite); window.draw(@@rhodolite01.sprite); 
-      window.draw(@@chalcanthite01.sprite); window.draw(@@flourite01.sprite); window.draw(@@amorite01.sprite); window.draw(@@lapis_lazuli01.sprite); 
-      window.draw(@@moonstone01.sprite); window.draw(@@blue_calcite01.sprite); window.draw(@@hiddenite01.sprite); window.draw(@@ofretite01.sprite); 
-      window.draw(@@holly_blue_agate01.sprite); window.draw(@@ametrine01.sprite); window.draw(@@hemimorphite01.sprite); window.draw(@@tiffany_stone01.sprite);
-      window.draw(@@azurite01.sprite); window.draw(@@howlite01.sprite); window.draw(@@angelite01.sprite); window.draw(@@blue_lace_agate01.sprite)
-      window.draw(@@iolite01.sprite); window.draw(@@sodalite01.sprite); window.draw(@@kyanite01.sprite); window.draw(@@sunstone01.sprite) 
-      window.draw(@@bony_amber01.sprite); window.draw(@@blue_amber01.sprite); window.draw(@@blue_spinel01.sprite); window.draw(@@red_spinel01.sprite)
-      window.draw(@@fire_opal01.sprite); window.draw(@@garnet01.sprite); window.draw(@@ruby01.sprite); window.draw(@@cherry_quartz01.sprite)
-      window.draw(@@lemon_quartz01.sprite); window.draw(@@turquoise01.sprite); window.draw(@@tigers_eye01.sprite); window.draw(@@orange_calcite01.sprite)
-      window.draw(@@grape_agate01.sprite); window.draw(@@jade01.sprite); window.draw(@@diamond01.sprite); window.draw(@@emerald01.sprite)
-      window.draw(@@painite01.sprite); window.draw(@@bumblebee_jasper01.sprite); window.draw(@@blood_jasper01.sprite); window.draw(@@mook_jasper01.sprite)
-      window.draw(@@red_jasper01.sprite); window.draw(@@carbon01.sprite); window.draw(@@copper01.sprite); window.draw(@@tin01.sprite)
-      window.draw(@@zinc01.sprite); window.draw(@@iron01.sprite)
+      case map
+      when "test_ore"
+       Testing_Text.string = @@black_opal01.hp.to_s + Ore_Clock_Break.elapsed_time.to_s
+       @@bloodstone_02.sprite.position = SF.vector2(4500, 702); @@bloodstone_01.sprite.position = SF.vector2(300, 702)
+       window.draw(Testing_Text)
+       window.draw(@@bloodstone_01.sprite); window.draw(@@bloodstone_02.sprite); window.draw(@@moss_agate_01.sprite); window.draw(@@amber01.sprite); 
+       window.draw(@@wavellite01.sprite); window.draw(@@topaz01.sprite); window.draw(@@amethyst01.sprite); window.draw(@@smoky_quartz01.sprite); 
+       window.draw(@@sapphire01.sprite); window.draw(@@black_opal01.sprite); window.draw(@@ajoite01.sprite); window.draw(@@rhodolite01.sprite); 
+       window.draw(@@chalcanthite01.sprite); window.draw(@@flourite01.sprite); window.draw(@@amorite01.sprite); window.draw(@@lapis_lazuli01.sprite); 
+       window.draw(@@moonstone01.sprite); window.draw(@@blue_calcite01.sprite); window.draw(@@hiddenite01.sprite); window.draw(@@ofretite01.sprite); 
+       window.draw(@@holly_blue_agate01.sprite); window.draw(@@ametrine01.sprite); window.draw(@@hemimorphite01.sprite); window.draw(@@tiffany_stone01.sprite);
+       window.draw(@@azurite01.sprite); window.draw(@@howlite01.sprite); window.draw(@@angelite01.sprite); window.draw(@@blue_lace_agate01.sprite)
+       window.draw(@@iolite01.sprite); window.draw(@@sodalite01.sprite); window.draw(@@kyanite01.sprite); window.draw(@@sunstone01.sprite) 
+       window.draw(@@bony_amber01.sprite); window.draw(@@blue_amber01.sprite); window.draw(@@blue_spinel01.sprite); window.draw(@@red_spinel01.sprite)
+       window.draw(@@fire_opal01.sprite); window.draw(@@garnet01.sprite); window.draw(@@ruby01.sprite); window.draw(@@cherry_quartz01.sprite)
+       window.draw(@@lemon_quartz01.sprite); window.draw(@@turquoise01.sprite); window.draw(@@tigers_eye01.sprite); window.draw(@@orange_calcite01.sprite)
+       window.draw(@@grape_agate01.sprite); window.draw(@@jade01.sprite); window.draw(@@diamond01.sprite); window.draw(@@emerald01.sprite)
+       window.draw(@@painite01.sprite); window.draw(@@bumblebee_jasper01.sprite); window.draw(@@blood_jasper01.sprite); window.draw(@@mook_jasper01.sprite)
+       window.draw(@@red_jasper01.sprite); window.draw(@@carbon01.sprite); window.draw(@@copper01.sprite); window.draw(@@tin01.sprite)
+       window.draw(@@zinc01.sprite); window.draw(@@iron01.sprite)
+      end
       if @@is_smelting == true
         page = 1
         window.draw(Test_Smelter_Menu); Etc::Inventory_Ore.update_ore_inventory; Etc::Inventory_Ore.display_metal_smelter(window)  
@@ -5761,8 +5764,8 @@ include Use
    #---------------------------------------------------------------Display---------------------------------------------------------------------------------
     def Herbs.display(window, map)
       case map
-      when "test_garden"
-      Herb_Array.map { |i| window.draw(i.sprite)}
+       when "test_garden"
+        Herb_Array.map { |i| window.draw(i.sprite)}
       end
       #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Animations'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
        if @@is_plant_attacked == true
@@ -7099,9 +7102,27 @@ module Map_Geometry
    #?                                                               Methods                                                                                ?
    #????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
     #===============================================================Position================================================================================
+       def Ladder.position(map, area)
+        case area
+        when "test"
+          Ladder.position_test(map, area)
+        when "doll factory"
+          Ladder.position_doll_factory_ladders(map, area)
+        end
+       end
+     #---------------------------------------------------------------Test-----------------------------------------------------------------------------------
+      def Ladder.position_test(map, area)
+       case map
+        when "test"
+         @@long_ladder_01.sprite.position = SF.vector2(0, 10000)
+        end
+      end
      #-----------------------------------------------------------Doll  Factory------------------------------------------------------------------------------
-      def Ladder.position_doll_factory_01_ladders
+      def Ladder.position_doll_factory_ladders(map, area)
+        case map
+        when "factory_map_01"
        @@long_ladder_01.sprite.position = SF.vector2(0, 400)
+        end
       end
     #===============================================================Display=================================================================================
      #-----------------------------------------------------------Doll  Factory------------------------------------------------------------------------------
@@ -7114,7 +7135,6 @@ module Map_Geometry
      def Ladder.climb_ladder(map, player)
       case map
         when "factory_map_01"
-          puts @@is_on_ladder
          Ladder_Array.map { |i| if player.global_bounds.intersects? i.sprite.global_bounds
          @@is_on_ladder = true
         else
@@ -7158,6 +7178,9 @@ module Map_Geometry
    #????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
     def Platform.set_positions(map)
       case map
+        when "test"
+          @@medium_platform_01.bounding_rectangle.position = SF.vector2(0, 400)
+          @@medium_platform_01.display_rectangle.position = SF.vector2(0, 400)
         when "factory_map_01"
           @@medium_platform_01.bounding_rectangle.position = SF.vector2(0, 400)
           @@medium_platform_01.display_rectangle.position = SF.vector2(0, 400)
@@ -7165,6 +7188,11 @@ module Map_Geometry
      end
     def Platform.display(map, window)
       case map
+        when "test"
+          Ground.set_texture(GRASS_TEXTURE_1, reset_rect: false)
+          @@medium_platform_01.display_rectangle.set_texture(GRASS_TEXTURE_1, reset_rect: false)
+          window.draw(@@medium_platform_01.bounding_rectangle)
+          window.draw(@@medium_platform_01.display_rectangle)
         when "factory_map_01"
           Ground.set_texture(CONCRETE_TEXTURE_1, reset_rect: false)
           @@medium_platform_01.display_rectangle.set_texture(CONCRETE_TEXTURE_1, reset_rect: false)
@@ -7176,7 +7204,115 @@ module Map_Geometry
    #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
    #/                                                               Entities                                                                               /
    #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    @@medium_platform_01 = Platform.new(1, Test_Platform_01, Test_Platform_Cover_01)
+    @@medium_platform_01 = Platform.new(1, Test_Platform_01, Test_Platform_Cover_01); 
    #________________________________________________________________________________________________________________________________________________________
    end
+ class Teleporter
+  #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  #!                                                              Initialize                                                                              !
+  #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+   def initialize(id : Int32, destination_map : String, destination_postion : Array(Float64), sprite : SF::Sprite)
+     @id = id
+     @destination_map = destination_map
+     @destination_postion = destination_postion
+     @sprite = sprite
+    end
+   def id
+     @id
+    end
+   def destination_map
+     @destination_map
+    end
+   def destination_postion
+     @destination_postion
+    end
+   def sprite
+     @sprite
+    end
+  #________________________________________________________________________________________________________________________________________________________
+  #********************************************************************************************************************************************************
+  #*                                                              Variables                                                                               *
+  #********************************************************************************************************************************************************
+   Teleporter_Animation = SF::Clock.new; Teleporter_Array = [] of Teleporter
+  #________________________________________________________________________________________________________________________________________________________
+  #????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
+  #?                                                               Methods                                                                                ?
+  #????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
+   #----------------------------------------------------------Position Teleporters-------------------------------------------------------------------------
+    def Teleporter.position_teleporters(area, map)
+      case area
+      when "test"
+        Teleporter.position_test_teleporters(area, map)
+      when "doll factory"
+        Teleporter.position_doll_factory_teleporters(area, map)
+      end
+     end
+    def Teleporter.position_test_teleporters(area, map)
+     case map
+      when "test"
+       @@teleporter_01.sprite.position = SF.vector2(120, 762)
+       @@teleporter_02.sprite.position = SF.vector2(-120, 762)
+       @@teleporter_03.sprite.position = SF.vector2(-320, 762)
+     end
+    end
+    def Teleporter.position_doll_factory_teleporters(area, map)
+      case map
+       when "factory_map_01"
+        @@teleporter_01.sprite.position = SF.vector2(120, 762)
+      end
+     end
+  #-----------------------------------------------------------Display Teleporters--------------------------------------------------------------------------
+   def Teleporter.display_teleporters(window, area, map)
+    case area
+     when "test"
+      Teleporter.display_teleporters_test(window, area, map)
+    when "doll factory"
+      Teleporter.display_teleporters_doll_factory(window, area, map)
+     end
+   end
+   def Teleporter.display_teleporters_test(window, area, map)
+    case map
+     when "test"
+      Map_Geometry::Teleporter.animate_teleporters(window)
+      window.draw(@@teleporter_01.sprite)
+      window.draw(@@teleporter_02.sprite)
+      window.draw(@@teleporter_03.sprite)
+     end
+   end
+   def Teleporter.display_teleporters_doll_factory(window, area, map)
+    case map
+     when "factory_map_01"
+      Map_Geometry::Teleporter.animate_teleporters(window)
+      window.draw(@@teleporter_01.sprite)
+     end
+   end
+  #________________________________________________________________________________________________________________________________________________________
+  #-----------------------------------------------------------Animate Teleporters--------------------------------------------------------------------------
+   def Teleporter.animate_teleporters(window)
+    Teleporter_Array.map{ |i|   
+    if Teleporter_Animation.elapsed_time >= SF.milliseconds(0) && Teleporter_Animation.elapsed_time <= SF.milliseconds(15)
+      i.sprite.texture_rect = SF.int_rect(0, 0, 100, 80)
+    end
+    if Teleporter_Animation.elapsed_time >= SF.milliseconds(15) && Teleporter_Animation.elapsed_time <= SF.milliseconds(30)
+      i.sprite.texture_rect = SF.int_rect(100, 0, 100, 80)
+    end
+    if Teleporter_Animation.elapsed_time >= SF.milliseconds(30) && Teleporter_Animation.elapsed_time <= SF.milliseconds(45)
+      i.sprite.texture_rect = SF.int_rect(200, 0, 100, 80)
+    end
+    if Teleporter_Animation.elapsed_time >= SF.milliseconds(45) 
+      i.sprite.texture_rect = SF.int_rect(300, 0, 100, 80)
+      Teleporter_Animation.restart
+    end}
+   end
+  #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  #/                                                               Entities                                                                               /
+  #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+   @@teleporter_01 = Teleporter.new(1, "test", [0.0, 0.0], Teleporter_01.dup)
+   Teleporter_Array.push(@@teleporter_01)
+   @@teleporter_02 = Teleporter.new(2, "test", [0.0, 0.0], Teleporter_01.dup)
+   Teleporter_Array.push(@@teleporter_02)
+   @@teleporter_03 = Teleporter.new(3, "test", [0.0, 0.0], Teleporter_01.dup)
+   Teleporter_Array.push(@@teleporter_03)
+  #________________________________________________________________________________________________________________________________________________________
+  end
 end
