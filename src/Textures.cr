@@ -1,9 +1,14 @@
 #|||||||||||||||||||||||||||||||||||||||||||||||||||||||Textures|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-  Ground = SF::RectangleShape.new(SF.vector2(10000, 500)); Ground.fill_color = SF.color(0, 255, 100)
-  Ground.position = SF.vector2(-5000, 800)
+  GRASS_TEXTURE_1 = SF::Texture.from_file("graphics/map objects/Grass_01.png"); GRASS_TEXTURE_1.repeated = true
+  CONCRETE_TEXTURE_1 = SF::Texture.from_file("graphics/map objects/Concrete_01.png"); CONCRETE_TEXTURE_1.repeated = true
+  Ground = SF::RectangleShape.new(SF.vector2(10000, 500)); #Ground.fill_color = SF.color(0, 255, 100)
+  Ground.position = SF.vector2(-5000, 800); Ground.set_texture(GRASS_TEXTURE_1, reset_rect: false)
 
   Test_Platform_01 = SF::RectangleShape.new(SF.vector2(5000, 5)); Test_Platform_01.fill_color = SF.color(0, 255, 100)
   Test_Platform_01.position = SF.vector2(0, 400)
+
+  Test_Platform_Cover_01 = SF::RectangleShape.new(SF.vector2(5000, 50)); Test_Platform_Cover_01.set_texture(GRASS_TEXTURE_1, reset_rect: false)
+  Test_Platform_Cover_01.position = SF.vector2(0, 400)
 
   Test_Platform_02 = SF::RectangleShape.new(SF.vector2(5000, 5)); Test_Platform_02.fill_color = SF.color(0, 255, 100)
   Test_Platform_02.position = SF.vector2(0, 200)

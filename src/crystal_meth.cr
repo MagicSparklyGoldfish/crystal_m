@@ -776,7 +776,9 @@ extend self
     Window_Class.player_attack_bounding_box(window)
     end
    map = @@map
-   window.draw(Ground); window.draw(@@player_character_rendered_model); Map_Geometry::Ladder.display_doll_factory_01_ladders(window)
+   window.draw(@@player_character_rendered_model); window.draw(Ground); Map_Geometry::Ladder.display_doll_factory_01_ladders(window)
+   Map_Geometry::Platform.set_positions(map)
+   Map_Geometry::Platform.display(map, window)
   end
 #=======================================================================================================================================+
 #---------------------------------------------------------------------------------------------------------------------------------------+
@@ -932,6 +934,7 @@ extend self
     #================================================================================================================================================+
      #-------------------------------------------------------------Map 01----------------------------------------------------------------------------
       when "factory_map_01"
+       map = @@map
        Window_Class.factory_map_01(window)
        Player_Data::Player_Physics.gravity(@@player_character_rendered_model, window)
        Window_Class.hud(window)
@@ -3708,7 +3711,7 @@ def Window_Class.hud_keypresses(window)
         if @@is_on_ladder == false
           walking = false
           Gui::Window_Class.is_walking(walking)
-          Doll_Factory_Ladder_Array.map { |i| if @@player_character_rendered_model.global_bounds.intersects? i.sprite.global_bounds
+          Ladder_Array.map { |i| if @@player_character_rendered_model.global_bounds.intersects? i.sprite.global_bounds
           @@is_on_ladder = true
           gravity_bool = false
           Player_Data::Player_Physics.gravity_toggle(gravity_bool)
