@@ -3408,34 +3408,37 @@ Testing_Text.character_size = 20; Testing_Text.color = SF::Color::White; Testing
 #-------------------------------------------------------------------------------------------------------------------------------------- 
 #                                                         Maps
 #-------------------------------------------------------------------------------------------------------------------------------------- 
- Test_Teleporter = SF::RectangleShape.new(SF.vector2(100, 40)); Test_Teleporter.fill_color = SF.color(50, 150, 255)
- Test_Teleporter.position = SF.vector2(120, 762);
-
- Test_Teleporter2 = SF::RectangleShape.new(SF.vector2(100, 40)); Test_Teleporter2.fill_color = SF.color(50, 150, 255)
- Test_Teleporter2.position = SF.vector2(-120, 762);
-
- Test_Teleporter3 = SF::RectangleShape.new(SF.vector2(100, 40)); Test_Teleporter3.fill_color = SF.color(50, 150, 255)
- Test_Teleporter3.position = SF.vector2(-320, 762);
-
- Test_Ladder = SF::RectangleShape.new(SF.vector2(40, 400)); Test_Teleporter.fill_color = SF.color(50, 150, 255)
- Test_Ladder.position = SF.vector2(0, 400);
-
- SMELTER_RECTANGLE_TEXTURE = SF::Texture.from_file("graphics/Smelter_Sprite.png")
- Test_Smelter = SF::RectangleShape.new(SF.vector2(120, 80)); Test_Smelter.set_texture(SMELTER_RECTANGLE_TEXTURE, reset_rect: false)
- Test_Smelter.position = SF.vector2(400, 125); #Test_Smelter.fill_color = SF.color(50, 150, 155);
-
- FORGE_RECTANGLE_TEXTURE = SF::Texture.from_file("graphics/Forge_Sprite.png")
- Test_Forge = SF::RectangleShape.new(SF.vector2(120, 80)); Test_Forge.set_texture(FORGE_RECTANGLE_TEXTURE, reset_rect: false)
- Test_Forge.position = SF.vector2(600, 120); #Test_Smelter.fill_color = SF.color(50, 150, 155);
-
- GEM_CUTTER_RECTANGLE_TEXTURE = SF::Texture.from_file("graphics/Gem_Cutter_Sprite.png")
- Test_Gem_Cutter = SF::RectangleShape.new(SF.vector2(120, 80)); Test_Gem_Cutter.set_texture(GEM_CUTTER_RECTANGLE_TEXTURE, reset_rect: false)
- Test_Gem_Cutter.position = SF.vector2(800, 120);
-
- UPGRADE_TABLE_RECTANGLE_TEXTURE = SF::Texture.from_file("graphics/Upgrade_Table.png")
- Test_Upgrade_Table = SF::RectangleShape.new(SF.vector2(120, 80)); Test_Upgrade_Table.set_texture(UPGRADE_TABLE_RECTANGLE_TEXTURE, reset_rect: false)
- Test_Upgrade_Table.position = SF.vector2(1000, 120);
-
+ #--------------------------------------------------------Test-------------------------------------------------------------------------
+  Test_Teleporter = SF::RectangleShape.new(SF.vector2(100, 40)); Test_Teleporter.fill_color = SF.color(50, 150, 255)
+  Test_Teleporter.position = SF.vector2(120, 762);
+ 
+  Test_Teleporter2 = SF::RectangleShape.new(SF.vector2(100, 40)); Test_Teleporter2.fill_color = SF.color(50, 150, 255)
+  Test_Teleporter2.position = SF.vector2(-120, 762);
+ 
+  Test_Teleporter3 = SF::RectangleShape.new(SF.vector2(100, 40)); Test_Teleporter3.fill_color = SF.color(50, 150, 255)
+  Test_Teleporter3.position = SF.vector2(-320, 762);
+ 
+  Test_Ladder = SF::RectangleShape.new(SF.vector2(40, 400)); Test_Teleporter.fill_color = SF.color(50, 150, 255)
+  Test_Ladder.position = SF.vector2(0, 400);
+ 
+  SMELTER_RECTANGLE_TEXTURE = SF::Texture.from_file("graphics/Smelter_Sprite.png")
+  Test_Smelter = SF::RectangleShape.new(SF.vector2(120, 80)); Test_Smelter.set_texture(SMELTER_RECTANGLE_TEXTURE, reset_rect: false)
+  Test_Smelter.position = SF.vector2(400, 125); #Test_Smelter.fill_color = SF.color(50, 150, 155);
+ 
+  FORGE_RECTANGLE_TEXTURE = SF::Texture.from_file("graphics/Forge_Sprite.png")
+  Test_Forge = SF::RectangleShape.new(SF.vector2(120, 80)); Test_Forge.set_texture(FORGE_RECTANGLE_TEXTURE, reset_rect: false)
+  Test_Forge.position = SF.vector2(600, 120); #Test_Smelter.fill_color = SF.color(50, 150, 155);
+ 
+  GEM_CUTTER_RECTANGLE_TEXTURE = SF::Texture.from_file("graphics/Gem_Cutter_Sprite.png")
+  Test_Gem_Cutter = SF::RectangleShape.new(SF.vector2(120, 80)); Test_Gem_Cutter.set_texture(GEM_CUTTER_RECTANGLE_TEXTURE, reset_rect: false)
+  Test_Gem_Cutter.position = SF.vector2(800, 120);
+ 
+  UPGRADE_TABLE_RECTANGLE_TEXTURE = SF::Texture.from_file("graphics/Upgrade_Table.png")
+  Test_Upgrade_Table = SF::RectangleShape.new(SF.vector2(120, 80)); Test_Upgrade_Table.set_texture(UPGRADE_TABLE_RECTANGLE_TEXTURE, reset_rect: false)
+  Test_Upgrade_Table.position = SF.vector2(1000, 120);
+ #-------------------------------------------------------Ladders-----------------------------------------------------------------------
+  LONG_METAL_LADDER_TEXTURE_01 = SF::Texture.from_file("graphics/map objects/Long_Metal_Ladder_01.png")
+  Long_Metal_Ladder_01 = SF::Sprite.new(LONG_METAL_LADDER_TEXTURE_01)
 #--------------------------------------------------------------------------------------------------------------------------------------
 #                                                       Smelter
 #-------------------------------------------------------------------------------------------------------------------------------------- 

@@ -39,9 +39,10 @@ include X11
 
 module Gui  
 include Equipment
+include Map_Geometry
 extend self
 
- class Window_Class 
+ class Window_Class < Ladder
 #----------------------------------------------------------------------------------------------------------------------------------------+
 #====================================================Window_Class Variables==============================================================+
   @@item_type = "Consumable"
@@ -74,6 +75,7 @@ extend self
   WALK_TIMER = SF::Clock.new
   IDLE_TIMER = SF::Clock.new
   @@airborn : Bool; @@airborn = false
+  @@is_on_ladder : Bool; @@is_on_ladder = false
  #_______________________________________________________________________________________________________________________________________+
  #-----------------------------------------------------Character Model Variables---------------------------------------------------------+
   @@player_character_model = SF::RenderTexture.new(672, 512)
@@ -477,12 +479,13 @@ extend self
       @@map = "test_garden"
     end
   end
-  def Window_Class.teleport_test_garden
+  def Window_Class.teleport_doll_factory_01
     bounding_box1 = @@player_character_rendered_model.global_bounds
     bounding_box2 = Test_Teleporter3.global_bounds
     if bounding_box1.intersects? bounding_box2
       Window_Class.ore_test_initialize
       Etc::Inventory_Ore.update_ore_inventory 
+      Map_Geometry::Ladder.position_doll_factory_01_ladders
       @@map = "factory_map_01"
     end
   end
@@ -773,9 +776,7 @@ extend self
     Window_Class.player_attack_bounding_box(window)
     end
    map = @@map
-   window.draw(Ground); window.draw(@@player_character_rendered_model); window.draw(Test_Teleporter); window.draw(Test_Ladder)
-   window.draw(Test_Platform_01); window.draw(Test_Platform_02); window.draw(Test_Platform_03);
-   window.draw(@@test_ladder_02); window.draw(@@test_ladder_03); #Harvestables::Herbs.display(window, map)
+   window.draw(Ground); window.draw(@@player_character_rendered_model); Map_Geometry::Ladder.display_doll_factory_01_ladders(window)
   end
 #=======================================================================================================================================+
 #---------------------------------------------------------------------------------------------------------------------------------------+
@@ -907,6 +908,9 @@ extend self
   end
  def Window_Class.is_airborn(airborn)
   @@airborn = airborn
+ end
+ def Window_Class.is_on_ladder(bool)
+  @@is_on_ladder = bool
  end
 #/////////////////////////////////////////////////////////////Draw//////////////////////////////////////////////////////////////////////+
 
@@ -3631,10 +3635,17 @@ def Window_Class.hud_keypresses(window)
       when SF::Keyboard::Space
         @@attacking = false
         case @@map
+         #===========================================================================================================================================
+         #=                                                            Doll Factory                                                                 =
+         #===========================================================================================================================================
+          #---------------------------------------------------------Doll Factory Map 1---------------------------------------------------------------
+           when "factory_map_01"
+
         when "test"
           NPCS::Test_Npcs.click(window, @@player_character_rendered_model)
           Window_Class.space_test_map
           Window_Class.teleport_test_garden
+          Window_Class.teleport_doll_factory_01
         when "test_garden"
           Window_Class.teleport_test_garden_map
           Window_Class.ladder_test_garden_map
@@ -3666,6 +3677,7 @@ def Window_Class.hud_keypresses(window)
            end; end; end; end
         end
       when SF::Keyboard::D
+        if @@is_on_ladder == false
         @@idleframes = 0
         @@attacking = false
         walking = true
@@ -3677,8 +3689,9 @@ def Window_Class.hud_keypresses(window)
         Window_Class.change_direction(this)
         end
         window.draw(@@player_character_rendered_model)
-        
+      end
       when SF::Keyboard::A
+        if @@is_on_ladder == false
         @@idleframes = 0
         @@attacking = false
         walking = true
@@ -3690,14 +3703,34 @@ def Window_Class.hud_keypresses(window)
         Window_Class.change_direction(this)
         end
         window.draw(@@player_character_rendered_model)
+        end
       when SF::Keyboard::W
-        @@idleframes = 0
-        @@attacking = false
-        airborn = true
-        IDLE_TIMER.restart
-        Gui::Window_Class.is_airborn(airborn)
-        Player_Data::Player_Physics.wasd_up(@@player_character_rendered_model, window)
-
+        if @@is_on_ladder == false
+          walking = false
+          Gui::Window_Class.is_walking(walking)
+          Doll_Factory_Ladder_Array.map { |i| if @@player_character_rendered_model.global_bounds.intersects? i.sprite.global_bounds
+          @@is_on_ladder = true
+          gravity_bool = false
+          Player_Data::Player_Physics.gravity_toggle(gravity_bool)
+          x = i.sprite.position.x - 25
+          y = @@player_character_rendered_model.position.y += -10
+          @@player_character_rendered_model.position = SF.vector2(x, y)
+         else
+           @@is_on_ladder = false
+           gravity_bool = true
+           Player_Data::Player_Physics.gravity_toggle(gravity_bool)
+           @@idleframes = 0
+           @@attacking = false
+           airborn = true
+           IDLE_TIMER.restart
+           Gui::Window_Class.is_airborn(airborn)
+           Player_Data::Player_Physics.wasd_up(@@player_character_rendered_model, window)
+         end}
+        else
+          @@is_on_ladder = false
+          gravity_bool = true
+          Player_Data::Player_Physics.gravity_toggle(gravity_bool)
+        end
       when SF::Keyboard::S
         @@idleframes = 0
         @@attacking = false
@@ -4069,6 +4102,10 @@ end; end; end; end; end; end
 
    #=============================================Gravity==============================================================================+
     @@gravity_iterator : Int32; @@gravity_iterator = 0; @@gravity_clock = SF::Clock.new; @@jump_clock = SF::Clock.new;
+    @@gravity_is_on : Bool; @@gravity_is_on = true
+    def Player_Physics.gravity_toggle(gravity_bool)
+      @@gravity_is_on = gravity_bool
+    end
     def Player_Physics.gravity(@@player_character_rendered_model, window)
        gravity = @@gravity_clock.elapsed_time
      #-------------------------------------------Variables-----------------------------------------------------------------------------+  
@@ -4080,7 +4117,7 @@ end; end; end; end; end; end
       test_platform_array = [ground_box, test_platform_box, test_platform_box_2, test_platform_box_3]
      #---------------------------------------------------------------------------------------------------------------------------------+
 
-     if @@player_bounding_box.intersects? test_platform_array[@@gravity_iterator] #ground_box
+     if @@player_bounding_box.intersects? test_platform_array[@@gravity_iterator]
        airborn = false
        Gui::Window_Class.is_airborn(airborn)
        @@player_jumped = false
@@ -4088,10 +4125,10 @@ end; end; end; end; end; end
        @@fallrate = 0  
        @@gravity_clock.restart    
      else
-       @@is_player_airborne = true
+       @@is_player_airborne = true 
        airborn = true
        Gui::Window_Class.is_airborn(airborn)
-       if gravity >= SF.seconds(0.01)
+       if gravity >= SF.seconds(0.01) && @@gravity_is_on == true
          @@player_character_rendered_model.position += SF.vector2(0, 0.95)
          if SF::Keyboard.key_pressed?(SF::Keyboard::A)
           IDLE_TIMER.restart
@@ -4440,13 +4477,13 @@ include Gui
  # __________________________________________________________________________________________________________________________________________
  #|                                                             initialize                                                                  |
  #|_________________________________________________________________________________________________________________________________________|
-   def initialize(is_owned : Bool, char_sprite : SF::Sprite, display_sprite : SF::Sprite, name : String, color : String, length : String, number : Int32) 
+   def initialize(is_owned : Bool, char_sprite : SF::Sprite, display_sprite : SF::Sprite, name : String, color : String, pants_length : String, number : Int32) 
      @is_owned = is_owned
      @char_sprite = char_sprite
      @display_sprite = display_sprite
      @name = name
      @color = color
-     @length = length
+     @pants_length = pants_length
      @number = number 
     end
    def is_owned
@@ -4464,8 +4501,8 @@ include Gui
    def color
      @color
     end
-   def length
-     @length
+   def pants_length
+     @pants_length
     end
    def number
      @number
