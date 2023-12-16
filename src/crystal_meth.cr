@@ -442,10 +442,10 @@ extend self
      Harvestables::Ore.draw_ores(window, map)
      Harvestables::Herbs.display(window, map)
      Map_Geometry::Teleporter.position_teleporters(area, map)
-     Map_Geometry::Platform.set_positions(map)
+     Map_Geometry::Platform.set_positions(area, map)
      Map_Geometry::Ladder.position(map, area)
      Map_Geometry::Teleporter.display_teleporters(window, area, map)
-     Map_Geometry::Platform.display(map, window)
+     Map_Geometry::Platform.display(area, map, window)
      Map_Geometry::Ladder.display_ladders(window, map, area)
      window.draw(@@player_character_rendered_model); 
      window.draw(Ground); 
@@ -462,7 +462,7 @@ extend self
       puts @@map
       Map_Geometry::Teleporter.position_teleporters(area, map)
       Map_Geometry::Ladder.position(map, area)
-      Map_Geometry::Platform.set_positions(map)
+      Map_Geometry::Platform.set_positions(area, map)
     end}
    end 
 #---------------------------------------------------------------------------------------------------------------------------------------+
@@ -773,7 +773,7 @@ def Window_Class.main_menu_keypresses(window)
     @@player_character_rendered_model.position = SF.vector2(0, 600)
     Map_Geometry::Teleporter.position_teleporters(area, map)
     Map_Geometry::Ladder.position(map, area)
-    Map_Geometry::Platform.set_positions(map)
+    Map_Geometry::Platform.set_positions(area, map)
     @@player_character_rendered_model.scale = SF.vector2(1.0, 1.0)
     All_Audio::MUSIC.test_song
     #view2 = SF::View.new(SF.vector2(350, 300), SF.vector2(300, 200))

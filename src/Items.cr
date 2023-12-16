@@ -7180,30 +7180,63 @@ module Map_Geometry
    #????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
    #?                                                               Methods                                                                                ?
    #????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
-    def Platform.set_positions(map)
-      case map
+     def Platform.set_positions(area, map)
+       case area
+         when "test"
+          Platform.set_positions_test(map)
+         when "doll factory"
+          Platform.set_positions_doll_factory(map)
+        end
+      end
+      def Platform.set_positions_test(map)
+        case map
         when "test"
           @@medium_platform_01.bounding_rectangle.position = SF.vector2(0, 400)
           @@medium_platform_01.display_rectangle.position = SF.vector2(0, 400)
+        when "test_ore"
+          @@medium_platform_01.bounding_rectangle.position = SF.vector2(0, 400)
+          @@medium_platform_01.display_rectangle.position = SF.vector2(0, 400)
+       end
+      end
+      def Platform.set_positions_doll_factory(map)
+        case map
         when "factory_map_01"
           @@medium_platform_01.bounding_rectangle.position = SF.vector2(-4900, 400)
           @@medium_platform_01.display_rectangle.position = SF.vector2(-4900, 400)
        end
+      end
+    #---------------------------------------------------------------Display---------------------------------------------------------------------------------
+     def Platform.display(area, map, window)
+       case area
+         when "test"
+           Platform.display_test(map, window)
+         when "doll factory"
+           Platform.display_doll_factory(map, window)
+        end
      end
-    def Platform.display(map, window)
-      case map
-        when "test"
-          Ground.set_texture(GRASS_TEXTURE_1, reset_rect: false)
-          @@medium_platform_01.display_rectangle.set_texture(GRASS_TEXTURE_1, reset_rect: false)
-          window.draw(@@medium_platform_01.bounding_rectangle)
-          window.draw(@@medium_platform_01.display_rectangle)
-        when "factory_map_01"
-          Ground.set_texture(CONCRETE_TEXTURE_1, reset_rect: false)
-          @@medium_platform_01.display_rectangle.set_texture(CONCRETE_TEXTURE_1, reset_rect: false)
-          window.draw(@@medium_platform_01.bounding_rectangle)
-          window.draw(@@medium_platform_01.display_rectangle)
+     def Platform.display_test(map, window)
+       case map
+       when "test"
+         Ground.set_texture(GRASS_TEXTURE_1, reset_rect: false)
+         @@medium_platform_01.display_rectangle.set_texture(GRASS_TEXTURE_1, reset_rect: false)
+         window.draw(@@medium_platform_01.bounding_rectangle)
+         window.draw(@@medium_platform_01.display_rectangle)
+       when "test_ore"
+         Ground.set_texture(GRASS_TEXTURE_1, reset_rect: false)
+         @@medium_platform_01.display_rectangle.set_texture(GRASS_TEXTURE_1, reset_rect: false)
+         window.draw(@@medium_platform_01.bounding_rectangle)
+         window.draw(@@medium_platform_01.display_rectangle)
        end
-    end
+     end
+     def Platform.display_doll_factory(map, window)
+       case map
+       when "factory_map_01"
+         Ground.set_texture(CONCRETE_TEXTURE_1, reset_rect: false)
+         @@medium_platform_01.display_rectangle.set_texture(CONCRETE_TEXTURE_1, reset_rect: false)
+         window.draw(@@medium_platform_01.bounding_rectangle)
+         window.draw(@@medium_platform_01.display_rectangle)
+      end
+     end
    #________________________________________________________________________________________________________________________________________________________
    #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
    #/                                                               Entities                                                                               /
