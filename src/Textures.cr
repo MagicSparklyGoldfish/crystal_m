@@ -3444,6 +3444,7 @@ Testing_Text.character_size = 20; Testing_Text.color = SF::Color::White; Testing
  #-------------------------------------------------------Ladders-----------------------------------------------------------------------
   LONG_METAL_LADDER_TEXTURE_01 = SF::Texture.from_file("graphics/map objects/Long_Metal_Ladder_01.png")
   Long_Metal_Ladder_01 = SF::Sprite.new(LONG_METAL_LADDER_TEXTURE_01)
+  Short_Metal_Ladder_01 = SF::Sprite.new(LONG_METAL_LADDER_TEXTURE_01); Short_Metal_Ladder_01.texture_rect = SF.int_rect(0, 0, 40, 200)
  #-----------------------------------------------------Teleporters---------------------------------------------------------------------
   TELEPORTER_TEXTURE_01 = SF::Texture.from_file("graphics/map objects/Teleporter_01.png")
   Teleporter_01 = SF::Sprite.new(TELEPORTER_TEXTURE_01); Teleporter_01.texture_rect = SF.int_rect(0, 0, 100, 80)

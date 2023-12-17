@@ -7114,7 +7114,12 @@ module Map_Geometry
       def Ladder.position_test(map, area)
        case map
         when "test"
-         @@long_ladder_01.sprite.position = SF.vector2(0, 10000)
+         @@long_ladder_01.sprite.position = SF.vector2(0, 400)
+        when "test_ore"
+          @@long_ladder_01.sprite.position = SF.vector2(0, 400)
+          @@short_ladder_01.sprite.position = SF.vector2(1400, 200)
+        when "test_garden"
+          @@long_ladder_01.sprite.position = SF.vector2(0, 400)
         end
       end
      #-----------------------------------------------------------Doll  Factory------------------------------------------------------------------------------
@@ -7129,9 +7134,21 @@ module Map_Geometry
       def Ladder.display_ladders(window, map, area)
        case area
         when "test"
+          Ladder.display_test_ladders(window, map)
         when "doll factory"
           Ladder.display_doll_factory_01_ladders(window)
       end; end
+      def Ladder.display_test_ladders(window, map)
+       case map
+        when "test"
+          window.draw(@@long_ladder_01.sprite);
+        when "test_ore"
+          window.draw(@@long_ladder_01.sprite);
+          window.draw(@@short_ladder_01.sprite)
+        when "test_garden"
+          window.draw(@@long_ladder_01.sprite);
+        end
+       end
       def Ladder.display_doll_factory_01_ladders(window)
         window.draw(@@long_ladder_01.sprite);
        end
@@ -7152,6 +7169,10 @@ module Map_Geometry
    #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     @@long_ladder_01 = Ladder.new(Long_Metal_Ladder_01, 400)
     Ladder_Array.push(@@long_ladder_01)
+    @@long_ladder_02 = Ladder.new(Long_Metal_Ladder_01.dup, 400)
+    Ladder_Array.push(@@long_ladder_02)
+    @@short_ladder_01 = Ladder.new(Short_Metal_Ladder_01, 200)
+    Ladder_Array.push(@@short_ladder_01)
    #________________________________________________________________________________________________________________________________________________________
    end
   class Platform
@@ -7196,6 +7217,13 @@ module Map_Geometry
         when "test_ore"
           @@medium_platform_01.bounding_rectangle.position = SF.vector2(0, 400)
           @@medium_platform_01.display_rectangle.position = SF.vector2(0, 400)
+          @@medium_platform_02.bounding_rectangle.position = SF.vector2(0, 200)
+          @@medium_platform_02.display_rectangle.position = SF.vector2(0, 200)
+        when "test_garden"
+          @@medium_platform_01.bounding_rectangle.position = SF.vector2(0, 400)
+          @@medium_platform_01.display_rectangle.position = SF.vector2(0, 400)
+          @@medium_platform_02.bounding_rectangle.position = SF.vector2(0, 200)
+          @@medium_platform_02.display_rectangle.position = SF.vector2(0, 200)
        end
       end
       def Platform.set_positions_doll_factory(map)
@@ -7226,6 +7254,17 @@ module Map_Geometry
          @@medium_platform_01.display_rectangle.set_texture(GRASS_TEXTURE_1, reset_rect: false)
          window.draw(@@medium_platform_01.bounding_rectangle)
          window.draw(@@medium_platform_01.display_rectangle)
+         @@medium_platform_02.display_rectangle.set_texture(GRASS_TEXTURE_1, reset_rect: false)
+         window.draw(@@medium_platform_02.bounding_rectangle)
+         window.draw(@@medium_platform_02.display_rectangle)
+        when "test_garden"
+         Ground.set_texture(GRASS_TEXTURE_1, reset_rect: false)
+         @@medium_platform_01.display_rectangle.set_texture(GRASS_TEXTURE_1, reset_rect: false)
+         window.draw(@@medium_platform_01.bounding_rectangle)
+         window.draw(@@medium_platform_01.display_rectangle)
+         @@medium_platform_02.display_rectangle.set_texture(GRASS_TEXTURE_1, reset_rect: false)
+         window.draw(@@medium_platform_02.bounding_rectangle)
+         window.draw(@@medium_platform_02.display_rectangle)
        end
      end
      def Platform.display_doll_factory(map, window)
@@ -7242,6 +7281,7 @@ module Map_Geometry
    #/                                                               Entities                                                                               /
    #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     @@medium_platform_01 = Platform.new(1, Test_Platform_01, Test_Platform_Cover_01); 
+    @@medium_platform_02 = Platform.new(2, Test_Platform_01.dup, Test_Platform_Cover_01.dup); 
    #________________________________________________________________________________________________________________________________________________________
    end
  class Teleporter < Ladder
@@ -7370,6 +7410,38 @@ module Map_Geometry
    Teleporter_Array.push(@@teleporter_02)
    @@teleporter_03 = Teleporter.new(3, "test", "test", [0.0, 0.0], Teleporter_01.dup, 0)
    Teleporter_Array.push(@@teleporter_03)
+  #________________________________________________________________________________________________________________________________________________________
+  end
+ class Crafting_Station
+  #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  #!                                                              Initialize                                                                              !
+  #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+   def initialize(id : Int32, rectangle : SF::RectangleShape)
+     @id = id
+     @rectangle = rectangle
+    end
+   def id
+     @id
+    end
+   def rectangle
+     @rectangle
+    end
+  #________________________________________________________________________________________________________________________________________________________
+  #********************************************************************************************************************************************************
+  #*                                                              Variables                                                                               *
+  #********************************************************************************************************************************************************
+  #________________________________________________________________________________________________________________________________________________________
+  #????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
+  #?                                                               Methods                                                                                ?
+  #????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
+  #________________________________________________________________________________________________________________________________________________________
+  #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  #/                                                               Entities                                                                               /
+  #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+   @@smelter_01 = Crafting_Station.new(1, Test_Smelter)
+   @@forge_01 = Crafting_Station.new(2, Test_Forge)
+   @@gem_cutter_01 = Crafting_Station.new(3, Test_Gem_Cutter)
+   @@upgrade_table_01 = Crafting_Station.new(4, Test_Upgrade_Table)
   #________________________________________________________________________________________________________________________________________________________
   end
 end

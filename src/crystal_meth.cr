@@ -439,8 +439,6 @@ extend self
       end
      map = @@map
      area = @@area
-     Harvestables::Ore.draw_ores(window, map)
-     Harvestables::Herbs.display(window, map)
      Map_Geometry::Teleporter.position_teleporters(area, map)
      Map_Geometry::Platform.set_positions(area, map)
      Map_Geometry::Ladder.position(map, area)
@@ -448,6 +446,8 @@ extend self
      Map_Geometry::Platform.display(area, map, window)
      Map_Geometry::Ladder.display_ladders(window, map, area)
      window.draw(@@player_character_rendered_model); 
+     Harvestables::Ore.draw_ores(window, map)
+     Harvestables::Herbs.display(window, map)
      window.draw(Ground); 
    
     end
