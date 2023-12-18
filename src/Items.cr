@@ -5528,360 +5528,405 @@ include Use
         a = 0; b = 200; x = 50; y = 100
        end
        broken.sprite_change_square(a, b, x, y)
- else if time >= SF.seconds(0.2) && time < SF.seconds(0.3)
-       a = 100; b = 200; x = 100; y = 100
-       case @@current_plant_attacked.kind
-       when "bush"
-        a = 100; b = 200; x = 100; y = 100
-       when "tree"
-        a = 100; b = 400; x = 100; y = 200
-       when "vine"
-        a = 100; b = 400; x = 100; y = 200
-       when "crop"
-        a = 50; b = 200; x = 50; y = 100
-       end
-       broken.sprite_change_square(a, b, x, y)
- else if time >= SF.seconds(0.3) && time < SF.seconds(0.4)
-       a = 200; b = 200; x = 100; y = 100
-       case @@current_plant_attacked.kind
-       when "bush"
-        a = 200; b = 200; x = 100; y = 100
-       when "tree"
-        a = 200; b = 400; x = 100; y = 200
-       when "vine"
-        a = 200; b = 400; x = 100; y = 200
-       when "crop"
-        a = 100; b = 200; x = 50; y = 100
-       end
-       broken.sprite_change_square(a, b, x, y)
- else if time >= SF.seconds(0.4) && time < SF.seconds(0.5)
-       a = 300; b = 200; x = 100; y = 100
-       case @@current_plant_attacked.kind
-       when "bush"
-        a = 300; b = 200; x = 100; y = 100
-       when "tree"
-        a = 300; b = 400; x = 100; y = 200
-       when "vine"
-        a = 300; b = 400; x = 100; y = 200
-       when "crop"
-        a = 150; b = 200; x = 50; y = 100
-       end
-       broken.sprite_change_square(a, b, x, y)
- else if time >= SF.seconds(0.5) && time < SF.seconds(0.6)
-        a = 400; b = 200; x = 100; y = 100
-        case @@current_plant_attacked.kind
-        when "bush"
-         a = 400; b = 200; x = 100; y = 100
-        when "tree"
-         a = 400; b = 400; x = 100; y = 200
-        when "vine"
-         a = 400; b = 400; x = 100; y = 200
-        when "crop"
-         a = 200; b = 200; x = 50; y = 100
-        end
-        broken.sprite_change_square(a, b, x, y)
- else if time >= SF.seconds(0.6) && time < SF.seconds(1.75)
-  broken.is_broke_toggle   
-  @@plant_reset = 0
-  if time > SF.milliseconds(3000)  #@note this only works with microseconds and milliseconds, not seconds. I don't know why, there wasn't a typo
-    Plant_Clock_Break.restart
-       this = broken.max_hp
-       broken.hp_set(this)
-       a = 0; b = 0; x = 100; y = 100
-       case broken.kind
-       when "bush"
-        a = 0; b = 0; x = 100; y = 100
-       when "tree"
-        a = 0; b = 0; x = 100; y = 200
-       when "vine"
-        a = 0; b = 0; x = 100; y = 200
-       when "crop"
-        a = 0; b = 0; x = 50; y = 100
-       end
-       broken.sprite_change_square(a, b, x, y)
-       this = broken.is_broke  
-       broken.is_broke_toggle 
+    else if time >= SF.seconds(0.2) && time < SF.seconds(0.3)
+          a = 100; b = 200; x = 100; y = 100
+          case @@current_plant_attacked.kind
+          when "bush"
+           a = 100; b = 200; x = 100; y = 100
+          when "tree"
+           a = 100; b = 400; x = 100; y = 200
+          when "vine"
+           a = 100; b = 400; x = 100; y = 200
+          when "crop"
+           a = 50; b = 200; x = 50; y = 100
+          end
+          broken.sprite_change_square(a, b, x, y)
+    else if time >= SF.seconds(0.3) && time < SF.seconds(0.4)
+          a = 200; b = 200; x = 100; y = 100
+          case @@current_plant_attacked.kind
+          when "bush"
+           a = 200; b = 200; x = 100; y = 100
+          when "tree"
+           a = 200; b = 400; x = 100; y = 200
+          when "vine"
+           a = 200; b = 400; x = 100; y = 200
+          when "crop"
+           a = 100; b = 200; x = 50; y = 100
+          end
+          broken.sprite_change_square(a, b, x, y)
+    else if time >= SF.seconds(0.4) && time < SF.seconds(0.5)
+          a = 300; b = 200; x = 100; y = 100
+          case @@current_plant_attacked.kind
+          when "bush"
+           a = 300; b = 200; x = 100; y = 100
+          when "tree"
+           a = 300; b = 400; x = 100; y = 200
+          when "vine"
+           a = 300; b = 400; x = 100; y = 200
+          when "crop"
+           a = 150; b = 200; x = 50; y = 100
+          end
+          broken.sprite_change_square(a, b, x, y)
+    else if time >= SF.seconds(0.5) && time < SF.seconds(0.6)
+           a = 400; b = 200; x = 100; y = 100
+           case @@current_plant_attacked.kind
+           when "bush"
+            a = 400; b = 200; x = 100; y = 100
+           when "tree"
+            a = 400; b = 400; x = 100; y = 200
+           when "vine"
+            a = 400; b = 400; x = 100; y = 200
+           when "crop"
+            a = 200; b = 200; x = 50; y = 100
+           end
+           broken.sprite_change_square(a, b, x, y)
+    else if time >= SF.seconds(0.6) && time < SF.seconds(1.75)
+     broken.is_broke_toggle   
+     @@plant_reset = 0
+     if time > SF.milliseconds(3000)  #@note this only works with microseconds and milliseconds, not seconds. I don't know why, there wasn't a typo
        Plant_Clock_Break.restart
-      end; end; end; end; end; end; end; end 
-   #---------------------------------------------------------------Display---------------------------------------------------------------------------------
-    def Herbs.display(window, map)
-      case map
-       when "test_garden"
-        Herb_Array.map { |i| window.draw(i.sprite)}
-      end
-      #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Animations'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-       if @@is_plant_attacked == true
-         if Plant_Animation_Clock_01.elapsed_time >= SF.seconds(0.05) && Plant_Animation_Clock_01.elapsed_time <= SF.seconds(0.1) && @@current_plant_attacked.hp > @@current_plant_attacked.max_hp/2
-          a = 100; b = 0; x = 100; y = 100
-          case @@current_plant_attacked.kind
-           when "bush"
-            a = 100; b = 0; x = 100; y = 100
-           when "tree"
-            a = 100; b = 0; x = 100; y = 200
-           when "vine"
-            a = 100; b = 0; x = 100; y = 200
-           when "crop"
-            a = 50; b = 0; x = 50; y = 100
-           end
-           @@current_plant_attacked.sprite_change_square(a, b, x, y)
-         else if Plant_Animation_Clock_01.elapsed_time >= SF.seconds(0.01) && Plant_Animation_Clock_01.elapsed_time <= SF.seconds(0.1) && @@current_plant_attacked.hp < @@current_plant_attacked.max_hp/2
-          a = 100; b = 100; x = 100; y = 100
-          case @@current_plant_attacked.kind
+          this = broken.max_hp
+          broken.hp_set(this)
+          a = 0; b = 0; x = 100; y = 100
+          case broken.kind
           when "bush"
-           a = 100; b = 100; x = 100; y = 100
+           a = 0; b = 0; x = 100; y = 100
           when "tree"
-           a = 100; b = 200; x = 100; y = 200
+           a = 0; b = 0; x = 100; y = 200
           when "vine"
-            a = 100; b = 200; x = 100; y = 200
+           a = 0; b = 0; x = 100; y = 200
           when "crop"
-            a = 50; b = 100; x = 50; y = 100
+           a = 0; b = 0; x = 50; y = 100
           end
-          @@current_plant_attacked.sprite_change_square(a, b, x, y)
-          end; end
-         if Plant_Animation_Clock_01.elapsed_time >= SF.seconds(0.1) && Plant_Animation_Clock_01.elapsed_time <= SF.seconds(0.2) && @@current_plant_attacked.hp > @@current_plant_attacked.max_hp/2
-           a = 200; b = 0; x = 100; y = 100
-           case @@current_plant_attacked.kind
-           when "bush"
-            a = 200; b = 0; x = 100; y = 100
-           when "tree"
-            a = 200; b = 0; x = 100; y = 200
-           when "vine"
-            a = 200; b = 0; x = 100; y = 200
-           when "crop"
-            a = 100; b = 0; x = 50; y = 100
-           end
-           @@current_plant_attacked.sprite_change_square(a, b, x, y)
-         else if Plant_Animation_Clock_01.elapsed_time >= SF.seconds(0.1) && Plant_Animation_Clock_01.elapsed_time <= SF.seconds(0.2) && @@current_plant_attacked.hp < @@current_plant_attacked.max_hp/2
-          a = 200; b = 100; x = 100; y = 100
-          case @@current_plant_attacked.kind
-          when "bush"
-           a = 200; b = 100; x = 100; y = 100
-          when "tree"
-           a = 200; b = 200; x = 100; y = 200
-          when "vine"
-            a = 200; b = 200; x = 100; y = 200
-          when "crop"
-            a = 100; b = 100; x = 50; y = 100
+          broken.sprite_change_square(a, b, x, y)
+          this = broken.is_broke  
+          broken.is_broke_toggle 
+          Plant_Clock_Break.restart
+         end; end; end; end; end; end; end; end 
+      #---------------------------------------------------------------Display---------------------------------------------------------------------------------
+       def Herbs.display(window, map, area)
+         case area
+          when "test"
+            Herbs.display_test(window, map, area)
+          when "doll factory"
           end
-          @@current_plant_attacked.sprite_change_square(a, b, x, y)
-          end; end
-         if Plant_Animation_Clock_01.elapsed_time >= SF.seconds(0.2) && Plant_Animation_Clock_01.elapsed_time <= SF.seconds(0.3) && @@current_plant_attacked.hp > @@current_plant_attacked.max_hp/2
-           a = 300; b = 0; x = 100; y = 100
-           case @@current_plant_attacked.kind
-           when "bush"
-            a = 300; b = 0; x = 100; y = 100
-           when "tree"
-            a = 300; b = 0; x = 100; y = 200
-           when "vine"
-            a = 300; b = 0; x = 100; y = 200
-           when "crop"
-            a = 150; b = 0; x = 50; y = 100
-           end
-           @@current_plant_attacked.sprite_change_square(a, b, x, y)
-         else if Plant_Animation_Clock_01.elapsed_time >= SF.seconds(0.2) && Plant_Animation_Clock_01.elapsed_time <= SF.seconds(0.3) && @@current_plant_attacked.hp < @@current_plant_attacked.max_hp/2
-          a = 300; b = 100; x = 100; y = 100
-          case @@current_plant_attacked.kind
-           when "bush"
-            a = 300; b = 100; x = 100; y = 100
-           when "tree"
-            a = 300; b = 200; x = 100; y = 200
-           when "vine"
-            a = 300; b = 200; x = 100; y = 200
-           when "crop"
-            a = 150; b = 100; x = 50; y = 100
-           end
-          @@current_plant_attacked.sprite_change_square(a, b, x, y)
-          end; end
-         if Plant_Animation_Clock_01.elapsed_time >= SF.seconds(0.3) && Plant_Animation_Clock_01.elapsed_time <= SF.seconds(0.4) && @@current_plant_attacked.hp > @@current_plant_attacked.max_hp/2
-           a = 400; b = 0; x = 100; y = 100
-           case @@current_plant_attacked.kind
-            when "bush"
-             a = 400; b = 0; x = 100; y = 100
-            when "tree"
-             a = 400; b = 0; x = 100; y = 200
-            when "vine"
-             a = 400; b = 0; x = 100; y = 200
-            when "crop"
-             a = 200; b = 0; x = 50; y = 100
-            end
-           @@current_plant_attacked.sprite_change_square(a, b, x, y)
-         else if Plant_Animation_Clock_01.elapsed_time >= SF.seconds(0.3) && Plant_Animation_Clock_01.elapsed_time <= SF.seconds(0.4) && @@current_plant_attacked.hp < @@current_plant_attacked.max_hp/2
-          a = 400; b = 100; x = 100; y = 100
-          case @@current_plant_attacked.kind
-          when "bush"
-            a = 400; b = 100; x = 100; y = 100
-           when "tree"
-            a = 400; b = 200; x = 100; y = 200
-          when "vine"
-            a = 400; b = 200; x = 100; y = 200
-          when "crop"
-            a = 200; b = 100; x = 50; y = 100
-           end
-          @@current_plant_attacked.sprite_change_square(a, b, x, y)
-          end; end
-        end
-       if @@is_plant_attacked == false
-       if @@current_plant_attacked.hp > @@current_plant_attacked.max_hp/2
-            a = 0; b = 0; x = 100; y = 100
-            case @@current_plant_attacked.kind
-            when "bush"
-              a = 0; b = 0; x = 100; y = 100
-            when "tree"
-              a = 0; b = 0; x = 100; y = 200
-            when "vine"
-              a = 0; b = 0; x = 100; y = 200
-            when "crop"
-              a = 0; b = 0; x = 50; y = 100
+         end
+         #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Animations'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+          def Herbs.animate(window, map, area)
+          if @@is_plant_attacked == true
+            if Plant_Animation_Clock_01.elapsed_time >= SF.seconds(0.05) && Plant_Animation_Clock_01.elapsed_time <= SF.seconds(0.1) && @@current_plant_attacked.hp > @@current_plant_attacked.max_hp/2
+             a = 100; b = 0; x = 100; y = 100
+             case @@current_plant_attacked.kind
+              when "bush"
+               a = 100; b = 0; x = 100; y = 100
+              when "tree"
+               a = 100; b = 0; x = 100; y = 200
+              when "vine"
+               a = 100; b = 0; x = 100; y = 200
+              when "crop"
+               a = 50; b = 0; x = 50; y = 100
+              end
+              @@current_plant_attacked.sprite_change_square(a, b, x, y)
+            else if Plant_Animation_Clock_01.elapsed_time >= SF.seconds(0.01) && Plant_Animation_Clock_01.elapsed_time <= SF.seconds(0.1) && @@current_plant_attacked.hp < @@current_plant_attacked.max_hp/2
+             a = 100; b = 100; x = 100; y = 100
+             case @@current_plant_attacked.kind
+             when "bush"
+              a = 100; b = 100; x = 100; y = 100
+             when "tree"
+              a = 100; b = 200; x = 100; y = 200
+             when "vine"
+               a = 100; b = 200; x = 100; y = 200
+             when "crop"
+               a = 50; b = 100; x = 50; y = 100
              end
-            @@current_plant_attacked.sprite_change_square(a, b, x, y)
-          else if @@current_plant_attacked.hp < @@current_plant_attacked.max_hp/2 && @@current_plant_attacked.hp > 0
-            a = 0; b = 100; x = 100; y = 100
-            case @@current_plant_attacked.kind
-            when "bush"
-              a = 0; b = 100; x = 100; y = 100
-            when "tree"
-              a = 0; b = 200; x = 100; y = 200
-            when "vine"
-              a = 0; b = 200; x = 100; y = 200
-            when "crop"
-              a = 0; b = 100; x = 50; y = 100
+             @@current_plant_attacked.sprite_change_square(a, b, x, y)
+             end; end
+            if Plant_Animation_Clock_01.elapsed_time >= SF.seconds(0.1) && Plant_Animation_Clock_01.elapsed_time <= SF.seconds(0.2) && @@current_plant_attacked.hp > @@current_plant_attacked.max_hp/2
+              a = 200; b = 0; x = 100; y = 100
+              case @@current_plant_attacked.kind
+              when "bush"
+               a = 200; b = 0; x = 100; y = 100
+              when "tree"
+               a = 200; b = 0; x = 100; y = 200
+              when "vine"
+               a = 200; b = 0; x = 100; y = 200
+              when "crop"
+               a = 100; b = 0; x = 50; y = 100
+              end
+              @@current_plant_attacked.sprite_change_square(a, b, x, y)
+            else if Plant_Animation_Clock_01.elapsed_time >= SF.seconds(0.1) && Plant_Animation_Clock_01.elapsed_time <= SF.seconds(0.2) && @@current_plant_attacked.hp < @@current_plant_attacked.max_hp/2
+             a = 200; b = 100; x = 100; y = 100
+             case @@current_plant_attacked.kind
+             when "bush"
+              a = 200; b = 100; x = 100; y = 100
+             when "tree"
+              a = 200; b = 200; x = 100; y = 200
+             when "vine"
+               a = 200; b = 200; x = 100; y = 200
+             when "crop"
+               a = 100; b = 100; x = 50; y = 100
              end
-            @@current_plant_attacked.sprite_change_square(a, b, x, y)
-          end; end
+             @@current_plant_attacked.sprite_change_square(a, b, x, y)
+             end; end
+            if Plant_Animation_Clock_01.elapsed_time >= SF.seconds(0.2) && Plant_Animation_Clock_01.elapsed_time <= SF.seconds(0.3) && @@current_plant_attacked.hp > @@current_plant_attacked.max_hp/2
+              a = 300; b = 0; x = 100; y = 100
+              case @@current_plant_attacked.kind
+              when "bush"
+               a = 300; b = 0; x = 100; y = 100
+              when "tree"
+               a = 300; b = 0; x = 100; y = 200
+              when "vine"
+               a = 300; b = 0; x = 100; y = 200
+              when "crop"
+               a = 150; b = 0; x = 50; y = 100
+              end
+              @@current_plant_attacked.sprite_change_square(a, b, x, y)
+            else if Plant_Animation_Clock_01.elapsed_time >= SF.seconds(0.2) && Plant_Animation_Clock_01.elapsed_time <= SF.seconds(0.3) && @@current_plant_attacked.hp < @@current_plant_attacked.max_hp/2
+             a = 300; b = 100; x = 100; y = 100
+             case @@current_plant_attacked.kind
+              when "bush"
+               a = 300; b = 100; x = 100; y = 100
+              when "tree"
+               a = 300; b = 200; x = 100; y = 200
+              when "vine"
+               a = 300; b = 200; x = 100; y = 200
+              when "crop"
+               a = 150; b = 100; x = 50; y = 100
+              end
+             @@current_plant_attacked.sprite_change_square(a, b, x, y)
+             end; end
+            if Plant_Animation_Clock_01.elapsed_time >= SF.seconds(0.3) && Plant_Animation_Clock_01.elapsed_time <= SF.seconds(0.4) && @@current_plant_attacked.hp > @@current_plant_attacked.max_hp/2
+              a = 400; b = 0; x = 100; y = 100
+              case @@current_plant_attacked.kind
+               when "bush"
+                a = 400; b = 0; x = 100; y = 100
+               when "tree"
+                a = 400; b = 0; x = 100; y = 200
+               when "vine"
+                a = 400; b = 0; x = 100; y = 200
+               when "crop"
+                a = 200; b = 0; x = 50; y = 100
+               end
+              @@current_plant_attacked.sprite_change_square(a, b, x, y)
+            else if Plant_Animation_Clock_01.elapsed_time >= SF.seconds(0.3) && Plant_Animation_Clock_01.elapsed_time <= SF.seconds(0.4) && @@current_plant_attacked.hp < @@current_plant_attacked.max_hp/2
+             a = 400; b = 100; x = 100; y = 100
+             case @@current_plant_attacked.kind
+             when "bush"
+               a = 400; b = 100; x = 100; y = 100
+              when "tree"
+               a = 400; b = 200; x = 100; y = 200
+             when "vine"
+               a = 400; b = 200; x = 100; y = 200
+             when "crop"
+               a = 200; b = 100; x = 50; y = 100
+              end
+             @@current_plant_attacked.sprite_change_square(a, b, x, y)
+             end; end
+           end
+          if @@is_plant_attacked == false
+          if @@current_plant_attacked.hp > @@current_plant_attacked.max_hp/2
+               a = 0; b = 0; x = 100; y = 100
+               case @@current_plant_attacked.kind
+               when "bush"
+                 a = 0; b = 0; x = 100; y = 100
+               when "tree"
+                 a = 0; b = 0; x = 100; y = 200
+               when "vine"
+                 a = 0; b = 0; x = 100; y = 200
+               when "crop"
+                 a = 0; b = 0; x = 50; y = 100
+                end
+               @@current_plant_attacked.sprite_change_square(a, b, x, y)
+             else if @@current_plant_attacked.hp < @@current_plant_attacked.max_hp/2 && @@current_plant_attacked.hp > 0
+               a = 0; b = 100; x = 100; y = 100
+               case @@current_plant_attacked.kind
+               when "bush"
+                 a = 0; b = 100; x = 100; y = 100
+               when "tree"
+                 a = 0; b = 200; x = 100; y = 200
+               when "vine"
+                 a = 0; b = 200; x = 100; y = 200
+               when "crop"
+                 a = 0; b = 100; x = 50; y = 100
+                end
+               @@current_plant_attacked.sprite_change_square(a, b, x, y)
+             end; end
+          end
+          Herb_Array.map { |i| if i.hp <= 0 && i.is_broke == false
+          broken = i
+          Herbs.break(broken)
+        end} end
+     #-----------------------------------------------------------Initialize Positions-------------------------------------------------------------------------
+       def Herbs.initialize
+        Herb_Array.map { |i| i.sprite.position = SF.vector2(0, 10000) }
        end
-       Herb_Array.map { |i| if i.hp <= 0 && i.is_broke == false
-       broken = i
-       Herbs.break(broken)
-      end}
-    end
+     #--------------------------------------------------------------Set Positions-----------------------------------------------------------------------------
+       def Herbs.position_test(window, map)
+        case map
+        when "test_garden"
+          x = 0
+          y = 702
+          x2 = 0
+          y2 = 602
+         Herb_Array.map { |i| 
+         if x < 4800 && i.kind == "bush"
+          x += 200 
+          i.sprite.position = SF.vector2(x, y) 
+         end
+         if x2 > -4800 && i.kind == "tree"
+          x2 -= 200 
+          i.sprite.position = SF.vector2(x2, y2) 
+         end}
+        end
+       end
+     #--------------------------------------------------------------Set Displays------------------------------------------------------------------------------
+       def Herbs.display_test(window, map, area)
+         case map
+         when "test"
+          Herbs.initialize
+         when "ore_test"
+          Herbs.initialize
+         when "test_garden"
+          Herbs.position_test(window, map)
+          Herb_Array.map { |i| window.draw(i.sprite)}
+          Herbs.animate(window, map, area)
+         end
+       end
+       def Herbs.display_doll_factory(window, map, area)
+        case map
+        when "factory_map_01"
+         Herb_Array.map { |i| window.draw(i.sprite)}
+         Herbs.animate(window, map, area)
+        end
+      end
   #________________________________________________________________________________________________________________________________________________________
   #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   #/                                                               Entities                                                                               /
   #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-   #................................................................Bushes.................................................................................
-    #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Blackberry Bush''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-     @@blackberry_bush = Herbs.new("Blackberry Bush", 0, "black", 100, 100, @@blackberries, Blackberry_Bush, false, "bush", 0, ["Hp+", "Mp+"])
-     Herb_Array.push(@@blackberry_bush)
-    #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Raspberry Bush'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-     @@raspberry_bush = Herbs.new("Raspberry Bush", 1, "red", 100, 100, @@raspberries, Raspberry_Bush, false, "bush", 0, ["Hp+", "Str+"])
-     Herb_Array.push(@@raspberry_bush)
-    #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Elderberry Bush''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-     @@elderberry_bush = Herbs.new("Elderberry Bush", 2, "black", 100, 100, @@elderberries, Elderberry_Bush, false, "bush", 0, ["Hp+", "Remove Poison"])
-     Herb_Array.push(@@elderberry_bush)
-    #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''Black Currant Bush'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-     @@black_currant_bush = Herbs.new("Black Currant Bush", 3, "black", 100, 100, @@black_currants, Black_Currant_Bush, false, "bush", 0, ["Hp+", "Luk+"])
-     Herb_Array.push(@@black_currant_bush)
-    #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Blueberry Bush'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-     @@blueberry_bush = Herbs.new("Blueberry Bush", 4, "blue", 100, 100, @@blueberries, Blueberry_Bush, false, "bush", 0, ["Mp+", "Int+"])
-     Herb_Array.push(@@blueberry_bush)
-    #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''Lemonade Berry Bush''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-     @@lemonade_berry_bush = Herbs.new("Lemonade Berry Bush", 5, "red", 100, 100, @@lemonade_berries, Lemonade_Berry_Bush, false, "bush", 0, ["Hp+", "Dex+"])
-     Herb_Array.push(@@lemonade_berry_bush)
-    #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Gooseberry Bush''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-     @@gooseberry_bush = Herbs.new("Gooseberry Bush", 6, "yellow", 100, 100, @@gooseberries, Gooseberry_Bush, false, "bush", 0, ["Hp+", "Dex+"])
-     Herb_Array.push(@@gooseberry_bush)
-    #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Hagberry Bush'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-     @@hagberry_bush = Herbs.new("Hagberry Bush", 7, "black", 100, 100, @@hagberries, Hagberry_Bush, false, "bush", 0, ["Hp+", "Dex+"])
-     Herb_Array.push(@@hagberry_bush)
-    #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Red Currant Bush''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-     @@red_currant_bush = Herbs.new("Red Currant Bush", 8, "red", 100, 100, @@red_currants, Red_Currant_Bush, false, "bush", 0, ["Hp+", "Dex+"])
-     Herb_Array.push(@@red_currant_bush)
-    #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Pomegranite Bush''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-     @@pomegranite_bush = Herbs.new("Pomegranite Bush", 9, "red", 100, 100, @@pomegranites, Pomegranite_Bush, false, "bush", 0, ["Hp+", "Dex+"])
-     Herb_Array.push(@@pomegranite_bush)
-    #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Dragonfruit Bush''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-     @@dragonfruit_bush = Herbs.new("Dragonfruit Bush", 10, "pink", 100, 100, @@dragonfruit, Dragonfruit_Bush, false, "bush", 0, ["Hp+", "Dex+"])
-     Herb_Array.push(@@dragonfruit_bush)
-    #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Strawberry Bush'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-     @@strawberry_bush = Herbs.new("Strawberry Bush", 11, "red", 100, 100, @@strawberries, Strawberry_Bush, false, "bush", 0, ["Hp+", "Dex+"])
-     Herb_Array.push(@@strawberry_bush)
-    #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''pineapple Bush''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-     @@pineapple_bush = Herbs.new("Pineapple Bush", 12, "yellow", 100, 100, @@pineapples, Pineapple_Bush, false, "bush", 0, ["Hp+", "Dex+"])
-     Herb_Array.push(@@pineapple_bush)
-   #................................................................Trees..................................................................................
-    #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Snow Pear Tree'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-     @@snow_pear_tree = Herbs.new("Snow Pear Tree", 100, "yellow", 100, 100, @@snow_pears, Snow_Pear_Tree, false, "tree", 0, ["Mp+", "Int+"])
-     Herb_Array.push(@@snow_pear_tree)
-    #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Quince Tree'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-     @@quince_tree = Herbs.new("Quince Tree", 101, "yellow", 100, 100, @@quince, Quince_Tree, false, "tree", 0, ["Hp+", "Dex+"])
-     Herb_Array.push(@@quince_tree)
-    #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Butterfruit Tree''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-     @@butterfruit_tree = Herbs.new("Butterfruit Tree", 102, "purple", 100, 100, @@butterfruit, Butterfruit_Tree, false, "tree", 0, ["Hp++", "Dex+"])
-     Herb_Array.push(@@butterfruit_tree)
-    #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Dusky Pear Tree'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-     @@dusky_pear_tree = Herbs.new("Dusky Pear Tree", 103, "orange", 100, 100, @@dusky_pear, Dusky_Pear_Tree, false, "tree", 0, ["Mp+", "Int+"])
-     Herb_Array.push(@@dusky_pear_tree)
-    #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Date Tree'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-     @@date_tree = Herbs.new("Date Tree", 104, "brown", 100, 100, @@dates, Date_Tree, false, "tree", 0, ["Hp+", "Dex+"])
-     Herb_Array.push(@@date_tree)
-    #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Coconut Tree'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-     @@coconut_tree = Herbs.new("Coconut Tree", 105, "brown", 100, 100, @@coconuts, Coconut_Tree, false, "tree", 0, ["Hp+", "Str+"])
-     Herb_Array.push(@@coconut_tree)
-    #'''''''''''''''''''''''''''''''''''''''''''''''''''''Peanut Butter Fruit Tree'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-     @@peanut_butter_fruit_tree = Herbs.new("Peanut Butter Fruit Tree", 106, "red", 100, 100, @@peanut_butter_fruit, Peanut_Butter_Fruit_Tree, false, "tree", 0, ["Hp+", "Luk+"])
-     Herb_Array.push(@@peanut_butter_fruit_tree)
-    #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Lychee Tree''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-     @@lychee_tree = Herbs.new("Lychee Tree", 107, "red", 100, 100, @@lychee, Lychee_Tree, false, "tree", 0, ["Hp+", "Luk+"])
-     Herb_Array.push(@@lychee_tree)
-    #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''Black Cherry Tree''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-     @@black_cherry_tree = Herbs.new("Black Cherry Tree", 108, "black", 100, 100, @@black_cherry, Black_Cherry_Tree, false, "tree", 0, ["Hp+", "Luk+"])
-     Herb_Array.push(@@black_cherry_tree)
-    #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Red Cherry Tree'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-     @@red_cherry_tree = Herbs.new("Red Cherry Tree", 109, "red", 100, 100, @@red_cherry, Red_Cherry_Tree, false, "tree", 0, ["Hp+", "Luk+"])
-     Herb_Array.push(@@red_cherry_tree)
-    #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Apricot Tree''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-     @@apricot_tree = Herbs.new("Apricot Tree", 110, "yellow", 100, 100, @@apricot, Apricot_Tree, false, "tree", 0, ["Hp+", "Luk+"])
-     Herb_Array.push(@@apricot_tree)
-    #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Acai Tree''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-     @@acai_tree = Herbs.new("Acai Tree", 111, "purple", 100, 100, @@acai, Acai_Tree, false, "tree", 0, ["Hp+", "Luk+"])
-     Herb_Array.push(@@acai_tree)
-    #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Peach Tree'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-     @@peach_tree = Herbs.new("Peach Tree", 112, "pink", 100, 100, @@peaches, Peach_Tree, false, "tree", 0, ["Hp+", "Luk+"])
-     Herb_Array.push(@@peach_tree)
-    #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Mango Tree'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-     @@mango_tree = Herbs.new("Mango Tree", 113, "orange", 100, 100, @@mangoes, Mango_Tree, false, "tree", 0, ["Hp+", "Luk+"])
-     Herb_Array.push(@@mango_tree)
-    #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Lime Tree''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-     @@lime_tree = Herbs.new("Lime Tree", 114, "green", 100, 100, @@limes, Lime_Tree, false, "tree", 0, ["Hp+", "Luk+"])
-     Herb_Array.push(@@lime_tree)
-    #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Blood Lime Tree'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-     @@blood_lime_tree = Herbs.new("Blood Lime Tree", 115, "red", 100, 100, @@blood_limes, Blood_Lime_Tree, false, "tree", 0, ["Hp+", "Luk+"])
-     Herb_Array.push(@@blood_lime_tree)
-    #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Lemon Tree''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-     @@lemon_tree = Herbs.new("Lemon Tree", 116, "yellow", 100, 100, @@lemons, Lemon_Tree, false, "tree", 0, ["Hp+", "Luk+"])
-     Herb_Array.push(@@lemon_tree)
-    #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Orange Tree'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-     @@orange_tree = Herbs.new("Orange Tree", 117, "orange", 100, 100, @@oranges, Orange_Tree, false, "tree", 0, ["Hp+", "Luk+"])
-     Herb_Array.push(@@orange_tree)
-    #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Banana Tree'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-     @@banana_tree = Herbs.new("Banana Tree", 118, "yellow", 100, 100, @@bananas, Banana_Tree, false, "tree", 0, ["Hp+", "Luk+"])
-     Herb_Array.push(@@banana_tree)
-   #................................................................Vines..................................................................................
-    #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Red Grape Vine''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-     @@red_grape_vine = Herbs.new("Red Grape Vine", 200, "red", 100, 100, @@red_grapes, Red_Grape_Vine, false, "vine", 0, ["Hp+", "Luk+"])
-     Herb_Array.push(@@red_grape_vine)
-    #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''Purple Grape Vine''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-     @@purple_grape_vine = Herbs.new("Purple Grape Vine", 201, "purple", 100, 100, @@purple_grapes, Purple_Grape_Vine, false, "vine", 0, ["Hp+", "Luk+"])
-     Herb_Array.push(@@purple_grape_vine)
-    #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''Green Grape Vine'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-     @@green_grape_vine = Herbs.new("Green Grape Vine", 202, "green", 100, 100, @@green_grapes, Green_Grape_Vine, false, "vine", 0, ["Hp+", "Luk+"])
-     Herb_Array.push(@@green_grape_vine)
-   #................................................................Vines..................................................................................
-    #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Corn Crop''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-     @@corn_crop = Herbs.new("Corn Crop", 300, "yellow", 100, 100, @@corn, Corn_Crop, false, "crop", 0, ["Hp+", "Luk+"])
-     Herb_Array.push(@@corn_crop)
-    #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Rice Crop''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-     @@rice_crop = Herbs.new("Rice Crop", 301, "white", 100, 100, @@rice, Rice_Crop, false, "crop", 0, ["Hp+", "Luk+"])
-     Herb_Array.push(@@rice_crop)
-    #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Oats Crop''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-     @@oats_crop = Herbs.new("Oats Crop", 302, "brown", 100, 100, @@oats, Oats_Crop, false, "crop", 0, ["Hp+", "Luk+"])
-     Herb_Array.push(@@oats_crop)
-    #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Oats Crop''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-     @@wheat_crop = Herbs.new("Wheat Crop", 303, "yellow", 100, 100, @@wheat, Wheat_Crop, false, "crop", 0, ["Hp+", "Luk+"])
-     Herb_Array.push(@@wheat_crop)
-  #________________________________________________________________________________________________________________________________________________________
-  end
-end
+     #................................................................Bushes.................................................................................
+      #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Blackberry Bush''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+       @@blackberry_bush = Herbs.new("Blackberry Bush", 0, "black", 100, 100, @@blackberries, Blackberry_Bush, false, "bush", 0, ["Hp+", "Mp+"])
+       Herb_Array.push(@@blackberry_bush)
+      #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Raspberry Bush'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+       @@raspberry_bush = Herbs.new("Raspberry Bush", 1, "red", 100, 100, @@raspberries, Raspberry_Bush, false, "bush", 0, ["Hp+", "Str+"])
+       Herb_Array.push(@@raspberry_bush)
+      #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Elderberry Bush''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+       @@elderberry_bush = Herbs.new("Elderberry Bush", 2, "black", 100, 100, @@elderberries, Elderberry_Bush, false, "bush", 0, ["Hp+", "Remove Poison"])
+       Herb_Array.push(@@elderberry_bush)
+      #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''Black Currant Bush'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+       @@black_currant_bush = Herbs.new("Black Currant Bush", 3, "black", 100, 100, @@black_currants, Black_Currant_Bush, false, "bush", 0, ["Hp+", "Luk+"])
+       Herb_Array.push(@@black_currant_bush)
+      #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Blueberry Bush'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+       @@blueberry_bush = Herbs.new("Blueberry Bush", 4, "blue", 100, 100, @@blueberries, Blueberry_Bush, false, "bush", 0, ["Mp+", "Int+"])
+       Herb_Array.push(@@blueberry_bush)
+      #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''Lemonade Berry Bush''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+       @@lemonade_berry_bush = Herbs.new("Lemonade Berry Bush", 5, "red", 100, 100, @@lemonade_berries, Lemonade_Berry_Bush, false, "bush", 0, ["Hp+", "Dex+"])
+       Herb_Array.push(@@lemonade_berry_bush)
+      #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Gooseberry Bush''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+       @@gooseberry_bush = Herbs.new("Gooseberry Bush", 6, "yellow", 100, 100, @@gooseberries, Gooseberry_Bush, false, "bush", 0, ["Hp+", "Dex+"])
+       Herb_Array.push(@@gooseberry_bush)
+      #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Hagberry Bush'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+       @@hagberry_bush = Herbs.new("Hagberry Bush", 7, "black", 100, 100, @@hagberries, Hagberry_Bush, false, "bush", 0, ["Hp+", "Dex+"])
+       Herb_Array.push(@@hagberry_bush)
+      #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Red Currant Bush''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+       @@red_currant_bush = Herbs.new("Red Currant Bush", 8, "red", 100, 100, @@red_currants, Red_Currant_Bush, false, "bush", 0, ["Hp+", "Dex+"])
+       Herb_Array.push(@@red_currant_bush)
+      #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Pomegranite Bush''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+       @@pomegranite_bush = Herbs.new("Pomegranite Bush", 9, "red", 100, 100, @@pomegranites, Pomegranite_Bush, false, "bush", 0, ["Hp+", "Dex+"])
+       Herb_Array.push(@@pomegranite_bush)
+      #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Dragonfruit Bush''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+       @@dragonfruit_bush = Herbs.new("Dragonfruit Bush", 10, "pink", 100, 100, @@dragonfruit, Dragonfruit_Bush, false, "bush", 0, ["Hp+", "Dex+"])
+       Herb_Array.push(@@dragonfruit_bush)
+      #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Strawberry Bush'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+       @@strawberry_bush = Herbs.new("Strawberry Bush", 11, "red", 100, 100, @@strawberries, Strawberry_Bush, false, "bush", 0, ["Hp+", "Dex+"])
+       Herb_Array.push(@@strawberry_bush)
+      #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''pineapple Bush''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+       @@pineapple_bush = Herbs.new("Pineapple Bush", 12, "yellow", 100, 100, @@pineapples, Pineapple_Bush, false, "bush", 0, ["Hp+", "Dex+"])
+       Herb_Array.push(@@pineapple_bush)
+     #................................................................Trees..................................................................................
+      #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Snow Pear Tree'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+       @@snow_pear_tree = Herbs.new("Snow Pear Tree", 100, "yellow", 100, 100, @@snow_pears, Snow_Pear_Tree, false, "tree", 0, ["Mp+", "Int+"])
+       Herb_Array.push(@@snow_pear_tree)
+      #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Quince Tree'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+       @@quince_tree = Herbs.new("Quince Tree", 101, "yellow", 100, 100, @@quince, Quince_Tree, false, "tree", 0, ["Hp+", "Dex+"])
+       Herb_Array.push(@@quince_tree)
+      #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Butterfruit Tree''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+       @@butterfruit_tree = Herbs.new("Butterfruit Tree", 102, "purple", 100, 100, @@butterfruit, Butterfruit_Tree, false, "tree", 0, ["Hp++", "Dex+"])
+       Herb_Array.push(@@butterfruit_tree)
+      #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Dusky Pear Tree'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+       @@dusky_pear_tree = Herbs.new("Dusky Pear Tree", 103, "orange", 100, 100, @@dusky_pear, Dusky_Pear_Tree, false, "tree", 0, ["Mp+", "Int+"])
+       Herb_Array.push(@@dusky_pear_tree)
+      #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Date Tree'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+       @@date_tree = Herbs.new("Date Tree", 104, "brown", 100, 100, @@dates, Date_Tree, false, "tree", 0, ["Hp+", "Dex+"])
+       Herb_Array.push(@@date_tree)
+      #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Coconut Tree'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+       @@coconut_tree = Herbs.new("Coconut Tree", 105, "brown", 100, 100, @@coconuts, Coconut_Tree, false, "tree", 0, ["Hp+", "Str+"])
+       Herb_Array.push(@@coconut_tree)
+      #'''''''''''''''''''''''''''''''''''''''''''''''''''''Peanut Butter Fruit Tree'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+       @@peanut_butter_fruit_tree = Herbs.new("Peanut Butter Fruit Tree", 106, "red", 100, 100, @@peanut_butter_fruit, Peanut_Butter_Fruit_Tree, false, "tree", 0, ["Hp+", "Luk+"])
+       Herb_Array.push(@@peanut_butter_fruit_tree)
+      #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Lychee Tree''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+       @@lychee_tree = Herbs.new("Lychee Tree", 107, "red", 100, 100, @@lychee, Lychee_Tree, false, "tree", 0, ["Hp+", "Luk+"])
+       Herb_Array.push(@@lychee_tree)
+      #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''Black Cherry Tree''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+       @@black_cherry_tree = Herbs.new("Black Cherry Tree", 108, "black", 100, 100, @@black_cherry, Black_Cherry_Tree, false, "tree", 0, ["Hp+", "Luk+"])
+       Herb_Array.push(@@black_cherry_tree)
+      #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Red Cherry Tree'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+       @@red_cherry_tree = Herbs.new("Red Cherry Tree", 109, "red", 100, 100, @@red_cherry, Red_Cherry_Tree, false, "tree", 0, ["Hp+", "Luk+"])
+       Herb_Array.push(@@red_cherry_tree)
+      #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Apricot Tree''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+       @@apricot_tree = Herbs.new("Apricot Tree", 110, "yellow", 100, 100, @@apricot, Apricot_Tree, false, "tree", 0, ["Hp+", "Luk+"])
+       Herb_Array.push(@@apricot_tree)
+      #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Acai Tree''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+       @@acai_tree = Herbs.new("Acai Tree", 111, "purple", 100, 100, @@acai, Acai_Tree, false, "tree", 0, ["Hp+", "Luk+"])
+       Herb_Array.push(@@acai_tree)
+      #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Peach Tree'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+       @@peach_tree = Herbs.new("Peach Tree", 112, "pink", 100, 100, @@peaches, Peach_Tree, false, "tree", 0, ["Hp+", "Luk+"])
+       Herb_Array.push(@@peach_tree)
+      #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Mango Tree'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+       @@mango_tree = Herbs.new("Mango Tree", 113, "orange", 100, 100, @@mangoes, Mango_Tree, false, "tree", 0, ["Hp+", "Luk+"])
+       Herb_Array.push(@@mango_tree)
+      #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Lime Tree''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+       @@lime_tree = Herbs.new("Lime Tree", 114, "green", 100, 100, @@limes, Lime_Tree, false, "tree", 0, ["Hp+", "Luk+"])
+       Herb_Array.push(@@lime_tree)
+      #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Blood Lime Tree'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+       @@blood_lime_tree = Herbs.new("Blood Lime Tree", 115, "red", 100, 100, @@blood_limes, Blood_Lime_Tree, false, "tree", 0, ["Hp+", "Luk+"])
+       Herb_Array.push(@@blood_lime_tree)
+      #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Lemon Tree''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+       @@lemon_tree = Herbs.new("Lemon Tree", 116, "yellow", 100, 100, @@lemons, Lemon_Tree, false, "tree", 0, ["Hp+", "Luk+"])
+       Herb_Array.push(@@lemon_tree)
+      #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Orange Tree'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+       @@orange_tree = Herbs.new("Orange Tree", 117, "orange", 100, 100, @@oranges, Orange_Tree, false, "tree", 0, ["Hp+", "Luk+"])
+       Herb_Array.push(@@orange_tree)
+      #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Banana Tree'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+       @@banana_tree = Herbs.new("Banana Tree", 118, "yellow", 100, 100, @@bananas, Banana_Tree, false, "tree", 0, ["Hp+", "Luk+"])
+       Herb_Array.push(@@banana_tree)
+     #................................................................Vines..................................................................................
+      #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Red Grape Vine''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+       @@red_grape_vine = Herbs.new("Red Grape Vine", 200, "red", 100, 100, @@red_grapes, Red_Grape_Vine, false, "vine", 0, ["Hp+", "Luk+"])
+       Herb_Array.push(@@red_grape_vine)
+      #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''Purple Grape Vine''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+       @@purple_grape_vine = Herbs.new("Purple Grape Vine", 201, "purple", 100, 100, @@purple_grapes, Purple_Grape_Vine, false, "vine", 0, ["Hp+", "Luk+"])
+       Herb_Array.push(@@purple_grape_vine)
+      #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''Green Grape Vine'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+       @@green_grape_vine = Herbs.new("Green Grape Vine", 202, "green", 100, 100, @@green_grapes, Green_Grape_Vine, false, "vine", 0, ["Hp+", "Luk+"])
+       Herb_Array.push(@@green_grape_vine)
+     #................................................................Vines..................................................................................
+      #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Corn Crop''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+       @@corn_crop = Herbs.new("Corn Crop", 300, "yellow", 100, 100, @@corn, Corn_Crop, false, "crop", 0, ["Hp+", "Luk+"])
+       Herb_Array.push(@@corn_crop)
+      #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Rice Crop''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+       @@rice_crop = Herbs.new("Rice Crop", 301, "white", 100, 100, @@rice, Rice_Crop, false, "crop", 0, ["Hp+", "Luk+"])
+       Herb_Array.push(@@rice_crop)
+      #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Oats Crop''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+       @@oats_crop = Herbs.new("Oats Crop", 302, "brown", 100, 100, @@oats, Oats_Crop, false, "crop", 0, ["Hp+", "Luk+"])
+       Herb_Array.push(@@oats_crop)
+      #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Oats Crop''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+       @@wheat_crop = Herbs.new("Wheat Crop", 303, "yellow", 100, 100, @@wheat, Wheat_Crop, false, "crop", 0, ["Hp+", "Luk+"])
+       Herb_Array.push(@@wheat_crop)
+    #________________________________________________________________________________________________________________________________________________________
+    end
+   end
 
 module Crafted_Items
 include Etc

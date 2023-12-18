@@ -453,7 +453,7 @@ extend self
      Regular_Enemies.display(window, map, area)
      window.draw(@@player_character_rendered_model); 
      Harvestables::Ore.draw_ores(window, map, area)
-     Harvestables::Herbs.display(window, map)
+     Harvestables::Herbs.display(window, map, area)
      window.draw(Ground); 
    
     end
@@ -466,6 +466,7 @@ extend self
       puts @@area
       @@map = i.destination_map 
       puts @@map
+      Harvestables::Herbs.initialize
       Map_Geometry::Teleporter.position_teleporters(area, map)
       Map_Geometry::Ladder.position(map, area)
       Map_Geometry::Platform.set_positions(area, map)
