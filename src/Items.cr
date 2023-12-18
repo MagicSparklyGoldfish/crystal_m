@@ -7231,6 +7231,8 @@ module Map_Geometry
         when "factory_map_01"
           @@medium_platform_01.bounding_rectangle.position = SF.vector2(-4900, 400)
           @@medium_platform_01.display_rectangle.position = SF.vector2(-4900, 400)
+          @@short_platform_01.bounding_rectangle.position = SF.vector2(0, 600)
+          @@short_platform_01.display_rectangle.position = SF.vector2(0, 600)
        end
       end
     #---------------------------------------------------------------Display---------------------------------------------------------------------------------
@@ -7272,8 +7274,11 @@ module Map_Geometry
        when "factory_map_01"
          Ground.set_texture(CONCRETE_TEXTURE_1, reset_rect: false)
          @@medium_platform_01.display_rectangle.set_texture(CONCRETE_TEXTURE_1, reset_rect: false)
+         @@short_platform_01.display_rectangle.set_texture(CONCRETE_TEXTURE_1, reset_rect: false)
          window.draw(@@medium_platform_01.bounding_rectangle)
          window.draw(@@medium_platform_01.display_rectangle)
+         window.draw(@@short_platform_01.bounding_rectangle)
+         window.draw(@@short_platform_01.display_rectangle)
       end
      end
    #________________________________________________________________________________________________________________________________________________________
@@ -7282,6 +7287,7 @@ module Map_Geometry
    #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     @@medium_platform_01 = Platform.new(1, Test_Platform_01, Test_Platform_Cover_01); 
     @@medium_platform_02 = Platform.new(2, Test_Platform_01.dup, Test_Platform_Cover_01.dup); 
+    @@short_platform_01 = Platform.new(3, Short_Platform_01, Short_Platform_Cover_01); 
    #________________________________________________________________________________________________________________________________________________________
    end
  class Teleporter < Ladder

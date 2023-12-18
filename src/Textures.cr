@@ -4,7 +4,7 @@
   Ground = SF::RectangleShape.new(SF.vector2(10000, 500)); #Ground.fill_color = SF.color(0, 255, 100)
   Ground.position = SF.vector2(-5000, 800); Ground.set_texture(GRASS_TEXTURE_1, reset_rect: false)
 
-  Test_Platform_01 = SF::RectangleShape.new(SF.vector2(5000, 5)); Test_Platform_01.fill_color = SF.color(0, 255, 100)
+  Test_Platform_01 = SF::RectangleShape.new(SF.vector2(5000, 5)); Test_Platform_01.fill_color = SF.color(0, 255, 100, 0)
   Test_Platform_01.position = SF.vector2(0, 400)
 
   Test_Platform_Cover_01 = SF::RectangleShape.new(SF.vector2(5000, 50)); Test_Platform_Cover_01.set_texture(GRASS_TEXTURE_1, reset_rect: false)
@@ -15,6 +15,12 @@
 
   Test_Platform_03 = SF::RectangleShape.new(SF.vector2(5000, 5)); Test_Platform_03.fill_color = SF.color(0, 255, 100)
   Test_Platform_03.position = SF.vector2(-5000, 400)
+
+  Short_Platform_01 = SF::RectangleShape.new(SF.vector2(100, 5)); Short_Platform_01.fill_color = SF.color(0, 255, 100, 0)
+  Short_Platform_01.position = SF.vector2(0, 400)
+
+  Short_Platform_Cover_01 = SF::RectangleShape.new(SF.vector2(100, 50)); Short_Platform_Cover_01.set_texture(GRASS_TEXTURE_1, reset_rect: false)
+  Short_Platform_Cover_01.position = SF.vector2(0, 400)
 #------------------------------------------------------------------------------------------------------------------------------------
 #                                                    Menu Textures
 #-----------------------------------------------------------------------------------------------------------------------------------

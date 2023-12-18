@@ -253,7 +253,7 @@ extend self
    if @@idle == true && @@airborn == false
     idletime = IDLE_TIMER.elapsed_time
     @@idleframes += 1
-    if SF::Keyboard.key_pressed?(SF::Keyboard::D) || SF::Keyboard.key_pressed?(SF::Keyboard::A)
+    if SF::Keyboard.key_pressed?(SF::Keyboard::D) || SF::Keyboard.key_pressed?(SF::Keyboard::A) || SF::Keyboard.key_pressed?(SF::Keyboard::W) 
       IDLE_TIMER.restart
     end
     if idletime > SF.seconds(0.25) && @@current_direction == "right"
@@ -3778,9 +3778,10 @@ end; end; end; end; end; end
       ground_box = Ground.global_bounds; test_platform_box = Test_Platform_01.global_bounds
       test_platform_box_2 = Test_Platform_02.global_bounds
       test_platform_box_3 = Test_Platform_03.global_bounds
+      test_platform_box_4 = Short_Platform_01.global_bounds
       @@player_bounding_box = Feet_Bounding_Box.global_bounds #@@player_character_rendered_model.global_bounds
       Feet_Bounding_Box.position = @@player_character_rendered_model.position + SF.vector2(25, 120)
-      test_platform_array = [ground_box, test_platform_box, test_platform_box_2, test_platform_box_3]
+      test_platform_array = [ground_box, test_platform_box, test_platform_box_2, test_platform_box_3, test_platform_box_4]
      #---------------------------------------------------------------------------------------------------------------------------------+
 
      if @@player_bounding_box.intersects? test_platform_array[@@gravity_iterator]
@@ -3795,15 +3796,13 @@ end; end; end; end; end; end
        airborn = true
        Gui::Window_Class.is_airborn(airborn)
        if gravity >= SF.seconds(0.01) && @@gravity_is_on == true
-         @@player_character_rendered_model.position += SF.vector2(0, 0.95)
+         @@player_character_rendered_model.position += SF.vector2(0, 1.95)
          if SF::Keyboard.key_pressed?(SF::Keyboard::A)
           IDLE_TIMER.restart
-          @@player_character_rendered_model.position -= SF.vector2(0.01, 0)
           Player_Physics.wasd_left(@@player_character_rendered_model)
          end
          if SF::Keyboard.key_pressed?(SF::Keyboard::D)
           IDLE_TIMER.restart
-           @@player_character_rendered_model.position += SF.vector2(0.01, 0)
            Player_Physics.wasd_right(@@player_character_rendered_model)
          end
          @@gravity_clock.restart
@@ -3854,10 +3853,10 @@ end; end; end; end; end; end
         if @@player_jumped == false && @@can_player_move_at_all == true
           @@jump_clock.restart
           IDLE_TIMER.restart
-       #  if jump_time <= SF.seconds(3)
+         if jump_time <= SF.seconds(3)
             @@player_character_rendered_model.position += SF.vector2(0, -150)
             @@player_jumped = true
-        #  end
+          end
     #      if SF::Keyboard.key_pressed?(SF::Keyboard::A)
     #       @@player_character_rendered_model.position -= SF.vector2(5, 0)
     #      end
