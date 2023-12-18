@@ -38,7 +38,7 @@ GL.enable(GL::TEXTURE_2D)
 include X11
 
 module Gui  
-include Equipment
+include Crafted_Items
 include Map_Geometry
 extend self
 
@@ -3300,7 +3300,7 @@ def Window_Class.hud_keypresses(window)
     when SF::Keyboard::Enter
       @@attacking = true
       @@idleframes = 0
-      if @@has_weapon == true && WEAPON_OBJECT_ARRAY[@@current_weapon].can_swing == true
+      if @@has_weapon == true && Weapon_Template_Array[@@current_weapon].weapon_motion == "Swing"
         IDLE_TIMER.restart
         case @@current_direction
       when "left"

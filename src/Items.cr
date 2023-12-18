@@ -18,94 +18,6 @@ require "file_utils"
 
 module Equipment
    extend self
- # ____________________________________________________________________________________________________________________________________
- #|                                                     Equipment Variables                                                            |
- #|____________________________________________________________________________________________________________________________________|
-   @@nil_stick = Stick.new("", -1, false, false, false, 1.5, ["none"], ["none"], WEAPSOUND_01, WEAPSOUND_02, Weapon_Rectangle_01, false, Stick01, "none", "none", "none")
-   @@current_weapon : Int32
-   @@current_weapon = -1
-   @@current_weapon_object : Stick 
-   @@current_weapon_object = @@nil_stick
-   property = @@current_weapon
-   property = @@current_weapon_object
-   WEAPON_OBJECT_ARRAY = [] of Stick
-   WEAPON_INVENTORY_ARRAY = [] of Stick
-   MOLD_ARRAY = [] of Mold
- #======================================================================================================================================
- # ____________________________________________________________________________________________________________________________________
- #|                                                     Equipment Methods                                                              |
- #|____________________________________________________________________________________________________________________________________|
-   def Equipment.equip_weapon(this)
-    size = WEAPON_INVENTORY_ARRAY.size 
-     if this > size
-       All_Audio::SFX.light_bonk
-      else 
-     if @@current_weapon_object != Nil || @@nil_stick
-       WEAPON_INVENTORY_ARRAY.push(@@current_weapon_object)
-       @@current_weapon = WEAPON_INVENTORY_ARRAY[this].number
-       @@current_weapon_object = WEAPON_INVENTORY_ARRAY[this]
-       WEAPON_INVENTORY_ARRAY.delete(@@current_weapon_object)
-       puts "equip" + this.to_s
-      end
-      end
-    end
-   def Equipment.show_weapon_info(this)
-      size = WEAPON_INVENTORY_ARRAY.size 
-       if this > size
-         All_Audio::SFX.light_bonk
-        else 
-       if @@current_weapon_object != Nil || @@nil_stick
-         WEAPON_INVENTORY_ARRAY.push(@@current_weapon_object)
-         @@current_weapon = WEAPON_INVENTORY_ARRAY[this].number
-         @@current_weapon_object = WEAPON_INVENTORY_ARRAY[this]
-         WEAPON_INVENTORY_ARRAY.delete(@@current_weapon_object)
-        end
-        end
-      end
-    def Equipment.draw_current_weapon(player) #@note draw current weapon
-      Equipment.check_gem_element_current_weapon
-      player.draw(@@current_weapon_object.sprite)
-    end
-
-   def Equipment.attack_strength(base_attack) #@note attack strength 
-    attack_strength = base_attack + @@current_weapon_object.atk_power
-    Harvestables::Ore.set_attack_strength(attack_strength)
-    Harvestables::Herbs.set_attack_strength(attack_strength)
-   end
-   def Equipment.check_stats(slot)
-    if WEAPON_INVENTORY_ARRAY.size > slot
-      Weapon_Info_Text.string = " Name: " + WEAPON_INVENTORY_ARRAY[slot].name + "\n Attack: " + WEAPON_INVENTORY_ARRAY[slot].atk_power.to_s 
-    else
-      Weapon_Info_Text.string = ""
-    end
-   end
-   def Equipment.play_swing_sound
-    @@current_weapon_object.swing_sound.play
-   end
-   def Equipment.play_hit_sound
-    @@current_weapon_object.hit_sound.play
-   end
-   def Equipment.stop_swing_sound
-    @@current_weapon_object.swing_sound.stop
-    @@current_weapon_object.hit_sound.play
-   end
-   def Equipment.forge_weapon(weapon)
-    s = WEAPON_OBJECT_ARRAY.size; i = 0
-    puts WEAPON_OBJECT_ARRAY[i]
-    while s > i
-      if weapon == WEAPON_OBJECT_ARRAY[i].number 
-        WEAPON_INVENTORY_ARRAY.push(WEAPON_OBJECT_ARRAY[i].dup)
-        puts WEAPON_OBJECT_ARRAY[i]
-      end
-      i += 1
-    end
-   end
-   def Equipment.check_gem_element_current_weapon
-    gem1 = WEAPON_OBJECT_ARRAY[@@current_weapon].socket01
-    Etc::Gem.check_element(gem1)
-    elements = [gem1]
-   end
- #======================================================================================================================================
  class Stick
  def initialize(name : String, number : Int32, can_swing : Bool, can_stab : Bool, can_shoot : Bool, atk_power : Float64, elements : Array(String), 
   special_effects : Array(String), swing_sound : SF::Sound, hit_sound : SF::Sound, rectangle : SF::RectangleShape, is_equipped : Bool, sprite : SF::Sprite,
@@ -181,7 +93,7 @@ module Equipment
  def Stick.test(window, page)
         window.draw(Weapon_Rectangle_01)
     end
-    WEAPON_OBJECT_ARRAY.push(@@stick01, @@zinc_stick, @@tin_stick, @@copper_stick, @@brass_stick, @@bronze_stick, @@iron_stick, @@steel_stick)
+    #WEAPON_OBJECT_ARRAY.push(@@stick01, @@zinc_stick, @@tin_stick, @@copper_stick, @@brass_stick, @@bronze_stick, @@iron_stick, @@steel_stick)
     #WEAPON_INVENTORY_ARRAY.push(@@nil_stick)
    # WEAPON_INVENTORY_ARRAY.push(@@zinc_stick, @@tin_stick, @@copper_stick, @@brass_stick, @@bronze_stick, @@iron_stick, @@steel_stick)
  #-------------------------------------------------------------Entities----------------------------------------------------------------------------------------
@@ -212,7 +124,7 @@ module Equipment
     @lvl_req
    end
  @@stick_mold = Mold.new("Stick Mold", 2, 0)  
-  MOLD_ARRAY.push(@@stick_mold) 
+  #MOLD_ARRAY.push(@@stick_mold) 
  end
 
  class Weapon_Crafting < Mold
