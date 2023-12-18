@@ -466,12 +466,18 @@ extend self
       puts @@area
       @@map = i.destination_map 
       puts @@map
-      Harvestables::Herbs.initialize
-      Map_Geometry::Teleporter.position_teleporters(area, map)
-      Map_Geometry::Ladder.position(map, area)
-      Map_Geometry::Platform.set_positions(area, map)
+      Window_Class.initialize_map(window, map, area)
     end}
    end 
+   def Window_Class.initialize_map(window, map, area)
+    map = @@map
+    area = @@area
+    Harvestables::Herbs.initialize
+    Map_Geometry::Teleporter.position_teleporters(area, map)
+    Map_Geometry::Ladder.position(map, area)
+    Map_Geometry::Platform.set_positions(area, map)
+    Regular_Enemies::Humanoids.initialize_humanoids(window, map, area)
+   end
  #-----------------------------------------------------------Walls----------------------------------------------------------------------
   def Window_Class.wall_collision
     Wall_Array.map { |i| bounding_box1 = @@player_character_rendered_model.global_bounds
@@ -3301,6 +3307,7 @@ def Window_Class.hud_keypresses(window)
     when SF::Keyboard::Enter
       @@attacking = true
       @@idleframes = 0
+      Player_Data::Stats.check_attack
       if @@has_weapon == true && Weapon_Template_Array[@@current_weapon].weapon_motion == "Swing"
         IDLE_TIMER.restart
         case @@current_direction

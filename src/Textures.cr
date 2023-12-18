@@ -1,10 +1,10 @@
 #|||||||||||||||||||||||||||||||||||||||||||||||||||||||Textures|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 
   Test_Platform_02 = SF::RectangleShape.new(SF.vector2(5000, 5)); Test_Platform_02.fill_color = SF.color(0, 255, 100)
-  Test_Platform_02.position = SF.vector2(0, 200)
+  Test_Platform_02.position = SF.vector2(0, 200000)
 
   Test_Platform_03 = SF::RectangleShape.new(SF.vector2(5000, 5)); Test_Platform_03.fill_color = SF.color(0, 255, 100)
-  Test_Platform_03.position = SF.vector2(-5000, 400)
+  Test_Platform_03.position = SF.vector2(-15000, 400)
 
 
 #------------------------------------------------------------------------------------------------------------------------------------
@@ -3447,6 +3447,9 @@ Testing_Text.character_size = 20; Testing_Text.color = SF::Color::White; Testing
 
   Map_Boundary_Wall_01 = SF::RectangleShape.new(SF.vector2(1000, 5000)); Map_Boundary_Wall_01.set_texture(CONCRETE_TEXTURE_1, reset_rect: false)
   Map_Boundary_Wall_01.position = SF.vector2(-50000, 600)
+
+  Enemy_Blocking_Wall_01 = SF::RectangleShape.new(SF.vector2(50, 250)); Enemy_Blocking_Wall_01.fill_color = SF.color(0, 255, 100, 100)
+  Enemy_Blocking_Wall_01.position = SF.vector2(-50000, 600)
  #------------------------------------------------------Platforms----------------------------------------------------------------------
   Test_Platform_01 = SF::RectangleShape.new(SF.vector2(5000, 5)); Test_Platform_01.fill_color = SF.color(0, 255, 100, 0)
   Test_Platform_01.position = SF.vector2(0, 400)
@@ -3799,3 +3802,6 @@ Testing_Text.character_size = 20; Testing_Text.color = SF::Color::White; Testing
   #---------------------------------------------------Broken Doll----------------------------------------------------------------------
    BROKEN_DOLL_TEXTURE = SF::Texture.from_file("graphics/enemies/Broken_Doll.png")
    Broken_Doll = SF::Sprite.new(BROKEN_DOLL_TEXTURE); Broken_Doll.texture_rect = SF.int_rect(0, 0, 75, 100)
+
+   Enemy_Health_Bar = SF::RectangleShape.new(SF.vector2(5, 5)); Enemy_Health_Bar.fill_color = SF.color(255, 50, 50, 125)
+   Enemy_Health_Bar.position = SF.vector2(0, 400)

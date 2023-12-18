@@ -132,13 +132,13 @@ include Use
  Enemy_Clock_01 = SF::Clock.new
 
  def Regular_Enemies.set_attack_strength(attack_strength)
-    @@attack_strength = attack_strength
+    Humanoids.set_attack_strength(attack_strength)
    end 
  def Regular_Enemies.display(window, map, area)
    case area
     when "test"
     when "doll factory"
-        Humanoids.display(window, map)
+        Humanoids.display_doll_factory(window, map)
   end
  end
   def Regular_Enemies.attack(attack)
@@ -198,6 +198,9 @@ include Use
    #*                                                              Variables                                                                               *
    #********************************************************************************************************************************************************
     @@attack_strength : Float64; @@attack_strength = 1.0
+    Enemy_Blocking_Wall_Array = [Enemy_Blocking_Wall_01]
+    All_Humanoid_Enemy_Array = [] of Humanoids 
+    Current_Map_Humanoid_Array = [] of Humanoids
    #________________________________________________________________________________________________________________________________________________________
    #????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
    #?                                                               Methods                                                                                ?
@@ -206,6 +209,9 @@ include Use
      def hp_subtract(damage)
         @hp -= damage
        end
+     def Humanoids.set_attack_strength(attack_strength)
+       @@attack_strength = attack_strength
+      end
      def Humanoids.attack(attack)
          b = Player_Attack_Bounding_Box.global_bounds
          if b.intersects? @@broken_doll.sprite.global_bounds
@@ -221,19 +227,45 @@ include Use
           enemy.hp_subtract(damage)
           Enemy_Clock_01.restart
         end; end; end; end; end
+    #-------------------------------------------------------------Initialize--------------------------------------------------------------------------------
+     def Humanoids.initialize_humanoids(window, map, area)
+        All_Humanoid_Enemy_Array.map { |i| i.sprite.position = SF.vector2(100, 20005)}
+        Current_Map_Humanoid_Array.clear
+      case area
+       when "test"
+       when "doll factory"
+        @@broken_doll.sprite.position = SF.vector2(0, 305) 
+        Current_Map_Humanoid_Array.push(@@broken_doll)
+        puts @@broken_doll.sprite.position
+       end
+     end
     #--------------------------------------------------------------Display----------------------------------------------------------------------------------
-     def Humanoids.display(window, map)
+     def Humanoids.display_doll_factory(window, map)
         case map
         when "factory_map_01"
+            Enemy_Blocking_Wall_Array.map { |i| window.draw(i)}
+            Enemy_Blocking_Wall_01.position = SF.vector2(100, 205)
             @@broken_doll.sprite.position = SF.vector2(0, 305)
-            window.draw(@@broken_doll.sprite)
-        end
+            Current_Map_Humanoid_Array.map { |i| 
+            Enemy_Health_Bar.position = i.sprite.position + SF.vector2(-25, 100)
+            if i.hp > 0
+            x = i.hp / 4
+            else
+            x = 0
+            end
+            Enemy_Health_Bar.size = SF.vector2(x, 5)
+            window.draw(i.sprite); window.draw(Enemy_Health_Bar)
+           }end
       end
+    #---------------------------------------------------------------Logic-----------------------------------------------------------------------------------
+     def wander(humanoid)
+     end
    #________________________________________________________________________________________________________________________________________________________
    #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
    #/                                                               Entities                                                                               /
    #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     @@broken_doll = Humanoids.new(500.1, 500.1, 10.1, "Broken Doll", 1, [@@pineapples], 0, Broken_Doll, WEAPSOUND_06, 1, "humanoid", "N/A", 0, ["N/A"])
+    All_Humanoid_Enemy_Array.push(@@broken_doll)
    #________________________________________________________________________________________________________________________________________________________
  end
 end
