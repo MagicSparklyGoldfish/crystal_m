@@ -204,6 +204,7 @@ include Use
     Enemy_Blocking_Wall_Array = [Enemy_Blocking_Wall_01]
     All_Humanoid_Enemy_Array = [] of Humanoids 
     Current_Map_Humanoid_Array = [] of Humanoids
+    Enemy_Walk_Cycle_Clock = SF::Clock.new
    #________________________________________________________________________________________________________________________________________________________
    #????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
    #?                                                               Methods                                                                                ?
@@ -275,16 +276,41 @@ include Use
        movement = rand(1..10) 
        movement += humanoid.amount_owned
        if movement < 5
+        Humanoids.walk_animation(humanoid)
         humanoid.sprite.position += SF.vector2(0.025, 0)
         humanoid.sprite.scale = SF.vector2(1.0, 1.0)
         humanoid.amount_owned -= 1
        else if movement > 6
+        Humanoids.walk_animation(humanoid)
         humanoid.sprite.position -= SF.vector2(0.025, 0)
         humanoid.sprite.scale = SF.vector2(-1.0, 1.0)
         humanoid.amount_owned += 1
        else
+        humanoid.sprite.texture_rect = SF.int_rect(0, 0, 75, 100)
        end; end
      end}
+      end
+      def Humanoids.walk_animation(humanoid)
+        if humanoid.sprite.texture_rect == SF.int_rect(0, 0, 75, 100) && Enemy_Walk_Cycle_Clock.elapsed_time >= SF.milliseconds(150)
+            humanoid.sprite.texture_rect = SF.int_rect(0, 100, 75, 100)
+            Enemy_Walk_Cycle_Clock.restart
+        end
+        if humanoid.sprite.texture_rect == SF.int_rect(0, 100, 75, 100) && Enemy_Walk_Cycle_Clock.elapsed_time >= SF.milliseconds(150)
+            humanoid.sprite.texture_rect = SF.int_rect(75, 100, 75, 100)
+            Enemy_Walk_Cycle_Clock.restart
+        end
+        if humanoid.sprite.texture_rect == SF.int_rect(75, 100, 75, 100) && Enemy_Walk_Cycle_Clock.elapsed_time >= SF.milliseconds(150)
+            humanoid.sprite.texture_rect = SF.int_rect(150, 100, 75, 100)
+            Enemy_Walk_Cycle_Clock.restart
+        end
+        if humanoid.sprite.texture_rect == SF.int_rect(150, 100, 75, 100) && Enemy_Walk_Cycle_Clock.elapsed_time >= SF.milliseconds(150)
+            humanoid.sprite.texture_rect = SF.int_rect(225, 100, 75, 100)
+            Enemy_Walk_Cycle_Clock.restart
+        end
+        if humanoid.sprite.texture_rect == SF.int_rect(225, 100, 75, 100) && Enemy_Walk_Cycle_Clock.elapsed_time >= SF.milliseconds(150)
+            humanoid.sprite.texture_rect = SF.int_rect(0, 100, 75, 100)
+            Enemy_Walk_Cycle_Clock.restart
+        end
       end
    #________________________________________________________________________________________________________________________________________________________
    #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
