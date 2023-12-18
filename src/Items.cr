@@ -16,168 +16,6 @@ require "crystal/system/time"
 require "chipmunk/chipmunk_crsfml"
 require "file_utils"
 
-module Equipment
-   extend self
- class Stick
- def initialize(name : String, number : Int32, can_swing : Bool, can_stab : Bool, can_shoot : Bool, atk_power : Float64, elements : Array(String), 
-  special_effects : Array(String), swing_sound : SF::Sound, hit_sound : SF::Sound, rectangle : SF::RectangleShape, is_equipped : Bool, sprite : SF::Sprite,
-  socket01 : String,  socket02 : String, socket03 : String)
-    @name = name
-    @number = number
-    @can_swing = can_swing
-    @can_stab = can_stab
-    @can_shoot = can_shoot
-    @atk_power = atk_power
-    @elements = elements
-    @special_effects = special_effects
-    @swing_sound = swing_sound
-    @hit_sound = hit_sound
-    @rectangle = rectangle
-    @is_equipped = is_equipped
-    @sprite = sprite
-    @socket01 = socket01
-    @socket02 = socket02
-    @socket03 = socket03
-  end
- def name
-   @name
-  end
- def number
-   @number
-  end
- def can_swing
-    @can_swing
-  end
- def can_stab
-    @can_stab
-  end
- def can_stab
-    @can_stab
-  end
- def can_shoot
-    @can_shoot
-  end
- def atk_power
-    @atk_power
-  end
- def elements
-    @elements
-  end
- def special_effects
-    @special_effects
-  end
- def swing_sound
-    @swing_sound
-  end
- def hit_sound
-  @hit_sound
-  end
- def rectangle
-   @rectangle
-  end
- def is_equipped
-    @is_equipped
-  end
- def sprite
-    @sprite
-  end
- def socket01
-    @socket01
-  end
- def socket02
-    @socket02
-  end
- def socket03
-    @socket03
-  end
- def Stick.test(window, page)
-        window.draw(Weapon_Rectangle_01)
-    end
-    #WEAPON_OBJECT_ARRAY.push(@@stick01, @@zinc_stick, @@tin_stick, @@copper_stick, @@brass_stick, @@bronze_stick, @@iron_stick, @@steel_stick)
-    #WEAPON_INVENTORY_ARRAY.push(@@nil_stick)
-   # WEAPON_INVENTORY_ARRAY.push(@@zinc_stick, @@tin_stick, @@copper_stick, @@brass_stick, @@bronze_stick, @@iron_stick, @@steel_stick)
- #-------------------------------------------------------------Entities----------------------------------------------------------------------------------------
-  @@nil_stick = Stick.new("", -1, false, false, false, 1.5, ["none"], ["none"], WEAPSOUND_01, WEAPSOUND_02, Weapon_Rectangle_01, false, Stick01, "none", "none", "none")
-  @@stick01 = Stick.new("Stick", 0, true, false, false, 1.5, ["none"], ["none"], WEAPSOUND_01, WEAPSOUND_02, Weapon_Rectangle_01, false, Stick01, "none", "none", "none")
-  @@zinc_stick = Stick.new("Zinc Stick", 4, true, false, false, 1.75, ["none"], ["none"], WEAPSOUND_01, WEAPSOUND_02, Zinc_Stick_Display, false, Zinc_Stick, "none", "none", "none")
-  @@tin_stick = Stick.new("Tin Stick", 2, true, false, false, 2, ["none"], ["none"], WEAPSOUND_01, WEAPSOUND_02, Tin_Stick_Display, false, Tin_Stick, "none", "none", "none")
-  @@copper_stick = Stick.new("Copper Stick", 1, true, false, false, 4, ["none"], ["none"], WEAPSOUND_01, WEAPSOUND_02, Copper_Stick_Display, false, Copper_Stick, "empty", "none", "none")
-  @@brass_stick = Stick.new("Brass Stick", 5, true, false, false, 2.5, ["none"], ["none"], WEAPSOUND_01, WEAPSOUND_02, Brass_Stick_Display, false, Brass_Stick, "empty", "empty", "none")
-  @@bronze_stick = Stick.new("Bronze Stick", 3, true, false, false, 3, ["none"], ["none"], WEAPSOUND_01, WEAPSOUND_02, Bronze_Stick_Display, false, Bronze_Stick, "empty", "none", "none")
-  @@iron_stick = Stick.new("Iron Stick", 6, true, false, false, 4, ["none"], ["none"], WEAPSOUND_01, WEAPSOUND_02, Iron_Stick_Display, false, Iron_Stick, "empty", "empty", "none")
-  @@steel_stick = Stick.new("Steel Stick", 7, true, false, false, 5, ["none"], ["none"], WEAPSOUND_01, WEAPSOUND_02, Steel_Stick_Display, false, Steel_Stick, "empty", "empty", "empty")
- #_____________________________________________________________________________________________________________________________________________________________
- end
- class Mold
-  def initialize(name : String, sockets : Int32, lvl_req : Int32)
-    @name = name
-    @sockets = sockets
-    @lvl_req = lvl_req
-   end
-  def name
-    @name
-   end
-  def sockets
-    @sockets
-   end
-  def lvl_req
-    @lvl_req
-   end
- @@stick_mold = Mold.new("Stick Mold", 2, 0)  
-  #MOLD_ARRAY.push(@@stick_mold) 
- end
-
- class Weapon_Crafting < Mold
-  @@chosen_ingot : Int32; @@chosen_ingot = 0; @@chosen_mold : Mold; @@chosen_mold = @@stick_mold
-  @@craft_weapon : Int32; @@craft_weapon = 0
-  def Weapon_Crafting.choose_ingot(ingot)
-    @@chosen_ingot = ingot
-  end 
-  def Weapon_Crafting.forge_weapon
-    weapon = @@craft_weapon
-    Crafted_Items::Weapon.forge_weapon(weapon)
-  end
-  def Weapon_Crafting.diplay_forge(window)
-      window.draw(Test_Forge_Menu)
-      Etc::Inventory_Ingot.display_forge_ingots(window)
-      Weapon_Crafting.current_mold(window)
-  end
-  def Weapon_Crafting.current_mold(window)
-    weapon = Nil_Stick_Display.dup
-    if  @@chosen_mold == @@stick_mold
-      case @@chosen_ingot
-       when 1
-        weapon = Copper_Stick_Display.dup
-        @@craft_weapon = 1      
-       when 2
-        weapon = Tin_Stick_Display.dup
-        @@craft_weapon = 2
-       when 3
-        weapon = Bronze_Stick_Display.dup
-        @@craft_weapon = 3
-       when 4
-        weapon = Zinc_Stick_Display.dup
-        @@craft_weapon = 4
-       when 5
-        weapon = Brass_Stick_Display.dup
-        @@craft_weapon = 5
-      when 6
-        weapon = Iron_Stick_Display.dup
-        @@craft_weapon = 6
-      when 7
-        weapon = Steel_Stick_Display.dup
-        @@craft_weapon = 7
-     end; end
-     weapon.position = SF.vector2(250, 150)
-     window.draw(weapon)
-  end
-  def Weapon_Crafting.choose_mold(mold)
-    if mold == 1
-      @@chosen_mold = @@stick_mold
-    end
-  end
- end
-end
 #UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU
 #UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU
 #UU                                                                  Use                                                                                    UU
@@ -409,7 +247,6 @@ end
  end
 
 module Etc
-include Equipment
   # _________________________________________________________________________________________________________________________________________________________
   #|                                                              Etc Variables                                                                              |
   #|_________________________________________________________________________________________________________________________________________________________|
@@ -6425,7 +6262,7 @@ include Etc
   #________________________________________________________________________________________________________________________________________________________
   #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   #/                                                               Entities                                                                               /
-  #///////////////////////////////////////////////////////////////////////////////////////////Atk/////////////////////////////////////////////////////////////
+  #///////////////////////////////////////////////////////////////////////////////////////////Atk//////////////////////////////////////////////////////////
    @@nil_stick = Weapon.new("", -1, "", 0, [""], [""], Nil_Ingot_Ore, Nil_Rectangle_01, SYSSOUND_6, SYSSOUND_6, "", 0, 0)
    @@stick = Weapon.new("Stick", 0, "stick", 1.25, ["none", "none", "none"], ["none", "none", "none"], Stick01, Weapon_Rectangle_01, WEAPSOUND_01, WEAPSOUND_02, "Swing", 0, 0)
    @@zinc_stick = Weapon.new("Zinc Stick", 4, "stick", 1.5, ["empty", "none", "none"], ["empty", "none", "none"], Zinc_Stick, Zinc_Stick_Display, WEAPSOUND_01, WEAPSOUND_02, "Swing", 0, 2)
