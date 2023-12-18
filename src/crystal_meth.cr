@@ -452,7 +452,7 @@ extend self
      Map_Geometry::Ladder.display_ladders(window, map, area)
      Regular_Enemies.display(window, map, area)
      window.draw(@@player_character_rendered_model); 
-     Harvestables::Ore.draw_ores(window, map)
+     Harvestables::Ore.draw_ores(window, map, area)
      Harvestables::Herbs.display(window, map)
      window.draw(Ground); 
    
