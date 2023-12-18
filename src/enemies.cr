@@ -193,6 +193,9 @@ include Use
     def sfx
       @sfx
      end
+    def amount_owned #direction
+      @amount_owned
+     end
    #________________________________________________________________________________________________________________________________________________________
    #********************************************************************************************************************************************************
    #*                                                              Variables                                                                               *
@@ -245,9 +248,10 @@ include Use
         when "factory_map_01"
             Enemy_Blocking_Wall_Array.map { |i| window.draw(i)}
             Enemy_Blocking_Wall_01.position = SF.vector2(100, 205)
-            @@broken_doll.sprite.position = SF.vector2(0, 305)
             Current_Map_Humanoid_Array.map { |i| 
-            Enemy_Health_Bar.position = i.sprite.position + SF.vector2(-25, 100)
+                humanoid = i
+                Humanoids.wander(humanoid)
+            Enemy_Health_Bar.position = i.sprite.position + SF.vector2(-50, 100)
             if i.hp > 0
             x = i.hp / 4
             else
@@ -258,8 +262,30 @@ include Use
            }end
       end
     #---------------------------------------------------------------Logic-----------------------------------------------------------------------------------
-     def wander(humanoid)
-     end
+     def Humanoids.wander(humanoid)
+        if humanoid.amount_owned > 2000 || humanoid.amount_owned < -2000
+            humanoid.amount_owned = 0
+        end
+      Enemy_Blocking_Wall_Array.map { |i| if i.global_bounds.intersects? humanoid.sprite.global_bounds
+      if humanoid.sprite.position.x < i.position.x
+        humanoid.sprite.position -= SF.vector2(1, 0)
+        humanoid.amount_owned = 0
+       end
+      else 
+       movement = rand(1..10) 
+       movement += humanoid.amount_owned
+       if movement < 5
+        humanoid.sprite.position += SF.vector2(0.025, 0)
+        humanoid.sprite.scale = SF.vector2(1.0, 1.0)
+        humanoid.amount_owned -= 1
+       else if movement > 6
+        humanoid.sprite.position -= SF.vector2(0.025, 0)
+        humanoid.sprite.scale = SF.vector2(-1.0, 1.0)
+        humanoid.amount_owned += 1
+       else
+       end; end
+     end}
+      end
    #________________________________________________________________________________________________________________________________________________________
    #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
    #/                                                               Entities                                                                               /

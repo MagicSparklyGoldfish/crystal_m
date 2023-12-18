@@ -440,15 +440,10 @@ extend self
      map = @@map
      area = @@area
      Window_Class.wall_collision
-     Map_Geometry::Wall.position(window, area, map)
-     Map_Geometry::Misc_Decor.position(window, area, map)
-     Map_Geometry::Teleporter.position_teleporters(area, map)
-     Map_Geometry::Platform.set_positions(area, map)
-     Map_Geometry::Ladder.position(map, area)
-     Map_Geometry::Wall.display(window, area, map)
      Map_Geometry::Misc_Decor.display(window, area, map)
      Map_Geometry::Teleporter.display_teleporters(window, area, map)
      Map_Geometry::Platform.display(area, map, window)
+     Map_Geometry::Wall.display(window, area, map)
      Map_Geometry::Ladder.display_ladders(window, map, area)
      Regular_Enemies.display(window, map, area)
      window.draw(@@player_character_rendered_model); 
@@ -472,6 +467,9 @@ extend self
    def Window_Class.initialize_map(window, map, area)
     map = @@map
     area = @@area
+    Map_Geometry::Ladder.position(map, area)
+    Map_Geometry::Wall.position(window, area, map)
+    Map_Geometry::Misc_Decor.position(window, area, map)
     Harvestables::Herbs.initialize
     Map_Geometry::Teleporter.position_teleporters(area, map)
     Map_Geometry::Ladder.position(map, area)
