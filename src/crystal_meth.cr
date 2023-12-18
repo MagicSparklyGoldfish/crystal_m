@@ -439,9 +439,14 @@ extend self
       end
      map = @@map
      area = @@area
+     Window_Class.wall_collision
+     Map_Geometry::Wall.position(window, area, map)
+     Map_Geometry::Misc_Decor.position(window, area, map)
      Map_Geometry::Teleporter.position_teleporters(area, map)
      Map_Geometry::Platform.set_positions(area, map)
      Map_Geometry::Ladder.position(map, area)
+     Map_Geometry::Wall.display(window, area, map)
+     Map_Geometry::Misc_Decor.display(window, area, map)
      Map_Geometry::Teleporter.display_teleporters(window, area, map)
      Map_Geometry::Platform.display(area, map, window)
      Map_Geometry::Ladder.display_ladders(window, map, area)
@@ -465,6 +470,22 @@ extend self
       Map_Geometry::Platform.set_positions(area, map)
     end}
    end 
+ #-----------------------------------------------------------Walls----------------------------------------------------------------------
+  def Window_Class.wall_collision
+    Wall_Array.map { |i| bounding_box1 = @@player_character_rendered_model.global_bounds
+    bounding_box2 = i.bounding_rectangle.global_bounds
+    if bounding_box1.intersects? bounding_box2
+     if @@player_character_rendered_model.position.x > i.bounding_rectangle.position.x
+      y = @@player_character_rendered_model.position.y
+      x = i.bounding_rectangle.position.x + i.length
+      @@player_character_rendered_model.position = SF.vector2(x, y)
+     else if @@player_character_rendered_model.position.x < i.bounding_rectangle.position.x
+      y = @@player_character_rendered_model.position.y
+      x = i.bounding_rectangle.position.x - 100
+      @@player_character_rendered_model.position = SF.vector2(x, y)
+    end; end; end}
+   end
+  
 #---------------------------------------------------------------------------------------------------------------------------------------+
 #==========================================================Animations===================================================================+
    #====================================================Idle Animations=================================================================+
@@ -3344,31 +3365,41 @@ def Window_Class.hud_keypresses(window)
        # end
       when SF::Keyboard::D
         if @@is_on_ladder == false
-        @@idleframes = 0
-        @@attacking = false
-        walking = true
-        IDLE_TIMER.restart
-        Gui::Window_Class.is_walking(walking)
-        #Player_Data::Player_Physics.wasd_right(@@player_character_rendered_model)
-        if @@current_direction == "left"
-        this = "right"
-        Window_Class.change_direction(this)
-        end
-        window.draw(@@player_character_rendered_model)
+        Wall_Array.map { |i| bounding_box1 = @@player_character_rendered_model.global_bounds
+        bounding_box2 = i.bounding_rectangle.global_bounds
+        if bounding_box1.intersects? bounding_box2
+          All_Audio::SFX.char_create_up
+        else
+          @@idleframes = 0
+          @@attacking = false
+          walking = true
+          IDLE_TIMER.restart
+          Gui::Window_Class.is_walking(walking)
+          if @@current_direction == "left"
+          this = "right"
+          Window_Class.change_direction(this)
+          end
+          window.draw(@@player_character_rendered_model)
+        end}
       end
       when SF::Keyboard::A
-        if @@is_on_ladder == false
+       if @@is_on_ladder == false
+        Wall_Array.map { |i| bounding_box1 = @@player_character_rendered_model.global_bounds
+        bounding_box2 = i.bounding_rectangle.global_bounds
+       if bounding_box1.intersects? bounding_box2
+         All_Audio::SFX.char_create_up
+       else
         @@idleframes = 0
         @@attacking = false
         walking = true
         IDLE_TIMER.restart
         Gui::Window_Class.is_walking(walking)
-        #Player_Data::Player_Physics.wasd_left(@@player_character_rendered_model)
         if @@current_direction == "right"
         this = "left"
         Window_Class.change_direction(this)
         end
         window.draw(@@player_character_rendered_model)
+         end}
         end
       when SF::Keyboard::W
         if @@is_on_ladder == false
@@ -3779,9 +3810,10 @@ end; end; end; end; end; end
       test_platform_box_2 = Test_Platform_02.global_bounds
       test_platform_box_3 = Test_Platform_03.global_bounds
       test_platform_box_4 = Short_Platform_01.global_bounds
-      @@player_bounding_box = Feet_Bounding_Box.global_bounds #@@player_character_rendered_model.global_bounds
+      test_platform_box_5 = Medium_Platform_01.global_bounds
+      @@player_bounding_box = Feet_Bounding_Box.global_bounds
       Feet_Bounding_Box.position = @@player_character_rendered_model.position + SF.vector2(25, 120)
-      test_platform_array = [ground_box, test_platform_box, test_platform_box_2, test_platform_box_3, test_platform_box_4]
+      test_platform_array = [ground_box, test_platform_box, test_platform_box_2, test_platform_box_3, test_platform_box_4, test_platform_box_5]
      #---------------------------------------------------------------------------------------------------------------------------------+
 
      if @@player_bounding_box.intersects? test_platform_array[@@gravity_iterator]

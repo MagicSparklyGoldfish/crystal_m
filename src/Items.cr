@@ -7127,6 +7127,7 @@ module Map_Geometry
         case map
         when "factory_map_01"
        @@long_ladder_01.sprite.position = SF.vector2(-4900, 400)
+       @@long_ladder_02.sprite.position = SF.vector2(-100, 0)
         end
       end
     #===============================================================Display=================================================================================
@@ -7151,6 +7152,7 @@ module Map_Geometry
        end
       def Ladder.display_doll_factory_01_ladders(window)
         window.draw(@@long_ladder_01.sprite);
+        window.draw(@@long_ladder_02.sprite);
        end
     #================================================================Logic==================================================================================
      def Ladder.climb_ladder(map, player)
@@ -7231,40 +7233,42 @@ module Map_Geometry
         when "factory_map_01"
           @@medium_platform_01.bounding_rectangle.position = SF.vector2(-4900, 400)
           @@medium_platform_01.display_rectangle.position = SF.vector2(-4900, 400)
-          @@short_platform_01.bounding_rectangle.position = SF.vector2(0, 600)
-          @@short_platform_01.display_rectangle.position = SF.vector2(0, 600)
+          @@short_platform_01.bounding_rectangle.position = SF.vector2(-600, 600)
+          @@short_platform_01.display_rectangle.position = SF.vector2(-600, 600)
+          @@medium_platform_03.bounding_rectangle.position = SF.vector2(-600, 0)
+          @@medium_platform_03.display_rectangle.position = SF.vector2(-600, 0)
        end
       end
     #---------------------------------------------------------------Display---------------------------------------------------------------------------------
      def Platform.display(area, map, window)
        case area
          when "test"
-           Platform.display_test(map, window)
+          @@medium_platform_01.display_rectangle.set_texture(GRASS_TEXTURE_1, reset_rect: false)
+          @@medium_platform_02.display_rectangle.set_texture(GRASS_TEXTURE_1, reset_rect: false)
+          Ground.set_texture(GRASS_TEXTURE_1, reset_rect: false)
+          Platform.display_test(map, window)
          when "doll factory"
-           Platform.display_doll_factory(map, window)
+          Ground.set_texture(CONCRETE_TEXTURE_1, reset_rect: false)
+          @@medium_platform_01.display_rectangle.set_texture(CONCRETE_TEXTURE_1, reset_rect: false)
+          @@short_platform_01.display_rectangle.set_texture(CONCRETE_TEXTURE_1, reset_rect: false)
+          @@medium_platform_03.display_rectangle.set_texture(CONCRETE_TEXTURE_1, reset_rect: false)
+          Platform.display_doll_factory(map, window)
         end
      end
      def Platform.display_test(map, window)
        case map
        when "test"
          Ground.set_texture(GRASS_TEXTURE_1, reset_rect: false)
-         @@medium_platform_01.display_rectangle.set_texture(GRASS_TEXTURE_1, reset_rect: false)
          window.draw(@@medium_platform_01.bounding_rectangle)
          window.draw(@@medium_platform_01.display_rectangle)
        when "test_ore"
-         Ground.set_texture(GRASS_TEXTURE_1, reset_rect: false)
-         @@medium_platform_01.display_rectangle.set_texture(GRASS_TEXTURE_1, reset_rect: false)
          window.draw(@@medium_platform_01.bounding_rectangle)
          window.draw(@@medium_platform_01.display_rectangle)
-         @@medium_platform_02.display_rectangle.set_texture(GRASS_TEXTURE_1, reset_rect: false)
          window.draw(@@medium_platform_02.bounding_rectangle)
          window.draw(@@medium_platform_02.display_rectangle)
         when "test_garden"
-         Ground.set_texture(GRASS_TEXTURE_1, reset_rect: false)
-         @@medium_platform_01.display_rectangle.set_texture(GRASS_TEXTURE_1, reset_rect: false)
          window.draw(@@medium_platform_01.bounding_rectangle)
          window.draw(@@medium_platform_01.display_rectangle)
-         @@medium_platform_02.display_rectangle.set_texture(GRASS_TEXTURE_1, reset_rect: false)
          window.draw(@@medium_platform_02.bounding_rectangle)
          window.draw(@@medium_platform_02.display_rectangle)
        end
@@ -7272,13 +7276,12 @@ module Map_Geometry
      def Platform.display_doll_factory(map, window)
        case map
        when "factory_map_01"
-         Ground.set_texture(CONCRETE_TEXTURE_1, reset_rect: false)
-         @@medium_platform_01.display_rectangle.set_texture(CONCRETE_TEXTURE_1, reset_rect: false)
-         @@short_platform_01.display_rectangle.set_texture(CONCRETE_TEXTURE_1, reset_rect: false)
          window.draw(@@medium_platform_01.bounding_rectangle)
          window.draw(@@medium_platform_01.display_rectangle)
          window.draw(@@short_platform_01.bounding_rectangle)
          window.draw(@@short_platform_01.display_rectangle)
+         window.draw(@@medium_platform_03.bounding_rectangle)
+         window.draw(@@medium_platform_03.display_rectangle)
       end
      end
    #________________________________________________________________________________________________________________________________________________________
@@ -7288,19 +7291,112 @@ module Map_Geometry
     @@medium_platform_01 = Platform.new(1, Test_Platform_01, Test_Platform_Cover_01); 
     @@medium_platform_02 = Platform.new(2, Test_Platform_01.dup, Test_Platform_Cover_01.dup); 
     @@short_platform_01 = Platform.new(3, Short_Platform_01, Short_Platform_Cover_01); 
+    @@medium_platform_03 = Platform.new(4, Medium_Platform_01, Medium_Platform_Cover_01); 
    #________________________________________________________________________________________________________________________________________________________
    end
- class Teleporter < Ladder
+ #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ #+                                                                 Walls                                                                                 +
+ #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  class Wall < Ladder
   #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   #!                                                              Initialize                                                                              !
   #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-   def initialize(id : Int32, destination_map : String, destination_area : String, destination_postion : Array(Float64), sprite : SF::Sprite, length : Int32)
+   def initialize(id : Int32, display_rectangle : SF::RectangleShape, bounding_rectangle : SF::RectangleShape, sprite : SF::Sprite, length : Int32)
+     @id = id
+     @display_rectangle = display_rectangle
+     @bounding_rectangle = bounding_rectangle
+     @sprite = sprite
+     @length = length
+    end
+   def id
+    @id
+    end
+   def display_rectangle
+    @display_rectangle
+    end
+   def bounding_rectangle
+    @bounding_rectangle
+    end
+   def sprite
+     @sprite
+    end
+   def length
+     @length
+    end
+  #________________________________________________________________________________________________________________________________________________________
+  #********************************************************************************************************************************************************
+  #*                                                              Variables                                                                               *
+  #********************************************************************************************************************************************************
+   Wall_Array = [] of Wall
+  #________________________________________________________________________________________________________________________________________________________
+  #????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
+  #?                                                               Methods                                                                                ?
+  #????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
+   #--------------------------------------------------------------Position---------------------------------------------------------------------------------
+    def Wall.position(window, area, map)
+       case area
+        when "test"
+         Wall.position_test(window, area, map)
+        when "doll factory"
+         Wall.position_doll_factory(window, area, map)
+      end
+     end
+    #----------------------------------------------------------------Test----------------------------------------------------------------------------------
+     def Wall.position_test(window, area, map)
+       @@map_boundary_wall_01.bounding_rectangle.position = SF.vector2(-6000, -3000)
+       @@map_boundary_wall_01.display_rectangle.position = SF.vector2(-6000, -3000)
+      end
+    #------------------------------------------------------------Doll Factory------------------------------------------------------------------------------
+     def Wall.position_doll_factory(window, area, map)
+      @@map_boundary_wall_01.bounding_rectangle.position = SF.vector2(-6000, -3000)
+      @@map_boundary_wall_01.display_rectangle.position = SF.vector2(-6000, -3000)
+      @@map_boundary_wall_02.bounding_rectangle.position = SF.vector2(600, -3000)
+      @@map_boundary_wall_02.display_rectangle.position = SF.vector2(600, -3000)
+     end
+   #---------------------------------------------------------------Display---------------------------------------------------------------------------------
+    def Wall.display(window, area, map)
+      case area
+         when "test"
+          Wall.display_test(window, area, map)
+         when "doll factory"
+          Wall.display_doll_factory(window, area, map)
+        end
+     end
+    #----------------------------------------------------------------Test----------------------------------------------------------------------------------
+     def Wall.display_test(window, area, map)
+      end
+    #------------------------------------------------------------Doll Factory------------------------------------------------------------------------------
+     def Wall.display_doll_factory(window, area, map)
+       window.draw(@@map_boundary_wall_01.bounding_rectangle)
+       window.draw(@@map_boundary_wall_01.display_rectangle)
+       window.draw(@@map_boundary_wall_02.bounding_rectangle)
+       window.draw(@@map_boundary_wall_02.display_rectangle)
+      end
+  #________________________________________________________________________________________________________________________________________________________
+  #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  #/                                                               Entities                                                                               /
+  #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+   @@map_boundary_wall_01 = Wall.new(1, Map_Boundary_Wall_01, Map_Boundary_Wall_Bounds_01, Concrete_Pillar_01, 1000)
+   Wall_Array.push(@@map_boundary_wall_01)
+   @@map_boundary_wall_02 = Wall.new(1, Map_Boundary_Wall_01.dup, Map_Boundary_Wall_Bounds_01.dup, Concrete_Pillar_01, 1000)
+   Wall_Array.push(@@map_boundary_wall_02)
+  #________________________________________________________________________________________________________________________________________________________
+ #_________________________________________________________________________________________________________________________________________________________
+  end
+ class Teleporter < Wall
+  #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  #!                                                              Initialize                                                                              !
+  #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+   def initialize(id : Int32, destination_map : String, destination_area : String, destination_postion : Array(Float64), sprite : SF::Sprite, length : Int32,
+    display_rectangle : SF::RectangleShape, bounding_rectangle : SF::RectangleShape)
      @id = id
      @destination_map = destination_map
      @destination_area = destination_area
      @destination_postion = destination_postion
      @sprite = sprite
      @length = length
+     @display_rectangle = display_rectangle
+     @bounding_rectangle = bounding_rectangle
     end
    def id
      @id
@@ -7325,6 +7421,12 @@ module Map_Geometry
     end
    def destination_area=(this)
     @destination_area= this
+   end
+   def display_rectangle
+    @display_rectangle
+   end
+   def bounding_rectangle
+    @bounding_rectangle
    end
   #________________________________________________________________________________________________________________________________________________________
   #********************************************************************************************************************************************************
@@ -7410,11 +7512,11 @@ module Map_Geometry
   #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   #/                                                               Entities                                                                               /
   #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-   @@teleporter_01 = Teleporter.new(1, "test", "test", [0.0, 0.0], Teleporter_01.dup, 0)
+   @@teleporter_01 = Teleporter.new(1, "test", "test", [0.0, 0.0], Teleporter_01.dup, 0, Map_Boundary_Wall_01, Map_Boundary_Wall_01)
    Teleporter_Array.push(@@teleporter_01)
-   @@teleporter_02 = Teleporter.new(2, "test", "test", [0.0, 0.0], Teleporter_01.dup, 0)
+   @@teleporter_02 = Teleporter.new(2, "test", "test", [0.0, 0.0], Teleporter_01.dup, 0, Map_Boundary_Wall_01, Map_Boundary_Wall_01)
    Teleporter_Array.push(@@teleporter_02)
-   @@teleporter_03 = Teleporter.new(3, "test", "test", [0.0, 0.0], Teleporter_01.dup, 0)
+   @@teleporter_03 = Teleporter.new(3, "test", "test", [0.0, 0.0], Teleporter_01.dup, 0, Map_Boundary_Wall_01, Map_Boundary_Wall_01)
    Teleporter_Array.push(@@teleporter_03)
   #________________________________________________________________________________________________________________________________________________________
   end
@@ -7448,6 +7550,79 @@ module Map_Geometry
    @@forge_01 = Crafting_Station.new(2, Test_Forge)
    @@gem_cutter_01 = Crafting_Station.new(3, Test_Gem_Cutter)
    @@upgrade_table_01 = Crafting_Station.new(4, Test_Upgrade_Table)
+  #________________________________________________________________________________________________________________________________________________________
+  end
+  class Misc_Decor
+  #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  #!                                                              Initialize                                                                              !
+  #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    def initialize(id : Int32, sprite : SF::Sprite)
+      @id = id
+      @sprite = sprite
+     end
+    def id
+      @id
+    end
+    def sprite
+      @sprite
+    end
+  #________________________________________________________________________________________________________________________________________________________
+  #********************************************************************************************************************************************************
+  #*                                                              Variables                                                                               *
+  #********************************************************************************************************************************************************
+  #________________________________________________________________________________________________________________________________________________________
+  #????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
+  #?                                                               Methods                                                                                ?
+  #????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
+   #--------------------------------------------------------------Position---------------------------------------------------------------------------------
+    def Misc_Decor.position(window, area, map)
+      case area
+       when "test"
+        Misc_Decor.position_test(window, area, map)
+       when "doll factory"
+        Misc_Decor.position_doll_factory(window, area, map)
+     end
+    end
+    #----------------------------------------------------------------Test----------------------------------------------------------------------------------
+     def Misc_Decor.position_test(window, area, map)
+      end
+    #------------------------------------------------------------Doll Factory------------------------------------------------------------------------------
+     def Misc_Decor.position_doll_factory(window, area, map)
+      @@concrete_pillar_01.sprite.position = SF.vector2(-4400, 600)
+      @@concrete_pillar_02.sprite.scale = SF.vector2(1.0, -1.0)
+      @@concrete_pillar_02.sprite.position = SF.vector2(-4400, 600)
+      @@concrete_pillar_03.sprite.position = SF.vector2(-100, 600)
+      @@concrete_pillar_04.sprite.scale = SF.vector2(1.0, -1.0)
+      @@concrete_pillar_04.sprite.position = SF.vector2(-100, 600)
+     end
+   #---------------------------------------------------------------Display---------------------------------------------------------------------------------
+    def Misc_Decor.display(window, area, map)
+      case area
+         when "test"
+          Misc_Decor.display_test(window, area, map)
+         when "doll factory"
+          Misc_Decor.display_doll_factory(window, area, map)
+        end
+     end
+    #----------------------------------------------------------------Test----------------------------------------------------------------------------------
+     def Misc_Decor.display_test(window, area, map)
+      end
+    #------------------------------------------------------------Doll Factory------------------------------------------------------------------------------
+     def Misc_Decor.display_doll_factory(window, area, map)
+       window.draw(@@concrete_pillar_01.sprite)
+       window.draw(@@concrete_pillar_02.sprite)
+       window.draw(@@concrete_pillar_03.sprite)
+       window.draw(@@concrete_pillar_04.sprite)
+      end
+  #________________________________________________________________________________________________________________________________________________________
+  #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  #/                                                               Entities                                                                               /
+  #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+   #---------------------------------------------------------------Pillars---------------------------------------------------------------------------------
+    @@concrete_pillar_01 = Misc_Decor.new(1, Concrete_Pillar_01)
+    @@concrete_pillar_02 = Misc_Decor.new(2, Concrete_Pillar_01.dup)
+    @@concrete_pillar_03 = Misc_Decor.new(3, Concrete_Pillar_01.dup)
+    @@concrete_pillar_04 = Misc_Decor.new(4, Concrete_Pillar_01.dup)
   #________________________________________________________________________________________________________________________________________________________
   end
 end

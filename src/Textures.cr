@@ -1,14 +1,4 @@
 #|||||||||||||||||||||||||||||||||||||||||||||||||||||||Textures|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-  GRASS_TEXTURE_1 = SF::Texture.from_file("graphics/map objects/Grass_01.png"); GRASS_TEXTURE_1.repeated = true
-  CONCRETE_TEXTURE_1 = SF::Texture.from_file("graphics/map objects/Concrete_01.png"); CONCRETE_TEXTURE_1.repeated = true
-  Ground = SF::RectangleShape.new(SF.vector2(10000, 500)); #Ground.fill_color = SF.color(0, 255, 100)
-  Ground.position = SF.vector2(-5000, 800); Ground.set_texture(GRASS_TEXTURE_1, reset_rect: false)
-
-  Test_Platform_01 = SF::RectangleShape.new(SF.vector2(5000, 5)); Test_Platform_01.fill_color = SF.color(0, 255, 100, 0)
-  Test_Platform_01.position = SF.vector2(0, 400)
-
-  Test_Platform_Cover_01 = SF::RectangleShape.new(SF.vector2(5000, 50)); Test_Platform_Cover_01.set_texture(GRASS_TEXTURE_1, reset_rect: false)
-  Test_Platform_Cover_01.position = SF.vector2(0, 400)
 
   Test_Platform_02 = SF::RectangleShape.new(SF.vector2(5000, 5)); Test_Platform_02.fill_color = SF.color(0, 255, 100)
   Test_Platform_02.position = SF.vector2(0, 200)
@@ -16,11 +6,7 @@
   Test_Platform_03 = SF::RectangleShape.new(SF.vector2(5000, 5)); Test_Platform_03.fill_color = SF.color(0, 255, 100)
   Test_Platform_03.position = SF.vector2(-5000, 400)
 
-  Short_Platform_01 = SF::RectangleShape.new(SF.vector2(100, 5)); Short_Platform_01.fill_color = SF.color(0, 255, 100, 0)
-  Short_Platform_01.position = SF.vector2(0, 400)
 
-  Short_Platform_Cover_01 = SF::RectangleShape.new(SF.vector2(100, 50)); Short_Platform_Cover_01.set_texture(GRASS_TEXTURE_1, reset_rect: false)
-  Short_Platform_Cover_01.position = SF.vector2(0, 400)
 #------------------------------------------------------------------------------------------------------------------------------------
 #                                                    Menu Textures
 #-----------------------------------------------------------------------------------------------------------------------------------
@@ -3419,6 +3405,14 @@ Testing_Text.character_size = 20; Testing_Text.color = SF::Color::White; Testing
 #-------------------------------------------------------------------------------------------------------------------------------------- 
 #                                                         Maps
 #-------------------------------------------------------------------------------------------------------------------------------------- 
+ Ground = SF::RectangleShape.new(SF.vector2(10000, 500));
+ Ground.position = SF.vector2(-5000, 800); Ground.set_texture(GRASS_TEXTURE_1, reset_rect: false)
+ #------------------------------------------------------Textures-----------------------------------------------------------------------
+  #------------------------------------------------------Grass-------------------------------------------------------------------------
+   GRASS_TEXTURE_1 = SF::Texture.from_file("graphics/map objects/Grass_01.png"); GRASS_TEXTURE_1.repeated = true
+  #-----------------------------------------------------Concrete-----------------------------------------------------------------------
+   CONCRETE_TEXTURE_1 = SF::Texture.from_file("graphics/map objects/Concrete_01.png"); CONCRETE_TEXTURE_1.repeated = true
+   CONCRETE_PILLAR_TEXTURE_01 = SF::Texture.from_file("graphics/map objects/Concrete_Pillar_01.png")
  #--------------------------------------------------------Test-------------------------------------------------------------------------
   Test_Teleporter = SF::RectangleShape.new(SF.vector2(100, 40)); Test_Teleporter.fill_color = SF.color(50, 150, 255)
   Test_Teleporter.position = SF.vector2(120, 762);
@@ -3447,6 +3441,30 @@ Testing_Text.character_size = 20; Testing_Text.color = SF::Color::White; Testing
   UPGRADE_TABLE_RECTANGLE_TEXTURE = SF::Texture.from_file("graphics/Upgrade_Table.png")
   Test_Upgrade_Table = SF::RectangleShape.new(SF.vector2(120, 80)); Test_Upgrade_Table.set_texture(UPGRADE_TABLE_RECTANGLE_TEXTURE, reset_rect: false)
   Test_Upgrade_Table.position = SF.vector2(1000, 120);
+ #--------------------------------------------------------Walls------------------------------------------------------------------------
+  Map_Boundary_Wall_Bounds_01 = SF::RectangleShape.new(SF.vector2(1000, 5000)); Map_Boundary_Wall_Bounds_01.fill_color = SF.color(0, 255, 100, 0)
+  Map_Boundary_Wall_Bounds_01.position = SF.vector2(-50000, 600)
+
+  Map_Boundary_Wall_01 = SF::RectangleShape.new(SF.vector2(1000, 5000)); Map_Boundary_Wall_01.set_texture(CONCRETE_TEXTURE_1, reset_rect: false)
+  Map_Boundary_Wall_01.position = SF.vector2(-50000, 600)
+ #------------------------------------------------------Platforms----------------------------------------------------------------------
+  Test_Platform_01 = SF::RectangleShape.new(SF.vector2(5000, 5)); Test_Platform_01.fill_color = SF.color(0, 255, 100, 0)
+  Test_Platform_01.position = SF.vector2(0, 400)
+ 
+  Test_Platform_Cover_01 = SF::RectangleShape.new(SF.vector2(5000, 50)); Test_Platform_Cover_01.set_texture(GRASS_TEXTURE_1, reset_rect: false)
+  Test_Platform_Cover_01.position = SF.vector2(0, 400)
+
+  Short_Platform_01 = SF::RectangleShape.new(SF.vector2(100, 5)); Short_Platform_01.fill_color = SF.color(0, 255, 100, 0)
+  Short_Platform_01.position = SF.vector2(0, 400)
+
+  Short_Platform_Cover_01 = SF::RectangleShape.new(SF.vector2(100, 50)); Short_Platform_Cover_01.set_texture(GRASS_TEXTURE_1, reset_rect: false)
+  Short_Platform_Cover_01.position = SF.vector2(0, 400)
+
+  Medium_Platform_01 = SF::RectangleShape.new(SF.vector2(2500, 5)); Medium_Platform_01.fill_color = SF.color(0, 255, 100, 0)
+  Medium_Platform_01.position = SF.vector2(0, 400)
+
+  Medium_Platform_Cover_01 = SF::RectangleShape.new(SF.vector2(2500, 50)); Medium_Platform_Cover_01.set_texture(GRASS_TEXTURE_1, reset_rect: false)
+  Medium_Platform_Cover_01.position = SF.vector2(0, 400)
  #-------------------------------------------------------Ladders-----------------------------------------------------------------------
   LONG_METAL_LADDER_TEXTURE_01 = SF::Texture.from_file("graphics/map objects/Long_Metal_Ladder_01.png")
   Long_Metal_Ladder_01 = SF::Sprite.new(LONG_METAL_LADDER_TEXTURE_01)
@@ -3454,6 +3472,8 @@ Testing_Text.character_size = 20; Testing_Text.color = SF::Color::White; Testing
  #-----------------------------------------------------Teleporters---------------------------------------------------------------------
   TELEPORTER_TEXTURE_01 = SF::Texture.from_file("graphics/map objects/Teleporter_01.png")
   Teleporter_01 = SF::Sprite.new(TELEPORTER_TEXTURE_01); Teleporter_01.texture_rect = SF.int_rect(0, 0, 100, 80)
+ #-------------------------------------------------------Pillars-----------------------------------------------------------------------
+  Concrete_Pillar_01 = SF::Sprite.new(CONCRETE_PILLAR_TEXTURE_01)
 #--------------------------------------------------------------------------------------------------------------------------------------
 #                                                       Smelter
 #-------------------------------------------------------------------------------------------------------------------------------------- 
