@@ -125,6 +125,25 @@ end
 
 module Regular_Enemies
 include Use
+ @@test_enemy_model : SF::RenderTexture 
+ @@test_enemy_model = SF::RenderTexture.new(672, 512)
+ @@test_enemy_rendered_model = SF::Sprite.new
+ @@attack_strength : Float64; @@attack_strength = 1
+ Enemy_Clock_01 = SF::Clock.new
+
+ def Regular_Enemies.set_attack_strength(attack_strength)
+    @@attack_strength = attack_strength
+   end 
+ def Regular_Enemies.display(window, map, area)
+   case area
+    when "test"
+    when "doll factory"
+        Humanoids.display(window, map)
+  end
+ end
+  def Regular_Enemies.attack(attack)
+    Regular_Enemies::Humanoids.attack(attack)
+  end
   class Humanoids < Ingredients
    #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
    #!                                                              Initialize                                                                              !
@@ -178,30 +197,36 @@ include Use
    #********************************************************************************************************************************************************
    #*                                                              Variables                                                                               *
    #********************************************************************************************************************************************************
+    @@attack_strength : Float64; @@attack_strength = 1.0
    #________________________________________________________________________________________________________________________________________________________
    #????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
    #?                                                               Methods                                                                                ?
    #????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
     #---------------------------------------------------------------Combat----------------------------------------------------------------------------------
+     def hp_subtract(damage)
+        @hp -= damage
+       end
      def Humanoids.attack(attack)
          b = Player_Attack_Bounding_Box.global_bounds
-         if b.intersects? @@test_humanoid.sprite.global_bounds
-         this = @@test_humanoid.sprite.global_bounds
-         enemy = @@test_humanoid
+         if b.intersects? @@broken_doll.sprite.global_bounds
+         this = @@broken_doll.sprite.global_bounds
+         enemy = @@broken_doll
          time = Enemy_Clock_01.elapsed_time
          attack2 = Player_Attack_Bounding_Box.global_bounds
         if attack2.intersects? this
         if enemy.hp > 0
         if time >= SF.seconds(0.35) && attack == true
           Crafted_Items::Weapon.play_hit_sound
-          enemy.hp_subtract(@@attack_strength)
+          damage = @@attack_strength
+          enemy.hp_subtract(damage)
           Enemy_Clock_01.restart
         end; end; end; end; end
     #--------------------------------------------------------------Display----------------------------------------------------------------------------------
      def Humanoids.display(window, map)
         case map
         when "factory_map_01"
-            window.draw(@@broken_doll)
+            @@broken_doll.sprite.position = SF.vector2(0, 305)
+            window.draw(@@broken_doll.sprite)
         end
       end
    #________________________________________________________________________________________________________________________________________________________

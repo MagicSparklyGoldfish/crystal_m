@@ -6473,7 +6473,7 @@ include Etc
         attack_strength = base_attack * @@current_equipped_weapon.weapon_atk
         Harvestables::Ore.set_attack_strength(attack_strength)
         Harvestables::Herbs.set_attack_strength(attack_strength)
-        Test_Enemies::Test_Humanoids.set_attack_strength(attack_strength)
+        Regular_Enemies.set_attack_strength(attack_strength)
        end
 
        def Crafted_Items::Weapon.check_stats(slot)

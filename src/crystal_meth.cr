@@ -450,6 +450,7 @@ extend self
      Map_Geometry::Teleporter.display_teleporters(window, area, map)
      Map_Geometry::Platform.display(area, map, window)
      Map_Geometry::Ladder.display_ladders(window, map, area)
+     Regular_Enemies.display(window, map, area)
      window.draw(@@player_character_rendered_model); 
      Harvestables::Ore.draw_ores(window, map)
      Harvestables::Herbs.display(window, map)
@@ -3306,12 +3307,14 @@ def Window_Class.hud_keypresses(window)
         @@attacking = true
         Window_Class.attack_swing_left(@@player_character_rendered_model, window)
         attack = @@attacking
+        Regular_Enemies.attack(attack)
         Harvestables::Ore.harvest(attack)
         Harvestables::Herbs.harvest(attack)
       when "right"
         @@attacking = true
         Window_Class.attack_swing_right(@@player_character_rendered_model, window)
         attack = @@attacking
+        Regular_Enemies.attack(attack)
         Harvestables::Ore.harvest(attack)
         Harvestables::Herbs.harvest(attack)
       end; end
