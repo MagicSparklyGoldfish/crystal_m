@@ -5391,7 +5391,7 @@ include Use
      All_Ore_Array.push(@@iron01)
     #........................................................................................................................................................
   end
-  Herb_Array = [] of Herbs
+  Herb_Array = [] of Herbs; Current_Map_Herb_Array = [] of Herbs
   class Herbs <  Ingredients
   #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
   #+                                                              Variables                                                                               +
@@ -5604,12 +5604,23 @@ include Use
           broken.is_broke_toggle 
           Plant_Clock_Break.restart
          end; end; end; end; end; end; end; end 
+      #---------------------------------------------------------------Position--------------------------------------------------------------------------------
+       def Herbs.position(window, map, area)
+        Herbs.initialize
+        case area
+        when "test"
+          Herbs.position_test(window, map)
+        when "doll factory"
+          Herbs.position_doll_factory(window, map)
+        end
+       end
       #---------------------------------------------------------------Display---------------------------------------------------------------------------------
        def Herbs.display(window, map, area)
          case area
           when "test"
             Herbs.display_test(window, map, area)
           when "doll factory"
+            Herbs.display_doll_factory(window, map, area)
           end
          end
          #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Animations'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
@@ -5759,6 +5770,7 @@ include Use
         end} end
      #-----------------------------------------------------------Initialize Positions-------------------------------------------------------------------------
        def Herbs.initialize
+        Current_Map_Herb_Array.clear
         Herb_Array.map { |i| i.sprite.position = SF.vector2(0, 10000) }
        end
      #--------------------------------------------------------------Set Positions-----------------------------------------------------------------------------
@@ -5780,15 +5792,22 @@ include Use
          end}
         end
        end
+       def Herbs.position_doll_factory(window, map)
+        case map
+        when "factory_map_01"
+          @@hagberry_bush.sprite.position = SF.vector2(-600, 500)
+          @@elderberry_bush.sprite.position = SF.vector2(-550, -100)
+          Current_Map_Herb_Array.push(@@hagberry_bush, @@elderberry_bush)
+        end
+       end
      #--------------------------------------------------------------Set Displays------------------------------------------------------------------------------
        def Herbs.display_test(window, map, area)
          case map
          when "test"
-          Herbs.initialize
+          #Herbs.initialize
          when "ore_test"
-          Herbs.initialize
+          #Herbs.initialize
          when "test_garden"
-          Herbs.position_test(window, map)
           Herb_Array.map { |i| window.draw(i.sprite)}
           Herbs.animate(window, map, area)
          end
@@ -5796,7 +5815,7 @@ include Use
        def Herbs.display_doll_factory(window, map, area)
         case map
         when "factory_map_01"
-         Herb_Array.map { |i| window.draw(i.sprite)}
+         Current_Map_Herb_Array.map { |i| window.draw(i.sprite)}
          Herbs.animate(window, map, area)
         end
       end
@@ -5912,7 +5931,7 @@ include Use
       #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''Green Grape Vine'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
        @@green_grape_vine = Herbs.new("Green Grape Vine", 202, "green", 100, 100, @@green_grapes, Green_Grape_Vine, false, "vine", 0, ["Hp+", "Luk+"])
        Herb_Array.push(@@green_grape_vine)
-     #................................................................Vines..................................................................................
+     #................................................................Crops..................................................................................
       #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Corn Crop''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
        @@corn_crop = Herbs.new("Corn Crop", 300, "yellow", 100, 100, @@corn, Corn_Crop, false, "crop", 0, ["Hp+", "Luk+"])
        Herb_Array.push(@@corn_crop)
@@ -5922,7 +5941,7 @@ include Use
       #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Oats Crop''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
        @@oats_crop = Herbs.new("Oats Crop", 302, "brown", 100, 100, @@oats, Oats_Crop, false, "crop", 0, ["Hp+", "Luk+"])
        Herb_Array.push(@@oats_crop)
-      #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Oats Crop''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+      #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Wheat Crop''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
        @@wheat_crop = Herbs.new("Wheat Crop", 303, "yellow", 100, 100, @@wheat, Wheat_Crop, false, "crop", 0, ["Hp+", "Luk+"])
        Herb_Array.push(@@wheat_crop)
     #________________________________________________________________________________________________________________________________________________________

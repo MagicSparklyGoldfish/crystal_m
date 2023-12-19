@@ -466,10 +466,11 @@ extend self
    def Window_Class.initialize_map(window, map, area)
     map = @@map
     area = @@area
+    Harvestables::Herbs.initialize
+    Harvestables::Herbs.position(window, map, area)
     Map_Geometry::Ladder.position(map, area)
     Map_Geometry::Wall.position(window, area, map)
     Map_Geometry::Misc_Decor.position(window, area, map)
-    Harvestables::Herbs.initialize
     Map_Geometry::Teleporter.position_teleporters(area, map)
     Map_Geometry::Ladder.position(map, area)
     Map_Geometry::Platform.set_positions(area, map)
