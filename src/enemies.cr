@@ -1,3 +1,4 @@
+require "../src/crystal_meth.cr"
 require "../src/Textures.cr"
 require "crsfml"
 require "crsfml/audio"
@@ -149,7 +150,7 @@ include Use
    #!                                                              Initialize                                                                              !
    #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     def initialize(hp : Float64, max_hp : Float64, atk_power : Float64, name : String, lvl : Int32, drop_array : Array(Ingredients), amount_killed : Int32, sprite : SF::Sprite, sfx : SF::Sound,
-     id : Int32, kind : String, color : String, amount_owned : Int32, effects : Array(String), is_dead : Bool, clock : SF::Clock)
+     id : Int32, kind : String, color : String, amount_owned : Int32, effects : Array(String), is_dead : Bool, clock : SF::Clock, exp : Float64)
       @hp = hp
       @max_hp = max_hp
       @atk_power = atk_power
@@ -166,6 +167,7 @@ include Use
       @effects = effects
       @is_dead = is_dead
       @clock = clock
+      @exp = exp
      end
     def hp
        @hp
@@ -203,6 +205,9 @@ include Use
     def clock
         @clock
     end
+    def exp
+        @exp
+    end
     def is_dead=(this)
         @is_dead = this
     end
@@ -211,6 +216,7 @@ include Use
    #*                                                              Variables                                                                               *
    #********************************************************************************************************************************************************
     @@attack_strength : Float64; @@attack_strength = 1.0
+    @@exp : Float64; @@exp = 0.0
     Enemy_Blocking_Wall_Array = [Enemy_Blocking_Wall_01]
     All_Humanoid_Enemy_Array = [] of Humanoids 
     Current_Map_Humanoid_Array = [] of Humanoids
@@ -360,6 +366,7 @@ include Use
         if humanoid.sprite.texture_rect == SF.int_rect(225, 300, 75, 100) && Enemy_Death_Animation_Clock.elapsed_time >= SF.milliseconds(150)
             humanoid.sprite.texture_rect = SF.int_rect(300, 300, 75, 100)
             humanoid.is_dead = true
+            @@exp += humanoid.exp
             humanoid.clock.restart
         end
       end
@@ -368,7 +375,7 @@ include Use
    #/                                                               Entities                                                                               /
    #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     @@broken_doll = Humanoids.new(50.1, 50.1, 10.1, "Broken Doll", 1, [@@pineapples], 0, Broken_Doll, WEAPSOUND_06, 1, "humanoid", "N/A", 0, ["N/A"],
-    false, Enemy_Death_Clock.dup)
+    false, Enemy_Death_Clock.dup, 10)
     All_Humanoid_Enemy_Array.push(@@broken_doll)
    #________________________________________________________________________________________________________________________________________________________
  end

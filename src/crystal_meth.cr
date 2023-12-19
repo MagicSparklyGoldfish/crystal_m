@@ -3728,6 +3728,10 @@ end; end; end; end; end; end
     @@lvl = 1; @@exp = 0; @@exp_cap = @@lvl * Math.sqrt(100) ; @@exp_scale = @@exp / @@exp_cap
     @@speed : Int32; @@speed = @@current_dex + @@equip_speed + 3; @@equip_speed : Int32; @@equip_speed = 0
 
+   def Stats.increase_exp(exp)
+    @@exp += exp
+    end
+
    def Stats.bars
      HP_Bar_Color.scale = SF.vector2(@@current_hp * 0.005, 1); HP_Bar.scale = SF.vector2(@@current_max_hp * 0.005, 1)
      LVL_Bar_Color.scale = SF.vector2(@@exp_scale * 0.01, 1); 
