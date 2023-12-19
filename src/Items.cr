@@ -5391,6 +5391,9 @@ include Use
      All_Ore_Array.push(@@iron01)
     #........................................................................................................................................................
   end
+ #HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH
+ #H                                                                   Herbs                                                                               H
+ #HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH
   Herb_Array = [] of Herbs; Current_Map_Herb_Array = [] of Herbs
   class Herbs <  Ingredients
   #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -5491,100 +5494,100 @@ include Use
        Plant_Clock_01.restart
      end; end; end; end
    #.......................................................Animation Class Functions.......................................................................
-     def sprite_change_square(a, b, x, y)
-      @sprite.texture_rect = SF.int_rect(a, b, x, y)
-     end
-    def is_broke_toggle
-      if @is_broke == true
-        @is_broke = false
-     else if @is_broke == false
-      @is_broke = true
+      def sprite_change_square(a, b, x, y)
+       @sprite.texture_rect = SF.int_rect(a, b, x, y)
       end
-     end; end
-     def Herbs.stop_attack
-      @@is_plant_attacked = false
-    end
-     def Herbs.break(broken)
-      amount = rand(1..3)
-      ingredient = broken.drop_item
-      @@is_plant_attacked = false
-      if @@plant_reset == 0
-        Use::Ingredients.add_ingredient(amount, ingredient)
-        #Etc::Inventory_Ore.update_ore_inventory
-        Plant_Clock_Break.restart
-        @@plant_reset = 1
-      end
-      time = Plant_Clock_Break.elapsed_time
-      if time >= SF.seconds(0.1) && time < SF.seconds(0.2)
-        All_Audio::SFX.dig_02
-       a = 0; b = 200; x = 100; y = 100
-       case @@current_plant_attacked.kind
-       when "bush"
-        a = 0; b = 200; x = 100; y = 100
-       when "tree"
-        a = 0; b = 400; x = 100; y = 200
-       when "vine"
-        a = 0; b = 400; x = 100; y = 200
-      when "crop"
-        a = 0; b = 200; x = 50; y = 100
+     def is_broke_toggle
+       if @is_broke == true
+         @is_broke = false
+      else if @is_broke == false
+       @is_broke = true
        end
-       broken.sprite_change_square(a, b, x, y)
-    else if time >= SF.seconds(0.2) && time < SF.seconds(0.3)
-          a = 100; b = 200; x = 100; y = 100
-          case @@current_plant_attacked.kind
-          when "bush"
+      end; end
+      def Herbs.stop_attack
+       @@is_plant_attacked = false
+     end
+      def Herbs.break(broken)
+       amount = rand(1..3)
+       ingredient = broken.drop_item
+       @@is_plant_attacked = false
+       if @@plant_reset == 0
+         Use::Ingredients.add_ingredient(amount, ingredient)
+         #Etc::Inventory_Ore.update_ore_inventory
+         Plant_Clock_Break.restart
+         @@plant_reset = 1
+       end
+       time = Plant_Clock_Break.elapsed_time
+       if time >= SF.seconds(0.1) && time < SF.seconds(0.2)
+         All_Audio::SFX.dig_02
+        a = 0; b = 200; x = 100; y = 100
+        case @@current_plant_attacked.kind
+        when "bush"
+         a = 0; b = 200; x = 100; y = 100
+        when "tree"
+         a = 0; b = 400; x = 100; y = 200
+        when "vine"
+         a = 0; b = 400; x = 100; y = 200
+       when "crop"
+         a = 0; b = 200; x = 50; y = 100
+        end
+        broken.sprite_change_square(a, b, x, y)
+     else if time >= SF.seconds(0.2) && time < SF.seconds(0.3)
            a = 100; b = 200; x = 100; y = 100
-          when "tree"
-           a = 100; b = 400; x = 100; y = 200
-          when "vine"
-           a = 100; b = 400; x = 100; y = 200
-          when "crop"
-           a = 50; b = 200; x = 50; y = 100
-          end
-          broken.sprite_change_square(a, b, x, y)
-    else if time >= SF.seconds(0.3) && time < SF.seconds(0.4)
-          a = 200; b = 200; x = 100; y = 100
-          case @@current_plant_attacked.kind
-          when "bush"
-           a = 200; b = 200; x = 100; y = 100
-          when "tree"
-           a = 200; b = 400; x = 100; y = 200
-          when "vine"
-           a = 200; b = 400; x = 100; y = 200
-          when "crop"
-           a = 100; b = 200; x = 50; y = 100
-          end
-          broken.sprite_change_square(a, b, x, y)
-    else if time >= SF.seconds(0.4) && time < SF.seconds(0.5)
-          a = 300; b = 200; x = 100; y = 100
-          case @@current_plant_attacked.kind
-          when "bush"
-           a = 300; b = 200; x = 100; y = 100
-          when "tree"
-           a = 300; b = 400; x = 100; y = 200
-          when "vine"
-           a = 300; b = 400; x = 100; y = 200
-          when "crop"
-           a = 150; b = 200; x = 50; y = 100
-          end
-          broken.sprite_change_square(a, b, x, y)
-    else if time >= SF.seconds(0.5) && time < SF.seconds(0.6)
-           a = 400; b = 200; x = 100; y = 100
            case @@current_plant_attacked.kind
            when "bush"
-            a = 400; b = 200; x = 100; y = 100
+            a = 100; b = 200; x = 100; y = 100
            when "tree"
-            a = 400; b = 400; x = 100; y = 200
+            a = 100; b = 400; x = 100; y = 200
            when "vine"
-            a = 400; b = 400; x = 100; y = 200
+            a = 100; b = 400; x = 100; y = 200
            when "crop"
-            a = 200; b = 200; x = 50; y = 100
+            a = 50; b = 200; x = 50; y = 100
            end
            broken.sprite_change_square(a, b, x, y)
-    else if time >= SF.seconds(0.6) && time < SF.seconds(1.75)
-     broken.is_broke_toggle   
-     @@plant_reset = 0
-     if time > SF.milliseconds(3000)  #@note this only works with microseconds and milliseconds, not seconds. I don't know why, there wasn't a typo
+     else if time >= SF.seconds(0.3) && time < SF.seconds(0.4)
+           a = 200; b = 200; x = 100; y = 100
+           case @@current_plant_attacked.kind
+           when "bush"
+            a = 200; b = 200; x = 100; y = 100
+           when "tree"
+            a = 200; b = 400; x = 100; y = 200
+           when "vine"
+            a = 200; b = 400; x = 100; y = 200
+           when "crop"
+            a = 100; b = 200; x = 50; y = 100
+           end
+           broken.sprite_change_square(a, b, x, y)
+     else if time >= SF.seconds(0.4) && time < SF.seconds(0.5)
+           a = 300; b = 200; x = 100; y = 100
+           case @@current_plant_attacked.kind
+           when "bush"
+            a = 300; b = 200; x = 100; y = 100
+           when "tree"
+            a = 300; b = 400; x = 100; y = 200
+           when "vine"
+            a = 300; b = 400; x = 100; y = 200
+           when "crop"
+            a = 150; b = 200; x = 50; y = 100
+           end
+           broken.sprite_change_square(a, b, x, y)
+     else if time >= SF.seconds(0.5) && time < SF.seconds(0.6)
+            a = 400; b = 200; x = 100; y = 100
+            case @@current_plant_attacked.kind
+            when "bush"
+             a = 400; b = 200; x = 100; y = 100
+            when "tree"
+             a = 400; b = 400; x = 100; y = 200
+            when "vine"
+             a = 400; b = 400; x = 100; y = 200
+            when "crop"
+             a = 200; b = 200; x = 50; y = 100
+            end
+            broken.sprite_change_square(a, b, x, y)
+     else if time >= SF.seconds(0.6) && time < SF.seconds(1.75)
+      broken.is_broke_toggle   
+      @@plant_reset = 0
+      if time > SF.milliseconds(3000)  #@note this only works with microseconds and milliseconds, not seconds. I don't know why, there wasn't a typo
        Plant_Clock_Break.restart
           this = broken.max_hp
           broken.hp_set(this)
@@ -5604,7 +5607,7 @@ include Use
           broken.is_broke_toggle 
           Plant_Clock_Break.restart
          end; end; end; end; end; end; end; end 
-      #---------------------------------------------------------------Position--------------------------------------------------------------------------------
+   #---------------------------------------------------------------Position--------------------------------------------------------------------------------
        def Herbs.position(window, map, area)
         Herbs.initialize
         case area
@@ -5614,7 +5617,7 @@ include Use
           Herbs.position_doll_factory(window, map)
         end
        end
-      #---------------------------------------------------------------Display---------------------------------------------------------------------------------
+   #---------------------------------------------------------------Display---------------------------------------------------------------------------------
        def Herbs.display(window, map, area)
          case area
           when "test"
@@ -5768,7 +5771,7 @@ include Use
           broken = i
           Herbs.break(broken)
         end} end
-     #-----------------------------------------------------------Initialize Positions-------------------------------------------------------------------------
+   #----------------------------------------------------------Initialize Positions-------------------------------------------------------------------------
        def Herbs.initialize
         Current_Map_Herb_Array.clear
         Herb_Array.map { |i| i.sprite.position = SF.vector2(0, 10000) }
@@ -5800,25 +5803,25 @@ include Use
           Current_Map_Herb_Array.push(@@hagberry_bush, @@elderberry_bush)
         end
        end
-     #--------------------------------------------------------------Set Displays------------------------------------------------------------------------------
-       def Herbs.display_test(window, map, area)
-         case map
-         when "test"
-          #Herbs.initialize
-         when "ore_test"
-          #Herbs.initialize
-         when "test_garden"
-          Herb_Array.map { |i| window.draw(i.sprite)}
-          Herbs.animate(window, map, area)
-         end
-       end
-       def Herbs.display_doll_factory(window, map, area)
-        case map
-        when "factory_map_01"
-         Current_Map_Herb_Array.map { |i| window.draw(i.sprite)}
-         Herbs.animate(window, map, area)
+   #-------------------------------------------------------------Set Displays------------------------------------------------------------------------------
+      #.............................................................Test...................................................................................
+        def Herbs.display_test(window, map, area)
+          case map
+          when "test"
+          when "ore_test"
+          when "test_garden"
+           Herb_Array.map { |i| window.draw(i.sprite)}
+           Herbs.animate(window, map, area)
+          end
         end
-      end
+      #..........................................................Doll Factory..............................................................................
+        def Herbs.display_doll_factory(window, map, area)
+          case map
+           when "factory_map_01"
+            Current_Map_Herb_Array.map { |i| window.draw(i.sprite)}
+            Herbs.animate(window, map, area)
+          end
+         end
   #________________________________________________________________________________________________________________________________________________________
   #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   #/                                                               Entities                                                                               /
@@ -5947,1044 +5950,1055 @@ include Use
     #________________________________________________________________________________________________________________________________________________________
     end
    end
-
+#==========================================================================================================================================================
+#=CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC=
+#=CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC=
+#=CC                                                             Crafted Items                                                                          CC=
+#=CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC=
+#=CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC=
+#==========================================================================================================================================================
 module Crafted_Items
-include Etc
- Weapon_Inventory_Array = [] of Weapon; Weapon_Template_Array = [] of Weapon
- class Weapon
-  #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-  #+                                                              Variables                                                                               +
-  #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-   @@current_equipped_weapon : Weapon; @@current_equipped_weapon = @@nil_stick; 
-  #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-  #!                                                              Initialize                                                                              !
-  #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-   def initialize(@@weapon_name : String, @@weapon_id : Int32, @@weapon_type : String, @@weapon_atk : Float64, @@weapon_element : Array(String), 
-     @weapon_effect : Array(String), @@weapon_sprite : SF::Sprite, @@weapon_inventory_sprite : SF::RectangleShape, @@weapon_swing_sound : SF::Sound, 
-     @@weapon_hit_sound : SF::Sound, @@weapon_motion : String, @@weapon_upgrade_count : Int32, @@ingots_required : Int32)
-     @weapon_name = weapon_name
-     @weapon_id = weapon_id
-     @weapon_type = weapon_type
-     @weapon_atk = weapon_atk
-     @weapon_element = weapon_element
-     @weapon_effect = weapon_effect
-     @weapon_sprite = weapon_sprite
-     @weapon_inventory_sprite = weapon_inventory_sprite
-     @weapon_swing_sound = weapon_swing_sound
-     @weapon_hit_sound = weapon_hit_sound
-     @weapon_motion = weapon_motion
-     @weapon_upgrade_count = weapon_upgrade_count
-     @ingots_required = ingots_required
+ include Etc
+  Weapon_Inventory_Array = [] of Weapon; Weapon_Template_Array = [] of Weapon
+  class Weapon
+   #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+   #+                                                              Variables                                                                               +
+   #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    @@current_equipped_weapon : Weapon; @@current_equipped_weapon = @@nil_stick; 
+   #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+   #!                                                              Initialize                                                                              !
+   #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    def initialize(@@weapon_name : String, @@weapon_id : Int32, @@weapon_type : String, @@weapon_atk : Float64, @@weapon_element : Array(String), 
+      @weapon_effect : Array(String), @@weapon_sprite : SF::Sprite, @@weapon_inventory_sprite : SF::RectangleShape, @@weapon_swing_sound : SF::Sound, 
+      @@weapon_hit_sound : SF::Sound, @@weapon_motion : String, @@weapon_upgrade_count : Int32, @@ingots_required : Int32)
+      @weapon_name = weapon_name
+      @weapon_id = weapon_id
+      @weapon_type = weapon_type
+      @weapon_atk = weapon_atk
+      @weapon_element = weapon_element
+      @weapon_effect = weapon_effect
+      @weapon_sprite = weapon_sprite
+      @weapon_inventory_sprite = weapon_inventory_sprite
+      @weapon_swing_sound = weapon_swing_sound
+      @weapon_hit_sound = weapon_hit_sound
+      @weapon_motion = weapon_motion
+      @weapon_upgrade_count = weapon_upgrade_count
+      @ingots_required = ingots_required
+     end
+    def weapon_name
+      @weapon_name
+     end
+    def weapon_id
+      @weapon_id
+     end
+    def weapon_type
+      @weapon_type
+     end
+    def weapon_atk
+      @weapon_atk
+     end
+    def weapon_element
+      @weapon_element
+     end
+    def weapon_effect
+      @weapon_effect
+     end
+    def weapon_sprite
+      @weapon_sprite
+     end
+    def weapon_inventory_sprite
+      @weapon_inventory_sprite
+     end
+    def weapon_swing_sound
+      @weapon_swing_sound
+     end
+    def weapon_hit_sound
+       @weapon_hit_sound
+     end
+    def weapon_motion
+      @weapon_motion
+     end
+    def weapon_upgrade_count
+     @weapon_upgrade_count
+     end
+    def ingots_required
+     @ingots_required
     end
-   def weapon_name
-     @weapon_name
-    end
-   def weapon_id
-     @weapon_id
-    end
-   def weapon_type
-     @weapon_type
-    end
-   def weapon_atk
+    def weapon_atk=(this)
      @weapon_atk
     end
-   def weapon_element
-     @weapon_element
+    def weapon_upgrade_count=(this)
+     @weapon_upgrade_count
     end
-   def weapon_effect
-     @weapon_effect
-    end
-   def weapon_sprite
-     @weapon_sprite
-    end
-   def weapon_inventory_sprite
-     @weapon_inventory_sprite
-    end
-   def weapon_swing_sound
-     @weapon_swing_sound
-    end
-   def weapon_hit_sound
-      @weapon_hit_sound
-    end
-   def weapon_motion
-     @weapon_motion
-    end
-   def weapon_upgrade_count
-    @weapon_upgrade_count
-    end
-   def ingots_required
-    @ingots_required
-   end
-   def weapon_atk=(this)
-    @weapon_atk
-   end
-   def weapon_upgrade_count=(this)
-    @weapon_upgrade_count
-   end
-  #________________________________________________________________________________________________________________________________________________________
-  #????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
-  #?                                                               Methods                                                                                ?
-  #????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
-   #.............................................................Draw Weapon...............................................................................
-    def Weapon.draw_current_weapon(player) #@note draw current weapon
-      #Equipment.check_gem_element_current_weapon
-      player.draw(@@current_equipped_weapon.weapon_sprite)
-    end
-   #.............................................................Equip Weapon...............................................................................
-    def Weapon.equip_weapon(this)
-      size = Weapon_Inventory_Array.size 
-       if this > size
-         All_Audio::SFX.light_bonk
-        else 
-       if @@current_equipped_weapon != Nil && @@current_equipped_weapon != @@nil_stick
-         Weapon_Inventory_Array.push(@@current_equipped_weapon)
+   #________________________________________________________________________________________________________________________________________________________
+   #????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
+   #?                                                               Methods                                                                                ?
+   #????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
+    #.............................................................Draw Weapon...............................................................................
+     def Weapon.draw_current_weapon(player) #@note draw current weapon
+       #Equipment.check_gem_element_current_weapon
+       player.draw(@@current_equipped_weapon.weapon_sprite)
+     end
+    #.............................................................Equip Weapon...............................................................................
+     def Weapon.equip_weapon(this)
+       size = Weapon_Inventory_Array.size 
+        if this > size
+          All_Audio::SFX.light_bonk
+         else 
+        if @@current_equipped_weapon != Nil && @@current_equipped_weapon != @@nil_stick
+          Weapon_Inventory_Array.push(@@current_equipped_weapon)
+          @@current_equipped_weapon = Weapon_Inventory_Array[this]
+          Weapon_Inventory_Array.delete(@@current_equipped_weapon)
+          puts "equip" + this.to_s
+        else
          @@current_equipped_weapon = Weapon_Inventory_Array[this]
          Weapon_Inventory_Array.delete(@@current_equipped_weapon)
-         puts "equip" + this.to_s
-       else
-        @@current_equipped_weapon = Weapon_Inventory_Array[this]
-        Weapon_Inventory_Array.delete(@@current_equipped_weapon)
-        end
-        end
-      end
-   #.............................................................Draw Weapon................................................................................
-      def Weapon.display_equipment_inventory(window, page) #@note inventory max is 54 slots for now. may expand at some point
-        #----------------------Slot 1--------------------------
-         if Weapon_Inventory_Array.size >= 1
-          case page
-           when 1   
-            Weapon_Inventory_Array[0].weapon_inventory_sprite.position = SF.vector2(555, 310);
-            window.draw(Weapon_Inventory_Array[0].weapon_inventory_sprite)
-           when 2   
-            if Weapon_Inventory_Array.size >= 19
-              Weapon_Inventory_Array[18].weapon_inventory_sprite.position = SF.vector2(555, 310);
-              window.draw(Weapon_Inventory_Array[18].weapon_inventory_sprite)
-             end
-           when 3   
-            if Weapon_Inventory_Array.size >= 37
-              Weapon_Inventory_Array[36].weapon_inventory_sprite.position = SF.vector2(555, 310);
-              window.draw(Weapon_Inventory_Array[36].weapon_inventory_sprite)
-             end
-           end
          end
-        #----------------------Slot 2--------------------------
-         if Weapon_Inventory_Array.size >= 2
-          case page
-           when 1   
-            Weapon_Inventory_Array[1].weapon_inventory_sprite.position = SF.vector2(710, 310);
-            window.draw(Weapon_Inventory_Array[1].weapon_inventory_sprite)
-           when 2   
-            if Weapon_Inventory_Array.size >= 20
-              Weapon_Inventory_Array[19].weapon_inventory_sprite.position = SF.vector2(710, 310);
-              window.draw(Weapon_Inventory_Array[19].weapon_inventory_sprite)
-             end
-           when 3   
-            if Weapon_Inventory_Array.size >= 38
-              Weapon_Inventory_Array[37].weapon_inventory_sprite.position = SF.vector2(710, 310);
-              window.draw(Weapon_Inventory_Array[37].weapon_inventory_sprite)
-             end
-           end
          end
-        #----------------------Slot 3--------------------------
-         if Weapon_Inventory_Array.size >= 3
+       end
+    #.............................................................Draw Weapon................................................................................
+       def Weapon.display_equipment_inventory(window, page) #@note inventory max is 54 slots for now. may expand at some point
+         #----------------------Slot 1--------------------------
+          if Weapon_Inventory_Array.size >= 1
            case page
             when 1   
-             Weapon_Inventory_Array[2].weapon_inventory_sprite.position = SF.vector2(855, 310);
-             window.draw(Weapon_Inventory_Array[2].weapon_inventory_sprite)
+             Weapon_Inventory_Array[0].weapon_inventory_sprite.position = SF.vector2(555, 310);
+             window.draw(Weapon_Inventory_Array[0].weapon_inventory_sprite)
             when 2   
-             if Weapon_Inventory_Array.size >= 21
-               Weapon_Inventory_Array[20].weapon_inventory_sprite.position = SF.vector2(855, 310);
-               window.draw(Weapon_Inventory_Array[20].weapon_inventory_sprite)
+             if Weapon_Inventory_Array.size >= 19
+               Weapon_Inventory_Array[18].weapon_inventory_sprite.position = SF.vector2(555, 310);
+               window.draw(Weapon_Inventory_Array[18].weapon_inventory_sprite)
               end
             when 3   
-             if Weapon_Inventory_Array.size >= 39
-               Weapon_Inventory_Array[38].weapon_inventory_sprite.position = SF.vector2(855, 310);
-               window.draw(Weapon_Inventory_Array[38].weapon_inventory_sprite)
+             if Weapon_Inventory_Array.size >= 37
+               Weapon_Inventory_Array[36].weapon_inventory_sprite.position = SF.vector2(555, 310);
+               window.draw(Weapon_Inventory_Array[36].weapon_inventory_sprite)
+              end
+            end
+          end
+         #----------------------Slot 2--------------------------
+          if Weapon_Inventory_Array.size >= 2
+           case page
+            when 1   
+             Weapon_Inventory_Array[1].weapon_inventory_sprite.position = SF.vector2(710, 310);
+             window.draw(Weapon_Inventory_Array[1].weapon_inventory_sprite)
+            when 2   
+             if Weapon_Inventory_Array.size >= 20
+               Weapon_Inventory_Array[19].weapon_inventory_sprite.position = SF.vector2(710, 310);
+               window.draw(Weapon_Inventory_Array[19].weapon_inventory_sprite)
+              end
+            when 3   
+             if Weapon_Inventory_Array.size >= 38
+               Weapon_Inventory_Array[37].weapon_inventory_sprite.position = SF.vector2(710, 310);
+               window.draw(Weapon_Inventory_Array[37].weapon_inventory_sprite)
+              end
+            end
+          end
+         #----------------------Slot 3--------------------------
+          if Weapon_Inventory_Array.size >= 3
+            case page
+             when 1   
+              Weapon_Inventory_Array[2].weapon_inventory_sprite.position = SF.vector2(855, 310);
+              window.draw(Weapon_Inventory_Array[2].weapon_inventory_sprite)
+             when 2   
+              if Weapon_Inventory_Array.size >= 21
+                Weapon_Inventory_Array[20].weapon_inventory_sprite.position = SF.vector2(855, 310);
+                window.draw(Weapon_Inventory_Array[20].weapon_inventory_sprite)
+               end
+             when 3   
+              if Weapon_Inventory_Array.size >= 39
+                Weapon_Inventory_Array[38].weapon_inventory_sprite.position = SF.vector2(855, 310);
+                window.draw(Weapon_Inventory_Array[38].weapon_inventory_sprite)
+               end
+            end
+          end
+         #----------------------Slot 4--------------------------
+          if Weapon_Inventory_Array.size >= 4
+            case page
+            when 1   
+             Weapon_Inventory_Array[3].weapon_inventory_sprite.position = SF.vector2(1005, 310);
+             window.draw(Weapon_Inventory_Array[3].weapon_inventory_sprite)
+            when 2   
+             if Weapon_Inventory_Array.size >= 22
+               Weapon_Inventory_Array[21].weapon_inventory_sprite.position = SF.vector2(1005, 310);
+               window.draw(Weapon_Inventory_Array[21].weapon_inventory_sprite)
+              end
+            when 3   
+             if Weapon_Inventory_Array.size >= 40
+               Weapon_Inventory_Array[39].weapon_inventory_sprite.position = SF.vector2(1005, 310);
+               window.draw(Weapon_Inventory_Array[39].weapon_inventory_sprite)
+              end
+            end
+          end
+         #----------------------Slot 5--------------------------
+          if Weapon_Inventory_Array.size >= 5
+            case page
+            when 1   
+             Weapon_Inventory_Array[4].weapon_inventory_sprite.position = SF.vector2(1155, 310);
+             window.draw(Weapon_Inventory_Array[4].weapon_inventory_sprite)
+            when 2   
+             if Weapon_Inventory_Array.size >= 23
+               Weapon_Inventory_Array[22].weapon_inventory_sprite.position = SF.vector2(1155, 310);
+               window.draw(Weapon_Inventory_Array[22].weapon_inventory_sprite)
+              end
+            when 3   
+             if Weapon_Inventory_Array.size >= 41
+               Weapon_Inventory_Array[40].weapon_inventory_sprite.position = SF.vector2(1155, 310);
+               window.draw(Weapon_Inventory_Array[40].weapon_inventory_sprite)
+              end
+            end
+          end
+         #----------------------Slot 6--------------------------
+          if Weapon_Inventory_Array.size >= 6
+            case page
+            when 1   
+             Weapon_Inventory_Array[5].weapon_inventory_sprite.position = SF.vector2(1305, 310);
+             window.draw(Weapon_Inventory_Array[5].weapon_inventory_sprite)
+            when 2   
+             if Weapon_Inventory_Array.size >= 24
+               Weapon_Inventory_Array[23].weapon_inventory_sprite.position = SF.vector2(1305, 310);
+               window.draw(Weapon_Inventory_Array[23].weapon_inventory_sprite)
+              end
+            when 3   
+             if Weapon_Inventory_Array.size >= 42
+               Weapon_Inventory_Array[41].weapon_inventory_sprite.position = SF.vector2(1305, 310);
+               window.draw(Weapon_Inventory_Array[41].weapon_inventory_sprite)
+              end
+            end
+          end
+         #----------------------Slot 7--------------------------
+          if Weapon_Inventory_Array.size >= 7
+            case page
+            when 1   
+             Weapon_Inventory_Array[6].weapon_inventory_sprite.position = SF.vector2(555, 460);
+             window.draw(Weapon_Inventory_Array[6].weapon_inventory_sprite)
+            when 2   
+             if Weapon_Inventory_Array.size >= 25
+               Weapon_Inventory_Array[24].weapon_inventory_sprite.position = SF.vector2(555, 460);
+               window.draw(Weapon_Inventory_Array[24].weapon_inventory_sprite)
+              end
+            when 3   
+             if Weapon_Inventory_Array.size >= 43
+               Weapon_Inventory_Array[42].weapon_inventory_sprite.position = SF.vector2(555, 460);
+               window.draw(Weapon_Inventory_Array[42].weapon_inventory_sprite)
+              end
+            end
+          end
+         #----------------------Slot 8--------------------------
+          if Weapon_Inventory_Array.size >= 8
+            case page
+            when 1   
+             Weapon_Inventory_Array[7].weapon_inventory_sprite.position = SF.vector2(710, 460);
+             window.draw(Weapon_Inventory_Array[7].weapon_inventory_sprite)
+            when 2   
+             if Weapon_Inventory_Array.size >= 26
+               Weapon_Inventory_Array[25].weapon_inventory_sprite.position = SF.vector2(710, 460);
+               window.draw(Weapon_Inventory_Array[25].weapon_inventory_sprite)
+              end
+            when 3   
+             if Weapon_Inventory_Array.size >= 44
+               Weapon_Inventory_Array[43].weapon_inventory_sprite.position = SF.vector2(710, 460);
+               window.draw(Weapon_Inventory_Array[43].weapon_inventory_sprite)
+              end
+            end
+          end
+         #----------------------Slot 9--------------------------
+          if Weapon_Inventory_Array.size >= 9
+            case page
+            when 1   
+             Weapon_Inventory_Array[8].weapon_inventory_sprite.position = SF.vector2(855, 460);
+             window.draw(Weapon_Inventory_Array[8].weapon_inventory_sprite)
+            when 2   
+             if Weapon_Inventory_Array.size >= 27
+               Weapon_Inventory_Array[26].weapon_inventory_sprite.position = SF.vector2(855, 460);
+               window.draw(Weapon_Inventory_Array[26].weapon_inventory_sprite)
+              end
+            when 3   
+             if Weapon_Inventory_Array.size >= 45
+               Weapon_Inventory_Array[44].weapon_inventory_sprite.position = SF.vector2(855, 460);
+               window.draw(Weapon_Inventory_Array[44].weapon_inventory_sprite)
+              end
+            end
+          end
+         #----------------------Slot 10-------------------------
+          if Weapon_Inventory_Array.size >= 10
+            case page
+            when 1   
+             Weapon_Inventory_Array[9].weapon_inventory_sprite.position = SF.vector2(1005, 460);
+             window.draw(Weapon_Inventory_Array[9].weapon_inventory_sprite)
+            when 2   
+             if Weapon_Inventory_Array.size >= 28
+               Weapon_Inventory_Array[27].weapon_inventory_sprite.position = SF.vector2(1005, 460);
+               window.draw(Weapon_Inventory_Array[27].weapon_inventory_sprite)
+              end
+            when 3   
+             if Weapon_Inventory_Array.size >= 46
+               Weapon_Inventory_Array[45].weapon_inventory_sprite.position = SF.vector2(1005, 460);
+               window.draw(Weapon_Inventory_Array[45].weapon_inventory_sprite)
+              end
+            end
+          end
+         #----------------------Slot 11-------------------------
+          if Weapon_Inventory_Array.size >= 11
+            case page
+            when 1   
+             Weapon_Inventory_Array[10].weapon_inventory_sprite.position = SF.vector2(1155, 460);
+             window.draw(Weapon_Inventory_Array[10].weapon_inventory_sprite)
+            when 2   
+             if Weapon_Inventory_Array.size >= 29
+               Weapon_Inventory_Array[28].weapon_inventory_sprite.position = SF.vector2(1155, 460);
+               window.draw(Weapon_Inventory_Array[28].weapon_inventory_sprite)
+              end
+            when 3   
+             if Weapon_Inventory_Array.size >= 47
+               Weapon_Inventory_Array[46].weapon_inventory_sprite.position = SF.vector2(1155, 460);
+               window.draw(Weapon_Inventory_Array[46].weapon_inventory_sprite)
+              end
+            end
+          end
+         #----------------------Slot 12-------------------------
+          if Weapon_Inventory_Array.size >= 12
+            case page
+            when 1   
+             Weapon_Inventory_Array[11].weapon_inventory_sprite.position = SF.vector2(1305, 460);
+             window.draw(Weapon_Inventory_Array[11].weapon_inventory_sprite)
+            when 2   
+             if Weapon_Inventory_Array.size >= 30
+               Weapon_Inventory_Array[29].weapon_inventory_sprite.position = SF.vector2(1305, 460);
+               window.draw(Weapon_Inventory_Array[29].weapon_inventory_sprite)
+              end
+            when 3   
+             if Weapon_Inventory_Array.size >= 48
+               Weapon_Inventory_Array[47].weapon_inventory_sprite.position = SF.vector2(1305, 460);
+               window.draw(Weapon_Inventory_Array[47].weapon_inventory_sprite)
+              end
+            end
+          end
+         #----------------------Slot 13-------------------------
+          if Weapon_Inventory_Array.size >= 13
+            case page
+            when 1   
+             Weapon_Inventory_Array[12].weapon_inventory_sprite.position = SF.vector2(555, 610);
+             window.draw(Weapon_Inventory_Array[12].weapon_inventory_sprite)
+            when 2   
+             if Weapon_Inventory_Array.size >= 31
+               Weapon_Inventory_Array[30].weapon_inventory_sprite.position = SF.vector2(555, 610);
+               window.draw(Weapon_Inventory_Array[30].weapon_inventory_sprite)
+              end
+            when 3   
+             if Weapon_Inventory_Array.size >= 49
+               Weapon_Inventory_Array[48].weapon_inventory_sprite.position = SF.vector2(555, 610);
+               window.draw(Weapon_Inventory_Array[48].weapon_inventory_sprite)
+              end
+            end
+          end
+         #----------------------Slot 14-------------------------
+          if Weapon_Inventory_Array.size >= 14
+            case page
+            when 1   
+             Weapon_Inventory_Array[13].weapon_inventory_sprite.position = SF.vector2(710, 610);
+             window.draw(Weapon_Inventory_Array[13].weapon_inventory_sprite)
+            when 2   
+             if Weapon_Inventory_Array.size >= 32
+               Weapon_Inventory_Array[31].weapon_inventory_sprite.position = SF.vector2(710, 610);
+               window.draw(Weapon_Inventory_Array[31].weapon_inventory_sprite)
+              end
+            when 3   
+             if Weapon_Inventory_Array.size >= 50
+               Weapon_Inventory_Array[49].weapon_inventory_sprite.position = SF.vector2(710, 610);
+               window.draw(Weapon_Inventory_Array[49].weapon_inventory_sprite)
+              end
+            end
+          end
+         #----------------------Slot 15-------------------------
+          if Weapon_Inventory_Array.size >= 15
+            case page
+            when 1   
+             Weapon_Inventory_Array[14].weapon_inventory_sprite.position = SF.vector2(855, 610);
+             window.draw(Weapon_Inventory_Array[14].weapon_inventory_sprite)
+            when 2   
+             if Weapon_Inventory_Array.size >= 33
+               Weapon_Inventory_Array[32].weapon_inventory_sprite.position = SF.vector2(855, 610);
+               window.draw(Weapon_Inventory_Array[32].weapon_inventory_sprite)
+              end
+            when 3   
+             if Weapon_Inventory_Array.size >= 51
+               Weapon_Inventory_Array[50].weapon_inventory_sprite.position = SF.vector2(855, 610);
+               window.draw(Weapon_Inventory_Array[50].weapon_inventory_sprite)
+              end
+            end
+          end
+         #----------------------Slot 16-------------------------
+          if Weapon_Inventory_Array.size >= 16
+            case page
+            when 1   
+             Weapon_Inventory_Array[15].weapon_inventory_sprite.position = SF.vector2(1005, 610);
+             window.draw(Weapon_Inventory_Array[15].weapon_inventory_sprite)
+            when 2   
+             if Weapon_Inventory_Array.size >= 34
+               Weapon_Inventory_Array[33].weapon_inventory_sprite.position = SF.vector2(1005, 610);
+               window.draw(Weapon_Inventory_Array[33].weapon_inventory_sprite)
+              end
+            when 3   
+             if Weapon_Inventory_Array.size >= 52
+               Weapon_Inventory_Array[51].weapon_inventory_sprite.position = SF.vector2(1005, 610);
+               window.draw(Weapon_Inventory_Array[51].weapon_inventory_sprite)
+              end
+            end
+          end
+         #----------------------Slot 17-------------------------
+          if Weapon_Inventory_Array.size >= 17
+            case page
+            when 1   
+             Weapon_Inventory_Array[16].weapon_inventory_sprite.position = SF.vector2(1155, 610);
+             window.draw(Weapon_Inventory_Array[16].weapon_inventory_sprite)
+            when 2   
+             if Weapon_Inventory_Array.size >= 35
+               Weapon_Inventory_Array[34].weapon_inventory_sprite.position = SF.vector2(1155, 610);
+               window.draw(Weapon_Inventory_Array[34].weapon_inventory_sprite)
+              end
+            when 3   
+             if Weapon_Inventory_Array.size >= 53
+               Weapon_Inventory_Array[52].weapon_inventory_sprite.position = SF.vector2(1155, 610);
+               window.draw(Weapon_Inventory_Array[52].weapon_inventory_sprite)
+              end
+            end
+          end
+         #----------------------Slot 18-------------------------
+          if Weapon_Inventory_Array.size >= 18
+            case page
+            when 1   
+             Weapon_Inventory_Array[17].weapon_inventory_sprite.position = SF.vector2(1305, 610);
+             window.draw(Weapon_Inventory_Array[17].weapon_inventory_sprite)
+            when 2   
+             if Weapon_Inventory_Array.size >= 36
+               Weapon_Inventory_Array[35].weapon_inventory_sprite.position = SF.vector2(1305, 610);
+               window.draw(Weapon_Inventory_Array[35].weapon_inventory_sprite)
+              end
+            when 3   
+             if Weapon_Inventory_Array.size >= 54
+               Weapon_Inventory_Array[53].weapon_inventory_sprite.position = SF.vector2(1305, 610);
+               window.draw(Weapon_Inventory_Array[53].weapon_inventory_sprite)
+              end
+            end
+          end
+        end
+ 
+    #.............................................................Attack Strength................................................................................
+        def Weapon.attack_strength(base_attack) #@note attack strength 
+         attack_strength = base_attack * @@current_equipped_weapon.weapon_atk
+         Harvestables::Ore.set_attack_strength(attack_strength)
+         Harvestables::Herbs.set_attack_strength(attack_strength)
+         Regular_Enemies.set_attack_strength(attack_strength)
+        end
+ 
+        def Crafted_Items::Weapon.check_stats(slot)
+         if Weapon_Inventory_Array.size > slot
+            Weapon_Info_Text.string = " Name: " + Weapon_Inventory_Array[slot].weapon_name + "\n Attack: " + 
+            Weapon_Inventory_Array[slot].weapon_atk.to_s + "\n Elements: " + Weapon_Inventory_Array[slot].weapon_element[0] + ", " +
+            Weapon_Inventory_Array[slot].weapon_element[1] + ", " + Weapon_Inventory_Array[slot].weapon_element[2] +
+            "\n Effects: " + Weapon_Inventory_Array[slot].weapon_effect[0] + ", " + Weapon_Inventory_Array[slot].weapon_effect[1] +
+            ", " + Weapon_Inventory_Array[slot].weapon_effect[2] + "\n Upgrade Count: " + Weapon_Inventory_Array[slot].weapon_upgrade_count.to_s
+          else
+           Weapon_Info_Text.string = ""
+         end
+        end
+        def Weapon.play_swing_sound
+           @@current_equipped_weapon.weapon_swing_sound.play
+          end
+        def Weapon.play_hit_sound
+          @@current_equipped_weapon.weapon_hit_sound.play
+         end
+        def Weapon.stop_swing_sound
+          @@current_equipped_weapon.swing_sound.stop
+          @@current_equipped_weapon.hit_sound.play
+         end
+        def Weapon.forge_weapon(weapon)
+         if Weapon_Inventory_Array.size < 54
+         s = Weapon_Template_Array.size; i = 0
+         while s > i
+           if weapon == Weapon_Template_Array[i].weapon_id 
+             Weapon_Inventory_Array.push(Weapon_Template_Array[i].dup)
+           end
+           i += 1
+         end
+       else
+         All_Audio::SFX.char_create_up
+       end
+        end
+   #________________________________________________________________________________________________________________________________________________________
+   #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+   #/                                                               Entities                                                                               /
+   #///////////////////////////////////////////////////////////////////////////////////////////Atk//////////////////////////////////////////////////////////
+    @@nil_stick = Weapon.new("", -1, "", 0, [""], [""], Nil_Ingot_Ore, Nil_Rectangle_01, SYSSOUND_6, SYSSOUND_6, "", 0, 0)
+    @@stick = Weapon.new("Stick", 0, "stick", 1.25, ["none", "none", "none"], ["none", "none", "none"], Stick01, Weapon_Rectangle_01, WEAPSOUND_01, WEAPSOUND_02, "Swing", 0, 0)
+    @@zinc_stick = Weapon.new("Zinc Stick", 4, "stick", 1.5, ["empty", "none", "none"], ["empty", "none", "none"], Zinc_Stick, Zinc_Stick_Display, WEAPSOUND_01, WEAPSOUND_02, "Swing", 0, 2)
+    Weapon_Inventory_Array.push(@@zinc_stick); Weapon_Template_Array.push(@@zinc_stick)
+    @@tin_stick = Weapon.new("Tin Stick", 2, "stick", 1.75, ["empty", "none", "none"], ["empty", "none", "none"], Tin_Stick, Tin_Stick_Display, WEAPSOUND_01, WEAPSOUND_02, "Swing", 0, 2)
+    Weapon_Template_Array.push(@@tin_stick)
+    @@copper_stick = Weapon.new("Copper Stick", 1, "stick", 2.5, ["empty", "none", "none"], ["empty", "none", "none"], Copper_Stick, Copper_Stick_Display, WEAPSOUND_01, WEAPSOUND_02, "Swing", 0, 2)
+    Weapon_Template_Array.push(@@copper_stick)
+    @@brass_stick = Weapon.new("Brass Stick", 5, "stick", 2, ["empty", "empty", "none"], ["empty", "empty", "none"], Brass_Stick, Brass_Stick_Display, WEAPSOUND_01, WEAPSOUND_02, "Swing", 0, 2)
+    Weapon_Template_Array.push(@@brass_stick)
+    @@bronze_stick = Weapon.new("Bronze Stick", 3, "stick", 2.25, ["empty", "empty", "none"], ["empty", "empty", "none"], Bronze_Stick, Bronze_Stick_Display, WEAPSOUND_01, WEAPSOUND_02, "Swing", 0, 2)
+    Weapon_Template_Array.push(@@bronze_stick)
+    @@iron_stick = Weapon.new("Iron Stick", 6, "stick", 2.5, ["empty", "empty", "none"], ["empty", "empty", "none"], Iron_Stick, Iron_Stick_Display, WEAPSOUND_01, WEAPSOUND_02, "Swing", 0, 2)
+    Weapon_Template_Array.push(@@iron_stick)
+    @@steel_stick = Weapon.new("Steel Stick", 7, "stick", 3, ["empty", "empty", "empty"], ["empty", "empty", "empty"], Steel_Stick, Steel_Stick_Display, WEAPSOUND_01, WEAPSOUND_02, "Swing", 0, 2)
+    Weapon_Template_Array.push(@@steel_stick)
+   #________________________________________________________________________________________________________________________________________________________
+   end
+   Upgrade_Gem_Array = GEM_ARRAY.clone
+  class Upgrade_Table
+   #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+   #+                                                              Variables                                                                               +
+   #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  
+    @@nil_stick = Weapon.new("", -1, "", 0, ["", "", ""], ["", "", ""], Nil_Ingot_Ore, Nil_Rectangle_01, SYSSOUND_6, SYSSOUND_6, "", 0, 0) 
+    @@selected_gem_01 : Gem; @@selected_gem_01 = GEM_ARRAY[0]; @@selected_gem_01.craft_sprite.position = SF.vector2(650, -52)
+    @@selected_gem_02 : Gem; @@selected_gem_02 = GEM_ARRAY[0]; @@selected_gem_02.craft_sprite.position = SF.vector2(725, -52)
+    @@selected_gem_03 : Gem; @@selected_gem_03 = GEM_ARRAY[0]; @@selected_gem_03.craft_sprite.position = SF.vector2(805, -52)
+    @@selected_weapon_original_elements : Array(String); @@selected_weapon_original_elements = @@nil_stick.weapon_element 
+    @@selected_weapon_original_effects : Array(String); @@selected_weapon_original_effects = @@nil_stick.weapon_effect
+    @@selected_weapon_original_attack : Float64; @@selected_weapon_original_attack = @@nil_stick.weapon_atk
+    @@selected_weapon_original_upgrade_count : Int32; @@selected_weapon_original_upgrade_count = @@nil_stick.weapon_upgrade_count
+    @@current_gem_slot : Int32; @@current_gem_slot = 1; @@current_upgrade_table_weapon : Weapon; @@current_upgrade_table_weapon = @@nil_stick
+    @@upgrade_table_text = SF::Text.new; @@upgrade_table_text.string = "  Upgrade Stuff Here!"; @@upgrade_table_text.position = SF.vector2(700, 55);
+    @@upgrade_table_text.font = FONT_MILITARY; @@upgrade_table_text.color = SF::Color::Black; @@upgrade_table_text.character_size = 15
+   #________________________________________________________________________________________________________________________________________________________
+   #????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
+   #?                                                               Methods                                                                                ?
+   #????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
+     def Upgrade_Table.initialize_upgrade_table
+       @@upgrade_table_text.string = "Upgrade Stuff Here!"
+       if @@selected_gem_01 != GEM_ARRAY[0]
+       Owned_Gem_Array.push(@@selected_gem_01)
+       end
+       if @@selected_gem_02 != GEM_ARRAY[0]
+       Owned_Gem_Array.push(@@selected_gem_02)
+       end
+       if @@selected_gem_03 != GEM_ARRAY[0]
+       Owned_Gem_Array.push(@@selected_gem_03)
+       end
+       @@current_gem_slot = 1
+       @@current_upgrade_table_weapon.weapon_element[0] = @@selected_weapon_original_elements[0]
+       @@current_upgrade_table_weapon.weapon_element[1] = @@selected_weapon_original_elements[1]
+       @@current_upgrade_table_weapon.weapon_element[2] = @@selected_weapon_original_elements[2]
+       @@current_upgrade_table_weapon.weapon_effect[0] = @@selected_weapon_original_effects[0]  
+       @@current_upgrade_table_weapon.weapon_effect[1] = @@selected_weapon_original_effects[1] 
+       @@current_upgrade_table_weapon.weapon_effect[2] = @@selected_weapon_original_effects[2] 
+       @@current_upgrade_table_weapon.weapon_atk = @@selected_weapon_original_attack
+       @@current_upgrade_table_weapon.weapon_upgrade_count = @@selected_weapon_original_upgrade_count
+       @@selected_gem_01 = GEM_ARRAY[0]
+       @@selected_gem_02 = GEM_ARRAY[0]
+       @@selected_gem_03 = GEM_ARRAY[0]
+       @@current_upgrade_table_weapon = @@nil_stick
+      end
+     def Upgrade_Table.upgrade
+       if @@current_upgrade_table_weapon != GEM_ARRAY[0]
+       All_Audio::SFX.metal_hit_01
+       @@selected_weapon_original_elements[0] = @@current_upgrade_table_weapon.weapon_element[0]
+       @@selected_weapon_original_effects[0] = @@current_upgrade_table_weapon.weapon_effect[0]      
+       @@selected_weapon_original_elements[1] = @@current_upgrade_table_weapon.weapon_element[1]
+       @@selected_weapon_original_effects[1] = @@current_upgrade_table_weapon.weapon_effect[1]
+       @@selected_weapon_original_elements[2] = @@current_upgrade_table_weapon.weapon_element[2]         
+       @@selected_weapon_original_effects[2] = @@current_upgrade_table_weapon.weapon_effect[2]   
+       @@selected_gem_01 = GEM_ARRAY[0]
+       @@selected_gem_02 = GEM_ARRAY[0]
+       @@selected_gem_03 = GEM_ARRAY[0]
+       else
+         All_Audio::SFX.char_create_up
+       end
+      end
+     def Upgrade_Table.update_upgrade_table_string
+       if @@current_upgrade_table_weapon != @@nil_stick
+       @@upgrade_table_text.string = "  Name: " + @@current_upgrade_table_weapon.weapon_name +
+       "\n  Atk: " + @@current_upgrade_table_weapon.weapon_atk.to_s + "\n  Elements: " +
+       @@current_upgrade_table_weapon.weapon_element[0] + ", \n" + @@current_upgrade_table_weapon.weapon_element[1] +
+       ", " + @@current_upgrade_table_weapon.weapon_element[2] + "\n  Effects: " + @@current_upgrade_table_weapon.weapon_effect[0] +
+       ", \n" + @@current_upgrade_table_weapon.weapon_effect[1] + ", " + @@current_upgrade_table_weapon.weapon_effect[2] +
+       "\n  Upgrade Count: " + @@current_upgrade_table_weapon.weapon_upgrade_count.to_s
+       end
+     end
+     def Upgrade_Table.select_gem(gem)
+      if Owned_Gem_Array.size > gem
+        case @@current_gem_slot
+          when 1
+           if @@current_upgrade_table_weapon.weapon_element[0] == "empty"
+           @@selected_gem_01 = Owned_Gem_Array[gem]
+           @@selected_gem_01.craft_sprite.position = SF.vector2(670, -38)
+           @@selected_gem_01.craft_sprite.scale = SF.vector2(0.85, 0.85)
+           @@current_upgrade_table_weapon.weapon_element[0] = @@selected_gem_01.element
+           @@current_upgrade_table_weapon.weapon_effect[0] = @@selected_gem_01.effect
+           @@current_gem_slot = 2
+           Owned_Gem_Array.delete(Owned_Gem_Array[gem])
+           else
+             @@current_gem_slot = 2
+             Upgrade_Table.select_gem(gem)
+           end
+          when 2
+           if @@current_upgrade_table_weapon.weapon_element[1] == "empty"
+           @@selected_gem_02 = Owned_Gem_Array[gem]
+           @@selected_gem_02.craft_sprite.position = SF.vector2(740, -38)
+           @@selected_gem_02.craft_sprite.scale = SF.vector2(0.85, 0.85)
+           @@current_upgrade_table_weapon.weapon_effect[1] = @@selected_gem_02.effect   
+           @@current_upgrade_table_weapon.weapon_element[1] = @@selected_gem_02.element
+           @@current_gem_slot = 3
+           Owned_Gem_Array.delete(Owned_Gem_Array[gem])
+           else
+             @@current_gem_slot = 3
+             Upgrade_Table.select_gem(gem)
+            end
+          when 3
+           if @@current_upgrade_table_weapon.weapon_element[2] == "empty"
+           @@selected_gem_03 = Owned_Gem_Array[gem]
+           @@selected_gem_03.craft_sprite.position = SF.vector2(810, -38)
+           @@selected_gem_03.craft_sprite.scale = SF.vector2(0.85, 0.85)
+           @@current_upgrade_table_weapon.weapon_element[2] = @@selected_gem_03.element
+           @@current_upgrade_table_weapon.weapon_effect[2] = @@selected_gem_03.effect  
+           @@current_gem_slot = 4
+           Owned_Gem_Array.delete(Owned_Gem_Array[gem])
+           else
+             All_Audio::SFX.char_create_up
+            end
+          when 4
+           All_Audio::SFX.char_create_up
+         end
+         Upgrade_Table.update_upgrade_table_string
+       end
+     end
+      #........................................................Draw Weapon Upgrade Table...........................................................................
+        def Upgrade_Table.display_weapon_upgrade_table(window, page, page_02, page_03)
+         #---------------------weapon init------------------------------
+          weapon = Nil_Stick_Display
+          weapon2 = Nil_Stick_Display
+          weapon3 = Nil_Stick_Display
+          weapon4 = Nil_Stick_Display
+          weapon5 = Nil_Stick_Display
+          weapon6 = Nil_Stick_Display
+          weapon7 = Nil_Stick_Display
+          weapon8 = Nil_Stick_Display
+          weapon9 = Nil_Stick_Display
+          weapon10 = Nil_Stick_Display
+          weapon11 = Nil_Stick_Display
+          weapon12 = Nil_Stick_Display
+          weapon13 = Nil_Stick_Display
+          weapon14 = Nil_Stick_Display
+          weapon15 = Nil_Stick_Display
+          weapon16 = Nil_Stick_Display
+         #______________________________________________________________
+         current_weapon_upgrade_display = @@current_upgrade_table_weapon.weapon_inventory_sprite.dup
+         current_weapon_upgrade_display.position = SF.vector2(700, -175)
+         current_weapon_upgrade_display.scale(SF.vector2(1.5, 1.5))
+         window.draw(current_weapon_upgrade_display)
+         if Weapon_Inventory_Array.size >= 1
+          case page
+            when 1
+             weapon = Weapon_Inventory_Array[0].weapon_inventory_sprite.dup
+            when 2
+             if Weapon_Inventory_Array.size >= 17
+             weapon = Weapon_Inventory_Array[16].weapon_inventory_sprite.dup
+             end
+           when 3
+             if Weapon_Inventory_Array.size >= 33
+             weapon = Weapon_Inventory_Array[32].weapon_inventory_sprite.dup
+             end
+           when 4
+             if Weapon_Inventory_Array.size >= 49
+             weapon = Weapon_Inventory_Array[48].weapon_inventory_sprite.dup
+             end
+            end
+              weapon.scale(SF.vector2(0.5, 0.5))
+              weapon.position = SF.vector2(440, -150);
+              window.draw(weapon)
+          end
+         if Weapon_Inventory_Array.size >= 2
+          case page
+           when 1
+             weapon2 = Weapon_Inventory_Array[1].weapon_inventory_sprite.dup
+           when 2
+             if Weapon_Inventory_Array.size >= 18
+             weapon2 = Weapon_Inventory_Array[17].weapon_inventory_sprite.dup
+             end
+           when 3
+             if Weapon_Inventory_Array.size >= 34
+             weapon2 = Weapon_Inventory_Array[33].weapon_inventory_sprite.dup
+             end
+           when 4
+             if Weapon_Inventory_Array.size >= 50
+             weapon2 = Weapon_Inventory_Array[49].weapon_inventory_sprite.dup
+             end
+            end
+           weapon2.scale(SF.vector2(0.5, 0.5))
+           weapon2.position = SF.vector2(490, -150);
+           window.draw(weapon2)
+          end
+         if Weapon_Inventory_Array.size >= 3
+          case page
+           when 1
+            weapon3 = Weapon_Inventory_Array[2].weapon_inventory_sprite.dup
+           when 2
+             if Weapon_Inventory_Array.size >= 19
+             weapon3 = Weapon_Inventory_Array[18].weapon_inventory_sprite.dup
+             end
+           when 3
+             if Weapon_Inventory_Array.size >= 35
+             weapon3 = Weapon_Inventory_Array[34].weapon_inventory_sprite.dup
+             end
+           when 4
+             if Weapon_Inventory_Array.size >= 51
+             weapon3 = Weapon_Inventory_Array[50].weapon_inventory_sprite.dup
+             end
+           end
+           weapon3.scale(SF.vector2(0.5, 0.5))
+           weapon3.position = SF.vector2(540, -150);
+           window.draw(weapon3)
+          end
+         if Weapon_Inventory_Array.size >= 4
+          case page
+            when 1
+             weapon4 = Weapon_Inventory_Array[3].weapon_inventory_sprite.dup
+            when 2
+             if Weapon_Inventory_Array.size >= 20
+             weapon4 = Weapon_Inventory_Array[19].weapon_inventory_sprite.dup 
+             end
+            when 3
+              if Weapon_Inventory_Array.size >= 36
+              weapon4 = Weapon_Inventory_Array[35].weapon_inventory_sprite.dup
+              end
+            when 4
+              if Weapon_Inventory_Array.size >= 52
+              weapon4 = Weapon_Inventory_Array[51].weapon_inventory_sprite.dup
               end
            end
-         end
-        #----------------------Slot 4--------------------------
-         if Weapon_Inventory_Array.size >= 4
-           case page
-           when 1   
-            Weapon_Inventory_Array[3].weapon_inventory_sprite.position = SF.vector2(1005, 310);
-            window.draw(Weapon_Inventory_Array[3].weapon_inventory_sprite)
-           when 2   
-            if Weapon_Inventory_Array.size >= 22
-              Weapon_Inventory_Array[21].weapon_inventory_sprite.position = SF.vector2(1005, 310);
-              window.draw(Weapon_Inventory_Array[21].weapon_inventory_sprite)
-             end
-           when 3   
-            if Weapon_Inventory_Array.size >= 40
-              Weapon_Inventory_Array[39].weapon_inventory_sprite.position = SF.vector2(1005, 310);
-              window.draw(Weapon_Inventory_Array[39].weapon_inventory_sprite)
-             end
-           end
-         end
-        #----------------------Slot 5--------------------------
+           weapon4.scale(SF.vector2(0.5, 0.5))
+           weapon4.position = SF.vector2(590, -150);
+           window.draw(weapon4)
+          end
          if Weapon_Inventory_Array.size >= 5
-           case page
-           when 1   
-            Weapon_Inventory_Array[4].weapon_inventory_sprite.position = SF.vector2(1155, 310);
-            window.draw(Weapon_Inventory_Array[4].weapon_inventory_sprite)
-           when 2   
-            if Weapon_Inventory_Array.size >= 23
-              Weapon_Inventory_Array[22].weapon_inventory_sprite.position = SF.vector2(1155, 310);
-              window.draw(Weapon_Inventory_Array[22].weapon_inventory_sprite)
-             end
-           when 3   
-            if Weapon_Inventory_Array.size >= 41
-              Weapon_Inventory_Array[40].weapon_inventory_sprite.position = SF.vector2(1155, 310);
-              window.draw(Weapon_Inventory_Array[40].weapon_inventory_sprite)
-             end
+          case page
+            when 1
+              weapon5 = Weapon_Inventory_Array[4].weapon_inventory_sprite.dup
+            when 2
+              if Weapon_Inventory_Array.size >= 21
+              weapon5 = Weapon_Inventory_Array[20].weapon_inventory_sprite.dup
+              end
+            when 3
+              if Weapon_Inventory_Array.size >= 37
+              weapon5 = Weapon_Inventory_Array[36].weapon_inventory_sprite.dup
+              end
+            when 4
+              if Weapon_Inventory_Array.size >= 53
+              weapon5 = Weapon_Inventory_Array[52].weapon_inventory_sprite.dup
+              end
            end
-         end
-        #----------------------Slot 6--------------------------
+           weapon5.scale(SF.vector2(0.5, 0.5))
+           weapon5.position = SF.vector2(440, -100);
+           window.draw(weapon5)
+          end
          if Weapon_Inventory_Array.size >= 6
-           case page
-           when 1   
-            Weapon_Inventory_Array[5].weapon_inventory_sprite.position = SF.vector2(1305, 310);
-            window.draw(Weapon_Inventory_Array[5].weapon_inventory_sprite)
-           when 2   
-            if Weapon_Inventory_Array.size >= 24
-              Weapon_Inventory_Array[23].weapon_inventory_sprite.position = SF.vector2(1305, 310);
-              window.draw(Weapon_Inventory_Array[23].weapon_inventory_sprite)
+          case page
+           when 1
+             weapon6 = Weapon_Inventory_Array[5].weapon_inventory_sprite.dup
+           when 2
+             if Weapon_Inventory_Array.size >= 22
+             weapon6 = Weapon_Inventory_Array[21].weapon_inventory_sprite.dup
              end
-           when 3   
-            if Weapon_Inventory_Array.size >= 42
-              Weapon_Inventory_Array[41].weapon_inventory_sprite.position = SF.vector2(1305, 310);
-              window.draw(Weapon_Inventory_Array[41].weapon_inventory_sprite)
+           when 3
+             if Weapon_Inventory_Array.size >= 38
+             weapon6 = Weapon_Inventory_Array[37].weapon_inventory_sprite.dup
              end
-           end
-         end
-        #----------------------Slot 7--------------------------
+           when 4
+             if Weapon_Inventory_Array.size >= 54
+             weapon6 = Weapon_Inventory_Array[53].weapon_inventory_sprite.dup
+             end
+            end
+           weapon6.scale(SF.vector2(0.5, 0.5))
+           weapon6.position = SF.vector2(490, -100);
+           window.draw(weapon6)
+          end
          if Weapon_Inventory_Array.size >= 7
-           case page
-           when 1   
-            Weapon_Inventory_Array[6].weapon_inventory_sprite.position = SF.vector2(555, 460);
-            window.draw(Weapon_Inventory_Array[6].weapon_inventory_sprite)
-           when 2   
-            if Weapon_Inventory_Array.size >= 25
-              Weapon_Inventory_Array[24].weapon_inventory_sprite.position = SF.vector2(555, 460);
-              window.draw(Weapon_Inventory_Array[24].weapon_inventory_sprite)
+          case page
+           when 1       
+             weapon7 = Weapon_Inventory_Array[6].weapon_inventory_sprite.dup
+           when 2
+             if Weapon_Inventory_Array.size >= 23
+             weapon7 = Weapon_Inventory_Array[22].weapon_inventory_sprite.dup
              end
-           when 3   
-            if Weapon_Inventory_Array.size >= 43
-              Weapon_Inventory_Array[42].weapon_inventory_sprite.position = SF.vector2(555, 460);
-              window.draw(Weapon_Inventory_Array[42].weapon_inventory_sprite)
+           when 3
+             if Weapon_Inventory_Array.size >= 39
+             weapon7 = Weapon_Inventory_Array[38].weapon_inventory_sprite.dup
              end
-           end
-         end
-        #----------------------Slot 8--------------------------
+            end
+           weapon7.scale(SF.vector2(0.5, 0.5))
+           weapon7.position = SF.vector2(540, -100);
+           window.draw(weapon7)
+          end
          if Weapon_Inventory_Array.size >= 8
-           case page
-           when 1   
-            Weapon_Inventory_Array[7].weapon_inventory_sprite.position = SF.vector2(710, 460);
-            window.draw(Weapon_Inventory_Array[7].weapon_inventory_sprite)
-           when 2   
-            if Weapon_Inventory_Array.size >= 26
-              Weapon_Inventory_Array[25].weapon_inventory_sprite.position = SF.vector2(710, 460);
-              window.draw(Weapon_Inventory_Array[25].weapon_inventory_sprite)
+          case page
+           when 1           
+             weapon8 = Weapon_Inventory_Array[7].weapon_inventory_sprite.dup
+           when 2
+             if Weapon_Inventory_Array.size >= 24
+             weapon8 = Weapon_Inventory_Array[23].weapon_inventory_sprite.dup
              end
-           when 3   
-            if Weapon_Inventory_Array.size >= 44
-              Weapon_Inventory_Array[43].weapon_inventory_sprite.position = SF.vector2(710, 460);
-              window.draw(Weapon_Inventory_Array[43].weapon_inventory_sprite)
+           when 3
+             if Weapon_Inventory_Array.size >= 40
+             weapon8 = Weapon_Inventory_Array[39].weapon_inventory_sprite.dup
              end
-           end
-         end
-        #----------------------Slot 9--------------------------
+            end
+           weapon8.scale(SF.vector2(0.5, 0.5))
+           weapon8.position = SF.vector2(590, -100);
+           window.draw(weapon8)
+          end
          if Weapon_Inventory_Array.size >= 9
-           case page
-           when 1   
-            Weapon_Inventory_Array[8].weapon_inventory_sprite.position = SF.vector2(855, 460);
-            window.draw(Weapon_Inventory_Array[8].weapon_inventory_sprite)
-           when 2   
-            if Weapon_Inventory_Array.size >= 27
-              Weapon_Inventory_Array[26].weapon_inventory_sprite.position = SF.vector2(855, 460);
-              window.draw(Weapon_Inventory_Array[26].weapon_inventory_sprite)
+          case page
+           when 1           
+             weapon9 = Weapon_Inventory_Array[8].weapon_inventory_sprite.dup
+           when 2
+             if Weapon_Inventory_Array.size >= 25
+             weapon9 = Weapon_Inventory_Array[24].weapon_inventory_sprite.dup
              end
-           when 3   
-            if Weapon_Inventory_Array.size >= 45
-              Weapon_Inventory_Array[44].weapon_inventory_sprite.position = SF.vector2(855, 460);
-              window.draw(Weapon_Inventory_Array[44].weapon_inventory_sprite)
+           when 3
+             if Weapon_Inventory_Array.size >= 41
+             weapon9 = Weapon_Inventory_Array[40].weapon_inventory_sprite.dup
              end
-           end
-         end
-        #----------------------Slot 10-------------------------
+            end
+           weapon9.scale(SF.vector2(0.5, 0.5))
+           weapon9.position = SF.vector2(440, -50);
+           window.draw(weapon9)
+          end
          if Weapon_Inventory_Array.size >= 10
-           case page
-           when 1   
-            Weapon_Inventory_Array[9].weapon_inventory_sprite.position = SF.vector2(1005, 460);
-            window.draw(Weapon_Inventory_Array[9].weapon_inventory_sprite)
-           when 2   
-            if Weapon_Inventory_Array.size >= 28
-              Weapon_Inventory_Array[27].weapon_inventory_sprite.position = SF.vector2(1005, 460);
-              window.draw(Weapon_Inventory_Array[27].weapon_inventory_sprite)
+          case page
+           when 1          
+             weapon10 = Weapon_Inventory_Array[9].weapon_inventory_sprite.dup
+           when 2
+             if Weapon_Inventory_Array.size >= 26
+             weapon10 = Weapon_Inventory_Array[25].weapon_inventory_sprite.dup
              end
-           when 3   
-            if Weapon_Inventory_Array.size >= 46
-              Weapon_Inventory_Array[45].weapon_inventory_sprite.position = SF.vector2(1005, 460);
-              window.draw(Weapon_Inventory_Array[45].weapon_inventory_sprite)
+           when 3
+             if Weapon_Inventory_Array.size >= 42
+             weapon10 = Weapon_Inventory_Array[41].weapon_inventory_sprite.dup
              end
-           end
-         end
-        #----------------------Slot 11-------------------------
+            end
+           weapon10.scale(SF.vector2(0.5, 0.5))
+           weapon10.position = SF.vector2(490, -50);
+           window.draw(weapon10)
+          end
          if Weapon_Inventory_Array.size >= 11
-           case page
-           when 1   
-            Weapon_Inventory_Array[10].weapon_inventory_sprite.position = SF.vector2(1155, 460);
-            window.draw(Weapon_Inventory_Array[10].weapon_inventory_sprite)
-           when 2   
-            if Weapon_Inventory_Array.size >= 29
-              Weapon_Inventory_Array[28].weapon_inventory_sprite.position = SF.vector2(1155, 460);
-              window.draw(Weapon_Inventory_Array[28].weapon_inventory_sprite)
+          case page
+           when 1           
+             weapon11 = Weapon_Inventory_Array[10].weapon_inventory_sprite.dup
+           when 2
+             if Weapon_Inventory_Array.size >= 27
+             weapon11 = Weapon_Inventory_Array[26].weapon_inventory_sprite.dup
              end
-           when 3   
-            if Weapon_Inventory_Array.size >= 47
-              Weapon_Inventory_Array[46].weapon_inventory_sprite.position = SF.vector2(1155, 460);
-              window.draw(Weapon_Inventory_Array[46].weapon_inventory_sprite)
+           when 3
+             if Weapon_Inventory_Array.size >= 43
+             weapon11 = Weapon_Inventory_Array[42].weapon_inventory_sprite.dup
              end
-           end
-         end
-        #----------------------Slot 12-------------------------
+            end
+           weapon11.scale(SF.vector2(0.5, 0.5))
+           weapon11.position = SF.vector2(540, -50);
+           window.draw(weapon11)
+          end
          if Weapon_Inventory_Array.size >= 12
-           case page
-           when 1   
-            Weapon_Inventory_Array[11].weapon_inventory_sprite.position = SF.vector2(1305, 460);
-            window.draw(Weapon_Inventory_Array[11].weapon_inventory_sprite)
-           when 2   
-            if Weapon_Inventory_Array.size >= 30
-              Weapon_Inventory_Array[29].weapon_inventory_sprite.position = SF.vector2(1305, 460);
-              window.draw(Weapon_Inventory_Array[29].weapon_inventory_sprite)
+          case page
+           when 1               
+             weapon12 = Weapon_Inventory_Array[11].weapon_inventory_sprite.dup
+           when 2
+             if Weapon_Inventory_Array.size >= 28
+             weapon12 = Weapon_Inventory_Array[27].weapon_inventory_sprite.dup
              end
-           when 3   
-            if Weapon_Inventory_Array.size >= 48
-              Weapon_Inventory_Array[47].weapon_inventory_sprite.position = SF.vector2(1305, 460);
-              window.draw(Weapon_Inventory_Array[47].weapon_inventory_sprite)
+           when 3
+             if Weapon_Inventory_Array.size >= 44
+             weapon12 = Weapon_Inventory_Array[43].weapon_inventory_sprite.dup
              end
-           end
-         end
-        #----------------------Slot 13-------------------------
+            end
+           weapon12.scale(SF.vector2(0.5, 0.5))
+           weapon12.position = SF.vector2(590, -50);
+           window.draw(weapon12)
+          end
          if Weapon_Inventory_Array.size >= 13
-           case page
-           when 1   
-            Weapon_Inventory_Array[12].weapon_inventory_sprite.position = SF.vector2(555, 610);
-            window.draw(Weapon_Inventory_Array[12].weapon_inventory_sprite)
-           when 2   
-            if Weapon_Inventory_Array.size >= 31
-              Weapon_Inventory_Array[30].weapon_inventory_sprite.position = SF.vector2(555, 610);
-              window.draw(Weapon_Inventory_Array[30].weapon_inventory_sprite)
+          case page
+           when 1           
+             weapon13 = Weapon_Inventory_Array[12].weapon_inventory_sprite.dup
+           when 2
+             if Weapon_Inventory_Array.size >= 29
+             weapon13 = Weapon_Inventory_Array[28].weapon_inventory_sprite.dup
              end
-           when 3   
-            if Weapon_Inventory_Array.size >= 49
-              Weapon_Inventory_Array[48].weapon_inventory_sprite.position = SF.vector2(555, 610);
-              window.draw(Weapon_Inventory_Array[48].weapon_inventory_sprite)
+           when 3
+             if Weapon_Inventory_Array.size >= 45
+             weapon13 = Weapon_Inventory_Array[44].weapon_inventory_sprite.dup
              end
-           end
-         end
-        #----------------------Slot 14-------------------------
+            end
+           weapon13.scale(SF.vector2(0.5, 0.5))
+           weapon13.position = SF.vector2(440, 0);
+           window.draw(weapon13)
+          end      
          if Weapon_Inventory_Array.size >= 14
-           case page
-           when 1   
-            Weapon_Inventory_Array[13].weapon_inventory_sprite.position = SF.vector2(710, 610);
-            window.draw(Weapon_Inventory_Array[13].weapon_inventory_sprite)
-           when 2   
-            if Weapon_Inventory_Array.size >= 32
-              Weapon_Inventory_Array[31].weapon_inventory_sprite.position = SF.vector2(710, 610);
-              window.draw(Weapon_Inventory_Array[31].weapon_inventory_sprite)
+          case page
+           when 1           
+             weapon14 = Weapon_Inventory_Array[13].weapon_inventory_sprite.dup
+           when 2
+             if Weapon_Inventory_Array.size >= 30
+             weapon14 = Weapon_Inventory_Array[29].weapon_inventory_sprite.dup
              end
-           when 3   
-            if Weapon_Inventory_Array.size >= 50
-              Weapon_Inventory_Array[49].weapon_inventory_sprite.position = SF.vector2(710, 610);
-              window.draw(Weapon_Inventory_Array[49].weapon_inventory_sprite)
+           when 3
+             if Weapon_Inventory_Array.size >= 46
+             weapon14 = Weapon_Inventory_Array[45].weapon_inventory_sprite.dup
              end
-           end
-         end
-        #----------------------Slot 15-------------------------
+            end
+           weapon14.scale(SF.vector2(0.5, 0.5))
+           weapon14.position = SF.vector2(490, 0);
+           window.draw(weapon14)
+          end     
          if Weapon_Inventory_Array.size >= 15
-           case page
-           when 1   
-            Weapon_Inventory_Array[14].weapon_inventory_sprite.position = SF.vector2(855, 610);
-            window.draw(Weapon_Inventory_Array[14].weapon_inventory_sprite)
-           when 2   
-            if Weapon_Inventory_Array.size >= 33
-              Weapon_Inventory_Array[32].weapon_inventory_sprite.position = SF.vector2(855, 610);
-              window.draw(Weapon_Inventory_Array[32].weapon_inventory_sprite)
+          case page
+           when 1            
+             weapon15 = Weapon_Inventory_Array[14].weapon_inventory_sprite.dup
+           when 2
+             if Weapon_Inventory_Array.size >= 31
+             weapon15 = Weapon_Inventory_Array[30].weapon_inventory_sprite.dup
              end
-           when 3   
-            if Weapon_Inventory_Array.size >= 51
-              Weapon_Inventory_Array[50].weapon_inventory_sprite.position = SF.vector2(855, 610);
-              window.draw(Weapon_Inventory_Array[50].weapon_inventory_sprite)
+           when 3
+             if Weapon_Inventory_Array.size >= 47
+             weapon15 = Weapon_Inventory_Array[46].weapon_inventory_sprite.dup
              end
-           end
-         end
-        #----------------------Slot 16-------------------------
+            end
+           weapon15.scale(SF.vector2(0.5, 0.5))
+           weapon15.position = SF.vector2(540, 0);
+           window.draw(weapon15)
+          end   
          if Weapon_Inventory_Array.size >= 16
-           case page
-           when 1   
-            Weapon_Inventory_Array[15].weapon_inventory_sprite.position = SF.vector2(1005, 610);
-            window.draw(Weapon_Inventory_Array[15].weapon_inventory_sprite)
-           when 2   
-            if Weapon_Inventory_Array.size >= 34
-              Weapon_Inventory_Array[33].weapon_inventory_sprite.position = SF.vector2(1005, 610);
-              window.draw(Weapon_Inventory_Array[33].weapon_inventory_sprite)
+          case page
+           when 1     
+             weapon16 = Weapon_Inventory_Array[15].weapon_inventory_sprite.dup
+           when 2
+             if Weapon_Inventory_Array.size >= 32
+             weapon16 = Weapon_Inventory_Array[31].weapon_inventory_sprite.dup
              end
-           when 3   
-            if Weapon_Inventory_Array.size >= 52
-              Weapon_Inventory_Array[51].weapon_inventory_sprite.position = SF.vector2(1005, 610);
-              window.draw(Weapon_Inventory_Array[51].weapon_inventory_sprite)
+           when 3
+             if Weapon_Inventory_Array.size >= 48
+             weapon16 = Weapon_Inventory_Array[47].weapon_inventory_sprite.dup
              end
-           end
+            end
+           weapon16.scale(SF.vector2(0.5, 0.5))
+           weapon16.position = SF.vector2(590, 0);
+           window.draw(weapon16)
+          end  
          end
-        #----------------------Slot 17-------------------------
-         if Weapon_Inventory_Array.size >= 17
-           case page
-           when 1   
-            Weapon_Inventory_Array[16].weapon_inventory_sprite.position = SF.vector2(1155, 610);
-            window.draw(Weapon_Inventory_Array[16].weapon_inventory_sprite)
-           when 2   
-            if Weapon_Inventory_Array.size >= 35
-              Weapon_Inventory_Array[34].weapon_inventory_sprite.position = SF.vector2(1155, 610);
-              window.draw(Weapon_Inventory_Array[34].weapon_inventory_sprite)
-             end
-           when 3   
-            if Weapon_Inventory_Array.size >= 53
-              Weapon_Inventory_Array[52].weapon_inventory_sprite.position = SF.vector2(1155, 610);
-              window.draw(Weapon_Inventory_Array[52].weapon_inventory_sprite)
-             end
-           end
-         end
-        #----------------------Slot 18-------------------------
-         if Weapon_Inventory_Array.size >= 18
-           case page
-           when 1   
-            Weapon_Inventory_Array[17].weapon_inventory_sprite.position = SF.vector2(1305, 610);
-            window.draw(Weapon_Inventory_Array[17].weapon_inventory_sprite)
-           when 2   
-            if Weapon_Inventory_Array.size >= 36
-              Weapon_Inventory_Array[35].weapon_inventory_sprite.position = SF.vector2(1305, 610);
-              window.draw(Weapon_Inventory_Array[35].weapon_inventory_sprite)
-             end
-           when 3   
-            if Weapon_Inventory_Array.size >= 54
-              Weapon_Inventory_Array[53].weapon_inventory_sprite.position = SF.vector2(1305, 610);
-              window.draw(Weapon_Inventory_Array[53].weapon_inventory_sprite)
-             end
-           end
-         end
-       end
-
-   #.............................................................Attack Strength................................................................................
-       def Weapon.attack_strength(base_attack) #@note attack strength 
-        attack_strength = base_attack * @@current_equipped_weapon.weapon_atk
-        Harvestables::Ore.set_attack_strength(attack_strength)
-        Harvestables::Herbs.set_attack_strength(attack_strength)
-        Regular_Enemies.set_attack_strength(attack_strength)
-       end
-
-       def Crafted_Items::Weapon.check_stats(slot)
-        if Weapon_Inventory_Array.size > slot
-           Weapon_Info_Text.string = " Name: " + Weapon_Inventory_Array[slot].weapon_name + "\n Attack: " + 
-           Weapon_Inventory_Array[slot].weapon_atk.to_s + "\n Elements: " + Weapon_Inventory_Array[slot].weapon_element[0] + ", " +
-           Weapon_Inventory_Array[slot].weapon_element[1] + ", " + Weapon_Inventory_Array[slot].weapon_element[2] +
-           "\n Effects: " + Weapon_Inventory_Array[slot].weapon_effect[0] + ", " + Weapon_Inventory_Array[slot].weapon_effect[1] +
-           ", " + Weapon_Inventory_Array[slot].weapon_effect[2] + "\n Upgrade Count: " + Weapon_Inventory_Array[slot].weapon_upgrade_count.to_s
+ 
+      #..........................................................Choose Upgrade Weapon.............................................................................
+       def Upgrade_Table.choose_upgrade_weapon(weapon)
+         if Weapon_Inventory_Array.size > weapon
+           All_Audio::SFX.light_bonk
+           @@current_upgrade_table_weapon = Weapon_Inventory_Array[weapon]
+           Upgrade_Table.update_upgrade_table_string       
+           @@selected_weapon_original_elements[0] = @@current_upgrade_table_weapon.weapon_element[0]
+           @@selected_weapon_original_effects[0] = @@current_upgrade_table_weapon.weapon_effect[0]      
+           @@selected_weapon_original_elements[1] = @@current_upgrade_table_weapon.weapon_element[1]
+           @@selected_weapon_original_effects[1] = @@current_upgrade_table_weapon.weapon_effect[1]
+           @@selected_weapon_original_elements[2] = @@current_upgrade_table_weapon.weapon_element[2]         
+           @@selected_weapon_original_effects[2] = @@current_upgrade_table_weapon.weapon_effect[2]                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
          else
-          Weapon_Info_Text.string = ""
-        end
+           All_Audio::SFX.char_create_up
+         end
        end
-       def Weapon.play_swing_sound
-          @@current_equipped_weapon.weapon_swing_sound.play
-         end
-       def Weapon.play_hit_sound
-         @@current_equipped_weapon.weapon_hit_sound.play
-        end
-       def Weapon.stop_swing_sound
-         @@current_equipped_weapon.swing_sound.stop
-         @@current_equipped_weapon.hit_sound.play
-        end
-       def Weapon.forge_weapon(weapon)
-        if Weapon_Inventory_Array.size < 54
-        s = Weapon_Template_Array.size; i = 0
-        while s > i
-          if weapon == Weapon_Template_Array[i].weapon_id 
-            Weapon_Inventory_Array.push(Weapon_Template_Array[i].dup)
-          end
-          i += 1
-        end
-      else
-        All_Audio::SFX.char_create_up
-      end
+     def Upgrade_Table.display_upgrade_table(window)
+       window.draw(Test_Upgrade_Table_Menu)
+       up_arrow_01 = Up_Arrow_01.dup; up_arrow_01.position = Test_Upgrade_Table_Menu.position + SF.vector2(-75, 50)
+       down_arrow_01 = Down_Arrow_01.dup; down_arrow_01.position = Test_Upgrade_Table_Menu.position + SF.vector2(-75, 175)
+       up_arrow_02 = Up_Arrow_01.dup; up_arrow_02.position = Test_Upgrade_Table_Menu.position + SF.vector2(820, 50)
+       down_arrow_02 = Down_Arrow_01.dup; down_arrow_02.position = Test_Upgrade_Table_Menu.position + SF.vector2(820, 175)
+       window.draw(up_arrow_01); window.draw(down_arrow_01); window.draw(up_arrow_02); window.draw(down_arrow_02)
+       window.draw(@@selected_gem_01.craft_sprite); window.draw(@@selected_gem_02.craft_sprite); window.draw(@@selected_gem_03.craft_sprite)
+       window.draw(@@upgrade_table_text)
+     end
+   end
+  class Mold
+    def initialize(name : String, id : Int32, is_owned : Bool, material_cost : Int32)
+      @name = name
+      @id = id
+      @is_owned = is_owned
+      @material_cost = material_cost
+     end
+    def name
+      @name
+     end
+    def id
+      @id
+     end
+    def is_owned
+      @is_owned
+     end
+    def material
+      @material
+     end
+     @@stick_mold = Mold.new("Stick Mold", 0, true, 3)
+   end
+  class Forge<Mold
+     @@chosen_ingot : Int32; @@chosen_ingot = 0; @@chosen_mold : Mold; @@chosen_mold = @@stick_mold
+     @@craft_weapon : Int32; @@craft_weapon = 0
+     def Forge.choose_ingot(ingot)
+       @@chosen_ingot = ingot
+     end 
+     def Forge.forge_weapon  
+       weapon = @@craft_weapon
+       if Ingot_Array[weapon].amount_owned >= Weapon_Template_Array[weapon - 1].ingots_required
+       Crafted_Items::Weapon.forge_weapon(weapon)
+       ingot = Ingot_Array[weapon]
+       amount = Weapon_Template_Array[weapon - 1].ingots_required
+       Etc::Inventory_Ingot.subtract_amount_owned(ingot, amount)
        end
-  #________________________________________________________________________________________________________________________________________________________
-  #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  #/                                                               Entities                                                                               /
-  #///////////////////////////////////////////////////////////////////////////////////////////Atk//////////////////////////////////////////////////////////
-   @@nil_stick = Weapon.new("", -1, "", 0, [""], [""], Nil_Ingot_Ore, Nil_Rectangle_01, SYSSOUND_6, SYSSOUND_6, "", 0, 0)
-   @@stick = Weapon.new("Stick", 0, "stick", 1.25, ["none", "none", "none"], ["none", "none", "none"], Stick01, Weapon_Rectangle_01, WEAPSOUND_01, WEAPSOUND_02, "Swing", 0, 0)
-   @@zinc_stick = Weapon.new("Zinc Stick", 4, "stick", 1.5, ["empty", "none", "none"], ["empty", "none", "none"], Zinc_Stick, Zinc_Stick_Display, WEAPSOUND_01, WEAPSOUND_02, "Swing", 0, 2)
-   Weapon_Inventory_Array.push(@@zinc_stick); Weapon_Template_Array.push(@@zinc_stick)
-   @@tin_stick = Weapon.new("Tin Stick", 2, "stick", 1.75, ["empty", "none", "none"], ["empty", "none", "none"], Tin_Stick, Tin_Stick_Display, WEAPSOUND_01, WEAPSOUND_02, "Swing", 0, 2)
-   Weapon_Template_Array.push(@@tin_stick)
-   @@copper_stick = Weapon.new("Copper Stick", 1, "stick", 2.5, ["empty", "none", "none"], ["empty", "none", "none"], Copper_Stick, Copper_Stick_Display, WEAPSOUND_01, WEAPSOUND_02, "Swing", 0, 2)
-   Weapon_Template_Array.push(@@copper_stick)
-   @@brass_stick = Weapon.new("Brass Stick", 5, "stick", 2, ["empty", "empty", "none"], ["empty", "empty", "none"], Brass_Stick, Brass_Stick_Display, WEAPSOUND_01, WEAPSOUND_02, "Swing", 0, 2)
-   Weapon_Template_Array.push(@@brass_stick)
-   @@bronze_stick = Weapon.new("Bronze Stick", 3, "stick", 2.25, ["empty", "empty", "none"], ["empty", "empty", "none"], Bronze_Stick, Bronze_Stick_Display, WEAPSOUND_01, WEAPSOUND_02, "Swing", 0, 2)
-   Weapon_Template_Array.push(@@bronze_stick)
-   @@iron_stick = Weapon.new("Iron Stick", 6, "stick", 2.5, ["empty", "empty", "none"], ["empty", "empty", "none"], Iron_Stick, Iron_Stick_Display, WEAPSOUND_01, WEAPSOUND_02, "Swing", 0, 2)
-   Weapon_Template_Array.push(@@iron_stick)
-   @@steel_stick = Weapon.new("Steel Stick", 7, "stick", 3, ["empty", "empty", "empty"], ["empty", "empty", "empty"], Steel_Stick, Steel_Stick_Display, WEAPSOUND_01, WEAPSOUND_02, "Swing", 0, 2)
-   Weapon_Template_Array.push(@@steel_stick)
-  #________________________________________________________________________________________________________________________________________________________
-  end
-  Upgrade_Gem_Array = GEM_ARRAY.clone
- class Upgrade_Table
-  #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-  #+                                                              Variables                                                                               +
-  #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++  
-   @@nil_stick = Weapon.new("", -1, "", 0, ["", "", ""], ["", "", ""], Nil_Ingot_Ore, Nil_Rectangle_01, SYSSOUND_6, SYSSOUND_6, "", 0, 0) 
-   @@selected_gem_01 : Gem; @@selected_gem_01 = GEM_ARRAY[0]; @@selected_gem_01.craft_sprite.position = SF.vector2(650, -52)
-   @@selected_gem_02 : Gem; @@selected_gem_02 = GEM_ARRAY[0]; @@selected_gem_02.craft_sprite.position = SF.vector2(725, -52)
-   @@selected_gem_03 : Gem; @@selected_gem_03 = GEM_ARRAY[0]; @@selected_gem_03.craft_sprite.position = SF.vector2(805, -52)
-   @@selected_weapon_original_elements : Array(String); @@selected_weapon_original_elements = @@nil_stick.weapon_element 
-   @@selected_weapon_original_effects : Array(String); @@selected_weapon_original_effects = @@nil_stick.weapon_effect
-   @@selected_weapon_original_attack : Float64; @@selected_weapon_original_attack = @@nil_stick.weapon_atk
-   @@selected_weapon_original_upgrade_count : Int32; @@selected_weapon_original_upgrade_count = @@nil_stick.weapon_upgrade_count
-   @@current_gem_slot : Int32; @@current_gem_slot = 1; @@current_upgrade_table_weapon : Weapon; @@current_upgrade_table_weapon = @@nil_stick
-   @@upgrade_table_text = SF::Text.new; @@upgrade_table_text.string = "  Upgrade Stuff Here!"; @@upgrade_table_text.position = SF.vector2(700, 55);
-   @@upgrade_table_text.font = FONT_MILITARY; @@upgrade_table_text.color = SF::Color::Black; @@upgrade_table_text.character_size = 15
-  #________________________________________________________________________________________________________________________________________________________
-  #????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
-  #?                                                               Methods                                                                                ?
-  #????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
-    def Upgrade_Table.initialize_upgrade_table
-      @@upgrade_table_text.string = "Upgrade Stuff Here!"
-      if @@selected_gem_01 != GEM_ARRAY[0]
-      Owned_Gem_Array.push(@@selected_gem_01)
-      end
-      if @@selected_gem_02 != GEM_ARRAY[0]
-      Owned_Gem_Array.push(@@selected_gem_02)
-      end
-      if @@selected_gem_03 != GEM_ARRAY[0]
-      Owned_Gem_Array.push(@@selected_gem_03)
-      end
-      @@current_gem_slot = 1
-      @@current_upgrade_table_weapon.weapon_element[0] = @@selected_weapon_original_elements[0]
-      @@current_upgrade_table_weapon.weapon_element[1] = @@selected_weapon_original_elements[1]
-      @@current_upgrade_table_weapon.weapon_element[2] = @@selected_weapon_original_elements[2]
-      @@current_upgrade_table_weapon.weapon_effect[0] = @@selected_weapon_original_effects[0]  
-      @@current_upgrade_table_weapon.weapon_effect[1] = @@selected_weapon_original_effects[1] 
-      @@current_upgrade_table_weapon.weapon_effect[2] = @@selected_weapon_original_effects[2] 
-      @@current_upgrade_table_weapon.weapon_atk = @@selected_weapon_original_attack
-      @@current_upgrade_table_weapon.weapon_upgrade_count = @@selected_weapon_original_upgrade_count
-      @@selected_gem_01 = GEM_ARRAY[0]
-      @@selected_gem_02 = GEM_ARRAY[0]
-      @@selected_gem_03 = GEM_ARRAY[0]
-      @@current_upgrade_table_weapon = @@nil_stick
      end
-    def Upgrade_Table.upgrade
-      if @@current_upgrade_table_weapon != GEM_ARRAY[0]
-      All_Audio::SFX.metal_hit_01
-      @@selected_weapon_original_elements[0] = @@current_upgrade_table_weapon.weapon_element[0]
-      @@selected_weapon_original_effects[0] = @@current_upgrade_table_weapon.weapon_effect[0]      
-      @@selected_weapon_original_elements[1] = @@current_upgrade_table_weapon.weapon_element[1]
-      @@selected_weapon_original_effects[1] = @@current_upgrade_table_weapon.weapon_effect[1]
-      @@selected_weapon_original_elements[2] = @@current_upgrade_table_weapon.weapon_element[2]         
-      @@selected_weapon_original_effects[2] = @@current_upgrade_table_weapon.weapon_effect[2]   
-      @@selected_gem_01 = GEM_ARRAY[0]
-      @@selected_gem_02 = GEM_ARRAY[0]
-      @@selected_gem_03 = GEM_ARRAY[0]
-      else
-        All_Audio::SFX.char_create_up
-      end
+     def Forge.diplay_forge(window)
+         window.draw(Test_Forge_Menu)
+         Etc::Inventory_Ingot.display_forge_ingots(window)
+         Forge.current_mold(window)
      end
-    def Upgrade_Table.update_upgrade_table_string
-      if @@current_upgrade_table_weapon != @@nil_stick
-      @@upgrade_table_text.string = "  Name: " + @@current_upgrade_table_weapon.weapon_name +
-      "\n  Atk: " + @@current_upgrade_table_weapon.weapon_atk.to_s + "\n  Elements: " +
-      @@current_upgrade_table_weapon.weapon_element[0] + ", \n" + @@current_upgrade_table_weapon.weapon_element[1] +
-      ", " + @@current_upgrade_table_weapon.weapon_element[2] + "\n  Effects: " + @@current_upgrade_table_weapon.weapon_effect[0] +
-      ", \n" + @@current_upgrade_table_weapon.weapon_effect[1] + ", " + @@current_upgrade_table_weapon.weapon_effect[2] +
-      "\n  Upgrade Count: " + @@current_upgrade_table_weapon.weapon_upgrade_count.to_s
-      end
-    end
-    def Upgrade_Table.select_gem(gem)
-     if Owned_Gem_Array.size > gem
-       case @@current_gem_slot
-         when 1
-          if @@current_upgrade_table_weapon.weapon_element[0] == "empty"
-          @@selected_gem_01 = Owned_Gem_Array[gem]
-          @@selected_gem_01.craft_sprite.position = SF.vector2(670, -38)
-          @@selected_gem_01.craft_sprite.scale = SF.vector2(0.85, 0.85)
-          @@current_upgrade_table_weapon.weapon_element[0] = @@selected_gem_01.element
-          @@current_upgrade_table_weapon.weapon_effect[0] = @@selected_gem_01.effect
-          @@current_gem_slot = 2
-          Owned_Gem_Array.delete(Owned_Gem_Array[gem])
-          else
-            @@current_gem_slot = 2
-            Upgrade_Table.select_gem(gem)
-          end
-         when 2
-          if @@current_upgrade_table_weapon.weapon_element[1] == "empty"
-          @@selected_gem_02 = Owned_Gem_Array[gem]
-          @@selected_gem_02.craft_sprite.position = SF.vector2(740, -38)
-          @@selected_gem_02.craft_sprite.scale = SF.vector2(0.85, 0.85)
-          @@current_upgrade_table_weapon.weapon_effect[1] = @@selected_gem_02.effect   
-          @@current_upgrade_table_weapon.weapon_element[1] = @@selected_gem_02.element
-          @@current_gem_slot = 3
-          Owned_Gem_Array.delete(Owned_Gem_Array[gem])
-          else
-            @@current_gem_slot = 3
-            Upgrade_Table.select_gem(gem)
-           end
-         when 3
-          if @@current_upgrade_table_weapon.weapon_element[2] == "empty"
-          @@selected_gem_03 = Owned_Gem_Array[gem]
-          @@selected_gem_03.craft_sprite.position = SF.vector2(810, -38)
-          @@selected_gem_03.craft_sprite.scale = SF.vector2(0.85, 0.85)
-          @@current_upgrade_table_weapon.weapon_element[2] = @@selected_gem_03.element
-          @@current_upgrade_table_weapon.weapon_effect[2] = @@selected_gem_03.effect  
-          @@current_gem_slot = 4
-          Owned_Gem_Array.delete(Owned_Gem_Array[gem])
-          else
-            All_Audio::SFX.char_create_up
-           end
-         when 4
-          All_Audio::SFX.char_create_up
-        end
-        Upgrade_Table.update_upgrade_table_string
-      end
-    end
-     #........................................................Draw Weapon Upgrade Table...........................................................................
-       def Upgrade_Table.display_weapon_upgrade_table(window, page, page_02, page_03)
-        #---------------------weapon init------------------------------
-         weapon = Nil_Stick_Display
-         weapon2 = Nil_Stick_Display
-         weapon3 = Nil_Stick_Display
-         weapon4 = Nil_Stick_Display
-         weapon5 = Nil_Stick_Display
-         weapon6 = Nil_Stick_Display
-         weapon7 = Nil_Stick_Display
-         weapon8 = Nil_Stick_Display
-         weapon9 = Nil_Stick_Display
-         weapon10 = Nil_Stick_Display
-         weapon11 = Nil_Stick_Display
-         weapon12 = Nil_Stick_Display
-         weapon13 = Nil_Stick_Display
-         weapon14 = Nil_Stick_Display
-         weapon15 = Nil_Stick_Display
-         weapon16 = Nil_Stick_Display
-        #______________________________________________________________
-        current_weapon_upgrade_display = @@current_upgrade_table_weapon.weapon_inventory_sprite.dup
-        current_weapon_upgrade_display.position = SF.vector2(700, -175)
-        current_weapon_upgrade_display.scale(SF.vector2(1.5, 1.5))
-        window.draw(current_weapon_upgrade_display)
-        if Weapon_Inventory_Array.size >= 1
-         case page
-           when 1
-            weapon = Weapon_Inventory_Array[0].weapon_inventory_sprite.dup
-           when 2
-            if Weapon_Inventory_Array.size >= 17
-            weapon = Weapon_Inventory_Array[16].weapon_inventory_sprite.dup
-            end
-          when 3
-            if Weapon_Inventory_Array.size >= 33
-            weapon = Weapon_Inventory_Array[32].weapon_inventory_sprite.dup
-            end
-          when 4
-            if Weapon_Inventory_Array.size >= 49
-            weapon = Weapon_Inventory_Array[48].weapon_inventory_sprite.dup
-            end
-           end
-             weapon.scale(SF.vector2(0.5, 0.5))
-             weapon.position = SF.vector2(440, -150);
-             window.draw(weapon)
-         end
-        if Weapon_Inventory_Array.size >= 2
-         case page
+     def Forge.current_mold(window)
+       weapon = Nil_Stick_Display.dup
+       if  @@chosen_mold == @@stick_mold
+         case @@chosen_ingot
           when 1
-            weapon2 = Weapon_Inventory_Array[1].weapon_inventory_sprite.dup
+           weapon = Copper_Stick_Display.dup
+           @@craft_weapon = 1      
           when 2
-            if Weapon_Inventory_Array.size >= 18
-            weapon2 = Weapon_Inventory_Array[17].weapon_inventory_sprite.dup
-            end
+           weapon = Tin_Stick_Display.dup
+           @@craft_weapon = 2
           when 3
-            if Weapon_Inventory_Array.size >= 34
-            weapon2 = Weapon_Inventory_Array[33].weapon_inventory_sprite.dup
-            end
+           weapon = Bronze_Stick_Display.dup
+           @@craft_weapon = 3
           when 4
-            if Weapon_Inventory_Array.size >= 50
-            weapon2 = Weapon_Inventory_Array[49].weapon_inventory_sprite.dup
-            end
-           end
-          weapon2.scale(SF.vector2(0.5, 0.5))
-          weapon2.position = SF.vector2(490, -150);
-          window.draw(weapon2)
-         end
-        if Weapon_Inventory_Array.size >= 3
-         case page
-          when 1
-           weapon3 = Weapon_Inventory_Array[2].weapon_inventory_sprite.dup
-          when 2
-            if Weapon_Inventory_Array.size >= 19
-            weapon3 = Weapon_Inventory_Array[18].weapon_inventory_sprite.dup
-            end
-          when 3
-            if Weapon_Inventory_Array.size >= 35
-            weapon3 = Weapon_Inventory_Array[34].weapon_inventory_sprite.dup
-            end
-          when 4
-            if Weapon_Inventory_Array.size >= 51
-            weapon3 = Weapon_Inventory_Array[50].weapon_inventory_sprite.dup
-            end
-          end
-          weapon3.scale(SF.vector2(0.5, 0.5))
-          weapon3.position = SF.vector2(540, -150);
-          window.draw(weapon3)
-         end
-        if Weapon_Inventory_Array.size >= 4
-         case page
-           when 1
-            weapon4 = Weapon_Inventory_Array[3].weapon_inventory_sprite.dup
-           when 2
-            if Weapon_Inventory_Array.size >= 20
-            weapon4 = Weapon_Inventory_Array[19].weapon_inventory_sprite.dup 
-            end
-           when 3
-             if Weapon_Inventory_Array.size >= 36
-             weapon4 = Weapon_Inventory_Array[35].weapon_inventory_sprite.dup
-             end
-           when 4
-             if Weapon_Inventory_Array.size >= 52
-             weapon4 = Weapon_Inventory_Array[51].weapon_inventory_sprite.dup
-             end
-          end
-          weapon4.scale(SF.vector2(0.5, 0.5))
-          weapon4.position = SF.vector2(590, -150);
-          window.draw(weapon4)
-         end
-        if Weapon_Inventory_Array.size >= 5
-         case page
-           when 1
-             weapon5 = Weapon_Inventory_Array[4].weapon_inventory_sprite.dup
-           when 2
-             if Weapon_Inventory_Array.size >= 21
-             weapon5 = Weapon_Inventory_Array[20].weapon_inventory_sprite.dup
-             end
-           when 3
-             if Weapon_Inventory_Array.size >= 37
-             weapon5 = Weapon_Inventory_Array[36].weapon_inventory_sprite.dup
-             end
-           when 4
-             if Weapon_Inventory_Array.size >= 53
-             weapon5 = Weapon_Inventory_Array[52].weapon_inventory_sprite.dup
-             end
-          end
-          weapon5.scale(SF.vector2(0.5, 0.5))
-          weapon5.position = SF.vector2(440, -100);
-          window.draw(weapon5)
-         end
-        if Weapon_Inventory_Array.size >= 6
-         case page
-          when 1
-            weapon6 = Weapon_Inventory_Array[5].weapon_inventory_sprite.dup
-          when 2
-            if Weapon_Inventory_Array.size >= 22
-            weapon6 = Weapon_Inventory_Array[21].weapon_inventory_sprite.dup
-            end
-          when 3
-            if Weapon_Inventory_Array.size >= 38
-            weapon6 = Weapon_Inventory_Array[37].weapon_inventory_sprite.dup
-            end
-          when 4
-            if Weapon_Inventory_Array.size >= 54
-            weapon6 = Weapon_Inventory_Array[53].weapon_inventory_sprite.dup
-            end
-           end
-          weapon6.scale(SF.vector2(0.5, 0.5))
-          weapon6.position = SF.vector2(490, -100);
-          window.draw(weapon6)
-         end
-        if Weapon_Inventory_Array.size >= 7
-         case page
-          when 1       
-            weapon7 = Weapon_Inventory_Array[6].weapon_inventory_sprite.dup
-          when 2
-            if Weapon_Inventory_Array.size >= 23
-            weapon7 = Weapon_Inventory_Array[22].weapon_inventory_sprite.dup
-            end
-          when 3
-            if Weapon_Inventory_Array.size >= 39
-            weapon7 = Weapon_Inventory_Array[38].weapon_inventory_sprite.dup
-            end
-           end
-          weapon7.scale(SF.vector2(0.5, 0.5))
-          weapon7.position = SF.vector2(540, -100);
-          window.draw(weapon7)
-         end
-        if Weapon_Inventory_Array.size >= 8
-         case page
-          when 1           
-            weapon8 = Weapon_Inventory_Array[7].weapon_inventory_sprite.dup
-          when 2
-            if Weapon_Inventory_Array.size >= 24
-            weapon8 = Weapon_Inventory_Array[23].weapon_inventory_sprite.dup
-            end
-          when 3
-            if Weapon_Inventory_Array.size >= 40
-            weapon8 = Weapon_Inventory_Array[39].weapon_inventory_sprite.dup
-            end
-           end
-          weapon8.scale(SF.vector2(0.5, 0.5))
-          weapon8.position = SF.vector2(590, -100);
-          window.draw(weapon8)
-         end
-        if Weapon_Inventory_Array.size >= 9
-         case page
-          when 1           
-            weapon9 = Weapon_Inventory_Array[8].weapon_inventory_sprite.dup
-          when 2
-            if Weapon_Inventory_Array.size >= 25
-            weapon9 = Weapon_Inventory_Array[24].weapon_inventory_sprite.dup
-            end
-          when 3
-            if Weapon_Inventory_Array.size >= 41
-            weapon9 = Weapon_Inventory_Array[40].weapon_inventory_sprite.dup
-            end
-           end
-          weapon9.scale(SF.vector2(0.5, 0.5))
-          weapon9.position = SF.vector2(440, -50);
-          window.draw(weapon9)
-         end
-        if Weapon_Inventory_Array.size >= 10
-         case page
-          when 1          
-            weapon10 = Weapon_Inventory_Array[9].weapon_inventory_sprite.dup
-          when 2
-            if Weapon_Inventory_Array.size >= 26
-            weapon10 = Weapon_Inventory_Array[25].weapon_inventory_sprite.dup
-            end
-          when 3
-            if Weapon_Inventory_Array.size >= 42
-            weapon10 = Weapon_Inventory_Array[41].weapon_inventory_sprite.dup
-            end
-           end
-          weapon10.scale(SF.vector2(0.5, 0.5))
-          weapon10.position = SF.vector2(490, -50);
-          window.draw(weapon10)
-         end
-        if Weapon_Inventory_Array.size >= 11
-         case page
-          when 1           
-            weapon11 = Weapon_Inventory_Array[10].weapon_inventory_sprite.dup
-          when 2
-            if Weapon_Inventory_Array.size >= 27
-            weapon11 = Weapon_Inventory_Array[26].weapon_inventory_sprite.dup
-            end
-          when 3
-            if Weapon_Inventory_Array.size >= 43
-            weapon11 = Weapon_Inventory_Array[42].weapon_inventory_sprite.dup
-            end
-           end
-          weapon11.scale(SF.vector2(0.5, 0.5))
-          weapon11.position = SF.vector2(540, -50);
-          window.draw(weapon11)
-         end
-        if Weapon_Inventory_Array.size >= 12
-         case page
-          when 1               
-            weapon12 = Weapon_Inventory_Array[11].weapon_inventory_sprite.dup
-          when 2
-            if Weapon_Inventory_Array.size >= 28
-            weapon12 = Weapon_Inventory_Array[27].weapon_inventory_sprite.dup
-            end
-          when 3
-            if Weapon_Inventory_Array.size >= 44
-            weapon12 = Weapon_Inventory_Array[43].weapon_inventory_sprite.dup
-            end
-           end
-          weapon12.scale(SF.vector2(0.5, 0.5))
-          weapon12.position = SF.vector2(590, -50);
-          window.draw(weapon12)
-         end
-        if Weapon_Inventory_Array.size >= 13
-         case page
-          when 1           
-            weapon13 = Weapon_Inventory_Array[12].weapon_inventory_sprite.dup
-          when 2
-            if Weapon_Inventory_Array.size >= 29
-            weapon13 = Weapon_Inventory_Array[28].weapon_inventory_sprite.dup
-            end
-          when 3
-            if Weapon_Inventory_Array.size >= 45
-            weapon13 = Weapon_Inventory_Array[44].weapon_inventory_sprite.dup
-            end
-           end
-          weapon13.scale(SF.vector2(0.5, 0.5))
-          weapon13.position = SF.vector2(440, 0);
-          window.draw(weapon13)
-         end      
-        if Weapon_Inventory_Array.size >= 14
-         case page
-          when 1           
-            weapon14 = Weapon_Inventory_Array[13].weapon_inventory_sprite.dup
-          when 2
-            if Weapon_Inventory_Array.size >= 30
-            weapon14 = Weapon_Inventory_Array[29].weapon_inventory_sprite.dup
-            end
-          when 3
-            if Weapon_Inventory_Array.size >= 46
-            weapon14 = Weapon_Inventory_Array[45].weapon_inventory_sprite.dup
-            end
-           end
-          weapon14.scale(SF.vector2(0.5, 0.5))
-          weapon14.position = SF.vector2(490, 0);
-          window.draw(weapon14)
-         end     
-        if Weapon_Inventory_Array.size >= 15
-         case page
-          when 1            
-            weapon15 = Weapon_Inventory_Array[14].weapon_inventory_sprite.dup
-          when 2
-            if Weapon_Inventory_Array.size >= 31
-            weapon15 = Weapon_Inventory_Array[30].weapon_inventory_sprite.dup
-            end
-          when 3
-            if Weapon_Inventory_Array.size >= 47
-            weapon15 = Weapon_Inventory_Array[46].weapon_inventory_sprite.dup
-            end
-           end
-          weapon15.scale(SF.vector2(0.5, 0.5))
-          weapon15.position = SF.vector2(540, 0);
-          window.draw(weapon15)
-         end   
-        if Weapon_Inventory_Array.size >= 16
-         case page
-          when 1     
-            weapon16 = Weapon_Inventory_Array[15].weapon_inventory_sprite.dup
-          when 2
-            if Weapon_Inventory_Array.size >= 32
-            weapon16 = Weapon_Inventory_Array[31].weapon_inventory_sprite.dup
-            end
-          when 3
-            if Weapon_Inventory_Array.size >= 48
-            weapon16 = Weapon_Inventory_Array[47].weapon_inventory_sprite.dup
-            end
-           end
-          weapon16.scale(SF.vector2(0.5, 0.5))
-          weapon16.position = SF.vector2(590, 0);
-          window.draw(weapon16)
-         end  
-        end
-
-     #..........................................................Choose Upgrade Weapon.............................................................................
-      def Upgrade_Table.choose_upgrade_weapon(weapon)
-        if Weapon_Inventory_Array.size > weapon
-          All_Audio::SFX.light_bonk
-          @@current_upgrade_table_weapon = Weapon_Inventory_Array[weapon]
-          Upgrade_Table.update_upgrade_table_string       
-          @@selected_weapon_original_elements[0] = @@current_upgrade_table_weapon.weapon_element[0]
-          @@selected_weapon_original_effects[0] = @@current_upgrade_table_weapon.weapon_effect[0]      
-          @@selected_weapon_original_elements[1] = @@current_upgrade_table_weapon.weapon_element[1]
-          @@selected_weapon_original_effects[1] = @@current_upgrade_table_weapon.weapon_effect[1]
-          @@selected_weapon_original_elements[2] = @@current_upgrade_table_weapon.weapon_element[2]         
-          @@selected_weapon_original_effects[2] = @@current_upgrade_table_weapon.weapon_effect[2]                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
-        else
-          All_Audio::SFX.char_create_up
-        end
-      end
-    def Upgrade_Table.display_upgrade_table(window)
-      window.draw(Test_Upgrade_Table_Menu)
-      up_arrow_01 = Up_Arrow_01.dup; up_arrow_01.position = Test_Upgrade_Table_Menu.position + SF.vector2(-75, 50)
-      down_arrow_01 = Down_Arrow_01.dup; down_arrow_01.position = Test_Upgrade_Table_Menu.position + SF.vector2(-75, 175)
-      up_arrow_02 = Up_Arrow_01.dup; up_arrow_02.position = Test_Upgrade_Table_Menu.position + SF.vector2(820, 50)
-      down_arrow_02 = Down_Arrow_01.dup; down_arrow_02.position = Test_Upgrade_Table_Menu.position + SF.vector2(820, 175)
-      window.draw(up_arrow_01); window.draw(down_arrow_01); window.draw(up_arrow_02); window.draw(down_arrow_02)
-      window.draw(@@selected_gem_01.craft_sprite); window.draw(@@selected_gem_02.craft_sprite); window.draw(@@selected_gem_03.craft_sprite)
-      window.draw(@@upgrade_table_text)
-    end
-  end
- class Mold
-   def initialize(name : String, id : Int32, is_owned : Bool, material_cost : Int32)
-     @name = name
-     @id = id
-     @is_owned = is_owned
-     @material_cost = material_cost
-    end
-   def name
-     @name
-    end
-   def id
-     @id
-    end
-   def is_owned
-     @is_owned
-    end
-   def material
-     @material
-    end
-    @@stick_mold = Mold.new("Stick Mold", 0, true, 3)
-  end
- class Forge<Mold
-    @@chosen_ingot : Int32; @@chosen_ingot = 0; @@chosen_mold : Mold; @@chosen_mold = @@stick_mold
-    @@craft_weapon : Int32; @@craft_weapon = 0
-    def Forge.choose_ingot(ingot)
-      @@chosen_ingot = ingot
-    end 
-    def Forge.forge_weapon  
-      weapon = @@craft_weapon
-      if Ingot_Array[weapon].amount_owned >= Weapon_Template_Array[weapon - 1].ingots_required
-      Crafted_Items::Weapon.forge_weapon(weapon)
-      ingot = Ingot_Array[weapon]
-      amount = Weapon_Template_Array[weapon - 1].ingots_required
-      Etc::Inventory_Ingot.subtract_amount_owned(ingot, amount)
-      end
-    end
-    def Forge.diplay_forge(window)
-        window.draw(Test_Forge_Menu)
-        Etc::Inventory_Ingot.display_forge_ingots(window)
-        Forge.current_mold(window)
-    end
-    def Forge.current_mold(window)
-      weapon = Nil_Stick_Display.dup
-      if  @@chosen_mold == @@stick_mold
-        case @@chosen_ingot
-         when 1
-          weapon = Copper_Stick_Display.dup
-          @@craft_weapon = 1      
-         when 2
-          weapon = Tin_Stick_Display.dup
-          @@craft_weapon = 2
-         when 3
-          weapon = Bronze_Stick_Display.dup
-          @@craft_weapon = 3
-         when 4
-          weapon = Zinc_Stick_Display.dup
-          @@craft_weapon = 4
-         when 5
-          weapon = Brass_Stick_Display.dup
-          @@craft_weapon = 5
-        when 6
-          weapon = Iron_Stick_Display.dup
-          @@craft_weapon = 6
-        when 7
-          weapon = Steel_Stick_Display.dup
-          @@craft_weapon = 7
-       end; end
-       weapon.position = SF.vector2(250, 150)
-       window.draw(weapon)
-    end
-    def Forge.choose_mold(mold)
-      if mold == 1
-        @@chosen_mold = @@stick_mold
-      end
-  end
-  end
-end
-
-module Map_Geometry
+           weapon = Zinc_Stick_Display.dup
+           @@craft_weapon = 4
+          when 5
+           weapon = Brass_Stick_Display.dup
+           @@craft_weapon = 5
+         when 6
+           weapon = Iron_Stick_Display.dup
+           @@craft_weapon = 6
+         when 7
+           weapon = Steel_Stick_Display.dup
+           @@craft_weapon = 7
+        end; end
+        weapon.position = SF.vector2(250, 150)
+        window.draw(weapon)
+     end
+     def Forge.choose_mold(mold)
+       if mold == 1
+         @@chosen_mold = @@stick_mold
+       end
+   end
+   end
+ end
+#===========================================================================================================================================================
+#=MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM=
+#=MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM=
+#=MM                                                              Map Geometry                                                                           MM=
+#=MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM=
+#=MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM=
+ module Map_Geometry
  #LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLlLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
  #L                                                                  Ladder                                                                                L
  #LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLlLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
