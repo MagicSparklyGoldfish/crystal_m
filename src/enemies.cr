@@ -135,11 +135,11 @@ include Use
  def Regular_Enemies.set_attack_strength(attack_strength)
     Humanoids.set_attack_strength(attack_strength)
    end 
- def Regular_Enemies.display(window, map, area)
+ def Regular_Enemies.display(window, map, area, player)
    case area
     when "test"
     when "doll factory"
-        Humanoids.display_doll_factory(window, map)
+        Humanoids.display_doll_factory(window, map, player)
   end
  end
   def Regular_Enemies.attack(attack)
@@ -154,7 +154,8 @@ include Use
    #!                                                              Initialize                                                                              !
    #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     def initialize(hp : Float64, max_hp : Float64, atk_power : Float64, name : String, lvl : Int32, drop_array : Array(Ingredients), amount_killed : Int32, sprite : SF::Sprite, sfx : SF::Sound,
-     id : Int32, kind : String, color : String, amount_owned : Int32, effects : Array(String), is_dead : Bool, clock : SF::Clock, exp : Float64, health_bar : SF::RectangleShape)
+     id : Int32, kind : String, color : String, amount_owned : Int32, effects : Array(String), is_dead : Bool, clock : SF::Clock, atk_clock : SF::Clock, exp : Float64, health_bar : SF::RectangleShape,
+     )
       @hp = hp
       @max_hp = max_hp
       @atk_power = atk_power
@@ -171,6 +172,7 @@ include Use
       @effects = effects
       @is_dead = is_dead
       @clock = clock
+      @atk_clock = atk_clock
       @exp = exp
       @health_bar = health_bar
      end
@@ -181,7 +183,7 @@ include Use
       @max_hp
      end
     def atk_power
-       @power
+       @atk_power
      end
     def name
        @name
@@ -210,6 +212,9 @@ include Use
     def clock
         @clock
      end
+    def atk_clock
+        @atk_clock
+     end
     def exp
         @exp
      end
@@ -225,6 +230,9 @@ include Use
     def clock=(this)
         @clock = this 
      end
+     def atk_clock=(this)
+        @atk_clock = this 
+     end
     def health_bar=(this)
        @health_bar = this 
      end
@@ -238,6 +246,7 @@ include Use
     All_Humanoid_Enemy_Array = [] of Humanoids 
     Current_Map_Humanoid_Array = [] of Humanoids
     Enemy_Walk_Cycle_Clock = SF::Clock.new; Enemy_Death_Animation_Clock = SF::Clock.new; Enemy_Death_Clock = SF::Clock.new
+    Enemy_Attack_Clock = SF::Clock.new
    #________________________________________________________________________________________________________________________________________________________
    #????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
    #?                                                               Methods                                                                                ?
@@ -268,6 +277,18 @@ include Use
           enemy.hp_subtract(damage)
           Enemy_Clock_01.restart
         end; end; end; end; }end
+
+     def Humanoids.get_hit(player, i)
+            if i.atk_clock.elapsed_time > SF.milliseconds(550) && i.is_dead == false && i.hp > 0
+            i.sfx.play
+            humanoid = i
+            Humanoids.attack_animation(humanoid)
+            damage = i.atk_power
+            Player_Info::Player.take_damage(damage)
+            i.atk_clock.restart
+            Humanoids.attack_animation(humanoid)
+            end
+      end
     #-------------------------------------------------------------Initialize--------------------------------------------------------------------------------
      def Humanoids.initialize_humanoids(window, map, area)
         All_Humanoid_Enemy_Array.map { |i| i.sprite.position = SF.vector2(100, 20005)}
@@ -290,13 +311,15 @@ include Use
        end
      end
     #--------------------------------------------------------------Display----------------------------------------------------------------------------------
-     def Humanoids.display_doll_factory(window, map)
+     def Humanoids.display_doll_factory(window, map, player)
         case map
         when "factory_map_01"
             Enemy_Blocking_Wall_Array.map { |i| window.draw(i)}
             Enemy_Blocking_Wall_01.position = SF.vector2(100, 205)
             Current_Map_Humanoid_Array.map { |i| 
-                if i.hp > 0
+                if i.hp > 0 && player.intersects? i.sprite.global_bounds  
+                Humanoids.get_hit(player, i)
+                else if i.hp > 0
                 humanoid = i
                 Humanoids.wander(humanoid)
                 else if i.is_dead == false
@@ -305,7 +328,7 @@ include Use
                 else
                 humanoid = i
                 Humanoids.respawn(humanoid)
-                end; end
+                end; end; end
                 i.health_bar.position = i.sprite.position + SF.vector2(-50, 100)
             if i.hp > 0
             x = i.hp / 4
@@ -398,12 +421,38 @@ include Use
             humanoid.clock.restart
         end
       end
+      def Humanoids.attack_animation(humanoid)
+        if humanoid.sprite.texture_rect != SF.int_rect(0, 200, 75, 100) && humanoid.sprite.texture_rect != SF.int_rect(75, 200, 75, 100) && 
+          humanoid.sprite.texture_rect != SF.int_rect(150, 200, 75, 100) && humanoid.sprite.texture_rect != SF.int_rect(225, 200, 75, 100)
+          humanoid.sprite.texture_rect = SF.int_rect(0, 200, 75, 100)
+          humanoid.clock.restart
+          Humanoids.attack_animation(humanoid)
+         end
+        if humanoid.sprite.texture_rect == SF.int_rect(0, 200, 75, 100) && humanoid.clock.elapsed_time >= SF.microseconds(1)
+           humanoid.sprite.texture_rect = SF.int_rect(75, 200, 75, 100)
+           humanoid.clock.restart 
+           Humanoids.attack_animation(humanoid)
+        end
+        if humanoid.sprite.texture_rect == SF.int_rect(75, 200, 75, 100) && humanoid.clock.elapsed_time >= SF.microseconds(1)
+         humanoid.sprite.texture_rect = SF.int_rect(150, 200, 75, 100)
+         humanoid.clock.restart 
+         Humanoids.attack_animation(humanoid)
+        end
+        if humanoid.sprite.texture_rect == SF.int_rect(150, 200, 75, 100) && humanoid.clock.elapsed_time >= SF.microseconds(1)
+           humanoid.sprite.texture_rect = SF.int_rect(225, 200, 75, 100)
+           humanoid.clock.restart 
+        end
+        if humanoid.sprite.texture_rect == SF.int_rect(225, 200, 75, 100) && humanoid.clock.elapsed_time >= SF.microseconds(1)
+            humanoid.sprite.texture_rect = SF.int_rect(0, 200, 75, 100)
+            humanoid.clock.restart 
+         end
+      end
    #________________________________________________________________________________________________________________________________________________________
    #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
    #/                                                               Entities                                                                               /
    #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    @@broken_doll = Humanoids.new(50.1, 50.1, 10.1, "Broken Doll", 1, [@@pineapples], 0, Broken_Doll, WEAPSOUND_06, 1, "humanoid", "N/A", 0, ["N/A"],
-    false, Enemy_Death_Clock.dup, 10, Enemy_Health_Bar.dup)
+    @@broken_doll = Humanoids.new(50.1, 50.1, 1.1, "Broken Doll", 1, [@@pineapples], 0, Broken_Doll, WEAPSOUND_06, 1, "humanoid", "N/A", 0, ["N/A"],
+    false, Enemy_Death_Clock.dup, Enemy_Attack_Clock.dup, 10, Enemy_Health_Bar.dup)
     All_Humanoid_Enemy_Array.push(@@broken_doll)
    #________________________________________________________________________________________________________________________________________________________
  end

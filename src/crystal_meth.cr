@@ -5,6 +5,7 @@ require "../src/Textures.cr"
 require "../src/Items.cr"
 require "../src/Custom_Body.cr"
 require "../src/enemies.cr"
+require "../src/Player_Stats.cr"
 require "../src/Audio.cr"
 require "../src/Saves.cr"
 require "../src/Fonts.cr"
@@ -245,7 +246,8 @@ extend self
    view2 = SF::View.new(SF.float_rect(0, 950, 1890, 140))
    view2.viewport = SF.float_rect(0, 0.85, 1, 0.15)
    window.view = view2
-   Player_Data::Stats.bars 
+   Player_Info::Player.adjust_stat_bars(window)
+   Player_Info::Player.calculate_stat_strings
    window.draw(Bottom_HUD); window.draw(System_Menu); window.draw(Text_System_Menu)
    window.draw(LVL_Box); window.draw(LVL_Bar); window.draw(LVL_Bar_Color); window.draw(EXP_Label); window.draw(MP_Bar) 
    window.draw(MP_Bar_Color); window.draw(MP_Label); window.draw(HP_Bar); 
@@ -289,7 +291,7 @@ extend self
     view5 = SF::View.new(SF.float_rect(0, 0, 1920, 1080))
     view5.viewport = SF.float_rect(0, 0, 1, 1)
     window.view = view5
-    Player_Data::Stats.stat_menu; 
+    Player_Info::Player.calculate_stat_strings
    window.draw(Stats_Window); window.draw(Stats_Window_Char_Box); #window.draw(@@player_character_rendered_model); 
    window.draw(Stats_Window_Exit_Box); window.draw(Stats_Window_LVL_Text); window.draw(Stats_Window_LVL_Text_02);
    window.draw(Stats_Window_Str_Text); window.draw(Stats_Window_Dex_Text); window.draw(Stats_Window_Luk_Text)
@@ -440,6 +442,8 @@ extend self
      map = @@map
      area = @@area
      Window_Class.wall_collision
+     player = @@player_character_rendered_model.global_bounds
+     #Regular_Enemies::Humanoids.get_hit(player)
      Map_Geometry::Misc_Decor.display(window, area, map)
      Map_Geometry::Teleporter.display_teleporters(window, area, map)
      Map_Geometry::Platform.display(area, map, window)
@@ -448,7 +452,7 @@ extend self
      window.draw(@@player_character_rendered_model); 
      Harvestables::Ore.draw_ores(window, map, area)
      Harvestables::Herbs.display(window, map, area)
-     window.draw(Ground); Regular_Enemies.display(window, map, area)
+     window.draw(Ground); Regular_Enemies.display(window, map, area, player)
    
     end
  #-------------------------------------------------------teleporters---------------------------------------------------------------------
@@ -3306,6 +3310,8 @@ def Window_Class.hud_keypresses(window)
       @@attacking = true
       @@idleframes = 0
       Player_Data::Stats.check_attack
+      atk_type = "physical"
+      Player_Info::Player.get_atk(atk_type)
       if @@has_weapon == true && Weapon_Template_Array[@@current_weapon].weapon_motion == "Swing"
         IDLE_TIMER.restart
         case @@current_direction
@@ -3732,26 +3738,6 @@ end; end; end; end; end; end
     @@exp += exp
     end
 
-   def Stats.bars
-     HP_Bar_Color.scale = SF.vector2(@@current_hp * 0.005, 1); HP_Bar.scale = SF.vector2(@@current_max_hp * 0.005, 1)
-     LVL_Bar_Color.scale = SF.vector2(@@exp_scale * 0.01, 1); 
-     MP_Bar_Color.scale = SF.vector2(@@current_mp * 0.005, 1); MP_Bar.scale = SF.vector2(@@current_max_mp * 0.005, 1)
-     if @@exp >= @@exp_cap
-       @@lvl += 1; @@exp = 0; @@lvl_points + 5
-       end
-     end
-   def Stats.stat_menu
-     exp = @@exp.to_s + "/" + @@exp_cap.to_s; lvl = "Lvl: " + @@lvl.to_s;
-     Stats_Window_LVL_Text.string = exp; Stats_Window_LVL_Text_02.string = lvl; 
-     str = "STR: " + @@current_str.to_s; Stats_Window_Str_Text.string = str
-     dex = "DEX: " + @@current_dex.to_s; Stats_Window_Dex_Text.string = dex
-     luk = "LUK: " + @@current_luk.to_s; Stats_Window_Luk_Text.string = luk
-     int = "INT: " + @@current_int.to_s; Stats_Window_Int_Text.string = int
-     hp = "HP: " + @@current_hp.to_s + "/" + @@current_max_hp.to_s; Stats_Window_HP_Text.string = hp
-     mp = "MP: " + @@current_mp.to_s + "/" + @@current_max_mp.to_s; Stats_Window_MP_Text.string = mp
-     LVL_Label.string = @@lvl.to_s;
-     Stats_Window_Name_Text.string = @@name
-    end
    def Stats.check_attack
     base_attack = 10 + @@current_str
     Crafted_Items::Weapon.attack_strength(base_attack)
