@@ -149,7 +149,7 @@ include Use
    #!                                                              Initialize                                                                              !
    #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     def initialize(hp : Float64, max_hp : Float64, atk_power : Float64, name : String, lvl : Int32, drop_array : Array(Ingredients), amount_killed : Int32, sprite : SF::Sprite, sfx : SF::Sound,
-     id : Int32, kind : String, color : String, amount_owned : Int32, effects : Array(String))
+     id : Int32, kind : String, color : String, amount_owned : Int32, effects : Array(String), is_dead : Bool, clock : SF::Clock)
       @hp = hp
       @max_hp = max_hp
       @atk_power = atk_power
@@ -159,12 +159,13 @@ include Use
       @amount_killed = amount_killed
       @sprite = sprite
       @sfx = sfx 
-     #------------drop item properties
       @id = id
       @kind = kind
       @color = color
       @amount_owned = amount_owned
       @effects = effects
+      @is_dead = is_dead
+      @clock = clock
      end
     def hp
        @hp
@@ -196,6 +197,15 @@ include Use
     def amount_owned #direction
       @amount_owned
      end
+    def is_dead
+        @is_dead
+    end
+    def clock
+        @clock
+    end
+    def is_dead=(this)
+        @is_dead = this
+    end
    #________________________________________________________________________________________________________________________________________________________
    #********************************************************************************************************************************************************
    #*                                                              Variables                                                                               *
@@ -204,7 +214,7 @@ include Use
     Enemy_Blocking_Wall_Array = [Enemy_Blocking_Wall_01]
     All_Humanoid_Enemy_Array = [] of Humanoids 
     Current_Map_Humanoid_Array = [] of Humanoids
-    Enemy_Walk_Cycle_Clock = SF::Clock.new
+    Enemy_Walk_Cycle_Clock = SF::Clock.new; Enemy_Death_Animation_Clock = SF::Clock.new; Enemy_Death_Clock = SF::Clock.new
    #________________________________________________________________________________________________________________________________________________________
    #????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
    #?                                                               Methods                                                                                ?
@@ -212,6 +222,9 @@ include Use
     #---------------------------------------------------------------Combat----------------------------------------------------------------------------------
      def hp_subtract(damage)
         @hp -= damage
+       end
+     def revive
+        @hp = @max_hp
        end
      def Humanoids.set_attack_strength(attack_strength)
        @@attack_strength = attack_strength
@@ -250,13 +263,22 @@ include Use
             Enemy_Blocking_Wall_Array.map { |i| window.draw(i)}
             Enemy_Blocking_Wall_01.position = SF.vector2(100, 205)
             Current_Map_Humanoid_Array.map { |i| 
+                if i.hp > 0
                 humanoid = i
                 Humanoids.wander(humanoid)
+                else if i.is_dead == false
+                humanoid = i
+                Humanoids.death_animation(humanoid)
+                else
+                humanoid = i
+                Humanoids.respawn(humanoid)
+                end; end
             Enemy_Health_Bar.position = i.sprite.position + SF.vector2(-50, 100)
             if i.hp > 0
             x = i.hp / 4
             else
             x = 0
+            humanoid = i
             end
             Enemy_Health_Bar.size = SF.vector2(x, 5)
             window.draw(i.sprite); window.draw(Enemy_Health_Bar)
@@ -290,6 +312,11 @@ include Use
        end; end
      end}
       end
+      def Humanoids.respawn(humanoid)
+        Current_Map_Humanoid_Array.map { |i| if i.is_dead == true && i.clock.elapsed_time >= SF.seconds(5) 
+        i.revive; i.is_dead = false
+      end}
+      end
       def Humanoids.walk_animation(humanoid)
         if humanoid.sprite.texture_rect == SF.int_rect(0, 0, 75, 100) && Enemy_Walk_Cycle_Clock.elapsed_time >= SF.milliseconds(150)
             humanoid.sprite.texture_rect = SF.int_rect(0, 100, 75, 100)
@@ -312,11 +339,36 @@ include Use
             Enemy_Walk_Cycle_Clock.restart
         end
       end
+      def Humanoids.death_animation(humanoid)
+        if humanoid.sprite.texture_rect != SF.int_rect(0, 300, 75, 100) && humanoid.sprite.texture_rect != SF.int_rect(75, 300, 75, 100) && 
+        humanoid.sprite.texture_rect != SF.int_rect(150, 300, 75, 100) && humanoid.sprite.texture_rect != SF.int_rect(225, 300, 75, 100)
+        humanoid.sprite.texture_rect = SF.int_rect(0, 300, 75, 100)
+        Enemy_Death_Animation_Clock.restart
+        end
+        if humanoid.sprite.texture_rect == SF.int_rect(0, 300, 75, 100) && Enemy_Death_Animation_Clock.elapsed_time >= SF.milliseconds(150)
+            humanoid.sprite.texture_rect = SF.int_rect(75, 300, 75, 100)
+            Enemy_Death_Animation_Clock.restart        
+        end
+        if humanoid.sprite.texture_rect == SF.int_rect(75, 300, 75, 100) && Enemy_Death_Animation_Clock.elapsed_time >= SF.milliseconds(150)
+            humanoid.sprite.texture_rect = SF.int_rect(150, 300, 75, 100)
+            Enemy_Death_Animation_Clock.restart
+        end
+        if humanoid.sprite.texture_rect == SF.int_rect(150, 300, 75, 100) && Enemy_Death_Animation_Clock.elapsed_time >= SF.milliseconds(150)
+            humanoid.sprite.texture_rect = SF.int_rect(225, 300, 75, 100)
+            Enemy_Death_Animation_Clock.restart
+        end
+        if humanoid.sprite.texture_rect == SF.int_rect(225, 300, 75, 100) && Enemy_Death_Animation_Clock.elapsed_time >= SF.milliseconds(150)
+            humanoid.sprite.texture_rect = SF.int_rect(300, 300, 75, 100)
+            humanoid.is_dead = true
+            humanoid.clock.restart
+        end
+      end
    #________________________________________________________________________________________________________________________________________________________
    #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
    #/                                                               Entities                                                                               /
    #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    @@broken_doll = Humanoids.new(500.1, 500.1, 10.1, "Broken Doll", 1, [@@pineapples], 0, Broken_Doll, WEAPSOUND_06, 1, "humanoid", "N/A", 0, ["N/A"])
+    @@broken_doll = Humanoids.new(50.1, 50.1, 10.1, "Broken Doll", 1, [@@pineapples], 0, Broken_Doll, WEAPSOUND_06, 1, "humanoid", "N/A", 0, ["N/A"],
+    false, Enemy_Death_Clock.dup)
     All_Humanoid_Enemy_Array.push(@@broken_doll)
    #________________________________________________________________________________________________________________________________________________________
  end
