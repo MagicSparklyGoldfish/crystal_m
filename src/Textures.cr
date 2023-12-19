@@ -3800,11 +3800,14 @@ Testing_Text.character_size = 20; Testing_Text.color = SF::Color::White; Testing
 #-------------------------------------------------------------------------------------------------------------------------------------- 
  #$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$Humanoids$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
    Damage_Text = SF::Text.new; Damage_Text.font = FONT_MILITARY; Damage_Text.character_size = 15; 
-   Damage_Text.color = SF::Color::White; Damage_Text.position = SF.vector2(1060, 280);
+   Damage_Text.color = SF::Color::White; Damage_Text.position = SF.vector2(10600, 280);
+
+   Name_Text = SF::Text.new; Name_Text.font = FONT_MILITARY; Name_Text.character_size = 10; 
+   Name_Text.color = SF::Color::White; Damage_Text.position = SF.vector2(10060, 280);
   #---------------------------------------------------Broken Doll----------------------------------------------------------------------
    BROKEN_DOLL_TEXTURE = SF::Texture.from_file("graphics/enemies/Broken_Doll.png")
    Broken_Doll = SF::Sprite.new(BROKEN_DOLL_TEXTURE); Broken_Doll.texture_rect = SF.int_rect(0, 0, 75, 100)
    Broken_Doll.origin = SF.vector2(32, 0)
 
    Enemy_Health_Bar = SF::RectangleShape.new(SF.vector2(5, 5)); Enemy_Health_Bar.fill_color = SF.color(255, 50, 50, 125)
-   Enemy_Health_Bar.position = SF.vector2(0, 400)
+   Enemy_Health_Bar.position = SF.vector2(0, 400); Enemy_Health_Bar.origin = SF.vector2(32, 0)

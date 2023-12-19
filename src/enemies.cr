@@ -336,7 +336,9 @@ include Use
                 humanoid = i
                 Humanoids.respawn(humanoid)
                 end; end; end
-                i.health_bar.position = i.sprite.position + SF.vector2(-50, 100)
+                Name_Text.string = i.name
+                Name_Text.position = i.sprite.position + SF.vector2(-50, 100)
+                i.health_bar.position = i.sprite.position + SF.vector2(0, 125)
             if i.hp > 0
             x = i.hp / 4
             else
@@ -344,8 +346,9 @@ include Use
             humanoid = i
             end
             i.health_bar.size = SF.vector2(x, 5)
+            i.health_bar.origin = SF.vector2(x / 2, 0)
             window.draw(i.sprite); window.draw(i.health_bar)
-            window.draw(Damage_Text)
+            window.draw(Damage_Text); window.draw(Name_Text)
            }end
       end
     #---------------------------------------------------------------Logic-----------------------------------------------------------------------------------
@@ -427,6 +430,7 @@ include Use
             humanoid.is_dead = true
             exp = humanoid.exp
             Damage_Text.position = SF.vector2(100, 20005)
+            Name_Text.position = SF.vector2(100, 20005)
             Player_Info::Player.gain_exp(exp)
             humanoid.clock.restart
         end

@@ -206,6 +206,7 @@ require "file_utils"
          @@player.lvl_up_points += 3
          @@player.exp = 0
          @@exp_cap = @@player.lvl * Math.sqrt(100) 
+         @@player.current_hp = @@player.max_hp
          puts @@exp_cap
       end
      end
