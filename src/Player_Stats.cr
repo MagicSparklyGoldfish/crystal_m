@@ -18,17 +18,23 @@ require "chipmunk/chipmunk_crsfml"
 require "file_utils"
 
  module Player_Info
- include Use
+ include Crafted_Items
+ extend self
  #PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP
  #P                                                                 Player                                                                              P
  #PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP
-  class Player
+  class Player < Weapon
    #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
    #!                                                              Initialize                                                                              !
    #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     def initialize(name : String, current_hp : Float64, max_hp : Float64, current_mp : Float64,
       max_mp : Float64, str : Int32, dex : Int32, int : Int32, luk : Int32, atk : Int32, m_atk : Int32, 
-      speed : Float64, jump_height : Float64, exp : Float64, lvl : Int32, lvl_up_points : Int32)
+      speed : Float64, jump_height : Float64, exp : Float64, lvl : Int32, lvl_up_points : Int32,
+
+      current_weapon : Weapon, @@weapon_name : String, @@weapon_id : Int32, @@weapon_type : String, @@weapon_atk : Float64, @@weapon_element : Array(String), 
+      @weapon_effect : Array(String), @@weapon_sprite : SF::Sprite, @@weapon_inventory_sprite : SF::RectangleShape, @@weapon_swing_sound : SF::Sound, 
+      @@weapon_hit_sound : SF::Sound, @@weapon_motion : String, @@weapon_upgrade_count : Int32, @@ingots_required : Int32)
+
       @name = name
       @current_hp = current_hp
       @max_hp = max_hp
@@ -45,6 +51,21 @@ require "file_utils"
       @exp = exp
       @lvl = lvl
       @lvl_up_points = lvl_up_points
+      @current_weapon = current_weapon
+
+      @weapon_name = weapon_name
+      @weapon_id = weapon_id
+      @weapon_type = weapon_type
+      @weapon_atk = weapon_atk
+      @weapon_element = weapon_element
+      @weapon_effect = weapon_effect
+      @weapon_sprite = weapon_sprite
+      @weapon_inventory_sprite = weapon_inventory_sprite
+      @weapon_swing_sound = weapon_swing_sound
+      @weapon_hit_sound = weapon_hit_sound
+      @weapon_motion = weapon_motion
+      @weapon_upgrade_count = weapon_upgrade_count
+      @ingots_required = ingots_required
      end
     def name
         @name
@@ -94,7 +115,9 @@ require "file_utils"
     def lvl_up_points
         @lvl_up_points
      end
-
+    def current_weapon
+        @current_weapon
+     end
     def current_hp=(this)
         @current_hp = this
      end
@@ -106,7 +129,51 @@ require "file_utils"
      end
     def lvl_up_points=(this)
        @lvl_up_points = this
+     end
+    def current_weapon=(this)
+        @current_weapon = this
     end
+    #----------------------------------------------------------------Weapon =--------------------------------------------------------------------------------
+     def weapon_name=(this)
+         @weapon_name = this
+      end
+     def weapon_id=(this)
+         @weapon_id = this
+      end
+     def weapon_type=(this)
+         @weapon_type = this
+      end
+     def weapon_atk=(this)
+         @weapon_atk = this
+      end
+     def weapon_element=(this)
+         @weapon_element = this
+      end
+     def weapon_effect=(this)
+        @weapon_effect = this
+      end
+     def weapon_sprite=(this)
+         @weapon_sprite = this
+      end
+     def weapon_inventory_sprite=(this)
+         @weapon_inventory_sprite = this
+      end
+     def weapon_swing_sound=(this)
+         @weapon_swing_sound = this
+      end
+     def weapon_hit_sound=(this)
+         @weapon_hit_sound = this
+      end
+     def weapon_motion=(this)
+         @weapon_motion = this
+      end
+     def weapon_upgrade_count=(this)
+         @weapon_upgrade_count = this
+      end
+     def ingots_required=(this)
+         @ingots_required = this
+      end
+    
    #________________________________________________________________________________________________________________________________________________________
    #********************************************************************************************************************************************************
    #*                                                              Variables                                                                               *
@@ -139,6 +206,9 @@ require "file_utils"
     def Player.take_damage(damage)
       @@player.current_hp -= damage
      end
+    def Player.heal(heal)
+        @@player.current_hp += heal
+    end
     def Player.adjust_stat_bars(window)
       HP_Bar_Color.scale = SF.vector2(@@player.current_hp * 0.005, 1); HP_Bar.scale = SF.vector2(@@player.max_hp * 0.005, 1)
       LVL_Bar_Color.scale = SF.vector2(@@player.exp / 100, 1); LVL_Bar.scale = SF.vector2(@@exp_cap / 100, 1)
@@ -156,12 +226,32 @@ require "file_utils"
       LVL_Label.string = @@player.lvl.to_s;
       Stats_Window_Name_Text.string = @@player.name
      end
+    def Player.equip_weapon(weapon)
+        @@player.current_weapon = weapon
+        Player.update_equipped_weapon_stats
+    end
+    def Player.update_equipped_weapon_stats
+     @@player.weapon_name = @@player.current_weapon.weapon_name; @@player.weapon_id = @@player.current_weapon.weapon_id; 
+     @@player.weapon_type = @@player.current_weapon.weapon_type; @@player.weapon_atk = @@player.current_weapon.weapon_atk; 
+     @@player.weapon_element = @@player.current_weapon.weapon_element; @@player.weapon_effect = @@player.current_weapon.weapon_effect; 
+     @@player.weapon_sprite = @@player.current_weapon.weapon_sprite; 
+     @@player.weapon_inventory_sprite = @@player.current_weapon.weapon_inventory_sprite; 
+     @@player.weapon_swing_sound = @@player.current_weapon.weapon_swing_sound; 
+     @@player.weapon_hit_sound = @@player.current_weapon.weapon_hit_sound; @@player.weapon_motion = @@player.current_weapon.weapon_motion;
+     @@player.weapon_upgrade_count = @@player.current_weapon.weapon_upgrade_count; 
+     @@player.ingots_required = @@player.current_weapon.ingots_required
+    end
    #________________________________________________________________________________________________________________________________________________________
    #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
    #/                                                               Entities                                                                               /
    #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    @@player = Player.new("Some Rando", 100, 100, 50, 50, 1, 1, 1, 1, 5, 5, 1, 1, 0, 1, 3)
+    @@player = Player.new("Some Rando", 100, 100, 50, 50, 1, 1, 1, 1, 5, 5, 1, 1, 0, 1, 3, @@stick, @@stick.weapon_name,
+    @@stick.weapon_id, @@stick.weapon_type, @@stick.weapon_atk, @@stick.weapon_element, 
+    @@stick.weapon_effect, @@stick.weapon_sprite, @@stick.weapon_inventory_sprite, 
+    @@stick.weapon_swing_sound, @@stick.weapon_hit_sound, @@stick.weapon_motion,
+    @@stick.weapon_upgrade_count, @@stick.ingots_required)
    #________________________________________________________________________________________________________________________________________________________
+
    end
   class Skill
    end

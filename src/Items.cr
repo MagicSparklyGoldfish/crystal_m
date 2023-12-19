@@ -248,6 +248,7 @@ require "file_utils"
  end
 
 module Etc
+include Use 
   # _________________________________________________________________________________________________________________________________________________________
   #|                                                              Etc Variables                                                                              |
   #|_________________________________________________________________________________________________________________________________________________________|
@@ -6048,10 +6049,14 @@ module Crafted_Items
         if @@current_equipped_weapon != Nil && @@current_equipped_weapon != @@nil_stick
           Weapon_Inventory_Array.push(@@current_equipped_weapon)
           @@current_equipped_weapon = Weapon_Inventory_Array[this]
+          weapon = Weapon_Inventory_Array[this]
           Weapon_Inventory_Array.delete(@@current_equipped_weapon)
+          Player_Info::Player.equip_weapon(weapon)
           puts "equip" + this.to_s
         else
          @@current_equipped_weapon = Weapon_Inventory_Array[this]
+         weapon = Weapon_Inventory_Array[this]
+         Player_Info::Player.equip_weapon(weapon)
          Weapon_Inventory_Array.delete(@@current_equipped_weapon)
          end
          end
