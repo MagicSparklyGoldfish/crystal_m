@@ -3805,17 +3805,22 @@ end; end; end; end; end; end
     def Player_Physics.gravity(@@player_character_rendered_model, window)
        gravity = @@gravity_clock.elapsed_time
      #-------------------------------------------Variables-----------------------------------------------------------------------------+  
-      ground_box = Ground.global_bounds; test_platform_box = Test_Platform_01.global_bounds
-      test_platform_box_2 = Test_Platform_02.global_bounds
-      test_platform_box_3 = Test_Platform_03.global_bounds
-      test_platform_box_4 = Short_Platform_01.global_bounds
-      test_platform_box_5 = Medium_Platform_01.global_bounds
+      ground_box = Ground; test_platform_box = Test_Platform_01
+      test_platform_box_2 = Test_Platform_02
+      test_platform_box_3 = Test_Platform_03
+      test_platform_box_4 = Short_Platform_01
+      test_platform_box_5 = Medium_Platform_01
       @@player_bounding_box = Feet_Bounding_Box.global_bounds
       Feet_Bounding_Box.position = @@player_character_rendered_model.position + SF.vector2(25, 120)
       test_platform_array = [ground_box, test_platform_box, test_platform_box_2, test_platform_box_3, test_platform_box_4, test_platform_box_5]
      #---------------------------------------------------------------------------------------------------------------------------------+
 
-     if @@player_bounding_box.intersects? test_platform_array[@@gravity_iterator]
+     if @@player_bounding_box.intersects? test_platform_array[@@gravity_iterator].global_bounds
+       y = test_platform_array[@@gravity_iterator].position.y - 125
+       x = @@player_character_rendered_model.position.x
+       if @@player_character_rendered_model.position.y > y + 10
+       @@player_character_rendered_model.position = SF.vector2(x, y)
+       end
        airborn = false
        Gui::Window_Class.is_airborn(airborn)
        @@player_jumped = false
