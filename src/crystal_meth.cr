@@ -445,11 +445,10 @@ extend self
      Map_Geometry::Platform.display(area, map, window)
      Map_Geometry::Wall.display(window, area, map)
      Map_Geometry::Ladder.display_ladders(window, map, area)
-     Regular_Enemies.display(window, map, area)
      window.draw(@@player_character_rendered_model); 
      Harvestables::Ore.draw_ores(window, map, area)
      Harvestables::Herbs.display(window, map, area)
-     window.draw(Ground); 
+     window.draw(Ground); Regular_Enemies.display(window, map, area)
    
     end
  #-------------------------------------------------------teleporters---------------------------------------------------------------------
