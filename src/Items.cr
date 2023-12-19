@@ -6391,7 +6391,9 @@ module Crafted_Items
  
     #.............................................................Attack Strength................................................................................
         def Weapon.attack_strength(base_attack) #@note attack strength 
-         attack_strength = base_attack * @@current_equipped_weapon.weapon_atk
+          attack_strength = 1
+         Player_Info::Player.get_atk
+         attack_strength = Player_Info::Player.get_atk#base_attack * @@current_equipped_weapon.weapon_atk
          Harvestables::Ore.set_attack_strength(attack_strength)
          Harvestables::Herbs.set_attack_strength(attack_strength)
          Regular_Enemies.set_attack_strength(attack_strength)

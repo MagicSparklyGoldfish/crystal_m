@@ -3799,6 +3799,8 @@ Testing_Text.character_size = 20; Testing_Text.color = SF::Color::White; Testing
 #                                                       Enemies
 #-------------------------------------------------------------------------------------------------------------------------------------- 
  #$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$Humanoids$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+   Damage_Text = SF::Text.new; Damage_Text.font = FONT_MILITARY; Damage_Text.character_size = 15; 
+   Damage_Text.color = SF::Color::White; Damage_Text.position = SF.vector2(1060, 280);
   #---------------------------------------------------Broken Doll----------------------------------------------------------------------
    BROKEN_DOLL_TEXTURE = SF::Texture.from_file("graphics/enemies/Broken_Doll.png")
    Broken_Doll = SF::Sprite.new(BROKEN_DOLL_TEXTURE); Broken_Doll.texture_rect = SF.int_rect(0, 0, 75, 100)

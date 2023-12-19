@@ -3311,7 +3311,7 @@ def Window_Class.hud_keypresses(window)
       @@idleframes = 0
       Player_Data::Stats.check_attack
       atk_type = "physical"
-      Player_Info::Player.get_atk(atk_type)
+      Player_Info::Player.get_atk
       if @@has_weapon == true && Weapon_Template_Array[@@current_weapon].weapon_motion == "Swing"
         IDLE_TIMER.restart
         case @@current_direction

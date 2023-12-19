@@ -131,6 +131,7 @@ include Use
  @@test_enemy_rendered_model = SF::Sprite.new
  @@attack_strength : Float64; @@attack_strength = 1
  Enemy_Clock_01 = SF::Clock.new
+ Enemy_Clock_02 = SF::Clock.new
 
  def Regular_Enemies.set_attack_strength(attack_strength)
     Humanoids.set_attack_strength(attack_strength)
@@ -273,9 +274,15 @@ include Use
         if enemy.hp > 0
         if time >= SF.seconds(0.35) && attack == true
           Crafted_Items::Weapon.play_hit_sound
+          Enemy_Clock_02.restart
           damage = @@attack_strength
+          Damage_Text.string = damage.to_s
+          Damage_Text.position = enemy.sprite.position
           enemy.hp_subtract(damage)
           Enemy_Clock_01.restart
+          if time <= SF.seconds(0.35)
+            Damage_Text.position = SF.vector2(100, 20005)
+          end
         end; end; end; end; }end
 
      def Humanoids.get_hit(player, i)
@@ -338,6 +345,7 @@ include Use
             end
             i.health_bar.size = SF.vector2(x, 5)
             window.draw(i.sprite); window.draw(i.health_bar)
+            window.draw(Damage_Text)
            }end
       end
     #---------------------------------------------------------------Logic-----------------------------------------------------------------------------------
@@ -418,6 +426,7 @@ include Use
             humanoid.sprite.texture_rect = SF.int_rect(300, 300, 75, 100)
             humanoid.is_dead = true
             exp = humanoid.exp
+            Damage_Text.position = SF.vector2(100, 20005)
             Player_Info::Player.gain_exp(exp)
             humanoid.clock.restart
         end
