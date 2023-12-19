@@ -417,7 +417,8 @@ include Use
         if humanoid.sprite.texture_rect == SF.int_rect(225, 300, 75, 100) && Enemy_Death_Animation_Clock.elapsed_time >= SF.milliseconds(150)
             humanoid.sprite.texture_rect = SF.int_rect(300, 300, 75, 100)
             humanoid.is_dead = true
-            @@exp += humanoid.exp
+            exp = humanoid.exp
+            Player_Info::Player.gain_exp(exp)
             humanoid.clock.restart
         end
       end
@@ -452,7 +453,7 @@ include Use
    #/                                                               Entities                                                                               /
    #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     @@broken_doll = Humanoids.new(50.1, 50.1, 1.1, "Broken Doll", 1, [@@pineapples], 0, Broken_Doll, WEAPSOUND_06, 1, "humanoid", "N/A", 0, ["N/A"],
-    false, Enemy_Death_Clock.dup, Enemy_Attack_Clock.dup, 10, Enemy_Health_Bar.dup)
+    false, Enemy_Death_Clock.dup, Enemy_Attack_Clock.dup, 3, Enemy_Health_Bar.dup)
     All_Humanoid_Enemy_Array.push(@@broken_doll)
    #________________________________________________________________________________________________________________________________________________________
  end

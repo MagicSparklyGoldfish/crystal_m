@@ -28,7 +28,7 @@ require "file_utils"
    #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     def initialize(name : String, current_hp : Float64, max_hp : Float64, current_mp : Float64,
       max_mp : Float64, str : Int32, dex : Int32, int : Int32, luk : Int32, atk : Int32, m_atk : Int32, 
-      speed : Float64, jump_height : Float64, exp : Float64, lvl : Int32)
+      speed : Float64, jump_height : Float64, exp : Float64, lvl : Int32, lvl_up_points : Int32)
       @name = name
       @current_hp = current_hp
       @max_hp = max_hp
@@ -44,6 +44,7 @@ require "file_utils"
       @jump_height = jump_height
       @exp = exp
       @lvl = lvl
+      @lvl_up_points = lvl_up_points
      end
     def name
         @name
@@ -90,9 +91,21 @@ require "file_utils"
     def lvl
         @lvl
      end
+    def lvl_up_points
+        @lvl_up_points
+     end
 
     def current_hp=(this)
         @current_hp = this
+     end
+    def exp=(this)
+        @exp = this
+     end
+    def lvl=(this)
+       @lvl = this
+     end
+    def lvl_up_points=(this)
+       @lvl_up_points = this
     end
    #________________________________________________________________________________________________________________________________________________________
    #********************************************************************************************************************************************************
@@ -113,12 +126,22 @@ require "file_utils"
         return @@player.m_atk 
       end
     end
+    def Player.gain_exp(exp)
+     @@player.exp += exp
+     if @@player.exp >= @@exp_cap
+        @@player.lvl += 1
+        @@player.lvl_up_points += 3
+        @@player.exp = 0
+        @@exp_cap = @@player.lvl * Math.sqrt(100) 
+        puts @@exp_cap
+     end
+    end
     def Player.take_damage(damage)
       @@player.current_hp -= damage
      end
     def Player.adjust_stat_bars(window)
       HP_Bar_Color.scale = SF.vector2(@@player.current_hp * 0.005, 1); HP_Bar.scale = SF.vector2(@@player.max_hp * 0.005, 1)
-      LVL_Bar_Color.scale = SF.vector2(@@exp_scale * 0.01, 1); 
+      LVL_Bar_Color.scale = SF.vector2(@@player.exp / 100, 1); LVL_Bar.scale = SF.vector2(@@exp_cap / 100, 1)
       MP_Bar_Color.scale = SF.vector2(@@player.current_mp * 0.005, 1); MP_Bar.scale = SF.vector2(@@player.max_mp * 0.005, 1)
      end
     def Player.calculate_stat_strings
@@ -137,7 +160,7 @@ require "file_utils"
    #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
    #/                                                               Entities                                                                               /
    #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    @@player = Player.new("Some Rando", 100, 100, 50, 50, 1, 1, 1, 1, 5, 5, 1, 1, 0, 1)
+    @@player = Player.new("Some Rando", 100, 100, 50, 50, 1, 1, 1, 1, 5, 5, 1, 1, 0, 1, 3)
    #________________________________________________________________________________________________________________________________________________________
    end
   class Skill
