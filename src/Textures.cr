@@ -438,6 +438,12 @@
    Gem_Info_Text = SF::Text.new; Gem_Info_Text.font = FONT_COMMON; Gem_Info_Text.character_size = 20
    Gem_Info_Text.color = SF::Color::Black; Gem_Info_Text.position = Gem_Info_Box.position 
    Gem_Info_Text.string = ""
+  #-------------------------------------------------Ingredient Info Box------------------------------------------------------------
+   Ingredient_Info_Box = SF::RectangleShape.new(SF.vector2(250, 100)); Ingredient_Info_Box.fill_color = SF.color(200, 200, 200)
+   Ingredient_Info_Box.position = SF.vector2(200, 150) 
+   Ingredient_Info_Text = SF::Text.new; Ingredient_Info_Text.font = FONT_COMMON; Ingredient_Info_Text.character_size = 20
+   Ingredient_Info_Text.color = SF::Color::Black; Ingredient_Info_Text.position = Ingredient_Info_Text.position 
+   Ingredient_Info_Text.string = ""
   #--------------------------------------------------Weapon Overlays---------------------------------------------------------------
    #.....................................................Stick.....................................................................
     EARTH_STICK_OVERLAY_TEXTURE = SF::Texture.from_file("graphics/metals/Earth_Stick_Overlay.png")

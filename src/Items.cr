@@ -88,6 +88,9 @@ require "file_utils"
       end
      def Ingredients.display_inventory(window, page)
       current_position = SF.vector2(400, 310)
+      amount_owned_text = Ingredient_Info_Text.dup
+      amount_owned_text.color = SF::Color::White 
+      amount_owned_text.character_size = 25
       slot = 0; line = 1
       Owned_Ingredient_Array.map { |i| 
       if slot < 6
@@ -103,13 +106,31 @@ require "file_utils"
       end; end; end
       if line < 4 && page == 1
        i.sprite.position = current_position
-       window.draw(i.sprite)
+       amount_owned_text.position = current_position + SF.vector2(100, 0)
+       if i.amount_owned < 100
+        amount_owned_text.string = "x" + i.amount_owned.to_s
+       else
+        amount_owned_text.string = "x" + "99+"
+       end
+       window.draw(i.sprite); window.draw(amount_owned_text)
       else if line >= 4 && line < 7  && page == 2
        i.sprite.position = current_position
-       window.draw(i.sprite)
+       amount_owned_text.position = current_position + SF.vector2(100, 0)
+       if i.amount_owned < 100
+        amount_owned_text.string = "x" + i.amount_owned.to_s
+       else
+        amount_owned_text.string = "x" + "99+"
+       end
+       window.draw(i.sprite); window.draw(amount_owned_text)
       else if line >= 7 && line < 12  && page == 3
         i.sprite.position = current_position
-        window.draw(i.sprite)
+        amount_owned_text.position = current_position + SF.vector2(100, 0)
+        if i.amount_owned < 100
+          amount_owned_text.string = "x" + i.amount_owned.to_s
+         else
+          amount_owned_text.string = "x" + "99+"
+         end
+        window.draw(i.sprite); window.draw(amount_owned_text)
       end; end; end}
       end
       def Ingredients.click_on_item(item)
@@ -130,7 +151,7 @@ require "file_utils"
       end
       def Ingredients.check_stats(slot)
         if Owned_Ingredient_Array.size > slot
-          Gem_Info_Text.string = " Name: " + Owned_Ingredient_Array[slot].name + "\n Effects: " + 
+          Ingredient_Info_Text.string = " Name: " + Owned_Ingredient_Array[slot].name + "\n Effects: " + 
           Owned_Ingredient_Array[slot].effects[0] + ", " + Owned_Ingredient_Array[slot].effects[1]
         else
           Gem_Info_Text.string = ""

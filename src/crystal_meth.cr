@@ -387,7 +387,7 @@ extend self
     case @@category
       when "Ingredients"
         if @@info_box == "Ingredients"
-          window.draw(Gem_Info_Box);  window.draw(Gem_Info_Text)
+          window.draw(Ingredient_Info_Box);  window.draw(Ingredient_Info_Text)
         end
        Use::Ingredients.display_inventory(window, page)
      end
@@ -1079,7 +1079,7 @@ def Window_Class.char_creation_menu_keypresses(window)
 #------------------------------------------------------------------------------------------------------------------------------------------+
 def Window_Class.hud_keypresses(window)
   while (event = window.poll_event)
-   #-------------------------------------------------------------Right Mouse Button---------------------------------------------------------
+   #--------------------------------------------------------Right Mouse Button-------------------------------------------------------------
     if SF::Mouse.button_pressed?(SF::Mouse::Right)
       mouse_position = SF::Mouse.position
       x = mouse_position.x
@@ -1089,8 +1089,8 @@ def Window_Class.hud_keypresses(window)
       case @@category
        when "Ingredients"  #----------------------------------Ingredients Info Boxes
         if (x >= 555 && x <= 710) && (y >= 310 && y <= 460) #--slot one
-          Gem_Info_Box.position = SF.vector2(500, 460) 
-          Gem_Info_Text.position = Gem_Info_Box.position 
+          Ingredient_Info_Box.position = SF.vector2(500, 460) 
+          Ingredient_Info_Text.position = Ingredient_Info_Box.position 
           if @@info_box != "Ingredients"
            @@info_box = "Ingredients"
            slot = 0
@@ -1109,8 +1109,8 @@ def Window_Class.hud_keypresses(window)
            @@info_box = "none"
           end; end; end    
         if (x >= 710 && x <= 865) && (y >= 310 && y <= 460) #--slot two
-          Gem_Info_Box.position = SF.vector2(655, 460) 
-          Gem_Info_Text.position = Gem_Info_Box.position 
+          Ingredient_Info_Box.position = SF.vector2(655, 460) 
+          Ingredient_Info_Text.position = Ingredient_Info_Box.position 
            if @@info_box != "Ingredients"
             @@info_box = "Ingredients"
             slot = 0
@@ -1129,8 +1129,8 @@ def Window_Class.hud_keypresses(window)
             @@info_box = "none"
             end; end; end    
         if (x >= 865 && x <= 1020) && (y >= 310 && y <= 460) #--slot three
-          Gem_Info_Box.position = SF.vector2(800, 460) 
-          Gem_Info_Text.position = Gem_Info_Box.position 
+          Ingredient_Info_Box.position = SF.vector2(800, 460) 
+          Ingredient_Info_Text.position = Ingredient_Info_Box.position 
            if @@info_box != "Ingredients"
             @@info_box = "Ingredients"
             slot = 0
@@ -1149,8 +1149,8 @@ def Window_Class.hud_keypresses(window)
             @@info_box = "none"
             end; end; end
         if (x >= 1020 && x <= 1175) && (y >= 310 && y <= 460) #--slot four
-          Gem_Info_Box.position = SF.vector2(945, 460) 
-          Gem_Info_Text.position = Gem_Info_Box.position 
+          Ingredient_Info_Box.position = SF.vector2(945, 460) 
+          Ingredient_Info_Text.position = Ingredient_Info_Box.position 
            if @@info_box != "Ingredients"
              @@info_box = "Ingredients"
              slot = 0
@@ -1169,8 +1169,8 @@ def Window_Class.hud_keypresses(window)
              @@info_box = "none"
              end; end; end
         if (x >= 1175 && x <= 1330) && (y >= 310 && y <= 460) #--slot five
-         Gem_Info_Box.position = SF.vector2(1100, 460) 
-         Gem_Info_Text.position = Gem_Info_Box.position 
+          Ingredient_Info_Box.position = SF.vector2(1100, 460) 
+          Ingredient_Info_Text.position = Ingredient_Info_Box.position 
           if @@info_box != "Ingredients"
             @@info_box = "Ingredients"
             slot = 0
@@ -1188,315 +1188,211 @@ def Window_Class.hud_keypresses(window)
             else if @@info_box == "Ingredients"
             @@info_box = "none"
             end; end; end
-     end
-     when "Etc"  #----------------------------------Gem Info Boxes
-      case @@category
-       when "gem"
-       if (x >= 555 && x <= 710) && (y >= 310 && y <= 460) #--slot one
-        Gem_Info_Box.position = SF.vector2(500, 460) 
-        Gem_Info_Text.position = Gem_Info_Box.position 
-        if @@info_box != "gem"
-         @@info_box = "gem"
-         slot = 0
-         case @@page
-          when 1
-           slot = 0
-          when 2
-           slot = 18
-          when 3
-            slot = 36
-          when 4
-            slot = 54  
-          end
-         Etc::Gem.check_stats(slot)
-        else if @@info_box == "gem"
-         @@info_box = "none"
-        end; end; end
-       if (x >= 710 && x <= 865) && (y >= 310 && y <= 460) #--slot two
-        Gem_Info_Box.position = SF.vector2(655, 460) 
-        Gem_Info_Text.position = Gem_Info_Box.position 
-         if @@info_box != "gem"
-          @@info_box = "gem"
-          slot = 0
-          case @@page
-           when 1
-            slot = 1
-           when 2
-            slot = 19
-           when 3
-            slot = 37
-           when 4
-            slot = 55  
-           end
-          Etc::Gem.check_stats(slot)
-         else if @@info_box == "gem"
-          @@info_box = "none"
-          end; end; end
-       if (x >= 865 && x <= 1020) && (y >= 310 && y <= 460) #--slot three
-        Gem_Info_Box.position = SF.vector2(800, 460) 
-        Gem_Info_Text.position = Gem_Info_Box.position 
-         if @@info_box != "gem"
-          @@info_box = "gem"
-          slot = 0
-          case @@page
-           when 1
-            slot = 2
-           when 2
-            slot = 20
-           when 3
-            slot = 38    
-           when 4
-            slot = 56         
-           end
-          Etc::Gem.check_stats(slot)
-        else if @@info_box == "gem"
-          @@info_box = "none"
-          end; end; end
-       if (x >= 1020 && x <= 1175) && (y >= 310 && y <= 460) #--slot four
-        Gem_Info_Box.position = SF.vector2(945, 460) 
-        Gem_Info_Text.position = Gem_Info_Box.position 
-         if @@info_box != "gem"
-           @@info_box = "gem"
-           slot = 0
-           case @@page
-            when 1
-             slot = 3
-            when 2
-             slot = 21
-            when 3
-              slot = 39 
-            when 4
-              slot = 57     
-            end
-           Etc::Gem.check_stats(slot)
-           else if @@info_box == "gem"
-           @@info_box = "none"
-           end; end; end
-       if (x >= 1175 && x <= 1330) && (y >= 310 && y <= 460) #--slot five
-        Gem_Info_Box.position = SF.vector2(1100, 460) 
-        Gem_Info_Text.position = Gem_Info_Box.position 
-         if @@info_box != "gem"
-           @@info_box = "gem"
-           slot = 0
-           case @@page
-            when 1
-             slot = 4
-            when 2
-             slot = 22
-            when 3
-             slot = 40 
-            when 4
-             slot = 58     
-            end
-           Etc::Gem.check_stats(slot)
-           else if @@info_box == "gem"
-           @@info_box = "none"
-           end; end; end
-       if (x >= 1330 && x <= 1485) && (y >= 310 && y <= 460) #--slot six
-        Gem_Info_Box.position = SF.vector2(1265, 460) 
-        Gem_Info_Text.position = Gem_Info_Box.position 
-         if @@info_box != "gem"
-           @@info_box = "gem"
-           slot = 0
-           case @@page
-            when 1
-             slot = 5
-            when 2
-             slot = 23
-            when 3
-             slot = 41  
-            when 4
-             slot = 59    
-            end
-           Etc::Gem.check_stats(slot)
-           else if @@info_box == "gem"
-           @@info_box = "none"
-           end; end; end
-       if (x >= 555 && x <= 710) && (y >= 460 && y <= 610) #--slot seven
-        Gem_Info_Box.position = SF.vector2(500, 610) 
-        Gem_Info_Text.position = Gem_Info_Box.position 
-         if @@info_box != "gem"
-           @@info_box = "gem"
-           slot = 0
-           case @@page
-            when 1
-             slot = 6
-            when 2
-             slot = 24
-            when 3
-             slot = 42 
-            when 4
-             slot = 60     
-            end
-           Etc::Gem.check_stats(slot)
-         else if @@info_box == "gem"
-           @@info_box = "none"
-           end; end; end
-       if (x >= 710 && x <= 865) && (y >= 460 && y <= 610) #--slot eight
-        Gem_Info_Box.position = SF.vector2(655, 610) 
-        Gem_Info_Text.position = Gem_Info_Box.position 
-         if @@info_box != "gem"
-           @@info_box = "gem"
-           slot = 0
-           case @@page
-            when 1
-             slot = 7
-            when 2
-             slot = 25
-            when 3
-             slot = 43  
-            when 4
-             slot = 61 
-            end
-           Etc::Gem.check_stats(slot)
-         else if @@info_box == "gem"
-           @@info_box = "none"
-           end; end; end
-       if (x >= 865 && x <= 1020) && (y >= 460 && y <= 610) #--slot nine
-        Gem_Info_Box.position = SF.vector2(800, 610) 
-        Gem_Info_Text.position = Gem_Info_Box.position 
-         if @@info_box != "gem"
-           @@info_box = "gem"
-           slot = 0
-           case @@page
-            when 1
-             slot = 8
-            when 2
-              slot = 26
-            when 3
-              slot = 44 
-            when 4
-              slot = 62  
-            end
-           Etc::Gem.check_stats(slot)
-         else if @@info_box == "gem"
-           @@info_box = "none"
-           end; end; end
-       if (x >= 1020 && x <= 1175) && (y >= 460 && y <= 610) #--slot ten
-        Gem_Info_Box.position = SF.vector2(945, 610) 
-        Gem_Info_Text.position = Gem_Info_Box.position 
-         if @@info_box != "gem"
-           @@info_box = "gem"
-           slot = 0
-           case @@page
-            when 1
-             slot = 9
-            when 2
-              slot = 27
-            when 3
-              slot = 45  
-            when 4
-              slot = 63 
-            end
-           Etc::Gem.check_stats(slot)
-         else if @@info_box == "gem"
-           @@info_box = "none"
-           end; end; end
-       if (x >= 1175 && x <= 1330) && (y >= 460 && y <= 610) #--slot eleven
-        Gem_Info_Box.position = SF.vector2(1100, 610) 
-        Gem_Info_Text.position = Gem_Info_Box.position 
-         if @@info_box != "gem"
-          @@info_box = "gem"
-          slot = 0
-          case @@page
-           when 1
-            slot = 10
-           when 2
-            slot = 28
-           when 3
-            slot = 46  
-           when 4
-            slot = 64 
-           end
-          Etc::Gem.check_stats(slot)
-          else if @@info_box == "gem"
-          @@info_box = "none"
-          end; end; end
-       if (x >= 1330 && x <= 1485) && (y >= 460 && y <= 610) #--slot twelve
-        Gem_Info_Box.position = SF.vector2(1265, 610) 
-        Gem_Info_Text.position = Gem_Info_Box.position 
-         if @@info_box != "gem"
-           @@info_box = "gem"
-           slot = 0
-           case @@page
-            when 1
-             slot = 11
-            when 2
-             slot = 29
-            when 3
-             slot = 47 
-            when 4
-             slot = 65  
-            end
-           Etc::Gem.check_stats(slot)
-           else if @@info_box == "gem"
-           @@info_box = "none"
-           end; end; end
-       if (x >= 555 && x <= 710) && (y >= 610 && y <= 760) #--slot thirteen
-        Gem_Info_Box.position = SF.vector2(500, 760) 
-        Gem_Info_Text.position = Gem_Info_Box.position 
-         if @@info_box != "gem"
-           @@info_box = "gem"
-           slot = 0
-           case @@page
-            when 1
-             slot = 12
-            when 2
-             slot = 30
-            when 3
-             slot = 48  
-            when 4
-             slot = 66 
-            end
-           Etc::Gem.check_stats(slot)
-         else if @@info_box == "gem"
-           @@info_box = "none"
-           end; end; end
-       if (x >= 710 && x <= 865) && (y >= 610 && y <= 760) #--slot fourteen
-        Gem_Info_Box.position = SF.vector2(655, 760) 
-        Gem_Info_Text.position = Gem_Info_Box.position 
-         if @@info_box != "gem"
-           @@info_box = "gem"
-           slot = 0
-           case @@page
-            when 1
-             slot = 13
-            when 2
-              slot = 31
-            when 3
-              slot = 49  
-            when 4
-              slot = 67 
-            end
-           Etc::Gem.check_stats(slot)
-         else if @@info_box == "gem"
-           @@info_box = "none"
-           end; end; end
-       if (x >= 865 && x <= 1020) && (y >= 610 && y <= 760) #--slot fifteen
-         Gem_Info_Box.position = SF.vector2(800, 760) 
-         Gem_Info_Text.position = Gem_Info_Box.position 
-          if @@info_box != "gem"
-            @@info_box = "gem"
+        if (x >= 1330 && x <= 1485) && (y >= 310 && y <= 460) #--slot six
+          Ingredient_Info_Box.position = SF.vector2(1265, 460) 
+          Ingredient_Info_Text.position = Ingredient_Info_Box.position 
+           if @@info_box != "Ingredients"
+             @@info_box = "Ingredients"
+             slot = 0
+             case @@page
+              when 1
+               slot = 5
+              when 2
+               slot = 23
+              when 3
+               slot = 41  
+              when 4
+               slot = 59    
+              end
+              Use::Ingredients.check_stats(slot)
+             else if @@info_box == "Ingredients"
+             @@info_box = "none"
+             end; end; end
+        if (x >= 555 && x <= 710) && (y >= 460 && y <= 610) #--slot seven
+          Ingredient_Info_Box.position = SF.vector2(500, 610) 
+          Ingredient_Info_Text.position = Ingredient_Info_Box.position 
+          if @@info_box != "Ingredients"
+            @@info_box = "Ingredients"
             slot = 0
             case @@page
              when 1
-              slot = 14
+              slot = 6
              when 2
-              slot = 32
+              slot = 24
              when 3
-              slot = 50  
+              slot = 42 
              when 4
-              slot = 68 
+              slot = 60     
              end
-            Etc::Gem.check_stats(slot)
-          else if @@info_box == "gem"
+             Use::Ingredients.check_stats(slot)
+          else if @@info_box == "Ingredients"
             @@info_box = "none"
             end; end; end
-       if (x >= 1020 && x <= 1175) && (y >= 610 && y <= 760) #--slot sixteen
-         Gem_Info_Box.position = SF.vector2(945, 760) 
-         Gem_Info_Text.position = Gem_Info_Box.position 
-          if @@info_box != "gem"
-            @@info_box = "gem"
+        if (x >= 710 && x <= 865) && (y >= 460 && y <= 610) #--slot eight
+          Ingredient_Info_Box.position = SF.vector2(655, 610) 
+          Ingredient_Info_Text.position = Ingredient_Info_Box.position 
+           if @@info_box != "Ingredients"
+             @@info_box = "Ingredients"
+             slot = 0
+             case @@page
+              when 1
+               slot = 7
+              when 2
+               slot = 25
+              when 3
+               slot = 43  
+              when 4
+               slot = 61 
+              end
+              Use::Ingredients.check_stats(slot)
+           else if @@info_box == "Ingredients"
+             @@info_box = "none"
+             end; end; end
+        if (x >= 865 && x <= 1020) && (y >= 460 && y <= 610) #--slot nine
+          Ingredient_Info_Box.position = SF.vector2(800, 610) 
+          Ingredient_Info_Text.position = Ingredient_Info_Box.position 
+          if @@info_box != "Ingredients"
+            @@info_box = "Ingredients"
+            slot = 0
+            case @@page
+             when 1
+              slot = 8
+             when 2
+               slot = 26
+             when 3
+               slot = 44 
+             when 4
+               slot = 62  
+             end
+             Use::Ingredients.check_stats(slot)
+          else if @@info_box == "Ingredients"
+            @@info_box = "none"
+            end; end; end
+        if (x >= 1020 && x <= 1175) && (y >= 460 && y <= 610) #--slot ten
+          Ingredient_Info_Box.position = SF.vector2(945, 610) 
+          Ingredient_Info_Text.position = Ingredient_Info_Box.position 
+           if @@info_box != "Ingredients"
+             @@info_box = "Ingredients"
+             slot = 0
+             case @@page
+              when 1
+               slot = 9
+              when 2
+                slot = 27
+              when 3
+                slot = 45  
+              when 4
+                slot = 63 
+              end
+              Use::Ingredients.check_stats(slot)
+           else if @@info_box == "Ingredients"
+             @@info_box = "none"
+             end; end; end
+        if (x >= 1175 && x <= 1330) && (y >= 460 && y <= 610) #--slot eleven
+          Ingredient_Info_Box.position = SF.vector2(1100, 610) 
+          Ingredient_Info_Text.position = Ingredient_Info_Box.position 
+          if @@info_box != "Ingredients"
+           @@info_box = "Ingredients"
+           slot = 0
+           case @@page
+            when 1
+             slot = 10
+            when 2
+             slot = 28
+            when 3
+             slot = 46  
+            when 4
+             slot = 64 
+            end
+            Use::Ingredients.check_stats(slot)
+           else if @@info_box == "Ingredients"
+           @@info_box = "none"
+           end; end; end
+        if (x >= 1330 && x <= 1485) && (y >= 460 && y <= 610) #--slot twelve
+          Ingredient_Info_Box.position = SF.vector2(1265, 610) 
+          Ingredient_Info_Text.position = Ingredient_Info_Box.position 
+          if @@info_box != "Ingredients"
+            @@info_box = "Ingredients"
+            slot = 0
+            case @@page
+             when 1
+              slot = 11
+             when 2
+              slot = 29
+             when 3
+              slot = 47 
+             when 4
+              slot = 65  
+             end
+             Use::Ingredients.check_stats(slot)
+            else if @@info_box == "Ingredients"
+            @@info_box = "none"
+            end; end; end
+        if (x >= 555 && x <= 710) && (y >= 610 && y <= 760) #--slot thirteen
+          Ingredient_Info_Box.position = SF.vector2(500, 760) 
+          Ingredient_Info_Text.position = Ingredient_Info_Box.position 
+           if @@info_box != "Ingredients"
+             @@info_box = "Ingredients"
+             slot = 0
+             case @@page
+              when 1
+               slot = 12
+              when 2
+               slot = 30
+              when 3
+               slot = 48  
+              when 4
+               slot = 66 
+              end
+              Use::Ingredients.check_stats(slot)
+           else if @@info_box == "Ingredients"
+             @@info_box = "none"
+             end; end; end
+        if (x >= 710 && x <= 865) && (y >= 610 && y <= 760) #--slot fourteen
+          Ingredient_Info_Box.position = SF.vector2(655, 760) 
+          Ingredient_Info_Text.position = Ingredient_Info_Box.position 
+          if @@info_box != "Ingredients"
+            @@info_box = "Ingredients"
+            slot = 0
+            case @@page
+             when 1
+              slot = 13
+             when 2
+               slot = 31
+             when 3
+               slot = 49  
+             when 4
+               slot = 67 
+             end
+             Use::Ingredients.check_stats(slot)
+          else if @@info_box == "Ingredients"
+            @@info_box = "none"
+            end; end; end
+        if (x >= 865 && x <= 1020) && (y >= 610 && y <= 760) #--slot fifteen
+          Ingredient_Info_Box.position = SF.vector2(800, 760) 
+          Ingredient_Info_Text.position = Ingredient_Info_Box.position 
+           if @@info_box != "Ingredients"
+             @@info_box = "Ingredients"
+             slot = 0
+             case @@page
+              when 1
+               slot = 14
+              when 2
+               slot = 32
+              when 3
+               slot = 50  
+              when 4
+               slot = 68 
+              end
+              Use::Ingredients.check_stats(slot)
+           else if @@info_box == "Ingredients"
+             @@info_box = "none"
+             end; end; end
+        if (x >= 1020 && x <= 1175) && (y >= 610 && y <= 760) #--slot sixteen
+          Ingredient_Info_Box.position = SF.vector2(945, 760) 
+          Ingredient_Info_Text.position = Ingredient_Info_Box.position 
+          if @@info_box != "Ingredients"
+            @@info_box = "Ingredients"
             slot = 0
             case @@page
              when 1
@@ -1508,31 +1404,395 @@ def Window_Class.hud_keypresses(window)
              when 4
               slot = 69
              end
-            Etc::Gem.check_stats(slot)
-          else if @@info_box == "gem"
+             Use::Ingredients.check_stats(slot)
+          else if @@info_box == "Ingredients"
             @@info_box = "none"
             end; end; end
-       if (x >= 1175 && x <= 1330) && (y >= 610 && y <= 760) #--slot seventeen
-         Gem_Info_Box.position = SF.vector2(1100, 760) 
+        if (x >= 1175 && x <= 1330) && (y >= 610 && y <= 760) #--slot seventeen
+          Ingredient_Info_Box.position = SF.vector2(1100, 760) 
+          Ingredient_Info_Text.position = Ingredient_Info_Box.position 
+           if @@info_box != "Ingredients"
+             @@info_box = "Ingredients"
+             slot = 0
+             case @@page
+              when 1
+               slot = 16
+              when 2
+               slot = 34
+              when 3
+               slot = 52  
+              when 4
+               slot = 70 
+              end
+              Use::Ingredients.check_stats(slot)
+           else if @@info_box == "Ingredients"
+             @@info_box = "none"
+             end; end; end
+        if (x >= 1330 && x <= 1485) && (y >= 610 && y <= 760) #--slot eighteen
+          Ingredient_Info_Box.position = SF.vector2(1265, 760) 
+          Ingredient_Info_Text.position = Ingredient_Info_Box.position 
+          if @@info_box != "Ingredients"
+            @@info_box = "Ingredients"
+            slot = 0
+            case @@page
+             when 1
+              slot = 17
+             when 2
+              slot = 35
+             when 3
+              slot = 53 
+             when 4
+              slot = 71  
+             end
+             Use::Ingredients.check_stats(slot)
+          else if @@info_box == "Ingredients"
+            @@info_box = "none"
+            end; end; end
+      end
+     when "Etc"  #----------------------------------Gem Info Boxes
+      case @@category
+       when "gem"
+        if (x >= 555 && x <= 710) && (y >= 310 && y <= 460) #--slot one
+         Gem_Info_Box.position = SF.vector2(500, 460) 
+         Gem_Info_Text.position = Gem_Info_Box.position 
+         if @@info_box != "gem"
+          @@info_box = "gem"
+          slot = 0
+          case @@page
+           when 1
+            slot = 0
+           when 2
+            slot = 18
+           when 3
+             slot = 36
+           when 4
+             slot = 54  
+           end
+          Etc::Gem.check_stats(slot)
+         else if @@info_box == "gem"
+          @@info_box = "none"
+         end; end; end
+        if (x >= 710 && x <= 865) && (y >= 310 && y <= 460) #--slot two
+         Gem_Info_Box.position = SF.vector2(655, 460) 
+         Gem_Info_Text.position = Gem_Info_Box.position 
+          if @@info_box != "gem"
+           @@info_box = "gem"
+           slot = 0
+           case @@page
+            when 1
+             slot = 1
+            when 2
+             slot = 19
+            when 3
+             slot = 37
+            when 4
+             slot = 55  
+            end
+           Etc::Gem.check_stats(slot)
+          else if @@info_box == "gem"
+           @@info_box = "none"
+           end; end; end
+        if (x >= 865 && x <= 1020) && (y >= 310 && y <= 460) #--slot three
+         Gem_Info_Box.position = SF.vector2(800, 460) 
+         Gem_Info_Text.position = Gem_Info_Box.position 
+          if @@info_box != "gem"
+           @@info_box = "gem"
+           slot = 0
+           case @@page
+            when 1
+             slot = 2
+            when 2
+             slot = 20
+            when 3
+             slot = 38    
+            when 4
+             slot = 56         
+            end
+           Etc::Gem.check_stats(slot)
+         else if @@info_box == "gem"
+           @@info_box = "none"
+           end; end; end
+        if (x >= 1020 && x <= 1175) && (y >= 310 && y <= 460) #--slot four
+         Gem_Info_Box.position = SF.vector2(945, 460) 
          Gem_Info_Text.position = Gem_Info_Box.position 
           if @@info_box != "gem"
             @@info_box = "gem"
             slot = 0
             case @@page
              when 1
-              slot = 16
+              slot = 3
              when 2
-              slot = 34
+              slot = 21
              when 3
-              slot = 52  
+               slot = 39 
              when 4
-              slot = 70 
+               slot = 57     
+             end
+            Etc::Gem.check_stats(slot)
+            else if @@info_box == "gem"
+            @@info_box = "none"
+            end; end; end
+        if (x >= 1175 && x <= 1330) && (y >= 310 && y <= 460) #--slot five
+         Gem_Info_Box.position = SF.vector2(1100, 460) 
+         Gem_Info_Text.position = Gem_Info_Box.position 
+          if @@info_box != "gem"
+            @@info_box = "gem"
+            slot = 0
+            case @@page
+             when 1
+              slot = 4
+             when 2
+              slot = 22
+             when 3
+              slot = 40 
+             when 4
+              slot = 58     
+             end
+            Etc::Gem.check_stats(slot)
+            else if @@info_box == "gem"
+            @@info_box = "none"
+            end; end; end
+        if (x >= 1330 && x <= 1485) && (y >= 310 && y <= 460) #--slot six
+         Gem_Info_Box.position = SF.vector2(1265, 460) 
+         Gem_Info_Text.position = Gem_Info_Box.position 
+          if @@info_box != "gem"
+            @@info_box = "gem"
+            slot = 0
+            case @@page
+             when 1
+              slot = 5
+             when 2
+              slot = 23
+             when 3
+              slot = 41  
+             when 4
+              slot = 59    
+             end
+            Etc::Gem.check_stats(slot)
+            else if @@info_box == "gem"
+            @@info_box = "none"
+            end; end; end
+        if (x >= 555 && x <= 710) && (y >= 460 && y <= 610) #--slot seven
+         Gem_Info_Box.position = SF.vector2(500, 610) 
+         Gem_Info_Text.position = Gem_Info_Box.position 
+          if @@info_box != "gem"
+            @@info_box = "gem"
+            slot = 0
+            case @@page
+             when 1
+              slot = 6
+             when 2
+              slot = 24
+             when 3
+              slot = 42 
+             when 4
+              slot = 60     
              end
             Etc::Gem.check_stats(slot)
           else if @@info_box == "gem"
             @@info_box = "none"
             end; end; end
-       if (x >= 1330 && x <= 1485) && (y >= 610 && y <= 760) #--slot eighteen
+        if (x >= 710 && x <= 865) && (y >= 460 && y <= 610) #--slot eight
+         Gem_Info_Box.position = SF.vector2(655, 610) 
+         Gem_Info_Text.position = Gem_Info_Box.position 
+          if @@info_box != "gem"
+            @@info_box = "gem"
+            slot = 0
+            case @@page
+             when 1
+              slot = 7
+             when 2
+              slot = 25
+             when 3
+              slot = 43  
+             when 4
+              slot = 61 
+             end
+            Etc::Gem.check_stats(slot)
+          else if @@info_box == "gem"
+            @@info_box = "none"
+            end; end; end
+        if (x >= 865 && x <= 1020) && (y >= 460 && y <= 610) #--slot nine
+         Gem_Info_Box.position = SF.vector2(800, 610) 
+         Gem_Info_Text.position = Gem_Info_Box.position 
+          if @@info_box != "gem"
+            @@info_box = "gem"
+            slot = 0
+            case @@page
+             when 1
+              slot = 8
+             when 2
+               slot = 26
+             when 3
+               slot = 44 
+             when 4
+               slot = 62  
+             end
+            Etc::Gem.check_stats(slot)
+          else if @@info_box == "gem"
+            @@info_box = "none"
+            end; end; end
+        if (x >= 1020 && x <= 1175) && (y >= 460 && y <= 610) #--slot ten
+         Gem_Info_Box.position = SF.vector2(945, 610) 
+         Gem_Info_Text.position = Gem_Info_Box.position 
+          if @@info_box != "gem"
+            @@info_box = "gem"
+            slot = 0
+            case @@page
+             when 1
+              slot = 9
+             when 2
+               slot = 27
+             when 3
+               slot = 45  
+             when 4
+               slot = 63 
+             end
+            Etc::Gem.check_stats(slot)
+          else if @@info_box == "gem"
+            @@info_box = "none"
+            end; end; end
+        if (x >= 1175 && x <= 1330) && (y >= 460 && y <= 610) #--slot eleven
+         Gem_Info_Box.position = SF.vector2(1100, 610) 
+         Gem_Info_Text.position = Gem_Info_Box.position 
+          if @@info_box != "gem"
+           @@info_box = "gem"
+           slot = 0
+           case @@page
+            when 1
+             slot = 10
+            when 2
+             slot = 28
+            when 3
+             slot = 46  
+            when 4
+             slot = 64 
+            end
+           Etc::Gem.check_stats(slot)
+           else if @@info_box == "gem"
+           @@info_box = "none"
+           end; end; end
+        if (x >= 1330 && x <= 1485) && (y >= 460 && y <= 610) #--slot twelve
+         Gem_Info_Box.position = SF.vector2(1265, 610) 
+         Gem_Info_Text.position = Gem_Info_Box.position 
+          if @@info_box != "gem"
+            @@info_box = "gem"
+            slot = 0
+            case @@page
+             when 1
+              slot = 11
+             when 2
+              slot = 29
+             when 3
+              slot = 47 
+             when 4
+              slot = 65  
+             end
+            Etc::Gem.check_stats(slot)
+            else if @@info_box == "gem"
+            @@info_box = "none"
+            end; end; end
+        if (x >= 555 && x <= 710) && (y >= 610 && y <= 760) #--slot thirteen
+         Gem_Info_Box.position = SF.vector2(500, 760) 
+         Gem_Info_Text.position = Gem_Info_Box.position 
+          if @@info_box != "gem"
+            @@info_box = "gem"
+            slot = 0
+            case @@page
+             when 1
+              slot = 12
+             when 2
+              slot = 30
+             when 3
+              slot = 48  
+             when 4
+              slot = 66 
+             end
+            Etc::Gem.check_stats(slot)
+          else if @@info_box == "gem"
+            @@info_box = "none"
+            end; end; end
+        if (x >= 710 && x <= 865) && (y >= 610 && y <= 760) #--slot fourteen
+         Gem_Info_Box.position = SF.vector2(655, 760) 
+         Gem_Info_Text.position = Gem_Info_Box.position 
+          if @@info_box != "gem"
+            @@info_box = "gem"
+            slot = 0
+            case @@page
+             when 1
+              slot = 13
+             when 2
+               slot = 31
+             when 3
+               slot = 49  
+             when 4
+               slot = 67 
+             end
+            Etc::Gem.check_stats(slot)
+          else if @@info_box == "gem"
+            @@info_box = "none"
+            end; end; end
+        if (x >= 865 && x <= 1020) && (y >= 610 && y <= 760) #--slot fifteen
+          Gem_Info_Box.position = SF.vector2(800, 760) 
+          Gem_Info_Text.position = Gem_Info_Box.position 
+           if @@info_box != "gem"
+             @@info_box = "gem"
+             slot = 0
+             case @@page
+              when 1
+               slot = 14
+              when 2
+               slot = 32
+              when 3
+               slot = 50  
+              when 4
+               slot = 68 
+              end
+             Etc::Gem.check_stats(slot)
+           else if @@info_box == "gem"
+             @@info_box = "none"
+             end; end; end
+        if (x >= 1020 && x <= 1175) && (y >= 610 && y <= 760) #--slot sixteen
+          Gem_Info_Box.position = SF.vector2(945, 760) 
+          Gem_Info_Text.position = Gem_Info_Box.position 
+           if @@info_box != "gem"
+             @@info_box = "gem"
+             slot = 0
+             case @@page
+              when 1
+               slot = 15
+              when 2
+               slot = 33
+              when 3
+               slot = 51  
+              when 4
+               slot = 69
+              end
+             Etc::Gem.check_stats(slot)
+           else if @@info_box == "gem"
+             @@info_box = "none"
+             end; end; end
+        if (x >= 1175 && x <= 1330) && (y >= 610 && y <= 760) #--slot seventeen
+          Gem_Info_Box.position = SF.vector2(1100, 760) 
+          Gem_Info_Text.position = Gem_Info_Box.position 
+           if @@info_box != "gem"
+             @@info_box = "gem"
+             slot = 0
+             case @@page
+              when 1
+               slot = 16
+              when 2
+               slot = 34
+              when 3
+               slot = 52  
+              when 4
+               slot = 70 
+              end
+             Etc::Gem.check_stats(slot)
+           else if @@info_box == "gem"
+             @@info_box = "none"
+             end; end; end
+        if (x >= 1330 && x <= 1485) && (y >= 610 && y <= 760) #--slot eighteen
          Gem_Info_Box.position = SF.vector2(1265, 760) 
          Gem_Info_Text.position = Gem_Info_Box.position 
           if @@info_box != "gem"
@@ -1754,6 +2014,7 @@ def Window_Class.hud_keypresses(window)
       end; end; end
     end
     end
+   #--------------------------------------------------------Left Mouse Button--------------------------------------------------------------
     if SF::Mouse.button_pressed?(SF::Mouse::Left)
       mouse_position = SF::Mouse.position
       x = mouse_position.x
@@ -1802,6 +2063,7 @@ def Window_Class.hud_keypresses(window)
           All_Audio::SFX.select1
           Window_Class.use_tab(window)
           @@tab = "Use"; @@page = 1
+          @@category = "Ingredients"
          end
         if (x >= 1220 && x <= 1420) && (y >= 160 && y <= 230)
           All_Audio::SFX.select1
@@ -1809,6 +2071,7 @@ def Window_Class.hud_keypresses(window)
           @@tab = "Etc"; @@page = 1
          end
       case @@tab
+     #--------------------------------------------------------Equip------------------------------------------------------------------------
       when "Equipment"
         if (x >= 555 && x <= 710) && (y >= 310 && y <= 460)
           All_Audio::SFX.light_bonk
@@ -1849,7 +2112,7 @@ def Window_Class.hud_keypresses(window)
           this2 = @@current_weapon
           Gui::Window_Class.equip_weapon(this2)
          end
-         if (x >= 1305 && x <= 1455) && (y >= 310 && y <= 460)
+        if (x >= 1305 && x <= 1455) && (y >= 310 && y <= 460)
           All_Audio::SFX.light_bonk
           this = 5
           Crafted_Items::Weapon.equip_weapon(this)
@@ -1870,28 +2133,141 @@ def Window_Class.hud_keypresses(window)
           this2 = @@current_weapon
           Gui::Window_Class.equip_weapon(this2)
           end
-         if (x >= 855 && x <= 1005) && (y >= 460 && y <= 610)
+        if (x >= 855 && x <= 1005) && (y >= 460 && y <= 610)
           All_Audio::SFX.light_bonk
           this = 8
           Crafted_Items::Weapon.equip_weapon(this)
           this2 = @@current_weapon
           Gui::Window_Class.equip_weapon(this2)
           end
+     #---------------------------------------------------------Use-------------------------------------------------------------------------
       when "Use"
-        if (x >= 560 && x <= 700) && (y >= 310 && y <= 460)
-          case @@category
-          when "Ingredients"
-          item = 0
-          Use::Ingredients.click_on_item(item)
-          end
+       if (x >= 555 && x <= 710) && (y >= 310 && y <= 460) #----------Slot 0
+        item = 18 * (@@page - 1)
+         case @@category
+         when "Ingredients"
+         Use::Ingredients.click_on_item(item)
          end
-        if (x >= 710 && x <= 855) && (y >= 310 && y <= 460)
-          case @@category
-          when "Ingredients"
-          item = 1
-          Use::Ingredients.click_on_item(item)
-          end
+        end
+       if (x >= 710 && x <= 855) && (y >= 310 && y <= 460) #----------Slot 1
+         case @@category
+         when "Ingredients"
+         item = 1
+         Use::Ingredients.click_on_item(item)
          end
+        end
+       if (x >= 855 && x <= 1005) && (y >= 310 && y <= 460) #----------Slot 2
+         case @@category
+         when "Ingredients"
+         item = 2
+         Use::Ingredients.click_on_item(item)
+         end
+        end
+       if (x >= 1005 && x <= 1155) && (y >= 310 && y <= 460) #----------Slot 3
+         case @@category
+         when "Ingredients"
+         item = 3
+         Use::Ingredients.click_on_item(item)
+         end
+        end
+       if (x >= 1155 && x <= 1305) && (y >= 310 && y <= 460) #----------Slot 4
+         case @@category
+         when "Ingredients"
+         item = 4
+         Use::Ingredients.click_on_item(item)
+         end
+        end
+       if (x >= 1305 && x <= 1455) && (y >= 310 && y <= 460) #----------Slot 5
+         case @@category
+         when "Ingredients"
+         item = 5
+         Use::Ingredients.click_on_item(item)
+         end
+        end
+       if (x >= 555 && x <= 710) && (y >= 460 && y <= 610) #----------Slot 6
+         case @@category
+         when "Ingredients"
+         item = 6
+         Use::Ingredients.click_on_item(item)
+         end
+        end
+       if (x >= 710 && x <= 855) && (y >= 460 && y <= 610) #----------Slot 7
+         case @@category
+         when "Ingredients"
+         item = 7
+         Use::Ingredients.click_on_item(item)
+         end
+        end
+       if (x >= 855 && x <= 1005) && (y >= 460 && y <= 610) #----------Slot 8
+         case @@category
+         when "Ingredients"
+         item = 8
+         Use::Ingredients.click_on_item(item)
+         end
+        end
+       if (x >= 1005 && x <= 1155) && (y >= 460 && y <= 610) #----------Slot 9
+         case @@category
+         when "Ingredients"
+         item = 9
+         Use::Ingredients.click_on_item(item)
+         end
+        end
+       if (x >= 1155 && x <= 1305) && (y >= 460 && y <= 610) #----------Slot 10
+         case @@category
+         when "Ingredients"
+         item = 10
+         Use::Ingredients.click_on_item(item)
+         end
+        end
+       if (x >= 1305 && x <= 1455) && (y >= 460 && y <= 610) #----------Slot 11
+         case @@category
+         when "Ingredients"
+         item = 11
+         Use::Ingredients.click_on_item(item)
+         end
+        end
+       if (x >= 555 && x <= 710) && (y >= 610 && y <= 760) #----------Slot 12
+         case @@category
+         when "Ingredients"
+         item = 12
+         Use::Ingredients.click_on_item(item)
+         end
+        end
+       if (x >= 710 && x <= 855) && (y >= 610 && y <= 760) #----------Slot 13
+         case @@category
+         when "Ingredients"
+         item = 13
+         Use::Ingredients.click_on_item(item)
+         end
+        end
+       if (x >= 855 && x <= 1005) && (y >= 610 && y <= 760) #----------Slot 14
+         case @@category
+         when "Ingredients"
+         item = 14
+         Use::Ingredients.click_on_item(item)
+         end
+        end
+       if (x >= 1005 && x <= 1155) && (y >= 610 && y <= 760) #----------Slot 15
+         case @@category
+         when "Ingredients"
+         item = 15
+         Use::Ingredients.click_on_item(item)
+         end
+        end
+       if (x >= 1155 && x <= 1305) && (y >= 610 && y <= 760) #----------Slot 16
+         case @@category
+         when "Ingredients"
+         item = 16
+         Use::Ingredients.click_on_item(item)
+         end
+        end
+       if (x >= 1305 && x <= 1455) && (y >= 610 && y <= 760) #----------Slot 17
+         case @@category
+         when "Ingredients"
+         item = 17
+         Use::Ingredients.click_on_item(item)
+         end
+        end
        if (x >= 555 && x <= 680) && (y >= 245 && y <= 295)
         puts @@category
         All_Audio::SFX.light_bonk
@@ -1899,6 +2275,7 @@ def Window_Class.hud_keypresses(window)
         @@page = 1
         @@category = "Ingredients"
        end
+     #---------------------------------------------------------Etc-------------------------------------------------------------------------
       when "Etc"
         if (x >= 555 && x <= 645) && (y >= 245 && y <= 295)
           All_Audio::SFX.light_bonk
@@ -1918,6 +2295,7 @@ def Window_Class.hud_keypresses(window)
           @@category = "gem"
          end
       end
+     #--------------------------------------------------------Other------------------------------------------------------------------------
       when "Salon" #-------------------------------------------------------------Salon clicks   
         if (x >= 750 && x <= 900) && (y >= 530 && y <= 600) && @@tab == "salon_confirm" #yes
           All_Audio::SFX.select_2
