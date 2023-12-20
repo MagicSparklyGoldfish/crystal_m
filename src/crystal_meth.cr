@@ -386,6 +386,9 @@ extend self
     page = @@page
     case @@category
       when "Ingredients"
+        if @@info_box == "Ingredients"
+          window.draw(Gem_Info_Box);  window.draw(Gem_Info_Text)
+        end
        Use::Ingredients.display_inventory(window, page)
      end
    else if @@tab == "Etc"
@@ -1082,6 +1085,110 @@ def Window_Class.hud_keypresses(window)
       x = mouse_position.x
       y = mouse_position.y
     case @@tab
+     when "Use"
+      case @@category
+       when "Ingredients"  #----------------------------------Ingredients Info Boxes
+        if (x >= 555 && x <= 710) && (y >= 310 && y <= 460) #--slot one
+          Gem_Info_Box.position = SF.vector2(500, 460) 
+          Gem_Info_Text.position = Gem_Info_Box.position 
+          if @@info_box != "Ingredients"
+           @@info_box = "Ingredients"
+           slot = 0
+           case @@page
+            when 1
+             slot = 0
+            when 2
+             slot = 18
+            when 3
+              slot = 36
+            when 4
+              slot = 54  
+            end
+            Use::Ingredients.check_stats(slot)
+          else if @@info_box == "Ingredients"
+           @@info_box = "none"
+          end; end; end    
+        if (x >= 710 && x <= 865) && (y >= 310 && y <= 460) #--slot two
+          Gem_Info_Box.position = SF.vector2(655, 460) 
+          Gem_Info_Text.position = Gem_Info_Box.position 
+           if @@info_box != "Ingredients"
+            @@info_box = "Ingredients"
+            slot = 0
+            case @@page
+             when 1
+              slot = 1
+             when 2
+              slot = 19
+             when 3
+              slot = 37
+             when 4
+              slot = 55  
+             end
+             Use::Ingredients.check_stats(slot)
+           else if @@info_box == "Ingredients"
+            @@info_box = "none"
+            end; end; end    
+        if (x >= 865 && x <= 1020) && (y >= 310 && y <= 460) #--slot three
+          Gem_Info_Box.position = SF.vector2(800, 460) 
+          Gem_Info_Text.position = Gem_Info_Box.position 
+           if @@info_box != "Ingredients"
+            @@info_box = "Ingredients"
+            slot = 0
+            case @@page
+             when 1
+              slot = 2
+             when 2
+              slot = 20
+             when 3
+              slot = 38    
+             when 4
+              slot = 56         
+             end
+             Use::Ingredients.check_stats(slot)
+          else if @@info_box == "Ingredients"
+            @@info_box = "none"
+            end; end; end
+        if (x >= 1020 && x <= 1175) && (y >= 310 && y <= 460) #--slot four
+          Gem_Info_Box.position = SF.vector2(945, 460) 
+          Gem_Info_Text.position = Gem_Info_Box.position 
+           if @@info_box != "Ingredients"
+             @@info_box = "Ingredients"
+             slot = 0
+             case @@page
+              when 1
+               slot = 3
+              when 2
+               slot = 21
+              when 3
+                slot = 39 
+              when 4
+                slot = 57     
+              end
+              Use::Ingredients.check_stats(slot)
+             else if @@info_box == "Ingredients"
+             @@info_box = "none"
+             end; end; end
+        if (x >= 1175 && x <= 1330) && (y >= 310 && y <= 460) #--slot five
+         Gem_Info_Box.position = SF.vector2(1100, 460) 
+         Gem_Info_Text.position = Gem_Info_Box.position 
+          if @@info_box != "Ingredients"
+            @@info_box = "Ingredients"
+            slot = 0
+            case @@page
+             when 1
+              slot = 4
+             when 2
+              slot = 22
+             when 3
+              slot = 40 
+             when 4
+              slot = 58     
+             end
+             Use::Ingredients.check_stats(slot)
+            else if @@info_box == "Ingredients"
+            @@info_box = "none"
+            end; end; end
+     end
      when "Etc"  #----------------------------------Gem Info Boxes
       case @@category
        when "gem"
@@ -1777,7 +1884,14 @@ def Window_Class.hud_keypresses(window)
           item = 0
           Use::Ingredients.click_on_item(item)
           end
-        end
+         end
+        if (x >= 710 && x <= 855) && (y >= 310 && y <= 460)
+          case @@category
+          when "Ingredients"
+          item = 1
+          Use::Ingredients.click_on_item(item)
+          end
+         end
        if (x >= 555 && x <= 680) && (y >= 245 && y <= 295)
         puts @@category
         All_Audio::SFX.light_bonk

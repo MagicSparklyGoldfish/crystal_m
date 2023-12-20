@@ -128,6 +128,14 @@ require "file_utils"
           Player_Info::Buffs_And_Debuffs.add_buffs(buff_added)
       end
       end
+      def Ingredients.check_stats(slot)
+        if Owned_Ingredient_Array.size > slot
+          Gem_Info_Text.string = " Name: " + Owned_Ingredient_Array[slot].name + "\n Effects: " + 
+          Owned_Ingredient_Array[slot].effects[0] + ", " + Owned_Ingredient_Array[slot].effects[1]
+        else
+          Gem_Info_Text.string = ""
+        end
+       end
    #__________________________________________________________________________________________________________________________________________________________
    #//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
    #/                                                               Entities                                                                                 /
