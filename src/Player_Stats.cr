@@ -332,7 +332,8 @@ require "file_utils"
    #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
    #!                                                              Initialize                                                                              !
    #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    def initialize(name : String, id : Int32, sprite : SF::Sprite, clock : SF::Clock, is_applied : Bool, duration : Float64, effect : String)
+    def initialize(name : String, id : Int32, sprite : SF::Sprite, clock : SF::Clock, is_applied : Bool, duration : Float64, effect : String,
+        text : SF::Text)
       @name = name
       @id = id
       @sprite = sprite
@@ -340,6 +341,7 @@ require "file_utils"
       @is_applied = is_applied
       @duration = duration
       @effect = effect
+      @text = text
      end
     def name
         @name
@@ -361,6 +363,9 @@ require "file_utils"
     end
     def effect
         @effect
+    end
+    def text
+        @text
     end
     def is_applied=(this)
         @is_applied = this
@@ -430,15 +435,15 @@ require "file_utils"
         end
     end
     def Buffs_And_Debuffs.display_buffs(window)
-        Buff_Array.map { |i| if i.is_applied == true
         x = 0
         y = 0
+        Buff_Array.map { |i| if i.is_applied == true
         i.sprite.position = SF.vector2(x, y)
-        Buff_Text.dup.position = SF.vector2(x, y)
+        i.text.position = i.sprite.position
         string = i.duration.to_i - i.clock.elapsed_time.as_seconds.to_i
-        Buff_Text.string = string.to_s
-        window.draw(i.sprite); window.draw(Buff_Text)
-        x += 30
+        i.text.string = string.to_s
+        window.draw(i.sprite); window.draw(i.text)
+        x += 65
     end}
     end
 
@@ -446,13 +451,13 @@ require "file_utils"
    #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
    #/                                                               Entities                                                                               /
    #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    @@str_buff_small = Buffs_And_Debuffs.new("Str+", 0, Str_Buff_01, Buff_Clock.dup, false, 30.1, "Str+")
+    @@str_buff_small = Buffs_And_Debuffs.new("Str+", 0, Str_Buff_01, Buff_Clock.dup, false, 30.1, "Str+", Buff_Text.dup)
     Buff_Array.push(@@str_buff_small)
-    @@dex_buff_small = Buffs_And_Debuffs.new("Dex+", 1, Dex_Buff_01, Buff_Clock.dup, false, 30.1, "Dex+")
+    @@dex_buff_small = Buffs_And_Debuffs.new("Dex+", 1, Dex_Buff_01, Buff_Clock.dup, false, 30.1, "Dex+", Buff_Text.dup)
     Buff_Array.push(@@dex_buff_small)
-    @@int_buff_small = Buffs_And_Debuffs.new("Int+", 2, Dex_Buff_01, Buff_Clock.dup, false, 30.1, "Int+")
+    @@int_buff_small = Buffs_And_Debuffs.new("Int+", 2, Int_Buff_01, Buff_Clock.dup, false, 30.1, "Int+", Buff_Text.dup)
     Buff_Array.push(@@int_buff_small)
-    @@luk_buff_small = Buffs_And_Debuffs.new("Luk+", 3, Luk_Buff_01, Buff_Clock.dup, false, 30.1, "Luk+")
+    @@luk_buff_small = Buffs_And_Debuffs.new("Luk+", 3, Luk_Buff_01, Buff_Clock.dup, false, 30.1, "Luk+", Buff_Text.dup)
     Buff_Array.push(@@luk_buff_small)
    #________________________________________________________________________________________________________________________________________________________
   end
