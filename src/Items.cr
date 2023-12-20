@@ -79,6 +79,12 @@ require "file_utils"
         ingredient.amount_owned += amount
       end
      end 
+      def Ingredients.remove_ingredient(amount, ingredient)
+         ingredient.amount_owned -= amount
+        if ingredient.amount_owned <= 0
+          Owned_Ingredient_Array.delete(ingredient)
+         end
+      end
     #---------------------------------------------------------Ingredient Inventory----------------------------------------------------------------------------
      def Ingredients.initialize_inventory
        Ingredient_Array.map { |i| if i.amount_owned > 0
@@ -134,9 +140,12 @@ require "file_utils"
       end; end; end}
       end
       def Ingredients.click_on_item(item)
-        if item <= Owned_Ingredient_Array.size
+        if item < Owned_Ingredient_Array.size
           All_Audio::SFX.light_bonk
         used_item = Owned_Ingredient_Array[item]
+        ingredient = used_item
+        amount = 1
+        Ingredients.remove_ingredient(amount, ingredient)
         case used_item.effects[0]
         when "Hp+"
           heal_percent = 0.05

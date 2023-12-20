@@ -2150,9 +2150,9 @@ def Window_Class.hud_keypresses(window)
          end
         end
        if (x >= 710 && x <= 855) && (y >= 310 && y <= 460) #----------Slot 1
+         item = 18 * (@@page - 1) + 1
          case @@category
          when "Ingredients"
-         item = 1
          Use::Ingredients.click_on_item(item)
          end
         end
