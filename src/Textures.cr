@@ -214,8 +214,17 @@
 #-----------------------------------------------------------------------------------------------------------------------------------  
  #_______________________________________________________Icons______________________________________________________________________
   BUFF_ICONS_TEXTURE_01 = SF::Texture.from_file("graphics/Buff_Icons_01.png")
-  Hp_Buff_01 = SF::Sprite.new(BUFF_ICONS_TEXTURE_01); Hp_Buff_01.texture_rect = SF.int_rect(0, 0, 30, 30)
-  Hp_Buff_01.scale = SF.vector2(2.0, 2.0)
+  Str_Buff_01 = SF::Sprite.new(BUFF_ICONS_TEXTURE_01); Str_Buff_01.texture_rect = SF.int_rect(0, 0, 30, 30)
+  Str_Buff_01.scale = SF.vector2(2.0, 2.0)
+
+  Dex_Buff_01 = SF::Sprite.new(BUFF_ICONS_TEXTURE_01); Dex_Buff_01.texture_rect = SF.int_rect(60, 0, 30, 30)
+  Dex_Buff_01.scale = SF.vector2(2.0, 2.0)
+
+  Int_Buff_01 = SF::Sprite.new(BUFF_ICONS_TEXTURE_01); Int_Buff_01.texture_rect = SF.int_rect(30, 0, 30, 30)
+  Int_Buff_01.scale = SF.vector2(2.0, 2.0)
+
+  Luk_Buff_01 = SF::Sprite.new(BUFF_ICONS_TEXTURE_01); Luk_Buff_01.texture_rect = SF.int_rect(90, 0, 30, 30)
+  Luk_Buff_01.scale = SF.vector2(2.0, 2.0)
 
   Buff_Text = SF::Text.new; Buff_Text.font = FONT_COMMON; Buff_Text.character_size = 15; 
   Buff_Text.color = SF::Color::White; #Stats_Window_Int_Text.position = SF.vector2(1170, 280);

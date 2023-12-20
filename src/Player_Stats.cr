@@ -130,6 +130,15 @@ require "file_utils"
      def str=(this) 
        @str = this
       end
+     def dex=(this) 
+       @dex = this
+      end
+     def int=(this) 
+       @int = this
+      end
+     def luk=(this) 
+       @luk = this
+      end
      def exp=(this)
          @exp = this
       end
@@ -249,6 +258,27 @@ require "file_utils"
      def Player.reduce_str(amount)
         @@player.str -= amount
      end
+    #----------------------------------------------------------------Dex------------------------------------------------------------------------------------
+     def Player.increase_dex(amount)
+         @@player.dex += amount
+      end
+      def Player.reduce_dex(amount)
+         @@player.dex -= amount
+      end
+    #----------------------------------------------------------------Int------------------------------------------------------------------------------------
+     def Player.increase_int(amount)
+         @@player.int += amount
+      end
+     def Player.reduce_int(amount)
+        @@player.int -= amount
+      end
+    #----------------------------------------------------------------Luk------------------------------------------------------------------------------------
+     def Player.increase_luk(amount)
+         @@player.luk += amount
+      end
+     def Player.reduce_luk(amount)
+        @@player.luk -= amount
+      end
     #-------------------------------------------------------------Stat Menu---------------------------------------------------------------------------------
      def Player.adjust_stat_bars(window)
        HP_Bar_Color.scale = SF.vector2(@@player.current_hp * 0.005, 1); HP_Bar.scale = SF.vector2(@@player.max_hp * 0.005, 1)
@@ -363,9 +393,40 @@ require "file_utils"
         case buff_added
         when "Str+"
             amount = 1
+            if @@str_buff_small.is_applied == false
             @@str_buff_small.clock.restart
             @@str_buff_small.is_applied = true
             Player_Info::Player.increase_str(amount)
+            else
+            @@str_buff_small.clock.restart
+            end
+        when "Dex+"
+            amount = 1
+            if @@dex_buff_small.is_applied == false
+            @@dex_buff_small.clock.restart
+            @@dex_buff_small.is_applied = true
+            Player_Info::Player.increase_dex(amount)
+            else
+            @@dex_buff_small.clock.restart
+            end
+        when "Int+"
+            amount = 1
+            if @@int_buff_small.is_applied == false
+            @@int_buff_small.clock.restart
+            @@int_buff_small.is_applied = true
+            Player_Info::Player.increase_int(amount)
+            else
+            @@int_buff_small.clock.restart
+            end
+        when "Luk+"
+            amount = 1
+            if @@luk_buff_small.is_applied == false
+            @@luk_buff_small.clock.restart
+            @@luk_buff_small.is_applied = true
+            Player_Info::Player.increase_luk(amount)
+            else
+            @@luk_buff_small.clock.restart
+            end
         end
     end
     def Buffs_And_Debuffs.display_buffs(window)
@@ -374,7 +435,7 @@ require "file_utils"
         y = 0
         i.sprite.position = SF.vector2(x, y)
         Buff_Text.dup.position = SF.vector2(x, y)
-        string = i.duration - i.clock.elapsed_time.as_seconds
+        string = i.duration.to_i - i.clock.elapsed_time.as_seconds.to_i
         Buff_Text.string = string.to_s
         window.draw(i.sprite); window.draw(Buff_Text)
         x += 30
@@ -385,8 +446,14 @@ require "file_utils"
    #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
    #/                                                               Entities                                                                               /
    #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    @@str_buff_small = Buffs_And_Debuffs.new("Str+", 0, Hp_Buff_01, Buff_Clock.dup, false, 30.1, "Str+")
+    @@str_buff_small = Buffs_And_Debuffs.new("Str+", 0, Str_Buff_01, Buff_Clock.dup, false, 30.1, "Str+")
     Buff_Array.push(@@str_buff_small)
+    @@dex_buff_small = Buffs_And_Debuffs.new("Dex+", 1, Dex_Buff_01, Buff_Clock.dup, false, 30.1, "Dex+")
+    Buff_Array.push(@@dex_buff_small)
+    @@int_buff_small = Buffs_And_Debuffs.new("Int+", 2, Dex_Buff_01, Buff_Clock.dup, false, 30.1, "Int+")
+    Buff_Array.push(@@int_buff_small)
+    @@luk_buff_small = Buffs_And_Debuffs.new("Luk+", 3, Luk_Buff_01, Buff_Clock.dup, false, 30.1, "Luk+")
+    Buff_Array.push(@@luk_buff_small)
    #________________________________________________________________________________________________________________________________________________________
   end
   class Skill
