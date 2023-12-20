@@ -212,6 +212,14 @@
 #-----------------------------------------------------------------------------------------------------------------------------------
 #                                                         HUD
 #-----------------------------------------------------------------------------------------------------------------------------------  
+ #_______________________________________________________Icons______________________________________________________________________
+  BUFF_ICONS_TEXTURE_01 = SF::Texture.from_file("graphics/Buff_Icons_01.png")
+  Hp_Buff_01 = SF::Sprite.new(BUFF_ICONS_TEXTURE_01); Hp_Buff_01.texture_rect = SF.int_rect(0, 0, 30, 30)
+  Hp_Buff_01.scale = SF.vector2(2.0, 2.0)
+
+  Buff_Text = SF::Text.new; Buff_Text.font = FONT_COMMON; Buff_Text.character_size = 15; 
+  Buff_Text.color = SF::Color::White; #Stats_Window_Int_Text.position = SF.vector2(1170, 280);
+  
  #______________________________________________________Arrows______________________________________________________________________
   UP_ARROW_TEXTURE_01 = SF::Texture.from_file("graphics/Up_Arrow.png")
   Up_Arrow_01 = SF::Sprite.new(UP_ARROW_TEXTURE_01) 

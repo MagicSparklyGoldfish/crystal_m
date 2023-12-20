@@ -251,7 +251,7 @@ extend self
    window.draw(Bottom_HUD); window.draw(System_Menu); window.draw(Text_System_Menu)
    window.draw(LVL_Box); window.draw(LVL_Bar); window.draw(LVL_Bar_Color); window.draw(EXP_Label); window.draw(MP_Bar) 
    window.draw(MP_Bar_Color); window.draw(MP_Label); window.draw(HP_Bar); 
-   window.draw(HP_Bar_Color); window.draw(HP_Label); window.draw(LVL_Label)
+   window.draw(HP_Bar_Color); window.draw(HP_Label); window.draw(LVL_Label); 
    if @@idle == true && @@airborn == false
     idletime = IDLE_TIMER.elapsed_time
     @@idleframes += 1
@@ -272,6 +272,13 @@ extend self
     end
   end
    end
+  def Window_Class.buff_icons(window)
+    view5 = SF::View.new(SF.float_rect(0, 0, 1920, 1080))
+    view5.viewport = SF.float_rect(0, 0, 1, 1)
+    window.view = view5
+    Player_Info::Buffs_And_Debuffs.check_buffs
+    Player_Info::Buffs_And_Debuffs.display_buffs(window)
+  end
   def Window_Class.system_popup(window)
     view4 = SF::View.new(SF.float_rect(1700, 810, 150, 150))
     view4.viewport = SF.float_rect(0.899, 0.771, 0.08, 0.09)
@@ -678,6 +685,7 @@ extend self
    when "HUD"
     Window_Class.draw_map(window)
     Window_Class.hud(window)
+    Window_Class.buff_icons(window)
     Player_Data::Player_Physics.gravity(@@player_character_rendered_model, window)
     if @@popup == "Salon"
       Window_Class.salon(window)
@@ -1763,7 +1771,15 @@ def Window_Class.hud_keypresses(window)
           Gui::Window_Class.equip_weapon(this2)
           end
       when "Use"
+        if (x >= 560 && x <= 700) && (y >= 310 && y <= 460)
+          case @@category
+          when "Ingredients"
+          item = 0
+          Use::Ingredients.click_on_item(item)
+          end
+        end
        if (x >= 555 && x <= 680) && (y >= 245 && y <= 295)
+        puts @@category
         All_Audio::SFX.light_bonk
         Use::Ingredients.initialize_inventory
         @@page = 1

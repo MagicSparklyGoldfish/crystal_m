@@ -124,6 +124,12 @@ require "file_utils"
      def current_hp=(this)
          @current_hp = this
       end
+     def current_mp=(this)
+       @current_mp = this
+       end
+     def str=(this) 
+       @str = this
+      end
      def exp=(this)
          @exp = this
       end
@@ -207,7 +213,7 @@ require "file_utils"
          @@player.exp = 0
          @@exp_cap = @@player.lvl * Math.sqrt(100) 
          @@player.current_hp = @@player.max_hp
-         puts @@exp_cap
+         @@player.current_mp = @@player.max_mp
       end
      end
     #-----------------------------------------------------------------Hp------------------------------------------------------------------------------------
@@ -216,6 +222,32 @@ require "file_utils"
       end
      def Player.heal(heal)
          @@player.current_hp += heal
+     end
+     def Player.heal_percent(heal_percent)
+        @@player.current_hp += @@player.max_hp * heal_percent
+        if @@player.current_hp > @@player.max_hp
+            @@player.current_hp = @@player.max_hp
+        end
+      end
+    #-----------------------------------------------------------------Mp------------------------------------------------------------------------------------
+     def Player.use_mp(mp_used)
+        @@player.current_mp -= mp_used
+       end
+     def Player.restore_mp(mp_restored)
+       @@player.current_mp += mp_restored
+      end
+     def Player.restore_mp_percent(mp_restored_percent)
+       @@player.current_mp += @@player.max_mp * mp_restored_percent
+       if @@player.current_mp > @@player.max_mp
+           @@player.current_mp = @@player.max_mp
+       end
+     end
+    #----------------------------------------------------------------Str------------------------------------------------------------------------------------
+    def Player.increase_str(amount)
+        @@player.str += amount
+     end
+     def Player.reduce_str(amount)
+        @@player.str -= amount
      end
     #-------------------------------------------------------------Stat Menu---------------------------------------------------------------------------------
      def Player.adjust_stat_bars(window)
@@ -263,6 +295,100 @@ require "file_utils"
    #________________________________________________________________________________________________________________________________________________________
 
    end
+ #BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
+ #B                                                             Buffs and Debuffs                                                                          B
+ #BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
+  class Buffs_And_Debuffs
+   #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+   #!                                                              Initialize                                                                              !
+   #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    def initialize(name : String, id : Int32, sprite : SF::Sprite, clock : SF::Clock, is_applied : Bool, duration : Float64, effect : String)
+      @name = name
+      @id = id
+      @sprite = sprite
+      @clock = clock
+      @is_applied = is_applied
+      @duration = duration
+      @effect = effect
+     end
+    def name
+        @name
+     end
+    def id
+        @id
+     end
+    def sprite
+        @sprite
+     end
+    def clock
+        @clock
+     end
+    def is_applied
+        @is_applied
+     end
+    def duration
+        @duration
+    end
+    def effect
+        @effect
+    end
+    def is_applied=(this)
+        @is_applied = this
+     end
+   #________________________________________________________________________________________________________________________________________________________
+   #********************************************************************************************************************************************************
+   #*                                                              Variables                                                                               *
+   #********************************************************************************************************************************************************
+    Buff_Array = [] of Buffs_And_Debuffs; Buff_Clock = SF::Clock.new
+   #________________________________________________________________________________________________________________________________________________________
+   #????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
+   #?                                                               Methods                                                                                ?
+   #????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
+    def Buffs_And_Debuffs.check_buffs
+        Buff_Array.map { |i| difference = i.duration - i.clock.elapsed_time.as_seconds
+        if i.is_applied == true && difference <= 0
+        buff_removed = i.effect
+        i.is_applied = false
+        Buffs_And_Debuffs.remove_buffs(buff_removed)
+    end}
+    end
+    def Buffs_And_Debuffs.remove_buffs(buff_removed)
+        case buff_removed
+        when "Str+"
+            amount = 1
+            Player_Info::Player.reduce_str(amount)
+        end
+    end
+    def Buffs_And_Debuffs.add_buffs(buff_added)
+        case buff_added
+        when "Str+"
+            amount = 1
+            @@str_buff_small.clock.restart
+            @@str_buff_small.is_applied = true
+            Player_Info::Player.increase_str(amount)
+        end
+    end
+    def Buffs_And_Debuffs.display_buffs(window)
+        Buff_Array.map { |i| if i.is_applied == true
+        x = 0
+        y = 0
+        i.sprite.position = SF.vector2(x, y)
+        Buff_Text.dup.position = SF.vector2(x, y)
+        string = i.duration - i.clock.elapsed_time.as_seconds
+        Buff_Text.string = string.to_s
+        window.draw(i.sprite); window.draw(Buff_Text)
+        x += 30
+    end}
+    end
+
+   #________________________________________________________________________________________________________________________________________________________
+   #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+   #/                                                               Entities                                                                               /
+   #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    @@str_buff_small = Buffs_And_Debuffs.new("Str+", 0, Hp_Buff_01, Buff_Clock.dup, false, 30.1, "Str+")
+    Buff_Array.push(@@str_buff_small)
+   #________________________________________________________________________________________________________________________________________________________
+  end
   class Skill
    end
  end

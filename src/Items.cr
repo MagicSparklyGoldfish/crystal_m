@@ -112,6 +112,22 @@ require "file_utils"
         window.draw(i.sprite)
       end; end; end}
       end
+      def Ingredients.click_on_item(item)
+        if item <= Owned_Ingredient_Array.size
+          All_Audio::SFX.light_bonk
+        used_item = Owned_Ingredient_Array[item]
+        case used_item.effects[0]
+        when "Hp+"
+          heal_percent = 0.05
+          Player_Info::Player.heal_percent(heal_percent)
+        when "Mp+"
+          mp_restored_percent = 0.05
+          Player_Info::Player.restore_mp_percent(mp_restored_percent)
+        end
+        buff_added = used_item.effects[1]
+          Player_Info::Buffs_And_Debuffs.add_buffs(buff_added)
+      end
+      end
    #__________________________________________________________________________________________________________________________________________________________
    #//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
    #/                                                               Entities                                                                                 /
@@ -6393,7 +6409,7 @@ module Crafted_Items
         def Weapon.attack_strength(base_attack) #@note attack strength 
           attack_strength = 1
          Player_Info::Player.get_atk
-         attack_strength = Player_Info::Player.get_atk#base_attack * @@current_equipped_weapon.weapon_atk
+         attack_strength = Player_Info::Player.get_atk
          Harvestables::Ore.set_attack_strength(attack_strength)
          Harvestables::Herbs.set_attack_strength(attack_strength)
          Regular_Enemies.set_attack_strength(attack_strength)
