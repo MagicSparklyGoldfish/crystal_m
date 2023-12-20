@@ -2157,114 +2157,114 @@ def Window_Class.hud_keypresses(window)
          end
         end
        if (x >= 855 && x <= 1005) && (y >= 310 && y <= 460) #----------Slot 2
+        item = 18 * (@@page - 1) + 2
          case @@category
          when "Ingredients"
-         item = 2
          Use::Ingredients.click_on_item(item)
          end
         end
        if (x >= 1005 && x <= 1155) && (y >= 310 && y <= 460) #----------Slot 3
+        item = 18 * (@@page - 1) + 3
          case @@category
          when "Ingredients"
-         item = 3
          Use::Ingredients.click_on_item(item)
          end
         end
        if (x >= 1155 && x <= 1305) && (y >= 310 && y <= 460) #----------Slot 4
+        item = 18 * (@@page - 1) + 4
          case @@category
          when "Ingredients"
-         item = 4
          Use::Ingredients.click_on_item(item)
          end
         end
        if (x >= 1305 && x <= 1455) && (y >= 310 && y <= 460) #----------Slot 5
+        item = 18 * (@@page - 1) + 5
          case @@category
          when "Ingredients"
-         item = 5
          Use::Ingredients.click_on_item(item)
          end
         end
        if (x >= 555 && x <= 710) && (y >= 460 && y <= 610) #----------Slot 6
+        item = 18 * (@@page - 1) + 6
          case @@category
          when "Ingredients"
-         item = 6
          Use::Ingredients.click_on_item(item)
          end
         end
        if (x >= 710 && x <= 855) && (y >= 460 && y <= 610) #----------Slot 7
+        item = 18 * (@@page - 1) + 7
          case @@category
          when "Ingredients"
-         item = 7
          Use::Ingredients.click_on_item(item)
          end
         end
        if (x >= 855 && x <= 1005) && (y >= 460 && y <= 610) #----------Slot 8
+        item = 18 * (@@page - 1) + 8
          case @@category
          when "Ingredients"
-         item = 8
          Use::Ingredients.click_on_item(item)
          end
         end
        if (x >= 1005 && x <= 1155) && (y >= 460 && y <= 610) #----------Slot 9
+        item = 18 * (@@page - 1) + 9
          case @@category
          when "Ingredients"
-         item = 9
          Use::Ingredients.click_on_item(item)
          end
         end
        if (x >= 1155 && x <= 1305) && (y >= 460 && y <= 610) #----------Slot 10
+        item = 18 * (@@page - 1) + 10
          case @@category
          when "Ingredients"
-         item = 10
          Use::Ingredients.click_on_item(item)
          end
         end
        if (x >= 1305 && x <= 1455) && (y >= 460 && y <= 610) #----------Slot 11
+        item = 18 * (@@page - 1) + 11
          case @@category
          when "Ingredients"
-         item = 11
          Use::Ingredients.click_on_item(item)
          end
         end
        if (x >= 555 && x <= 710) && (y >= 610 && y <= 760) #----------Slot 12
+        item = 18 * (@@page - 1) + 12
          case @@category
          when "Ingredients"
-         item = 12
          Use::Ingredients.click_on_item(item)
          end
         end
        if (x >= 710 && x <= 855) && (y >= 610 && y <= 760) #----------Slot 13
+        item = 18 * (@@page - 1) + 13
          case @@category
          when "Ingredients"
-         item = 13
          Use::Ingredients.click_on_item(item)
          end
         end
        if (x >= 855 && x <= 1005) && (y >= 610 && y <= 760) #----------Slot 14
+        item = 18 * (@@page - 1) + 14
          case @@category
          when "Ingredients"
-         item = 14
          Use::Ingredients.click_on_item(item)
          end
         end
        if (x >= 1005 && x <= 1155) && (y >= 610 && y <= 760) #----------Slot 15
+        item = 18 * (@@page - 1) + 15
          case @@category
          when "Ingredients"
-         item = 15
          Use::Ingredients.click_on_item(item)
          end
         end
        if (x >= 1155 && x <= 1305) && (y >= 610 && y <= 760) #----------Slot 16
+        item = 18 * (@@page - 1) + 16
          case @@category
          when "Ingredients"
-         item = 16
          Use::Ingredients.click_on_item(item)
          end
         end
        if (x >= 1305 && x <= 1455) && (y >= 610 && y <= 760) #----------Slot 17
+        item = 18 * (@@page - 1) + 17
          case @@category
          when "Ingredients"
-         item = 17
          Use::Ingredients.click_on_item(item)
          end
         end
