@@ -392,6 +392,15 @@ require "file_utils"
         when "Str+"
             amount = 1
             Player_Info::Player.reduce_str(amount)
+        when "Dex+"
+            amount = 1
+            Player_Info::Player.reduce_dex(amount)
+        when "Int+"
+            amount = 1
+            Player_Info::Player.reduce_int(amount)
+        when "Luk+"
+            amount = 1
+            Player_Info::Player.reduce_luk(amount)
         end
     end
     def Buffs_And_Debuffs.add_buffs(buff_added)
