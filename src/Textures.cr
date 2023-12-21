@@ -3450,6 +3450,7 @@ Testing_Text.character_size = 20; Testing_Text.color = SF::Color::White; Testing
   #-----------------------------------------------------Concrete-----------------------------------------------------------------------
    CONCRETE_TEXTURE_1 = SF::Texture.from_file("graphics/map objects/Concrete_01.png"); CONCRETE_TEXTURE_1.repeated = true
    CONCRETE_PILLAR_TEXTURE_01 = SF::Texture.from_file("graphics/map objects/Concrete_Pillar_01.png")
+   HANGING_DECOR_01 = SF::Texture.from_file("graphics/map objects/Hanging_Decor_01.png")
  #--------------------------------------------------------Test-------------------------------------------------------------------------
   Test_Teleporter = SF::RectangleShape.new(SF.vector2(100, 40)); Test_Teleporter.fill_color = SF.color(50, 150, 255)
   Test_Teleporter.position = SF.vector2(120, 762);
@@ -3485,7 +3486,7 @@ Testing_Text.character_size = 20; Testing_Text.color = SF::Color::White; Testing
   Map_Boundary_Wall_01 = SF::RectangleShape.new(SF.vector2(1000, 5000)); Map_Boundary_Wall_01.set_texture(CONCRETE_TEXTURE_1, reset_rect: false)
   Map_Boundary_Wall_01.position = SF.vector2(-50000, 600)
 
-  Enemy_Blocking_Wall_01 = SF::RectangleShape.new(SF.vector2(50, 250)); Enemy_Blocking_Wall_01.fill_color = SF.color(0, 255, 100, 100)
+  Enemy_Blocking_Wall_01 = SF::RectangleShape.new(SF.vector2(50, 250)); Enemy_Blocking_Wall_01.fill_color = SF.color(0, 255, 100, 0)
   Enemy_Blocking_Wall_01.position = SF.vector2(-50000, 600)
  #------------------------------------------------------Platforms----------------------------------------------------------------------
   Test_Platform_01 = SF::RectangleShape.new(SF.vector2(5000, 5)); Test_Platform_01.fill_color = SF.color(0, 255, 100, 0)
@@ -3514,6 +3515,8 @@ Testing_Text.character_size = 20; Testing_Text.color = SF::Color::White; Testing
   Teleporter_01 = SF::Sprite.new(TELEPORTER_TEXTURE_01); Teleporter_01.texture_rect = SF.int_rect(0, 0, 100, 80)
  #-------------------------------------------------------Pillars-----------------------------------------------------------------------
   Concrete_Pillar_01 = SF::Sprite.new(CONCRETE_PILLAR_TEXTURE_01)
+ #----------------------------------------------------Hanging Decor--------------------------------------------------------------------
+  Hanging_Wires_01 = SF::Sprite.new(HANGING_DECOR_01); Hanging_Wires_01.texture_rect = SF.int_rect(0, 0, 100, 200)
 #--------------------------------------------------------------------------------------------------------------------------------------
 #                                                       Smelter
 #-------------------------------------------------------------------------------------------------------------------------------------- 

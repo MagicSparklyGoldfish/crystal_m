@@ -469,7 +469,7 @@ extend self
      Harvestables::Ore.draw_ores(window, map, area)
      Harvestables::Herbs.display(window, map, area)
      window.draw(Ground); Regular_Enemies.display(window, map, area, player)
-   
+     Map_Geometry::Misc_Decor.display_doll_factory_overlay(window, area, map)
     end
  #-------------------------------------------------------teleporters---------------------------------------------------------------------
   def Window_Class.teleport(window, map, area)
