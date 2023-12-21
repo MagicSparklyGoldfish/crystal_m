@@ -145,6 +145,12 @@ require "file_utils"
      def lvl=(this)
         @lvl = this
       end
+     def speed=(this)
+        @speed = this
+     end
+     def jump_height=(this)
+        @jump_height = this
+     end
      def lvl_up_points=(this)
         @lvl_up_points = this
       end
@@ -207,15 +213,38 @@ require "file_utils"
      def Player.get_atk
        atk = @@player.weapon_atk * @@player.atk + @@player.str
       crit_chance = rand(10)
-      if crit_chance < @@player.luk
+      if crit_chance < @@player.luk * 0.25
        atk = atk * 1.5
       else
         atk = @@player.weapon_atk * @@player.atk + @@player.str
       end
      end
+     def Player.get_magic_atk
+        m_atk = @@player.weapon_atk * @@player.m_atk + @@player.int
+       crit_chance = rand(10)
+       if crit_chance < @@player.luk * 0.25
+        m_atk = atk * 1.5
+       else
+        m_atk = @@player.weapon_atk * @@player.m_atk + @@player.int
+       end
+      end
+     def Player.get_speed
+       @@player.speed = @@player.dex * 0.25 + 2
+       speed = @@player.speed
+      end
+     def Player.get_jump_height
+        @@player.jump_height = @@player.dex * 0.25 + 80
+        jump_height = @@player.jump_height
+       end
+     def Player.get_display_physical_atk
+        atk = @@player.weapon_atk * @@player.atk + @@player.str
+      end
+     def Player.get_display_magic_atk
+       atk = @@player.weapon_atk * @@player.m_atk + @@player.int
+     end
     #------------------------------------------------------------Display Stats------------------------------------------------------------------------------
      def Player.display_char_menu(window)
-      #---------------name-----------------------
+      #----------------name----------------------
        name_text = Char_Menu_Bod_Text.dup
        name_text.position = SF.vector2(680, 170)
        name_text.character_size = 40 
@@ -254,8 +283,90 @@ require "file_utils"
        else if @@player.str < 10000
         strength_text.position = SF.vector2(700, 350)
        end; end; end; end
+      #-------------dexterity--------------------
+       dexterity_text = Char_Menu_Bod_Text.dup
+       dexterity_text.string = @@player.dex.to_s
+       if @@player.dex < 10
+        dexterity_text.position = SF.vector2(715, 550)
+       else if @@player.dex < 100
+        dexterity_text.position = SF.vector2(710, 550)
+       else if @@player.dex < 1000
+        dexterity_text.position = SF.vector2(705, 550)
+       else if @@player.dex < 10000
+        dexterity_text.position = SF.vector2(700, 550)
+       end; end; end; end
+      #----------max health points---------------
+       max_hp_text = Char_Menu_Bod_Text.dup
+       max_hp_text.string = @@player.max_hp.to_s
+       if @@player.max_hp < 10
+        max_hp_text.position = SF.vector2(715, 750)
+       else if @@player.max_hp < 100
+        max_hp_text.position = SF.vector2(695, 750)
+       else if @@player.max_hp < 1000
+        max_hp_text.position = SF.vector2(675, 750)
+       else if @@player.max_hp < 10000
+        max_hp_text.position = SF.vector2(655, 750)
+       end; end; end; end
+      #------------intelligence------------------
+       intelligence_text = Char_Menu_Bod_Text.dup
+       intelligence_text.string = @@player.int.to_s
+       if @@player.int < 10
+        intelligence_text.position = SF.vector2(965, 350)
+       else if @@player.int < 100
+        intelligence_text.position = SF.vector2(945, 350)
+       else if @@player.int < 1000
+        intelligence_text.position = SF.vector2(925, 350)
+       else if @@player.int < 10000
+        intelligence_text.position = SF.vector2(905, 350)
+       end; end; end; end
+      #---------------luck-----------------------
+       luck_text = Char_Menu_Bod_Text.dup
+       luck_text.string = @@player.luk.to_s
+       if @@player.luk < 10
+        luck_text.position = SF.vector2(965, 550)
+       else if @@player.luk < 100
+        luck_text.position = SF.vector2(945, 550)
+       else if @@player.luk < 1000
+        luck_text.position = SF.vector2(925, 550)
+       else if @@player.luk < 10000
+        luck_text.position = SF.vector2(905, 550)
+       end; end; end; end
+      #----------max magic points----------------
+       max_mp_text = Char_Menu_Bod_Text.dup
+       max_mp_text.string = @@player.max_mp.to_s
+       if @@player.max_mp < 10
+        max_mp_text.position = SF.vector2(965, 750)
+       else if @@player.max_mp < 100
+        max_mp_text.position = SF.vector2(945, 750)
+       else if @@player.max_mp < 1000
+        max_mp_text.position = SF.vector2(925, 750)
+       else if @@player.max_mp < 10000
+        max_mp_text.position = SF.vector2(905, 750)
+       end; end; end; end
+      #--------------attack----------------------     
+       atk = Player.get_display_physical_atk
+       attack_text = Char_Menu_Bod_Text.dup
+       attack_text.string = "Attack: " + atk.to_s 
+       attack_text.character_size = 20 
+       attack_text.position = SF.vector2(1165, 310)
+      #-----------magic attack-------------------     
+       m_atk = Player.get_display_magic_atk
+       m_attack_text = Char_Menu_Bod_Text.dup
+       m_attack_text.string = "Magic Attack: " + m_atk.to_s 
+       m_attack_text.character_size = 20 
+       m_attack_text.position = SF.vector2(1165, 330)
+      #--------------speed-----------------------
+       speed = Player.get_speed
+       speed_text = Char_Menu_Bod_Text.dup
+       speed_text.string = "Speed: " + speed.to_s 
+       speed_text.character_size = 20 
+       speed_text.position = SF.vector2(1165, 350)
       window.draw(name_text); window.draw(level_text)
       window.draw(points_text); window.draw(strength_text)
+      window.draw(dexterity_text); window.draw(max_hp_text)
+      window.draw(intelligence_text); window.draw(luck_text)
+      window.draw(max_mp_text); window.draw(attack_text)
+      window.draw(m_attack_text); window.draw(speed_text)
      end
     #----------------------------------------------------------------Exp------------------------------------------------------------------------------------
      def Player.gain_exp(exp)
