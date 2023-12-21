@@ -2034,6 +2034,55 @@ def Window_Class.hud_keypresses(window)
       puts "x", x
       puts "y", y
      case @@popup
+      when "Char_Menu"
+       if (x >= 825 && x <= 850) && (y >= 320 && y <= 370)
+        stat = "str"
+         Player_Info::Player.level_up_stat(stat)
+        end
+       if (x >= 825 && x <= 850) && (y >= 400 && y <= 450)
+         stat = "str"
+          Player_Info::Player.level_down_stat(stat)
+         end
+       if (x >= 825 && x <= 850) && (y >= 520 && y <= 570)
+         stat = "dex"
+         Player_Info::Player.level_up_stat(stat)
+        end
+       if (x >= 825 && x <= 850) && (y >= 600 && y <= 650)
+         stat = "dex"
+         Player_Info::Player.level_down_stat(stat)
+        end
+       if (x >= 825 && x <= 850) && (y >= 720 && y <= 770)
+         stat = "m_hp"
+         Player_Info::Player.level_up_stat(stat)
+        end
+       if (x >= 825 && x <= 850) && (y >= 800 && y <= 850)
+         stat = "m_hp"
+         Player_Info::Player.level_down_stat(stat)
+        end
+       if (x >= 1075 && x <= 1100) && (y >= 320 && y <= 370)
+         stat = "int"
+          Player_Info::Player.level_up_stat(stat)
+         end
+       if (x >= 1075 && x <= 1100) && (y >= 400 && y <= 450)
+         stat = "int"
+          Player_Info::Player.level_down_stat(stat)
+         end
+       if (x >= 1075 && x <= 1100) && (y >= 520 && y <= 570)
+        stat = "luk"
+         Player_Info::Player.level_up_stat(stat)
+        end
+       if (x >= 1075 && x <= 1100) && (y >= 600 && y <= 650)
+         stat = "luk"
+          Player_Info::Player.level_down_stat(stat)
+         end
+       if (x >= 1075 && x <= 1100) && (y >= 720 && y <= 770)
+        stat = "m_mp"
+         Player_Info::Player.level_up_stat(stat)
+        end
+       if (x >= 1075 && x <= 1100) && (y >= 800 && y <= 850)
+         stat = "m_mp"
+          Player_Info::Player.level_down_stat(stat)
+         end
       when "Inventory" #--------------------------------------------------------Inventory clicks
         if (x >= 400 && x <= 450) && (y >= 400 && y <= 490) #----page down
           if @@page > 1

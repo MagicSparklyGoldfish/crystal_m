@@ -124,9 +124,15 @@ require "file_utils"
      def current_hp=(this)
          @current_hp = this
       end
+     def max_hp=(this)
+       @max_hp = this
+      end
      def current_mp=(this)
        @current_mp = this
        end
+     def max_mp=(this)
+       @max_mp = this
+      end
      def str=(this) 
        @str = this
       end
@@ -229,7 +235,7 @@ require "file_utils"
        end
       end
      def Player.get_speed
-       @@player.speed = @@player.dex * 0.25 + 0.75
+       @@player.speed = @@player.dex * 0.05 + 0.95
        speed = @@player.speed
       end
      def Player.get_jump_height
@@ -241,6 +247,85 @@ require "file_utils"
       end
      def Player.get_display_magic_atk
        atk = @@player.weapon_atk * @@player.m_atk + @@player.int
+     end
+    #---------------------------------------------------------Char Menu Controls----------------------------------------------------------------------------
+     def Player.level_up_stat(stat)
+      if @@player.lvl_up_points > 0
+        All_Audio::SFX.char_create_up 
+       case stat
+          when "str"
+           @@player.str += 1
+          when "dex"
+           @@player.dex += 1
+          when "m_hp"
+           @@player.max_hp += 25
+           @@player.current_mp += 25
+          when "int"
+           @@player.int += 1
+          when "luk"
+           @@player.luk += 1
+          when "m_mp"
+           @@player.max_mp += 15
+           @@player.current_mp += 15
+         end 
+         @@player.lvl_up_points -= 1
+      else          
+        All_Audio::SFX.char_create_down
+      end
+     end
+     def Player.level_down_stat(stat)
+      case stat
+        when "str"
+         if @@player.str > 1
+          All_Audio::SFX.char_create_up
+          @@player.str -= 1
+          @@player.lvl_up_points += 1
+         else
+          All_Audio::SFX.char_create_down
+         end
+        when "dex"
+         if @@player.dex > 1
+          All_Audio::SFX.char_create_up
+          @@player.dex -= 1
+          @@player.lvl_up_points += 1
+         else
+          All_Audio::SFX.char_create_down
+         end
+        when "m_hp"
+         if @@player.max_hp > 25
+          All_Audio::SFX.char_create_up
+          @@player.current_hp -= 25
+          @@player.max_hp -= 25
+          @@player.lvl_up_points += 1
+         else
+          All_Audio::SFX.char_create_down
+         end
+        when "int"
+         if @@player.int > 1
+          All_Audio::SFX.char_create_up
+          @@player.int -= 1
+          @@player.lvl_up_points += 1
+         else
+          All_Audio::SFX.char_create_down
+         end
+        when "luk"
+         if @@player.luk > 1
+          All_Audio::SFX.char_create_up
+          @@player.luk -= 1
+          @@player.lvl_up_points += 1
+         else
+          All_Audio::SFX.char_create_down
+         end
+        when "m_mp"
+         if @@player.max_mp > 15
+          All_Audio::SFX.char_create_up
+          @@player.current_mp -= 15
+          @@player.max_mp -= 15
+          @@player.lvl_up_points += 1
+         else
+          All_Audio::SFX.char_create_down
+         end
+       end
      end
     #------------------------------------------------------------Display Stats------------------------------------------------------------------------------
      def Player.display_char_menu(window)
