@@ -220,6 +220,12 @@
 
    Char_Menu_Bod_Text = SF::Text.new; Char_Menu_Bod_Text.font = FONT_COMMON; Char_Menu_Bod_Text.character_size = 35; 
    Char_Menu_Bod_Text.color = SF::Color::Black; Char_Menu_Bod_Text.position = SF.vector2(840, 250);
+
+   CHAR_MENU_ARROW_01 = SF::Texture.from_file("graphics/Tiny_Arrow_01.png")
+   Char_Menu_Arrow_Up = SF::Sprite.new(CHAR_MENU_ARROW_01)
+
+   CHAR_MENU_ARROW_02 = SF::Texture.from_file("graphics/Tiny_Arrow_02.png")
+   Char_Menu_Arrow_Down = SF::Sprite.new(CHAR_MENU_ARROW_02)
  #_______________________________________________________Icons______________________________________________________________________
   BUFF_ICONS_TEXTURE_01 = SF::Texture.from_file("graphics/Buff_Icons_01.png")
   Str_Buff_01 = SF::Sprite.new(BUFF_ICONS_TEXTURE_01); Str_Buff_01.texture_rect = SF.int_rect(0, 0, 30, 30)

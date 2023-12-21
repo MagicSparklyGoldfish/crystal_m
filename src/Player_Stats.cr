@@ -147,16 +147,16 @@ require "file_utils"
       end
      def speed=(this)
         @speed = this
-     end
+      end
      def jump_height=(this)
         @jump_height = this
-     end
+      end
      def lvl_up_points=(this)
         @lvl_up_points = this
       end
      def current_weapon=(this)
          @current_weapon = this
-     end
+      end
     #----------------------------------------------------------------Weapon =--------------------------------------------------------------------------------
      def weapon_name=(this)
          @weapon_name = this
@@ -212,8 +212,8 @@ require "file_utils"
     #-----------------------------------------------------------Retreive Stats------------------------------------------------------------------------------
      def Player.get_atk
        atk = @@player.weapon_atk * @@player.atk + @@player.str
-      crit_chance = rand(10)
-      if crit_chance < @@player.luk * 0.25
+      crit_chance = rand(100)
+      if crit_chance < @@player.luk * 0.05
        atk = atk * 1.5
       else
         atk = @@player.weapon_atk * @@player.atk + @@player.str
@@ -229,7 +229,7 @@ require "file_utils"
        end
       end
      def Player.get_speed
-       @@player.speed = @@player.dex * 0.25 + 2
+       @@player.speed = @@player.dex * 0.25 + 0.75
        speed = @@player.speed
       end
      def Player.get_jump_height
@@ -244,12 +244,12 @@ require "file_utils"
      end
     #------------------------------------------------------------Display Stats------------------------------------------------------------------------------
      def Player.display_char_menu(window)
-      #----------------name----------------------
+      #--------------------------name----------------------
        name_text = Char_Menu_Bod_Text.dup
        name_text.position = SF.vector2(680, 170)
        name_text.character_size = 40 
        name_text.string = @@player.name
-      #---------------level----------------------
+      #-------------------------level----------------------
        level_text = Char_Menu_Bod_Text.dup
        level_text.character_size = 40 
        level_text.string = @@player.lvl.to_s
@@ -260,7 +260,7 @@ require "file_utils"
        else if @@player.lvl < 1000
         level_text.position = SF.vector2(1045, 170)
        end; end; end
-      #---------------points---------------------
+      #-------------------------points---------------------
        points_text = Char_Menu_Bod_Text.dup
        points_text.character_size = 40 
        points_text.string = @@player.lvl_up_points.to_s
@@ -271,7 +271,7 @@ require "file_utils"
        else if @@player.lvl_up_points < 1000        
         points_text.position = SF.vector2(1220, 170)
        end; end; end
-      #--------------strength--------------------
+      #------------------------strength--------------------
        strength_text = Char_Menu_Bod_Text.dup
        strength_text.string = @@player.str.to_s
        if @@player.str < 10
@@ -283,7 +283,7 @@ require "file_utils"
        else if @@player.str < 10000
         strength_text.position = SF.vector2(700, 350)
        end; end; end; end
-      #-------------dexterity--------------------
+      #------------------------dexterity-------------------
        dexterity_text = Char_Menu_Bod_Text.dup
        dexterity_text.string = @@player.dex.to_s
        if @@player.dex < 10
@@ -295,7 +295,7 @@ require "file_utils"
        else if @@player.dex < 10000
         dexterity_text.position = SF.vector2(700, 550)
        end; end; end; end
-      #----------max health points---------------
+      #--------------------max health points---------------
        max_hp_text = Char_Menu_Bod_Text.dup
        max_hp_text.string = @@player.max_hp.to_s
        if @@player.max_hp < 10
@@ -307,7 +307,7 @@ require "file_utils"
        else if @@player.max_hp < 10000
         max_hp_text.position = SF.vector2(655, 750)
        end; end; end; end
-      #------------intelligence------------------
+      #----------------------intelligence------------------
        intelligence_text = Char_Menu_Bod_Text.dup
        intelligence_text.string = @@player.int.to_s
        if @@player.int < 10
@@ -319,7 +319,7 @@ require "file_utils"
        else if @@player.int < 10000
         intelligence_text.position = SF.vector2(905, 350)
        end; end; end; end
-      #---------------luck-----------------------
+      #-------------------------luck-----------------------
        luck_text = Char_Menu_Bod_Text.dup
        luck_text.string = @@player.luk.to_s
        if @@player.luk < 10
@@ -331,7 +331,7 @@ require "file_utils"
        else if @@player.luk < 10000
         luck_text.position = SF.vector2(905, 550)
        end; end; end; end
-      #----------max magic points----------------
+      #--------------------max magic points----------------
        max_mp_text = Char_Menu_Bod_Text.dup
        max_mp_text.string = @@player.max_mp.to_s
        if @@player.max_mp < 10
@@ -343,30 +343,110 @@ require "file_utils"
        else if @@player.max_mp < 10000
         max_mp_text.position = SF.vector2(905, 750)
        end; end; end; end
-      #--------------attack----------------------     
+      #------------------------attack----------------------     
        atk = Player.get_display_physical_atk
        attack_text = Char_Menu_Bod_Text.dup
        attack_text.string = "Attack: " + atk.to_s 
        attack_text.character_size = 20 
        attack_text.position = SF.vector2(1165, 310)
-      #-----------magic attack-------------------     
+      #---------------------magic attack-------------------     
        m_atk = Player.get_display_magic_atk
        m_attack_text = Char_Menu_Bod_Text.dup
        m_attack_text.string = "Magic Attack: " + m_atk.to_s 
        m_attack_text.character_size = 20 
        m_attack_text.position = SF.vector2(1165, 330)
-      #--------------speed-----------------------
+      #------------------------speed-----------------------
        speed = Player.get_speed
        speed_text = Char_Menu_Bod_Text.dup
        speed_text.string = "Speed: " + speed.to_s 
        speed_text.character_size = 20 
        speed_text.position = SF.vector2(1165, 350)
+      #-----------------------crit rate--------------------
+       crit_chance = @@player.luk * 0.05
+       crit_chance_text = Char_Menu_Bod_Text.dup
+       crit_chance_text.string = "Crit Rate: " + crit_chance.to_s + "%"
+       crit_chance_text.character_size = 20 
+       crit_chance_text.position = SF.vector2(1165, 370)
+      #-----------------------up arrow 1-------------------
+       up_arrow_01 = Char_Menu_Arrow_Up.dup
+       up_arrow_01.position = SF.vector2(825, 320)
+       if @@player.lvl_up_points > 0
+        up_arrow_01.color = SF.color(255, 255, 255)
+       else
+        up_arrow_01.color = SF.color(211, 161, 111)
+       end
+      #----------------------down arrow 1------------------
+       down_arrow_01 = Char_Menu_Arrow_Down.dup
+       down_arrow_01.position = SF.vector2(825, 400)
+      #-----------------------up arrow 2-------------------
+       up_arrow_02 = Char_Menu_Arrow_Up.dup
+       up_arrow_02.position = SF.vector2(825, 520)
+       if @@player.lvl_up_points > 0
+        up_arrow_02.color = SF.color(255, 255, 255)
+       else
+        up_arrow_02.color = SF.color(211, 161, 111)
+       end
+      #----------------------down arrow 2------------------
+       down_arrow_02 = Char_Menu_Arrow_Down.dup
+       down_arrow_02.position = SF.vector2(825, 600)
+      #-----------------------up arrow 3-------------------
+       up_arrow_03 = Char_Menu_Arrow_Up.dup
+       up_arrow_03.position = SF.vector2(825, 720)
+       if @@player.lvl_up_points > 0
+        up_arrow_03.color = SF.color(255, 255, 255)
+       else
+        up_arrow_03.color = SF.color(211, 161, 111)
+       end
+      #----------------------down arrow 3------------------
+       down_arrow_03 = Char_Menu_Arrow_Down.dup
+       down_arrow_03.position = SF.vector2(825, 800)
+      #-----------------------up arrow 4-------------------
+       up_arrow_04 = Char_Menu_Arrow_Up.dup
+       up_arrow_04.position = SF.vector2(1075, 320)
+       if @@player.lvl_up_points > 0
+        up_arrow_04.color = SF.color(255, 255, 255)
+       else
+        up_arrow_04.color = SF.color(211, 161, 111)
+       end
+      #----------------------down arrow 4------------------
+       down_arrow_04 = Char_Menu_Arrow_Down.dup
+       down_arrow_04.position = SF.vector2(1075, 400)
+      #-----------------------up arrow 5-------------------
+       up_arrow_05 = Char_Menu_Arrow_Up.dup
+       up_arrow_05.position = SF.vector2(1075, 520)
+       if @@player.lvl_up_points > 0
+        up_arrow_05.color = SF.color(255, 255, 255)
+       else
+        up_arrow_05.color = SF.color(211, 161, 111)
+       end
+      #----------------------down arrow 5------------------
+       down_arrow_05 = Char_Menu_Arrow_Down.dup
+       down_arrow_05.position = SF.vector2(1075, 600)
+      #-----------------------up arrow 6-------------------
+       up_arrow_06 = Char_Menu_Arrow_Up.dup
+       up_arrow_06.position = SF.vector2(1075, 720)
+       if @@player.lvl_up_points > 0
+        up_arrow_06.color = SF.color(255, 255, 255)
+       else
+        up_arrow_06.color = SF.color(211, 161, 111)
+       end
+      #----------------------down arrow 6------------------
+       down_arrow_06 = Char_Menu_Arrow_Down.dup
+       down_arrow_06.position = SF.vector2(1075, 800)
+
       window.draw(name_text); window.draw(level_text)
       window.draw(points_text); window.draw(strength_text)
       window.draw(dexterity_text); window.draw(max_hp_text)
       window.draw(intelligence_text); window.draw(luck_text)
       window.draw(max_mp_text); window.draw(attack_text)
       window.draw(m_attack_text); window.draw(speed_text)
+      window.draw(crit_chance_text); window.draw(up_arrow_01)
+      window.draw(down_arrow_01); window.draw(up_arrow_02)
+      window.draw(down_arrow_02); window.draw(up_arrow_03)
+      window.draw(down_arrow_03); window.draw(up_arrow_04)
+      window.draw(down_arrow_04); window.draw(up_arrow_05)
+      window.draw(down_arrow_05); window.draw(up_arrow_06)
+      window.draw(down_arrow_06); 
      end
     #----------------------------------------------------------------Exp------------------------------------------------------------------------------------
      def Player.gain_exp(exp)
@@ -407,12 +487,12 @@ require "file_utils"
        end
      end
     #----------------------------------------------------------------Str------------------------------------------------------------------------------------
-    def Player.increase_str(amount)
-        @@player.str += amount
-     end
-     def Player.reduce_str(amount)
-        @@player.str -= amount
-     end
+     def Player.increase_str(amount)
+         @@player.str += amount
+      end
+      def Player.reduce_str(amount)
+         @@player.str -= amount
+      end
     #----------------------------------------------------------------Dex------------------------------------------------------------------------------------
      def Player.increase_dex(amount)
          @@player.dex += amount
