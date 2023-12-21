@@ -213,6 +213,50 @@ require "file_utils"
         atk = @@player.weapon_atk * @@player.atk + @@player.str
       end
      end
+    #------------------------------------------------------------Display Stats------------------------------------------------------------------------------
+     def Player.display_char_menu(window)
+      #---------------name-----------------------
+       name_text = Char_Menu_Bod_Text.dup
+       name_text.position = SF.vector2(680, 170)
+       name_text.character_size = 40 
+       name_text.string = @@player.name
+      #---------------level----------------------
+       level_text = Char_Menu_Bod_Text.dup
+       level_text.character_size = 40 
+       level_text.string = @@player.lvl.to_s
+       if @@player.lvl < 10
+        level_text.position = SF.vector2(1065, 170)
+       else if @@player.lvl < 100
+        level_text.position = SF.vector2(1055, 170)
+       else if @@player.lvl < 1000
+        level_text.position = SF.vector2(1045, 170)
+       end; end; end
+      #---------------points---------------------
+       points_text = Char_Menu_Bod_Text.dup
+       points_text.character_size = 40 
+       points_text.string = @@player.lvl_up_points.to_s
+       if @@player.lvl_up_points < 10
+        points_text.position = SF.vector2(1240, 170)
+       else if @@player.lvl_up_points < 100        
+        points_text.position = SF.vector2(1230, 170)
+       else if @@player.lvl_up_points < 1000        
+        points_text.position = SF.vector2(1220, 170)
+       end; end; end
+      #--------------strength--------------------
+       strength_text = Char_Menu_Bod_Text.dup
+       strength_text.string = @@player.str.to_s
+       if @@player.str < 10
+        strength_text.position = SF.vector2(715, 350)
+       else if @@player.str < 100
+        strength_text.position = SF.vector2(710, 350)
+       else if @@player.str < 1000
+        strength_text.position = SF.vector2(705, 350)
+       else if @@player.str < 10000
+        strength_text.position = SF.vector2(700, 350)
+       end; end; end; end
+      window.draw(name_text); window.draw(level_text)
+      window.draw(points_text); window.draw(strength_text)
+     end
     #----------------------------------------------------------------Exp------------------------------------------------------------------------------------
      def Player.gain_exp(exp)
       @@player.exp += exp

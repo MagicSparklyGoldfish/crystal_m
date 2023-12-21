@@ -294,6 +294,13 @@ extend self
     window.draw(Quit_Window); window.draw(Quit_Menu_Text); window.draw(Quit_Window_Opt_01); window.draw(Quit_Menu_Opt_01_Text)
     window.draw(Quit_Window_Opt_02); window.draw(Quit_Menu_Opt_02_Text)
    end
+  def Window_Class.char_menu(window)
+    view5 = SF::View.new(SF.float_rect(0, 0, 1920, 1080))
+    view5.viewport = SF.float_rect(0, 0, 1, 1)
+    window.view = view5
+    window.draw(Char_Menu_Body_Sprite)
+    Player_Info::Player.display_char_menu(window)
+  end
   def Window_Class.stat_window(window)
     view5 = SF::View.new(SF.float_rect(0, 0, 1920, 1080))
     view5.viewport = SF.float_rect(0, 0, 1, 1)
@@ -380,7 +387,6 @@ extend self
     if @@info_box == "equipment"
       window.draw(Weapon_Info_Box);  window.draw(Weapon_Info_Text)
     end
-     #Equipment::Stick.test(window, page)
    else if @@tab == "Use"
     window.draw(Ingredient_Button); window.draw(Ingredient_Button_Text)
     page = @@page
@@ -423,17 +429,17 @@ extend self
    Use_Tab.texture_rect = SF.int_rect(0, 0, 200, 70)
    Etc_Tab.texture_rect = SF.int_rect(200, 0, 200, 70);
   end
-  def Window_Class.player_attack_bounding_box(window) 
-    if @@current_direction == "right"
-     Player_Attack_Bounding_Box.position = @@player_character_rendered_model.position + SF.vector2(65, 25)
-    end
-    if @@current_direction == "left"
-      Player_Attack_Bounding_Box.position = @@player_character_rendered_model.position + SF.vector2(-65, 25)
-     end
-    if @@attacking == true
-    window.draw(Player_Attack_Bounding_Box)
-    end
+ def Window_Class.player_attack_bounding_box(window) 
+   if @@current_direction == "right"
+    Player_Attack_Bounding_Box.position = @@player_character_rendered_model.position + SF.vector2(65, 25)
    end
+   if @@current_direction == "left"
+     Player_Attack_Bounding_Box.position = @@player_character_rendered_model.position + SF.vector2(-65, 25)
+    end
+   if @@attacking == true
+   window.draw(Player_Attack_Bounding_Box)
+   end
+  end
 #=======================================================================================================================================+
 #---------------------------------------------------------------------------------------------------------------------------------------+
 #========================================================Map Renderer===================================================================+
@@ -695,6 +701,9 @@ extend self
       if @@tab == "salon_confirm"
         Window_Class.salon_confirm_tab(window)
       end
+    end
+    if @@popup == "Char_Menu"
+      Window_Class.char_menu(window)
     end
     if @@popup == "Inventory"
       Window_Class.inventory(window)
@@ -3844,48 +3853,7 @@ def Window_Class.hud_keypresses(window)
         map = @@map
         area = @@area
         Window_Class.teleport(window, map, area)
-     #   case @@map
-         #===========================================================================================================================================
-         #=                                                            Doll Factory                                                                 =
-         #===========================================================================================================================================
-          #---------------------------------------------------------Doll Factory Map 1---------------------------------------------------------------
-        #    when "factory_map_01"
 
-        # when "test"
-        #   NPCS::Test_Npcs.click(window, @@player_character_rendered_model)
-        #   Window_Class.space_test_map
-        #   Window_Class.teleport_test_garden
-        #   Window_Class.teleport_doll_factory_01
-        # when "test_garden"
-        #   Window_Class.teleport_test_garden_map
-        #   Window_Class.ladder_test_garden_map
-        # when "test_ore"
-        #   player = @@player_character_rendered_model.global_bounds
-        #   Window_Class.teleport_test_ore_map; Window_Class.ladder_test_ore_map
-        #   Harvestables::Ore.smelt(window, player)
-        #   if player.intersects? Test_Smelter.global_bounds
-        #     Player_Data::Player_Physics.immobilize_player
-        #     @@popup = "smelter"
-        #     @@player_character_rendered_model.position = SF.vector2(400, 75)
-        # else if player.intersects? Test_Forge.global_bounds
-        #     Player_Data::Player_Physics.immobilize_player
-        #     @@popup = "forge"
-        #     Etc::Inventory_Ingot.initialize_inventory
-        #     @@player_character_rendered_model.position = SF.vector2(600, 75)
-        # else if player.intersects? Test_Gem_Cutter.global_bounds
-        #     Player_Data::Player_Physics.immobilize_player
-        #     @@popup = "gem_cutter"
-        #     @@page = 1
-        #     Etc::Gem.initialize_gem_inventory
-        #     Etc::Gem.initialize_gem_cutter_ore_display
-        #     @@player_character_rendered_model.position = SF.vector2(800, 75)
-        #     Etc::Gem.initialize_gem_cutter_cut_display
-        # else if player.intersects? Test_Upgrade_Table_Menu.global_bounds
-        #      Player_Data::Player_Physics.immobilize_player
-        #      @@player_character_rendered_model.position = SF.vector2(1000, 75)
-        #      @@popup = "upgrade_table"
-        #    end; end; end; end
-       # end
       when SF::Keyboard::D
         if @@is_on_ladder == false
         Wall_Array.map { |i| bounding_box1 = @@player_character_rendered_model.global_bounds
@@ -3905,7 +3873,25 @@ def Window_Class.hud_keypresses(window)
           window.draw(@@player_character_rendered_model)
         end}
       end
-      when SF::Keyboard::A
+    when SF::Keyboard::A
+      if @@is_on_ladder == false
+      Wall_Array.map { |i| bounding_box1 = @@player_character_rendered_model.global_bounds
+      bounding_box2 = i.bounding_rectangle.global_bounds
+      if bounding_box1.intersects? bounding_box2
+        All_Audio::SFX.char_create_up
+      else
+        @@idleframes = 0
+        @@attacking = false
+        walking = true
+        IDLE_TIMER.restart
+        Gui::Window_Class.is_walking(walking)
+        if @@current_direction == "right"
+        this = "left"
+        Window_Class.change_direction(this)
+        end
+        window.draw(@@player_character_rendered_model)
+      end}
+    end
        if @@is_on_ladder == false
         Wall_Array.map { |i| bounding_box1 = @@player_character_rendered_model.global_bounds
         bounding_box2 = i.bounding_rectangle.global_bounds
@@ -3964,6 +3950,12 @@ def Window_Class.hud_keypresses(window)
 #|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 #|                                                       @note menu shortcuts                                                              |
 #||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||| 
+      when SF::Keyboard::C
+        if @@popup != "Char_Menu"
+          @@popup = "Char_Menu"
+          else if @@popup == "Char_Menu"
+            @@popup = "none"
+          end; end
       when SF::Keyboard::I
         if @@popup != "Inventory"
         @@popup = "Inventory"
@@ -4007,18 +3999,6 @@ end; end; end; end; end; end
            this2 = Rectangle_CharInner_1
       when 2
            this2 = Rectangle_CharInner_2
-      #    end
-      #    if this2.nil? 
-      #     this2 = Rectangle_CharInner_0
-      #  if @@char_select_blink == 1
-      #   this2.move(SF.vector2(0, -5)); @@char_select_blink = @@char_select_blink + 1
-      #  else if @@char_select_blink == 5
-      #   this2.move(SF.vector2(0, 5)); @@char_select_blink = @@char_select_blink + 1
-      #  else if @@char_select_blink > 9
-      #   @@char_select_blink = 1
-      #  else @@char_select_blink = @@char_select_blink + 1
-      #   window.draw(this2)
-      #  end; end; end; 
       end; end
     def MenuElements.charcreatecursorFunc(window, @@menu)
 
