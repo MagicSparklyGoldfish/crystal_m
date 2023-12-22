@@ -457,6 +457,8 @@ extend self
       end
      map = @@map
      area = @@area
+     player = @@player_character_rendered_model
+     Map_Geometry::Parallax.display(window, map, area, player)
      Window_Class.wall_collision
      player = @@player_character_rendered_model.global_bounds
      Map_Geometry::Misc_Decor.display(window, area, map)

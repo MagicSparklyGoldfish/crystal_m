@@ -430,6 +430,7 @@ include Use
             humanoid.sprite.texture_rect = SF.int_rect(300, 300, 75, 100)
             humanoid.is_dead = true
             exp = humanoid.exp
+            Name_Text.string = ""
             Damage_Text.string = ""
             Damage_Text.position = SF.vector2(100, 20005)
             Name_Text.position = SF.vector2(100, 20005)
