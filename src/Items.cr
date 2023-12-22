@@ -7195,6 +7195,9 @@ module Crafted_Items
    #????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
    #?                                                               Methods                                                                                ?
    #????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
+     def Platform.check_array
+      platform_array = Platform_Array
+     end
      def Platform.set_positions(area, map)
        case area
          when "test"
@@ -7227,6 +7230,8 @@ module Crafted_Items
           @@medium_platform_01.display_rectangle.position = SF.vector2(-4900, 400)
           @@short_platform_01.bounding_rectangle.position = SF.vector2(-600, 600)
           @@short_platform_01.display_rectangle.position = SF.vector2(-600, 600)
+          @@medium_platform_02.bounding_rectangle.position = SF.vector2(-1600, -300)
+          @@medium_platform_02.display_rectangle.position = SF.vector2(-1600, -300)
           @@medium_platform_03.bounding_rectangle.position = SF.vector2(-600, 0)
           @@medium_platform_03.display_rectangle.position = SF.vector2(-600, 0)
        end
@@ -7243,6 +7248,7 @@ module Crafted_Items
           Ground.set_texture(CONCRETE_TEXTURE_1, reset_rect: false)
           @@medium_platform_01.display_rectangle.set_texture(CONCRETE_TEXTURE_1, reset_rect: false)
           @@short_platform_01.display_rectangle.set_texture(CONCRETE_TEXTURE_1, reset_rect: false)
+          @@medium_platform_02.display_rectangle.set_texture(CONCRETE_TEXTURE_1, reset_rect: false)
           @@medium_platform_03.display_rectangle.set_texture(CONCRETE_TEXTURE_1, reset_rect: false)
           Platform.display_doll_factory(map, window)
         end
@@ -7274,16 +7280,25 @@ module Crafted_Items
          window.draw(@@short_platform_01.display_rectangle)
          window.draw(@@medium_platform_03.bounding_rectangle)
          window.draw(@@medium_platform_03.display_rectangle)
+         window.draw(@@medium_platform_02.bounding_rectangle)
+         window.draw(@@medium_platform_02.display_rectangle)
       end
      end
    #________________________________________________________________________________________________________________________________________________________
    #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
    #/                                                               Entities                                                                               /
    #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    Platform_Array = [] of Platform
+    @@ground = Platform.new(1, Ground, Ground)
+    Platform_Array.push(@@ground)
     @@medium_platform_01 = Platform.new(1, Test_Platform_01, Test_Platform_Cover_01); 
+    Platform_Array.push(@@medium_platform_01)
     @@medium_platform_02 = Platform.new(2, Test_Platform_01.dup, Test_Platform_Cover_01.dup); 
+    Platform_Array.push(@@medium_platform_02)
     @@short_platform_01 = Platform.new(3, Short_Platform_01, Short_Platform_Cover_01); 
+    Platform_Array.push(@@short_platform_01)
     @@medium_platform_03 = Platform.new(4, Medium_Platform_01, Medium_Platform_Cover_01); 
+    Platform_Array.push(@@medium_platform_03)
    #________________________________________________________________________________________________________________________________________________________
    end
  #WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
@@ -7593,6 +7608,8 @@ module Crafted_Items
      @@concrete_pillar_04.sprite.scale = SF.vector2(1.0, -1.0)
      @@concrete_pillar_04.sprite.position = SF.vector2(-100, 600)
      @@hanging_wires_01.sprite.position = SF.vector2(0, 395)
+     @@hanging_wires_02.sprite.position = SF.vector2(-650, -305) 
+     @@hanging_wires_05.sprite.position = SF.vector2(-150, -305) 
     end
   #---------------------------------------------------------------Display---------------------------------------------------------------------------------
    def Misc_Decor.display(window, area, map)
@@ -7603,6 +7620,13 @@ module Crafted_Items
          Misc_Decor.display_doll_factory(window, area, map)
        end
     end
+    def Misc_Decor.display_overlay(window, area, map)
+      case area
+         when "test"
+         when "doll factory"
+          Misc_Decor.display_doll_factory_overlay(window, area, map)
+        end
+     end
    #----------------------------------------------------------------Test----------------------------------------------------------------------------------
     def Misc_Decor.display_test(window, area, map)
      end
@@ -7612,10 +7636,10 @@ module Crafted_Items
       window.draw(@@concrete_pillar_02.sprite)
       window.draw(@@concrete_pillar_03.sprite)
       window.draw(@@concrete_pillar_04.sprite)
-      window.draw(@@hanging_wires_01.sprite)
      end
      def Misc_Decor.display_doll_factory_overlay(window, area, map)
-      window.draw(@@hanging_wires_01.sprite)
+      window.draw(@@hanging_wires_01.sprite); window.draw(@@hanging_wires_02.sprite)
+      window.draw(@@hanging_wires_05.sprite)
      end
  #________________________________________________________________________________________________________________________________________________________
  #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -7627,7 +7651,12 @@ module Crafted_Items
    @@concrete_pillar_03 = Misc_Decor.new(3, Concrete_Pillar_01.dup)
    @@concrete_pillar_04 = Misc_Decor.new(4, Concrete_Pillar_01.dup)
   #------------------------------------------------------------Hanging Decor------------------------------------------------------------------------------
-   @@hanging_wires_01 = Misc_Decor.new(500, Hanging_Wires_01.dup)
+   #...........................................................Hanging Wires..............................................................................
+    @@hanging_wires_01 = Misc_Decor.new(500, Hanging_Wires_01.dup)
+    @@hanging_wires_02 = Misc_Decor.new(501, Hanging_Wires_01.dup)
+    @@hanging_wires_03 = Misc_Decor.new(502, Hanging_Wires_01.dup)
+    @@hanging_wires_04 = Misc_Decor.new(503, Hanging_Wires_01.dup)
+    @@hanging_wires_05 = Misc_Decor.new(504, Hanging_Wires_02.dup)
  #________________________________________________________________________________________________________________________________________________________
   end
 end

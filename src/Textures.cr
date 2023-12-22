@@ -3517,6 +3517,7 @@ Testing_Text.character_size = 20; Testing_Text.color = SF::Color::White; Testing
   Concrete_Pillar_01 = SF::Sprite.new(CONCRETE_PILLAR_TEXTURE_01)
  #----------------------------------------------------Hanging Decor--------------------------------------------------------------------
   Hanging_Wires_01 = SF::Sprite.new(HANGING_DECOR_01); Hanging_Wires_01.texture_rect = SF.int_rect(0, 0, 100, 200)
+  Hanging_Wires_02 = SF::Sprite.new(HANGING_DECOR_01); Hanging_Wires_02.texture_rect = SF.int_rect(100, 0, 100, 200)
 #--------------------------------------------------------------------------------------------------------------------------------------
 #                                                       Smelter
 #-------------------------------------------------------------------------------------------------------------------------------------- 

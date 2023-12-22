@@ -459,7 +459,6 @@ extend self
      area = @@area
      Window_Class.wall_collision
      player = @@player_character_rendered_model.global_bounds
-     #Regular_Enemies::Humanoids.get_hit(player)
      Map_Geometry::Misc_Decor.display(window, area, map)
      Map_Geometry::Teleporter.display_teleporters(window, area, map)
      Map_Geometry::Platform.display(area, map, window)
@@ -469,7 +468,7 @@ extend self
      Harvestables::Ore.draw_ores(window, map, area)
      Harvestables::Herbs.display(window, map, area)
      window.draw(Ground); Regular_Enemies.display(window, map, area, player)
-     Map_Geometry::Misc_Decor.display_doll_factory_overlay(window, area, map)
+     Map_Geometry::Misc_Decor.display_overlay(window, area, map)
     end
  #-------------------------------------------------------teleporters---------------------------------------------------------------------
   def Window_Class.teleport(window, map, area)
@@ -4366,9 +4365,9 @@ end; end; end; end; end; end
       Feet_Bounding_Box.position = @@player_character_rendered_model.position + SF.vector2(25, 120)
       test_platform_array = [ground_box, test_platform_box, test_platform_box_2, test_platform_box_3, test_platform_box_4, test_platform_box_5]
      #---------------------------------------------------------------------------------------------------------------------------------+
-
-     if @@player_bounding_box.intersects? test_platform_array[@@gravity_iterator].global_bounds
-       y = test_platform_array[@@gravity_iterator].position.y - 125
+       platform_array = Map_Geometry::Platform.check_array
+       if @@player_bounding_box.intersects? platform_array[@@gravity_iterator].bounding_rectangle.global_bounds
+       y = platform_array[@@gravity_iterator].bounding_rectangle.position.y - 125
        x = @@player_character_rendered_model.position.x
        if @@player_character_rendered_model.position.y > y + 10
        @@player_character_rendered_model.position = SF.vector2(x, y)
@@ -4398,7 +4397,7 @@ end; end; end; end; end; end
        else
          @@fallrate += 1
        end; end
-       if @@gravity_iterator >= test_platform_array.size - 1
+       if @@gravity_iterator >= platform_array.size - 1
         @@gravity_iterator = 0
        else
         @@gravity_iterator += 1

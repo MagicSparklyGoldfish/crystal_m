@@ -391,6 +391,7 @@ include Use
             humanoid.clock.restart
         end
         if humanoid.sprite.texture_rect == SF.int_rect(0, 100, 75, 100) && humanoid.clock.elapsed_time >= SF.milliseconds(150)
+            Damage_Text.string = ""
             humanoid.sprite.texture_rect = SF.int_rect(75, 100, 75, 100)
             humanoid.clock.restart
         end
@@ -429,6 +430,7 @@ include Use
             humanoid.sprite.texture_rect = SF.int_rect(300, 300, 75, 100)
             humanoid.is_dead = true
             exp = humanoid.exp
+            Damage_Text.string = ""
             Damage_Text.position = SF.vector2(100, 20005)
             Name_Text.position = SF.vector2(100, 20005)
             Player_Info::Player.gain_exp(exp)
