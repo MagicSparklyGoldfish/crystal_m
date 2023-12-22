@@ -481,6 +481,9 @@ extend self
       puts @@area
       @@map = i.destination_map 
       puts @@map
+      x = i.destination_postion[0]
+      y = i.destination_postion[1]
+      @@player_character_rendered_model.position = SF.vector2(x, y)
       Window_Class.initialize_map(window, map, area)
     end}
    end 

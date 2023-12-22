@@ -3509,6 +3509,7 @@ Testing_Text.character_size = 20; Testing_Text.color = SF::Color::White; Testing
  #-------------------------------------------------------Ladders-----------------------------------------------------------------------
   LONG_METAL_LADDER_TEXTURE_01 = SF::Texture.from_file("graphics/map objects/Long_Metal_Ladder_01.png")
   Long_Metal_Ladder_01 = SF::Sprite.new(LONG_METAL_LADDER_TEXTURE_01)
+  Medium_Metal_Ladder_01 = SF::Sprite.new(LONG_METAL_LADDER_TEXTURE_01); Medium_Metal_Ladder_01.texture_rect = SF.int_rect(0, 0, 40, 300)
   Short_Metal_Ladder_01 = SF::Sprite.new(LONG_METAL_LADDER_TEXTURE_01); Short_Metal_Ladder_01.texture_rect = SF.int_rect(0, 0, 40, 200)
  #-----------------------------------------------------Teleporters---------------------------------------------------------------------
   TELEPORTER_TEXTURE_01 = SF::Texture.from_file("graphics/map objects/Teleporter_01.png")
@@ -3519,12 +3520,16 @@ Testing_Text.character_size = 20; Testing_Text.color = SF::Color::White; Testing
   Hanging_Wires_01 = SF::Sprite.new(HANGING_DECOR_01); Hanging_Wires_01.texture_rect = SF.int_rect(0, 0, 100, 200)
   Hanging_Wires_02 = SF::Sprite.new(HANGING_DECOR_01); Hanging_Wires_02.texture_rect = SF.int_rect(100, 0, 100, 200)
  #-----------------------------------------------------Parallaxes----------------------------------------------------------------------
-  TEST_PARALLAX_TEXTURE = SF::Texture.from_file("graphics/map objects/Test_Parallax_01.png")
-  Test_Parallax = SF::Sprite.new(TEST_PARALLAX_TEXTURE); Test_Parallax.origin = SF.vector2(1000, 1000)
-
-  SUNSET_PARALLAX_TEXTURE_01 = SF::Texture.from_file("graphics/map objects/Sunset_Parallax_01.png")
-  Sunset_Parallax_01 = SF::Sprite.new(SUNSET_PARALLAX_TEXTURE_01); Sunset_Parallax_01.origin = SF.vector2(1000, 1000)
-  Sunset_Parallax_01.scale = SF.vector2(1, 0.5)
+   TEST_PARALLAX_TEXTURE = SF::Texture.from_file("graphics/map objects/Test_Parallax_01.png")
+   Test_Parallax = SF::Sprite.new(TEST_PARALLAX_TEXTURE); Test_Parallax.origin = SF.vector2(1000, 1000)
+  #......................................................Sunset........................................................................
+   SUNSET_PARALLAX_TEXTURE_01 = SF::Texture.from_file("graphics/map objects/Sunset_Parallax_01.png")
+   Sunset_Parallax_01 = SF::Sprite.new(SUNSET_PARALLAX_TEXTURE_01); Sunset_Parallax_01.origin = SF.vector2(1000, 1000)
+   Sunset_Parallax_01.scale = SF.vector2(1, 0.5)
+  #....................................................Rusty Metal.....................................................................
+   RUSTY_METAL_PARALLAX_TEXTURE_01 = SF::Texture.from_file("graphics/map objects/Rusty_Metal_Parallax_01.png")
+   Rusty_Metal_Parallax_01 = SF::Sprite.new(RUSTY_METAL_PARALLAX_TEXTURE_01); Rusty_Metal_Parallax_01.origin = SF.vector2(1000, 1000)
+   Rusty_Metal_Parallax_01.scale = SF.vector2(1, 0.5)
 #--------------------------------------------------------------------------------------------------------------------------------------
 #                                                       Smelter
 #-------------------------------------------------------------------------------------------------------------------------------------- 

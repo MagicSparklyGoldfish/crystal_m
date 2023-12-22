@@ -7086,6 +7086,10 @@ module Crafted_Items
    #????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
    #?                                                               Methods                                                                                ?
    #????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
+    #==============================================================Initialize===============================================================================
+     def Ladder.initialize_ladders
+      Ladder_Array.map{ |i| i.sprite.position = SF.vector2(0, 40000)}
+     end
     #===============================================================Position================================================================================
        def Ladder.position(map, area)
         case area
@@ -7097,6 +7101,7 @@ module Crafted_Items
        end
      #---------------------------------------------------------------Test-----------------------------------------------------------------------------------
       def Ladder.position_test(map, area)
+        Ladder.initialize_ladders
        case map
         when "test"
          @@long_ladder_01.sprite.position = SF.vector2(0, 400)
@@ -7109,11 +7114,14 @@ module Crafted_Items
       end
      #-----------------------------------------------------------Doll  Factory------------------------------------------------------------------------------
       def Ladder.position_doll_factory_ladders(map, area)
-        case map
+       case map
         when "factory_map_01"
-       @@long_ladder_01.sprite.position = SF.vector2(-4900, 400)
-       @@long_ladder_02.sprite.position = SF.vector2(-100, 0)
-       @@long_ladder_03.sprite.position = SF.vector2(-2500, 400)
+         @@long_ladder_01.sprite.position = SF.vector2(-4900, 400)
+         @@long_ladder_02.sprite.position = SF.vector2(-100, 0)
+         @@long_ladder_03.sprite.position = SF.vector2(-2500, 400)
+         @@medium_ladder_01.sprite.position = SF.vector2(150, -300)
+        when "factory_home"
+         @@long_ladder_01.sprite.position = SF.vector2(0, 400)
         end
       end
     #===============================================================Display=================================================================================
@@ -7123,7 +7131,7 @@ module Crafted_Items
         when "test"
           Ladder.display_test_ladders(window, map)
         when "doll factory"
-          Ladder.display_doll_factory_01_ladders(window)
+          Ladder.display_doll_factory_01_ladders(window, map)
       end; end
       def Ladder.display_test_ladders(window, map)
        case map
@@ -7136,21 +7144,24 @@ module Crafted_Items
           window.draw(@@long_ladder_01.sprite);
         end
        end
-      def Ladder.display_doll_factory_01_ladders(window)
-        window.draw(@@long_ladder_01.sprite);
-        window.draw(@@long_ladder_02.sprite);
-        window.draw(@@long_ladder_03.sprite);
+      def Ladder.display_doll_factory_01_ladders(window, map)
+        case map
+         when "factory_map_01"
+          window.draw(@@long_ladder_01.sprite);
+          window.draw(@@long_ladder_02.sprite);
+          window.draw(@@long_ladder_03.sprite);
+          window.draw(@@medium_ladder_01.sprite)
+         when "factory_home"
+          window.draw(@@long_ladder_01.sprite);
+        end
        end
     #================================================================Logic==================================================================================
      def Ladder.climb_ladder(map, player)
-      case map
-        when "factory_map_01"
          Ladder_Array.map { |i| if player.global_bounds.intersects? i.sprite.global_bounds
          @@is_on_ladder = true
         else
           @@is_on_ladder = false
         end}
-       end
       end
    #________________________________________________________________________________________________________________________________________________________
    #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -7162,6 +7173,8 @@ module Crafted_Items
     Ladder_Array.push(@@long_ladder_02)
     @@long_ladder_03 = Ladder.new(Long_Metal_Ladder_01.dup, 400)
     Ladder_Array.push(@@long_ladder_03)
+    @@medium_ladder_01 = Ladder.new(Medium_Metal_Ladder_01, 300)
+    Ladder_Array.push(@@medium_ladder_01)
     @@short_ladder_01 = Ladder.new(Short_Metal_Ladder_01, 200)
     Ladder_Array.push(@@short_ladder_01)
    #________________________________________________________________________________________________________________________________________________________
@@ -7198,6 +7211,13 @@ module Crafted_Items
      def Platform.check_array
       platform_array = Platform_Array
      end
+     def Platform.initialize_platform_positions
+      Platform_Array.map{ |i| 
+        if i.id != 1
+        i.bounding_rectangle.position = SF.vector2(0, 40000)
+        i.display_rectangle.position = SF.vector2(0, 40000)
+        end}
+     end
      def Platform.set_positions(area, map)
        case area
          when "test"
@@ -7207,6 +7227,7 @@ module Crafted_Items
         end
       end
       def Platform.set_positions_test(map)
+        Platform.initialize_platform_positions
         case map
         when "test"
           @@medium_platform_01.bounding_rectangle.position = SF.vector2(0, 400)
@@ -7224,6 +7245,7 @@ module Crafted_Items
        end
       end
       def Platform.set_positions_doll_factory(map)
+        Platform.initialize_platform_positions
         case map
         when "factory_map_01"
           @@medium_platform_01.bounding_rectangle.position = SF.vector2(-4900, 400)
@@ -7234,6 +7256,11 @@ module Crafted_Items
           @@medium_platform_02.display_rectangle.position = SF.vector2(-1600, -300)
           @@medium_platform_03.bounding_rectangle.position = SF.vector2(-600, 0)
           @@medium_platform_03.display_rectangle.position = SF.vector2(-600, 0)
+        when "factory_home"
+          @@medium_platform_01.bounding_rectangle.position = SF.vector2(-2000, 400)
+          @@medium_platform_01.display_rectangle.position = SF.vector2(-2000, 400)
+          @@medium_platform_02.bounding_rectangle.position = SF.vector2(-2000, 0)
+          @@medium_platform_02.display_rectangle.position = SF.vector2(-2000, 0)
        end
       end
     #---------------------------------------------------------------Display---------------------------------------------------------------------------------
@@ -7282,6 +7309,11 @@ module Crafted_Items
          window.draw(@@medium_platform_03.display_rectangle)
          window.draw(@@medium_platform_02.bounding_rectangle)
          window.draw(@@medium_platform_02.display_rectangle)
+       when "factory_home"
+         window.draw(@@medium_platform_01.bounding_rectangle)
+         window.draw(@@medium_platform_01.display_rectangle)
+         window.draw(@@medium_platform_02.bounding_rectangle)
+         window.draw(@@medium_platform_02.display_rectangle)
       end
      end
    #________________________________________________________________________________________________________________________________________________________
@@ -7291,13 +7323,13 @@ module Crafted_Items
     Platform_Array = [] of Platform
     @@ground = Platform.new(1, Ground, Ground)
     Platform_Array.push(@@ground)
-    @@medium_platform_01 = Platform.new(1, Test_Platform_01, Test_Platform_Cover_01); 
+    @@medium_platform_01 = Platform.new(2, Test_Platform_01, Test_Platform_Cover_01); 
     Platform_Array.push(@@medium_platform_01)
-    @@medium_platform_02 = Platform.new(2, Test_Platform_01.dup, Test_Platform_Cover_01.dup); 
+    @@medium_platform_02 = Platform.new(3, Test_Platform_01.dup, Test_Platform_Cover_01.dup); 
     Platform_Array.push(@@medium_platform_02)
-    @@short_platform_01 = Platform.new(3, Short_Platform_01, Short_Platform_Cover_01); 
+    @@short_platform_01 = Platform.new(4, Short_Platform_01, Short_Platform_Cover_01); 
     Platform_Array.push(@@short_platform_01)
-    @@medium_platform_03 = Platform.new(4, Medium_Platform_01, Medium_Platform_Cover_01); 
+    @@medium_platform_03 = Platform.new(5, Medium_Platform_01, Medium_Platform_Cover_01); 
     Platform_Array.push(@@medium_platform_03)
    #________________________________________________________________________________________________________________________________________________________
    end
@@ -7352,13 +7384,23 @@ module Crafted_Items
      def Wall.position_test(window, area, map)
        @@map_boundary_wall_01.bounding_rectangle.position = SF.vector2(-6000, -3000)
        @@map_boundary_wall_01.display_rectangle.position = SF.vector2(-6000, -3000)
+       @@map_boundary_wall_02.bounding_rectangle.position = SF.vector2(6000, -3000)
+       @@map_boundary_wall_02.display_rectangle.position = SF.vector2(6000, -3000)
       end
     #------------------------------------------------------------Doll Factory------------------------------------------------------------------------------
      def Wall.position_doll_factory(window, area, map)
-      @@map_boundary_wall_01.bounding_rectangle.position = SF.vector2(-6000, -3000)
-      @@map_boundary_wall_01.display_rectangle.position = SF.vector2(-6000, -3000)
-      @@map_boundary_wall_02.bounding_rectangle.position = SF.vector2(600, -3000)
-      @@map_boundary_wall_02.display_rectangle.position = SF.vector2(600, -3000)
+      case map
+       when"factory_map_01"
+       @@map_boundary_wall_01.bounding_rectangle.position = SF.vector2(-6000, -3000)
+       @@map_boundary_wall_01.display_rectangle.position = SF.vector2(-6000, -3000)
+       @@map_boundary_wall_02.bounding_rectangle.position = SF.vector2(600, -3000)
+       @@map_boundary_wall_02.display_rectangle.position = SF.vector2(600, -3000)
+      when "factory_home"
+       @@map_boundary_wall_01.bounding_rectangle.position = SF.vector2(-2000, -3000)
+       @@map_boundary_wall_01.display_rectangle.position = SF.vector2(-2000, -3000)
+       @@map_boundary_wall_02.bounding_rectangle.position = SF.vector2(600, -3000)
+       @@map_boundary_wall_02.display_rectangle.position = SF.vector2(600, -3000)
+       end
      end
    #---------------------------------------------------------------Display---------------------------------------------------------------------------------
     def Wall.display(window, area, map)
@@ -7371,6 +7413,10 @@ module Crafted_Items
      end
     #----------------------------------------------------------------Test----------------------------------------------------------------------------------
      def Wall.display_test(window, area, map)
+      window.draw(@@map_boundary_wall_01.bounding_rectangle)
+      window.draw(@@map_boundary_wall_01.display_rectangle)
+      window.draw(@@map_boundary_wall_02.bounding_rectangle)
+      window.draw(@@map_boundary_wall_02.display_rectangle)
       end
     #------------------------------------------------------------Doll Factory------------------------------------------------------------------------------
      def Wall.display_doll_factory(window, area, map)
@@ -7432,6 +7478,9 @@ module Crafted_Items
    def destination_area=(this)
     @destination_area= this
    end
+   def destination_postion=(this)
+    @destination_postion = this
+   end
    def display_rectangle
     @display_rectangle
    end
@@ -7447,8 +7496,24 @@ module Crafted_Items
   #????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
   #?                                                               Methods                                                                                ?
   #????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
+   #---------------------------------------------------------Initialize Teleporters------------------------------------------------------------------------
+    def Teleporter.initialize_teleporters
+      @@teleporter_01.sprite.position = SF.vector2(0, 99999)
+      @@teleporter_02.sprite.position = SF.vector2(0, 99999)
+      @@teleporter_03.sprite.position = SF.vector2(0, 99999)
+      @@teleporter_01.destination_map = ""
+      @@teleporter_02.destination_map = ""
+      @@teleporter_03.destination_map = ""
+      @@teleporter_01.destination_area = "" 
+      @@teleporter_02.destination_area = "" 
+      @@teleporter_03.destination_area = ""
+      @@teleporter_01.destination_postion = [0.0, 800.0]
+      @@teleporter_02.destination_postion = [0.0, 800.0]
+      @@teleporter_03.destination_postion = [0.0, 800.0]
+    end
    #----------------------------------------------------------Position Teleporters-------------------------------------------------------------------------
     def Teleporter.position_teleporters(area, map)
+      Teleporter.initialize_teleporters
       case area
       when "test"
         Teleporter.position_test_teleporters(area, map)
@@ -7468,12 +7533,25 @@ module Crafted_Items
        @@teleporter_01.destination_area = "test" 
        @@teleporter_02.destination_area = "test" 
        @@teleporter_03.destination_area = "doll factory"
+       @@teleporter_03.destination_postion = [0.0, -300.0]
      end
     end
     def Teleporter.position_doll_factory_teleporters(area, map)
       case map
        when "factory_map_01"
         @@teleporter_01.sprite.position = SF.vector2(120, 762)
+        @@teleporter_01.destination_map = "test"
+        @@teleporter_01.destination_area = "test" 
+        @@teleporter_02.sprite.position = SF.vector2(0, -380)
+        @@teleporter_02.destination_map = "factory_home"
+        @@teleporter_02.destination_area = "doll factory"
+        @@teleporter_02.destination_postion = [0.0, 800.0]
+        @@teleporter_03.sprite.position = SF.vector2(32000, 762)
+      when "factory_home"
+        @@teleporter_01.sprite.position = SF.vector2(120, 762)
+        @@teleporter_01.destination_map = "factory_map_01"
+        @@teleporter_01.destination_area = "doll factory" 
+        @@teleporter_01.destination_postion = [100.0, -400.0]
       end
      end
   #-----------------------------------------------------------Display Teleporters--------------------------------------------------------------------------
@@ -7497,6 +7575,11 @@ module Crafted_Items
    def Teleporter.display_teleporters_doll_factory(window, area, map)
     case map
      when "factory_map_01"
+      Map_Geometry::Teleporter.animate_teleporters(window)
+      window.draw(@@teleporter_01.sprite)
+      window.draw(@@teleporter_02.sprite)
+      #window.draw(@@teleporter_03.sprite)
+     when "factory_home"
       Map_Geometry::Teleporter.animate_teleporters(window)
       window.draw(@@teleporter_01.sprite)
      end
@@ -7632,14 +7715,22 @@ module Crafted_Items
      end
    #------------------------------------------------------------Doll Factory------------------------------------------------------------------------------
     def Misc_Decor.display_doll_factory(window, area, map)
-      window.draw(@@concrete_pillar_01.sprite)
-      window.draw(@@concrete_pillar_02.sprite)
-      window.draw(@@concrete_pillar_03.sprite)
-      window.draw(@@concrete_pillar_04.sprite)
+     case map
+      when "factory_map_01"
+       window.draw(@@concrete_pillar_01.sprite)
+       window.draw(@@concrete_pillar_02.sprite)
+       window.draw(@@concrete_pillar_03.sprite)
+       window.draw(@@concrete_pillar_04.sprite)
+      when "factory_home"
+    end
      end
      def Misc_Decor.display_doll_factory_overlay(window, area, map)
-      window.draw(@@hanging_wires_01.sprite); window.draw(@@hanging_wires_02.sprite)
-      window.draw(@@hanging_wires_05.sprite)
+      case map
+      when "factory_map_01"
+       window.draw(@@hanging_wires_01.sprite); window.draw(@@hanging_wires_02.sprite)
+       window.draw(@@hanging_wires_05.sprite)
+      when "factory_home"
+      end
      end
  #________________________________________________________________________________________________________________________________________________________
  #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -7697,9 +7788,12 @@ module Crafted_Items
      end
     def Parallax.display_doll_factory(window, map, area, player)
      case map
-     when "factory_map_01"
-      @@sunset_parallax_01.sprite.position = player.position
-      window.draw(@@sunset_parallax_01.sprite)
+      when "factory_map_01"
+       @@sunset_parallax_01.sprite.position = player.position
+       window.draw(@@sunset_parallax_01.sprite)
+      when "factory_home"
+       @@rusty_metal_01.sprite.position = player.position
+       window.draw(@@rusty_metal_01.sprite)
      end
      end
    #...........................................................Doll Factory...............................................................................
@@ -7709,6 +7803,7 @@ module Crafted_Items
  #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   @@test_parallax = Parallax.new(-1, Test_Parallax)
   @@sunset_parallax_01 = Parallax.new(0, Sunset_Parallax_01)
+  @@rusty_metal_01 = Parallax.new(1, Rusty_Metal_Parallax_01)
  #________________________________________________________________________________________________________________________________________________________
  end
 end
