@@ -22,6 +22,7 @@ include Map_Geometry
   @@current_object : Platform; @@current_object = Map_Geometry::Platform.level_editor_initial_platform
   @@current_template : Platform; @@current_template = Map_Geometry::Platform.level_editor_initial_platform
   @@id : Int32; @@id = 1; @@template_id : Int32; @@template_id = 1
+  @@zoom = 1
   def Editor_Controls.check_current_object
     return @@current_object
   end
@@ -40,6 +41,12 @@ include Map_Geometry
             Map_Geometry::Platform.level_editor_place_platform(current_platform, x, y, player_x, player_y)
         end
     end
+  end
+  def Editor_Controls.change_zoom(zoom)
+    @@zoom += zoom
+  end
+  def Editor_Controls.check_zoom
+    return @@zoom
   end
   def Editor_Controls.level_editor_keypresses(window, player)
     while (event = window.poll_event)
@@ -84,6 +91,7 @@ include Map_Geometry
           player.position -= SF.vector2(50, 0)
       when SF::Keyboard::D
           player.position += SF.vector2(50, 0)
+ #-------------------------------------------------Save, Load, Initialize------------------------------------------------ 
       when SF::Keyboard::X
         current_platform = @@current_object
         Map_Geometry::Platform.initialize_current_platform(current_platform)
@@ -91,6 +99,19 @@ include Map_Geometry
         Map_Geometry::Platform.level_editor_save_level
       when SF::Keyboard::B
         Map_Geometry::Platform.load_map_platform_settings
+ #-------------------------------------------------------Zoom View------------------------------------------------------- 
+      when SF::Keyboard::Add
+        zoom = -1
+        Editor_Controls.change_zoom(zoom)
+      when SF::Keyboard::Equal
+        zoom = -1
+        Editor_Controls.change_zoom(zoom)
+      when SF::Keyboard::Subtract
+        zoom = 1
+        Editor_Controls.change_zoom(zoom)
+      when SF::Keyboard::Hyphen
+        zoom = 1
+        Editor_Controls.change_zoom(zoom)
       when SF::Keyboard::K
         s = Map_Geometry::Platform.get_template_array_size
         if @@template_id < s

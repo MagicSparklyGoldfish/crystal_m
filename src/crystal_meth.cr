@@ -62,6 +62,7 @@ extend self
  #-------------------------------------------------------Game State Variables------------------------------------------------------------+
   @@dialog : Bool; @@dialog = false;
   @@case_frame = 0
+  @@level_editor_zoom : Int32; @@level_editor_zoom = 1
  #_______________________________________________________________________________________________________________________________________+
  #---------------------------------------------------------Cursor Variables--------------------------------------------------------------+
   @@cursorposition = "up"
@@ -220,8 +221,8 @@ extend self
     control_text = Level_Editor_Object_Text.dup
     control_text.position = SF.vector2(0, 0)
     control_text.color = SF::Color::White
-    control_text.string = "Save: V\nMove View: WASD\nMove Platform: Arrow Keys\nReset All Objects: Backspace\nReset Current Object: X" +
-    "\nNext Template: K\nPrevious Template: L\nNext Object: O\nPrevious Object: P\nNew Object: N\nPlace Object: Right Click"
+    control_text.string = "Save: V\nLoad: B\nMove View: WASD\nMove Platform: Arrow Keys\nReset All Objects: Backspace\nReset Current Object: X" +
+    "\nNext Template: K\nPrevious Template: L\nNext Object: O\nPrevious Object: P\nNew Object: N\nPlace Object: Right Click\nZoom: +/-"
     window.draw(control_text)
   end
  #/////////////////////////////////////////////////////////Main Menu////////////////////////////////////////////////////////////////////+
@@ -473,7 +474,8 @@ extend self
      view1.center = SF.vector2(x, y)
      view1.viewport = SF.float_rect(0, 0, 1, 0.85)
      if @@menu == "level_editor"
-      view1.zoom(4)
+      @@level_editor_zoom = Level_Editor::Editor_Controls.check_zoom
+      view1.zoom(@@level_editor_zoom)
      end
      window.view = view1
      if @@attacking == true

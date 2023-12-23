@@ -7365,7 +7365,6 @@ module Crafted_Items
          this.bounding_rectangle.position = SF.vector2(x, y)
          this.display_rectangle.position = this.bounding_rectangle.position
          Current_Platform_Array.push(this)
-         puts Current_Platform_Array
          i += 1
         end
        # yaml["platform_ids"].as_a.map{ |i| puts i} 
@@ -7435,6 +7434,7 @@ module Crafted_Items
        current_platform = Current_Platform_Array[id]
        current_platform
       end
+     #........................................................Change Object Texture.........................................................................
      #..........................................................Create New Object...........................................................................
       def Platform.level_editor_create_platform(platform)
        current_platform = platform.dup
