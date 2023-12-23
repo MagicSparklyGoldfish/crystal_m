@@ -11,6 +11,7 @@ require "../src/Saves.cr"
 require "../src/Fonts.cr"
 require "../src/level_test.cr"
 require "../src/Player_Character.cr"
+require "../src/Level_Editor.cr"
 require "x11"
 require "crystal/system/time"
 require "chipmunk/chipmunk_crsfml"
@@ -203,6 +204,27 @@ extend self
 #=======================================================================================================================================+
 #---------------------------------------------------------------------------------------------------------------------------------------+
 #=======================================================Menu Renderers==================================================================+ @note menu renderers
+ #///////////////////////////////////////////////////////Level Editor\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\+
+  def Window_Class.level_editor(window)
+    view2 = SF::View.new(SF.float_rect(0, 950, 1890, 140))
+    view2.viewport = SF.float_rect(0, 0.85, 1, 0.15)
+    window.view = view2
+    Level_Editor::Editor_UI.display_current_object_text(window)
+    button_02 = Level_Editor_Button_01.dup; button_02.position = SF.vector2(25, 1025)
+    window.draw(Bottom_HUD); window.draw(Level_Editor_Button_01); window.draw(button_02)
+    window.draw(Level_Editor_Object_Text)
+   end
+   def Window_Class.level_editor_control_overlay(window)
+    view5 = SF::View.new(SF.float_rect(0, 0, 1920, 1080))
+    view5.viewport = SF.float_rect(0, 0, 1, 1)
+    window.view = view5
+    control_text = Level_Editor_Object_Text.dup
+    control_text.position = SF.vector2(0, 0)
+    control_text.color = SF::Color::White
+    control_text.string = "Save: V\nMove: WASD\nReset All Objects: Backspace\nReset Current Object: X\nNext Object: O\nPrevious Object: P
+    \nNew Object: N\nPlace Object: Right Click"
+    window.draw(control_text)
+  end
  #/////////////////////////////////////////////////////////Main Menu////////////////////////////////////////////////////////////////////+
    def Window_Class.main_menu(window)
        window.clear(SF::Color::Black);
@@ -451,6 +473,9 @@ extend self
      view1 = SF::View.new(SF.float_rect(0, 0, 1900, 700))
      view1.center = SF.vector2(x, y)
      view1.viewport = SF.float_rect(0, 0, 1, 0.85)
+     if @@menu == "level_editor"
+      view1.zoom(4)
+     end
      window.view = view1
      if @@attacking == true
       Window_Class.player_attack_bounding_box(window)
@@ -466,7 +491,9 @@ extend self
      Map_Geometry::Platform.display(area, map, window)
      Map_Geometry::Wall.display(window, area, map)
      Map_Geometry::Ladder.display_ladders(window, map, area)
-     window.draw(@@player_character_rendered_model); 
+     if @@menu != "level_editor"
+     window.draw(@@player_character_rendered_model) 
+     end
      Harvestables::Ore.draw_ores(window, map, area)
      Harvestables::Herbs.display(window, map, area)
      window.draw(Ground); Regular_Enemies.display(window, map, area, player)
@@ -698,6 +725,11 @@ extend self
       MenuElements.cursorFunc(window, @@menu)
       Window_Class.character_creation_popup(window)
      end
+   when "level_editor"
+    Window_Class.draw_map(window)
+    Map_Geometry::Platform.level_editor_display_platforms(window)
+    Window_Class.level_editor(window)
+    Window_Class.level_editor_control_overlay(window)
    when "HUD"
     Window_Class.draw_map(window)
     Window_Class.hud(window)
@@ -747,6 +779,7 @@ extend self
    end; end; end
 #//////////////////////////////////////////////////////////Keypresses///////////////////////////////////////////////////////////////////+
    def Window_Class.keypresses(window)
+    player = @@player_character_rendered_model
     case @@menu
     when "main"
       Window_Class.main_menu_keypresses(window)
@@ -754,6 +787,9 @@ extend self
       Window_Class.char_select_menu_keypresses(window)
     when "charcreate"
       Window_Class.char_creation_menu_keypresses(window)
+    when "level_editor"
+      Level_Editor::Editor_Controls.level_editor_keypresses(window, player)
+      Level_Editor::Editor_Controls.level_editor_mouse_clicks(window, player)
     when "HUD"
       Window_Class.hud_keypresses(window)
       Window_Class.check_if_idle(window)
@@ -837,9 +873,11 @@ def Window_Class.main_menu_keypresses(window)
     #view2 = SF::View.new(SF.vector2(350, 300), SF.vector2(300, 200))
   when SF::Keyboard::W #---------------for testing purposes, remove when testing done
     Data_Manager.load_savegame
-  when SF::Keyboard::C #---------------for testing purposes, remove when testing done
-    Window_Class.player_model_initialize(@@current_shoes, @@current_gloves, @@current_shirt, @@current_pants, @@current_hair) 
-    @@menu = "charcreate"
+  when SF::Keyboard::L #---------------for testing purposes, remove when testing done
+    Map_Geometry::Platform.initialize_platform_positions
+    @@menu = "level_editor"
+    @@map = "blank"
+    @@area = "blank"
   when SF::Keyboard::Enter
     puts "enter"
      if @@menu == "main"

@@ -210,6 +210,14 @@
    Text_Popup_01_Opt_02.character_size = 30; Text_Popup_01_Opt_02.color = SF::Color::White
    Text_Popup_01_Opt_02.position = SF.vector2(960, 410) 
 #-----------------------------------------------------------------------------------------------------------------------------------
+#                                                     Level Editor                  
+#-----------------------------------------------------------------------------------------------------------------------------------
+ Level_Editor_Button_01 = SF::RectangleShape.new(SF.vector2(175, 40)); Level_Editor_Button_01.fill_color = SF.color(0, 255, 255)
+ Level_Editor_Button_01.position = SF.vector2(25, 965)
+
+ Level_Editor_Object_Text = SF::Text.new; Level_Editor_Object_Text.font = FONT_COMMON; Level_Editor_Object_Text.character_size = 20; 
+ Level_Editor_Object_Text.color = SF::Color::Black; Level_Editor_Object_Text.position = SF.vector2(25, 970)
+#-----------------------------------------------------------------------------------------------------------------------------------
 #                                                         HUD
 #-----------------------------------------------------------------------------------------------------------------------------------  
  #_____________________________________________________Char Menu____________________________________________________________________

@@ -7186,19 +7186,32 @@ module Crafted_Items
    #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
    #!                                                              Initialize                                                                              !
    #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    def initialize(id : Int32, bounding_rectangle : SF::RectangleShape, display_rectangle : SF::RectangleShape)
+    def initialize(id : Int32, name : String, bounding_rectangle : SF::RectangleShape, display_rectangle : SF::RectangleShape)
       @id = id
+      @name = name
       @bounding_rectangle = bounding_rectangle
       @display_rectangle = display_rectangle
      end
     def id
       @id
      end
+    def name
+      @name
+    end
     def bounding_rectangle
       @bounding_rectangle
      end
     def display_rectangle
       @display_rectangle
+     end
+    def id=(this)
+      @id = this
+    end
+    def bounding_rectangle=(this)
+      @bounding_rectangle = this
+     end
+    def display_rectangle=(this)
+      @display_rectangle = this
      end
    #________________________________________________________________________________________________________________________________________________________
    #********************************************************************************************************************************************************
@@ -7213,7 +7226,7 @@ module Crafted_Items
      end
      def Platform.initialize_platform_positions
       Platform_Array.map{ |i| 
-        if i.id != 1
+        if i.id != 0
         i.bounding_rectangle.position = SF.vector2(0, 40000)
         i.display_rectangle.position = SF.vector2(0, 40000)
         end}
@@ -7316,20 +7329,58 @@ module Crafted_Items
          window.draw(@@medium_platform_02.display_rectangle)
       end
      end
+    #------------------------------------------------------------Level Editor-------------------------------------------------------------------------------
+     def Platform.level_editor_display_platforms(window)
+      Platform_Array.map{ |i| window.draw(i.display_rectangle)}
+     end
+     def Platform.initialize_current_platform(current_platform)
+      current_platform.bounding_rectangle.position = SF.vector2(0, 40000)
+      current_platform.display_rectangle.position = SF.vector2(0, 40000)
+     end
+     def Platform.level_editor_place_platform(current_platform, x, y, player_x, player_y)
+      x = player_x + x
+      y = player_y + y
+      current_platform.bounding_rectangle.position = SF.vector2(x, y)
+      current_platform.display_rectangle.position = SF.vector2(x, y)
+     end
+     def Platform.level_editor_initial_platform
+      current_platform = @@medium_platform_01
+     end
+     def Platform.level_editor_change_platfrom(id)
+      if id < Platform_Array.size
+      else
+        id = Platform_Array[-1].id
+      end
+      current_platform = Platform_Array[id]
+      Platform_Array.push(current_platform)
+      current_platform
+     end
+     def Platform.level_editor_create_platform(platform)
+      current_platform = platform.dup
+      current_platform.id = platform.id + 1
+      current_platform.bounding_rectangle = platform.bounding_rectangle.dup
+      current_platform.display_rectangle = platform.display_rectangle.dup
+      Platform_Array.push(current_platform)
+      current_platform
+     end
+     def Platform.level_editor_save_positions
+      File.open("maps/map_01.yml", "w") { |f| YAML.dump({Platform_Array.map{ |i| i.id.to_s + ": " + i.bounding_rectangle.position.to_s}}, f) }
+      YAML.dump({Platform_Array.map{ |i| i.id.to_s + ": " + i.bounding_rectangle.position.to_s}})
+     end
    #________________________________________________________________________________________________________________________________________________________
    #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
    #/                                                               Entities                                                                               /
    #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     Platform_Array = [] of Platform
-    @@ground = Platform.new(1, Ground, Ground)
+    @@ground = Platform.new(0, "ground", Ground, Ground)
     Platform_Array.push(@@ground)
-    @@medium_platform_01 = Platform.new(2, Test_Platform_01, Test_Platform_Cover_01); 
+    @@medium_platform_01 = Platform.new(1, "medium_platform", Test_Platform_01, Test_Platform_Cover_01); 
     Platform_Array.push(@@medium_platform_01)
-    @@medium_platform_02 = Platform.new(3, Test_Platform_01.dup, Test_Platform_Cover_01.dup); 
+    @@medium_platform_02 = Platform.new(2, "medium_platform2", Test_Platform_01.dup, Test_Platform_Cover_01.dup); 
     Platform_Array.push(@@medium_platform_02)
-    @@short_platform_01 = Platform.new(4, Short_Platform_01, Short_Platform_Cover_01); 
+    @@short_platform_01 = Platform.new(3, "short_platform", Short_Platform_01, Short_Platform_Cover_01); 
     Platform_Array.push(@@short_platform_01)
-    @@medium_platform_03 = Platform.new(5, Medium_Platform_01, Medium_Platform_Cover_01); 
+    @@medium_platform_03 = Platform.new(4, "medium_platform3", Medium_Platform_01, Medium_Platform_Cover_01); 
     Platform_Array.push(@@medium_platform_03)
    #________________________________________________________________________________________________________________________________________________________
    end
@@ -7555,35 +7606,37 @@ module Crafted_Items
       end
      end
   #-----------------------------------------------------------Display Teleporters--------------------------------------------------------------------------
-   def Teleporter.display_teleporters(window, area, map)
-    case area
-     when "test"
-      Teleporter.display_teleporters_test(window, area, map)
-    when "doll factory"
-      Teleporter.display_teleporters_doll_factory(window, area, map)
-     end
-   end
-   def Teleporter.display_teleporters_test(window, area, map)
-    case map
-     when "test"
-      Map_Geometry::Teleporter.animate_teleporters(window)
-      window.draw(@@teleporter_01.sprite)
-      window.draw(@@teleporter_02.sprite)
-      window.draw(@@teleporter_03.sprite)
-     end
-   end
-   def Teleporter.display_teleporters_doll_factory(window, area, map)
-    case map
-     when "factory_map_01"
-      Map_Geometry::Teleporter.animate_teleporters(window)
-      window.draw(@@teleporter_01.sprite)
-      window.draw(@@teleporter_02.sprite)
-      #window.draw(@@teleporter_03.sprite)
-     when "factory_home"
-      Map_Geometry::Teleporter.animate_teleporters(window)
-      window.draw(@@teleporter_01.sprite)
-     end
-   end
+    def Teleporter.display_teleporters(window, area, map)
+     case area
+      when "test"
+       Teleporter.display_teleporters_test(window, area, map)
+     when "doll factory"
+       Teleporter.display_teleporters_doll_factory(window, area, map)
+      end
+    end
+   #.................................................................Test..................................................................................
+    def Teleporter.display_teleporters_test(window, area, map)
+     case map
+      when "test"
+       Map_Geometry::Teleporter.animate_teleporters(window)
+       window.draw(@@teleporter_01.sprite)
+       window.draw(@@teleporter_02.sprite)
+       window.draw(@@teleporter_03.sprite)
+      end
+    end
+   #..............................................................Doll Factory..............................................................................
+    def Teleporter.display_teleporters_doll_factory(window, area, map)
+     case map
+      when "factory_map_01"
+       Map_Geometry::Teleporter.animate_teleporters(window)
+       window.draw(@@teleporter_01.sprite)
+       window.draw(@@teleporter_02.sprite)
+       #window.draw(@@teleporter_03.sprite)
+      when "factory_home"
+       Map_Geometry::Teleporter.animate_teleporters(window)
+       window.draw(@@teleporter_01.sprite)
+      end
+    end
   #________________________________________________________________________________________________________________________________________________________
   #-----------------------------------------------------------Animate Teleporters--------------------------------------------------------------------------
    def Teleporter.animate_teleporters(window)
@@ -7648,162 +7701,168 @@ module Crafted_Items
    @@upgrade_table_01 = Crafting_Station.new(4, Test_Upgrade_Table)
   #________________________________________________________________________________________________________________________________________________________
   end
- class Misc_Decor
- #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
- #!                                                              Initialize                                                                              !
- #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+ #MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+ #M                                                               Misc Decor                                                                              M
+ #MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM
+  class Misc_Decor
+  #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  #!                                                              Initialize                                                                              !
+  #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    def initialize(id : Int32, sprite : SF::Sprite)
+      @id = id
+      @sprite = sprite
+     end
+    def id
+      @id
+    end
+    def sprite
+      @sprite
+    end
+  #________________________________________________________________________________________________________________________________________________________
+  #********************************************************************************************************************************************************
+  #*                                                              Variables                                                                               *
+  #********************************************************************************************************************************************************
+  #________________________________________________________________________________________________________________________________________________________
+  #????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
+  #?                                                               Methods                                                                                ?
+  #????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
+   #--------------------------------------------------------------Position---------------------------------------------------------------------------------
+    def Misc_Decor.position(window, area, map)
+      case area
+       when "test"
+        Misc_Decor.position_test(window, area, map)
+       when "doll factory"
+        Misc_Decor.position_doll_factory(window, area, map)
+     end
+    end
+    #----------------------------------------------------------------Test----------------------------------------------------------------------------------
+     def Misc_Decor.position_test(window, area, map)
+      end
+    #------------------------------------------------------------Doll Factory------------------------------------------------------------------------------
+     def Misc_Decor.position_doll_factory(window, area, map)
+      @@concrete_pillar_01.sprite.position = SF.vector2(-4400, 600)
+      @@concrete_pillar_02.sprite.scale = SF.vector2(1.0, -1.0)
+      @@concrete_pillar_02.sprite.position = SF.vector2(-4400, 600)
+      @@concrete_pillar_03.sprite.position = SF.vector2(-100, 600)
+      @@concrete_pillar_04.sprite.scale = SF.vector2(1.0, -1.0)
+      @@concrete_pillar_04.sprite.position = SF.vector2(-100, 600)
+      @@hanging_wires_01.sprite.position = SF.vector2(0, 395)
+      @@hanging_wires_02.sprite.position = SF.vector2(-650, -305) 
+      @@hanging_wires_05.sprite.position = SF.vector2(-150, -305) 
+     end
+   #---------------------------------------------------------------Display---------------------------------------------------------------------------------
+    def Misc_Decor.display(window, area, map)
+      case area
+         when "test"
+          Misc_Decor.display_test(window, area, map)
+         when "doll factory"
+          Misc_Decor.display_doll_factory(window, area, map)
+        end
+     end
+     def Misc_Decor.display_overlay(window, area, map)
+       case area
+          when "test"
+          when "doll factory"
+           Misc_Decor.display_doll_factory_overlay(window, area, map)
+         end
+      end
+    #----------------------------------------------------------------Test----------------------------------------------------------------------------------
+     def Misc_Decor.display_test(window, area, map)
+      end
+    #------------------------------------------------------------Doll Factory------------------------------------------------------------------------------
+     def Misc_Decor.display_doll_factory(window, area, map)
+      case map
+       when "factory_map_01"
+        window.draw(@@concrete_pillar_01.sprite)
+        window.draw(@@concrete_pillar_02.sprite)
+        window.draw(@@concrete_pillar_03.sprite)
+        window.draw(@@concrete_pillar_04.sprite)
+       when "factory_home"
+     end
+      end
+      def Misc_Decor.display_doll_factory_overlay(window, area, map)
+       case map
+       when "factory_map_01"
+        window.draw(@@hanging_wires_01.sprite); window.draw(@@hanging_wires_02.sprite)
+        window.draw(@@hanging_wires_05.sprite)
+       when "factory_home"
+       end
+      end
+  #________________________________________________________________________________________________________________________________________________________
+  #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  #/                                                               Entities                                                                               /
+  #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+   #---------------------------------------------------------------Pillars---------------------------------------------------------------------------------
+    @@concrete_pillar_01 = Misc_Decor.new(1, Concrete_Pillar_01.dup)
+    @@concrete_pillar_02 = Misc_Decor.new(2, Concrete_Pillar_01.dup)
+    @@concrete_pillar_03 = Misc_Decor.new(3, Concrete_Pillar_01.dup)
+    @@concrete_pillar_04 = Misc_Decor.new(4, Concrete_Pillar_01.dup)
+   #------------------------------------------------------------Hanging Decor------------------------------------------------------------------------------
+    #...........................................................Hanging Wires..............................................................................
+     @@hanging_wires_01 = Misc_Decor.new(500, Hanging_Wires_01.dup)
+     @@hanging_wires_02 = Misc_Decor.new(501, Hanging_Wires_01.dup)
+     @@hanging_wires_03 = Misc_Decor.new(502, Hanging_Wires_01.dup)
+     @@hanging_wires_04 = Misc_Decor.new(503, Hanging_Wires_01.dup)
+     @@hanging_wires_05 = Misc_Decor.new(504, Hanging_Wires_02.dup)
+  #________________________________________________________________________________________________________________________________________________________
+   end
+ #PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP
+ #P                                                                Parallax                                                                               P
+ #PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP
+  class Parallax
+  #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  #!                                                              Initialize                                                                              !
+  #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
    def initialize(id : Int32, sprite : SF::Sprite)
      @id = id
      @sprite = sprite
     end
    def id
      @id
-   end
+    end
    def sprite
      @sprite
    end
- #________________________________________________________________________________________________________________________________________________________
- #********************************************************************************************************************************************************
- #*                                                              Variables                                                                               *
- #********************************************************************************************************************************************************
- #________________________________________________________________________________________________________________________________________________________
- #????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
- #?                                                               Methods                                                                                ?
- #????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
-  #--------------------------------------------------------------Position---------------------------------------------------------------------------------
-   def Misc_Decor.position(window, area, map)
-     case area
-      when "test"
-       Misc_Decor.position_test(window, area, map)
-      when "doll factory"
-       Misc_Decor.position_doll_factory(window, area, map)
-    end
-   end
-   #----------------------------------------------------------------Test----------------------------------------------------------------------------------
-    def Misc_Decor.position_test(window, area, map)
-     end
-   #------------------------------------------------------------Doll Factory------------------------------------------------------------------------------
-    def Misc_Decor.position_doll_factory(window, area, map)
-     @@concrete_pillar_01.sprite.position = SF.vector2(-4400, 600)
-     @@concrete_pillar_02.sprite.scale = SF.vector2(1.0, -1.0)
-     @@concrete_pillar_02.sprite.position = SF.vector2(-4400, 600)
-     @@concrete_pillar_03.sprite.position = SF.vector2(-100, 600)
-     @@concrete_pillar_04.sprite.scale = SF.vector2(1.0, -1.0)
-     @@concrete_pillar_04.sprite.position = SF.vector2(-100, 600)
-     @@hanging_wires_01.sprite.position = SF.vector2(0, 395)
-     @@hanging_wires_02.sprite.position = SF.vector2(-650, -305) 
-     @@hanging_wires_05.sprite.position = SF.vector2(-150, -305) 
-    end
-  #---------------------------------------------------------------Display---------------------------------------------------------------------------------
-   def Misc_Decor.display(window, area, map)
-     case area
-        when "test"
-         Misc_Decor.display_test(window, area, map)
-        when "doll factory"
-         Misc_Decor.display_doll_factory(window, area, map)
-       end
-    end
-    def Misc_Decor.display_overlay(window, area, map)
+  #________________________________________________________________________________________________________________________________________________________
+  #********************************************************************************************************************************************************
+  #*                                                              Variables                                                                               *
+  #********************************************************************************************************************************************************
+  #________________________________________________________________________________________________________________________________________________________
+  #????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
+  #?                                                               Methods                                                                                ?
+  #????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
+   #---------------------------------------------------------------Display---------------------------------------------------------------------------------
+     def Parallax.display(window, map, area, player)
       case area
-         when "test"
-         when "doll factory"
-          Misc_Decor.display_doll_factory_overlay(window, area, map)
-        end
-     end
-   #----------------------------------------------------------------Test----------------------------------------------------------------------------------
-    def Misc_Decor.display_test(window, area, map)
-     end
-   #------------------------------------------------------------Doll Factory------------------------------------------------------------------------------
-    def Misc_Decor.display_doll_factory(window, area, map)
-     case map
-      when "factory_map_01"
-       window.draw(@@concrete_pillar_01.sprite)
-       window.draw(@@concrete_pillar_02.sprite)
-       window.draw(@@concrete_pillar_03.sprite)
-       window.draw(@@concrete_pillar_04.sprite)
-      when "factory_home"
-    end
-     end
-     def Misc_Decor.display_doll_factory_overlay(window, area, map)
-      case map
-      when "factory_map_01"
-       window.draw(@@hanging_wires_01.sprite); window.draw(@@hanging_wires_02.sprite)
-       window.draw(@@hanging_wires_05.sprite)
-      when "factory_home"
+      when "test"
+       Parallax.display_test(window, map, area, player)
+      when "doll factory"
+       Parallax.display_doll_factory(window, map, area, player)
       end
      end
- #________________________________________________________________________________________________________________________________________________________
- #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
- #/                                                               Entities                                                                               /
- #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  #---------------------------------------------------------------Pillars---------------------------------------------------------------------------------
-   @@concrete_pillar_01 = Misc_Decor.new(1, Concrete_Pillar_01.dup)
-   @@concrete_pillar_02 = Misc_Decor.new(2, Concrete_Pillar_01.dup)
-   @@concrete_pillar_03 = Misc_Decor.new(3, Concrete_Pillar_01.dup)
-   @@concrete_pillar_04 = Misc_Decor.new(4, Concrete_Pillar_01.dup)
-  #------------------------------------------------------------Hanging Decor------------------------------------------------------------------------------
-   #...........................................................Hanging Wires..............................................................................
-    @@hanging_wires_01 = Misc_Decor.new(500, Hanging_Wires_01.dup)
-    @@hanging_wires_02 = Misc_Decor.new(501, Hanging_Wires_01.dup)
-    @@hanging_wires_03 = Misc_Decor.new(502, Hanging_Wires_01.dup)
-    @@hanging_wires_04 = Misc_Decor.new(503, Hanging_Wires_01.dup)
-    @@hanging_wires_05 = Misc_Decor.new(504, Hanging_Wires_02.dup)
- #________________________________________________________________________________________________________________________________________________________
+    #...............................................................Test...................................................................................
+     def Parallax.display_test(window, map, area, player)
+       @@test_parallax.sprite.position = player.position
+       window.draw(@@test_parallax.sprite)
+      end
+     def Parallax.display_doll_factory(window, map, area, player)
+      case map
+       when "factory_map_01"
+        @@sunset_parallax_01.sprite.position = player.position
+        window.draw(@@sunset_parallax_01.sprite)
+       when "factory_home"
+        @@rusty_metal_01.sprite.position = player.position
+        window.draw(@@rusty_metal_01.sprite)
+      end
+      end
+    #...........................................................Doll Factory...............................................................................
+  #________________________________________________________________________________________________________________________________________________________
+  #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  #/                                                               Entities                                                                               /
+  #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+   @@test_parallax = Parallax.new(-1, Test_Parallax)
+   @@sunset_parallax_01 = Parallax.new(0, Sunset_Parallax_01)
+   @@rusty_metal_01 = Parallax.new(1, Rusty_Metal_Parallax_01)
+  #________________________________________________________________________________________________________________________________________________________
   end
- class Parallax
- #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
- #!                                                              Initialize                                                                              !
- #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-  def initialize(id : Int32, sprite : SF::Sprite)
-    @id = id
-    @sprite = sprite
-   end
-  def id
-    @id
-   end
-  def sprite
-    @sprite
-  end
- #________________________________________________________________________________________________________________________________________________________
- #********************************************************************************************************************************************************
- #*                                                              Variables                                                                               *
- #********************************************************************************************************************************************************
- #________________________________________________________________________________________________________________________________________________________
- #????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
- #?                                                               Methods                                                                                ?
- #????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
-  #---------------------------------------------------------------Display---------------------------------------------------------------------------------
-    def Parallax.display(window, map, area, player)
-     case area
-     when "test"
-      Parallax.display_test(window, map, area, player)
-     when "doll factory"
-      Parallax.display_doll_factory(window, map, area, player)
-     end
-    end
-   #...............................................................Test...................................................................................
-    def Parallax.display_test(window, map, area, player)
-      @@test_parallax.sprite.position = player.position
-      window.draw(@@test_parallax.sprite)
-     end
-    def Parallax.display_doll_factory(window, map, area, player)
-     case map
-      when "factory_map_01"
-       @@sunset_parallax_01.sprite.position = player.position
-       window.draw(@@sunset_parallax_01.sprite)
-      when "factory_home"
-       @@rusty_metal_01.sprite.position = player.position
-       window.draw(@@rusty_metal_01.sprite)
-     end
-     end
-   #...........................................................Doll Factory...............................................................................
- #________________________________________________________________________________________________________________________________________________________
- #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
- #/                                                               Entities                                                                               /
- #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  @@test_parallax = Parallax.new(-1, Test_Parallax)
-  @@sunset_parallax_01 = Parallax.new(0, Sunset_Parallax_01)
-  @@rusty_metal_01 = Parallax.new(1, Rusty_Metal_Parallax_01)
- #________________________________________________________________________________________________________________________________________________________
- end
 end

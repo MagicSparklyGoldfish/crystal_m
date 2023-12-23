@@ -1,0 +1,6 @@
+---
+- - 1SF::Vector2(Float32)(@x=-5000.0, @y=800.0)
+  - 2SF::Vector2(Float32)(@x=-785.0, @y=171.0)
+  - 3SF::Vector2(Float32)(@x=0.0, @y=40000.0)
+  - 4SF::Vector2(Float32)(@x=0.0, @y=40000.0)
+  - 5SF::Vector2(Float32)(@x=0.0, @y=40000.0)
