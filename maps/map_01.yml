@@ -1,6 +1,36 @@
 ---
-- - 1SF::Vector2(Float32)(@x=-5000.0, @y=800.0)
-  - 2SF::Vector2(Float32)(@x=-785.0, @y=171.0)
-  - 3SF::Vector2(Float32)(@x=0.0, @y=40000.0)
-  - 4SF::Vector2(Float32)(@x=0.0, @y=40000.0)
-  - 5SF::Vector2(Float32)(@x=0.0, @y=40000.0)
+platform_names:
+- medium_platform1
+- medium_platform2
+- short_platform1
+- short_platform2
+- short_platform3
+- medium_large_platform1
+platform_ids:
+- 4
+- 4
+- 3
+- 3
+- 3
+- 1
+platform_bounding_boxes:
+- '#<SF::RectangleShape:0x7fb07bfeb5a0>'
+- '#<SF::RectangleShape:0x7fb0751838d0>'
+- '#<SF::RectangleShape:0x7fb07bfebc00>'
+- '#<SF::RectangleShape:0x7fb07bff2120>'
+- '#<SF::RectangleShape:0x7fb07bfeb810>'
+- '#<SF::RectangleShape:0x7fb07bfed5a0>'
+platform_x_positions:
+- 0.0
+- 647.0
+- 507.0
+- 366.0
+- 252.0
+- 1106.0
+platform_y_positions:
+- 16.0
+- 395.0
+- 523.0
+- 618.0
+- 712.0
+- 594.0

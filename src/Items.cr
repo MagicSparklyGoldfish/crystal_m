@@ -14,6 +14,7 @@ require "../src/Player_Character.cr"
 require "x11"
 require "crystal/system/time"
 require "chipmunk/chipmunk_crsfml"
+require "yaml"
 require "file_utils"
 
 #UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUU
@@ -7183,6 +7184,7 @@ module Crafted_Items
  #P                                                                 Platform                                                                               P
  #PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP
   class Platform
+    include YAML::Serializable
    #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
    #!                                                              Initialize                                                                              !
    #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -7207,6 +7209,9 @@ module Crafted_Items
     def id=(this)
       @id = this
     end
+    def name=(this)
+      @name = this
+    end
     def bounding_rectangle=(this)
       @bounding_rectangle = this
      end
@@ -7217,6 +7222,8 @@ module Crafted_Items
    #********************************************************************************************************************************************************
    #*                                                              Variables                                                                               *
    #********************************************************************************************************************************************************
+    @@current_short_number : Int32; @@current_short_number = 0; @@current_medium_number : Int32; @@current_medium_number = 0
+    @@current_medium_large_number : Int32; @@current_medium_large_number = 0
    #________________________________________________________________________________________________________________________________________________________
    #????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
    #?                                                               Methods                                                                                ?
@@ -7330,58 +7337,156 @@ module Crafted_Items
       end
      end
     #------------------------------------------------------------Level Editor-------------------------------------------------------------------------------
-     def Platform.level_editor_display_platforms(window)
-      Platform_Array.map{ |i| window.draw(i.display_rectangle)}
-     end
-     def Platform.initialize_current_platform(current_platform)
-      current_platform.bounding_rectangle.position = SF.vector2(0, 40000)
-      current_platform.display_rectangle.position = SF.vector2(0, 40000)
-     end
-     def Platform.level_editor_place_platform(current_platform, x, y, player_x, player_y)
-      x = player_x + x
-      y = player_y + y
-      current_platform.bounding_rectangle.position = SF.vector2(x, y)
-      current_platform.display_rectangle.position = SF.vector2(x, y)
-     end
-     def Platform.level_editor_initial_platform
-      current_platform = @@medium_platform_01
-     end
-     def Platform.level_editor_change_platfrom(id)
-      if id < Platform_Array.size
-      else
-        id = Platform_Array[-1].id
+     #----------------------------------------------------------Load Map File-------------------------------------------------------------------------------
+      def Platform.load_map_platform_settings
+        Platform.initialize_platform_positions
+        yaml = File.open("maps/map_01.yml") { |file| YAML.parse(file) }
+        yaml.class 
+        hash = yaml.as_h  
+        hash.class
+        this = @@medium_platform_01.dup
+        i = 0
+        s = yaml["platform_ids"].as_a.size
+        while i < s 
+         if yaml["platform_ids"][i] == 1
+          this = @@medium_platform_01.dup
+         else if yaml["platform_ids"][i] == 3
+          this = @@short_platform_01.dup
+         else if yaml["platform_ids"][i] == 4
+          this = @@medium_platform_03.dup
+        else
+          puts "error!" + ["platform_ids"][i].to_s + " is an invalid id!" 
+          i += 1
+         end; end; end
+         this.id = yaml["platform_ids"][i].as_i
+         this.name = yaml["platform_names"][i].as_s
+         x = yaml["platform_x_positions"][i].as_f32
+         y = yaml["platform_y_positions"][i].as_f32
+         this.bounding_rectangle.position = SF.vector2(x, y)
+         this.display_rectangle.position = this.bounding_rectangle.position
+         Current_Platform_Array.push(this)
+         puts Current_Platform_Array
+         i += 1
+        end
+       # yaml["platform_ids"].as_a.map{ |i| puts i} 
+       # yaml["platform_names"].as_a.map{ |i| puts i} 
+       # yaml["platform_bounding_boxes"].as_a.map{ |i| puts i} 
+       # yaml["platform_x_positions"].as_a.map{ |i| puts i} 
+       # yaml["platform_y_positions"].as_a.map{ |i| puts i} 
       end
-      current_platform = Platform_Array[id]
-      Platform_Array.push(current_platform)
-      current_platform
-     end
-     def Platform.level_editor_create_platform(platform)
-      current_platform = platform.dup
-      current_platform.id = platform.id + 1
-      current_platform.bounding_rectangle = platform.bounding_rectangle.dup
-      current_platform.display_rectangle = platform.display_rectangle.dup
-      Platform_Array.push(current_platform)
-      current_platform
-     end
-     def Platform.level_editor_save_positions
-      File.open("maps/map_01.yml", "w") { |f| YAML.dump({Platform_Array.map{ |i| i.id.to_s + ": " + i.bounding_rectangle.position.to_s}}, f) }
-      YAML.dump({Platform_Array.map{ |i| i.id.to_s + ": " + i.bounding_rectangle.position.to_s}})
-     end
+     #.............................................................Display..................................................................................
+      def Platform.level_editor_display_platforms(window)
+        Current_Platform_Array.map{ |i| window.draw(i.display_rectangle)}
+      end
+     #............................................................Initialize................................................................................
+      def Platform.initialize_current_platform(current_platform)
+       current_platform.bounding_rectangle.position = SF.vector2(0, 40000)
+       current_platform.display_rectangle.position = SF.vector2(0, 40000)
+       Current_Platform_Array.delete(current_platform)
+      end
+     #..............................................................Place...................................................................................
+      def Platform.level_editor_place_platform(current_platform, x, y, player_x, player_y)
+       x = player_x + x
+       y = player_y + y
+       current_platform.bounding_rectangle.position = SF.vector2(x, y)
+       current_platform.display_rectangle.position = SF.vector2(x, y)
+      end
+      def Platform.level_editor_precision_placement(current_platform, direction)
+       case direction
+        when "left"
+         current_platform.bounding_rectangle.position -= SF.vector2(10, 0)
+         current_platform.display_rectangle.position -= SF.vector2(10, 0)
+        when "right"
+         current_platform.bounding_rectangle.position += SF.vector2(10, 0)
+         current_platform.display_rectangle.position += SF.vector2(10, 0)
+        when "up"
+         current_platform.bounding_rectangle.position -= SF.vector2(0, 10)
+         current_platform.display_rectangle.position -= SF.vector2(0, 10)
+        when "down"
+         current_platform.bounding_rectangle.position += SF.vector2(0, 10)
+         current_platform.display_rectangle.position += SF.vector2(0, 10)
+       end
+      end
+     #.........................................................Set Initial Object...........................................................................
+      def Platform.level_editor_initial_platform
+       current_platform = @@medium_platform_01
+      end
+     #...........................................................Get Array Size.............................................................................
+      def Platform.get_template_array_size
+       return Platform_Template_Array.size
+      end
+      def Platform.get_created_platform_array_size
+        return Current_Platform_Array.size
+       end
+     #............................................................Scroll Arrays.............................................................................
+      def Platform.level_editor_change_template(template_id)
+       if Platform_Template_Array.size > template_id && template_id > -1
+       else
+         template_id = -1
+       end
+       current_template = Platform_Template_Array[template_id]
+       current_template
+      end
+      def Platform.level_editor_change_platfrom(id)
+       if id < Current_Platform_Array.size && id > -1
+       else
+         id = -1
+       end
+       current_platform = Current_Platform_Array[id]
+       current_platform
+      end
+     #..........................................................Create New Object...........................................................................
+      def Platform.level_editor_create_platform(platform)
+       current_platform = platform.dup
+       current_platform.id = platform.id
+       case current_platform.id
+       when 1
+        @@current_medium_large_number += 1
+       current_platform.name += @@current_medium_large_number.to_s
+       when 3
+       @@current_medium_number += 1
+       current_platform.name += @@current_medium_number.to_s
+       when 4
+       @@current_short_number += 1
+       current_platform.name += @@current_short_number.to_s
+       end
+       current_platform.bounding_rectangle = platform.bounding_rectangle.dup
+       current_platform.display_rectangle = platform.display_rectangle.dup
+       Platform_Array.push(current_platform)
+       Current_Platform_Array.push(current_platform)
+       current_platform
+      end
+     #................................................................Save..................................................................................
+      @[YAML::Field(key: "platform_ids")]
+      @[YAML::Field(key: "platform_names")]
+      @[YAML::Field(key: "platform_x_positions")]
+      @[YAML::Field(key: "platform_y_positions")]
+      @[YAML::Field(key: "platform_bounding_boxes")]
+      def Platform.level_editor_save_level
+        File.open("maps/map_01.yml", "w") { |f| YAML.dump({"platform_names": Current_Platform_Array.map{ |i| i.name},
+        "platform_ids": Current_Platform_Array.map{ |i| i.id},
+        "platform_bounding_boxes": Current_Platform_Array.map{ |i| i.bounding_rectangle.to_s},
+        "platform_x_positions": Current_Platform_Array.map{ |i| i.bounding_rectangle.position.x},
+        "platform_y_positions": Current_Platform_Array.map{ |i| i.bounding_rectangle.position.y}}, f) }
+        #YAML.dump({"platform_names": Current_Platform_Array.map{ |i| i.name}})
+      end
    #________________________________________________________________________________________________________________________________________________________
    #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
    #/                                                               Entities                                                                               /
    #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     Platform_Array = [] of Platform
+    Platform_Template_Array = [] of Platform
+    Current_Platform_Array = [] of Platform
     @@ground = Platform.new(0, "ground", Ground, Ground)
     Platform_Array.push(@@ground)
-    @@medium_platform_01 = Platform.new(1, "medium_platform", Test_Platform_01, Test_Platform_Cover_01); 
-    Platform_Array.push(@@medium_platform_01)
-    @@medium_platform_02 = Platform.new(2, "medium_platform2", Test_Platform_01.dup, Test_Platform_Cover_01.dup); 
+    @@medium_platform_01 = Platform.new(1, "medium_large_platform", Test_Platform_01, Test_Platform_Cover_01); 
+    Platform_Array.push(@@medium_platform_01); Platform_Template_Array.push(@@medium_platform_01)
+    @@medium_platform_02 = Platform.new(2, "medium_platform", Test_Platform_01.dup, Test_Platform_Cover_01.dup); 
     Platform_Array.push(@@medium_platform_02)
     @@short_platform_01 = Platform.new(3, "short_platform", Short_Platform_01, Short_Platform_Cover_01); 
-    Platform_Array.push(@@short_platform_01)
-    @@medium_platform_03 = Platform.new(4, "medium_platform3", Medium_Platform_01, Medium_Platform_Cover_01); 
-    Platform_Array.push(@@medium_platform_03)
+    Platform_Array.push(@@short_platform_01); Platform_Template_Array.push(@@short_platform_01)
+    @@medium_platform_03 = Platform.new(4, "medium_platform", Medium_Platform_01, Medium_Platform_Cover_01); 
+    Platform_Array.push(@@medium_platform_03); Platform_Template_Array.push(@@medium_platform_03)
    #________________________________________________________________________________________________________________________________________________________
    end
  #WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW

@@ -20,9 +20,13 @@ include Map_Geometry
  class Editor_Controls
   @@current_object_type : String; @@current_object_type = "platform"
   @@current_object : Platform; @@current_object = Map_Geometry::Platform.level_editor_initial_platform
-  @@id : Int32; @@id = 1
+  @@current_template : Platform; @@current_template = Map_Geometry::Platform.level_editor_initial_platform
+  @@id : Int32; @@id = 1; @@template_id : Int32; @@template_id = 1
   def Editor_Controls.check_current_object
     return @@current_object
+  end
+  def Editor_Controls.check_current_template
+    return @@current_template
   end
   def Editor_Controls.level_editor_mouse_clicks(window, player)
     if SF::Mouse.button_pressed?(SF::Mouse::Right)
@@ -46,6 +50,32 @@ include Map_Geometry
         case event.code
       when SF::Keyboard::Escape
           window.close
+ #----------------------------------------------------Position Objects--------------------------------------------------- 
+      when SF::Keyboard::Left
+        if @@current_object_type == "platform"
+          current_platform = @@current_object
+          direction = "left"
+          Map_Geometry::Platform.level_editor_precision_placement(current_platform, direction)
+      end
+      when SF::Keyboard::Right
+        if @@current_object_type == "platform"
+          current_platform = @@current_object
+          direction = "right"
+          Map_Geometry::Platform.level_editor_precision_placement(current_platform, direction)
+      end
+      when SF::Keyboard::Up
+        if @@current_object_type == "platform"
+          current_platform = @@current_object
+          direction = "up"
+          Map_Geometry::Platform.level_editor_precision_placement(current_platform, direction)
+      end
+      when SF::Keyboard::Down
+        if @@current_object_type == "platform"
+          current_platform = @@current_object
+          direction = "down"
+          Map_Geometry::Platform.level_editor_precision_placement(current_platform, direction)
+      end
+ #-----------------------------------------------------Position View----------------------------------------------------- 
       when SF::Keyboard::W
           player.position -= SF.vector2(0, 50)
       when SF::Keyboard::S
@@ -58,17 +88,47 @@ include Map_Geometry
         current_platform = @@current_object
         Map_Geometry::Platform.initialize_current_platform(current_platform)
       when SF::Keyboard::V
-        Map_Geometry::Platform.level_editor_save_positions
+        Map_Geometry::Platform.level_editor_save_level
+      when SF::Keyboard::B
+        Map_Geometry::Platform.load_map_platform_settings
+      when SF::Keyboard::K
+        s = Map_Geometry::Platform.get_template_array_size
+        if @@template_id < s
+         @@template_id += 1
+        else 
+         @@template_id = 0
+        end
+        template_id = @@template_id
+        @@current_template = Map_Geometry::Platform.level_editor_change_template(template_id)
+      when SF::Keyboard::L
+        if @@template_id < 0
+         @@template_id -= 1
+        else 
+         @@template_id = 0
+        end
+        template_id = @@template_id
+        @@current_template = Map_Geometry::Platform.level_editor_change_template(template_id)
       when SF::Keyboard::O
+        s = Map_Geometry::Platform.get_created_platform_array_size
+        if s > 0
+        if @@id < s
         @@id += 1
+        else 
+        @@id = 0
+       end
         id = @@id
         @@current_object = Map_Geometry::Platform.level_editor_change_platfrom(id)
+       end
       when SF::Keyboard::P
+        if @@id < 0
         @@id -= 1
+      else 
+        @@id = 0
+       end
         id = @@id
         @@current_object = Map_Geometry::Platform.level_editor_change_platfrom(id)
       when SF::Keyboard::N
-        platform = @@current_object
+        platform = @@current_template
         current_platform = Map_Geometry::Platform.level_editor_create_platform(platform)
         @@current_object = current_platform
       when SF::Keyboard::Backspace
@@ -79,8 +139,13 @@ include Map_Geometry
  end
  class Editor_UI < Editor_Controls
   def Editor_UI.display_current_object_text(window)
+    current_template = Level_Editor::Editor_Controls.check_current_template
     current_object = Level_Editor::Editor_Controls.check_current_object
-    Level_Editor_Object_Text.string = current_object.name
+    current_object_text = Level_Editor_Object_Text.dup
+    Level_Editor_Object_Text.string = current_template.name
+    current_object_text.string = current_object.name
+    current_object_text.position = SF.vector2(25, 1030)
+    window.draw(Level_Editor_Object_Text); window.draw(current_object_text)
   end
  end
 end

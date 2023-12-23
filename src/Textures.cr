@@ -212,7 +212,7 @@
 #-----------------------------------------------------------------------------------------------------------------------------------
 #                                                     Level Editor                  
 #-----------------------------------------------------------------------------------------------------------------------------------
- Level_Editor_Button_01 = SF::RectangleShape.new(SF.vector2(175, 40)); Level_Editor_Button_01.fill_color = SF.color(0, 255, 255)
+ Level_Editor_Button_01 = SF::RectangleShape.new(SF.vector2(195, 40)); Level_Editor_Button_01.fill_color = SF.color(0, 255, 255)
  Level_Editor_Button_01.position = SF.vector2(25, 965)
 
  Level_Editor_Object_Text = SF::Text.new; Level_Editor_Object_Text.font = FONT_COMMON; Level_Editor_Object_Text.character_size = 20; 

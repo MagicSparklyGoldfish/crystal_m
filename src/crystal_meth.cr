@@ -209,10 +209,9 @@ extend self
     view2 = SF::View.new(SF.float_rect(0, 950, 1890, 140))
     view2.viewport = SF.float_rect(0, 0.85, 1, 0.15)
     window.view = view2
-    Level_Editor::Editor_UI.display_current_object_text(window)
     button_02 = Level_Editor_Button_01.dup; button_02.position = SF.vector2(25, 1025)
     window.draw(Bottom_HUD); window.draw(Level_Editor_Button_01); window.draw(button_02)
-    window.draw(Level_Editor_Object_Text)
+    Level_Editor::Editor_UI.display_current_object_text(window)
    end
    def Window_Class.level_editor_control_overlay(window)
     view5 = SF::View.new(SF.float_rect(0, 0, 1920, 1080))
@@ -221,8 +220,8 @@ extend self
     control_text = Level_Editor_Object_Text.dup
     control_text.position = SF.vector2(0, 0)
     control_text.color = SF::Color::White
-    control_text.string = "Save: V\nMove: WASD\nReset All Objects: Backspace\nReset Current Object: X\nNext Object: O\nPrevious Object: P
-    \nNew Object: N\nPlace Object: Right Click"
+    control_text.string = "Save: V\nMove View: WASD\nMove Platform: Arrow Keys\nReset All Objects: Backspace\nReset Current Object: X" +
+    "\nNext Template: K\nPrevious Template: L\nNext Object: O\nPrevious Object: P\nNew Object: N\nPlace Object: Right Click"
     window.draw(control_text)
   end
  #/////////////////////////////////////////////////////////Main Menu////////////////////////////////////////////////////////////////////+
