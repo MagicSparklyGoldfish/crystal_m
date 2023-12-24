@@ -29,7 +29,7 @@ include Map_Geometry
   #----------------------------------------------------------------Ladder---------------------------------------------------------------------------------
    @@current_ladder : Ladder; @@current_ladder = Map_Geometry::Ladder.level_editor_initial_ladder
    @@current_ladder_template  : Ladder; @@current_ladder_template  = Map_Geometry::Ladder.level_editor_initial_ladder
-   Ladder_Texture_Array = [0, 40]
+   Ladder_Texture_Array = [0, 40, 80, 120, 200]
    @@id : Int32; @@id = 1; @@template_id : Int32; @@template_id = 1
    @@zoom = 1; @@texture = 0
    def Editor_Controls.check_current_object
