@@ -3517,7 +3517,7 @@ Testing_Text.character_size = 20; Testing_Text.color = SF::Color::White; Testing
   Medium_Platform_Cover_01.position = SF.vector2(0, 400)
  #-------------------------------------------------------Ladders-----------------------------------------------------------------------
   LONG_METAL_LADDER_TEXTURE_01 = SF::Texture.from_file("graphics/map objects/Long_Metal_Ladder_01.png")
-  Long_Metal_Ladder_01 = SF::Sprite.new(LONG_METAL_LADDER_TEXTURE_01)
+  Long_Metal_Ladder_01 = SF::Sprite.new(LONG_METAL_LADDER_TEXTURE_01); Long_Metal_Ladder_01.texture_rect = SF.int_rect(0, 0, 40, 400)
   Medium_Metal_Ladder_01 = SF::Sprite.new(LONG_METAL_LADDER_TEXTURE_01); Medium_Metal_Ladder_01.texture_rect = SF.int_rect(0, 0, 40, 300)
   Short_Metal_Ladder_01 = SF::Sprite.new(LONG_METAL_LADDER_TEXTURE_01); Short_Metal_Ladder_01.texture_rect = SF.int_rect(0, 0, 40, 200)
  #-----------------------------------------------------Teleporters---------------------------------------------------------------------

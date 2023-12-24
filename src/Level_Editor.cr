@@ -29,6 +29,7 @@ include Map_Geometry
   #----------------------------------------------------------------Ladder---------------------------------------------------------------------------------
    @@current_ladder : Ladder; @@current_ladder = Map_Geometry::Ladder.level_editor_initial_ladder
    @@current_ladder_template  : Ladder; @@current_ladder_template  = Map_Geometry::Ladder.level_editor_initial_ladder
+   Ladder_Texture_Array = [0, 40]
    @@id : Int32; @@id = 1; @@template_id : Int32; @@template_id = 1
    @@zoom = 1; @@texture = 0
    def Editor_Controls.check_current_object
@@ -128,16 +129,29 @@ include Map_Geometry
        end
   #-----------------------------------------------------Change Texture---------------------------------------------------- 
        when SF::Keyboard::T
-        s = Platform_Texture_Array.size
-        @@texture += 1
-        if s > @@texture
-          texture = @@texture
-          current_platform = @@current_platform
-          Platform.change_texture(current_platform, texture)
-        else
-          @@texture = 0
+        case @@current_category
+        when "platform"
+         s = Platform_Texture_Array.size
+         @@texture += 1
+         if s > @@texture
+           texture = @@texture
+           current_platform = @@current_platform
+           Platform.change_texture(current_platform, texture)
+         else
+           @@texture = 0
+         end
+        when "ladder"
+          s = Ladder_Texture_Array.size
+          @@texture += 1
+          if s > @@texture
+           texture = Ladder_Texture_Array[@@texture]
+           current_ladder = @@current_ladder
+           Ladder.change_texture(current_ladder, texture)
+          end
         end
        when SF::Keyboard::Y
+        case @@current_category
+        when "platform"
          s = Platform_Texture_Array.size
          if @@texture > 0
            @@texture -= 1
@@ -147,6 +161,15 @@ include Map_Geometry
          else
            @@texture = 0
          end
+        when "ladder"
+          s = Ladder_Texture_Array.size
+          if @@texture > 0
+           @@texture -= 1
+           texture = Ladder_Texture_Array[@@texture]
+           current_ladder = @@current_ladder
+           Ladder.change_texture(current_ladder, texture)
+          end
+        end
   #-----------------------------------------------------Position View----------------------------------------------------- 
        when SF::Keyboard::W
            player.position -= SF.vector2(0, 50)
@@ -157,6 +180,7 @@ include Map_Geometry
        when SF::Keyboard::D
            player.position += SF.vector2(50, 0)
   #-------------------------------------------------Save, Load, Initialize------------------------------------------------ 
+   #@note rectangles and sprites must be duped individually or they will disappear
        when SF::Keyboard::X
          current_platform = @@current_platform
          Map_Geometry::Platform.initialize_current_platform(current_platform)
@@ -179,6 +203,8 @@ include Map_Geometry
          Editor_Controls.change_zoom(zoom)
   #----------------------------------------------------Choose Template---------------------------------------------------- 
        when SF::Keyboard::K
+        case @@current_category
+        when "platform"
          s = Map_Geometry::Platform.get_template_array_size
          if @@template_id < s
           @@template_id += 1
@@ -187,14 +213,35 @@ include Map_Geometry
          end
          template_id = @@template_id
          @@current_platform_template  = Map_Geometry::Platform.level_editor_change_template(template_id)
+        when "ladder"
+          s = Map_Geometry::Ladder.get_template_array_size
+          if @@template_id < s
+           @@template_id += 1
+          else 
+           @@template_id = -1
+          end
+          template_id = @@template_id
+          @@current_ladder_template  = Map_Geometry::Ladder.level_editor_change_template(template_id)
+        end
        when SF::Keyboard::L
-         if @@template_id < 0
+        case @@current_category
+        when "platform"
+         if @@template_id > 0
           @@template_id -= 1
          else 
-          @@template_id = 0
+          @@template_id = -1
          end
          template_id = @@template_id
          @@current_platform_template  = Map_Geometry::Platform.level_editor_change_template(template_id)
+        when "ladder"
+          if @@template_id > 0
+           @@template_id -= 1
+          else 
+           @@template_id = -1
+          end
+          template_id = @@template_id
+          @@current_ladder_template  = Map_Geometry::Ladder.level_editor_change_template(template_id)
+        end
   #----------------------------------------------------Choose Objects----------------------------------------------------- 
        when SF::Keyboard::O
          s = Map_Geometry::Platform.get_created_platform_array_size
