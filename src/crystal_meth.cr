@@ -222,7 +222,8 @@ extend self
     control_text.position = SF.vector2(0, 0)
     control_text.color = SF::Color::White
     control_text.string = "Save: V\nLoad: B\nMove View: WASD\nMove Platform: Arrow Keys\nReset All Objects: Backspace\nReset Current Object: X" +
-    "\nNext Template: K\nPrevious Template: L\nNext Object: O\nPrevious Object: P\nNew Object: N\nPlace Object: Right Click\nZoom: +/-"
+    "\nNext Template: K\nPrevious Template: L\nNext Object: O\nPrevious Object: P\nNew Object: N\nPlace Object: Right Click\nZoom: +/-" +
+    "\nTexture: T"
     window.draw(control_text)
   end
  #/////////////////////////////////////////////////////////Main Menu////////////////////////////////////////////////////////////////////+
@@ -729,6 +730,7 @@ extend self
    when "level_editor"
     Window_Class.draw_map(window)
     Map_Geometry::Platform.level_editor_display_platforms(window)
+    Map_Geometry::Ladder.level_editor_display_ladder(window)
     Window_Class.level_editor(window)
     Window_Class.level_editor_control_overlay(window)
    when "HUD"

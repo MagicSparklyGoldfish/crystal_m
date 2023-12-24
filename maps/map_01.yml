@@ -1,36 +1,46 @@
 ---
 platform_names:
+- medium_large_platform1
+- medium_large_platform2
+- medium_large_platform1
+- medium_large_platform2
+- medium_large_platform1
+- medium_large_platform2
 - medium_platform1
 - medium_platform2
-- short_platform1
-- short_platform2
-- short_platform3
-- medium_large_platform1
 platform_ids:
-- 4
-- 4
-- 3
-- 3
-- 3
 - 1
-platform_bounding_boxes:
-- '#<SF::RectangleShape:0x7fb07bfeb5a0>'
-- '#<SF::RectangleShape:0x7fb0751838d0>'
-- '#<SF::RectangleShape:0x7fb07bfebc00>'
-- '#<SF::RectangleShape:0x7fb07bff2120>'
-- '#<SF::RectangleShape:0x7fb07bfeb810>'
-- '#<SF::RectangleShape:0x7fb07bfed5a0>'
+- 1
+- 1
+- 1
+- 1
+- 1
+- 4
+- 4
+platform_textures:
+- 0
+- 1
+- 0
+- 1
+- 0
+- 1
+- 0
+- 1
 platform_x_positions:
 - 0.0
-- 647.0
-- 507.0
-- 366.0
-- 252.0
-- 1106.0
+- 0.0
+- 50.0
+- 50.0
+- 50.0
+- 50.0
+- 1309.0
+- 1650.0
 platform_y_positions:
-- 16.0
-- 395.0
-- 523.0
-- 618.0
-- 712.0
-- 594.0
+- 40000.0
+- 40000.0
+- 552.0
+- 400.0
+- 552.0
+- 400.0
+- 204.0
+- 50.0

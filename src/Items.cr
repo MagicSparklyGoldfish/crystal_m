@@ -7068,10 +7068,14 @@ module Crafted_Items
    #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
    #!                                                              Initialize                                                                              !
    #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    def initialize(sprite : SF::Sprite, length : Int32)
+    def initialize(name : String, sprite : SF::Sprite, length : Int32)
       @sprite = sprite
       @length = length
+      @name = name
      end
+    def name
+      @name
+    end
     def sprite
       @sprite
      end
@@ -7083,6 +7087,7 @@ module Crafted_Items
    #*                                                              Variables                                                                               *
    #********************************************************************************************************************************************************
     Ladder_Array = [] of Ladder; @@is_on_ladder : Bool; @@is_on_ladder = false
+    Current_Ladder_Array = [] of Ladder
    #________________________________________________________________________________________________________________________________________________________
    #????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
    #?                                                               Methods                                                                                ?
@@ -7164,19 +7169,46 @@ module Crafted_Items
           @@is_on_ladder = false
         end}
       end
+    #=============================================================Level Editor==============================================================================
+     #...........................................................Initialization.............................................................................
+       def Ladder.level_editor_initial_ladder
+        current_ladder = @@long_ladder_01
+        end
+     #..............................................................Display.................................................................................
+      def Ladder.level_editor_display_ladder(window)
+        Current_Ladder_Array.map{ |i| window.draw(i.sprite)}
+       end
+     #...............................................................Place..................................................................................
+      def Ladder.level_editor_place_platform(current_ladder, x, y, player_x, player_y)
+       x = player_x + x
+       y = player_y + y
+       current_ladder.sprite.position = SF.vector2(x, y)
+      end
+      def Ladder.level_editor_precision_placement(current_ladder, direction)
+       case direction
+        when "left"
+          current_ladder.sprite.position -= SF.vector2(10, 0)
+        when "right"
+          current_ladder.sprite.position += SF.vector2(10, 0)
+        when "up"
+          current_ladder.sprite.position -= SF.vector2(0, 10)
+        when "down"
+          current_ladder.sprite.position += SF.vector2(0, 10)
+       end
+      end
    #________________________________________________________________________________________________________________________________________________________
    #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
    #/                                                               Entities                                                                               /
    #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    @@long_ladder_01 = Ladder.new(Long_Metal_Ladder_01, 400)
-    Ladder_Array.push(@@long_ladder_01)
-    @@long_ladder_02 = Ladder.new(Long_Metal_Ladder_01.dup, 400)
+    @@long_ladder_01 = Ladder.new("Long Ladder", Long_Metal_Ladder_01, 400)
+    Ladder_Array.push(@@long_ladder_01); Current_Ladder_Array.push(@@long_ladder_01)
+    @@long_ladder_02 = Ladder.new("Long Ladder", Long_Metal_Ladder_01.dup, 400)
     Ladder_Array.push(@@long_ladder_02)
-    @@long_ladder_03 = Ladder.new(Long_Metal_Ladder_01.dup, 400)
+    @@long_ladder_03 = Ladder.new("Long Ladder", Long_Metal_Ladder_01.dup, 400)
     Ladder_Array.push(@@long_ladder_03)
-    @@medium_ladder_01 = Ladder.new(Medium_Metal_Ladder_01, 300)
+    @@medium_ladder_01 = Ladder.new("Long Ladder", Medium_Metal_Ladder_01, 300)
     Ladder_Array.push(@@medium_ladder_01)
-    @@short_ladder_01 = Ladder.new(Short_Metal_Ladder_01, 200)
+    @@short_ladder_01 = Ladder.new("Long Ladder", Short_Metal_Ladder_01, 200)
     Ladder_Array.push(@@short_ladder_01)
    #________________________________________________________________________________________________________________________________________________________
    end
@@ -7188,9 +7220,10 @@ module Crafted_Items
    #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
    #!                                                              Initialize                                                                              !
    #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    def initialize(id : Int32, name : String, bounding_rectangle : SF::RectangleShape, display_rectangle : SF::RectangleShape)
+    def initialize(id : Int32, name : String, texture : Int32, bounding_rectangle : SF::RectangleShape, display_rectangle : SF::RectangleShape)
       @id = id
       @name = name
+      @texture = texture
       @bounding_rectangle = bounding_rectangle
       @display_rectangle = display_rectangle
      end
@@ -7199,6 +7232,9 @@ module Crafted_Items
      end
     def name
       @name
+    end
+    def texture
+      @texture
     end
     def bounding_rectangle
       @bounding_rectangle
@@ -7211,6 +7247,9 @@ module Crafted_Items
     end
     def name=(this)
       @name = this
+    end
+    def texture=(this)
+      @texture = this
     end
     def bounding_rectangle=(this)
       @bounding_rectangle = this
@@ -7350,15 +7389,23 @@ module Crafted_Items
         while i < s 
          if yaml["platform_ids"][i] == 1
           this = @@medium_platform_01.dup
+          this.bounding_rectangle = @@medium_platform_01.bounding_rectangle.dup
+          this.display_rectangle = @@medium_platform_01.display_rectangle.dup
          else if yaml["platform_ids"][i] == 3
           this = @@short_platform_01.dup
+          this.bounding_rectangle = @@short_platform_01.bounding_rectangle.dup
+          this.display_rectangle = @@short_platform_01.display_rectangle.dup
          else if yaml["platform_ids"][i] == 4
           this = @@medium_platform_03.dup
+          this.bounding_rectangle = @@medium_platform_03.bounding_rectangle.dup
+          this.display_rectangle = @@medium_platform_03.display_rectangle.dup
         else
           puts "error!" + ["platform_ids"][i].to_s + " is an invalid id!" 
           i += 1
          end; end; end
          this.id = yaml["platform_ids"][i].as_i
+         this.texture = yaml["platform_textures"][i].as_i
+         this.display_rectangle.set_texture(Platform_Texture_Array[this.texture], reset_rect: false)
          this.name = yaml["platform_names"][i].as_s
          x = yaml["platform_x_positions"][i].as_f32
          y = yaml["platform_y_positions"][i].as_f32
@@ -7435,6 +7482,10 @@ module Crafted_Items
        current_platform
       end
      #........................................................Change Object Texture.........................................................................
+      def Platform.change_texture(current_platform, texture)
+        current_platform.display_rectangle.set_texture(Platform_Texture_Array[texture], reset_rect: false) 
+        current_platform.texture = texture
+      end
      #..........................................................Create New Object...........................................................................
       def Platform.level_editor_create_platform(platform)
        current_platform = platform.dup
@@ -7459,13 +7510,13 @@ module Crafted_Items
      #................................................................Save..................................................................................
       @[YAML::Field(key: "platform_ids")]
       @[YAML::Field(key: "platform_names")]
+      @[YAML::Field(key: "platform_textures")]
       @[YAML::Field(key: "platform_x_positions")]
       @[YAML::Field(key: "platform_y_positions")]
-      @[YAML::Field(key: "platform_bounding_boxes")]
       def Platform.level_editor_save_level
+        File.delete("maps/map_01.yml")
         File.open("maps/map_01.yml", "w") { |f| YAML.dump({"platform_names": Current_Platform_Array.map{ |i| i.name},
-        "platform_ids": Current_Platform_Array.map{ |i| i.id},
-        "platform_bounding_boxes": Current_Platform_Array.map{ |i| i.bounding_rectangle.to_s},
+        "platform_ids": Current_Platform_Array.map{ |i| i.id}, "platform_textures": Current_Platform_Array.map{ |i| i.texture},
         "platform_x_positions": Current_Platform_Array.map{ |i| i.bounding_rectangle.position.x},
         "platform_y_positions": Current_Platform_Array.map{ |i| i.bounding_rectangle.position.y}}, f) }
         #YAML.dump({"platform_names": Current_Platform_Array.map{ |i| i.name}})
@@ -7477,15 +7528,15 @@ module Crafted_Items
     Platform_Array = [] of Platform
     Platform_Template_Array = [] of Platform
     Current_Platform_Array = [] of Platform
-    @@ground = Platform.new(0, "ground", Ground, Ground)
+    @@ground = Platform.new(0, "ground", 0, Ground, Ground)
     Platform_Array.push(@@ground)
-    @@medium_platform_01 = Platform.new(1, "medium_large_platform", Test_Platform_01, Test_Platform_Cover_01); 
+    @@medium_platform_01 = Platform.new(1, "medium_large_platform", 0, Test_Platform_01, Test_Platform_Cover_01); 
     Platform_Array.push(@@medium_platform_01); Platform_Template_Array.push(@@medium_platform_01)
-    @@medium_platform_02 = Platform.new(2, "medium_platform", Test_Platform_01.dup, Test_Platform_Cover_01.dup); 
+    @@medium_platform_02 = Platform.new(2, "medium_platform", 0, Test_Platform_01.dup, Test_Platform_Cover_01.dup); 
     Platform_Array.push(@@medium_platform_02)
-    @@short_platform_01 = Platform.new(3, "short_platform", Short_Platform_01, Short_Platform_Cover_01); 
+    @@short_platform_01 = Platform.new(3, "short_platform", 0, Short_Platform_01, Short_Platform_Cover_01); 
     Platform_Array.push(@@short_platform_01); Platform_Template_Array.push(@@short_platform_01)
-    @@medium_platform_03 = Platform.new(4, "medium_platform", Medium_Platform_01, Medium_Platform_Cover_01); 
+    @@medium_platform_03 = Platform.new(4, "medium_platform", 0, Medium_Platform_01, Medium_Platform_Cover_01); 
     Platform_Array.push(@@medium_platform_03); Platform_Template_Array.push(@@medium_platform_03)
    #________________________________________________________________________________________________________________________________________________________
    end
@@ -7496,12 +7547,16 @@ module Crafted_Items
   #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   #!                                                              Initialize                                                                              !
   #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-   def initialize(id : Int32, display_rectangle : SF::RectangleShape, bounding_rectangle : SF::RectangleShape, sprite : SF::Sprite, length : Int32)
+   def initialize(name : String, id : Int32, display_rectangle : SF::RectangleShape, bounding_rectangle : SF::RectangleShape, sprite : SF::Sprite, length : Int32)
+     @name = name
      @id = id
      @display_rectangle = display_rectangle
      @bounding_rectangle = bounding_rectangle
      @sprite = sprite
      @length = length
+    end
+   def name
+     @name
     end
    def id
     @id
@@ -7585,9 +7640,9 @@ module Crafted_Items
   #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   #/                                                               Entities                                                                               /
   #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-   @@map_boundary_wall_01 = Wall.new(1, Map_Boundary_Wall_01, Map_Boundary_Wall_Bounds_01, Concrete_Pillar_01, 1000)
+   @@map_boundary_wall_01 = Wall.new("Boundary Wall 01", 1, Map_Boundary_Wall_01, Map_Boundary_Wall_Bounds_01, Concrete_Pillar_01, 1000)
    Wall_Array.push(@@map_boundary_wall_01)
-   @@map_boundary_wall_02 = Wall.new(1, Map_Boundary_Wall_01.dup, Map_Boundary_Wall_Bounds_01.dup, Concrete_Pillar_01, 1000)
+   @@map_boundary_wall_02 = Wall.new("Boundary Wall 02", 1, Map_Boundary_Wall_01.dup, Map_Boundary_Wall_Bounds_01.dup, Concrete_Pillar_01, 1000)
    Wall_Array.push(@@map_boundary_wall_02)
   #________________________________________________________________________________________________________________________________________________________
     end
@@ -7599,8 +7654,9 @@ module Crafted_Items
   #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   #!                                                              Initialize                                                                              !
   #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-   def initialize(id : Int32, destination_map : String, destination_area : String, destination_postion : Array(Float64), sprite : SF::Sprite, length : Int32,
+   def initialize(name : String, id : Int32, destination_map : String, destination_area : String, destination_postion : Array(Float64), sprite : SF::Sprite, length : Int32,
     display_rectangle : SF::RectangleShape, bounding_rectangle : SF::RectangleShape)
+     @name = name
      @id = id
      @destination_map = destination_map
      @destination_area = destination_area
@@ -7610,6 +7666,9 @@ module Crafted_Items
      @display_rectangle = display_rectangle
      @bounding_rectangle = bounding_rectangle
     end
+   def name
+    @name
+   end
    def id
      @id
     end
@@ -7763,11 +7822,11 @@ module Crafted_Items
   #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   #/                                                               Entities                                                                               /
   #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-   @@teleporter_01 = Teleporter.new(1, "test", "test", [0.0, 0.0], Teleporter_01.dup, 0, Map_Boundary_Wall_01, Map_Boundary_Wall_01)
+   @@teleporter_01 = Teleporter.new("Teleporter", 1, "test", "test", [0.0, 0.0], Teleporter_01.dup, 0, Map_Boundary_Wall_01, Map_Boundary_Wall_01)
    Teleporter_Array.push(@@teleporter_01)
-   @@teleporter_02 = Teleporter.new(2, "test", "test", [0.0, 0.0], Teleporter_01.dup, 0, Map_Boundary_Wall_01, Map_Boundary_Wall_01)
+   @@teleporter_02 = Teleporter.new("Teleporter", 2, "test", "test", [0.0, 0.0], Teleporter_01.dup, 0, Map_Boundary_Wall_01, Map_Boundary_Wall_01)
    Teleporter_Array.push(@@teleporter_02)
-   @@teleporter_03 = Teleporter.new(3, "test", "test", [0.0, 0.0], Teleporter_01.dup, 0, Map_Boundary_Wall_01, Map_Boundary_Wall_01)
+   @@teleporter_03 = Teleporter.new("Teleporter", 3, "test", "test", [0.0, 0.0], Teleporter_01.dup, 0, Map_Boundary_Wall_01, Map_Boundary_Wall_01)
    Teleporter_Array.push(@@teleporter_03)
   #________________________________________________________________________________________________________________________________________________________
   end

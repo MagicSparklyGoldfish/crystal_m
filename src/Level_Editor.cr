@@ -18,145 +18,217 @@ require "file_utils"
 module Level_Editor
 include Map_Geometry
  class Editor_Controls
-  @@current_object_type : String; @@current_object_type = "platform"
-  @@current_object : Platform; @@current_object = Map_Geometry::Platform.level_editor_initial_platform
-  @@current_template : Platform; @@current_template = Map_Geometry::Platform.level_editor_initial_platform
-  @@id : Int32; @@id = 1; @@template_id : Int32; @@template_id = 1
-  @@zoom = 1
-  def Editor_Controls.check_current_object
-    return @@current_object
-  end
-  def Editor_Controls.check_current_template
-    return @@current_template
-  end
-  def Editor_Controls.level_editor_mouse_clicks(window, player)
-    if SF::Mouse.button_pressed?(SF::Mouse::Right)
-        mouse_position = SF::Mouse.position
-        x = mouse_position.x
-        y = mouse_position.y
-        player_x = player.position.x
-        player_y = player.position.y
-        if @@current_object_type == "platform"
-            current_platform = @@current_object
-            Map_Geometry::Platform.level_editor_place_platform(current_platform, x, y, player_x, player_y)
-        end
+ #********************************************************************************************************************************************************
+ #*                                                              Variables                                                                               *
+ #********************************************************************************************************************************************************
+  #---------------------------------------------------------------Category--------------------------------------------------------------------------------
+   @@current_category : String; @@current_category = "platform"
+  #---------------------------------------------------------------Platform--------------------------------------------------------------------------------
+   @@current_platform : Platform; @@current_platform = Map_Geometry::Platform.level_editor_initial_platform
+   @@current_platform_template  : Platform; @@current_platform_template  = Map_Geometry::Platform.level_editor_initial_platform
+  #----------------------------------------------------------------Ladder---------------------------------------------------------------------------------
+   @@current_ladder : Ladder; @@current_ladder = Map_Geometry::Ladder.level_editor_initial_ladder
+   @@current_ladder_template  : Ladder; @@current_ladder_template  = Map_Geometry::Ladder.level_editor_initial_ladder
+   @@id : Int32; @@id = 1; @@template_id : Int32; @@template_id = 1
+   @@zoom = 1; @@texture = 0
+   def Editor_Controls.check_current_object
+    case @@current_category 
+     when "platform"
+      return @@current_platform
+     when "ladder"
+       return @@current_ladder
+     end
+     return @@current_platform_template 
     end
-  end
-  def Editor_Controls.change_zoom(zoom)
-    @@zoom += zoom
-  end
-  def Editor_Controls.check_zoom
-    return @@zoom
-  end
-  def Editor_Controls.level_editor_keypresses(window, player)
-    while (event = window.poll_event)
-     case event
-     when SF::Event::Closed
-        window.close
-      when SF::Event::KeyPressed
-        case event.code
-      when SF::Keyboard::Escape
-          window.close
- #----------------------------------------------------Position Objects--------------------------------------------------- 
-      when SF::Keyboard::Left
-        if @@current_object_type == "platform"
-          current_platform = @@current_object
+   def Editor_Controls.check_current_template
+    case @@current_category 
+     when "platform"
+      return @@current_platform_template 
+     when "ladder"
+      return @@current_ladder_template
+     end
+     return @@current_platform_template 
+    end
+   def Editor_Controls.level_editor_mouse_clicks(window, player)
+     if SF::Mouse.button_pressed?(SF::Mouse::Right)
+         mouse_position = SF::Mouse.position
+         x = mouse_position.x
+         y = mouse_position.y
+         player_x = player.position.x
+         player_y = player.position.y
+         case @@current_category
+           when "platform"
+            current_platform = @@current_platform
+            Map_Geometry::Platform.level_editor_place_platform(current_platform, x, y, player_x, player_y)
+           when "ladder"
+            current_ladder = @@current_ladder
+            Ladder.level_editor_place_platform(current_ladder, x, y, player_x, player_y)
+          end
+     end
+   end
+   def Editor_Controls.change_zoom(zoom)
+     @@zoom += zoom
+   end
+   def Editor_Controls.check_zoom
+     return @@zoom
+   end
+   def Editor_Controls.level_editor_keypresses(window, player)
+     while (event = window.poll_event)
+      case event
+      when SF::Event::Closed
+         window.close
+       when SF::Event::KeyPressed
+         case event.code
+       when SF::Keyboard::Escape
+           window.close
+  #----------------------------------------------------Position Objects--------------------------------------------------- 
+       when SF::Keyboard::Left
+        case @@current_category
+         when "platform"
+          current_platform = @@current_platform
           direction = "left"
           Map_Geometry::Platform.level_editor_precision_placement(current_platform, direction)
-      end
-      when SF::Keyboard::Right
-        if @@current_object_type == "platform"
-          current_platform = @@current_object
-          direction = "right"
-          Map_Geometry::Platform.level_editor_precision_placement(current_platform, direction)
-      end
-      when SF::Keyboard::Up
-        if @@current_object_type == "platform"
-          current_platform = @@current_object
-          direction = "up"
-          Map_Geometry::Platform.level_editor_precision_placement(current_platform, direction)
-      end
-      when SF::Keyboard::Down
-        if @@current_object_type == "platform"
-          current_platform = @@current_object
-          direction = "down"
-          Map_Geometry::Platform.level_editor_precision_placement(current_platform, direction)
-      end
- #-----------------------------------------------------Position View----------------------------------------------------- 
-      when SF::Keyboard::W
-          player.position -= SF.vector2(0, 50)
-      when SF::Keyboard::S
-          player.position += SF.vector2(0, 50)
-      when SF::Keyboard::A
-          player.position -= SF.vector2(50, 0)
-      when SF::Keyboard::D
-          player.position += SF.vector2(50, 0)
- #-------------------------------------------------Save, Load, Initialize------------------------------------------------ 
-      when SF::Keyboard::X
-        current_platform = @@current_object
-        Map_Geometry::Platform.initialize_current_platform(current_platform)
-      when SF::Keyboard::V
-        Map_Geometry::Platform.level_editor_save_level
-      when SF::Keyboard::B
-        Map_Geometry::Platform.load_map_platform_settings
- #-------------------------------------------------------Zoom View------------------------------------------------------- 
-      when SF::Keyboard::Add
-        zoom = -1
-        Editor_Controls.change_zoom(zoom)
-      when SF::Keyboard::Equal
-        zoom = -1
-        Editor_Controls.change_zoom(zoom)
-      when SF::Keyboard::Subtract
-        zoom = 1
-        Editor_Controls.change_zoom(zoom)
-      when SF::Keyboard::Hyphen
-        zoom = 1
-        Editor_Controls.change_zoom(zoom)
-      when SF::Keyboard::K
-        s = Map_Geometry::Platform.get_template_array_size
-        if @@template_id < s
-         @@template_id += 1
-        else 
-         @@template_id = 0
+         when "ladder"
+          current_ladder = @@current_ladder
+          direction = "left"
+          Map_Geometry::Ladder.level_editor_precision_placement(current_ladder, direction)
+       end
+       when SF::Keyboard::Right
+        case @@current_category
+         when "platform"
+           current_platform = @@current_platform
+           direction = "right"
+           Map_Geometry::Platform.level_editor_precision_placement(current_platform, direction)
+         when "ladder"
+           current_ladder = @@current_ladder
+           direction = "right"
+           Map_Geometry::Ladder.level_editor_precision_placement(current_ladder, direction)
+       end
+       when SF::Keyboard::Up
+        case @@current_category
+         when "platform"
+           current_platform = @@current_platform
+           direction = "up"
+           Map_Geometry::Platform.level_editor_precision_placement(current_platform, direction)
+         when "ladder"
+           current_ladder = @@current_ladder
+           direction = "up"
+           Map_Geometry::Ladder.level_editor_precision_placement(current_ladder, direction)
+       end
+       when SF::Keyboard::Down
+        case @@current_category
+         when "platform"
+           current_platform = @@current_platform
+           direction = "down"
+           Map_Geometry::Platform.level_editor_precision_placement(current_platform, direction)
+         when "ladder"
+           current_ladder = @@current_ladder
+           direction = "down"
+           Map_Geometry::Ladder.level_editor_precision_placement(current_ladder, direction)
+       end
+  #-----------------------------------------------------Change Texture---------------------------------------------------- 
+       when SF::Keyboard::T
+        s = Platform_Texture_Array.size
+        @@texture += 1
+        if s > @@texture
+          texture = @@texture
+          current_platform = @@current_platform
+          Platform.change_texture(current_platform, texture)
+        else
+          @@texture = 0
         end
-        template_id = @@template_id
-        @@current_template = Map_Geometry::Platform.level_editor_change_template(template_id)
-      when SF::Keyboard::L
-        if @@template_id < 0
-         @@template_id -= 1
-        else 
-         @@template_id = 0
+       when SF::Keyboard::Y
+         s = Platform_Texture_Array.size
+         if @@texture > 0
+           @@texture -= 1
+           texture = @@texture
+           current_platform = @@current_platform
+           Platform.change_texture(current_platform, texture)
+         else
+           @@texture = 0
+         end
+  #-----------------------------------------------------Position View----------------------------------------------------- 
+       when SF::Keyboard::W
+           player.position -= SF.vector2(0, 50)
+       when SF::Keyboard::S
+           player.position += SF.vector2(0, 50)
+       when SF::Keyboard::A
+           player.position -= SF.vector2(50, 0)
+       when SF::Keyboard::D
+           player.position += SF.vector2(50, 0)
+  #-------------------------------------------------Save, Load, Initialize------------------------------------------------ 
+       when SF::Keyboard::X
+         current_platform = @@current_platform
+         Map_Geometry::Platform.initialize_current_platform(current_platform)
+       when SF::Keyboard::V
+         Map_Geometry::Platform.level_editor_save_level
+       when SF::Keyboard::B
+         Map_Geometry::Platform.load_map_platform_settings
+  #-------------------------------------------------------Zoom View------------------------------------------------------- 
+       when SF::Keyboard::Add
+         zoom = -1
+         Editor_Controls.change_zoom(zoom)
+       when SF::Keyboard::Equal
+         zoom = -1
+         Editor_Controls.change_zoom(zoom)
+       when SF::Keyboard::Subtract
+         zoom = 1
+         Editor_Controls.change_zoom(zoom)
+       when SF::Keyboard::Hyphen
+         zoom = 1
+         Editor_Controls.change_zoom(zoom)
+  #----------------------------------------------------Choose Template---------------------------------------------------- 
+       when SF::Keyboard::K
+         s = Map_Geometry::Platform.get_template_array_size
+         if @@template_id < s
+          @@template_id += 1
+         else 
+          @@template_id = 0
+         end
+         template_id = @@template_id
+         @@current_platform_template  = Map_Geometry::Platform.level_editor_change_template(template_id)
+       when SF::Keyboard::L
+         if @@template_id < 0
+          @@template_id -= 1
+         else 
+          @@template_id = 0
+         end
+         template_id = @@template_id
+         @@current_platform_template  = Map_Geometry::Platform.level_editor_change_template(template_id)
+  #----------------------------------------------------Choose Objects----------------------------------------------------- 
+       when SF::Keyboard::O
+         s = Map_Geometry::Platform.get_created_platform_array_size
+         if s > 0
+         if @@id < s
+         @@id += 1
+         else 
+         @@id = 0
         end
-        template_id = @@template_id
-        @@current_template = Map_Geometry::Platform.level_editor_change_template(template_id)
-      when SF::Keyboard::O
-        s = Map_Geometry::Platform.get_created_platform_array_size
-        if s > 0
-        if @@id < s
-        @@id += 1
-        else 
-        @@id = 0
-       end
-        id = @@id
-        @@current_object = Map_Geometry::Platform.level_editor_change_platfrom(id)
-       end
-      when SF::Keyboard::P
-        if @@id < 0
-        @@id -= 1
-      else 
-        @@id = 0
-       end
-        id = @@id
-        @@current_object = Map_Geometry::Platform.level_editor_change_platfrom(id)
-      when SF::Keyboard::N
-        platform = @@current_template
-        current_platform = Map_Geometry::Platform.level_editor_create_platform(platform)
-        @@current_object = current_platform
-      when SF::Keyboard::Backspace
-        Platform.initialize_platform_positions
-      when SF::Keyboard::Num1
-        @@current_object_type = "platform"
-      end; end; end; end
+         id = @@id
+         @@current_platform = Map_Geometry::Platform.level_editor_change_platfrom(id)
+        end
+       when SF::Keyboard::P
+         if @@id < 0
+         @@id -= 1
+       else 
+         @@id = 0
+        end
+         id = @@id
+         @@current_platform = Map_Geometry::Platform.level_editor_change_platfrom(id)
+  #---------------------------------------------------Create New Objects-------------------------------------------------- 
+       when SF::Keyboard::N
+         platform = @@current_platform_template 
+         current_platform = Map_Geometry::Platform.level_editor_create_platform(platform)
+         @@current_platform = current_platform
+  #-----------------------------------------------------Initialize Map---------------------------------------------------- 
+       when SF::Keyboard::Backspace
+         Platform.initialize_platform_positions
+  #----------------------------------------------------Change Categories-------------------------------------------------- 
+       when SF::Keyboard::Num1
+         @@current_category = "platform"
+       when SF::Keyboard::Num2
+         @@current_category = "ladder"
+       end; end; end; end
  end
  class Editor_UI < Editor_Controls
   def Editor_UI.display_current_object_text(window)
