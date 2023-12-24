@@ -29,7 +29,7 @@ include Map_Geometry
   #----------------------------------------------------------------Ladder---------------------------------------------------------------------------------
    @@current_ladder : Ladder; @@current_ladder = Map_Geometry::Ladder.level_editor_initial_ladder
    @@current_ladder_template  : Ladder; @@current_ladder_template  = Map_Geometry::Ladder.level_editor_initial_ladder
-   Ladder_Texture_Array = [0, 40, 80, 120, 200]
+   Ladder_Texture_Array = [0, 40, 80, 120, 160]
    @@id : Int32; @@id = 1; @@template_id : Int32; @@template_id = 1
    @@zoom = 1; @@texture = 0
    def Editor_Controls.check_current_object
@@ -262,11 +262,18 @@ include Map_Geometry
         end
          id = @@id
          @@current_platform = Map_Geometry::Platform.level_editor_change_platfrom(id)
-  #---------------------------------------------------Create New Objects-------------------------------------------------- 
+  #---------------------------------------------------Create New Objects--------------------------------------------------  
        when SF::Keyboard::N
+        case @@current_category
+        when "platform"
          platform = @@current_platform_template 
          current_platform = Map_Geometry::Platform.level_editor_create_platform(platform)
          @@current_platform = current_platform
+        when "ladder"
+          ladder = @@current_ladder_template 
+          current_ladder = Map_Geometry::Ladder.level_editor_create_ladder(ladder)
+          @@current_ladder = current_ladder
+        end
   #-----------------------------------------------------Initialize Map---------------------------------------------------- 
        when SF::Keyboard::Backspace
          Platform.initialize_platform_positions

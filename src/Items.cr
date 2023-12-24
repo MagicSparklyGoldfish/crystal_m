@@ -7089,12 +7089,22 @@ module Crafted_Items
     def texture=(this)
      @texture = this
     end
+    def name=(this)
+      @name = this
+    end
+    def sprite=(this)
+      @sprite = this
+     end
+    def length=(this)
+      @length = this
+     end
    #________________________________________________________________________________________________________________________________________________________
    #********************************************************************************************************************************************************
    #*                                                              Variables                                                                               *
    #********************************************************************************************************************************************************
     Ladder_Array = [] of Ladder; @@is_on_ladder : Bool; @@is_on_ladder = false
     Current_Ladder_Array = [] of Ladder; Ladder_Template_Array = [] of Ladder
+    @@ladder_400_length_iteration_number = 0; @@ladder_300_length_iteration_number = 0; @@ladder_200_length_iteration_number = 0
    #________________________________________________________________________________________________________________________________________________________
    #????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
    #?                                                               Methods                                                                                ?
@@ -7236,6 +7246,26 @@ module Crafted_Items
       current_ladder = Current_Ladder_Array[id]
       current_ladder
      end
+     #..........................................................Create New Object...........................................................................
+      def Ladder.level_editor_create_ladder(ladder)
+       current_ladder = ladder.dup
+       current_ladder.length = ladder.length
+       case current_ladder.length
+       when 400
+        @@ladder_400_length_iteration_number += 1
+        current_ladder.name += @@ladder_400_length_iteration_number.to_s
+       when 300
+       @@ladder_300_length_iteration_number += 1
+       current_ladder.name += @@ladder_300_length_iteration_number.to_s
+       when 200
+       @@ladder_200_length_iteration_number += 1
+       current_ladder.name += @@ladder_200_length_iteration_number.to_s
+       end
+       current_ladder.sprite = ladder.sprite.dup
+       #Platform_Array.push(current_ladder)
+       Current_Ladder_Array.push(current_ladder)
+       current_ladder
+      end
    #________________________________________________________________________________________________________________________________________________________
    #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
    #/                                                               Entities                                                                               /
