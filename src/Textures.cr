@@ -3453,7 +3453,7 @@ Testing_Text.character_size = 20; Testing_Text.color = SF::Color::White; Testing
  Ground = SF::RectangleShape.new(SF.vector2(10000, 500));
  Ground.position = SF.vector2(-5000, 800); Ground.set_texture(GRASS_TEXTURE_1, reset_rect: false)
  #------------------------------------------------------Textures-----------------------------------------------------------------------
-    Platform_Texture_Array = [GRASS_TEXTURE_1, CONCRETE_TEXTURE_1, WOOD_TEXTURE_01]
+    Platform_Texture_Array = [GRASS_TEXTURE_1, CONCRETE_TEXTURE_1, WOOD_TEXTURE_01, WOOD_TEXTURE_02]
     Wall_Texture_Array = [CONCRETE_TEXTURE_1, WOOD_TEXTURE_01, WOOD_TEXTURE_02]
   #------------------------------------------------------Grass-------------------------------------------------------------------------
    GRASS_TEXTURE_1 = SF::Texture.from_file("graphics/map objects/Grass_01.png"); GRASS_TEXTURE_1.repeated = true

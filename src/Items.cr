@@ -7092,11 +7092,12 @@ module Crafted_Items
    #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
    #!                                                              Initialize                                                                              !
    #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    def initialize(name : String, texture : Int32, sprite : SF::Sprite, length : Int32)
+    def initialize(name : String, texture : Int32, sprite : SF::Sprite, length : Int32, display_rectangle : SF::RectangleShape)
       @texture = texture
       @sprite = sprite
       @length = length
       @name = name
+      @display_rectangle = display_rectangle
      end
     def texture
       @texture
@@ -7121,6 +7122,9 @@ module Crafted_Items
      end
     def length=(this)
       @length = this
+     end
+    def display_rectangle
+     @display_rectangle
      end
    #________________________________________________________________________________________________________________________________________________________
    #********************************************************************************************************************************************************
@@ -7326,16 +7330,16 @@ module Crafted_Items
    #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
    #/                                                               Entities                                                                               /
    #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    @@long_ladder_01 = Ladder.new("Long Ladder", 0, Long_Metal_Ladder_01, 400)
+    @@long_ladder_01 = Ladder.new("Long Ladder", 0, Long_Metal_Ladder_01, 400, Ground)
     Ladder_Array.push(@@long_ladder_01); Ladder_Template_Array.push(@@long_ladder_01)
     Current_Ladder_Array.push(@@long_ladder_01)
-    @@long_ladder_02 = Ladder.new("Long Ladder", 0, Long_Metal_Ladder_01.dup, 400)
+    @@long_ladder_02 = Ladder.new("Long Ladder", 0, Long_Metal_Ladder_01.dup, 400, Ground)
     Ladder_Array.push(@@long_ladder_02)
-    @@long_ladder_03 = Ladder.new("Long Ladder", 0, Long_Metal_Ladder_01.dup, 400)
+    @@long_ladder_03 = Ladder.new("Long Ladder", 0, Long_Metal_Ladder_01.dup, 400, Ground)
     Ladder_Array.push(@@long_ladder_03)
-    @@medium_ladder_01 = Ladder.new("Medium Ladder", 0, Medium_Metal_Ladder_01, 300)
+    @@medium_ladder_01 = Ladder.new("Medium Ladder", 0, Medium_Metal_Ladder_01, 300, Ground)
     Ladder_Array.push(@@medium_ladder_01); Ladder_Template_Array.push(@@medium_ladder_01)
-    @@short_ladder_01 = Ladder.new("Short Ladder", 0, Short_Metal_Ladder_01, 200)
+    @@short_ladder_01 = Ladder.new("Short Ladder", 0, Short_Metal_Ladder_01, 200, Ground)
     Ladder_Array.push(@@short_ladder_01); Ladder_Template_Array.push(@@short_ladder_01)
    #________________________________________________________________________________________________________________________________________________________
    end
@@ -7587,7 +7591,7 @@ module Crafted_Items
      #...........................................................Get Array Size.............................................................................
       def Platform.get_template_array_size
        return Platform_Template_Array.size
-      end
+       end
       def Platform.get_created_platform_array_size
         return Current_Platform_Array.size
        end
@@ -7775,7 +7779,7 @@ module Crafted_Items
        window.draw(@@map_boundary_wall_02.display_rectangle)
       end
    #------------------------------------------------------------Level Editor-------------------------------------------------------------------------------
-    #........................................................Set Initial Object...........................................................................
+    #........................................................Set Initial Object............................................................................
      def Wall.level_editor_initial_wall
       current_wall = @@short_wall_01
      end
@@ -7829,6 +7833,41 @@ module Crafted_Items
           current_wall.bounding_rectangle.position += SF.vector2(0, 10)
           current_wall.display_rectangle.position += SF.vector2(0, 10)
        end
+      end
+    #...........................................................Get Array Size.............................................................................
+     def Wall.get_template_array_size
+      return Wall_Template_Array.size
+      end
+     def Wall.get_created_wall_array_size
+       return Current_Wall_Array.size
+      end
+    #.............................................................Get Arrays...............................................................................
+     def Wall.get_created_wall_array
+      return Current_Wall_Array
+     end
+    #............................................................Scroll Arrays.............................................................................
+     def Wall.level_editor_change_template(template_id)
+      if Wall_Template_Array.size > template_id && template_id > -1
+      else
+        template_id = -1
+      end
+      current_template = Wall_Template_Array[template_id]
+      current_template
+     end
+     def Wall.level_editor_change_wall(id)
+      if id < Current_Wall_Array.size && id > -1
+      else
+        id = -1
+      end
+      current_platform = Current_Wall_Array[id]
+      current_platform
+     end
+     #........................................................Change Object Texture.........................................................................
+      def Wall.change_texture(current_wall, texture) #@todo prevent this from changing ground texture
+        if texture < Wall_Texture_Array.size
+        current_wall.display_rectangle.set_texture(Wall_Texture_Array[texture], reset_rect: false) 
+        current_wall.texture = texture
+        end
       end
   #________________________________________________________________________________________________________________________________________________________
   #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -185,6 +185,14 @@ include Map_Geometry
            current_ladder = @@current_ladder
            Ladder.change_texture(current_ladder, texture)
           end
+        when "wall"
+          s = Wall_Texture_Array.size
+          @@texture += 1
+          if s > @@texture
+           texture = @@texture
+           current_wall = @@current_wall
+           Wall.change_texture(current_wall, texture)
+          end
         end
        when SF::Keyboard::Y
         case @@current_category
@@ -205,6 +213,14 @@ include Map_Geometry
            texture = Ladder_Texture_Array[@@texture]
            current_ladder = @@current_ladder
            Ladder.change_texture(current_ladder, texture)
+          end
+        when "wall"
+          s = Wall_Texture_Array.size
+          if @@texture > 0
+           @@texture -= 1
+           texture = @@texture
+           current_wall = @@current_ladder
+           Wall.change_texture(current_wall, texture)
           end
         end
   #-------------------------------------------------------Change Map------------------------------------------------------ 
@@ -271,6 +287,15 @@ include Map_Geometry
           end
           template_id = @@template_id
           @@current_ladder_template  = Map_Geometry::Ladder.level_editor_change_template(template_id)
+        when "wall"
+          s = Map_Geometry::Wall.get_template_array_size
+          if @@template_id < s
+           @@template_id += 1
+          else 
+           @@template_id = -1
+          end
+          template_id = @@template_id
+          @@current_wall_template  = Map_Geometry::Wall.level_editor_change_template(template_id)
         end
        when SF::Keyboard::L
         case @@current_category
@@ -290,6 +315,14 @@ include Map_Geometry
           end
           template_id = @@template_id
           @@current_ladder_template  = Map_Geometry::Ladder.level_editor_change_template(template_id)
+        when "wall"
+          if @@template_id > 0
+           @@template_id -= 1
+          else 
+           @@template_id = -1
+          end
+          template_id = @@template_id
+          @@current_wall_template  = Map_Geometry::Wall.level_editor_change_template(template_id)
         end
   #----------------------------------------------------Choose Objects----------------------------------------------------- 
        when SF::Keyboard::O
@@ -298,44 +331,63 @@ include Map_Geometry
          s = Map_Geometry::Platform.get_created_platform_array_size
          if s > 0
          if @@id < s
-         @@id += 1
+           @@id += 1
          else 
-         @@id = 0
-        end
-         id = @@id
-         @@current_platform = Map_Geometry::Platform.level_editor_change_platfrom(id)
-        end
-      when "ladder"
-        s = Map_Geometry::Ladder.get_created_platform_array_size
-        if s > 0
-        if @@id < s
-        @@id += 1
-        else 
-        @@id = 0
-       end
-        id = @@id
-        @@current_ladder = Map_Geometry::Ladder.level_editor_change_ladder(id)
-       end
+           @@id = 0
+          end
+          id = @@id
+          @@current_platform = Map_Geometry::Platform.level_editor_change_platfrom(id)
+         end
+        when "ladder"
+          s = Map_Geometry::Ladder.get_created_platform_array_size
+          if s > 0
+          if @@id < s
+           @@id += 1
+          else 
+           @@id = 0
+           end
+           id = @@id
+           @@current_ladder = Map_Geometry::Ladder.level_editor_change_ladder(id)
+          end
+        when "wall"
+          s = Map_Geometry::Wall.get_created_wall_array_size
+          if s > 0
+          if @@id < s
+          @@id += 1
+          else 
+          @@id = 0
+         end
+          id = @@id
+          @@current_wall = Map_Geometry::Wall.level_editor_change_wall(id)
+         end
       end
        when SF::Keyboard::P
         case @@current_category
         when "platform"
-         if @@id < 0
-         @@id -= 1
-       else 
-         @@id = 0
+           if @@id < 0
+           @@id -= 1
+          else 
+           @@id = 0
+          end
+           id = @@id
+           @@current_platform = Map_Geometry::Platform.level_editor_change_platfrom(id)
+        when "ladder"
+          if @@id < 0
+          @@id -= 1
+         else 
+          @@id = 0
+         end
+          id = @@id
+          @@current_ladder = Map_Geometry::Ladder.level_editor_change_ladder(id)
+        when "wall"
+          if @@id < 0
+          @@id -= 1
+        else 
+          @@id = 0
+         end
+          id = @@id
+          @@current_wall = Map_Geometry::Wall.level_editor_change_wall(id)
         end
-         id = @@id
-         @@current_platform = Map_Geometry::Platform.level_editor_change_platfrom(id)
-      when "ladder"
-        if @@id < 0
-        @@id -= 1
-      else 
-        @@id = 0
-       end
-        id = @@id
-        @@current_ladder = Map_Geometry::Ladder.level_editor_change_ladder(id)
-      end
   #---------------------------------------------------Create New Objects--------------------------------------------------  
        when SF::Keyboard::N
         case @@current_category
@@ -352,7 +404,7 @@ include Map_Geometry
           current_wall = Map_Geometry::Wall.level_editor_create_platform(wall)
           @@current_wall = current_wall
         end
-  #-----------------------------------------------------Initialize Map---------------------------------------------------- 
+  #----------------------------------------------------Initialize Map----------------------------------------------------- 
        when SF::Keyboard::Backspace
          Platform.initialize_platform_positions
   #----------------------------------------------------Change Categories-------------------------------------------------- 
