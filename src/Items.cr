@@ -7089,14 +7089,20 @@ module Crafted_Items
   @[YAML::Field(key: "teleporter_destination_area")]
   @[YAML::Field(key: "teleporter_x_destination_positions")]
   @[YAML::Field(key: "teleporter_y_destination_positions")]
+ #--------------------------------------------------------------Crafting Tables-----------------------------------------------------------------------------
+  @[YAML::Field(key: "crafting_table_ids")]
+  @[YAML::Field(key: "crafting_table_names")]
+  @[YAML::Field(key: "crafting_table_x_positions")]
+  @[YAML::Field(key: "crafting_table_y_positions")]
 
   def Map_Geometry.level_editor_save_map(current_file)
     current_ladder_array = Ladder.get_created_platform_array
     current_platform_array = Platform.get_created_platform_array
     current_wall_array = Wall.get_created_wall_array
     current_teleporter_array = Teleporter.get_created_teleporter_array
+    current_crafting_table_array = Crafting_Station.get_created_crafting_station_array
    File.open(current_file, "w") { |f| YAML.dump({
-  #---------------------------------------------------Platforms------------------------------------------------------------------------
+  #-----------------------------------------------------------------Platforms--------------------------------------------------------------------------------
    "platform_names": current_platform_array.map{ |i| i.name},
    "platform_ids": current_platform_array.map{ |i| i.id}, "platform_textures": current_platform_array.map{ |i| i.texture},
    "platform_x_positions": current_platform_array.map{ |i| i.bounding_rectangle.position.x},
@@ -7106,12 +7112,12 @@ module Crafted_Items
    "ladder_lengths": current_ladder_array.map{ |i| i.length}, "ladder_textures": current_ladder_array.map{ |i| i.texture},
    "ladder_x_positions": current_ladder_array.map{ |i| i.sprite.position.x},
    "ladder_y_positions": current_ladder_array.map{ |i| i.sprite.position.y},
-  #-----------------------------------------------------Walls--------------------------------------------------------------------------
+  #-------------------------------------------------------------------Walls----------------------------------------------------------------------------------
    "wall_names": current_wall_array.map{ |i| i.name},
    "wall_ids": current_wall_array.map{ |i| i.id}, "wall_textures": current_wall_array.map{ |i| i.texture},
    "wall_x_positions": current_wall_array.map{ |i| i.bounding_rectangle.position.x},
    "wall_y_positions": current_wall_array.map{ |i| i.bounding_rectangle.position.y},
-  #--------------------------------------------------Teleporters-----------------------------------------------------------------------
+  #----------------------------------------------------------------Teleporters-------------------------------------------------------------------------------
    "teleporter_names": current_teleporter_array.map{ |i| i.name},
    "teleporter_ids": current_teleporter_array.map{ |i| i.length},
    "teleporter_x_positions": current_teleporter_array.map{ |i| i.sprite.position.x},
@@ -7119,7 +7125,12 @@ module Crafted_Items
    "teleporter_destination_map": current_teleporter_array.map{ |i| i.destination_map},
    "teleporter_destination_area": current_teleporter_array.map{ |i| i.destination_area},
    "teleporter_x_destination_positions": current_teleporter_array.map{ |i| i.destination_postion[0]},
-   "teleporter_y_destination_positions": current_teleporter_array.map{ |i| i.destination_postion[1]}
+   "teleporter_y_destination_positions": current_teleporter_array.map{ |i| i.destination_postion[1]},
+  #--------------------------------------------------------------Crafting Tables-----------------------------------------------------------------------------
+   "crafting_table_ids": current_crafting_table_array.map{ |i| i.id},
+   "crafting_table_names": current_crafting_table_array.map{ |i| i.name},
+   "crafting_table_x_positions": current_crafting_table_array.map{ |i| i.rectangle.position.x},
+   "crafting_table_y_positions": current_crafting_table_array.map{ |i| i.rectangle.position.y}
    }, f) }
   end
 
@@ -8144,9 +8155,7 @@ module Crafted_Items
      current_teleporter
     end
    #...............................................................Place...................................................................................
-    def Teleporter.level_editor_place_teleporter(current_teleporter, x, y, player_x, player_y)
-      x = player_x + x
-      y = player_y + y
+    def Teleporter.level_editor_place_teleporter(current_teleporter, x, y)
       current_teleporter.sprite.position = SF.vector2(x, y)
      end
      def Teleporter.level_editor_precision_placement(current_teleporter, direction)
@@ -8286,22 +8295,146 @@ module Crafted_Items
   #********************************************************************************************************************************************************
   #*                                                              Variables                                                                               *
   #********************************************************************************************************************************************************
+   Created_Crafting_Station_Array = [] of Crafting_Station
+   Created_Crafting_Station_Template_Array = [] of Crafting_Station
+   @@smelter_name_iterator = 0; @@forge_name_iterator = 0; @@gem_cutter_name_iterator = 0; @@upgrade_table_name_iterator = 0;
   #________________________________________________________________________________________________________________________________________________________
   #????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
   #?                                                               Methods                                                                                ?
   #????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
-   #..........................................................Set Initial Object...........................................................................
-     def Crafting_Station.level_editor_initial_crafting_station
-      current_crafting_station = @@smelter_01
+   #--------------------------------------------------------------Level Editor-----------------------------------------------------------------------------
+    #..........................................................Set Initial Object..........................................................................
+      def Crafting_Station.level_editor_initial_crafting_station
+       current_crafting_station = @@smelter_01
+      end
+    #...............................................................Display................................................................................
+     def Crafting_Station.level_editor_display_crafting_stations(window)
+      Created_Crafting_Station_Array.map{ |i| window.draw(i.rectangle)}
+     end
+    #.............................................................Initialize................................................................................
+     def Crafting_Station.initialize_current_crafting_stations(current_crafting_station)
+      current_crafting_station.rectangle.position = SF.vector2(0, 40000)
+      Created_Crafting_Station_Array.delete(current_crafting_station)
+     end
+    #..........................................................Create New Object............................................................................
+     def Crafting_Station.level_editor_create_crafting_station(crafting_station)
+       current_crafting_station = crafting_station.dup
+       current_crafting_station.id = crafting_station.id
+      case crafting_station.id
+       when 1
+        @@smelter_name_iterator += 1
+        current_crafting_station.name += @@smelter_name_iterator.to_s
+       when 2
+        @@forge_name_iterator += 1
+        current_crafting_station.name += @@forge_name_iterator.to_s
+       when 3
+        @@gem_cutter_name_iterator += 1
+        current_crafting_station.name += @@gem_cutter_name_iterator.to_s
+       when 4
+        @@upgrade_table_name_iterator += 1
+        current_crafting_station.name += @@upgrade_table_name_iterator.to_s
+       end
+      current_crafting_station.rectangle = crafting_station.rectangle.dup
+      Created_Crafting_Station_Array.push(current_crafting_station)
+      current_crafting_station
+     end
+    #...............................................................Place...................................................................................
+     def Crafting_Station.level_editor_place_crafting_station(current_crafting_station, x, y)
+       current_crafting_station.rectangle.position = SF.vector2(x, y)
+      end
+     def Crafting_Station.level_editor_precision_placement(current_crafting_station, direction)
+      case direction
+       when "left"
+        current_crafting_station.rectangle.position -= SF.vector2(10, 0)
+       when "right"
+        current_crafting_station.rectangle.position += SF.vector2(10, 0)
+       when "up"
+        current_crafting_station.rectangle.position -= SF.vector2(0, 10)
+       when "down"
+        current_crafting_station.rectangle.position += SF.vector2(0, 10)
+      end
+     end
+    #...........................................................Get Array Size..............................................................................
+     def Crafting_Station.get_created_crafting_station_array_size
+      return Created_Crafting_Station_Array.size
+     end
+     def Crafting_Station.get_created_crafting_station_template_array_size
+      return Created_Crafting_Station_Template_Array.size
+     end
+    #.............................................................Get Arrays................................................................................
+     def Crafting_Station.get_created_crafting_station_array
+      return Created_Crafting_Station_Array
+     end
+     def Crafting_Station.get_created_crafting_station_template_array
+      return Created_Crafting_Station_Template_Array
+     end
+    #............................................................Scroll Arrays..............................................................................
+     def Crafting_Station.level_editor_change_crafting_station_template(id)
+       if id < Created_Crafting_Station_Template_Array.size && id > -1
+       else
+         id = -1
+       end
+       current_crafting_station_template = Created_Crafting_Station_Template_Array[id]
+       current_crafting_station_template
+      end
+      def Crafting_Station.level_editor_change_crafting_station(id)
+       if Created_Crafting_Station_Array.size > 0
+       if id < Created_Crafting_Station_Array.size && id > -1
+       else
+         id = -1
+       end
+       current_crafting_station = Created_Crafting_Station_Array[id]
+       current_crafting_station
+       else current_crafting_station = @@smelter_01
+       end
+      end
+    #------------------------------------------------------------Load Map File------------------------------------------------------------------------------
+     def Crafting_Station.load_map_platform_settings(current_file)
+       yaml = File.open(current_file) { |file| YAML.parse(file) }
+       yaml.class 
+       hash = yaml.as_h  
+       hash.class
+       this = @@smelter_01.dup
+       i = 0
+       s = yaml["crafting_table_ids"].as_a.size
+       while i < s 
+        if yaml["crafting_table_ids"][i] == 1
+         this = @@smelter_01.dup
+         this.rectangle = @@smelter_01.rectangle.dup
+        else if yaml["crafting_table_ids"][i] == 2
+         this = @@forge_01.dup
+         this.rectangle = @@forge_01.rectangle.dup
+        else if yaml["crafting_table_ids"][i] == 3
+         this = @@gem_cutter_01.dup
+         this.rectangle = @@gem_cutter_01.rectangle.dup
+        else if yaml["crafting_table_ids"][i] == 4
+          this = @@upgrade_table_01.dup
+          this.rectangle = @@upgrade_table_01.rectangle.dup
+        else
+         puts "error!" + ["crafting_table_ids"][i].to_s + " is an invalid id!" 
+         i += 1
+        end; end; end; end
+        this.id = yaml["crafting_table_ids"][i].as_i
+        this.name = yaml["crafting_table_names"][i].as_s
+        x = yaml["crafting_table_x_positions"][i].as_f32
+        y = yaml["crafting_table_y_positions"][i].as_f32
+        this.rectangle.position = SF.vector2(x, y)
+        Created_Crafting_Station_Array.push(this)
+        i += 1
+       end
      end
   #________________________________________________________________________________________________________________________________________________________
   #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   #/                                                               Entities                                                                               /
   #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
    @@smelter_01 = Crafting_Station.new("Smelter", 1, Test_Smelter)
+   Created_Crafting_Station_Template_Array.push(@@smelter_01)
    @@forge_01 = Crafting_Station.new( "Forge", 2, Test_Forge)
+   Created_Crafting_Station_Template_Array.push(@@forge_01)
    @@gem_cutter_01 = Crafting_Station.new( "Gem Cutter", 3, Test_Gem_Cutter)
+   Created_Crafting_Station_Template_Array.push(@@gem_cutter_01)
    @@upgrade_table_01 = Crafting_Station.new( "Upgrade Table", 4, Test_Upgrade_Table)
+   Created_Crafting_Station_Template_Array.push(@@upgrade_table_01)
   #________________________________________________________________________________________________________________________________________________________
   end
  #MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM

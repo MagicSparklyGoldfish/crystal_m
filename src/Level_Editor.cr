@@ -48,11 +48,14 @@ include Map_Geometry
    @@teleporter_area_iterator = 0; @@teleporter_map_iterator = 0
   #-----------------------------------------------------------Crafting Stations---------------------------------------------------------------------------
    @@current_crafting_station : Crafting_Station; @@current_crafting_station = Crafting_Station.level_editor_initial_crafting_station
-   @@current_crafting_station_texture : Crafting_Station; @@current_crafting_station_texture = Crafting_Station.level_editor_initial_crafting_station
+   @@current_crafting_station_template : Crafting_Station; @@current_crafting_station_template = Crafting_Station.level_editor_initial_crafting_station
   #-----------------------------------------------------------------Misc----------------------------------------------------------------------------------
    @@id : Int32; @@id = 1; @@template_id : Int32; @@template_id = 1
    @@zoom = 1; @@texture = 0
   #_______________________________________________________________________________________________________________________________________________________
+ #????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
+ #?                                                               Methods                                                                                ?
+ #????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
    def Editor_Controls.choose_map_array
     current_teleporter = @@current_teleporter
     area = Teleporter.check_area(current_teleporter)
@@ -96,7 +99,7 @@ include Map_Geometry
      when "teleporter"
       return @@current_teleporter_template
      when "crafting_station"
-      return @@current_crafting_station_texture
+      return @@current_crafting_station_template
      end
      return @@current_platform_template 
     end
@@ -127,7 +130,10 @@ include Map_Geometry
             Map_Geometry::Wall.level_editor_place_wall(current_wall, x, y, player_x, player_y)
            when "teleporter"
             current_teleporter = @@current_teleporter
-            Map_Geometry::Teleporter.level_editor_place_teleporter(current_teleporter, x, y, player_x, player_y)
+            Map_Geometry::Teleporter.level_editor_place_teleporter(current_teleporter, x, y)
+           when "crafting_station"
+            current_crafting_station = @@current_crafting_station
+            Map_Geometry::Crafting_Station.level_editor_place_crafting_station(current_crafting_station, x, y)
           end
      end
    end
@@ -137,6 +143,9 @@ include Map_Geometry
    def Editor_Controls.check_zoom
      return @@zoom
    end
+ #$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+ #$                                                     Keypresses                                                        $
+ #$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
    def Editor_Controls.level_editor_keypresses(window, player)
     current_file = @@current_file
      while (event = window.poll_event)
@@ -166,6 +175,10 @@ include Map_Geometry
           current_teleporter = @@current_teleporter
           direction = "left"
           Map_Geometry::Teleporter.level_editor_precision_placement(current_teleporter, direction)
+         when "crafting_station"
+          current_crafting_station = @@current_crafting_station
+          direction = "left"
+          Map_Geometry::Crafting_Station.level_editor_precision_placement(current_crafting_station, direction)
        end
        when SF::Keyboard::Right
         case @@current_category
@@ -185,6 +198,10 @@ include Map_Geometry
            current_teleporter = @@current_teleporter
            direction = "right"
            Map_Geometry::Teleporter.level_editor_precision_placement(current_teleporter, direction)
+         when "crafting_station"
+           current_crafting_station = @@current_crafting_station
+           direction = "right"
+           Map_Geometry::Crafting_Station.level_editor_precision_placement(current_crafting_station, direction)
        end
        when SF::Keyboard::Up
         case @@current_category
@@ -204,6 +221,10 @@ include Map_Geometry
            current_teleporter = @@current_teleporter
            direction = "up"
            Map_Geometry::Teleporter.level_editor_precision_placement(current_teleporter, direction)
+         when "crafting_station"
+           current_crafting_station = @@current_crafting_station
+           direction = "up"
+           Map_Geometry::Crafting_Station.level_editor_precision_placement(current_crafting_station, direction)
        end
        when SF::Keyboard::Down
         case @@current_category
@@ -223,6 +244,10 @@ include Map_Geometry
            current_teleporter = @@current_teleporter
            direction = "down"
            Map_Geometry::Teleporter.level_editor_precision_placement(current_teleporter, direction)
+         when "crafting_station"
+           current_crafting_station = @@current_crafting_station
+           direction = "down"
+           Map_Geometry::Crafting_Station.level_editor_precision_placement(current_crafting_station, direction)
        end
   #----------------------------------------------------Change Texture/Y--------------------------------------------------- 
        when SF::Keyboard::T
@@ -351,6 +376,9 @@ include Map_Geometry
         when "teleporter"
          current_teleporter = @@current_teleporter
          Map_Geometry::Teleporter.initialize_current_teleporter(current_teleporter)
+        when "crafting_station"
+          current_crafting_station = @@current_crafting_station
+          Map_Geometry::Crafting_Station.initialize_current_crafting_stations(current_crafting_station)
         end
        when SF::Keyboard::V
         Map_Geometry.level_editor_save_map(current_file)
@@ -359,6 +387,7 @@ include Map_Geometry
          Map_Geometry::Ladder.load_map_ladder_settings(current_file)
          Map_Geometry::Wall.load_map_platform_settings(current_file)
          Map_Geometry::Teleporter.load_map_teleporter_settings(current_file)
+         Map_Geometry::Crafting_Station.load_map_platform_settings(current_file)
   #-------------------------------------------------------Zoom View------------------------------------------------------- 
        when SF::Keyboard::Add
          zoom = -1
@@ -406,7 +435,16 @@ include Map_Geometry
           position_x = 0.50
           current_teleporter = @@current_teleporter
           Map_Geometry::Teleporter.change_destination_position_x(current_teleporter, position_x)
-        end
+        when "crafting_station"
+         s = Map_Geometry::Crafting_Station.get_created_crafting_station_template_array_size
+         if @@template_id < s
+          @@template_id += 1
+         else 
+          @@template_id = -1
+         end
+         id = @@template_id
+         @@current_crafting_station_template  = Crafting_Station.level_editor_change_crafting_station_template(id)
+         end
        when SF::Keyboard::L
         case @@current_category
         when "platform"
@@ -437,6 +475,14 @@ include Map_Geometry
           position_x = -0.50
           current_teleporter = @@current_teleporter
           Map_Geometry::Teleporter.change_destination_position_x(current_teleporter, position_x)
+        when "crafting_station"
+          if @@template_id > 0
+            @@template_id -= 1
+           else 
+            @@template_id = -1
+           end
+           id = @@template_id
+           @@current_crafting_station_template  = Map_Geometry::Crafting_Station.level_editor_change_crafting_station_template(id)
         end
   #----------------------------------------------------Choose Objects----------------------------------------------------- 
        when SF::Keyboard::O
@@ -484,6 +530,17 @@ include Map_Geometry
          end
           id = @@id
           @@current_teleporter = Map_Geometry::Teleporter.level_editor_change_teleporter(id)
+        end
+        when "crafting_station"
+          s = Map_Geometry::Crafting_Station.get_created_crafting_station_array_size
+          if s > 0
+          if @@id < s
+          @@id += 1
+          else 
+          @@id = 0
+         end
+          id = @@id
+          @@current_crafting_station = Map_Geometry::Crafting_Station.level_editor_change_crafting_station(id)
          end
       end
        when SF::Keyboard::P
@@ -520,6 +577,14 @@ include Map_Geometry
          end
           id = @@id
           @@current_teleporter = Map_Geometry::Teleporter.level_editor_change_teleporter(id)
+        when "crafting_station"
+          if @@id < 0
+            @@id -= 1
+          else 
+            @@id = 0
+           end
+            id = @@id
+            @@current_crafting_station = Map_Geometry::Crafting_Station.level_editor_change_crafting_station(id)
         end
   #---------------------------------------------------Create New Objects--------------------------------------------------  
        when SF::Keyboard::N
@@ -539,7 +604,11 @@ include Map_Geometry
         when "teleporter"
           teleporter = @@current_teleporter_template
           current_teleporter = Map_Geometry::Teleporter.level_editor_create_platform(teleporter)
-          @@current_teleporter = current_teleporter
+          @@current_teleporter = teleporter
+        when "crafting_station"
+          crafting_station = @@current_crafting_station_template
+          current_crafting_station = Map_Geometry::Crafting_Station.level_editor_create_crafting_station(crafting_station)
+          @@current_crafting_station = current_crafting_station
         end
   #----------------------------------------------------Initialize Map----------------------------------------------------- 
        when SF::Keyboard::Backspace
@@ -555,6 +624,8 @@ include Map_Geometry
          @@current_category = "wall"
        when SF::Keyboard::Num4
          @@current_category = "teleporter"
+       when SF::Keyboard::Num5
+         @@current_category = "crafting_station"
        end; end; end; end
  end
  class Editor_UI < Editor_Controls
