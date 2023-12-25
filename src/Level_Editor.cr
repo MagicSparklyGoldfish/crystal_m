@@ -46,6 +46,9 @@ include Map_Geometry
    @@current_teleporter : Teleporter; @@current_teleporter = Map_Geometry::Teleporter.level_editor_initial_teleporter
    @@current_teleporter_template : Teleporter; @@current_teleporter_template = Map_Geometry::Teleporter.level_editor_initial_teleporter
    @@teleporter_area_iterator = 0; @@teleporter_map_iterator = 0
+  #-----------------------------------------------------------Crafting Stations---------------------------------------------------------------------------
+   @@current_crafting_station : Crafting_Station; @@current_crafting_station = Crafting_Station.level_editor_initial_crafting_station
+   @@current_crafting_station_texture : Crafting_Station; @@current_crafting_station_texture = Crafting_Station.level_editor_initial_crafting_station
   #-----------------------------------------------------------------Misc----------------------------------------------------------------------------------
    @@id : Int32; @@id = 1; @@template_id : Int32; @@template_id = 1
    @@zoom = 1; @@texture = 0
@@ -77,6 +80,8 @@ include Map_Geometry
        return @@current_wall
      when "teleporter"
        return @@current_teleporter
+     when "crafting_station"
+       return @@current_crafting_station
      end
      return @@current_platform_template 
     end
@@ -90,23 +95,33 @@ include Map_Geometry
       return @@current_wall_template
      when "teleporter"
       return @@current_teleporter_template
+     when "crafting_station"
+      return @@current_crafting_station_texture
      end
      return @@current_platform_template 
     end
-   def Editor_Controls.level_editor_mouse_clicks(window, player)
+   def Editor_Controls.level_editor_mouse_clicks(window, player, zoom)
      if SF::Mouse.button_pressed?(SF::Mouse::Right)
-         mouse_position = SF::Mouse.position
-         x = mouse_position.x
-         y = mouse_position.y
-         player_x = player.position.x
-         player_y = player.position.y
+      mouse_position = SF::Mouse.get_position(window)
+      b = player.position
+      x = b[0]; y = b[1]
+      view1 = SF::View.new(SF.float_rect(0, 0, 1900, 700))
+      view1.center = SF.vector2(x, y)
+      view1.viewport = SF.float_rect(0, 0, 1, 0.85)
+      view1.zoom(zoom)
+      window.view = view1
+      final_mouse_position = window.map_pixel_to_coords(mouse_position, window.view)
+         x = final_mouse_position.x
+         y = final_mouse_position.y
+         player_x = 0 #player.position.x
+         player_y = 0 #player.position.y
          case @@current_category
            when "platform"
             current_platform = @@current_platform
             Map_Geometry::Platform.level_editor_place_platform(current_platform, x, y, player_x, player_y)
            when "ladder"
             current_ladder = @@current_ladder
-            Ladder.level_editor_place_platform(current_ladder, x, y, player_x, player_y)
+            Ladder.level_editor_place_platform(current_ladder, x, y)
            when "wall"
             current_wall = @@current_wall
             Map_Geometry::Wall.level_editor_place_wall(current_wall, x, y, player_x, player_y)

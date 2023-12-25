@@ -7278,9 +7278,7 @@ module Crafted_Items
         Current_Ladder_Array.map{ |i| window.draw(i.sprite)}
        end
      #...............................................................Place..................................................................................
-      def Ladder.level_editor_place_platform(current_ladder, x, y, player_x, player_y)
-       x = player_x + x
-       y = player_y + y
+      def Ladder.level_editor_place_platform(current_ladder, x, y)
        current_ladder.sprite.position = SF.vector2(x, y)
       end
       def Ladder.level_editor_precision_placement(current_ladder, direction)
@@ -8261,15 +8259,28 @@ module Crafted_Items
   #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   #!                                                              Initialize                                                                              !
   #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-   def initialize(id : Int32, rectangle : SF::RectangleShape)
+   def initialize(name : String, id : Int32, rectangle : SF::RectangleShape)
+     @name = name
      @id = id
      @rectangle = rectangle
     end
+   def name
+    @name
+   end
    def id
      @id
     end
    def rectangle
      @rectangle
+    end
+   def name=(this)
+     @name = this
+    end
+   def id=(this)
+     @id = this
+    end
+   def rectangle=(this)
+     @rectangle = this
     end
   #________________________________________________________________________________________________________________________________________________________
   #********************************************************************************************************************************************************
@@ -8279,14 +8290,18 @@ module Crafted_Items
   #????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
   #?                                                               Methods                                                                                ?
   #????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
+   #..........................................................Set Initial Object...........................................................................
+     def Crafting_Station.level_editor_initial_crafting_station
+      current_crafting_station = @@smelter_01
+     end
   #________________________________________________________________________________________________________________________________________________________
   #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   #/                                                               Entities                                                                               /
   #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-   @@smelter_01 = Crafting_Station.new(1, Test_Smelter)
-   @@forge_01 = Crafting_Station.new(2, Test_Forge)
-   @@gem_cutter_01 = Crafting_Station.new(3, Test_Gem_Cutter)
-   @@upgrade_table_01 = Crafting_Station.new(4, Test_Upgrade_Table)
+   @@smelter_01 = Crafting_Station.new("Smelter", 1, Test_Smelter)
+   @@forge_01 = Crafting_Station.new( "Forge", 2, Test_Forge)
+   @@gem_cutter_01 = Crafting_Station.new( "Gem Cutter", 3, Test_Gem_Cutter)
+   @@upgrade_table_01 = Crafting_Station.new( "Upgrade Table", 4, Test_Upgrade_Table)
   #________________________________________________________________________________________________________________________________________________________
   end
  #MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM

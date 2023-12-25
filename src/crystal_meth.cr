@@ -799,8 +799,9 @@ extend self
     when "charcreate"
       Window_Class.char_creation_menu_keypresses(window)
     when "level_editor"
+      zoom = @@level_editor_zoom
       Level_Editor::Editor_Controls.level_editor_keypresses(window, player)
-      Level_Editor::Editor_Controls.level_editor_mouse_clicks(window, player)
+      Level_Editor::Editor_Controls.level_editor_mouse_clicks(window, player, zoom)
     when "HUD"
       Window_Class.hud_keypresses(window)
       Window_Class.check_if_idle(window)
