@@ -1,36 +1,66 @@
 ---
 platform_names:
-- medium_large_platform1
-- medium_large_platform2
+- medium_platform1
+- medium_platform1
 platform_ids:
-- 1
-- 1
+- 4
+- 4
 platform_textures:
 - 0
 - 0
 platform_x_positions:
-- 318.0
-- 389.0
+- 0.0
+- 578.0
 platform_y_positions:
-- 550.0
-- 673.0
+- 40000.0
+- 505.0
 ladder_names:
 - Long Ladder
-- Short Ladder1
-- Short Ladder2
+- Long Ladder
 ladder_lengths:
 - 400
-- 200
-- 200
+- 400
 ladder_textures:
-- 0
 - 0
 - 0
 ladder_x_positions:
 - 0.0
-- 163.0
-- 496.0
+- 882.0
 ladder_y_positions:
 - 40000.0
-- 610.0
-- 600.0
+- 498.0
+wall_names:
+- Short Wall1
+- Short Wall2
+- Short Wall3
+- Short Wall1
+- Short Wall2
+- Short Wall3
+wall_ids:
+- 2
+- 2
+- 2
+- 2
+- 2
+- 2
+wall_textures:
+- 0
+- 1
+- 2
+- 0
+- 1
+- 2
+wall_x_positions:
+- 649.0
+- 1046.0
+- 1453.0
+- 649.0
+- 1046.0
+- 1453.0
+wall_y_positions:
+- 509.0
+- 510.0
+- 506.0
+- 509.0
+- 510.0
+- 506.0

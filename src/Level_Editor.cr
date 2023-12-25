@@ -219,7 +219,7 @@ include Map_Geometry
           if @@texture > 0
            @@texture -= 1
            texture = @@texture
-           current_wall = @@current_ladder
+           current_wall = @@current_wall
            Wall.change_texture(current_wall, texture)
           end
         end
@@ -253,6 +253,7 @@ include Map_Geometry
        when SF::Keyboard::B
          Map_Geometry::Platform.load_map_platform_settings(current_file)
          Map_Geometry::Ladder.load_map_ladder_settings(current_file)
+         Map_Geometry::Wall.load_map_platform_settings(current_file)
   #-------------------------------------------------------Zoom View------------------------------------------------------- 
        when SF::Keyboard::Add
          zoom = -1

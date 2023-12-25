@@ -7066,14 +7066,22 @@ module Crafted_Items
   @[YAML::Field(key: "ladder_textures")]
   @[YAML::Field(key: "ladder_x_positions")]
   @[YAML::Field(key: "ladder_y_positions")]
+
   @[YAML::Field(key: "platform_ids")]
   @[YAML::Field(key: "platform_names")]
   @[YAML::Field(key: "platform_textures")]
   @[YAML::Field(key: "platform_x_positions")]
   @[YAML::Field(key: "platform_y_positions")]
+
+  @[YAML::Field(key: "wall_ids")]
+  @[YAML::Field(key: "wall_names")]
+  @[YAML::Field(key: "wall_textures")]
+  @[YAML::Field(key: "wall_x_positions")]
+  @[YAML::Field(key: "wall_y_positions")]
   def Map_Geometry.level_editor_save_map(current_file)
     current_ladder_array = Ladder.get_created_platform_array
     current_platform_array = Platform.get_created_platform_array
+    current_wall_array = Wall.get_created_wall_array
    File.open(current_file, "w") { |f| YAML.dump({"platform_names": current_platform_array.map{ |i| i.name},
    "platform_ids": current_platform_array.map{ |i| i.id}, "platform_textures": current_platform_array.map{ |i| i.texture},
    "platform_x_positions": current_platform_array.map{ |i| i.bounding_rectangle.position.x},
@@ -7081,7 +7089,11 @@ module Crafted_Items
    "ladder_names": current_ladder_array.map{ |i| i.name},
    "ladder_lengths": current_ladder_array.map{ |i| i.length}, "ladder_textures": current_ladder_array.map{ |i| i.texture},
    "ladder_x_positions": current_ladder_array.map{ |i| i.sprite.position.x},
-   "ladder_y_positions": current_ladder_array.map{ |i| i.sprite.position.y}
+   "ladder_y_positions": current_ladder_array.map{ |i| i.sprite.position.y},
+   "wall_names": current_wall_array.map{ |i| i.name},
+   "wall_ids": current_wall_array.map{ |i| i.id}, "wall_textures": current_wall_array.map{ |i| i.texture},
+   "wall_x_positions": current_wall_array.map{ |i| i.bounding_rectangle.position.x},
+   "wall_y_positions": current_wall_array.map{ |i| i.bounding_rectangle.position.y}
    }, f) }
   end
 
@@ -7779,6 +7791,41 @@ module Crafted_Items
        window.draw(@@map_boundary_wall_02.display_rectangle)
       end
    #------------------------------------------------------------Level Editor-------------------------------------------------------------------------------
+    #----------------------------------------------------------Load Map File-------------------------------------------------------------------------------
+     def Wall.load_map_platform_settings(current_file)
+       Platform.initialize_platform_positions
+       yaml = File.open(current_file) { |file| YAML.parse(file) }
+       yaml.class 
+       hash = yaml.as_h  
+       hash.class
+       this = @@short_wall_01.dup
+       i = 0
+       s = yaml["wall_ids"].as_a.size
+       while i < s 
+        if yaml["wall_ids"][i] == 1
+         this = @@map_boundary_wall_02.dup
+         this.bounding_rectangle = @@map_boundary_wall_02.bounding_rectangle.dup
+         this.display_rectangle = @@map_boundary_wall_02.display_rectangle.dup
+        else if yaml["wall_ids"][i] == 2
+         this = @@short_wall_01.dup
+         this.bounding_rectangle = @@short_wall_01.bounding_rectangle.dup
+         this.display_rectangle = @@short_wall_01.display_rectangle.dup
+       else
+         puts "error!" + ["wall_ids"][i].to_s + " is an invalid id!" 
+         i += 1
+        end; end
+        this.id = yaml["wall_ids"][i].as_i
+        this.texture = yaml["wall_textures"][i].as_i
+        this.display_rectangle.set_texture(Wall_Texture_Array[this.texture], reset_rect: false)
+        this.name = yaml["wall_names"][i].as_s
+        x = yaml["wall_x_positions"][i].as_f32
+        y = yaml["wall_y_positions"][i].as_f32
+        this.bounding_rectangle.position = SF.vector2(x, y)
+        this.display_rectangle.position = this.bounding_rectangle.position
+        Current_Wall_Array.push(this)
+        i += 1
+       end
+     end
     #........................................................Set Initial Object............................................................................
      def Wall.level_editor_initial_wall
       current_wall = @@short_wall_01
@@ -7862,8 +7909,8 @@ module Crafted_Items
       current_platform = Current_Wall_Array[id]
       current_platform
      end
-     #........................................................Change Object Texture.........................................................................
-      def Wall.change_texture(current_wall, texture) #@todo prevent this from changing ground texture
+    #........................................................Change Object Texture.........................................................................
+      def Wall.change_texture(current_wall, texture)
         if texture < Wall_Texture_Array.size
         current_wall.display_rectangle.set_texture(Wall_Texture_Array[texture], reset_rect: false) 
         current_wall.texture = texture
