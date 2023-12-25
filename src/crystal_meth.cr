@@ -211,7 +211,10 @@ extend self
     view2.viewport = SF.float_rect(0, 0.85, 1, 0.15)
     window.view = view2
     button_02 = Level_Editor_Button_01.dup; button_02.position = SF.vector2(25, 1025)
+    button_03 = Level_Editor_Button_01.dup; button_03.position = SF.vector2(265, 965)
+    button_04 = Level_Editor_Button_01.dup; button_04.position = SF.vector2(265, 1025)
     window.draw(Bottom_HUD); window.draw(Level_Editor_Button_01); window.draw(button_02)
+    window.draw(button_03); window.draw(button_04)
     Level_Editor::Editor_UI.display_current_object_text(window)
    end
    def Window_Class.level_editor_control_overlay(window)
@@ -222,8 +225,9 @@ extend self
     control_text.position = SF.vector2(0, 0)
     control_text.color = SF::Color::White
     control_text.string = "Save: V\nLoad: B\nMove View: WASD\nMove Platform: Arrow Keys\nReset All Objects: Backspace\nReset Current Object: X" +
-    "\nNext Template: K\nPrevious Template: L\nNext Object: O\nPrevious Object: P\nNew Object: N\nPlace Object: Right Click\nZoom: +/-" +
-    "\nTexture/Teleport Area: T"
+    "\nNext Template/Teleport X: K\nPrevious Template/Teleport X: L\nNext Object: O\nPrevious Object: P" + 
+    "\nNew Object: N\nPlace Object: Right Click\nZoom: +/-" +
+    "\nTexture/Teleport Y: T/Y\nTeleport Area: G/H\nTeleport Area: J/M"
     window.draw(control_text)
   end
  #/////////////////////////////////////////////////////////Main Menu////////////////////////////////////////////////////////////////////+
@@ -734,6 +738,7 @@ extend self
     Map_Geometry::Platform.level_editor_display_platforms(window)
     Map_Geometry::Ladder.level_editor_display_ladder(window)
     Map_Geometry::Wall.level_editor_display_walls(window)
+    Map_Geometry::Teleporter.level_editor_display_teleporters(window)
     Window_Class.level_editor(window)
     Window_Class.level_editor_control_overlay(window)
    when "HUD"

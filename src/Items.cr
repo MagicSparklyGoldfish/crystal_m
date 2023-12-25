@@ -7060,40 +7060,66 @@ module Crafted_Items
 #=MM                                                              Map Geometry                                                                           MM=
 #=MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM=
 #=MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM=
+#===========================================================================================================================================================
  module Map_Geometry
+ #------------------------------------------------------------------Ladders---------------------------------------------------------------------------------
   @[YAML::Field(key: "ladder_lengths")]
   @[YAML::Field(key: "ladder_names")]
   @[YAML::Field(key: "ladder_textures")]
   @[YAML::Field(key: "ladder_x_positions")]
   @[YAML::Field(key: "ladder_y_positions")]
-
+ #-----------------------------------------------------------------Platforms--------------------------------------------------------------------------------
   @[YAML::Field(key: "platform_ids")]
   @[YAML::Field(key: "platform_names")]
   @[YAML::Field(key: "platform_textures")]
   @[YAML::Field(key: "platform_x_positions")]
   @[YAML::Field(key: "platform_y_positions")]
-
+ #-------------------------------------------------------------------Walls----------------------------------------------------------------------------------
   @[YAML::Field(key: "wall_ids")]
   @[YAML::Field(key: "wall_names")]
   @[YAML::Field(key: "wall_textures")]
   @[YAML::Field(key: "wall_x_positions")]
   @[YAML::Field(key: "wall_y_positions")]
+ #----------------------------------------------------------------Teleporters-------------------------------------------------------------------------------
+  @[YAML::Field(key: "teleporter_names")]
+  @[YAML::Field(key: "teleporter_ids")]
+  @[YAML::Field(key: "teleporter_x_positions")]
+  @[YAML::Field(key: "teleporter_y_positions")]
+  @[YAML::Field(key: "teleporter_destination_map")]
+  @[YAML::Field(key: "teleporter_destination_area")]
+  @[YAML::Field(key: "teleporter_x_destination_positions")]
+  @[YAML::Field(key: "teleporter_y_destination_positions")]
+
   def Map_Geometry.level_editor_save_map(current_file)
     current_ladder_array = Ladder.get_created_platform_array
     current_platform_array = Platform.get_created_platform_array
     current_wall_array = Wall.get_created_wall_array
-   File.open(current_file, "w") { |f| YAML.dump({"platform_names": current_platform_array.map{ |i| i.name},
+    current_teleporter_array = Teleporter.get_created_teleporter_array
+   File.open(current_file, "w") { |f| YAML.dump({
+  #---------------------------------------------------Platforms------------------------------------------------------------------------
+   "platform_names": current_platform_array.map{ |i| i.name},
    "platform_ids": current_platform_array.map{ |i| i.id}, "platform_textures": current_platform_array.map{ |i| i.texture},
    "platform_x_positions": current_platform_array.map{ |i| i.bounding_rectangle.position.x},
    "platform_y_positions": current_platform_array.map{ |i| i.bounding_rectangle.position.y},
+  #------------------------------------------------------------------Ladders---------------------------------------------------------------------------------
    "ladder_names": current_ladder_array.map{ |i| i.name},
    "ladder_lengths": current_ladder_array.map{ |i| i.length}, "ladder_textures": current_ladder_array.map{ |i| i.texture},
    "ladder_x_positions": current_ladder_array.map{ |i| i.sprite.position.x},
    "ladder_y_positions": current_ladder_array.map{ |i| i.sprite.position.y},
+  #-----------------------------------------------------Walls--------------------------------------------------------------------------
    "wall_names": current_wall_array.map{ |i| i.name},
    "wall_ids": current_wall_array.map{ |i| i.id}, "wall_textures": current_wall_array.map{ |i| i.texture},
    "wall_x_positions": current_wall_array.map{ |i| i.bounding_rectangle.position.x},
-   "wall_y_positions": current_wall_array.map{ |i| i.bounding_rectangle.position.y}
+   "wall_y_positions": current_wall_array.map{ |i| i.bounding_rectangle.position.y},
+  #--------------------------------------------------Teleporters-----------------------------------------------------------------------
+   "teleporter_names": current_teleporter_array.map{ |i| i.name},
+   "teleporter_ids": current_teleporter_array.map{ |i| i.length},
+   "teleporter_x_positions": current_teleporter_array.map{ |i| i.sprite.position.x},
+   "teleporter_y_positions": current_teleporter_array.map{ |i| i.sprite.position.y},
+   "teleporter_destination_map": current_teleporter_array.map{ |i| i.destination_map},
+   "teleporter_destination_area": current_teleporter_array.map{ |i| i.destination_area},
+   "teleporter_x_destination_positions": current_teleporter_array.map{ |i| i.destination_postion[0]},
+   "teleporter_y_destination_positions": current_teleporter_array.map{ |i| i.destination_postion[1]}
    }, f) }
   end
 
@@ -7840,24 +7866,24 @@ module Crafted_Items
       current_wall.display_rectangle.position = SF.vector2(0, 40000)
       Current_Wall_Array.delete(current_wall)
      end
-     #..........................................................Create New Object...........................................................................
-      def Wall.level_editor_create_platform(wall)
-        current_wall = wall.dup
-        current_wall.id = wall.id
-       case current_wall.id
-       when 1
-        @@boundary_wall_iterator += 1
-        current_wall.name += @@boundary_wall_iterator.to_s
-       when 2
-       @@small_wall_iterator += 1
-       current_wall.name += @@small_wall_iterator.to_s
-       end
-       current_wall.bounding_rectangle = wall.bounding_rectangle.dup
-       current_wall.display_rectangle = wall.display_rectangle.dup
-       Wall_Array.push(current_wall)
-       Current_Wall_Array.push(current_wall)
-       current_wall
+    #..........................................................Create New Object...........................................................................
+     def Wall.level_editor_create_platform(wall)
+       current_wall = wall.dup
+       current_wall.id = wall.id
+      case current_wall.id
+      when 1
+       @@boundary_wall_iterator += 1
+       current_wall.name += @@boundary_wall_iterator.to_s
+      when 2
+      @@small_wall_iterator += 1
+      current_wall.name += @@small_wall_iterator.to_s
       end
+      current_wall.bounding_rectangle = wall.bounding_rectangle.dup
+      current_wall.display_rectangle = wall.display_rectangle.dup
+      Wall_Array.push(current_wall)
+      Current_Wall_Array.push(current_wall)
+      current_wall
+     end
     #..............................................................Place...................................................................................
       def Wall.level_editor_place_wall(current_wall, x, y, player_x, player_y)
        x = player_x + x
@@ -7993,12 +8019,16 @@ module Crafted_Items
   #*                                                              Variables                                                                               *
   #********************************************************************************************************************************************************
    Teleporter_Animation = SF::Clock.new; Teleporter_Array = [] of Teleporter
+   Created_Teleporter_Array = [] of Teleporter; @@teleporter_name_iterator = 0
   #________________________________________________________________________________________________________________________________________________________
   #????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
   #?                                                               Methods                                                                                ?
   #????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
-   #---------------------------------------------------------Initialize Teleporters------------------------------------------------------------------------
+  #---------------------------------------------------------Initialize Teleporters-------------------------------------------------------------------------
     def Teleporter.initialize_teleporters
+      Created_Teleporter_Array.map{ |i| i.sprite.position = SF.vector2(0, 99999)
+      i.destination_map = ""; i.destination_area = ""; i.destination_postion = [0.0, 800.0]}
+      Created_Teleporter_Array.clear
       @@teleporter_01.sprite.position = SF.vector2(0, 99999)
       @@teleporter_02.sprite.position = SF.vector2(0, 99999)
       @@teleporter_03.sprite.position = SF.vector2(0, 99999)
@@ -8086,6 +8116,114 @@ module Crafted_Items
        Map_Geometry::Teleporter.animate_teleporters(window)
        window.draw(@@teleporter_01.sprite)
       end
+    end
+  #--------------------------------------------------------------Level Editor------------------------------------------------------------------------------
+   #..........................................................Set Initial Object...........................................................................
+    def Teleporter.level_editor_initial_teleporter
+      current_teleporter = @@teleporter_01
+     end
+   #...............................................................Display.................................................................................
+    def Teleporter.level_editor_display_teleporters(window)
+      Created_Teleporter_Array.map{ |i| window.draw(i.sprite)}
+     end
+   #.............................................................Initialize................................................................................
+    def Teleporter.initialize_current_teleporter(current_teleporter)
+      current_teleporter.sprite.position = SF.vector2(0, 40000)
+      current_teleporter.destination_area = ""
+      current_teleporter.destination_map = ""
+      current_teleporter.destination_postion = [0.0, 800.0]
+      Created_Teleporter_Array.delete(current_teleporter)
+     end
+   #..........................................................Create New Object............................................................................
+    def Teleporter.level_editor_create_platform(teleporter)
+     current_teleporter = teleporter.dup
+     current_teleporter.id = teleporter.id
+     @@teleporter_name_iterator += 1
+     current_teleporter.name += @@teleporter_name_iterator.to_s
+     current_teleporter.sprite = teleporter.sprite.dup
+     Teleporter_Array.push(current_teleporter)
+     Created_Teleporter_Array.push(current_teleporter)
+     current_teleporter
+    end
+   #...............................................................Place...................................................................................
+    def Teleporter.level_editor_place_teleporter(current_teleporter, x, y, player_x, player_y)
+      x = player_x + x
+      y = player_y + y
+      current_teleporter.sprite.position = SF.vector2(x, y)
+     end
+     def Teleporter.level_editor_precision_placement(current_teleporter, direction)
+      case direction
+       when "left"
+        current_teleporter.sprite.position -= SF.vector2(10, 0)
+       when "right"
+        current_teleporter.sprite.position += SF.vector2(10, 0)
+       when "up"
+        current_teleporter.sprite.position -= SF.vector2(0, 10)
+       when "down"
+        current_teleporter.sprite.position += SF.vector2(0, 10)
+      end
+     end
+   #...........................................................Get Array Size..............................................................................
+     def Teleporter.get_created_teleporter_array_size
+       return Created_Teleporter_Array.size
+      end
+   #.............................................................Get Arrays................................................................................
+     def Teleporter.get_created_teleporter_array
+      return Created_Teleporter_Array
+     end
+   #............................................................Scroll Arrays..............................................................................
+     def Teleporter.level_editor_change_teleporter(id)
+      if id < Created_Teleporter_Array.size && id > -1
+      else
+        id = -1
+      end
+      current_teleporter = Created_Teleporter_Array[id]
+      current_teleporter
+     end
+   #......................................................Change Destination Position......................................................................
+    def Teleporter.change_destination_position_x(current_teleporter, position_x)
+      current_teleporter.destination_postion[0] += position_x
+    end
+    def Teleporter.change_destination_position_y(current_teleporter, position_y)
+      current_teleporter.destination_postion[1] += position_y
+    end
+   #.............................................................Change Area...............................................................................
+    def Teleporter.check_area(current_teleporter)
+      return current_teleporter.destination_area
+    end
+    def Teleporter.change_area(current_teleporter, area)
+      current_teleporter.destination_area = area
+    end
+   #.............................................................Change Map................................................................................
+    def Teleporter.check_map(current_teleporter)
+     return current_teleporter.destination_map
+    end
+    def Teleporter.change_map(current_teleporter, map)
+      current_teleporter.destination_map = map
+    end
+   #............................................................Load Map File..............................................................................
+    def Teleporter.load_map_teleporter_settings(current_file)
+      Teleporter.initialize_teleporters
+      yaml = File.open(current_file) { |file| YAML.parse(file) }
+        s = yaml["teleporter_names"].as_a.size
+        i = 0
+        while s > i
+         puts i
+        this = @@teleporter_01.dup
+        this.sprite = @@teleporter_01.sprite.dup 
+        this.id = yaml["teleporter_ids"][i].as_i
+        this.destination_area = yaml["teleporter_destination_area"][i].as_s
+        this.destination_map = yaml["teleporter_destination_map"][i].as_s
+        this.destination_postion[0] = yaml["teleporter_x_destination_positions"][i].as_f32
+        this.destination_postion[1] = yaml["teleporter_y_destination_positions"][i].as_f32
+        current_teleporter = this
+        this.name = yaml["teleporter_names"][i].as_s
+        x = yaml["teleporter_x_positions"][i].as_f32
+        y = yaml["teleporter_y_positions"][i].as_f32
+        this.sprite.position = SF.vector2(x, y)
+        Created_Teleporter_Array.push(this)
+        i += 1
+       end
     end
   #________________________________________________________________________________________________________________________________________________________
   #-----------------------------------------------------------Animate Teleporters--------------------------------------------------------------------------
