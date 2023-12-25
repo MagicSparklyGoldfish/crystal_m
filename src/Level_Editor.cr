@@ -49,6 +49,9 @@ include Map_Geometry
   #-----------------------------------------------------------Crafting Stations---------------------------------------------------------------------------
    @@current_crafting_station : Crafting_Station; @@current_crafting_station = Crafting_Station.level_editor_initial_crafting_station
    @@current_crafting_station_template : Crafting_Station; @@current_crafting_station_template = Crafting_Station.level_editor_initial_crafting_station
+  #--------------------------------------------------------------Misc Decor-------------------------------------------------------------------------------
+   @@current_misc_decor : Misc_Decor; @@current_misc_decor = Misc_Decor.level_editor_initial_misc_decor
+   @@current_misc_decor_template : Misc_Decor; @@current_misc_decor_template = Misc_Decor.level_editor_initial_misc_decor
   #-----------------------------------------------------------------Misc----------------------------------------------------------------------------------
    @@id : Int32; @@id = 1; @@template_id : Int32; @@template_id = 1
    @@zoom = 1; @@texture = 0
@@ -85,6 +88,8 @@ include Map_Geometry
        return @@current_teleporter
      when "crafting_station"
        return @@current_crafting_station
+     when "misc_decor"
+      return @@current_misc_decor
      end
      return @@current_platform_template 
     end
@@ -100,6 +105,8 @@ include Map_Geometry
       return @@current_teleporter_template
      when "crafting_station"
       return @@current_crafting_station_template
+     when "misc_decor"
+      return @@current_misc_decor_template
      end
      return @@current_platform_template 
     end
@@ -134,6 +141,9 @@ include Map_Geometry
            when "crafting_station"
             current_crafting_station = @@current_crafting_station
             Map_Geometry::Crafting_Station.level_editor_place_crafting_station(current_crafting_station, x, y)
+           when "misc_decor"
+            current_misc_decor = @@current_misc_decor
+            Misc_Decor.level_editor_place_crafting_station(current_misc_decor, x, y)
           end
      end
    end
@@ -179,6 +189,10 @@ include Map_Geometry
           current_crafting_station = @@current_crafting_station
           direction = "left"
           Map_Geometry::Crafting_Station.level_editor_precision_placement(current_crafting_station, direction)
+         when "misc_decor"
+          current_misc_decor = @@current_misc_decor
+          direction = "left"
+          Misc_Decor.level_editor_precision_placement(current_misc_decor, direction)
        end
        when SF::Keyboard::Right
         case @@current_category
@@ -202,6 +216,10 @@ include Map_Geometry
            current_crafting_station = @@current_crafting_station
            direction = "right"
            Map_Geometry::Crafting_Station.level_editor_precision_placement(current_crafting_station, direction)
+         when "misc_decor"
+           current_misc_decor = @@current_misc_decor
+           direction = "right"
+           Misc_Decor.level_editor_precision_placement(current_misc_decor, direction)
        end
        when SF::Keyboard::Up
         case @@current_category
@@ -225,6 +243,10 @@ include Map_Geometry
            current_crafting_station = @@current_crafting_station
            direction = "up"
            Map_Geometry::Crafting_Station.level_editor_precision_placement(current_crafting_station, direction)
+         when "misc_decor"
+           current_misc_decor = @@current_misc_decor
+           direction = "up"
+           Misc_Decor.level_editor_precision_placement(current_misc_decor, direction)
        end
        when SF::Keyboard::Down
         case @@current_category
@@ -248,6 +270,10 @@ include Map_Geometry
            current_crafting_station = @@current_crafting_station
            direction = "down"
            Map_Geometry::Crafting_Station.level_editor_precision_placement(current_crafting_station, direction)
+         when "misc_decor"
+           current_misc_decor = @@current_misc_decor
+           direction = "down"
+           Misc_Decor.level_editor_precision_placement(current_misc_decor, direction)
        end
   #----------------------------------------------------Change Texture/Y--------------------------------------------------- 
        when SF::Keyboard::T
@@ -379,6 +405,9 @@ include Map_Geometry
         when "crafting_station"
           current_crafting_station = @@current_crafting_station
           Map_Geometry::Crafting_Station.initialize_current_crafting_stations(current_crafting_station)
+        when "misc_decor"
+          current_misc_decor = @@current_misc_decor
+          Misc_Decor.initialize_current_misc_decor(current_misc_decor)
         end
        when SF::Keyboard::V
         Map_Geometry.level_editor_save_map(current_file)
@@ -609,6 +638,10 @@ include Map_Geometry
           crafting_station = @@current_crafting_station_template
           current_crafting_station = Map_Geometry::Crafting_Station.level_editor_create_crafting_station(crafting_station)
           @@current_crafting_station = current_crafting_station
+        when "misc_decor"
+          misc_decor = @@current_misc_decor_template
+          current_misc_decor = Misc_Decor.level_editor_create_crafting_station(misc_decor)
+          @@current_misc_decor = current_misc_decor
         end
   #----------------------------------------------------Initialize Map----------------------------------------------------- 
        when SF::Keyboard::Backspace
@@ -626,6 +659,8 @@ include Map_Geometry
          @@current_category = "teleporter"
        when SF::Keyboard::Num5
          @@current_category = "crafting_station"
+       when SF::Keyboard::Num6
+         @@current_category = "misc_decor"
        end; end; end; end
  end
  class Editor_UI < Editor_Controls

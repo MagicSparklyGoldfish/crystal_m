@@ -735,11 +735,13 @@ extend self
      end
    when "level_editor"
     Window_Class.draw_map(window)
+    Map_Geometry::Misc_Decor.level_editor_display_misc_decor(window)
     Map_Geometry::Platform.level_editor_display_platforms(window)
     Map_Geometry::Crafting_Station.level_editor_display_crafting_stations(window)
     Map_Geometry::Ladder.level_editor_display_ladder(window)
     Map_Geometry::Wall.level_editor_display_walls(window)
     Map_Geometry::Teleporter.level_editor_display_teleporters(window)
+    Map_Geometry::Misc_Decor.level_editor_display_misc_decor_overlay(window)
     Window_Class.level_editor(window)
     Window_Class.level_editor_control_overlay(window)
    when "HUD"
