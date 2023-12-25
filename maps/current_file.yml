@@ -1,0 +1,36 @@
+---
+platform_names:
+- medium_large_platform1
+- medium_large_platform2
+platform_ids:
+- 1
+- 1
+platform_textures:
+- 0
+- 0
+platform_x_positions:
+- 318.0
+- 389.0
+platform_y_positions:
+- 550.0
+- 673.0
+ladder_names:
+- Long Ladder
+- Short Ladder1
+- Short Ladder2
+ladder_lengths:
+- 400
+- 200
+- 200
+ladder_textures:
+- 0
+- 0
+- 0
+ladder_x_positions:
+- 0.0
+- 163.0
+- 496.0
+ladder_y_positions:
+- 40000.0
+- 610.0
+- 600.0

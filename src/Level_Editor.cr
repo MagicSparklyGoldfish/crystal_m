@@ -21,6 +21,8 @@ include Map_Geometry
  #********************************************************************************************************************************************************
  #*                                                              Variables                                                                               *
  #********************************************************************************************************************************************************
+  #-------------------------------------------------------------Current File------------------------------------------------------------------------------
+   @@current_file : String; @@current_file = "maps/current_file.yml"
   #---------------------------------------------------------------Category--------------------------------------------------------------------------------
    @@current_category : String; @@current_category = "platform"
   #---------------------------------------------------------------Platform--------------------------------------------------------------------------------
@@ -74,6 +76,7 @@ include Map_Geometry
      return @@zoom
    end
    def Editor_Controls.level_editor_keypresses(window, player)
+    current_file = @@current_file
      while (event = window.poll_event)
       case event
       when SF::Event::Closed
@@ -185,9 +188,10 @@ include Map_Geometry
          current_platform = @@current_platform
          Map_Geometry::Platform.initialize_current_platform(current_platform)
        when SF::Keyboard::V
-         Map_Geometry::Platform.level_editor_save_level
+        Map_Geometry.level_editor_save_map(current_file)
        when SF::Keyboard::B
-         Map_Geometry::Platform.load_map_platform_settings
+         Map_Geometry::Platform.load_map_platform_settings(current_file)
+         Map_Geometry::Ladder.load_map_ladder_settings(current_file)
   #-------------------------------------------------------Zoom View------------------------------------------------------- 
        when SF::Keyboard::Add
          zoom = -1
@@ -244,6 +248,8 @@ include Map_Geometry
         end
   #----------------------------------------------------Choose Objects----------------------------------------------------- 
        when SF::Keyboard::O
+        case @@current_category
+        when "platform"
          s = Map_Geometry::Platform.get_created_platform_array_size
          if s > 0
          if @@id < s
@@ -254,7 +260,21 @@ include Map_Geometry
          id = @@id
          @@current_platform = Map_Geometry::Platform.level_editor_change_platfrom(id)
         end
+      when "ladder"
+        s = Map_Geometry::Ladder.get_created_platform_array_size
+        if s > 0
+        if @@id < s
+        @@id += 1
+        else 
+        @@id = 0
+       end
+        id = @@id
+        @@current_ladder = Map_Geometry::Ladder.level_editor_change_ladder(id)
+       end
+      end
        when SF::Keyboard::P
+        case @@current_category
+        when "platform"
          if @@id < 0
          @@id -= 1
        else 
@@ -262,6 +282,15 @@ include Map_Geometry
         end
          id = @@id
          @@current_platform = Map_Geometry::Platform.level_editor_change_platfrom(id)
+      when "ladder"
+        if @@id < 0
+        @@id -= 1
+      else 
+        @@id = 0
+       end
+        id = @@id
+        @@current_ladder = Map_Geometry::Ladder.level_editor_change_ladder(id)
+      end
   #---------------------------------------------------Create New Objects--------------------------------------------------  
        when SF::Keyboard::N
         case @@current_category

@@ -7061,6 +7061,30 @@ module Crafted_Items
 #=MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM=
 #=MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM=
  module Map_Geometry
+  @[YAML::Field(key: "ladder_lengths")]
+  @[YAML::Field(key: "ladder_names")]
+  @[YAML::Field(key: "ladder_textures")]
+  @[YAML::Field(key: "ladder_x_positions")]
+  @[YAML::Field(key: "ladder_y_positions")]
+  @[YAML::Field(key: "platform_ids")]
+  @[YAML::Field(key: "platform_names")]
+  @[YAML::Field(key: "platform_textures")]
+  @[YAML::Field(key: "platform_x_positions")]
+  @[YAML::Field(key: "platform_y_positions")]
+  def Map_Geometry.level_editor_save_map(current_file)
+    current_ladder_array = Ladder.get_created_platform_array
+    current_platform_array = Platform.get_created_platform_array
+   File.open(current_file, "w") { |f| YAML.dump({"platform_names": current_platform_array.map{ |i| i.name},
+   "platform_ids": current_platform_array.map{ |i| i.id}, "platform_textures": current_platform_array.map{ |i| i.texture},
+   "platform_x_positions": current_platform_array.map{ |i| i.bounding_rectangle.position.x},
+   "platform_y_positions": current_platform_array.map{ |i| i.bounding_rectangle.position.y},
+   "ladder_names": current_ladder_array.map{ |i| i.name},
+   "ladder_lengths": current_ladder_array.map{ |i| i.length}, "ladder_textures": current_ladder_array.map{ |i| i.texture},
+   "ladder_x_positions": current_ladder_array.map{ |i| i.sprite.position.x},
+   "ladder_y_positions": current_ladder_array.map{ |i| i.sprite.position.y}
+   }, f) }
+  end
+
  #LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLlLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
  #L                                                                  Ladder                                                                                L
  #LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLlLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
@@ -7193,11 +7217,15 @@ module Crafted_Items
         end
      #...........................................................Get Array Size.............................................................................
       def Ladder.get_template_array_size
-       return Current_Ladder_Array.size
+       return Ladder_Template_Array.size
       end
       def Ladder.get_created_platform_array_size
-        return Current_Platform_Array.size
+        return Current_Ladder_Array.size
        end
+     #.............................................................Get Arrays...............................................................................
+      def Ladder.get_created_platform_array
+       return Current_Ladder_Array
+      end
      #..............................................................Display.................................................................................
       def Ladder.level_editor_display_ladder(window)
         Current_Ladder_Array.map{ |i| window.draw(i.sprite)}
@@ -7222,30 +7250,31 @@ module Crafted_Items
       end
      #........................................................Change Object Texture.........................................................................
       def Ladder.change_texture(current_ladder, texture)
+        puts current_ladder
         current_ladder.texture = texture
         current_ladder.sprite.texture_rect = SF.int_rect(0, 0, 40, 400)
         a = current_ladder.texture; b = current_ladder.length    
         current_ladder.sprite.texture_rect = SF.int_rect(a, 0, 40, b)   
-     end
+      end
      #............................................................Scroll Arrays.............................................................................
-     def Ladder.level_editor_change_template(template_id)
-      Ladder_Template_Array.map{ |i| puts i.name}
-      puts template_id
-      if Ladder_Template_Array.size > template_id && template_id > -1
-      else
-        template_id = -1
+      def Ladder.level_editor_change_template(template_id)
+       Ladder_Template_Array.map{ |i| puts i.name}
+       puts template_id
+       if Ladder_Template_Array.size > template_id && template_id > -1
+       else
+         template_id = -1
+       end
+       current_template = Ladder_Template_Array[template_id]
+       current_template
       end
-      current_template = Ladder_Template_Array[template_id]
-      current_template
-     end
-     def Ladder.level_editor_change_ladder(id)
-      if id < Current_Ladder_Array.size && id > -1
-      else
-        id = -1
+      def Ladder.level_editor_change_ladder(id)
+       if id < Current_Ladder_Array.size && id > -1
+       else
+         id = -1
+       end
+       current_ladder = Current_Ladder_Array[id]
+       current_ladder
       end
-      current_ladder = Current_Ladder_Array[id]
-      current_ladder
-     end
      #..........................................................Create New Object...........................................................................
       def Ladder.level_editor_create_ladder(ladder)
        current_ladder = ladder.dup
@@ -7262,10 +7291,32 @@ module Crafted_Items
        current_ladder.name += @@ladder_200_length_iteration_number.to_s
        end
        current_ladder.sprite = ladder.sprite.dup
-       #Platform_Array.push(current_ladder)
+       Ladder_Array.push(current_ladder)
        Current_Ladder_Array.push(current_ladder)
        current_ladder
       end
+     #----------------------------------------------------------Load Map File-------------------------------------------------------------------------------
+      def Ladder.load_map_ladder_settings(current_file)
+       Ladder.initialize_ladders
+       yaml = File.open(current_file) { |file| YAML.parse(file) }
+         s = yaml["ladder_lengths"].as_a.size
+         i = 0
+         while s > i
+          puts i
+         this = @@long_ladder_01.dup
+         this.sprite = @@long_ladder_01.sprite.dup
+         this.length = yaml["ladder_lengths"][i].as_i
+         this.texture = yaml["ladder_textures"][i].as_i
+         current_ladder = this
+         this.sprite.texture_rect = SF.int_rect(this.texture, 0, 40, this.length)
+         this.name = yaml["ladder_names"][i].as_s
+         x = yaml["ladder_x_positions"][i].as_f32
+         y = yaml["ladder_y_positions"][i].as_f32
+         this.sprite.position = SF.vector2(x, y)
+         Current_Ladder_Array.push(this)
+         i += 1
+        end
+     end
    #________________________________________________________________________________________________________________________________________________________
    #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
    #/                                                               Entities                                                                               /
@@ -7448,9 +7499,9 @@ module Crafted_Items
      end
     #------------------------------------------------------------Level Editor-------------------------------------------------------------------------------
      #----------------------------------------------------------Load Map File-------------------------------------------------------------------------------
-      def Platform.load_map_platform_settings
+      def Platform.load_map_platform_settings(current_file)
         Platform.initialize_platform_positions
-        yaml = File.open("maps/map_01.yml") { |file| YAML.parse(file) }
+        yaml = File.open(current_file) { |file| YAML.parse(file) }
         yaml.class 
         hash = yaml.as_h  
         hash.class
@@ -7535,6 +7586,10 @@ module Crafted_Items
       def Platform.get_created_platform_array_size
         return Current_Platform_Array.size
        end
+     #.............................................................Get Arrays...............................................................................
+      def Platform.get_created_platform_array
+       return Current_Platform_Array
+      end
      #............................................................Scroll Arrays.............................................................................
       def Platform.level_editor_change_template(template_id)
        if Platform_Template_Array.size > template_id && template_id > -1
@@ -7577,20 +7632,6 @@ module Crafted_Items
        Platform_Array.push(current_platform)
        Current_Platform_Array.push(current_platform)
        current_platform
-      end
-     #................................................................Save..................................................................................
-      @[YAML::Field(key: "platform_ids")]
-      @[YAML::Field(key: "platform_names")]
-      @[YAML::Field(key: "platform_textures")]
-      @[YAML::Field(key: "platform_x_positions")]
-      @[YAML::Field(key: "platform_y_positions")]
-      def Platform.level_editor_save_level
-        File.delete("maps/map_01.yml")
-        File.open("maps/map_01.yml", "w") { |f| YAML.dump({"platform_names": Current_Platform_Array.map{ |i| i.name},
-        "platform_ids": Current_Platform_Array.map{ |i| i.id}, "platform_textures": Current_Platform_Array.map{ |i| i.texture},
-        "platform_x_positions": Current_Platform_Array.map{ |i| i.bounding_rectangle.position.x},
-        "platform_y_positions": Current_Platform_Array.map{ |i| i.bounding_rectangle.position.y}}, f) }
-        #YAML.dump({"platform_names": Current_Platform_Array.map{ |i| i.name}})
       end
    #________________________________________________________________________________________________________________________________________________________
    #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
