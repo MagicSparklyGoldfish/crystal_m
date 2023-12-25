@@ -223,7 +223,7 @@ extend self
     control_text.color = SF::Color::White
     control_text.string = "Save: V\nLoad: B\nMove View: WASD\nMove Platform: Arrow Keys\nReset All Objects: Backspace\nReset Current Object: X" +
     "\nNext Template: K\nPrevious Template: L\nNext Object: O\nPrevious Object: P\nNew Object: N\nPlace Object: Right Click\nZoom: +/-" +
-    "\nTexture: T"
+    "\nTexture/Teleport Area: T"
     window.draw(control_text)
   end
  #/////////////////////////////////////////////////////////Main Menu////////////////////////////////////////////////////////////////////+
@@ -531,6 +531,7 @@ extend self
    end
  #-----------------------------------------------------------Walls----------------------------------------------------------------------
   def Window_Class.wall_collision
+    if @@menu != "level_editor"
     Wall_Array.map { |i| bounding_box1 = @@player_character_rendered_model.global_bounds
     bounding_box2 = i.bounding_rectangle.global_bounds
     if bounding_box1.intersects? bounding_box2
@@ -543,6 +544,7 @@ extend self
       x = i.bounding_rectangle.position.x - 100
       @@player_character_rendered_model.position = SF.vector2(x, y)
     end; end; end}
+  end
    end
   
 #---------------------------------------------------------------------------------------------------------------------------------------+
@@ -731,6 +733,7 @@ extend self
     Window_Class.draw_map(window)
     Map_Geometry::Platform.level_editor_display_platforms(window)
     Map_Geometry::Ladder.level_editor_display_ladder(window)
+    Map_Geometry::Wall.level_editor_display_walls(window)
     Window_Class.level_editor(window)
     Window_Class.level_editor_control_overlay(window)
    when "HUD"

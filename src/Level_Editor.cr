@@ -21,6 +21,13 @@ include Map_Geometry
  #********************************************************************************************************************************************************
  #*                                                              Variables                                                                               *
  #********************************************************************************************************************************************************
+  #-----------------------------------------------------------------Maps----------------------------------------------------------------------------------
+   #................................................................Areas.................................................................................
+    Area_Array = ["test", "doll factory"]
+   #................................................................Test..................................................................................
+    Test_Map_Area = ["test", "test_ore", "test_garden"]
+   #............................................................Doll Factory..............................................................................
+    Doll_Factory_Map_Array = ["factory_map_01", "factory_home"]
   #-------------------------------------------------------------Current File------------------------------------------------------------------------------
    @@current_file : String; @@current_file = "maps/current_file.yml"
   #---------------------------------------------------------------Category--------------------------------------------------------------------------------
@@ -32,6 +39,10 @@ include Map_Geometry
    @@current_ladder : Ladder; @@current_ladder = Map_Geometry::Ladder.level_editor_initial_ladder
    @@current_ladder_template  : Ladder; @@current_ladder_template  = Map_Geometry::Ladder.level_editor_initial_ladder
    Ladder_Texture_Array = [0, 40, 80, 120, 160]
+  #-----------------------------------------------------------------Wall----------------------------------------------------------------------------------
+   @@current_wall : Wall; @@current_wall = Map_Geometry::Wall.level_editor_initial_wall
+   @@current_wall_template : Wall; @@current_wall_template = Map_Geometry::Wall.level_editor_initial_wall
+
    @@id : Int32; @@id = 1; @@template_id : Int32; @@template_id = 1
    @@zoom = 1; @@texture = 0
    def Editor_Controls.check_current_object
@@ -40,6 +51,8 @@ include Map_Geometry
       return @@current_platform
      when "ladder"
        return @@current_ladder
+     when "wall"
+       return @@current_wall
      end
      return @@current_platform_template 
     end
@@ -49,6 +62,8 @@ include Map_Geometry
       return @@current_platform_template 
      when "ladder"
       return @@current_ladder_template
+     when "wall"
+      return @@current_wall_template
      end
      return @@current_platform_template 
     end
@@ -66,6 +81,9 @@ include Map_Geometry
            when "ladder"
             current_ladder = @@current_ladder
             Ladder.level_editor_place_platform(current_ladder, x, y, player_x, player_y)
+           when "wall"
+            current_wall = @@current_wall
+            Map_Geometry::Wall.level_editor_place_wall(current_wall, x, y, player_x, player_y)
           end
      end
    end
@@ -96,6 +114,10 @@ include Map_Geometry
           current_ladder = @@current_ladder
           direction = "left"
           Map_Geometry::Ladder.level_editor_precision_placement(current_ladder, direction)
+         when "wall"
+          current_wall = @@current_wall
+          direction = "left"
+          Map_Geometry::Wall.level_editor_precision_placement(current_wall, direction)
        end
        when SF::Keyboard::Right
         case @@current_category
@@ -107,6 +129,10 @@ include Map_Geometry
            current_ladder = @@current_ladder
            direction = "right"
            Map_Geometry::Ladder.level_editor_precision_placement(current_ladder, direction)
+         when "wall"
+           current_wall = @@current_wall
+           direction = "right"
+           Map_Geometry::Wall.level_editor_precision_placement(current_wall, direction)
        end
        when SF::Keyboard::Up
         case @@current_category
@@ -118,6 +144,10 @@ include Map_Geometry
            current_ladder = @@current_ladder
            direction = "up"
            Map_Geometry::Ladder.level_editor_precision_placement(current_ladder, direction)
+         when "wall"
+           current_wall = @@current_wall
+           direction = "up"
+           Map_Geometry::Wall.level_editor_precision_placement(current_wall, direction)
        end
        when SF::Keyboard::Down
         case @@current_category
@@ -129,8 +159,12 @@ include Map_Geometry
            current_ladder = @@current_ladder
            direction = "down"
            Map_Geometry::Ladder.level_editor_precision_placement(current_ladder, direction)
+         when "wall"
+           current_wall = @@current_wall
+           direction = "down"
+           Map_Geometry::Wall.level_editor_precision_placement(current_wall, direction)
        end
-  #-----------------------------------------------------Change Texture---------------------------------------------------- 
+  #--------------------------------------------------Change Texture/Area-------------------------------------------------- 
        when SF::Keyboard::T
         case @@current_category
         when "platform"
@@ -173,6 +207,8 @@ include Map_Geometry
            Ladder.change_texture(current_ladder, texture)
           end
         end
+  #-------------------------------------------------------Change Map------------------------------------------------------ 
+        when SF::Keyboard::M
   #-----------------------------------------------------Position View----------------------------------------------------- 
        when SF::Keyboard::W
            player.position -= SF.vector2(0, 50)
@@ -185,8 +221,17 @@ include Map_Geometry
   #-------------------------------------------------Save, Load, Initialize------------------------------------------------ 
    #@note rectangles and sprites must be duped individually or they will disappear
        when SF::Keyboard::X
+        case @@current_category
+        when "platform"
          current_platform = @@current_platform
          Map_Geometry::Platform.initialize_current_platform(current_platform)
+        when "ladder"
+          current_ladder = @@current_ladder
+          Map_Geometry::Ladder.initialize_current_ladder(current_ladder)
+        when "wall"
+         current_wall = @@current_wall
+         Map_Geometry::Wall.initialize_current_wall(current_wall)
+        end
        when SF::Keyboard::V
         Map_Geometry.level_editor_save_map(current_file)
        when SF::Keyboard::B
@@ -302,6 +347,10 @@ include Map_Geometry
           ladder = @@current_ladder_template 
           current_ladder = Map_Geometry::Ladder.level_editor_create_ladder(ladder)
           @@current_ladder = current_ladder
+        when "wall"
+          wall = @@current_wall_template 
+          current_wall = Map_Geometry::Wall.level_editor_create_platform(wall)
+          @@current_wall = current_wall
         end
   #-----------------------------------------------------Initialize Map---------------------------------------------------- 
        when SF::Keyboard::Backspace
@@ -311,6 +360,8 @@ include Map_Geometry
          @@current_category = "platform"
        when SF::Keyboard::Num2
          @@current_category = "ladder"
+       when SF::Keyboard::Num3
+         @@current_category = "wall"
        end; end; end; end
  end
  class Editor_UI < Editor_Controls

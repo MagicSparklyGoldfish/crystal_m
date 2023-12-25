@@ -7211,6 +7211,11 @@ module Crafted_Items
         end}
       end
     #=============================================================Level Editor==============================================================================
+     #............................................................Initialize................................................................................
+      def Ladder.initialize_current_ladder(current_ladder)
+        current_ladder.sprite.position = SF.vector2(0, 40000)
+        Current_Ladder_Array.delete(current_ladder)
+      end
      #...........................................................Initialization.............................................................................
        def Ladder.level_editor_initial_ladder
         current_ladder = @@long_ladder_01
@@ -7295,7 +7300,7 @@ module Crafted_Items
        Current_Ladder_Array.push(current_ladder)
        current_ladder
       end
-     #----------------------------------------------------------Load Map File-------------------------------------------------------------------------------
+     #------------------------------------------------------------Load Map File-----------------------------------------------------------------------------
       def Ladder.load_map_ladder_settings(current_file)
        Ladder.initialize_ladders
        yaml = File.open(current_file) { |file| YAML.parse(file) }
@@ -7354,10 +7359,10 @@ module Crafted_Items
      end
     def name
       @name
-    end
+     end
     def texture
       @texture
-    end
+     end
     def bounding_rectangle
       @bounding_rectangle
      end
@@ -7366,13 +7371,13 @@ module Crafted_Items
      end
     def id=(this)
       @id = this
-    end
+     end
     def name=(this)
       @name = this
-    end
+     end
     def texture=(this)
       @texture = this
-    end
+     end
     def bounding_rectangle=(this)
       @bounding_rectangle = this
      end
@@ -7677,7 +7682,7 @@ module Crafted_Items
     end
    def texture
     @texture
-   end
+    end
    def display_rectangle
     @display_rectangle
     end
@@ -7690,16 +7695,32 @@ module Crafted_Items
    def length
      @length
     end
+   def id=(this)
+     @id = this
+     end
+   def name=(this)
+    @name = this
+   end
+   def texture=(this)
+    @texture = this
+    end
+   def display_rectangle=(this)
+    @display_rectangle = this
+    end
+   def bounding_rectangle=(this)
+    @bounding_rectangle = this
+    end
   #________________________________________________________________________________________________________________________________________________________
   #********************************************************************************************************************************************************
   #*                                                              Variables                                                                               *
   #********************************************************************************************************************************************************
-   Wall_Array = [] of Wall
+   Wall_Array = [] of Wall; Current_Wall_Array = [] of Wall; Wall_Template_Array = [] of Wall
+   @@boundary_wall_iterator = 0; @@small_wall_iterator = 0
   #________________________________________________________________________________________________________________________________________________________
   #????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
   #?                                                               Methods                                                                                ?
   #????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
-   #--------------------------------------------------------------Position---------------------------------------------------------------------------------
+   #--------------------------------------------------------------Position--------------------------------------------------------------------------------
     def Wall.position(window, area, map)
        case area
         when "test"
@@ -7708,14 +7729,14 @@ module Crafted_Items
          Wall.position_doll_factory(window, area, map)
       end
      end
-    #----------------------------------------------------------------Test----------------------------------------------------------------------------------
+   #----------------------------------------------------------------Test----------------------------------------------------------------------------------
      def Wall.position_test(window, area, map)
        @@map_boundary_wall_01.bounding_rectangle.position = SF.vector2(-6000, -3000)
        @@map_boundary_wall_01.display_rectangle.position = SF.vector2(-6000, -3000)
        @@map_boundary_wall_02.bounding_rectangle.position = SF.vector2(6000, -3000)
        @@map_boundary_wall_02.display_rectangle.position = SF.vector2(6000, -3000)
       end
-    #------------------------------------------------------------Doll Factory------------------------------------------------------------------------------
+   #------------------------------------------------------------Doll Factory------------------------------------------------------------------------------
      def Wall.position_doll_factory(window, area, map)
       case map
        when"factory_map_01"
@@ -7730,7 +7751,7 @@ module Crafted_Items
        @@map_boundary_wall_02.display_rectangle.position = SF.vector2(600, -3000)
        end
      end
-   #---------------------------------------------------------------Display---------------------------------------------------------------------------------
+   #---------------------------------------------------------------Display--------------------------------------------------------------------------------
     def Wall.display(window, area, map)
       case area
          when "test"
@@ -7739,28 +7760,86 @@ module Crafted_Items
           Wall.display_doll_factory(window, area, map)
         end
      end
-    #----------------------------------------------------------------Test----------------------------------------------------------------------------------
+   #----------------------------------------------------------------Test----------------------------------------------------------------------------------
      def Wall.display_test(window, area, map)
       window.draw(@@map_boundary_wall_01.bounding_rectangle)
       window.draw(@@map_boundary_wall_01.display_rectangle)
       window.draw(@@map_boundary_wall_02.bounding_rectangle)
       window.draw(@@map_boundary_wall_02.display_rectangle)
       end
-    #------------------------------------------------------------Doll Factory------------------------------------------------------------------------------
+   #------------------------------------------------------------Doll Factory------------------------------------------------------------------------------
      def Wall.display_doll_factory(window, area, map)
        window.draw(@@map_boundary_wall_01.bounding_rectangle)
        window.draw(@@map_boundary_wall_01.display_rectangle)
        window.draw(@@map_boundary_wall_02.bounding_rectangle)
        window.draw(@@map_boundary_wall_02.display_rectangle)
       end
+   #------------------------------------------------------------Level Editor-------------------------------------------------------------------------------
+    #........................................................Set Initial Object...........................................................................
+     def Wall.level_editor_initial_wall
+      current_wall = @@short_wall_01
+     end
+    #.............................................................Display..................................................................................
+     def Wall.level_editor_display_walls(window)
+       Current_Wall_Array.map{ |i| window.draw(i.display_rectangle)}
+      end
+    #............................................................Initialize................................................................................
+     def Wall.initialize_current_wall(current_wall)
+      current_wall.bounding_rectangle.position = SF.vector2(0, 40000)
+      current_wall.display_rectangle.position = SF.vector2(0, 40000)
+      Current_Wall_Array.delete(current_wall)
+     end
+     #..........................................................Create New Object...........................................................................
+      def Wall.level_editor_create_platform(wall)
+        current_wall = wall.dup
+        current_wall.id = wall.id
+       case current_wall.id
+       when 1
+        @@boundary_wall_iterator += 1
+        current_wall.name += @@boundary_wall_iterator.to_s
+       when 2
+       @@small_wall_iterator += 1
+       current_wall.name += @@small_wall_iterator.to_s
+       end
+       current_wall.bounding_rectangle = wall.bounding_rectangle.dup
+       current_wall.display_rectangle = wall.display_rectangle.dup
+       Wall_Array.push(current_wall)
+       Current_Wall_Array.push(current_wall)
+       current_wall
+      end
+    #..............................................................Place...................................................................................
+      def Wall.level_editor_place_wall(current_wall, x, y, player_x, player_y)
+       x = player_x + x
+       y = player_y + y
+       current_wall.bounding_rectangle.position = SF.vector2(x, y)
+       current_wall.display_rectangle.position = SF.vector2(x, y)
+      end
+      def Wall.level_editor_precision_placement(current_wall, direction)
+       case direction
+        when "left"
+          current_wall.bounding_rectangle.position -= SF.vector2(10, 0)
+          current_wall.display_rectangle.position -= SF.vector2(10, 0)
+        when "right"
+          current_wall.bounding_rectangle.position += SF.vector2(10, 0)
+          current_wall.display_rectangle.position += SF.vector2(10, 0)
+        when "up"
+          current_wall.bounding_rectangle.position -= SF.vector2(0, 10)
+          current_wall.display_rectangle.position -= SF.vector2(0, 10)
+        when "down"
+          current_wall.bounding_rectangle.position += SF.vector2(0, 10)
+          current_wall.display_rectangle.position += SF.vector2(0, 10)
+       end
+      end
   #________________________________________________________________________________________________________________________________________________________
   #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   #/                                                               Entities                                                                               /
   #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-   @@map_boundary_wall_01 = Wall.new("Boundary Wall 01", 1, 0, Map_Boundary_Wall_01, Map_Boundary_Wall_Bounds_01, Concrete_Pillar_01, 1000)
+   @@map_boundary_wall_01 = Wall.new("Boundary Wall 01", 0, 0, Map_Boundary_Wall_01, Map_Boundary_Wall_Bounds_01, Concrete_Pillar_01, 1000)
    Wall_Array.push(@@map_boundary_wall_01)
-   @@map_boundary_wall_02 = Wall.new("Boundary Wall 02", 1, 0, Map_Boundary_Wall_01.dup, Map_Boundary_Wall_Bounds_01.dup, Concrete_Pillar_01, 1000)
-   Wall_Array.push(@@map_boundary_wall_02)
+   @@map_boundary_wall_02 = Wall.new("Boundary Wall 0", 1, 0, Map_Boundary_Wall_01.dup, Map_Boundary_Wall_Bounds_01.dup, Concrete_Pillar_01, 1000)
+   Wall_Array.push(@@map_boundary_wall_02); Wall_Template_Array.push(@@map_boundary_wall_02)
+   @@short_wall_01 = Wall.new("Short Wall", 2, 0, Short_Wall_01.dup, Short_Wall_01.dup, Concrete_Pillar_01, 300)
+   Wall_Template_Array.push(@@short_wall_01)
   #________________________________________________________________________________________________________________________________________________________
     end
  #_________________________________________________________________________________________________________________________________________________________
@@ -7847,7 +7926,7 @@ module Crafted_Items
       @@teleporter_02.destination_postion = [0.0, 800.0]
       @@teleporter_03.destination_postion = [0.0, 800.0]
     end
-   #----------------------------------------------------------Position Teleporters-------------------------------------------------------------------------
+  #----------------------------------------------------------Position Teleporters--------------------------------------------------------------------------
     def Teleporter.position_teleporters(area, map)
       Teleporter.initialize_teleporters
       case area

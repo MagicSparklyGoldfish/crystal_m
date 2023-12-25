@@ -3453,12 +3453,16 @@ Testing_Text.character_size = 20; Testing_Text.color = SF::Color::White; Testing
  Ground = SF::RectangleShape.new(SF.vector2(10000, 500));
  Ground.position = SF.vector2(-5000, 800); Ground.set_texture(GRASS_TEXTURE_1, reset_rect: false)
  #------------------------------------------------------Textures-----------------------------------------------------------------------
-    Platform_Texture_Array = [GRASS_TEXTURE_1, CONCRETE_TEXTURE_1]
+    Platform_Texture_Array = [GRASS_TEXTURE_1, CONCRETE_TEXTURE_1, WOOD_TEXTURE_01]
+    Wall_Texture_Array = [CONCRETE_TEXTURE_1, WOOD_TEXTURE_01, WOOD_TEXTURE_02]
   #------------------------------------------------------Grass-------------------------------------------------------------------------
    GRASS_TEXTURE_1 = SF::Texture.from_file("graphics/map objects/Grass_01.png"); GRASS_TEXTURE_1.repeated = true
   #-----------------------------------------------------Concrete-----------------------------------------------------------------------
    CONCRETE_TEXTURE_1 = SF::Texture.from_file("graphics/map objects/Concrete_01.png"); CONCRETE_TEXTURE_1.repeated = true
    CONCRETE_PILLAR_TEXTURE_01 = SF::Texture.from_file("graphics/map objects/Concrete_Pillar_01.png")
+  #-------------------------------------------------------Wood-------------------------------------------------------------------------
+   WOOD_TEXTURE_01 = SF::Texture.from_file("graphics/map objects/Wood_01.png")
+   WOOD_TEXTURE_02 = SF::Texture.from_file("graphics/map objects/Wood_02.png")
    HANGING_DECOR_01 = SF::Texture.from_file("graphics/map objects/Hanging_Decor_01.png")
  #--------------------------------------------------------Test-------------------------------------------------------------------------
   Test_Teleporter = SF::RectangleShape.new(SF.vector2(100, 40)); Test_Teleporter.fill_color = SF.color(50, 150, 255)
@@ -3494,6 +3498,9 @@ Testing_Text.character_size = 20; Testing_Text.color = SF::Color::White; Testing
 
   Map_Boundary_Wall_01 = SF::RectangleShape.new(SF.vector2(1000, 5000)); Map_Boundary_Wall_01.set_texture(CONCRETE_TEXTURE_1, reset_rect: false)
   Map_Boundary_Wall_01.position = SF.vector2(-50000, 600)
+
+  Short_Wall_01 = SF::RectangleShape.new(SF.vector2(75, 300)); Short_Wall_01.set_texture(CONCRETE_TEXTURE_1, reset_rect: false)
+  Short_Wall_01.position = SF.vector2(-50000, 600)
 
   Enemy_Blocking_Wall_01 = SF::RectangleShape.new(SF.vector2(50, 250)); Enemy_Blocking_Wall_01.fill_color = SF.color(0, 255, 100, 0)
   Enemy_Blocking_Wall_01.position = SF.vector2(-50000, 600)
