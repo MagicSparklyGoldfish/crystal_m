@@ -4560,35 +4560,40 @@ include Use
  end
 end   
 
-
+#===========================================================================================================================================================
+#=HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH=
+#=HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH=
+#=HH                                                            Harvestables                                                                             HH=
+#=HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH=
+#=HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH=
 module Harvestables
 include Use
   extend self
   class Ore
     All_Ore_Array = [] of Ore 
-    Test_Ore_Array = [@@bloodstone_01, @@moss_agate_01, @@amber01, @@wavellite01,  @@topaz01, @@amethyst01,
-    @@smoky_quartz01, @@sapphire01, @@black_opal01, @@ajoite01, @@rhodolite01, @@chalcanthite01, @@flourite01, @@amorite01, @@lapis_lazuli01,
-    @@moonstone01, @@blue_calcite01, @@hiddenite01, @@ofretite01, @@holly_blue_agate01, @@ametrine01, @@hemimorphite01, @@tiffany_stone01,
-    @@azurite01, @@howlite01, @@angelite01, @@blue_lace_agate01, @@iolite01, @@sodalite01, @@kyanite01, @@sunstone01, @@bony_amber01, @@blue_amber01,
-    @@blue_spinel01, @@red_spinel01, @@fire_opal01, @@garnet01, @@ruby01, @@cherry_quartz01, @@lemon_quartz01, @@turquoise01, @@tigers_eye01,
-    @@orange_calcite01, @@grape_agate01, @@jade01, @@diamond01, @@emerald01, @@painite01, @@bumblebee_jasper01, @@blood_jasper01, @@mook_jasper01,
-    @@red_jasper01, @@carbon01, @@copper01, @@tin01, @@zinc01, @@iron01]
+    # Test_Ore_Array = [@@bloodstone_01, @@moss_agate_01, @@amber01, @@wavellite01,  @@topaz01, @@amethyst01,
+    # @@smoky_quartz01, @@sapphire01, @@black_opal01, @@ajoite01, @@rhodolite01, @@chalcanthite01, @@flourite01, @@amorite01, @@lapis_lazuli01,
+    # @@moonstone01, @@blue_calcite01, @@hiddenite01, @@ofretite01, @@holly_blue_agate01, @@ametrine01, @@hemimorphite01, @@tiffany_stone01,
+    # @@azurite01, @@howlite01, @@angelite01, @@blue_lace_agate01, @@iolite01, @@sodalite01, @@kyanite01, @@sunstone01, @@bony_amber01, @@blue_amber01,
+    # @@blue_spinel01, @@red_spinel01, @@fire_opal01, @@garnet01, @@ruby01, @@cherry_quartz01, @@lemon_quartz01, @@turquoise01, @@tigers_eye01,
+    # @@orange_calcite01, @@grape_agate01, @@jade01, @@diamond01, @@emerald01, @@painite01, @@bumblebee_jasper01, @@blood_jasper01, @@mook_jasper01,
+    # @@red_jasper01, @@carbon01, @@copper01, @@tin01, @@zinc01, @@iron01]
 
-    Test_Ore_Sprite_Array = [@@bloodstone_01.sprite, @@bloodstone_02.sprite, @@bloodstone_03.sprite, @@moss_agate_01.sprite, @@amber01.sprite, 
-    @@wavellite01.sprite,  @@topaz01.sprite, @@amethyst01.sprite, @@smoky_quartz01.sprite, @@sapphire01.sprite, @@black_opal01.sprite,
-    @@ajoite01.sprite, @@rhodolite01.sprite, @@chalcanthite01.sprite, @@flourite01.sprite, @@amorite01.sprite, @@lapis_lazuli01.sprite,
-    @@moonstone01.sprite, @@blue_calcite01.sprite, @@hiddenite01.sprite, @@ofretite01.sprite, @@holly_blue_agate01.sprite, @@ametrine01.sprite,
-    @@hemimorphite01.sprite, @@tiffany_stone01.sprite, @@azurite01.sprite, @@howlite01.sprite, @@angelite01.sprite, @@blue_lace_agate01.sprite,
-    @@iolite01.sprite, @@sodalite01.sprite, @@kyanite01.sprite, @@sunstone01.sprite, @@bony_amber01.sprite, @@blue_amber01.sprite, @@blue_spinel01.sprite,
-    @@red_spinel01.sprite, @@fire_opal01.sprite, @@garnet01.sprite, @@ruby01.sprite, @@cherry_quartz01.sprite, @@lemon_quartz01.sprite,
-    @@turquoise01.sprite, @@tigers_eye01.sprite, @@orange_calcite01.sprite, @@grape_agate01.sprite, @@jade01.sprite, @@diamond01.sprite, @@emerald01.sprite,
-    @@painite01.sprite, @@bumblebee_jasper01.sprite, @@blood_jasper01.sprite, @@mook_jasper01.sprite, @@red_jasper01.sprite, @@carbon01.sprite, 
-    @@copper01.sprite, @@tin01.sprite, @@zinc01.sprite, @@iron01.sprite]
+    # Test_Ore_Sprite_Array = [@@bloodstone_01.sprite, @@bloodstone_02.sprite, @@bloodstone_03.sprite, @@moss_agate_01.sprite, @@amber01.sprite, 
+    # @@wavellite01.sprite,  @@topaz01.sprite, @@amethyst01.sprite, @@smoky_quartz01.sprite, @@sapphire01.sprite, @@black_opal01.sprite,
+    # @@ajoite01.sprite, @@rhodolite01.sprite, @@chalcanthite01.sprite, @@flourite01.sprite, @@amorite01.sprite, @@lapis_lazuli01.sprite,
+    # @@moonstone01.sprite, @@blue_calcite01.sprite, @@hiddenite01.sprite, @@ofretite01.sprite, @@holly_blue_agate01.sprite, @@ametrine01.sprite,
+    # @@hemimorphite01.sprite, @@tiffany_stone01.sprite, @@azurite01.sprite, @@howlite01.sprite, @@angelite01.sprite, @@blue_lace_agate01.sprite,
+    # @@iolite01.sprite, @@sodalite01.sprite, @@kyanite01.sprite, @@sunstone01.sprite, @@bony_amber01.sprite, @@blue_amber01.sprite, @@blue_spinel01.sprite,
+    # @@red_spinel01.sprite, @@fire_opal01.sprite, @@garnet01.sprite, @@ruby01.sprite, @@cherry_quartz01.sprite, @@lemon_quartz01.sprite,
+    # @@turquoise01.sprite, @@tigers_eye01.sprite, @@orange_calcite01.sprite, @@grape_agate01.sprite, @@jade01.sprite, @@diamond01.sprite, @@emerald01.sprite,
+    # @@painite01.sprite, @@bumblebee_jasper01.sprite, @@blood_jasper01.sprite, @@mook_jasper01.sprite, @@red_jasper01.sprite, @@carbon01.sprite, 
+    # @@copper01.sprite, @@tin01.sprite, @@zinc01.sprite, @@iron01.sprite]
    #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
    #+                                                              Variables                                                                               +
    #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
    @@ore_animation_frame = 0; @@ore_reset = 0; @@ore_break_iterator = 0; @@is_smelting : Bool; @@is_smelting = false; @@attack_strength : Float64
-   @@attack_strength = 10; @@ore_hit_animation_clock = SF::Clock.new; @@is_ore_attacked : Bool; @@is_ore_attacked = false; @@ore : Ore; @@ore = @@bloodstone_01
+   @@attack_strength = 10; @@ore_hit_animation_clock = SF::Clock.new; @@is_ore_attacked : Bool; @@is_ore_attacked = false; @@ore : Ore; @@ore = @@bloodstone
    #________________________________________________________________________________________________________________________________________________________
    #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
    #!                                                              Initialize                                                                              !
@@ -4691,12 +4696,12 @@ include Use
       @@is_ore_attacked = false
     end
     def Ore.harvest(attack)
-      x = 0; y = Test_Ore_Array.size - 1
+      x = 0; y = All_Ore_Array.size - 1
       while x <= y
-      Test_Ore_Array[x]
-      ore = Test_Ore_Array[x]
-      Test_Ore_Array[x].sprite.global_bounds
-      this = Test_Ore_Array[x].sprite.global_bounds
+        All_Ore_Array[x]
+      ore = All_Ore_Array[x]
+      All_Ore_Array[x].sprite.global_bounds
+      this = All_Ore_Array[x].sprite.global_bounds
       Ore.harvest2(attack, this, ore)
       if x <= y
         x += 1
@@ -4836,9 +4841,9 @@ include Use
           @@ore.sprite_change_square(a, b, x, y)
         end; end
       end
-      s = Test_Ore_Array.size - 1
-      if Test_Ore_Array[@@ore_break_iterator].hp <= 0 && Test_Ore_Array[@@ore_break_iterator].is_broke == false
-        broken = Test_Ore_Array[@@ore_break_iterator]
+      s = All_Ore_Array.size - 1
+      if All_Ore_Array[@@ore_break_iterator].hp <= 0 && All_Ore_Array[@@ore_break_iterator].is_broke == false
+        broken = All_Ore_Array[@@ore_break_iterator]
         Ore.break(broken)
       end
       if @@ore_break_iterator < s
@@ -4849,7 +4854,7 @@ include Use
       All_Ore_Array.map{ |i| i.sprite.position = SF.vector2(0, 10000)}
        case area 
        when "test"
-        Ore.display_test(window, map)
+        #Ore.display_test(window, map)
        when "doll factory"
        end
 
@@ -4859,62 +4864,15 @@ include Use
       end
       
     end
-    def Ore.display_test(window, map)
-     case map
-     when "test_ore"
-      @@bloodstone_01.sprite.position = SF.vector2(300, 702); @@moss_agate_01.sprite.position = SF.vector2(500, 702) 
-      @@amber01.sprite.position = SF.vector2(700, 702); @@wavellite01.sprite.position = SF.vector2(900, 702) 
-      @@topaz01.sprite.position = SF.vector2(1100, 702); @@amethyst01.sprite.position = SF.vector2(1300, 702)  
-      @@smoky_quartz01.sprite.position = SF.vector2(1500, 702); @@sapphire01.sprite.position = SF.vector2(1700, 702)  
-      @@black_opal01.sprite.position = SF.vector2(1900, 702); @@ajoite01.sprite.position = SF.vector2(2100, 702)  
-      @@rhodolite01.sprite.position = SF.vector2(2300, 702); @@chalcanthite01.sprite.position = SF.vector2(2500, 702)  
-      @@flourite01.sprite.position = SF.vector2(2700, 702); @@amorite01.sprite.position = SF.vector2(3000, 702)  
-      @@lapis_lazuli01.sprite.position = SF.vector2(3200, 702); @@moonstone01.sprite.position = SF.vector2(3400, 702)  
-      @@blue_calcite01.sprite.position = SF.vector2(3600, 702); @@hiddenite01.sprite.position = SF.vector2(3800, 702)  
-      @@ofretite01.sprite.position = SF.vector2(4000, 702); @@holly_blue_agate01.sprite.position = SF.vector2(4200, 702)  
-      @@ametrine01.sprite.position = SF.vector2(4400, 702); @@hemimorphite01.sprite.position = SF.vector2(4600, 702)  
-      @@tiffany_stone01.sprite.position = SF.vector2(4800, 702); @@azurite01.sprite.position = SF.vector2(-400, 702) 
-      @@howlite01.sprite.position = SF.vector2(-600, 702); @@angelite01.sprite.position = SF.vector2(-800, 702) 
-      @@blue_lace_agate01.sprite.position = SF.vector2(-1000, 702); @@iolite01.sprite.position = SF.vector2(-1200, 702) 
-      @@sodalite01.sprite.position = SF.vector2(-1400, 702); @@kyanite01.sprite.position = SF.vector2(-1600, 702)
-      @@sunstone01.sprite.position = SF.vector2(-1800, 702); @@bony_amber01.sprite.position = SF.vector2(-2000, 702)
-      @@blue_amber01.sprite.position = SF.vector2(-2200, 702); @@blue_spinel01.sprite.position = SF.vector2(-2400, 702)
-      @@red_spinel01.sprite.position = SF.vector2(-2600, 702); @@fire_opal01.sprite.position = SF.vector2(-2800, 702)
-      @@garnet01.sprite.position = SF.vector2(-3000, 702); @@ruby01.sprite.position = SF.vector2(-3200, 702)
-      @@cherry_quartz01.sprite.position = SF.vector2(-3400, 702); @@lemon_quartz01.sprite.position = SF.vector2(-3600, 702)
-      @@turquoise01.sprite.position = SF.vector2(-3800, 702); @@tigers_eye01.sprite.position = SF.vector2(-4000, 702)
-      @@orange_calcite01.sprite.position = SF.vector2(-4200, 702); @@grape_agate01.sprite.position = SF.vector2(-4600, 702)
-      @@jade01.sprite.position = SF.vector2(-4800, 702); @@diamond01.sprite.position = SF.vector2(50, 302) 
-      @@emerald01.sprite.position = SF.vector2(250, 302); @@painite01.sprite.position = SF.vector2(450, 302) 
-      @@bumblebee_jasper01.sprite.position = SF.vector2(650, 302); @@blood_jasper01.sprite.position = SF.vector2(850, 302)
-      @@mook_jasper01.sprite.position = SF.vector2(1050, 302); @@red_jasper01.sprite.position = SF.vector2(1250, 302)
-      @@carbon01.sprite.position = SF.vector2(1450, 302); @@copper01.sprite.position = SF.vector2(1650, 302)
-      @@tin01.sprite.position = SF.vector2(1850, 302); @@zinc01.sprite.position = SF.vector2(2050, 302)
-      @@iron01.sprite.position = SF.vector2(2250, 302)
-      Test_Ore_Array.map{ |i| window.draw(i.sprite)}
-     end
-     end
-    def Ore.display_doll_factory(window, map)
-     case map
-     when "factory_map_01"
-     # @@bloodstone_01.sprite.position = SF.vector2(300, 702)
-     # Test_Ore_Array.map{ |i| window.draw(i.sprite)}
-     end
-     end
    #________________________________________________________________________________________________________________________________________________________
    #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
    #/                                                               Entities                                                                               /
    #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
    #========================================================================================================================================================
-   #================================================================Minerals================================================================================
+   #=================================================================Minerals===============================================================================
     #..............................................................Bloodstone...............................................................................
-     @@bloodstone_01 = Ore.new("Bloodstone", 1, "red", 7, 500, "bloodstone_ore", Bloodstone_Ore.dup, false, 500) 
-     @@bloodstone_02 = Ore.new("Bloodstone", 2, "red", 7, 500, "bloodstone_ore", Bloodstone_Ore.dup, false, 500) 
-     @@bloodstone_03 = Ore.new("Bloodstone", 3, "red", 7, 500, "bloodstone_ore", Bloodstone_Ore.dup, false, 500) 
-     @@bloodstone_04 = Ore.new("Bloodstone", 4, "red", 7, 500, "bloodstone_ore", Bloodstone_Ore.dup, false, 500) 
-     @@bloodstone_05 = Ore.new("Bloodstone", 5, "red", 7, 500, "bloodstone_ore", Bloodstone_Ore.dup, false, 500) 
-     @@bloodstone_06 = Ore.new("Bloodstone", 6, "red", 7, 500, "bloodstone_ore", Bloodstone_Ore.dup, false, 500) 
-     All_Ore_Array.push(@@bloodstone_01, @@bloodstone_02, @@bloodstone_03, @@bloodstone_04, @@bloodstone_05, @@bloodstone_06)
+     @@bloodstone = Ore.new("Bloodstone", 1, "red", 7, 500, "bloodstone_ore", Bloodstone_Ore.dup, false, 500) 
+     All_Ore_Array.push(@@bloodstone)
     #.......................................................................................................................................................
     #..............................................................Moss Stone...............................................................................
      @@moss_agate_01 = Ore.new("Moss Agate", 7, "green", 7, 450, "moss_agate", Moss_Agate_Ore.dup, false, 450) 
@@ -7061,6 +7019,7 @@ module Crafted_Items
 #=MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM=
 #===========================================================================================================================================================
  module Map_Geometry
+ include Harvestables
  #save fields
  #------------------------------------------------------------------Ladders---------------------------------------------------------------------------------
   @[YAML::Field(key: "ladder_lengths")]
@@ -7114,6 +7073,8 @@ module Crafted_Items
   @[YAML::Field(key: "misc_decor_overlay_scale_x")]
   @[YAML::Field(key: "misc_decor_overlay_scale_y")]
   @[YAML::Field(key: "misc_decor_overlay_rotation")]
+ #-------------------------------------------------------------Current Parallax-----------------------------------------------------------------------------
+  @[YAML::Field(key: "current_parallax")]
 #save function
   def Map_Geometry.level_editor_save_map(current_file)
     current_ladder_array = Ladder.get_created_platform_array
@@ -7123,6 +7084,7 @@ module Crafted_Items
     current_crafting_table_array = Crafting_Station.get_created_crafting_station_array
     current_misc_object_array = Misc_Decor.get_misc_decor_station_array
     current_misc_object_overlay_array = Misc_Decor.get_misc_decor_overlay_array
+    parallax = Parallax.get_current_parallax
     scale_x_01 = current_misc_object_array.map{ |i| i.sprite.scale[0]}
     scale_y_01 = current_misc_object_array.map{ |i| i.sprite.scale[1]}
     scale_x_02 = current_misc_object_overlay_array.map{ |i| i.sprite.scale[0]}
@@ -7174,10 +7136,12 @@ module Crafted_Items
    "misc_decor_overlay_texture_rect": current_misc_object_overlay_array.map{ |i| i.texture_rect},
    "misc_decor_overlay_width": current_misc_object_overlay_array.map{ |i| i.width},
    "misc_decor_overlay_scale_x": scale_x_02, "misc_decor_overlay_scale_y": scale_y_02,
-   "misc_decor_overlay_rotation": current_misc_object_overlay_array.map{ |i| i.sprite.rotation}
+   "misc_decor_overlay_rotation": current_misc_object_overlay_array.map{ |i| i.sprite.rotation},
+  #-------------------------------------------------------------Current Parallax-----------------------------------------------------------------------------
+   "current_parallax": parallax.id
    }, f) }
   end
-
+  
  #LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLlLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
  #L                                                                  Ladder                                                                                L
  #LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLlLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
@@ -7396,6 +7360,7 @@ module Crafted_Items
       end
      #------------------------------------------------------------Load Map File-----------------------------------------------------------------------------
       def Ladder.load_map_ladder_settings(current_file)
+       Current_Ladder_Array.clear
        Ladder.initialize_ladders
        yaml = File.open(current_file) { |file| YAML.parse(file) }
          s = yaml["ladder_lengths"].as_a.size
@@ -7598,6 +7563,7 @@ module Crafted_Items
     #------------------------------------------------------------Level Editor-------------------------------------------------------------------------------
      #----------------------------------------------------------Load Map File-------------------------------------------------------------------------------
       def Platform.load_map_platform_settings(current_file)
+        Current_Platform_Array.clear
         Platform.initialize_platform_positions
         yaml = File.open(current_file) { |file| YAML.parse(file) }
         yaml.class 
@@ -7870,6 +7836,7 @@ module Crafted_Items
    #------------------------------------------------------------Level Editor-------------------------------------------------------------------------------
     #----------------------------------------------------------Load Map File-------------------------------------------------------------------------------
      def Wall.load_map_platform_settings(current_file)
+       Current_Wall_Array.clear
        Platform.initialize_platform_positions
        yaml = File.open(current_file) { |file| YAML.parse(file) }
        yaml.class 
@@ -8252,6 +8219,7 @@ module Crafted_Items
     end
    #............................................................Load Map File..............................................................................
     def Teleporter.load_map_teleporter_settings(current_file)
+      Created_Teleporter_Array.clear
       Teleporter.initialize_teleporters
       yaml = File.open(current_file) { |file| YAML.parse(file) }
         s = yaml["teleporter_names"].as_a.size
@@ -8431,6 +8399,7 @@ module Crafted_Items
       end
     #------------------------------------------------------------Load Map File------------------------------------------------------------------------------
      def Crafting_Station.load_map_platform_settings(current_file)
+      Created_Crafting_Station_Array.clear
        yaml = File.open(current_file) { |file| YAML.parse(file) }
        yaml.class 
        hash = yaml.as_h  
@@ -8597,7 +8566,7 @@ module Crafted_Items
        when "factory_home"
        end
       end
-   #--------------------------------------------------------------Level Editor-----------------------------------------------------------------------------
+   #-------------------------------------------------------------Level Editor------------------------------------------------------------------------------
     #..........................................................Set Initial Object..........................................................................
      def Misc_Decor.level_editor_initial_misc_decor
        current_misc_decor = @@concrete_pillar_01
@@ -8746,6 +8715,7 @@ module Crafted_Items
     #------------------------------------------------------------Load Map File------------------------------------------------------------------------------
      #dear fucking god this is the most intense part of the map load operation holy shit aaaaaaaaah
       def Misc_Decor.load_map_settings(current_file)
+        Created_Misc_Object_Array.clear
         yaml = File.open(current_file) { |file| YAML.parse(file) }
         yaml.class 
         hash = yaml.as_h  
@@ -8785,10 +8755,12 @@ module Crafted_Items
          this.sprite.scale = SF.vector2(scale_x, scale_y)
          this.sprite.rotation = yaml["misc_decor_rotation"][i].as_f32
          Created_Misc_Object_Array.push(this)
+         Created_Misc_Object_Array.uniq!
          i += 1
         end
       end
       def Misc_Decor.load_map_overlay_settings(current_file)
+        Created_Misc_Object_Overlay_Array.clear
         yaml = File.open(current_file) { |file| YAML.parse(file) }
         yaml.class 
         hash = yaml.as_h  
@@ -8828,6 +8800,7 @@ module Crafted_Items
          this.sprite.scale = SF.vector2(scale_x, scale_y)
          this.sprite.rotation = yaml["misc_decor_overlay_rotation"][i].as_f32
          Created_Misc_Object_Overlay_Array.push(this)
+         Created_Misc_Object_Overlay_Array.uniq!
          i += 1
         end
       end
@@ -8872,10 +8845,32 @@ module Crafted_Items
   #********************************************************************************************************************************************************
   #*                                                              Variables                                                                               *
   #********************************************************************************************************************************************************
+   @@current_parallax : Parallax; @@current_parallax = @@test_parallax 
+   Parallax_Array = [] of Parallax
   #________________________________________________________________________________________________________________________________________________________
   #????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
   #?                                                               Methods                                                                                ?
   #????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
+   #--------------------------------------------------------------Level Editor-----------------------------------------------------------------------------
+    #...........................................................Change Parallax............................................................................
+      def Parallax.change(parallax)
+       if Parallax_Array.size > parallax
+         @@current_parallax = Parallax_Array[parallax] 
+        end
+      end
+    #............................................................Load Parallax.............................................................................
+     def Parallax.load_map_settings(current_file)
+       yaml = File.open(current_file) { |file| YAML.parse(file) }
+       yaml.class 
+       hash = yaml.as_h  
+       hash.class
+       i = yaml["current_parallax"]
+       @@current_parallax = Parallax_Array[i.as_i]
+      end
+   #----------------------------------------------------------Get Current Parallax-------------------------------------------------------------------------
+    def Parallax.get_current_parallax
+      return @@current_parallax
+    end
    #---------------------------------------------------------------Display---------------------------------------------------------------------------------
      def Parallax.display(window, map, area, player)
       case area
@@ -8884,6 +8879,8 @@ module Crafted_Items
       when "doll factory"
        Parallax.display_doll_factory(window, map, area, player)
       end
+      @@current_parallax.sprite.position = player.position
+      window.draw(@@current_parallax.sprite)
      end
     #...............................................................Test...................................................................................
      def Parallax.display_test(window, map, area, player)
@@ -8905,9 +8902,12 @@ module Crafted_Items
   #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   #/                                                               Entities                                                                               /
   #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-   @@test_parallax = Parallax.new(-1, Test_Parallax)
-   @@sunset_parallax_01 = Parallax.new(0, Sunset_Parallax_01)
-   @@rusty_metal_01 = Parallax.new(1, Rusty_Metal_Parallax_01)
+   @@test_parallax = Parallax.new(0, Test_Parallax)
+   Parallax_Array.push(@@test_parallax)
+   @@sunset_parallax_01 = Parallax.new(1, Sunset_Parallax_01)
+   Parallax_Array.push(@@sunset_parallax_01)
+   @@rusty_metal_01 = Parallax.new(2, Rusty_Metal_Parallax_01)
+   Parallax_Array.push(@@rusty_metal_01)
   #________________________________________________________________________________________________________________________________________________________
   end
 end

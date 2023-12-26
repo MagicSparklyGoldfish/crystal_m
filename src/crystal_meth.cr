@@ -226,7 +226,7 @@ extend self
     control_text.string = "Save: V\nLoad: B\nMove View: WASD\nMove Platform: Arrow Keys\nReset All Objects: Backspace\nReset Current Object: X" +
     "\nNext Template/Teleport X: K\nPrevious Template/Teleport X: L\nNext Object: O\nPrevious Object: P" + 
     "\nNew Object: N\nPlace Object: Right Click\nZoom: +/-" +
-    "\nTexture/Teleport Y: T/Y\nTeleport Area/Misc Z: G/H\nTeleport Map/Scale Misc: J/M\nRotate: I"
+    "\nTexture/Teleport Y: T/Y\nTeleport Area/Misc Z: G/H\nTeleport Map/Scale Misc: J/M\nRotate: I\nChange Bckground: []"
     window.draw(control_text)
   end
  #/////////////////////////////////////////////////////////Main Menu////////////////////////////////////////////////////////////////////+

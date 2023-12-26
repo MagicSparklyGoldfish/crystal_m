@@ -53,7 +53,7 @@ include Map_Geometry
    @@current_misc_decor_template : Misc_Decor; @@current_misc_decor_template = Misc_Decor.level_editor_initial_misc_decor
   #-----------------------------------------------------------------Misc----------------------------------------------------------------------------------
    @@id : Int32; @@id = 1; @@template_id : Int32; @@template_id = 1
-   @@zoom = 1; @@texture = 0
+   @@zoom = 1; @@texture = 0; @@parallax_iterator = 0
   #_______________________________________________________________________________________________________________________________________________________
  #????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
  #?                                                               Methods                                                                                ?
@@ -165,6 +165,15 @@ include Map_Geometry
          case event.code
        when SF::Keyboard::Escape
            window.close
+  #-----------------------------------------------------Change Parallax---------------------------------------------------
+       when SF::Keyboard::LBracket
+        @@parallax_iterator -= 1 
+        parallax = @@parallax_iterator
+        Parallax.change(parallax)
+       when SF::Keyboard::RBracket
+        @@parallax_iterator += 1 
+        parallax = @@parallax_iterator
+        Parallax.change(parallax)
   #-----------------------------------------------------Rotate Objects----------------------------------------------------
        when SF::Keyboard::I
         current_misc_decor = @@current_misc_decor
@@ -431,6 +440,8 @@ include Map_Geometry
            player.position += SF.vector2(50, 0)
   #-------------------------------------------------Save, Load, Initialize------------------------------------------------ 
    #@note rectangles and sprites must be duped individually or they will disappear
+   #@note all load methods must start by clearing their respective arrays. In hindsight this seems pretty fucking obvious
+   # I fucking hate doing serialization fuuuuuck >:C
        when SF::Keyboard::X
         case @@current_category
         when "platform"
@@ -462,6 +473,7 @@ include Map_Geometry
          Map_Geometry::Crafting_Station.load_map_platform_settings(current_file)
          Map_Geometry::Misc_Decor.load_map_settings(current_file)
          Map_Geometry::Misc_Decor.load_map_overlay_settings(current_file)
+         Map_Geometry::Parallax.load_map_settings(current_file)
   #-------------------------------------------------------Zoom View------------------------------------------------------- 
        when SF::Keyboard::Add
          zoom = -1

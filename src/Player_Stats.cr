@@ -381,7 +381,8 @@ require "file_utils"
        end; end; end; end
       #--------------------max health points---------------
        max_hp_text = Char_Menu_Bod_Text.dup
-       max_hp_text.string = @@player.max_hp.to_s
+       max_hp_string = @@player.max_hp.significant(4) 
+       max_hp_text.string = max_hp_string.to_s
        if @@player.max_hp < 10
         max_hp_text.position = SF.vector2(715, 750)
        else if @@player.max_hp < 100
@@ -417,7 +418,8 @@ require "file_utils"
        end; end; end; end
       #--------------------max magic points----------------
        max_mp_text = Char_Menu_Bod_Text.dup
-       max_mp_text.string = @@player.max_mp.to_s
+       max_mp_string = @@player.max_mp.significant(4) 
+       max_mp_text.string = max_mp_string.to_s
        if @@player.max_mp < 10
         max_mp_text.position = SF.vector2(965, 750)
        else if @@player.max_mp < 100
@@ -442,7 +444,7 @@ require "file_utils"
       #------------------------speed-----------------------
        speed = Player.get_speed
        speed_text = Char_Menu_Bod_Text.dup
-       speed_text.string = "Speed: " + speed.to_s 
+       speed_text.string = "Speed: " + speed.significant(4).to_s 
        speed_text.character_size = 20 
        speed_text.position = SF.vector2(1165, 350)
       #-----------------------crit rate--------------------
