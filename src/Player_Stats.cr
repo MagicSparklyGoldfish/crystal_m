@@ -447,6 +447,7 @@ require "file_utils"
        speed_text.position = SF.vector2(1165, 350)
       #-----------------------crit rate--------------------
        crit_chance = @@player.luk * 0.05
+       crit_chance = crit_chance.significant(4) 
        crit_chance_text = Char_Menu_Bod_Text.dup
        crit_chance_text.string = "Crit Rate: " + crit_chance.to_s + "%"
        crit_chance_text.character_size = 20 
