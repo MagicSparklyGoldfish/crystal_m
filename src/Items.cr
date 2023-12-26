@@ -4575,7 +4575,8 @@ include Use
    #+                                                              Variables                                                                               +
    #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
    @@ore_animation_frame = 0; @@ore_reset = 0; @@ore_break_iterator = 0; @@is_smelting : Bool; @@is_smelting = false; @@attack_strength : Float64
-   @@attack_strength = 10; @@ore_hit_animation_clock = SF::Clock.new; @@is_ore_attacked : Bool; @@is_ore_attacked = false; @@ore : Ore; @@ore = @@bloodstone
+   @@attack_strength = 10; @@ore_hit_animation_clock = SF::Clock.new; @@is_ore_attacked : Bool; @@is_ore_attacked = false; @@ore : Ore; @@ore = @@bloodstone;
+   @@ore_name_iterator = 0
    #________________________________________________________________________________________________________________________________________________________
    #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
    #!                                                              Initialize                                                                              !
@@ -4624,11 +4625,21 @@ include Use
      def clock
       @clock
      end
+
+     def name=(this)
+      @name = this
+     end
+     def id=(this)
+      @id = this
+     end
      def is_broke=(this)
       @is_broke = this
      end
      def clock=(this)
       @clock = this
+     end
+     def sprite=(this)
+      @sprite = this
      end
     #_______________________________________________________________________________________________________________________________________________________
     #..........................................................HP Class Functions...........................................................................
@@ -4713,6 +4724,109 @@ include Use
     # def Ore.initialize_ore_positions
     #   All_Ore_Array.map{ |i| i.sprite.position = }
     #  end
+    #-------------------------------------------------------------Level Editor------------------------------------------------------------------------------
+     #...........................................................Initialization.............................................................................
+      def Ore.level_editor_initial_ore
+       current_ore = @@bloodstone
+       end
+      def Ore.initialize_all
+        Current_Map_Ore_Array.map{ |i| i.sprite.position = SF.vector2(0, 40000)}
+        Current_Map_Ore_Array.clear
+       end
+     #.......................................................Initialize Current Ore.........................................................................
+      def Ore.initialize_current(current_ore)
+        current_ore.sprite.position = SF.vector2(0, 40000)
+        Current_Map_Ore_Array.delete(current_ore)
+       end
+     #...........................................................Get Array Size.............................................................................
+       def Ore.get_template_array_size
+        return All_Ore_Array.size
+       end
+       def Ore.get_created_platform_array_size
+         return Current_Map_Ore_Array.size
+        end
+     #.............................................................Get Arrays...............................................................................
+      def Ore.get_created_ore_array
+       return Current_Map_Ore_Array
+      end
+     #..............................................................Display.................................................................................
+      def Ore.level_editor_display(window)
+       if Current_Map_Ore_Array.size > 0
+       Current_Map_Ore_Array.map{ |i| window.draw(i.sprite)}
+       end
+       end
+     #...............................................................Place..................................................................................
+      def Ore.level_editor_place(current_ore, x, y)
+        current_ore.sprite.position = SF.vector2(x, y)
+       end
+      def Ore.level_editor_precision_placement(current_ore, direction)
+       case direction
+         when "left"
+          current_ore.sprite.position -= SF.vector2(10, 0)
+         when "right"
+          current_ore.sprite.position += SF.vector2(10, 0)
+         when "up"
+          current_ore.sprite.position -= SF.vector2(0, 10)
+         when "down"
+          current_ore.sprite.position += SF.vector2(0, 10)
+        end
+       end
+     #............................................................Scroll Arrays.............................................................................
+      def Ore.level_editor_change_template(template_id)
+       if All_Ore_Array.size > template_id && template_id > -1
+       else
+         template_id = -1
+       end
+       current_template = All_Ore_Array[template_id]
+       current_template
+      end
+  
+      def Ore.level_editor_change_ore(id)
+       if id < Current_Map_Ore_Array.size && id > -1
+       else
+         id = -1
+       end
+       current_ore = Current_Map_Ore_Array[id]
+       current_ore
+      end
+     #..........................................................Create New Object...........................................................................
+      def Ore.level_editor_create_ore(ore)
+        @@ore_name_iterator += 1
+        current_ore = ore.dup
+        current_ore.name = ore.name + @@ore_name_iterator.to_s
+        current_ore.sprite = ore.sprite.dup
+        current_ore.clock = ore.clock.dup
+       Current_Map_Ore_Array.push(current_ore)
+       current_ore
+      end
+     #------------------------------------------------------------Load Map File-----------------------------------------------------------------------------
+      def Ore.load_map_ore_settings(current_file)
+        Current_Map_Ore_Array.clear
+        Ore.initialize_all
+       yaml = File.open(current_file) { |file| YAML.parse(file) }
+         s = yaml["ore_ids"].as_a.size
+         i = 0
+         while s > i
+         this = @@bloodstone.dup
+         this.name = yaml["ore_names"][i].as_s
+         this.id = yaml["ore_ids"][i].as_i
+         All_Ore_Array.map{ |a| 
+          if this.id == a.id
+            this = a.dup
+            this.sprite = a.sprite.dup
+            end}
+         this.is_broke = yaml["ore_is_broken"][i].as_bool
+         time = yaml["ore_clocks"][i].as_f
+         this.clock.elapsed_time = time
+        # this.name = yaml["ore_names"][i].as_s
+         x = yaml["ore_x_positions"][i].as_f32
+         y = yaml["ore_y_positions"][i].as_f32
+         this.sprite.position = SF.vector2(x, y)
+         puts this.sprite
+         Current_Map_Ore_Array.push(this)
+         i += 1
+        end
+     end
     #..............................................................Animations...............................................................................
      def Ore.animation_harvest(this, ore)
       Ore_Clock_Break.restart
@@ -4765,7 +4879,6 @@ include Use
         amount = rand(1..3)
         ore = broken.name
         @@is_ore_attacked = false
-    #    if broken.hp >= 0 && broken.is_broke == false
         if @@ore_reset == 0
           Etc::Inventory_Ore.add_ore(amount, ore)
           Etc::Inventory_Ore.update_ore_inventory
@@ -4794,8 +4907,8 @@ include Use
       broken.is_broke_toggle   
       @@ore_reset = 0
        end; end; end; end; end; end; end
-    #-------------------------------------------------------------------------------------------------------------------------------------------------     
-    def Ore.draw_ores(window, map, area)
+    #-------------------------------------------------------------------------------------------------------------------------------------------------------     
+     def Ore.draw_ores(window, map, area)
       if @@is_ore_attacked == true
        if @@ore_hit_animation_clock.elapsed_time >= SF.seconds(0.05) && @@ore_hit_animation_clock.elapsed_time <= SF.seconds(0.1) && @@ore.hp > @@ore.max_hp/2
          a = 100; b = 0; x = 100; y = 100
@@ -4835,9 +4948,9 @@ include Use
           @@ore.sprite_change_square(a, b, x, y)
         end; end
       end
-      s = All_Ore_Array.size - 1
-      if All_Ore_Array[@@ore_break_iterator].hp <= 0 && All_Ore_Array[@@ore_break_iterator].is_broke == false
-        broken = All_Ore_Array[@@ore_break_iterator]
+      s = Current_Map_Ore_Array.size - 1
+      if Current_Map_Ore_Array[@@ore_break_iterator].hp <= 0 && Current_Map_Ore_Array[@@ore_break_iterator].is_broke == false
+        broken = Current_Map_Ore_Array[@@ore_break_iterator]
         Ore.break(broken)
       end
       if @@ore_break_iterator < s
@@ -4845,10 +4958,9 @@ include Use
       else
         @@ore_break_iterator = 0
       end
-      All_Ore_Array.map{ |i| i.sprite.position = SF.vector2(0, 10000)}
+      #Current_Map_Ore_Array.map{ |i| i.sprite.position = SF.vector2(0, 10000)}
        case area 
        when "test"
-        #Ore.display_test(window, map)
        when "doll factory"
        end
 
@@ -6766,6 +6878,13 @@ module Crafted_Items
   @[YAML::Field(key: "misc_decor_overlay_rotation")]
  #-------------------------------------------------------------Current Parallax-----------------------------------------------------------------------------
   @[YAML::Field(key: "current_parallax")]
+ #-------------------------------------------------------------------Ores-----------------------------------------------------------------------------------
+  @[YAML::Field(key: "ore_ids")]
+  @[YAML::Field(key: "ore_names")]
+  @[YAML::Field(key: "ore_x_positions")]
+  @[YAML::Field(key: "ore_y_positions")]
+  @[YAML::Field(key: "ore_clocks")]
+  @[YAML::Field(key: "ore_is_broken")]
 #save function
   def Map_Geometry.level_editor_save_map(current_file)
     current_ladder_array = Ladder.get_created_platform_array
@@ -6776,6 +6895,7 @@ module Crafted_Items
     current_misc_object_array = Misc_Decor.get_misc_decor_station_array
     current_misc_object_overlay_array = Misc_Decor.get_misc_decor_overlay_array
     parallax = Parallax.get_current_parallax
+    current_ore_array = Harvestables::Ore.get_created_ore_array
     scale_x_01 = current_misc_object_array.map{ |i| i.sprite.scale[0]}
     scale_y_01 = current_misc_object_array.map{ |i| i.sprite.scale[1]}
     scale_x_02 = current_misc_object_overlay_array.map{ |i| i.sprite.scale[0]}
@@ -6829,7 +6949,11 @@ module Crafted_Items
    "misc_decor_overlay_scale_x": scale_x_02, "misc_decor_overlay_scale_y": scale_y_02,
    "misc_decor_overlay_rotation": current_misc_object_overlay_array.map{ |i| i.sprite.rotation},
   #-------------------------------------------------------------Current Parallax-----------------------------------------------------------------------------
-   "current_parallax": parallax.id
+   "current_parallax": parallax.id,
+  #-------------------------------------------------------------------Ores-----------------------------------------------------------------------------------
+   "ore_ids": current_ore_array.map{ |i| i.id}, "ore_names": current_ore_array.map{ |i| i.name}, 
+   "ore_x_positions": current_ore_array.map{ |i| i.sprite.position.x}, "ore_y_positions": current_ore_array.map{ |i| i.sprite.position.y},
+   "ore_clocks": current_ore_array.map{ |i| i.clock.elapsed_time.as_seconds}, "ore_is_broken": current_ore_array.map{ |i| i.is_broke}
    }, f) }
   end
   
@@ -7005,7 +7129,6 @@ module Crafted_Items
       end
      #........................................................Change Object Texture.........................................................................
       def Ladder.change_texture(current_ladder, texture)
-        puts current_ladder
         current_ladder.texture = texture
         current_ladder.sprite.texture_rect = SF.int_rect(0, 0, 40, 400)
         a = current_ladder.texture; b = current_ladder.length    
@@ -7013,7 +7136,6 @@ module Crafted_Items
       end
      #............................................................Scroll Arrays.............................................................................
       def Ladder.level_editor_change_template(template_id)
-       Ladder_Template_Array.map{ |i| puts i.name}
        if Ladder_Template_Array.size > template_id && template_id > -1
        else
          template_id = -1

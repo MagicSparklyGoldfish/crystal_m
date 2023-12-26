@@ -15,6 +15,7 @@ require "chipmunk/chipmunk_crsfml"
 require "file_utils"
 
 module Level_Editor
+include Harvestables
 include Map_Geometry
  class Editor_Controls
  #********************************************************************************************************************************************************
@@ -51,6 +52,9 @@ include Map_Geometry
   #--------------------------------------------------------------Misc Decor-------------------------------------------------------------------------------
    @@current_misc_decor : Misc_Decor; @@current_misc_decor = Misc_Decor.level_editor_initial_misc_decor
    @@current_misc_decor_template : Misc_Decor; @@current_misc_decor_template = Misc_Decor.level_editor_initial_misc_decor
+  #-----------------------------------------------------------------Ore-----------------------------------------------------------------------------------
+   @@current_ore : Ore; @@current_ore = Ore.level_editor_initial_ore
+   @@current_ore_template : Ore; @@current_ore_template = Ore.level_editor_initial_ore
   #-----------------------------------------------------------------Misc----------------------------------------------------------------------------------
    @@id : Int32; @@id = 1; @@template_id : Int32; @@template_id = 1
    @@zoom = 1; @@texture = 0; @@parallax_iterator = 0
@@ -70,11 +74,11 @@ include Map_Geometry
     return Doll_Factory_Map_Array
    end
    def Editor_Controls.check_current_teleporter
-    return @@current_teleporter
-   end
+     return @@current_teleporter
+    end
    def Editor_Controls.check_current_category
-    return @@current_category
-   end
+     return @@current_category
+    end
    def Editor_Controls.check_current_object
     case @@current_category 
      when "platform"
@@ -89,6 +93,8 @@ include Map_Geometry
        return @@current_crafting_station
      when "misc_decor"
       return @@current_misc_decor
+     when "ore"
+      return @@current_ore
      end
      return @@current_platform_template 
     end
@@ -106,6 +112,8 @@ include Map_Geometry
       return @@current_crafting_station_template
      when "misc_decor"
       return @@current_misc_decor_template
+     when "ore"
+      return @@current_ore_template 
      end
      return @@current_platform_template 
     end
@@ -143,6 +151,9 @@ include Map_Geometry
            when "misc_decor"
             current_misc_decor = @@current_misc_decor
             Misc_Decor.level_editor_place_crafting_station(current_misc_decor, x, y)
+           when "ore"
+            current_ore = @@current_ore
+            Ore.level_editor_place(current_ore, x, y)
           end
      end
    end
@@ -205,6 +216,10 @@ include Map_Geometry
           current_misc_decor = @@current_misc_decor
           direction = "left"
           Misc_Decor.level_editor_precision_placement(current_misc_decor, direction)
+         when "ore"
+          current_ore = @@current_ore
+          direction = "left"
+          Ore.level_editor_precision_placement(current_ore, direction)
        end
        when SF::Keyboard::Right
         case @@current_category
@@ -232,6 +247,10 @@ include Map_Geometry
            current_misc_decor = @@current_misc_decor
            direction = "right"
            Misc_Decor.level_editor_precision_placement(current_misc_decor, direction)
+         when "ore"
+           current_ore = @@current_ore
+           direction = "right"
+           Ore.level_editor_precision_placement(current_ore, direction)
        end
        when SF::Keyboard::Up
         case @@current_category
@@ -259,6 +278,10 @@ include Map_Geometry
            current_misc_decor = @@current_misc_decor
            direction = "up"
            Misc_Decor.level_editor_precision_placement(current_misc_decor, direction)
+         when "ore"
+           current_ore = @@current_ore
+           direction = "up"
+           Ore.level_editor_precision_placement(current_ore, direction)
        end
        when SF::Keyboard::Down
         case @@current_category
@@ -286,6 +309,10 @@ include Map_Geometry
            current_misc_decor = @@current_misc_decor
            direction = "down"
            Misc_Decor.level_editor_precision_placement(current_misc_decor, direction)
+         when "ore"
+           current_ore = @@current_ore
+           direction = "down"
+           Ore.level_editor_precision_placement(current_ore, direction)
        end
   #----------------------------------------------------Change Texture/Y--------------------------------------------------- 
        when SF::Keyboard::T
@@ -441,7 +468,6 @@ include Map_Geometry
   #-------------------------------------------------Save, Load, Initialize------------------------------------------------ 
    #@note rectangles and sprites must be duped individually or they will disappear
    #@note all load methods must start by clearing their respective arrays. In hindsight this seems pretty fucking obvious
-   # I fucking hate doing serialization fuuuuuck >:C
        when SF::Keyboard::X
         case @@current_category
         when "platform"
@@ -462,6 +488,9 @@ include Map_Geometry
         when "misc_decor"
           current_misc_decor = @@current_misc_decor
           Misc_Decor.initialize_current_misc_decor(current_misc_decor)
+        when "ore"
+          current_ore = @@current_ore 
+          Ore.initialize_current(current_ore)
         end
        when SF::Keyboard::V
         Map_Geometry.level_editor_save_map(current_file)
@@ -474,6 +503,7 @@ include Map_Geometry
          Map_Geometry::Misc_Decor.load_map_settings(current_file)
          Map_Geometry::Misc_Decor.load_map_overlay_settings(current_file)
          Map_Geometry::Parallax.load_map_settings(current_file)
+         Ore.load_map_ore_settings(current_file)
   #-------------------------------------------------------Zoom View------------------------------------------------------- 
        when SF::Keyboard::Add
          zoom = -1
@@ -539,6 +569,15 @@ include Map_Geometry
           end
           id = @@template_id
           @@current_misc_decor_template  = Misc_Decor.level_editor_change_misc_decor_template(id)
+        when "ore"
+          s = Map_Geometry::Ore.get_template_array_size
+          if @@template_id < s
+           @@template_id += 1
+          else 
+           @@template_id = -1
+          end
+          template_id = @@template_id
+          @@current_ore_template = Ore.level_editor_change_template(template_id)
          end
        when SF::Keyboard::L
         case @@current_category
@@ -586,6 +625,14 @@ include Map_Geometry
            end
            id = @@template_id
            @@current_misc_decor_template  = Map_Geometry::Misc_Decor.level_editor_change_misc_decor_template(id)
+        when "ore"
+          if @@template_id > 0
+            @@template_id -= 1
+           else 
+            @@template_id = -1
+           end
+           template_id = @@template_id
+           @@current_ore_template = Map_Geometry::Ore.level_editor_change_template(template_id)
         end
   #----------------------------------------------------Choose Objects----------------------------------------------------- 
        when SF::Keyboard::O
@@ -644,7 +691,7 @@ include Map_Geometry
          end
           id = @@id
           @@current_crafting_station = Map_Geometry::Crafting_Station.level_editor_change_crafting_station(id)
-        end
+         end
         when "misc_decor"
           s = Map_Geometry::Misc_Decor.get_misc_decor_station_array_size
           if s > 0
@@ -655,6 +702,17 @@ include Map_Geometry
          end
           id = @@id
           @@current_misc_decor = Misc_Decor.level_editor_change_misc_decor(id)
+         end
+        when "ore"
+          s = Map_Geometry::Ore.get_created_platform_array_size
+          if s > 0
+          if @@id < s
+          @@id += 1
+          else 
+          @@id = 0
+         end
+          id = @@id
+          @@current_ore = Ore.level_editor_change_ore(id)
          end
       end
        when SF::Keyboard::P
@@ -707,8 +765,16 @@ include Map_Geometry
            end
             id = @@id
             @@current_misc_decor = Map_Geometry::Misc_Decor.level_editor_change_misc_decor(id)
+        when "ore"
+          if @@id < 0
+            @@id -= 1
+          else 
+            @@id = 0
+           end
+            id = @@id
+            @@current_ore = Map_Geometry::Ore.level_editor_change_ore(id)
         end
-  #---------------------------------------------------Create New Objects--------------------------------------------------  
+  #--------------------------------------------------Create New Objects---------------------------------------------------  
        when SF::Keyboard::N
         case @@current_category
         when "platform"
@@ -735,12 +801,17 @@ include Map_Geometry
           misc_decor = @@current_misc_decor_template
           current_misc_decor = Misc_Decor.level_editor_create_crafting_station(misc_decor)
           @@current_misc_decor = current_misc_decor
+        when "ore"
+          ore = @@current_ore_template
+          current_ore = Ore.level_editor_create_ore(ore)
+          @@current_ore = current_ore
         end
   #----------------------------------------------------Initialize Map----------------------------------------------------- 
        when SF::Keyboard::Backspace
          Platform.initialize_platform_positions
          Teleporter.initialize_teleporters
          Ladder.initialize_ladders
+         Ore.initialize_all
   #---------------------------------------------------Change Categories--------------------------------------------------- 
        when SF::Keyboard::Num1
          @@current_category = "platform"
@@ -754,6 +825,8 @@ include Map_Geometry
          @@current_category = "crafting_station"
        when SF::Keyboard::Num6
          @@current_category = "misc_decor"
+       when SF::Keyboard::Num7
+         @@current_category = "ore"
        end; end; end; end
  end
  class Editor_UI < Editor_Controls

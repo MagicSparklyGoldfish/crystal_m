@@ -496,11 +496,11 @@ extend self
      Map_Geometry::Platform.display(area, map, window)
      Map_Geometry::Wall.display(window, area, map)
      Map_Geometry::Ladder.display_ladders(window, map, area)
-     if @@menu != "level_editor"
-     window.draw(@@player_character_rendered_model) 
-     end
-     Harvestables::Ore.draw_ores(window, map, area)
+     Map_Geometry::Ore.level_editor_display(window)
      Harvestables::Herbs.display(window, map, area)
+     if @@menu != "level_editor"
+      window.draw(@@player_character_rendered_model) 
+      end
      window.draw(Ground); Regular_Enemies.display(window, map, area, player)
      Map_Geometry::Misc_Decor.display_overlay(window, area, map)
     end

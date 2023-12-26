@@ -123,3 +123,33 @@ misc_decor_overlay_scale_y:
 misc_decor_overlay_rotation:
 - 0.0
 current_parallax: 1
+ore_ids:
+- 6
+- 6
+- 15
+- 24
+ore_names:
+- Smoky Quartz1
+- Smoky Quartz2
+- Moonstone3
+- Howlite4
+ore_x_positions:
+- -1226.9791
+- -761.875
+- 395.9896
+- 2930.7292
+ore_y_positions:
+- 706.3181
+- 709.36816
+- 704.0305
+- 706.3181
+ore_clocks:
+- 69.766975
+- 69.766975
+- 69.766975
+- 69.766975
+ore_is_broken:
+- false
+- false
+- false
+- false
