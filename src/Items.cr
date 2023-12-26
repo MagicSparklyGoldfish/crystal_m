@@ -10,7 +10,6 @@ require "../src/Audio.cr"
 require "../src/Saves.cr"
 require "../src/Fonts.cr"
 require "../src/level_test.cr"
-require "../src/Player_Character.cr"
 require "x11"
 require "crystal/system/time"
 require "chipmunk/chipmunk_crsfml"
@@ -7062,6 +7061,7 @@ module Crafted_Items
 #=MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM=
 #===========================================================================================================================================================
  module Map_Geometry
+ #save fields
  #------------------------------------------------------------------Ladders---------------------------------------------------------------------------------
   @[YAML::Field(key: "ladder_lengths")]
   @[YAML::Field(key: "ladder_names")]
@@ -7094,13 +7094,39 @@ module Crafted_Items
   @[YAML::Field(key: "crafting_table_names")]
   @[YAML::Field(key: "crafting_table_x_positions")]
   @[YAML::Field(key: "crafting_table_y_positions")]
-
+ #----------------------------------------------------------------Misc Decor--------------------------------------------------------------------------------
+  @[YAML::Field(key: "misc_decor_ids")]
+  @[YAML::Field(key: "misc_decor_names")]
+  @[YAML::Field(key: "misc_decor_x_positions")]
+  @[YAML::Field(key: "misc_decor_y_positions")]
+  @[YAML::Field(key: "misc_decor_texture_rect")]
+  @[YAML::Field(key: "misc_decor_width")]
+  @[YAML::Field(key: "misc_decor_scale_x")]
+  @[YAML::Field(key: "misc_decor_scale_y")]
+  @[YAML::Field(key: "misc_decor_rotation")]
+ #------------------------------------------------------------Misc Decor Overlay----------------------------------------------------------------------------
+  @[YAML::Field(key: "misc_decor_overlay_ids")]
+  @[YAML::Field(key: "misc_decor_overlay_names")]
+  @[YAML::Field(key: "misc_decor_overlay_x_positions")]
+  @[YAML::Field(key: "misc_decor_overlay_y_positions")]
+  @[YAML::Field(key: "misc_decor_overlay_texture_rect")]
+  @[YAML::Field(key: "misc_decor_overlay_width")]
+  @[YAML::Field(key: "misc_decor_overlay_scale_x")]
+  @[YAML::Field(key: "misc_decor_overlay_scale_y")]
+  @[YAML::Field(key: "misc_decor_overlay_rotation")]
+#save function
   def Map_Geometry.level_editor_save_map(current_file)
     current_ladder_array = Ladder.get_created_platform_array
     current_platform_array = Platform.get_created_platform_array
     current_wall_array = Wall.get_created_wall_array
     current_teleporter_array = Teleporter.get_created_teleporter_array
     current_crafting_table_array = Crafting_Station.get_created_crafting_station_array
+    current_misc_object_array = Misc_Decor.get_misc_decor_station_array
+    current_misc_object_overlay_array = Misc_Decor.get_misc_decor_overlay_array
+    scale_x_01 = current_misc_object_array.map{ |i| i.sprite.scale[0]}
+    scale_y_01 = current_misc_object_array.map{ |i| i.sprite.scale[1]}
+    scale_x_02 = current_misc_object_overlay_array.map{ |i| i.sprite.scale[0]}
+    scale_y_02 = current_misc_object_overlay_array.map{ |i| i.sprite.scale[1]}
    File.open(current_file, "w") { |f| YAML.dump({
   #-----------------------------------------------------------------Platforms--------------------------------------------------------------------------------
    "platform_names": current_platform_array.map{ |i| i.name},
@@ -7130,7 +7156,25 @@ module Crafted_Items
    "crafting_table_ids": current_crafting_table_array.map{ |i| i.id},
    "crafting_table_names": current_crafting_table_array.map{ |i| i.name},
    "crafting_table_x_positions": current_crafting_table_array.map{ |i| i.rectangle.position.x},
-   "crafting_table_y_positions": current_crafting_table_array.map{ |i| i.rectangle.position.y}
+   "crafting_table_y_positions": current_crafting_table_array.map{ |i| i.rectangle.position.y},
+  #----------------------------------------------------------------Misc Decor--------------------------------------------------------------------------------
+   "misc_decor_ids": current_misc_object_array.map{ |i| i.id},
+   "misc_decor_names": current_misc_object_array.map{ |i| i.name},
+   "misc_decor_x_positions": current_misc_object_array.map{ |i| i.sprite.position.x},
+   "misc_decor_y_positions": current_misc_object_array.map{ |i| i.sprite.position.y},
+   "misc_decor_texture_rect": current_misc_object_array.map{ |i| i.texture_rect},
+   "misc_decor_width": current_misc_object_array.map{ |i| i.width},
+   "misc_decor_scale_x": scale_x_01, "misc_decor_scale_y": scale_y_01,
+   "misc_decor_rotation": current_misc_object_array.map{ |i| i.sprite.rotation},
+  #------------------------------------------------------------Misc Decor Overlay----------------------------------------------------------------------------
+   "misc_decor_overlay_ids": current_misc_object_overlay_array.map{ |i| i.id},
+   "misc_decor_overlay_names": current_misc_object_overlay_array.map{ |i| i.name},
+   "misc_decor_overlay_x_positions": current_misc_object_overlay_array.map{ |i| i.sprite.position.x},
+   "misc_decor_overlay_y_positions": current_misc_object_overlay_array.map{ |i| i.sprite.position.y},
+   "misc_decor_overlay_texture_rect": current_misc_object_overlay_array.map{ |i| i.texture_rect},
+   "misc_decor_overlay_width": current_misc_object_overlay_array.map{ |i| i.width},
+   "misc_decor_overlay_scale_x": scale_x_02, "misc_decor_overlay_scale_y": scale_y_02,
+   "misc_decor_overlay_rotation": current_misc_object_overlay_array.map{ |i| i.sprite.rotation}
    }, f) }
   end
 
@@ -7315,7 +7359,6 @@ module Crafted_Items
      #............................................................Scroll Arrays.............................................................................
       def Ladder.level_editor_change_template(template_id)
        Ladder_Template_Array.map{ |i| puts i.name}
-       puts template_id
        if Ladder_Template_Array.size > template_id && template_id > -1
        else
          template_id = -1
@@ -7358,7 +7401,6 @@ module Crafted_Items
          s = yaml["ladder_lengths"].as_a.size
          i = 0
          while s > i
-          puts i
          this = @@long_ladder_01.dup
          this.sprite = @@long_ladder_01.sprite.dup
          this.length = yaml["ladder_lengths"][i].as_i
@@ -8215,7 +8257,6 @@ module Crafted_Items
         s = yaml["teleporter_names"].as_a.size
         i = 0
         while s > i
-         puts i
         this = @@teleporter_01.dup
         this.sprite = @@teleporter_01.sprite.dup 
         this.id = yaml["teleporter_ids"][i].as_i
@@ -8444,10 +8485,12 @@ module Crafted_Items
   #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   #!                                                              Initialize                                                                              !
   #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    def initialize(name : String, id : Int32, sprite : SF::Sprite)
+    def initialize(name : String, id : Int32, sprite : SF::Sprite, texture_rect : Array(Int32), width : Int32)
       @name = name
       @id = id
       @sprite = sprite
+      @texture_rect = texture_rect
+      @width = width
      end
     def name
       @name
@@ -8458,19 +8501,32 @@ module Crafted_Items
     def sprite
       @sprite
      end
+    def texture_rect
+      @texture_rect
+     end
+    def width
+      @width
+     end
     def name=(this)
      @name = this
-    end
-   def id=(this)
-     @id = this
-    end
-   def sprite=(this)
-     @sprite = this
-    end
+     end
+    def id=(this)
+      @id = this
+     end
+    def sprite=(this)
+      @sprite = this
+     end
+    def texture_rect=(this)
+      @texture_rect = this
+     end
+    def width=(this)
+     @width = this
+     end
   #________________________________________________________________________________________________________________________________________________________
   #********************************************************************************************************************************************************
   #*                                                              Variables                                                                               *
   #********************************************************************************************************************************************************
+   Rotate_Delay_Timer = SF::Clock.new
    Created_Misc_Object_Array = [] of Misc_Decor; Created_Misc_Object_Overlay_Array = [] of Misc_Decor;
    Created_Misc_Object_Template_Array = [] of Misc_Decor
    @@z_layer : String; @@z_layer = "back"
@@ -8546,7 +8602,7 @@ module Crafted_Items
      def Misc_Decor.level_editor_initial_misc_decor
        current_misc_decor = @@concrete_pillar_01
       end
-    #...............................................................Display................................................................................
+    #..............................................................Display.................................................................................
      def Misc_Decor.level_editor_display_misc_decor(window)
        Created_Misc_Object_Array.map{ |i| window.draw(i.sprite)}
       end
@@ -8595,24 +8651,204 @@ module Crafted_Items
         current_misc_decor.sprite.position += SF.vector2(0, 10)
       end
      end
+    #..............................................................Z-Axis..................................................................................
+     def Misc_Decor.change_z_axis(z, current_misc_decor)
+      @@z_layer = z
+      Created_Misc_Object_Array.delete(current_misc_decor)
+      Created_Misc_Object_Overlay_Array.delete(current_misc_decor)
+      if z = "back"
+       Created_Misc_Object_Array.push(current_misc_decor)
+      else if z = "front"
+        Created_Misc_Object_Overlay_Array.push(current_misc_decor)
+      end; end
+      end
+     def Misc_Decor.get_z_axis
+      return @@z_layer
+      end
+    #..............................................................Scale...................................................................................
+     def Misc_Decor.scale(current_misc_decor, x, y)
+      current_misc_decor.sprite.scale += SF.vector2(x, y)
+     end
+    #..............................................................Rotate..................................................................................
+     def Misc_Decor.rotate(current_misc_decor)
+       if Rotate_Delay_Timer.elapsed_time > SF.seconds(0.25)
+       current_misc_decor.sprite.rotate(5)
+       Rotate_Delay_Timer.restart
+       end
+      end
+    #...........................................................Get Array Size..............................................................................
+     def Misc_Decor.get_misc_decor_station_array_size
+       return Created_Misc_Object_Array.size
+      end
+      def Misc_Decor.get_misc_decor_station_template_array_size
+       return Created_Misc_Object_Template_Array.size
+      end
+    #.............................................................Get Arrays................................................................................
+      def Misc_Decor.get_misc_decor_station_array
+       return Created_Misc_Object_Array
+      end
+      def Misc_Decor.get_misc_decor_overlay_array
+        return Created_Misc_Object_Overlay_Array
+       end
+      def Misc_Decor.get_misc_decor_station_template_array
+       return Created_Misc_Object_Template_Array
+      end
+    #............................................................Scroll Arrays..............................................................................
+     def Misc_Decor.level_editor_change_misc_decor_template(id)
+       if id < Created_Misc_Object_Template_Array.size && id > -1
+       else
+         id = -1
+       end
+       current_misc_decor_template = Created_Misc_Object_Template_Array[id]
+       current_misc_decor_template
+      end
+
+      def Misc_Decor.level_editor_change_misc_decor(id)
+        current_misc_decor = @@concrete_pillar_01
+        case @@z_layer
+        when "back"
+          if Created_Misc_Object_Array.size > 0
+            if id < Created_Misc_Object_Array.size && id > -1
+            else
+              id = -1
+            end
+            current_misc_decor = Created_Misc_Object_Array[id]
+            return current_misc_decor
+            else 
+              current_misc_decor = @@concrete_pillar_02
+            end
+        when "front"
+          if Created_Misc_Object_Overlay_Array.size > 0
+            if id < Created_Misc_Object_Overlay_Array.size && id > -1
+            else
+              id = -1
+            end
+            current_misc_decor = Created_Misc_Object_Overlay_Array[id]
+            return current_misc_decor
+            else 
+              current_misc_decor = @@concrete_pillar_02
+            end
+        end
+        current_misc_decor = @@concrete_pillar_02
+      end
+    #........................................................Change Object Texture..........................................................................
+      def Misc_Decor.change_texture(current_misc_decor, texture)
+        if current_misc_decor.texture_rect[0] > 0
+        a = texture * current_misc_decor.texture_rect[0]
+        else if texture != 0
+        a = current_misc_decor.width
+        else
+        a = 0
+        end; end
+        current_misc_decor.texture_rect[0] = a
+        current_misc_decor.sprite.texture_rect = SF.int_rect(a, 0, current_misc_decor.width, 200)
+       end
+    #------------------------------------------------------------Load Map File------------------------------------------------------------------------------
+     #dear fucking god this is the most intense part of the map load operation holy shit aaaaaaaaah
+      def Misc_Decor.load_map_settings(current_file)
+        yaml = File.open(current_file) { |file| YAML.parse(file) }
+        yaml.class 
+        hash = yaml.as_h  
+        hash.class
+        this = @@concrete_pillar_01.dup
+        i = 0
+        s = yaml["misc_decor_ids"].as_a.size
+        while i < s 
+         if yaml["misc_decor_ids"][i] == 1
+          this = @@concrete_pillar_01.dup
+          this.sprite = @@concrete_pillar_01.sprite.dup
+         else if yaml["misc_decor_ids"][i] == 500
+          this = @@hanging_wires_01.dup
+          this.sprite = @@hanging_wires_01.sprite.dup
+         else
+          puts "error!" + ["misc_decor_ids"][i].to_s + " is an invalid id!" 
+          i += 1
+         end; end
+         this.id = yaml["misc_decor_ids"][i].as_i
+         this.name = yaml["misc_decor_names"][i].as_s
+         x = yaml["misc_decor_x_positions"][i].as_f32
+         y = yaml["misc_decor_y_positions"][i].as_f32
+         this.sprite.position = SF.vector2(x, y)
+         rect0 = yaml["misc_decor_texture_rect"][i].as_a[0]
+         rect0 = rect0.as_i
+         rect1 = yaml["misc_decor_texture_rect"][i].as_a[1]
+         rect1 = rect1.as_i
+         rect2 = yaml["misc_decor_texture_rect"][i].as_a[2]
+         rect2 = rect2.as_i
+         rect3 = yaml["misc_decor_texture_rect"][i].as_a[3]
+         rect3 = rect3.as_i
+         this.texture_rect = [rect0, rect1, rect2, rect3]
+         this.width = yaml["misc_decor_width"][i].as_i
+         this.sprite.texture_rect = SF.int_rect(this.texture_rect[0], 0, this.width, 200)
+         scale_x = yaml["misc_decor_scale_x"][i].as_f32
+         scale_y = yaml["misc_decor_scale_y"][i].as_f32
+         this.sprite.scale = SF.vector2(scale_x, scale_y)
+         this.sprite.rotation = yaml["misc_decor_rotation"][i].as_f32
+         Created_Misc_Object_Array.push(this)
+         i += 1
+        end
+      end
+      def Misc_Decor.load_map_overlay_settings(current_file)
+        yaml = File.open(current_file) { |file| YAML.parse(file) }
+        yaml.class 
+        hash = yaml.as_h  
+        hash.class
+        this = @@concrete_pillar_01.dup
+        i = 0
+        s = yaml["misc_decor_overlay_ids"].as_a.size
+        while i < s 
+         if yaml["misc_decor_overlay_ids"][i] == 1
+          this = @@concrete_pillar_01.dup
+          this.sprite = @@concrete_pillar_01.sprite.dup
+         else if yaml["misc_decor_overlay_ids"][i] == 500
+          this = @@hanging_wires_01.dup
+          this.sprite = @@hanging_wires_01.sprite.dup
+         else
+          puts "error!" + ["misc_decor_overlay_ids"][i].to_s + " is an invalid id!" 
+          i += 1
+         end; end
+         this.id = yaml["misc_decor_overlay_ids"][i].as_i
+         this.name = yaml["misc_decor_overlay_names"][i].as_s
+         x = yaml["misc_decor_overlay_x_positions"][i].as_f32
+         y = yaml["misc_decor_overlay_y_positions"][i].as_f32
+         this.sprite.position = SF.vector2(x, y)
+         rect0 = yaml["misc_decor_overlay_texture_rect"][i].as_a[0]
+         rect0 = rect0.as_i
+         rect1 = yaml["misc_decor_overlay_texture_rect"][i].as_a[1]
+         rect1 = rect1.as_i
+         rect2 = yaml["misc_decor_overlay_texture_rect"][i].as_a[2]
+         rect2 = rect2.as_i
+         rect3 = yaml["misc_decor_overlay_texture_rect"][i].as_a[3]
+         rect3 = rect3.as_i
+         this.texture_rect = [rect0, rect1, rect2, rect3]
+         this.width = yaml["misc_decor_overlay_width"][i].as_i
+         this.sprite.texture_rect = SF.int_rect(this.texture_rect[0], 0, this.width, 200)
+         scale_x = yaml["misc_decor_overlay_scale_x"][i].as_f32
+         scale_y = yaml["misc_decor_overlay_scale_y"][i].as_f32
+         this.sprite.scale = SF.vector2(scale_x, scale_y)
+         this.sprite.rotation = yaml["misc_decor_overlay_rotation"][i].as_f32
+         Created_Misc_Object_Overlay_Array.push(this)
+         i += 1
+        end
+      end
   #________________________________________________________________________________________________________________________________________________________
   #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   #/                                                               Entities                                                                               /
   #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
    #---------------------------------------------------------------Pillars---------------------------------------------------------------------------------
-    @@concrete_pillar_01 = Misc_Decor.new("Concrete Pillar", 1, Concrete_Pillar_01.dup)
+    @@concrete_pillar_01 = Misc_Decor.new("Concrete Pillar", 1, Concrete_Pillar_01.dup, [0, 0, 80, 200], 80)
     Created_Misc_Object_Template_Array.push(@@concrete_pillar_01)
-    @@concrete_pillar_02 = Misc_Decor.new("Concrete Pillar", 2, Concrete_Pillar_01.dup)
-    @@concrete_pillar_03 = Misc_Decor.new("Concrete Pillar", 3, Concrete_Pillar_01.dup)
-    @@concrete_pillar_04 = Misc_Decor.new("Concrete Pillar", 4, Concrete_Pillar_01.dup)
+    @@concrete_pillar_02 = Misc_Decor.new("Concrete Pillar", 2, Concrete_Pillar_01.dup, [0, 0, 80, 200], 80)
+    @@concrete_pillar_03 = Misc_Decor.new("Concrete Pillar", 3, Concrete_Pillar_01.dup, [0, 0, 80, 200], 80)
+    @@concrete_pillar_04 = Misc_Decor.new("Concrete Pillar", 4, Concrete_Pillar_01.dup, [0, 0, 80, 200], 80)
    #------------------------------------------------------------Hanging Decor------------------------------------------------------------------------------
     #...........................................................Hanging Wires..............................................................................
-     @@hanging_wires_01 = Misc_Decor.new("Hanging Wires", 500, Hanging_Wires_01.dup)
+     @@hanging_wires_01 = Misc_Decor.new("Hanging Wires", 500, Hanging_Wires_01.dup, [0, 0, 100, 200], 100)
      Created_Misc_Object_Template_Array.push(@@hanging_wires_01)
-     @@hanging_wires_02 = Misc_Decor.new("Hanging Wires", 501, Hanging_Wires_01.dup)
-     @@hanging_wires_03 = Misc_Decor.new("Hanging Wires", 502, Hanging_Wires_01.dup)
-     @@hanging_wires_04 = Misc_Decor.new("Hanging Wires", 503, Hanging_Wires_01.dup)
-     @@hanging_wires_05 = Misc_Decor.new("Hanging Wires", 504, Hanging_Wires_02.dup)
+     @@hanging_wires_02 = Misc_Decor.new("Hanging Wires", 501, Hanging_Wires_01.dup, [0, 0, 100, 200], 100)
+     @@hanging_wires_03 = Misc_Decor.new("Hanging Wires", 502, Hanging_Wires_01.dup, [0, 0, 100, 200], 100)
+     @@hanging_wires_04 = Misc_Decor.new("Hanging Wires", 503, Hanging_Wires_01.dup, [0, 0, 100, 200], 100)
+     @@hanging_wires_05 = Misc_Decor.new("Hanging Wires", 504, Hanging_Wires_02.dup, [0, 0, 100, 200], 100)
   #________________________________________________________________________________________________________________________________________________________
    end
  #PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP

@@ -10,7 +10,6 @@ require "../src/Audio.cr"
 require "../src/Saves.cr"
 require "../src/Fonts.cr"
 require "../src/level_test.cr"
-require "../src/Player_Character.cr"
 require "../src/Level_Editor.cr"
 require "x11"
 require "crystal/system/time"
@@ -227,7 +226,7 @@ extend self
     control_text.string = "Save: V\nLoad: B\nMove View: WASD\nMove Platform: Arrow Keys\nReset All Objects: Backspace\nReset Current Object: X" +
     "\nNext Template/Teleport X: K\nPrevious Template/Teleport X: L\nNext Object: O\nPrevious Object: P" + 
     "\nNew Object: N\nPlace Object: Right Click\nZoom: +/-" +
-    "\nTexture/Teleport Y: T/Y\nTeleport Area: G/H\nTeleport Area: J/M"
+    "\nTexture/Teleport Y: T/Y\nTeleport Area/Misc Z: G/H\nTeleport Map/Scale Misc: J/M\nRotate: I"
     window.draw(control_text)
   end
  #/////////////////////////////////////////////////////////Main Menu////////////////////////////////////////////////////////////////////+

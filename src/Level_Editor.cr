@@ -9,7 +9,6 @@ require "../src/Audio.cr"
 require "../src/Saves.cr"
 require "../src/Fonts.cr"
 require "../src/level_test.cr"
-require "../src/Player_Character.cr"
 require "x11"
 #require "crystal/system/te"
 require "chipmunk/chipmunk_crsfml"
@@ -166,6 +165,10 @@ include Map_Geometry
          case event.code
        when SF::Keyboard::Escape
            window.close
+  #-----------------------------------------------------Rotate Objects----------------------------------------------------
+       when SF::Keyboard::I
+        current_misc_decor = @@current_misc_decor
+        Misc_Decor.rotate(current_misc_decor)
   #----------------------------------------------------Position Objects--------------------------------------------------- 
        when SF::Keyboard::Left
         case @@current_category
@@ -308,6 +311,11 @@ include Map_Geometry
           position_y = 0.50
           current_teleporter = @@current_teleporter
           Teleporter.change_destination_position_y(current_teleporter, position_y)
+        when "misc_decor"
+          @@texture += 1
+           texture = @@texture
+           current_misc_decor = @@current_misc_decor
+           Misc_Decor.change_texture(current_misc_decor, texture)
         end
        when SF::Keyboard::Y
         case @@current_category
@@ -341,17 +349,31 @@ include Map_Geometry
           position_y = -0.50
           current_teleporter = @@current_teleporter
           Teleporter.change_destination_position_y(current_teleporter, position_y)
+        when "misc_decor"
+          @@texture -= 1
+           texture = @@texture
+           current_misc_decor = @@current_misc_decor
+           Misc_Decor.change_texture(current_misc_decor, texture)
         end
-  #----------------------------------------------------Change Map/Area---------------------------------------------------- 
+  #---------------------------------------------------Change Map/Area/Z--------------------------------------------------- 
         when SF::Keyboard::G
-         @@teleporter_area_iterator += 1
-         if Area_Array.size <= @@teleporter_area_iterator
+         case @@current_category
+         when "teleporter"
+          @@teleporter_area_iterator += 1
+          if Area_Array.size <= @@teleporter_area_iterator
           @@teleporter_area_iterator = 0         
-         end
-         area = Area_Array[@@teleporter_area_iterator] 
-         current_teleporter = @@current_teleporter
-         Teleporter.change_area(current_teleporter, area)
+          end
+          area = Area_Array[@@teleporter_area_iterator] 
+          current_teleporter = @@current_teleporter
+          Teleporter.change_area(current_teleporter, area)
+         when "misc_decor"
+           current_misc_decor = @@current_misc_decor
+           z = "front"
+          Misc_Decor.change_z_axis(z, current_misc_decor)
+        end
         when SF::Keyboard::H
+         case @@current_category
+         when "teleporter"
          @@teleporter_area_iterator -= 1
          if @@teleporter_area_iterator < 0
           @@teleporter_area_iterator = 0
@@ -359,16 +381,31 @@ include Map_Geometry
           area = Area_Array[@@teleporter_area_iterator] 
           current_teleporter = @@current_teleporter
           Teleporter.change_area(current_teleporter, area)
+          when "misc_decor"
+          current_misc_decor = @@current_misc_decor
+          z = "back"
+         Misc_Decor.change_z_axis(z, current_misc_decor)
+        end
         when SF::Keyboard::J
-          array = Editor_Controls.choose_map_array
-          current_teleporter = @@current_teleporter
-          @@teleporter_map_iterator += 1
-          if array.size <= @@teleporter_map_iterator
-           @@teleporter_map_iterator = 0         
+          case @@current_category
+          when "teleporter"
+           array = Editor_Controls.choose_map_array
+           current_teleporter = @@current_teleporter
+           @@teleporter_map_iterator += 1
+           if array.size <= @@teleporter_map_iterator
+            @@teleporter_map_iterator = 0         
+           end
+           map = array[@@teleporter_map_iterator]         
+           Teleporter.change_map(current_teleporter, map)
+          when "misc_decor"
+            current_misc_decor = @@current_misc_decor
+            x = 0.5
+            y = 0.5
+            Misc_Decor.scale(current_misc_decor, x, y)
           end
-          map = array[@@teleporter_map_iterator]         
-          Teleporter.change_map(current_teleporter, map)
         when SF::Keyboard::M
+          case @@current_category
+          when "teleporter"
           array = Editor_Controls.choose_map_array
           @@teleporter_map_iterator -= 1
           if @@teleporter_map_iterator < 0
@@ -377,6 +414,12 @@ include Map_Geometry
            map = array[@@teleporter_map_iterator] 
            current_teleporter = @@current_teleporter
            Teleporter.change_map(current_teleporter, map)
+          when "misc_decor"
+            current_misc_decor = @@current_misc_decor
+            x = -0.5
+            y = -0.5
+            Misc_Decor.scale(current_misc_decor, x, y)
+          end
   #-----------------------------------------------------Position View----------------------------------------------------- 
        when SF::Keyboard::W
            player.position -= SF.vector2(0, 50)
@@ -417,6 +460,8 @@ include Map_Geometry
          Map_Geometry::Wall.load_map_platform_settings(current_file)
          Map_Geometry::Teleporter.load_map_teleporter_settings(current_file)
          Map_Geometry::Crafting_Station.load_map_platform_settings(current_file)
+         Map_Geometry::Misc_Decor.load_map_settings(current_file)
+         Map_Geometry::Misc_Decor.load_map_overlay_settings(current_file)
   #-------------------------------------------------------Zoom View------------------------------------------------------- 
        when SF::Keyboard::Add
          zoom = -1
@@ -473,6 +518,15 @@ include Map_Geometry
          end
          id = @@template_id
          @@current_crafting_station_template  = Crafting_Station.level_editor_change_crafting_station_template(id)
+        when "misc_decor"
+          s = Map_Geometry::Misc_Decor.get_misc_decor_station_template_array_size
+          if @@template_id < s
+           @@template_id += 1
+          else 
+           @@template_id = -1
+          end
+          id = @@template_id
+          @@current_misc_decor_template  = Misc_Decor.level_editor_change_misc_decor_template(id)
          end
        when SF::Keyboard::L
         case @@current_category
@@ -512,6 +566,14 @@ include Map_Geometry
            end
            id = @@template_id
            @@current_crafting_station_template  = Map_Geometry::Crafting_Station.level_editor_change_crafting_station_template(id)
+        when "misc_decor"
+          if @@template_id > 0
+            @@template_id -= 1
+           else 
+            @@template_id = -1
+           end
+           id = @@template_id
+           @@current_misc_decor_template  = Map_Geometry::Misc_Decor.level_editor_change_misc_decor_template(id)
         end
   #----------------------------------------------------Choose Objects----------------------------------------------------- 
        when SF::Keyboard::O
@@ -559,7 +621,7 @@ include Map_Geometry
          end
           id = @@id
           @@current_teleporter = Map_Geometry::Teleporter.level_editor_change_teleporter(id)
-        end
+         end
         when "crafting_station"
           s = Map_Geometry::Crafting_Station.get_created_crafting_station_array_size
           if s > 0
@@ -570,6 +632,17 @@ include Map_Geometry
          end
           id = @@id
           @@current_crafting_station = Map_Geometry::Crafting_Station.level_editor_change_crafting_station(id)
+        end
+        when "misc_decor"
+          s = Map_Geometry::Misc_Decor.get_misc_decor_station_array_size
+          if s > 0
+          if @@id < s
+          @@id += 1
+          else 
+          @@id = 0
+         end
+          id = @@id
+          @@current_misc_decor = Misc_Decor.level_editor_change_misc_decor(id)
          end
       end
        when SF::Keyboard::P
@@ -601,7 +674,7 @@ include Map_Geometry
         when "teleporter"
           if @@id < 0
           @@id -= 1
-        else 
+         else 
           @@id = 0
          end
           id = @@id
@@ -614,6 +687,14 @@ include Map_Geometry
            end
             id = @@id
             @@current_crafting_station = Map_Geometry::Crafting_Station.level_editor_change_crafting_station(id)
+        when "misc_decor"
+          if @@id < 0
+            @@id -= 1
+          else 
+            @@id = 0
+           end
+            id = @@id
+            @@current_misc_decor = Map_Geometry::Misc_Decor.level_editor_change_misc_decor(id)
         end
   #---------------------------------------------------Create New Objects--------------------------------------------------  
        when SF::Keyboard::N
@@ -682,6 +763,12 @@ include Map_Geometry
      Level_Editor_Object_Text.string = @@current_teleporter.destination_postion[0].to_s + 
      ", " + @@current_teleporter.destination_postion[1].to_s
      window.draw(current_destination_area); window.draw(current_destination_map)
+    end
+    if @@current_category == "misc_decor"
+      z_text = Level_Editor_Object_Text.dup
+      z_text.string = Misc_Decor.get_z_axis
+      z_text.position = SF.vector2(265, 965)
+      window.draw(z_text)
     end
     current_object_text.string = current_object.name
     current_object_text.position = SF.vector2(25, 1030)

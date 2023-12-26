@@ -1,7 +1,0 @@
----
-#shirts
-
-White_Tee_Shirt:
- name: White Tee Shirt
- texture: TEE_SHIRT_TEXTURE_01
- sleeves: short
