@@ -4570,25 +4570,7 @@ module Harvestables
 include Use
   extend self
   class Ore
-    All_Ore_Array = [] of Ore 
-    # Test_Ore_Array = [@@bloodstone_01, @@moss_agate_01, @@amber01, @@wavellite01,  @@topaz01, @@amethyst01,
-    # @@smoky_quartz01, @@sapphire01, @@black_opal01, @@ajoite01, @@rhodolite01, @@chalcanthite01, @@flourite01, @@amorite01, @@lapis_lazuli01,
-    # @@moonstone01, @@blue_calcite01, @@hiddenite01, @@ofretite01, @@holly_blue_agate01, @@ametrine01, @@hemimorphite01, @@tiffany_stone01,
-    # @@azurite01, @@howlite01, @@angelite01, @@blue_lace_agate01, @@iolite01, @@sodalite01, @@kyanite01, @@sunstone01, @@bony_amber01, @@blue_amber01,
-    # @@blue_spinel01, @@red_spinel01, @@fire_opal01, @@garnet01, @@ruby01, @@cherry_quartz01, @@lemon_quartz01, @@turquoise01, @@tigers_eye01,
-    # @@orange_calcite01, @@grape_agate01, @@jade01, @@diamond01, @@emerald01, @@painite01, @@bumblebee_jasper01, @@blood_jasper01, @@mook_jasper01,
-    # @@red_jasper01, @@carbon01, @@copper01, @@tin01, @@zinc01, @@iron01]
-
-    # Test_Ore_Sprite_Array = [@@bloodstone_01.sprite, @@bloodstone_02.sprite, @@bloodstone_03.sprite, @@moss_agate_01.sprite, @@amber01.sprite, 
-    # @@wavellite01.sprite,  @@topaz01.sprite, @@amethyst01.sprite, @@smoky_quartz01.sprite, @@sapphire01.sprite, @@black_opal01.sprite,
-    # @@ajoite01.sprite, @@rhodolite01.sprite, @@chalcanthite01.sprite, @@flourite01.sprite, @@amorite01.sprite, @@lapis_lazuli01.sprite,
-    # @@moonstone01.sprite, @@blue_calcite01.sprite, @@hiddenite01.sprite, @@ofretite01.sprite, @@holly_blue_agate01.sprite, @@ametrine01.sprite,
-    # @@hemimorphite01.sprite, @@tiffany_stone01.sprite, @@azurite01.sprite, @@howlite01.sprite, @@angelite01.sprite, @@blue_lace_agate01.sprite,
-    # @@iolite01.sprite, @@sodalite01.sprite, @@kyanite01.sprite, @@sunstone01.sprite, @@bony_amber01.sprite, @@blue_amber01.sprite, @@blue_spinel01.sprite,
-    # @@red_spinel01.sprite, @@fire_opal01.sprite, @@garnet01.sprite, @@ruby01.sprite, @@cherry_quartz01.sprite, @@lemon_quartz01.sprite,
-    # @@turquoise01.sprite, @@tigers_eye01.sprite, @@orange_calcite01.sprite, @@grape_agate01.sprite, @@jade01.sprite, @@diamond01.sprite, @@emerald01.sprite,
-    # @@painite01.sprite, @@bumblebee_jasper01.sprite, @@blood_jasper01.sprite, @@mook_jasper01.sprite, @@red_jasper01.sprite, @@carbon01.sprite, 
-    # @@copper01.sprite, @@tin01.sprite, @@zinc01.sprite, @@iron01.sprite]
+    All_Ore_Array = [] of Ore; Current_Map_Ore_Array = [] of Ore 
    #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
    #+                                                              Variables                                                                               +
    #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -4598,7 +4580,8 @@ include Use
    #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
    #!                                                              Initialize                                                                              !
    #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    def initialize(name : String, id : Int32, color : String, hardness : Int32, hp : Float64, drop_item : String, sprite : SF::Sprite, is_broke : Bool, max_hp : Int32)
+    def initialize(name : String, id : Int32, color : String, hardness : Int32, hp : Float64, drop_item : String, sprite : SF::Sprite, 
+     is_broke : Bool, max_hp : Int32, clock : SF::Clock)
       @name = name
       @id = id
       @color = color
@@ -4608,6 +4591,7 @@ include Use
       @sprite = sprite
       @is_broke = is_broke
       @max_hp = max_hp 
+      @clock = clock
      end
     #..........................................................Basic Initializers...........................................................................
      def name
@@ -4637,6 +4621,15 @@ include Use
      def max_hp
         @max_hp
       end
+     def clock
+      @clock
+     end
+     def is_broke=(this)
+      @is_broke = this
+     end
+     def clock=(this)
+      @clock = this
+     end
     #_______________________________________________________________________________________________________________________________________________________
     #..........................................................HP Class Functions...........................................................................
      def Ore.set_attack_strength(attack_strength)
@@ -4690,7 +4683,7 @@ include Use
    #????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
    #?                                                               Methods                                                                                ?
    #????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
-    Ore_Clock_01 = SF::Clock.new; Ore_Clock_Break = SF::Clock.new
+    Ore_Clock_01 = SF::Clock.new; Ore_Clock_Break = SF::Clock.new; Ore_Respawn_Clock = SF::Clock.new
 
     def Ore.stop_attack
       @@is_ore_attacked = false
@@ -4758,16 +4751,26 @@ include Use
         if ore.hp >= 0
 
          end; end; end; end
+      def Ore.respawn
+        Current_Map_Ore_Array.map{ |i| 
+          if i.is_broke == true && i.clock.elapsed_time > SF.seconds(1800)
+            this = i.max_hp
+            i.hp_set(this)
+            i.is_broke = false
+            a = 0; b = 0; x = 100; y = 100
+            i.sprite_change_square(a, b, x, y)
+          end}
+      end
       def Ore.break(broken)
         amount = rand(1..3)
         ore = broken.name
         @@is_ore_attacked = false
     #    if broken.hp >= 0 && broken.is_broke == false
         if @@ore_reset == 0
-          puts "broke"
           Etc::Inventory_Ore.add_ore(amount, ore)
           Etc::Inventory_Ore.update_ore_inventory
           Ore_Clock_Break.restart
+          broken.clock.restart
           @@ore_reset = 1
         end;# end
            time = Ore_Clock_Break.elapsed_time
@@ -4790,16 +4793,7 @@ include Use
      else if time >= SF.seconds(1.5) && time < SF.seconds(1.75)
       broken.is_broke_toggle   
       @@ore_reset = 0
-      if time > SF.milliseconds(30)  #@note this only works with microseconds and milliseconds, not seconds. I don't know why, there wasn't a typo
-      Ore_Clock_Break.restart
-           this = broken.max_hp
-           broken.hp_set(this)
-           a = 0; b = 0; x = 100; y = 100
-           broken.sprite_change_square(a, b, x, y)
-           this = broken.is_broke  
-           broken.is_broke_toggle 
-           Ore_Clock_Break.restart
-       end; end; end; end; end; end; end; end
+       end; end; end; end; end; end; end
     #-------------------------------------------------------------------------------------------------------------------------------------------------     
     def Ore.draw_ores(window, map, area)
       if @@is_ore_attacked == true
@@ -4862,7 +4856,7 @@ include Use
         page = 1
         window.draw(Test_Smelter_Menu); Etc::Inventory_Ore.update_ore_inventory; Etc::Inventory_Ore.display_metal_smelter(window)  
       end
-      
+      Ore.respawn
     end
    #________________________________________________________________________________________________________________________________________________________
    #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -4871,537 +4865,234 @@ include Use
    #========================================================================================================================================================
    #=================================================================Minerals===============================================================================
     #..............................................................Bloodstone...............................................................................
-     @@bloodstone = Ore.new("Bloodstone", 1, "red", 7, 500, "bloodstone_ore", Bloodstone_Ore.dup, false, 500) 
+     @@bloodstone = Ore.new("Bloodstone", 0, "red", 7, 500, "bloodstone_ore", Bloodstone_Ore.dup, false, 500, Ore_Respawn_Clock.dup) 
      All_Ore_Array.push(@@bloodstone)
     #.......................................................................................................................................................
     #..............................................................Moss Stone...............................................................................
-     @@moss_agate_01 = Ore.new("Moss Agate", 7, "green", 7, 450, "moss_agate", Moss_Agate_Ore.dup, false, 450) 
-     @@moss_agate_02 = Ore.new("Moss Agate", 8, "green", 7, 450, "moss_agate", Moss_Agate_Ore.dup, false, 450) 
-     @@moss_agate_03 = Ore.new("Moss Agate", 9, "green", 7, 450, "moss_agate", Moss_Agate_Ore.dup, false, 450) 
-     @@moss_agate_04 = Ore.new("Moss Agate", 10, "green", 7, 450, "moss_agate", Moss_Agate_Ore.dup, false, 450) 
-     @@moss_agate_05 = Ore.new("Moss Agate", 11, "green", 7, 450, "moss_agate", Moss_Agate_Ore.dup, false, 450) 
-     @@moss_agate_06 = Ore.new("Moss Agate", 12, "green", 7, 450, "moss_agate", Moss_Agate_Ore.dup, false, 450) 
-     All_Ore_Array.push(@@moss_agate_01, @@moss_agate_02, @@moss_agate_03, @@moss_agate_04, @@moss_agate_05, @@moss_agate_06)
+     @@moss_agate = Ore.new("Moss Agate", 1, "green", 7, 450, "moss_agate", Moss_Agate_Ore.dup, false, 450, Ore_Respawn_Clock.dup) 
+     All_Ore_Array.push(@@moss_agate)
     #.......................................................................................................................................................
     #................................................................Amber..................................................................................
-     @@amber01 = Ore.new("Amber", 13, "yellow", 2, 100, "amber", Amber_Ore.dup, false, 100) 
-     @@amber02 = Ore.new("Amber", 14, "yellow", 2, 100, "amber", Amber_Ore.dup, false, 100) 
-     @@amber03 = Ore.new("Amber", 15, "yellow", 2, 100, "amber", Amber_Ore.dup, false, 100) 
-     @@amber04 = Ore.new("Amber", 16, "yellow", 2, 100, "amber", Amber_Ore.dup, false, 100) 
-     @@amber05 = Ore.new("Amber", 17, "yellow", 2, 100, "amber", Amber_Ore.dup, false, 100) 
-     @@amber06 = Ore.new("Amber", 18, "yellow", 2, 100, "amber", Amber_Ore.dup, false, 100) 
-     All_Ore_Array.push(@@amber01, @@amber02, @@amber03, @@amber04, @@amber05, @@amber06)
+     @@amber = Ore.new("Amber", 2, "yellow", 2, 100, "amber", Amber_Ore.dup, false, 100, Ore_Respawn_Clock.dup) 
+     All_Ore_Array.push(@@amber)
     #.......................................................................................................................................................
     #...............................................................Wavellite...............................................................................
-     @@wavellite01 = Ore.new("Wavellite", 19, "green", 4, 200, "wavellite", Wavellite_Ore.dup, false, 200) 
-     @@wavellite02 = Ore.new("Wavellite", 20, "green", 4, 200, "wavellite", Wavellite_Ore.dup, false, 200) 
-     @@wavellite03 = Ore.new("Wavellite", 21, "green", 4, 200, "wavellite", Wavellite_Ore.dup, false, 200) 
-     @@wavellite04 = Ore.new("Wavellite", 22, "green", 4, 200, "wavellite", Wavellite_Ore.dup, false, 200) 
-     @@wavellite05 = Ore.new("Wavellite", 23, "green", 4, 200, "wavellite", Wavellite_Ore.dup, false, 200) 
-     @@wavellite06 = Ore.new("Wavellite", 24, "green", 4, 200, "wavellite", Wavellite_Ore.dup, false, 200) 
-     All_Ore_Array.push(@@wavellite01, @@wavellite02, @@wavellite03, @@wavellite04, @@wavellite05, @@wavellite06)
+     @@wavellite = Ore.new("Wavellite", 3, "green", 4, 200, "wavellite", Wavellite_Ore.dup, false, 200, Ore_Respawn_Clock.dup) 
+     All_Ore_Array.push(@@wavellite)
     #.......................................................................................................................................................
     #.................................................................Topaz.................................................................................
-     @@topaz01 = Ore.new("Topaz", 25, "yellow", 8, 550, "topaz", Topaz_Ore.dup, false, 550)
-     @@topaz02 = Ore.new("Topaz", 26, "yellow", 8, 550, "topaz", Topaz_Ore.dup, false, 550)
-     @@topaz03 = Ore.new("Topaz", 27, "yellow", 8, 550, "topaz", Topaz_Ore.dup, false, 550)
-     @@topaz04 = Ore.new("Topaz", 28, "yellow", 8, 550, "topaz", Topaz_Ore.dup, false, 550)
-     @@topaz05 = Ore.new("Topaz", 29, "yellow", 8, 550, "topaz", Topaz_Ore.dup, false, 550)
-     @@topaz06 = Ore.new("Topaz", 20, "yellow", 8, 550, "topaz", Topaz_Ore.dup, false, 550)
-     All_Ore_Array.push(@@topaz01, @@topaz02, @@topaz03, @@topaz04, @@topaz05, @@topaz06)
+     @@topaz = Ore.new("Topaz", 4, "yellow", 8, 550, "topaz", Topaz_Ore.dup, false, 550, Ore_Respawn_Clock.dup)
+     All_Ore_Array.push(@@topaz)
     #.......................................................................................................................................................
     #................................................................Amethyst...............................................................................
-     @@amethyst01 = Ore.new("Amethyst", 21, "purple", 7, 500, "amethyst", Amethyst_Ore.dup, false, 500)
-     @@amethyst02 = Ore.new("Amethyst", 22, "purple", 7, 500, "amethyst", Amethyst_Ore.dup, false, 500)
-     @@amethyst03 = Ore.new("Amethyst", 23, "purple", 7, 500, "amethyst", Amethyst_Ore.dup, false, 500)
-     @@amethyst04 = Ore.new("Amethyst", 24, "purple", 7, 500, "amethyst", Amethyst_Ore.dup, false, 500)
-     @@amethyst05 = Ore.new("Amethyst", 25, "purple", 7, 500, "amethyst", Amethyst_Ore.dup, false, 500)
-     @@amethyst06 = Ore.new("Amethyst", 26, "purple", 7, 500, "amethyst", Amethyst_Ore.dup, false, 500)
-     All_Ore_Array.push(@@amethyst01, @@amethyst02, @@amethyst03, @@amethyst04, @@amethyst05, @@amethyst06)
+     @@amethyst = Ore.new("Amethyst", 5, "purple", 7, 500, "amethyst", Amethyst_Ore.dup, false, 500, Ore_Respawn_Clock.dup)
+     All_Ore_Array.push(@@amethyst)
     #.......................................................................................................................................................
     #..............................................................Smoky Quartz...........................................................................
-     @@smoky_quartz01 = Ore.new("Smoky Quartz", 27, "clear", 7, 500, "smoky_quartz", Smokey_Quartz_Ore.dup, false, 500)
-     @@smoky_quartz02 = Ore.new("Smoky Quartz", 28, "clear", 7, 500, "smoky_quartz", Smokey_Quartz_Ore.dup, false, 500)
-     @@smoky_quartz03 = Ore.new("Smoky Quartz", 29, "clear", 7, 500, "smoky_quartz", Smokey_Quartz_Ore.dup, false, 500)
-     @@smoky_quartz04 = Ore.new("Smoky Quartz", 30, "clear", 7, 500, "smoky_quartz", Smokey_Quartz_Ore.dup, false, 500)
-     @@smoky_quartz05 = Ore.new("Smoky Quartz", 31, "clear", 7, 500, "smoky_quartz", Smokey_Quartz_Ore.dup, false, 500)
-     @@smoky_quartz06 = Ore.new("Smoky Quartz", 32, "clear", 7, 500, "smoky_quartz", Smokey_Quartz_Ore.dup, false, 500)
-     All_Ore_Array.push(@@smoky_quartz01, @@smoky_quartz02, @@smoky_quartz03, @@smoky_quartz04, @@smoky_quartz05, @@smoky_quartz06)
+     @@smoky_quartz = Ore.new("Smoky Quartz", 6, "clear", 7, 500, "smoky_quartz", Smokey_Quartz_Ore.dup, false, 500, Ore_Respawn_Clock.dup)
+     All_Ore_Array.push(@@smoky_quartz)
     #.......................................................................................................................................................
     #................................................................Sapphire..............................................................................
-     @@sapphire01 = Ore.new("Sapphire", 33, "clear", 9, 600, "sapphire", Sapphire_Ore.dup, false, 600)
-     @@sapphire02 = Ore.new("Sapphire", 34, "clear", 9, 600, "sapphire", Sapphire_Ore.dup, false, 600)
-     @@sapphire03 = Ore.new("Sapphire", 35, "clear", 9, 600, "sapphire", Sapphire_Ore.dup, false, 600)
-     @@sapphire04 = Ore.new("Sapphire", 36, "clear", 9, 600, "sapphire", Sapphire_Ore.dup, false, 600)
-     @@sapphire05 = Ore.new("Sapphire", 37, "clear", 9, 600, "sapphire", Sapphire_Ore.dup, false, 600)
-     @@sapphire06 = Ore.new("Sapphire", 38, "clear", 9, 600, "sapphire", Sapphire_Ore.dup, false, 600)
-     All_Ore_Array.push(@@sapphire01, @@sapphire02, @@sapphire03, @@sapphire04, @@sapphire05, @@sapphire06)
+     @@sapphire = Ore.new("Sapphire", 7, "clear", 9, 600, "sapphire", Sapphire_Ore.dup, false, 600, Ore_Respawn_Clock.dup)
+     All_Ore_Array.push(@@sapphire)
     #.......................................................................................................................................................
     #................................................................Black Opal.............................................................................
-     @@black_opal01 = Ore.new("Black Opal", 39, "clear", 6, 400, "black_opal", Black_Opal_Ore.dup, false, 400)
-     @@black_opal02 = Ore.new("Black Opal", 40, "clear", 6, 400, "black_opal", Black_Opal_Ore.dup, false, 400)
-     @@black_opal03 = Ore.new("Black Opal", 41, "clear", 6, 400, "black_opal", Black_Opal_Ore.dup, false, 400)
-     @@black_opal04 = Ore.new("Black Opal", 42, "clear", 6, 400, "black_opal", Black_Opal_Ore.dup, false, 400)
-     @@black_opal05 = Ore.new("Black Opal", 43, "clear", 6, 400, "black_opal", Black_Opal_Ore.dup, false, 400)
-     @@black_opal06 = Ore.new("Black Opal", 44, "clear", 6, 400, "black_opal", Black_Opal_Ore.dup, false, 400)
-     All_Ore_Array.push(@@black_opal01, @@black_opal02, @@black_opal03, @@black_opal04, @@black_opal05, @@black_opal06)
+     @@black_opal = Ore.new("Black Opal", 8, "clear", 6, 400, "black_opal", Black_Opal_Ore.dup, false, 400, Ore_Respawn_Clock.dup)
+     All_Ore_Array.push(@@black_opal)
     #.......................................................................................................................................................
     #.................................................................Ajoite................................................................................
-     @@ajoite01 = Ore.new("Ajoite", 45, "clear", 3, 150, "ajoite", Ajoite_Ore.dup, false, 150)
-     @@ajoite02 = Ore.new("Ajoite", 46, "clear", 3, 150, "ajoite", Ajoite_Ore.dup, false, 150)
-     @@ajoite03 = Ore.new("Ajoite", 47, "clear", 3, 150, "ajoite", Ajoite_Ore.dup, false, 150)
-     @@ajoite04 = Ore.new("Ajoite", 48, "clear", 3, 150, "ajoite", Ajoite_Ore.dup, false, 150)
-     @@ajoite05 = Ore.new("Ajoite", 49, "clear", 3, 150, "ajoite", Ajoite_Ore.dup, false, 150)
-     @@ajoite06 = Ore.new("Ajoite", 50, "clear", 3, 150, "ajoite", Ajoite_Ore.dup, false, 150)
-     All_Ore_Array.push(@@ajoite01, @@ajoite02, @@ajoite03, @@ajoite04, @@ajoite05, @@ajoite06)
+     @@ajoite = Ore.new("Ajoite", 9, "clear", 3, 150, "ajoite", Ajoite_Ore.dup, false, 150, Ore_Respawn_Clock.dup)
+     All_Ore_Array.push(@@ajoite)
     #.......................................................................................................................................................
     #................................................................Rhodolite..............................................................................
-     @@rhodolite01 = Ore.new("Rhodolite", 51, "pink", 7, 500, "rhodolite", Rhodolite_Ore.dup, false, 500)
-     @@rhodolite02 = Ore.new("Rhodolite", 52, "pink", 7, 500, "rhodolite", Rhodolite_Ore.dup, false, 500)
-     @@rhodolite03 = Ore.new("Rhodolite", 53, "pink", 7, 500, "rhodolite", Rhodolite_Ore.dup, false, 500)
-     @@rhodolite04 = Ore.new("Rhodolite", 54, "pink", 7, 500, "rhodolite", Rhodolite_Ore.dup, false, 500)
-     @@rhodolite05 = Ore.new("Rhodolite", 55, "pink", 7, 500, "rhodolite", Rhodolite_Ore.dup, false, 500)
-     @@rhodolite06 = Ore.new("Rhodolite", 56, "pink", 7, 500, "rhodolite", Rhodolite_Ore.dup, false, 500)
-     All_Ore_Array.push(@@rhodolite01, @@rhodolite02, @@rhodolite03, @@rhodolite04, @@rhodolite05, @@rhodolite06)
+     @@rhodolite = Ore.new("Rhodolite", 10, "pink", 7, 500, "rhodolite", Rhodolite_Ore.dup, false, 500, Ore_Respawn_Clock.dup)
+     All_Ore_Array.push(@@rhodolite)
     #.......................................................................................................................................................
     #...............................................................Chalcanthite............................................................................
-     @@chalcanthite01 = Ore.new("Chalcanthite", 57, "blue", 2, 100, "chalcanthite", Chalcanthite_Ore.dup, false, 100)
-     @@chalcanthite02 = Ore.new("Chalcanthite", 58, "blue", 2, 100, "chalcanthite", Chalcanthite_Ore.dup, false, 100)
-     @@chalcanthite03 = Ore.new("Chalcanthite", 59, "blue", 2, 100, "chalcanthite", Chalcanthite_Ore.dup, false, 100)
-     @@chalcanthite04 = Ore.new("Chalcanthite", 60, "blue", 2, 100, "chalcanthite", Chalcanthite_Ore.dup, false, 100)
-     @@chalcanthite05 = Ore.new("Chalcanthite", 61, "blue", 2, 100, "chalcanthite", Chalcanthite_Ore.dup, false, 100)
-     @@chalcanthite06 = Ore.new("Chalcanthite", 62, "blue", 2, 100, "chalcanthite", Chalcanthite_Ore.dup, false, 100)
-     All_Ore_Array.push(@@chalcanthite01, @@chalcanthite02, @@chalcanthite03, @@chalcanthite04, @@chalcanthite05, @@chalcanthite06)
+     @@chalcanthite = Ore.new("Chalcanthite", 11, "blue", 2, 100, "chalcanthite", Chalcanthite_Ore.dup, false, 100, Ore_Respawn_Clock.dup)
+     All_Ore_Array.push(@@chalcanthite)
     #.......................................................................................................................................................
     #.................................................................Flourite..............................................................................
-     @@flourite01 = Ore.new("Flourite", 63, "clear", 4, 200, "flourite", Flourite_Ore.dup, false, 200)
-     @@flourite02 = Ore.new("Flourite", 64, "clear", 4, 200, "flourite", Flourite_Ore.dup, false, 200)
-     @@flourite03 = Ore.new("Flourite", 65, "clear", 4, 200, "flourite", Flourite_Ore.dup, false, 200)
-     @@flourite04 = Ore.new("Flourite", 66, "clear", 4, 200, "flourite", Flourite_Ore.dup, false, 200)
-     @@flourite05 = Ore.new("Flourite", 67, "clear", 4, 200, "flourite", Flourite_Ore.dup, false, 200)
-     @@flourite06 = Ore.new("Flourite", 68, "clear", 4, 200, "flourite", Flourite_Ore.dup, false, 200)
-     All_Ore_Array.push(@@flourite01, @@flourite02, @@flourite03, @@flourite04, @@flourite05, @@flourite06)
+     @@flourite = Ore.new("Flourite", 12, "clear", 4, 200, "flourite", Flourite_Ore.dup, false, 200, Ore_Respawn_Clock.dup)
+     All_Ore_Array.push(@@flourite)
     #.......................................................................................................................................................
     #.................................................................Amorite...............................................................................
-     @@amorite01 = Ore.new("Amorite", 69, "white", 6, 300, "amorite", Amorite_Ore.dup, false, 300)
-     @@amorite02 = Ore.new("Amorite", 70, "white", 6, 300, "amorite", Amorite_Ore.dup, false, 300)
-     @@amorite03 = Ore.new("Amorite", 71, "white", 6, 300, "amorite", Amorite_Ore.dup, false, 300)
-     @@amorite04 = Ore.new("Amorite", 72, "white", 6, 300, "amorite", Amorite_Ore.dup, false, 300)
-     @@amorite05 = Ore.new("Amorite", 73, "white", 6, 300, "amorite", Amorite_Ore.dup, false, 300)
-     @@amorite06 = Ore.new("Amorite", 74, "white", 6, 300, "amorite", Amorite_Ore.dup, false, 300)
-     All_Ore_Array.push(@@amorite01, @@amorite02, @@amorite03, @@amorite04, @@amorite05, @@amorite06)
+     @@amorite = Ore.new("Amorite", 13, "white", 6, 300, "amorite", Amorite_Ore.dup, false, 300, Ore_Respawn_Clock.dup)
+     All_Ore_Array.push(@@amorite)
     #.......................................................................................................................................................
     #...............................................................Lapis Lazuli.............................................................................
-     @@lapis_lazuli01 = Ore.new("Lapis Lazuli", 75, "blue", 6, 300, "lapis_lazuli", Lapis_Lazuli_Ore.dup, false, 300)
-     @@lapis_lazuli02 = Ore.new("Lapis Lazuli", 76, "blue", 6, 300, "lapis_lazuli", Lapis_Lazuli_Ore.dup, false, 300)
-     @@lapis_lazuli03 = Ore.new("Lapis Lazuli", 77, "blue", 6, 300, "lapis_lazuli", Lapis_Lazuli_Ore.dup, false, 300)
-     @@lapis_lazuli04 = Ore.new("Lapis Lazuli", 78, "blue", 6, 300, "lapis_lazuli", Lapis_Lazuli_Ore.dup, false, 300)
-     @@lapis_lazuli05 = Ore.new("Lapis Lazuli", 79, "blue", 6, 300, "lapis_lazuli", Lapis_Lazuli_Ore.dup, false, 300)
-     @@lapis_lazuli06 = Ore.new("Lapis Lazuli", 80, "blue", 6, 300, "lapis_lazuli", Lapis_Lazuli_Ore.dup, false, 300)
-     All_Ore_Array.push(@@lapis_lazuli01, @@lapis_lazuli02, @@lapis_lazuli03, @@lapis_lazuli04, @@lapis_lazuli05, @@lapis_lazuli06)
+     @@lapis_lazuli = Ore.new("Lapis Lazuli", 14, "blue", 6, 300, "lapis_lazuli", Lapis_Lazuli_Ore.dup, false, 300, Ore_Respawn_Clock.dup)
+     All_Ore_Array.push(@@lapis_lazuli)
     #........................................................................................................................................................
     #................................................................Moonstone...............................................................................
-     @@moonstone01 = Ore.new("Moonstone", 81, "white", 6, 300, "moonstone", Moonstone_Ore.dup, false, 300)
-     @@moonstone02 = Ore.new("Moonstone", 82, "white", 6, 300, "moonstone", Moonstone_Ore.dup, false, 300)
-     @@moonstone03 = Ore.new("Moonstone", 83, "white", 6, 300, "moonstone", Moonstone_Ore.dup, false, 300)
-     @@moonstone04 = Ore.new("Moonstone", 84, "white", 6, 300, "moonstone", Moonstone_Ore.dup, false, 300)
-     @@moonstone05 = Ore.new("Moonstone", 85, "white", 6, 300, "moonstone", Moonstone_Ore.dup, false, 300)
-     @@moonstone06 = Ore.new("Moonstone", 86, "white", 6, 300, "moonstone", Moonstone_Ore.dup, false, 300)
-     All_Ore_Array.push(@@moonstone01, @@moonstone02, @@moonstone03, @@moonstone04, @@moonstone05, @@moonstone06)
+     @@moonstone = Ore.new("Moonstone", 15, "white", 6, 300, "moonstone", Moonstone_Ore.dup, false, 300, Ore_Respawn_Clock.dup)
+     All_Ore_Array.push(@@moonstone)
     #........................................................................................................................................................
     #..............................................................Blue Calcite..............................................................................
-     @@blue_calcite01 = Ore.new("Blue Calcite", 87, "blue", 3, 250, "blue calcite", Blue_Calcite_Ore.dup, false, 250)
-     @@blue_calcite02 = Ore.new("Blue Calcite", 88, "blue", 3, 250, "blue calcite", Blue_Calcite_Ore.dup, false, 250)
-     @@blue_calcite03 = Ore.new("Blue Calcite", 89, "blue", 3, 250, "blue calcite", Blue_Calcite_Ore.dup, false, 250)
-     @@blue_calcite04 = Ore.new("Blue Calcite", 90, "blue", 3, 250, "blue calcite", Blue_Calcite_Ore.dup, false, 250)
-     @@blue_calcite05 = Ore.new("Blue Calcite", 91, "blue", 3, 250, "blue calcite", Blue_Calcite_Ore.dup, false, 250)
-     @@blue_calcite06 = Ore.new("Blue Calcite", 92, "blue", 3, 250, "blue calcite", Blue_Calcite_Ore.dup, false, 250)
-     All_Ore_Array.push(@@blue_calcite01, @@blue_calcite02, @@blue_calcite03, @@blue_calcite04, @@blue_calcite05, @@blue_calcite06)
+     @@blue_calcite = Ore.new("Blue Calcite", 16, "blue", 3, 250, "blue calcite", Blue_Calcite_Ore.dup, false, 250, Ore_Respawn_Clock.dup)
+     All_Ore_Array.push(@@blue_calcite)
     #........................................................................................................................................................
     #................................................................Hiddenite...............................................................................
-     @@hiddenite01 = Ore.new("Hiddenite", 93, "green", 7, 350, "hiddenite", Hiddenite_Ore.dup, false, 350)
-     @@hiddenite02 = Ore.new("Hiddenite", 94, "green", 7, 350, "hiddenite", Hiddenite_Ore.dup, false, 350)
-     @@hiddenite03 = Ore.new("Hiddenite", 95, "green", 7, 350, "hiddenite", Hiddenite_Ore.dup, false, 350)
-     @@hiddenite04 = Ore.new("Hiddenite", 96, "green", 7, 350, "hiddenite", Hiddenite_Ore.dup, false, 350)
-     @@hiddenite05 = Ore.new("Hiddenite", 97, "green", 7, 350, "hiddenite", Hiddenite_Ore.dup, false, 350)
-     @@hiddenite06 = Ore.new("Hiddenite", 98, "green", 7, 350, "hiddenite", Hiddenite_Ore.dup, false, 350)
-     All_Ore_Array.push(@@hiddenite01, @@hiddenite02, @@hiddenite03, @@hiddenite04, @@hiddenite05, @@hiddenite06)
+     @@hiddenite = Ore.new("Hiddenite", 17, "green", 7, 350, "hiddenite", Hiddenite_Ore.dup, false, 350, Ore_Respawn_Clock.dup)
+     All_Ore_Array.push(@@hiddenite)
     #........................................................................................................................................................
     #................................................................Offretite...............................................................................
-     @@ofretite01 = Ore.new("Offretite", 99, "clear", 5, 250, "offretite", Offretite_Ore.dup, false, 250)
-     @@ofretite02 = Ore.new("Offretite", 100, "clear", 5, 250, "offretite", Offretite_Ore.dup, false, 250)
-     @@ofretite03 = Ore.new("Offretite", 101, "clear", 5, 250, "offretite", Offretite_Ore.dup, false, 250)
-     @@ofretite04 = Ore.new("Offretite", 102, "clear", 5, 250, "offretite", Offretite_Ore.dup, false, 250)
-     @@ofretite05 = Ore.new("Offretite", 103, "clear", 5, 250, "offretite", Offretite_Ore.dup, false, 250)
-     @@ofretite06 = Ore.new("Offretite", 104, "clear", 5, 250, "offretite", Offretite_Ore.dup, false, 250)
-     All_Ore_Array.push(@@ofretite01, @@ofretite02, @@ofretite03, @@ofretite04, @@ofretite05, @@ofretite06)
+     @@ofretite = Ore.new("Offretite", 18, "clear", 5, 250, "offretite", Offretite_Ore.dup, false, 250, Ore_Respawn_Clock.dup)
+     All_Ore_Array.push(@@ofretite)
     #........................................................................................................................................................
     #..............................................................Holly Blue Agate.........................................................................
-     @@holly_blue_agate01 = Ore.new("Holly Blue Agate", 105, "blue", 7, 350, "holly_blue_agate", Holley_Blue_Agate_Ore.dup, false, 350)
-     @@holly_blue_agate02 = Ore.new("Holly Blue Agate", 106, "blue", 7, 350, "holly_blue_agate", Holley_Blue_Agate_Ore.dup, false, 350)
-     @@holly_blue_agate03 = Ore.new("Holly Blue Agate", 107, "blue", 7, 350, "holly_blue_agate", Holley_Blue_Agate_Ore.dup, false, 350)
-     @@holly_blue_agate04 = Ore.new("Holly Blue Agate", 108, "blue", 7, 350, "holly_blue_agate", Holley_Blue_Agate_Ore.dup, false, 350)
-     @@holly_blue_agate05 = Ore.new("Holly Blue Agate", 109, "blue", 7, 350, "holly_blue_agate", Holley_Blue_Agate_Ore.dup, false, 350)
-     @@holly_blue_agate06 = Ore.new("Holly Blue Agate", 110, "blue", 7, 350, "holly_blue_agate", Holley_Blue_Agate_Ore.dup, false, 350)
-     All_Ore_Array.push(@@holly_blue_agate01, @@holly_blue_agate02, @@holly_blue_agate03, @@holly_blue_agate04, @@holly_blue_agate05, @@holly_blue_agate06)
+     @@holly_blue_agate = Ore.new("Holly Blue Agate", 19, "blue", 7, 350, "holly_blue_agate", Holley_Blue_Agate_Ore.dup, false, 350, Ore_Respawn_Clock.dup)
+     All_Ore_Array.push(@@holly_blue_agate)
     #........................................................................................................................................................
     #..................................................................Ametrine..............................................................................
-     @@ametrine01 = Ore.new("Ametrine", 111, "purple", 7, 350, "ametrine", Ametrine_Ore.dup, false, 350)
-     @@ametrine02 = Ore.new("Ametrine", 112, "purple", 7, 350, "ametrine", Ametrine_Ore.dup, false, 350)
-     @@ametrine03 = Ore.new("Ametrine", 113, "purple", 7, 350, "ametrine", Ametrine_Ore.dup, false, 350)
-     @@ametrine04 = Ore.new("Ametrine", 114, "purple", 7, 350, "ametrine", Ametrine_Ore.dup, false, 350)
-     @@ametrine05 = Ore.new("Ametrine", 115, "purple", 7, 350, "ametrine", Ametrine_Ore.dup, false, 350)
-     @@ametrine06 = Ore.new("Ametrine", 116, "purple", 7, 350, "ametrine", Ametrine_Ore.dup, false, 350)
-     All_Ore_Array.push(@@ametrine01, @@ametrine02, @@ametrine03, @@ametrine04, @@ametrine05, @@ametrine06)
+     @@ametrine = Ore.new("Ametrine", 20, "purple", 7, 350, "ametrine", Ametrine_Ore.dup, false, 350, Ore_Respawn_Clock.dup)
+     All_Ore_Array.push(@@ametrine)
     #........................................................................................................................................................
     #................................................................Hemimorphite............................................................................
-     @@hemimorphite01 = Ore.new("Hemimorphite", 117, "purple", 5, 250, "hemimorphite", Hemimorphite_Ore.dup, false, 250)
-     @@hemimorphite02 = Ore.new("Hemimorphite", 118, "purple", 5, 250, "hemimorphite", Hemimorphite_Ore.dup, false, 250)
-     @@hemimorphite03 = Ore.new("Hemimorphite", 119, "purple", 5, 250, "hemimorphite", Hemimorphite_Ore.dup, false, 250)
-     @@hemimorphite04 = Ore.new("Hemimorphite", 120, "purple", 5, 250, "hemimorphite", Hemimorphite_Ore.dup, false, 250)
-     @@hemimorphite05 = Ore.new("Hemimorphite", 121, "purple", 5, 250, "hemimorphite", Hemimorphite_Ore.dup, false, 250)
-     @@hemimorphite06 = Ore.new("Hemimorphite", 122, "purple", 5, 250, "hemimorphite", Hemimorphite_Ore.dup, false, 250)
-     All_Ore_Array.push(@@hemimorphite01, @@hemimorphite02, @@hemimorphite03, @@hemimorphite04, @@hemimorphite05, @@hemimorphite06)
+     @@hemimorphite = Ore.new("Hemimorphite", 21, "purple", 5, 250, "hemimorphite", Hemimorphite_Ore.dup, false, 250, Ore_Respawn_Clock.dup)
+     All_Ore_Array.push(@@hemimorphite)
     #........................................................................................................................................................
     #................................................................Tiffany Stone...........................................................................
-     @@tiffany_stone01 = Ore.new("Tiffany Stone", 123, "purple", 5, 250, "tiffany stone", Tiffany_Stone_Ore.dup, false, 250)
-     @@tiffany_stone02 = Ore.new("Tiffany Stone", 124, "purple", 5, 250, "tiffany stone", Tiffany_Stone_Ore.dup, false, 250)
-     @@tiffany_stone03 = Ore.new("Tiffany Stone", 125, "purple", 5, 250, "tiffany stone", Tiffany_Stone_Ore.dup, false, 250)
-     @@tiffany_stone04 = Ore.new("Tiffany Stone", 126, "purple", 5, 250, "tiffany stone", Tiffany_Stone_Ore.dup, false, 250)
-     @@tiffany_stone05 = Ore.new("Tiffany Stone", 127, "purple", 5, 250, "tiffany stone", Tiffany_Stone_Ore.dup, false, 250)
-     @@tiffany_stone06 = Ore.new("Tiffany Stone", 128, "purple", 5, 250, "tiffany stone", Tiffany_Stone_Ore.dup, false, 250)
-     All_Ore_Array.push(@@tiffany_stone01, @@tiffany_stone02, @@tiffany_stone03, @@tiffany_stone04, @@tiffany_stone05, @@tiffany_stone06)
+     @@tiffany_stone = Ore.new("Tiffany Stone", 22, "purple", 5, 250, "tiffany stone", Tiffany_Stone_Ore.dup, false, 250, Ore_Respawn_Clock.dup)
+     All_Ore_Array.push(@@tiffany_stone)
     #........................................................................................................................................................
     #..................................................................Azurite...............................................................................
-     @@azurite01 = Ore.new("Azurite", 129, "blue", 4, 200, "azurite", Azurite_Ore.dup, false, 200)
-     @@azurite02 = Ore.new("Azurite", 130, "blue", 4, 200, "azurite", Azurite_Ore.dup, false, 200)
-     @@azurite03 = Ore.new("Azurite", 131, "blue", 4, 200, "azurite", Azurite_Ore.dup, false, 200)
-     @@azurite04 = Ore.new("Azurite", 132, "blue", 4, 200, "azurite", Azurite_Ore.dup, false, 200)
-     @@azurite05 = Ore.new("Azurite", 133, "blue", 4, 200, "azurite", Azurite_Ore.dup, false, 200)
-     @@azurite06 = Ore.new("Azurite", 134, "blue", 4, 200, "azurite", Azurite_Ore.dup, false, 200)
-     All_Ore_Array.push(@@azurite01, @@azurite02, @@azurite03, @@azurite04, @@azurite05, @@azurite06)
+     @@azurite = Ore.new("Azurite", 23, "blue", 4, 200, "azurite", Azurite_Ore.dup, false, 200, Ore_Respawn_Clock.dup)
+     All_Ore_Array.push(@@azurite)
     #........................................................................................................................................................
     #..................................................................Howlite...............................................................................
-     @@howlite01 = Ore.new("Howlite", 135, "white", 3, 150, "howlite", Howlite_Ore.dup, false, 150)
-     @@howlite02 = Ore.new("Howlite", 136, "white", 3, 150, "howlite", Howlite_Ore.dup, false, 150)
-     @@howlite03 = Ore.new("Howlite", 137, "white", 3, 150, "howlite", Howlite_Ore.dup, false, 150)
-     @@howlite04 = Ore.new("Howlite", 138, "white", 3, 150, "howlite", Howlite_Ore.dup, false, 150)
-     @@howlite05 = Ore.new("Howlite", 139, "white", 3, 150, "howlite", Howlite_Ore.dup, false, 150)
-     @@howlite06 = Ore.new("Howlite", 140, "white", 3, 150, "howlite", Howlite_Ore.dup, false, 150)
-     All_Ore_Array.push(@@howlite01, @@howlite02, @@howlite03, @@howlite04, @@howlite05, @@howlite06)
+     @@howlite = Ore.new("Howlite", 24, "white", 3, 150, "howlite", Howlite_Ore.dup, false, 150, Ore_Respawn_Clock.dup)
+     All_Ore_Array.push(@@howlite)
     #........................................................................................................................................................
     #..................................................................Angelite..............................................................................
-     @@angelite01 = Ore.new("Angelite", 141, "blue", 3, 150, "angelite", Angelite_Ore.dup, false, 150)
-     @@angelite02 = Ore.new("Angelite", 142, "blue", 3, 150, "angelite", Angelite_Ore.dup, false, 150)
-     @@angelite03 = Ore.new("Angelite", 143, "blue", 3, 150, "angelite", Angelite_Ore.dup, false, 150)
-     @@angelite04 = Ore.new("Angelite", 144, "blue", 3, 150, "angelite", Angelite_Ore.dup, false, 150)
-     @@angelite05 = Ore.new("Angelite", 145, "blue", 3, 150, "angelite", Angelite_Ore.dup, false, 150)
-     @@angelite06 = Ore.new("Angelite", 146, "blue", 3, 150, "angelite", Angelite_Ore.dup, false, 150)
-     All_Ore_Array.push(@@angelite01, @@angelite02, @@angelite03, @@angelite04, @@angelite05, @@angelite06)
+     @@angelite = Ore.new("Angelite", 25, "blue", 3, 150, "angelite", Angelite_Ore.dup, false, 150, Ore_Respawn_Clock.dup)
+     All_Ore_Array.push(@@angelite)
     #........................................................................................................................................................
     #...............................................................Blue Lace Agate..........................................................................
-     @@blue_lace_agate01 = Ore.new("Blue Lace Agate", 147, "blue", 7, 450, "blue lace agate", Blue_Lace_Agate_Ore.dup, false, 450)
-     @@blue_lace_agate02 = Ore.new("Blue Lace Agate", 148, "blue", 7, 450, "blue lace agate", Blue_Lace_Agate_Ore.dup, false, 450)
-     @@blue_lace_agate03 = Ore.new("Blue Lace Agate", 149, "blue", 7, 450, "blue lace agate", Blue_Lace_Agate_Ore.dup, false, 450)
-     @@blue_lace_agate04 = Ore.new("Blue Lace Agate", 150, "blue", 7, 450, "blue lace agate", Blue_Lace_Agate_Ore.dup, false, 450)
-     @@blue_lace_agate05 = Ore.new("Blue Lace Agate", 151, "blue", 7, 450, "blue lace agate", Blue_Lace_Agate_Ore.dup, false, 450)
-     @@blue_lace_agate06 = Ore.new("Blue Lace Agate", 152, "blue", 7, 450, "blue lace agate", Blue_Lace_Agate_Ore.dup, false, 450)
-     All_Ore_Array.push(@@blue_lace_agate01, @@blue_lace_agate02, @@blue_lace_agate03, @@blue_lace_agate04, @@blue_lace_agate05, @@blue_lace_agate06)
+     @@blue_lace_agate = Ore.new("Blue Lace Agate", 26, "blue", 7, 450, "blue lace agate", Blue_Lace_Agate_Ore.dup, false, 450, Ore_Respawn_Clock.dup)
+     All_Ore_Array.push(@@blue_lace_agate)
     #........................................................................................................................................................
     #...................................................................Iolite...............................................................................
-     @@iolite01 = Ore.new("Iolite", 153, "blue", 5, 350, "iolite", Iolite_Ore.dup, false, 350)
-     @@iolite02 = Ore.new("Iolite", 154, "blue", 5, 350, "iolite", Iolite_Ore.dup, false, 350)
-     @@iolite03 = Ore.new("Iolite", 155, "blue", 5, 350, "iolite", Iolite_Ore.dup, false, 350)
-     @@iolite04 = Ore.new("Iolite", 156, "blue", 5, 350, "iolite", Iolite_Ore.dup, false, 350)
-     @@iolite05 = Ore.new("Iolite", 157, "blue", 5, 350, "iolite", Iolite_Ore.dup, false, 350)
-     @@iolite06 = Ore.new("Iolite", 158, "blue", 5, 350, "iolite", Iolite_Ore.dup, false, 350)
-     All_Ore_Array.push(@@iolite01, @@iolite02, @@iolite03, @@iolite04, @@iolite05, @@iolite06)
+     @@iolite = Ore.new("Iolite", 27, "blue", 5, 350, "iolite", Iolite_Ore.dup, false, 350, Ore_Respawn_Clock.dup)
+     All_Ore_Array.push(@@iolite)
     #........................................................................................................................................................
     #..................................................................Sodalite..............................................................................
-     @@sodalite01 = Ore.new("Sodalite", 159, "blue", 6, 400, "sodalite", Sodalite_Ore.dup, false, 400)
-     @@sodalite02 = Ore.new("Sodalite", 160, "blue", 6, 400, "sodalite", Sodalite_Ore.dup, false, 400)
-     @@sodalite03 = Ore.new("Sodalite", 161, "blue", 6, 400, "sodalite", Sodalite_Ore.dup, false, 400)
-     @@sodalite04 = Ore.new("Sodalite", 162, "blue", 6, 400, "sodalite", Sodalite_Ore.dup, false, 400)
-     @@sodalite05 = Ore.new("Sodalite", 163, "blue", 6, 400, "sodalite", Sodalite_Ore.dup, false, 400)
-     @@sodalite06 = Ore.new("Sodalite", 164, "blue", 6, 400, "sodalite", Sodalite_Ore.dup, false, 400)
-     All_Ore_Array.push(@@sodalite01, @@sodalite02, @@sodalite03, @@sodalite04, @@sodalite05, @@sodalite06)
+     @@sodalite = Ore.new("Sodalite", 28, "blue", 6, 400, "sodalite", Sodalite_Ore.dup, false, 400, Ore_Respawn_Clock.dup)
+     All_Ore_Array.push(@@sodalite)
     #........................................................................................................................................................
     #..................................................................Kyanite...............................................................................
-     @@kyanite01 = Ore.new("Kyanite", 165, "blue", 6, 400, "kyanite", Kyanite_Ore.dup, false, 400)
-     @@kyanite02 = Ore.new("Kyanite", 166, "blue", 6, 400, "kyanite", Kyanite_Ore.dup, false, 400)
-     @@kyanite03 = Ore.new("Kyanite", 167, "blue", 6, 400, "kyanite", Kyanite_Ore.dup, false, 400)
-     @@kyanite04 = Ore.new("Kyanite", 168, "blue", 6, 400, "kyanite", Kyanite_Ore.dup, false, 400)
-     @@kyanite05 = Ore.new("Kyanite", 169, "blue", 6, 400, "kyanite", Kyanite_Ore.dup, false, 400)
-     @@kyanite06 = Ore.new("Kyanite", 170, "blue", 6, 400, "kyanite", Kyanite_Ore.dup, false, 400)
-     All_Ore_Array.push(@@kyanite01, @@kyanite02, @@kyanite03, @@kyanite04, @@kyanite05, @@kyanite06)
+     @@kyanite = Ore.new("Kyanite", 29, "blue", 6, 400, "kyanite", Kyanite_Ore.dup, false, 400, Ore_Respawn_Clock.dup)
+     All_Ore_Array.push(@@kyanite)
     #........................................................................................................................................................
     #..................................................................Sunstone..............................................................................
-     @@sunstone01 = Ore.new("Sunstone", 171, "orange", 7, 450, "sunstone", Sunstone_Ore.dup, false, 450)
-     @@sunstone02 = Ore.new("Sunstone", 172, "orange", 7, 450, "sunstone", Sunstone_Ore.dup, false, 450)
-     @@sunstone03 = Ore.new("Sunstone", 173, "orange", 7, 450, "sunstone", Sunstone_Ore.dup, false, 450)
-     @@sunstone04 = Ore.new("Sunstone", 174, "orange", 7, 450, "sunstone", Sunstone_Ore.dup, false, 450)
-     @@sunstone05 = Ore.new("Sunstone", 175, "orange", 7, 450, "sunstone", Sunstone_Ore.dup, false, 450)
-     @@sunstone06 = Ore.new("Sunstone", 176, "orange", 7, 450, "sunstone", Sunstone_Ore.dup, false, 450)
-     All_Ore_Array.push(@@sunstone01, @@sunstone02, @@sunstone03, @@sunstone04, @@sunstone05, @@sunstone06)
+     @@sunstone = Ore.new("Sunstone", 30, "orange", 7, 450, "sunstone", Sunstone_Ore.dup, false, 450, Ore_Respawn_Clock.dup)
+     All_Ore_Array.push(@@sunstone)
     #........................................................................................................................................................
     #.................................................................Bony Amber.............................................................................
-     @@bony_amber01 = Ore.new("Bony Amber", 177, "orange", 3, 250, "bony amber", Bony_Amber_Ore.dup, false, 250)
-     @@bony_amber02 = Ore.new("Bony Amber", 178, "orange", 3, 250, "bony amber", Bony_Amber_Ore.dup, false, 250)
-     @@bony_amber03 = Ore.new("Bony Amber", 179, "orange", 3, 250, "bony amber", Bony_Amber_Ore.dup, false, 250)
-     @@bony_amber04 = Ore.new("Bony Amber", 180, "orange", 3, 250, "bony amber", Bony_Amber_Ore.dup, false, 250)
-     @@bony_amber05 = Ore.new("Bony Amber", 181, "orange", 3, 250, "bony amber", Bony_Amber_Ore.dup, false, 250)
-     @@bony_amber06 = Ore.new("Bony Amber", 182, "orange", 3, 250, "bony amber", Bony_Amber_Ore.dup, false, 250)
-     All_Ore_Array.push(@@bony_amber01, @@bony_amber02, @@bony_amber03, @@bony_amber04, @@bony_amber05, @@bony_amber06)
+     @@bony_amber = Ore.new("Bony Amber", 31, "orange", 3, 250, "bony amber", Bony_Amber_Ore.dup, false, 250, Ore_Respawn_Clock.dup)
+     All_Ore_Array.push(@@bony_amber)
     #........................................................................................................................................................
     #.................................................................Blue Amber.............................................................................
-     @@blue_amber01 = Ore.new("Blue Amber", 183, "blue", 2, 200, "blue amber", Blue_Amber_Ore.dup, false, 200)
-     @@blue_amber02 = Ore.new("Blue Amber", 184, "blue", 2, 200, "blue amber", Blue_Amber_Ore.dup, false, 200)
-     @@blue_amber03 = Ore.new("Blue Amber", 185, "blue", 2, 200, "blue amber", Blue_Amber_Ore.dup, false, 200)
-     @@blue_amber04 = Ore.new("Blue Amber", 186, "blue", 2, 200, "blue amber", Blue_Amber_Ore.dup, false, 200)
-     @@blue_amber05 = Ore.new("Blue Amber", 187, "blue", 2, 200, "blue amber", Blue_Amber_Ore.dup, false, 200)
-     @@blue_amber06 = Ore.new("Blue Amber", 188, "blue", 2, 200, "blue amber", Blue_Amber_Ore.dup, false, 200)
-     All_Ore_Array.push(@@blue_amber01, @@blue_amber02, @@blue_amber03, @@blue_amber04, @@blue_amber05, @@bony_amber06)
+     @@blue_amber = Ore.new("Blue Amber", 32, "blue", 2, 200, "blue amber", Blue_Amber_Ore.dup, false, 200, Ore_Respawn_Clock.dup)
+     All_Ore_Array.push(@@blue_amber)
     #........................................................................................................................................................
     #.................................................................Blue Spinel............................................................................
-     @@blue_spinel01 = Ore.new("Blue Spinel", 189, "blue", 8, 500, "blue spinel", Blue_Spinel_Ore.dup, false, 500)
-     @@blue_spinel02 = Ore.new("Blue Spinel", 190, "blue", 8, 500, "blue spinel", Blue_Spinel_Ore.dup, false, 500)
-     @@blue_spinel03 = Ore.new("Blue Spinel", 191, "blue", 8, 500, "blue spinel", Blue_Spinel_Ore.dup, false, 500)
-     @@blue_spinel04 = Ore.new("Blue Spinel", 192, "blue", 8, 500, "blue spinel", Blue_Spinel_Ore.dup, false, 500)
-     @@blue_spinel05 = Ore.new("Blue Spinel", 193, "blue", 8, 500, "blue spinel", Blue_Spinel_Ore.dup, false, 500)
-     @@blue_spinel06 = Ore.new("Blue Spinel", 194, "blue", 8, 500, "blue spinel", Blue_Spinel_Ore.dup, false, 500)
-     All_Ore_Array.push(@@blue_spinel01, @@blue_spinel02, @@blue_spinel03, @@blue_spinel04, @@blue_spinel05, @@blue_spinel06)
+     @@blue_spinel = Ore.new("Blue Spinel", 33, "blue", 8, 500, "blue spinel", Blue_Spinel_Ore.dup, false, 500, Ore_Respawn_Clock.dup)
+     All_Ore_Array.push(@@blue_spinel)
     #........................................................................................................................................................
     #.................................................................Red Spinel.............................................................................
-     @@red_spinel01 = Ore.new("Red Spinel", 195, "red", 8, 500, "red spinel", Red_Spinel_Ore.dup, false, 500)
-     @@red_spinel02 = Ore.new("Red Spinel", 196, "red", 8, 500, "red spinel", Red_Spinel_Ore.dup, false, 500)
-     @@red_spinel03 = Ore.new("Red Spinel", 197, "red", 8, 500, "red spinel", Red_Spinel_Ore.dup, false, 500)
-     @@red_spinel04 = Ore.new("Red Spinel", 198, "red", 8, 500, "red spinel", Red_Spinel_Ore.dup, false, 500)
-     @@red_spinel05 = Ore.new("Red Spinel", 199, "red", 8, 500, "red spinel", Red_Spinel_Ore.dup, false, 500)
-     @@red_spinel06 = Ore.new("Red Spinel", 200, "red", 8, 500, "red spinel", Red_Spinel_Ore.dup, false, 500)
-     All_Ore_Array.push(@@red_spinel01, @@red_spinel02, @@red_spinel03, @@red_spinel04, @@red_spinel05, @@red_spinel06)
+     @@red_spinel = Ore.new("Red Spinel", 34, "red", 8, 500, "red spinel", Red_Spinel_Ore.dup, false, 500, Ore_Respawn_Clock.dup)
+     All_Ore_Array.push(@@red_spinel)
     #........................................................................................................................................................
     #.................................................................Fire Opal..............................................................................
-     @@fire_opal01 = Ore.new("Fire Opal", 201, "orange", 6, 400, "fire opal", Fire_Opal_Ore.dup, false, 400)
-     @@fire_opal02 = Ore.new("Fire Opal", 202, "orange", 6, 400, "fire opal", Fire_Opal_Ore.dup, false, 400)
-     @@fire_opal03 = Ore.new("Fire Opal", 203, "orange", 6, 400, "fire opal", Fire_Opal_Ore.dup, false, 400)
-     @@fire_opal04 = Ore.new("Fire Opal", 204, "orange", 6, 400, "fire opal", Fire_Opal_Ore.dup, false, 400)
-     @@fire_opal05 = Ore.new("Fire Opal", 205, "orange", 6, 400, "fire opal", Fire_Opal_Ore.dup, false, 400)
-     @@fire_opal06 = Ore.new("Fire Opal", 206, "orange", 6, 400, "fire opal", Fire_Opal_Ore.dup, false, 400)
-     All_Ore_Array.push(@@fire_opal01, @@fire_opal02, @@fire_opal03, @@fire_opal04, @@fire_opal05, @@fire_opal06)
+     @@fire_opal = Ore.new("Fire Opal", 35, "orange", 6, 400, "fire opal", Fire_Opal_Ore.dup, false, 400, Ore_Respawn_Clock.dup)
+     All_Ore_Array.push(@@fire_opal)
     #........................................................................................................................................................
     #..................................................................Garnet................................................................................
-     @@garnet01 = Ore.new("Garnet", 207, "red", 7, 450, "garnet", Garnet_Ore.dup, false, 450)
-     @@garnet02 = Ore.new("Garnet", 208, "red", 7, 450, "garnet", Garnet_Ore.dup, false, 450)
-     @@garnet03 = Ore.new("Garnet", 209, "red", 7, 450, "garnet", Garnet_Ore.dup, false, 450)
-     @@garnet04 = Ore.new("Garnet", 210, "red", 7, 450, "garnet", Garnet_Ore.dup, false, 450)
-     @@garnet05 = Ore.new("Garnet", 211, "red", 7, 450, "garnet", Garnet_Ore.dup, false, 450)
-     @@garnet06 = Ore.new("Garnet", 212, "red", 7, 450, "garnet", Garnet_Ore.dup, false, 450)
-     All_Ore_Array.push(@@garnet01, @@garnet02, @@garnet03, @@garnet04, @@garnet05, @@garnet06)
+     @@garnet = Ore.new("Garnet", 36, "red", 7, 450, "garnet", Garnet_Ore.dup, false, 450, Ore_Respawn_Clock.dup)
+     All_Ore_Array.push(@@garnet)
     #........................................................................................................................................................
     #...................................................................Ruby.................................................................................
-     @@ruby01 = Ore.new("Ruby", 213, "red", 9, 550, "ruby", Ruby_Ore.dup, false, 550)
-     @@ruby02 = Ore.new("Ruby", 214, "red", 9, 550, "ruby", Ruby_Ore.dup, false, 550)
-     @@ruby03 = Ore.new("Ruby", 215, "red", 9, 550, "ruby", Ruby_Ore.dup, false, 550)
-     @@ruby04 = Ore.new("Ruby", 216, "red", 9, 550, "ruby", Ruby_Ore.dup, false, 550)
-     @@ruby05 = Ore.new("Ruby", 217, "red", 9, 550, "ruby", Ruby_Ore.dup, false, 550)
-     @@ruby06 = Ore.new("Ruby", 218, "red", 9, 550, "ruby", Ruby_Ore.dup, false, 550)
-     All_Ore_Array.push(@@ruby01, @@ruby02, @@ruby03, @@ruby04, @@ruby05, @@ruby06)
+     @@ruby = Ore.new("Ruby", 37, "red", 9, 550, "ruby", Ruby_Ore.dup, false, 550, Ore_Respawn_Clock.dup)
+     All_Ore_Array.push(@@ruby)
     #........................................................................................................................................................
     #................................................................Cherry Quartz...........................................................................
-     @@cherry_quartz01 = Ore.new("Cherry Quartz", 219, "red", 7, 450, "cherry quartz", Cherry_Quartz_Ore.dup, false, 450)
-     @@cherry_quartz02 = Ore.new("Cherry Quartz", 220, "red", 7, 450, "cherry quartz", Cherry_Quartz_Ore.dup, false, 450)
-     @@cherry_quartz03 = Ore.new("Cherry Quartz", 221, "red", 7, 450, "cherry quartz", Cherry_Quartz_Ore.dup, false, 450)
-     @@cherry_quartz04 = Ore.new("Cherry Quartz", 222, "red", 7, 450, "cherry quartz", Cherry_Quartz_Ore.dup, false, 450)
-     @@cherry_quartz05 = Ore.new("Cherry Quartz", 223, "red", 7, 450, "cherry quartz", Cherry_Quartz_Ore.dup, false, 450)
-     @@cherry_quartz06 = Ore.new("Cherry Quartz", 224, "red", 7, 450, "cherry quartz", Cherry_Quartz_Ore.dup, false, 450)
-     All_Ore_Array.push(@@cherry_quartz01, @@cherry_quartz02, @@cherry_quartz03, @@cherry_quartz04, @@cherry_quartz05, @@cherry_quartz06)
+     @@cherry_quartz = Ore.new("Cherry Quartz", 38, "red", 7, 450, "cherry quartz", Cherry_Quartz_Ore.dup, false, 450, Ore_Respawn_Clock.dup)
+     All_Ore_Array.push(@@cherry_quartz)
     #........................................................................................................................................................
     #................................................................Lemon Quartz...........................................................................
-     @@lemon_quartz01 = Ore.new("Lemon Quartz", 225, "yellow", 7, 450, "lemon quartz", Lemon_Quartz_Ore.dup, false, 450)
-     @@lemon_quartz02 = Ore.new("Lemon Quartz", 226, "yellow", 7, 450, "lemon quartz", Lemon_Quartz_Ore.dup, false, 450)
-     @@lemon_quartz03 = Ore.new("Lemon Quartz", 227, "yellow", 7, 450, "lemon quartz", Lemon_Quartz_Ore.dup, false, 450)
-     @@lemon_quartz04 = Ore.new("Lemon Quartz", 228, "yellow", 7, 450, "lemon quartz", Lemon_Quartz_Ore.dup, false, 450)
-     @@lemon_quartz05 = Ore.new("Lemon Quartz", 229, "yellow", 7, 450, "lemon quartz", Lemon_Quartz_Ore.dup, false, 450)
-     @@lemon_quartz06 = Ore.new("Lemon Quartz", 230, "yellow", 7, 450, "lemon quartz", Lemon_Quartz_Ore.dup, false, 450)
-     All_Ore_Array.push(@@lemon_quartz01, @@lemon_quartz02, @@lemon_quartz03, @@lemon_quartz04, @@lemon_quartz05, @@lemon_quartz06)
+     @@lemon_quartz = Ore.new("Lemon Quartz", 39, "yellow", 7, 450, "lemon quartz", Lemon_Quartz_Ore.dup, false, 450, Ore_Respawn_Clock.dup)
+     All_Ore_Array.push(@@lemon_quartz)
     #........................................................................................................................................................
     #..................................................................Turquoise.............................................................................
-     @@turquoise01 = Ore.new("Turquoise", 231, "green", 5, 350, "turquoise", Turquoise_Ore.dup, false, 350)
-     @@turquoise02 = Ore.new("Turquoise", 232, "green", 5, 350, "turquoise", Turquoise_Ore.dup, false, 350)
-     @@turquoise03 = Ore.new("Turquoise", 233, "green", 5, 350, "turquoise", Turquoise_Ore.dup, false, 350)
-     @@turquoise04 = Ore.new("Turquoise", 234, "green", 5, 350, "turquoise", Turquoise_Ore.dup, false, 350)
-     @@turquoise05 = Ore.new("Turquoise", 235, "green", 5, 350, "turquoise", Turquoise_Ore.dup, false, 350)
-     @@turquoise06 = Ore.new("Turquoise", 236, "green", 5, 350, "turquoise", Turquoise_Ore.dup, false, 350)
-     All_Ore_Array.push(@@turquoise01, @@turquoise02, @@turquoise03, @@turquoise04, @@turquoise05, @@turquoise06)
+     @@turquoise = Ore.new("Turquoise", 40, "green", 5, 350, "turquoise", Turquoise_Ore.dup, false, 350, Ore_Respawn_Clock.dup)
+     All_Ore_Array.push(@@turquoise)
     #........................................................................................................................................................
     #.................................................................Tiger's Eye............................................................................
-     @@tigers_eye01 = Ore.new("Tiger's Eye", 237, "orange", 7, 450, "tiger's eye", Tigers_Eye_Ore.dup, false, 450)
-     @@tigers_eye02 = Ore.new("Tiger's Eye", 238, "orange", 7, 450, "tiger's eye", Tigers_Eye_Ore.dup, false, 450)
-     @@tigers_eye03 = Ore.new("Tiger's Eye", 239, "orange", 7, 450, "tiger's eye", Tigers_Eye_Ore.dup, false, 450)
-     @@tigers_eye04 = Ore.new("Tiger's Eye", 240, "orange", 7, 450, "tiger's eye", Tigers_Eye_Ore.dup, false, 450)
-     @@tigers_eye05 = Ore.new("Tiger's Eye", 241, "orange", 7, 450, "tiger's eye", Tigers_Eye_Ore.dup, false, 450)
-     @@tigers_eye06 = Ore.new("Tiger's Eye", 242, "orange", 7, 450, "tiger's eye", Tigers_Eye_Ore.dup, false, 450)
-     All_Ore_Array.push(@@tigers_eye01, @@tigers_eye02, @@tigers_eye03, @@tigers_eye04, @@tigers_eye05, @@tigers_eye06)
+     @@tigers_eye = Ore.new("Tiger's Eye", 41, "orange", 7, 450, "tiger's eye", Tigers_Eye_Ore.dup, false, 450, Ore_Respawn_Clock.dup)
+     All_Ore_Array.push(@@tigers_eye)
     #........................................................................................................................................................
     #................................................................Orange Calcite..........................................................................
-     @@orange_calcite01 = Ore.new("Orange Calcite", 243, "orange", 3, 250, "orange calclite", Orange_Calcite_Ore.dup, false, 250)
-     @@orange_calcite02 = Ore.new("Orange Calcite", 244, "orange", 3, 250, "orange calclite", Orange_Calcite_Ore.dup, false, 250)
-     @@orange_calcite03 = Ore.new("Orange Calcite", 245, "orange", 3, 250, "orange calclite", Orange_Calcite_Ore.dup, false, 250)
-     @@orange_calcite04 = Ore.new("Orange Calcite", 246, "orange", 3, 250, "orange calclite", Orange_Calcite_Ore.dup, false, 250)
-     @@orange_calcite05 = Ore.new("Orange Calcite", 247, "orange", 3, 250, "orange calclite", Orange_Calcite_Ore.dup, false, 250)
-     @@orange_calcite06 = Ore.new("Orange Calcite", 248, "orange", 3, 250, "orange calclite", Orange_Calcite_Ore.dup, false, 250)
-     All_Ore_Array.push(@@orange_calcite01, @@orange_calcite02, @@orange_calcite03, @@orange_calcite04, @@orange_calcite05, @@orange_calcite06)
+     @@orange_calcite = Ore.new("Orange Calcite", 42, "orange", 3, 250, "orange calclite", Orange_Calcite_Ore.dup, false, 250, Ore_Respawn_Clock.dup)
+     All_Ore_Array.push(@@orange_calcite)
     #........................................................................................................................................................
     #.................................................................Grape Agate............................................................................
-     @@grape_agate01 = Ore.new("Grape Agate", 249, "purple", 6, 400, "grape agate", Grape_Agate_Ore.dup, false, 400)
-     @@grape_agate02 = Ore.new("Grape Agate", 250, "purple", 6, 400, "grape agate", Grape_Agate_Ore.dup, false, 400)
-     @@grape_agate03 = Ore.new("Grape Agate", 251, "purple", 6, 400, "grape agate", Grape_Agate_Ore.dup, false, 400)
-     @@grape_agate04 = Ore.new("Grape Agate", 252, "purple", 6, 400, "grape agate", Grape_Agate_Ore.dup, false, 400)
-     @@grape_agate05 = Ore.new("Grape Agate", 253, "purple", 6, 400, "grape agate", Grape_Agate_Ore.dup, false, 400)
-     @@grape_agate06 = Ore.new("Grape Agate", 254, "purple", 6, 400, "grape agate", Grape_Agate_Ore.dup, false, 400)
-     All_Ore_Array.push(@@grape_agate01, @@grape_agate02, @@grape_agate03, @@grape_agate04, @@grape_agate05, @@grape_agate06)
+     @@grape_agate = Ore.new("Grape Agate", 43, "purple", 6, 400, "grape agate", Grape_Agate_Ore.dup, false, 400, Ore_Respawn_Clock.dup)
+     All_Ore_Array.push(@@grape_agate)
     #........................................................................................................................................................
     #....................................................................Jade................................................................................
-      @@jade01 = Ore.new("Jade", 255, "green", 7, 450, "jade", Jade_Ore.dup, false, 450)
-      @@jade02 = Ore.new("Jade", 256, "green", 7, 450, "jade", Jade_Ore.dup, false, 450)
-      @@jade03 = Ore.new("Jade", 257, "green", 7, 450, "jade", Jade_Ore.dup, false, 450)
-      @@jade04 = Ore.new("Jade", 258, "green", 7, 450, "jade", Jade_Ore.dup, false, 450)
-      @@jade05 = Ore.new("Jade", 259, "green", 7, 450, "jade", Jade_Ore.dup, false, 450)
-      @@jade06 = Ore.new("Jade", 260, "green", 7, 450, "jade", Jade_Ore.dup, false, 450)
-      All_Ore_Array.push(@@jade01, @@jade02, @@jade03, @@jade04, @@jade05, @@jade06)
+      @@jade = Ore.new("Jade", 44, "green", 7, 450, "jade", Jade_Ore.dup, false, 450, Ore_Respawn_Clock.dup)
+      All_Ore_Array.push(@@jade)
     #........................................................................................................................................................
     #...................................................................Diamond..............................................................................
-     @@diamond01 = Ore.new("Diamond", 261, "white", 10, 600, "diamond", Diamond_Ore.dup, false, 600)
-     @@diamond02 = Ore.new("Diamond", 262, "white", 10, 600, "diamond", Diamond_Ore.dup, false, 600)
-     @@diamond03 = Ore.new("Diamond", 263, "white", 10, 600, "diamond", Diamond_Ore.dup, false, 600)
-     @@diamond04 = Ore.new("Diamond", 264, "white", 10, 600, "diamond", Diamond_Ore.dup, false, 600)
-     @@diamond05 = Ore.new("Diamond", 265, "white", 10, 600, "diamond", Diamond_Ore.dup, false, 600)
-     @@diamond06 = Ore.new("Diamond", 266, "white", 10, 600, "diamond", Diamond_Ore.dup, false, 600)
-     All_Ore_Array.push(@@diamond01, @@diamond02, @@diamond03, @@diamond04, @@diamond05, @@diamond06)
+     @@diamond = Ore.new("Diamond", 45, "white", 10, 600, "diamond", Diamond_Ore.dup, false, 600, Ore_Respawn_Clock.dup)
+     All_Ore_Array.push(@@diamond)
     #........................................................................................................................................................
     #..................................................................Emerald...............................................................................
-     @@emerald01 = Ore.new("Emerald", 267, "green", 8, 500, "emerald", Emerald_Ore.dup, false, 500)
-     @@emerald02 = Ore.new("Emerald", 268, "green", 8, 500, "emerald", Emerald_Ore.dup, false, 500)
-     @@emerald03 = Ore.new("Emerald", 269, "green", 8, 500, "emerald", Emerald_Ore.dup, false, 500)
-     @@emerald04 = Ore.new("Emerald", 270, "green", 8, 500, "emerald", Emerald_Ore.dup, false, 500)
-     @@emerald05 = Ore.new("Emerald", 271, "green", 8, 500, "emerald", Emerald_Ore.dup, false, 500)
-     @@emerald06 = Ore.new("Emerald", 272, "green", 8, 500, "emerald", Emerald_Ore.dup, false, 500)
-     All_Ore_Array.push(@@emerald01, @@emerald02, @@emerald03, @@emerald04, @@emerald05, @@emerald06)
+     @@emerald = Ore.new("Emerald", 46, "green", 8, 500, "emerald", Emerald_Ore.dup, false, 500, Ore_Respawn_Clock.dup)
+     All_Ore_Array.push(@@emerald)
     #........................................................................................................................................................
     #..................................................................Painite...............................................................................
-     @@painite01 = Ore.new("Painite", 273, "red", 8, 500, "painite", Painite_Ore.dup, false, 500)
-     @@painite02 = Ore.new("Painite", 274, "red", 8, 500, "painite", Painite_Ore.dup, false, 500)
-     @@painite03 = Ore.new("Painite", 275, "red", 8, 500, "painite", Painite_Ore.dup, false, 500)
-     @@painite04 = Ore.new("Painite", 276, "red", 8, 500, "painite", Painite_Ore.dup, false, 500)
-     @@painite05 = Ore.new("Painite", 277, "red", 8, 500, "painite", Painite_Ore.dup, false, 500)
-     @@painite06 = Ore.new("Painite", 278, "red", 8, 500, "painite", Painite_Ore.dup, false, 500)
-     All_Ore_Array.push(@@painite01, @@painite02, @@painite03, @@painite04, @@painite05, @@painite06)
+     @@painite = Ore.new("Painite", 47, "red", 8, 500, "painite", Painite_Ore.dup, false, 500, Ore_Respawn_Clock.dup)
+     All_Ore_Array.push(@@painite)
     #........................................................................................................................................................
     #..............................................................Bumblebee Jasper..........................................................................
-     @@bumblebee_jasper01 = Ore.new("Bumblebee Jasper", 279, "yellow", 6, 400, "bumblebee jasper", Bumblebee_Jasper_Ore.dup, false, 400)
-     @@bumblebee_jasper02 = Ore.new("Bumblebee Jasper", 280, "yellow", 6, 400, "bumblebee jasper", Bumblebee_Jasper_Ore.dup, false, 400)
-     @@bumblebee_jasper03 = Ore.new("Bumblebee Jasper", 281, "yellow", 6, 400, "bumblebee jasper", Bumblebee_Jasper_Ore.dup, false, 400)
-     @@bumblebee_jasper04 = Ore.new("Bumblebee Jasper", 282, "yellow", 6, 400, "bumblebee jasper", Bumblebee_Jasper_Ore.dup, false, 400)
-     @@bumblebee_jasper05 = Ore.new("Bumblebee Jasper", 283, "yellow", 6, 400, "bumblebee jasper", Bumblebee_Jasper_Ore.dup, false, 400)
-     @@bumblebee_jasper06 = Ore.new("Bumblebee Jasper", 284, "yellow", 6, 400, "bumblebee jasper", Bumblebee_Jasper_Ore.dup, false, 400)
-     All_Ore_Array.push(@@bumblebee_jasper01, @@bumblebee_jasper02, @@bumblebee_jasper03, @@bumblebee_jasper04, @@bumblebee_jasper05, @@bumblebee_jasper06)
+     @@bumblebee_jasper = Ore.new("Bumblebee Jasper", 48, "yellow", 6, 400, "bumblebee jasper", Bumblebee_Jasper_Ore.dup, false, 400, Ore_Respawn_Clock.dup)
+     All_Ore_Array.push(@@bumblebee_jasper)
     #........................................................................................................................................................
     #................................................................Blood Jasper............................................................................
-     @@blood_jasper01 = Ore.new("Blood Jasper", 285, "green", 7, 450, "blood jasper", Blood_Jasper_Ore.dup, false, 450)
-     @@blood_jasper02 = Ore.new("Blood Jasper", 286, "green", 7, 450, "blood jasper", Blood_Jasper_Ore.dup, false, 450)
-     @@blood_jasper03 = Ore.new("Blood Jasper", 287, "green", 7, 450, "blood jasper", Blood_Jasper_Ore.dup, false, 450)
-     @@blood_jasper04 = Ore.new("Blood Jasper", 288, "green", 7, 450, "blood jasper", Blood_Jasper_Ore.dup, false, 450)
-     @@blood_jasper05 = Ore.new("Blood Jasper", 289, "green", 7, 450, "blood jasper", Blood_Jasper_Ore.dup, false, 450)
-     @@blood_jasper06 = Ore.new("Blood Jasper", 290, "green", 7, 450, "blood jasper", Blood_Jasper_Ore.dup, false, 450)
-     All_Ore_Array.push(@@blood_jasper01, @@blood_jasper02, @@blood_jasper03, @@blood_jasper04, @@blood_jasper05, @@blood_jasper06)
+     @@blood_jasper = Ore.new("Blood Jasper", 49, "green", 7, 450, "blood jasper", Blood_Jasper_Ore.dup, false, 450, Ore_Respawn_Clock.dup)
+     All_Ore_Array.push(@@blood_jasper)
     #........................................................................................................................................................
     #................................................................Mook Jasper.............................................................................
-     @@mook_jasper01 = Ore.new("Mook Jasper", 291, "brown", 6, 400, "mook jasper", Mook_Jasper_Ore.dup, false, 400)
-     @@mook_jasper02 = Ore.new("Mook Jasper", 292, "brown", 6, 400, "mook jasper", Mook_Jasper_Ore.dup, false, 400)
-     @@mook_jasper03 = Ore.new("Mook Jasper", 293, "brown", 6, 400, "mook jasper", Mook_Jasper_Ore.dup, false, 400)
-     @@mook_jasper04 = Ore.new("Mook Jasper", 294, "brown", 6, 400, "mook jasper", Mook_Jasper_Ore.dup, false, 400)
-     @@mook_jasper05 = Ore.new("Mook Jasper", 295, "brown", 6, 400, "mook jasper", Mook_Jasper_Ore.dup, false, 400)
-     @@mook_jasper06 = Ore.new("Mook Jasper", 296, "brown", 6, 400, "mook jasper", Mook_Jasper_Ore.dup, false, 400)
-     All_Ore_Array.push(@@mook_jasper01, @@mook_jasper02, @@mook_jasper03, @@mook_jasper04, @@mook_jasper05, @@mook_jasper06)
+     @@mook_jasper = Ore.new("Mook Jasper", 50, "brown", 6, 400, "mook jasper", Mook_Jasper_Ore.dup, false, 400, Ore_Respawn_Clock.dup)
+     All_Ore_Array.push(@@mook_jasper)
     #........................................................................................................................................................
     #.................................................................Red Jasper.............................................................................
-     @@red_jasper01 = Ore.new("Red Jasper", 297, "red", 6, 400, "red jasper", Red_Jasper_Ore.dup, false, 400)
-     @@red_jasper02 = Ore.new("Red Jasper", 298, "red", 6, 400, "red jasper", Red_Jasper_Ore.dup, false, 400)
-     @@red_jasper03 = Ore.new("Red Jasper", 299, "red", 6, 400, "red jasper", Red_Jasper_Ore.dup, false, 400)
-     @@red_jasper04 = Ore.new("Red Jasper", 300, "red", 6, 400, "red jasper", Red_Jasper_Ore.dup, false, 400)
-     @@red_jasper05 = Ore.new("Red Jasper", 301, "red", 6, 400, "red jasper", Red_Jasper_Ore.dup, false, 400)
-     @@red_jasper06 = Ore.new("Red Jasper", 302, "red", 6, 400, "red jasper", Red_Jasper_Ore.dup, false, 400)
-     All_Ore_Array.push(@@red_jasper01, @@red_jasper02, @@red_jasper03, @@red_jasper04, @@red_jasper05, @@red_jasper06)
+     @@red_jasper = Ore.new("Red Jasper", 51, "red", 6, 400, "red jasper", Red_Jasper_Ore.dup, false, 400, Ore_Respawn_Clock.dup)
+     All_Ore_Array.push(@@red_jasper)
     #........................................................................................................................................................
    #========================================================================================================================================================
    #==================================================================Metals================================================================================
     #.................................................................Carbon.................................................................................
-     @@carbon01 = Ore.new("Carbon", 3000, "black", 0, 200, "carbon", Carbon_Ore.dup, false, 200)
-     @@carbon02 = Ore.new("Carbon", 3001, "black", 0, 200, "carbon", Carbon_Ore.dup, false, 200)
-     @@carbon03 = Ore.new("Carbon", 3002, "black", 0, 200, "carbon", Carbon_Ore.dup, false, 200)
-     @@carbon04 = Ore.new("Carbon", 3003, "black", 0, 200, "carbon", Carbon_Ore.dup, false, 200)
-     @@carbon05 = Ore.new("Carbon", 3004, "black", 0, 200, "carbon", Carbon_Ore.dup, false, 200)
-     @@carbon06 = Ore.new("Carbon", 3005, "black", 0, 200, "carbon", Carbon_Ore.dup, false, 200)
-     @@carbon07 = Ore.new("Carbon", 3006, "black", 0, 200, "carbon", Carbon_Ore.dup, false, 200)
-     @@carbon08 = Ore.new("Carbon", 3007, "black", 0, 200, "carbon", Carbon_Ore.dup, false, 200)
-     @@carbon09 = Ore.new("Carbon", 3008, "black", 0, 200, "carbon", Carbon_Ore.dup, false, 200)
-     @@carbon10 = Ore.new("Carbon", 3009, "black", 0, 200, "carbon", Carbon_Ore.dup, false, 200)
-     @@carbon11 = Ore.new("Carbon", 3010, "black", 0, 200, "carbon", Carbon_Ore.dup, false, 200)
-     @@carbon12 = Ore.new("Carbon", 3011, "black", 0, 200, "carbon", Carbon_Ore.dup, false, 200)
-     All_Ore_Array.push(@@carbon01, @@carbon02, @@carbon03, @@carbon04, @@carbon05, @@carbon06, @@carbon07, @@carbon08, @@carbon09,
-     @@carbon10, @@carbon11, @@carbon12)
+     @@carbon = Ore.new("Carbon", 3000, "black", 0, 200, "carbon", Carbon_Ore.dup, false, 200, Ore_Respawn_Clock.dup)
+     All_Ore_Array.push(@@carbon)
     #........................................................................................................................................................
     #.................................................................Copper.................................................................................
-     @@copper01 = Ore.new("Copper", 3012, "brown", 0, 300, "copper", Copper_Ore.dup, false, 300)
-     @@copper02 = Ore.new("Copper", 3013, "brown", 0, 300, "copper", Copper_Ore.dup, false, 300)
-     @@copper03 = Ore.new("Copper", 3014, "brown", 0, 300, "copper", Copper_Ore.dup, false, 300)
-     @@copper04 = Ore.new("Copper", 3015, "brown", 0, 300, "copper", Copper_Ore.dup, false, 300)
-     @@copper05 = Ore.new("Copper", 3016, "brown", 0, 300, "copper", Copper_Ore.dup, false, 300)
-     @@copper06 = Ore.new("Copper", 3017, "brown", 0, 300, "copper", Copper_Ore.dup, false, 300)
-     @@copper07 = Ore.new("Copper", 3018, "brown", 0, 300, "copper", Copper_Ore.dup, false, 300)
-     @@copper08 = Ore.new("Copper", 3019, "brown", 0, 300, "copper", Copper_Ore.dup, false, 300)
-     @@copper09 = Ore.new("Copper", 3020, "brown", 0, 300, "copper", Copper_Ore.dup, false, 300)
-     @@copper10 = Ore.new("Copper", 3022, "brown", 0, 300, "copper", Copper_Ore.dup, false, 300)
-     @@copper11 = Ore.new("Copper", 3023, "brown", 0, 300, "copper", Copper_Ore.dup, false, 300)
-     @@copper12 = Ore.new("Copper", 3024, "brown", 0, 300, "copper", Copper_Ore.dup, false, 300)
-     All_Ore_Array.push(@@copper01, @@copper02, @@copper03, @@copper04, @@copper05, @@copper06, @@copper07, @@copper08, @@copper09,
-     @@copper10, @@copper11, @@copper12)
+     @@copper = Ore.new("Copper", 3012, "brown", 0, 300, "copper", Copper_Ore.dup, false, 300, Ore_Respawn_Clock.dup)
+     All_Ore_Array.push(@@copper)
     #........................................................................................................................................................
     #..................................................................Tin...................................................................................
-     @@tin01 = Ore.new("Tin", 3024, "white", 0, 200, "tin", Tin_Ore.dup, false, 200)
-     @@tin02 = Ore.new("Tin", 3025, "white", 0, 200, "tin", Tin_Ore.dup, false, 200)
-     @@tin03 = Ore.new("Tin", 3026, "white", 0, 200, "tin", Tin_Ore.dup, false, 200)
-     @@tin04 = Ore.new("Tin", 3027, "white", 0, 200, "tin", Tin_Ore.dup, false, 200)
-     @@tin05 = Ore.new("Tin", 3028, "white", 0, 200, "tin", Tin_Ore.dup, false, 200)
-     @@tin06 = Ore.new("Tin", 3029, "white", 0, 200, "tin", Tin_Ore.dup, false, 200)
-     @@tin07 = Ore.new("Tin", 3030, "white", 0, 200, "tin", Tin_Ore.dup, false, 200)
-     @@tin08 = Ore.new("Tin", 3031, "white", 0, 200, "tin", Tin_Ore.dup, false, 200)
-     @@tin09 = Ore.new("Tin", 3032, "white", 0, 200, "tin", Tin_Ore.dup, false, 200)
-     @@tin10 = Ore.new("Tin", 3033, "white", 0, 200, "tin", Tin_Ore.dup, false, 200)
-     @@tin11 = Ore.new("Tin", 3034, "white", 0, 200, "tin", Tin_Ore.dup, false, 200)
-     @@tin12 = Ore.new("Tin", 3035, "white", 0, 200, "tin", Tin_Ore.dup, false, 200)
-     All_Ore_Array.push(@@tin01, @@tin02, @@tin03, @@tin04, @@tin05, @@tin06, @@tin07, @@tin08, @@tin09,
-     @@tin10, @@tin11, @@tin12)
+     @@tin = Ore.new("Tin", 3024, "white", 0, 200, "tin", Tin_Ore.dup, false, 200, Ore_Respawn_Clock.dup)
+     All_Ore_Array.push(@@tin)
     #........................................................................................................................................................
     #.................................................................Zinc...................................................................................
-     @@zinc01 = Ore.new("Zinc", 3036, "white", 0, 100, "zinc", Zinc_Ore.dup, false, 100)
-     @@zinc02 = Ore.new("Zinc", 3037, "white", 0, 100, "zinc", Zinc_Ore.dup, false, 100)
-     @@zinc03 = Ore.new("Zinc", 3038, "white", 0, 100, "zinc", Zinc_Ore.dup, false, 100)
-     @@zinc04 = Ore.new("Zinc", 3039, "white", 0, 100, "zinc", Zinc_Ore.dup, false, 100)
-     @@zinc05 = Ore.new("Zinc", 3040, "white", 0, 100, "zinc", Zinc_Ore.dup, false, 100)
-     @@zinc06 = Ore.new("Zinc", 3041, "white", 0, 100, "zinc", Zinc_Ore.dup, false, 100)
-     @@zinc07 = Ore.new("Zinc", 3042, "white", 0, 100, "zinc", Zinc_Ore.dup, false, 100)
-     @@zinc08 = Ore.new("Zinc", 3043, "white", 0, 100, "zinc", Zinc_Ore.dup, false, 100)
-     @@zinc09 = Ore.new("Zinc", 3044, "white", 0, 100, "zinc", Zinc_Ore.dup, false, 100)
-     @@zinc10 = Ore.new("Zinc", 3045, "white", 0, 100, "zinc", Zinc_Ore.dup, false, 100)
-     @@zinc11 = Ore.new("Zinc", 3046, "white", 0, 100, "zinc", Zinc_Ore.dup, false, 100)
-     @@zinc12 = Ore.new("Zinc", 3047, "white", 0, 100, "zinc", Zinc_Ore.dup, false, 100)
-     All_Ore_Array.push(@@zinc01, @@zinc02, @@zinc03, @@zinc04, @@zinc05, @@zinc06, @@zinc07, @@zinc08, @@zinc09,
-     @@zinc10, @@zinc11, @@zinc12)
+     @@zinc = Ore.new("Zinc", 3036, "white", 0, 100, "zinc", Zinc_Ore.dup, false, 100, Ore_Respawn_Clock.dup)
+     All_Ore_Array.push(@@zinc)
     #........................................................................................................................................................
     #.................................................................Iron...................................................................................
-     @@iron01 = Ore.new("Iron", 3048, "grey", 0, 100, "iron", Iron_Ore.dup, false, 100)
-     All_Ore_Array.push(@@iron01)
+     @@iron = Ore.new("Iron", 3048, "grey", 0, 100, "iron", Iron_Ore.dup, false, 100, Ore_Respawn_Clock.dup)
+     All_Ore_Array.push(@@iron)
     #........................................................................................................................................................
   end
  #HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH
