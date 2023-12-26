@@ -55,6 +55,12 @@ include Map_Geometry
   #-----------------------------------------------------------------Ore-----------------------------------------------------------------------------------
    @@current_ore : Ore; @@current_ore = Ore.level_editor_initial_ore
    @@current_ore_template : Ore; @@current_ore_template = Ore.level_editor_initial_ore
+  #-----------------------------------------------------------------Herbs----------------------------------------------------------------------------------
+   @@current_herb : Herbs; @@current_herb = Herbs.level_editor_initial_herb
+   @@current_herb_template : Herbs; @@current_herb_template = Herbs.level_editor_initial_herb
+  #---------------------------------------------------------------Enemies---------------------------------------------------------------------------------
+   @@current_enemy : Regular_Enemies::Humanoids; @@current_enemy = Regular_Enemies.initial_enemy
+   @@current_enemy_template : Regular_Enemies::Humanoids; @@current_enemy_template = Regular_Enemies.initial_enemy
   #-----------------------------------------------------------------Misc----------------------------------------------------------------------------------
    @@id : Int32; @@id = 1; @@template_id : Int32; @@template_id = 1
    @@zoom = 1; @@texture = 0; @@parallax_iterator = 0
@@ -62,6 +68,163 @@ include Map_Geometry
  #????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
  #?                                                               Methods                                                                                ?
  #????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
+  #save fields
+  #------------------------------------------------------------------Ladders------------------------------------------------------------------------------
+   @[YAML::Field(key: "ladder_lengths")]
+   @[YAML::Field(key: "ladder_names")]
+   @[YAML::Field(key: "ladder_textures")]
+   @[YAML::Field(key: "ladder_x_positions")]
+   @[YAML::Field(key: "ladder_y_positions")]
+  #-----------------------------------------------------------------Platforms-----------------------------------------------------------------------------
+   @[YAML::Field(key: "platform_ids")]
+   @[YAML::Field(key: "platform_names")]
+   @[YAML::Field(key: "platform_textures")]
+   @[YAML::Field(key: "platform_x_positions")]
+   @[YAML::Field(key: "platform_y_positions")]
+  #-------------------------------------------------------------------Walls-------------------------------------------------------------------------------
+   @[YAML::Field(key: "wall_ids")]
+   @[YAML::Field(key: "wall_names")]
+   @[YAML::Field(key: "wall_textures")]
+   @[YAML::Field(key: "wall_x_positions")]
+   @[YAML::Field(key: "wall_y_positions")]
+  #----------------------------------------------------------------Teleporters----------------------------------------------------------------------------
+   @[YAML::Field(key: "teleporter_names")]
+   @[YAML::Field(key: "teleporter_ids")]
+   @[YAML::Field(key: "teleporter_x_positions")]
+   @[YAML::Field(key: "teleporter_y_positions")]
+   @[YAML::Field(key: "teleporter_destination_map")]
+   @[YAML::Field(key: "teleporter_destination_area")]
+   @[YAML::Field(key: "teleporter_x_destination_positions")]
+   @[YAML::Field(key: "teleporter_y_destination_positions")]
+  #--------------------------------------------------------------Crafting Tables--------------------------------------------------------------------------
+   @[YAML::Field(key: "crafting_table_ids")]
+   @[YAML::Field(key: "crafting_table_names")]
+   @[YAML::Field(key: "crafting_table_x_positions")]
+   @[YAML::Field(key: "crafting_table_y_positions")]
+  #----------------------------------------------------------------Misc Decor-----------------------------------------------------------------------------
+   @[YAML::Field(key: "misc_decor_ids")]
+   @[YAML::Field(key: "misc_decor_names")]
+   @[YAML::Field(key: "misc_decor_x_positions")]
+   @[YAML::Field(key: "misc_decor_y_positions")]
+   @[YAML::Field(key: "misc_decor_texture_rect")]
+   @[YAML::Field(key: "misc_decor_width")]
+   @[YAML::Field(key: "misc_decor_scale_x")]
+   @[YAML::Field(key: "misc_decor_scale_y")]
+   @[YAML::Field(key: "misc_decor_rotation")]
+  #------------------------------------------------------------Misc Decor Overlay-------------------------------------------------------------------------
+   @[YAML::Field(key: "misc_decor_overlay_ids")]
+   @[YAML::Field(key: "misc_decor_overlay_names")]
+   @[YAML::Field(key: "misc_decor_overlay_x_positions")]
+   @[YAML::Field(key: "misc_decor_overlay_y_positions")]
+   @[YAML::Field(key: "misc_decor_overlay_texture_rect")]
+   @[YAML::Field(key: "misc_decor_overlay_width")]
+   @[YAML::Field(key: "misc_decor_overlay_scale_x")]
+   @[YAML::Field(key: "misc_decor_overlay_scale_y")]
+   @[YAML::Field(key: "misc_decor_overlay_rotation")]
+  #-------------------------------------------------------------Current Parallax--------------------------------------------------------------------------
+   @[YAML::Field(key: "current_parallax")]
+  #-------------------------------------------------------------------Ores--------------------------------------------------------------------------------
+   @[YAML::Field(key: "ore_ids")]
+   @[YAML::Field(key: "ore_names")]
+   @[YAML::Field(key: "ore_x_positions")]
+   @[YAML::Field(key: "ore_y_positions")]
+   @[YAML::Field(key: "ore_clocks")]
+   @[YAML::Field(key: "ore_is_broken")]
+  #-------------------------------------------------------------------Herbs-------------------------------------------------------------------------------
+   @[YAML::Field(key: "herb_ids")]
+   @[YAML::Field(key: "herb_names")]
+   @[YAML::Field(key: "herb_x_positions")]
+   @[YAML::Field(key: "herb_y_positions")]
+   @[YAML::Field(key: "herb_clocks")]
+   @[YAML::Field(key: "herb_is_broken")]
+  #------------------------------------------------------------------Enemies------------------------------------------------------------------------------
+   @[YAML::Field(key: "enemy_names")]
+   @[YAML::Field(key: "enemy_x_positions")]
+   @[YAML::Field(key: "enemy_y_positions")]
+   @[YAML::Field(key: "enemy_clocks")]
+   @[YAML::Field(key: "enemy_hp")]
+   @[YAML::Field(key: "enemy_is_dead")]
+ #save function
+   def Editor_Controls.level_editor_save_map(current_file)
+     current_ladder_array = Ladder.get_created_platform_array
+     current_platform_array = Platform.get_created_platform_array
+     current_wall_array = Wall.get_created_wall_array
+     current_teleporter_array = Teleporter.get_created_teleporter_array
+     current_crafting_table_array = Crafting_Station.get_created_crafting_station_array
+     current_misc_object_array = Misc_Decor.get_misc_decor_station_array
+     current_misc_object_overlay_array = Misc_Decor.get_misc_decor_overlay_array
+     parallax = Parallax.get_current_parallax
+     current_ore_array = Harvestables::Ore.get_created_ore_array
+     current_herb_array = Harvestables::Herbs.get_created_array
+     current_enemy_array = Regular_Enemies::Humanoids.get_current_array
+     scale_x_01 = current_misc_object_array.map{ |i| i.sprite.scale[0]}
+     scale_y_01 = current_misc_object_array.map{ |i| i.sprite.scale[1]}
+     scale_x_02 = current_misc_object_overlay_array.map{ |i| i.sprite.scale[0]}
+     scale_y_02 = current_misc_object_overlay_array.map{ |i| i.sprite.scale[1]}
+    File.open(current_file, "w") { |f| YAML.dump({
+   #-----------------------------------------------------------------Platforms--------------------------------------------------------------------------------
+    "platform_names": current_platform_array.map{ |i| i.name},
+    "platform_ids": current_platform_array.map{ |i| i.id}, "platform_textures": current_platform_array.map{ |i| i.texture},
+    "platform_x_positions": current_platform_array.map{ |i| i.bounding_rectangle.position.x},
+    "platform_y_positions": current_platform_array.map{ |i| i.bounding_rectangle.position.y},
+   #------------------------------------------------------------------Ladders---------------------------------------------------------------------------------
+    "ladder_names": current_ladder_array.map{ |i| i.name},
+    "ladder_lengths": current_ladder_array.map{ |i| i.length}, "ladder_textures": current_ladder_array.map{ |i| i.texture},
+    "ladder_x_positions": current_ladder_array.map{ |i| i.sprite.position.x},
+    "ladder_y_positions": current_ladder_array.map{ |i| i.sprite.position.y},
+   #-------------------------------------------------------------------Walls----------------------------------------------------------------------------------
+    "wall_names": current_wall_array.map{ |i| i.name},
+    "wall_ids": current_wall_array.map{ |i| i.id}, "wall_textures": current_wall_array.map{ |i| i.texture},
+    "wall_x_positions": current_wall_array.map{ |i| i.bounding_rectangle.position.x},
+    "wall_y_positions": current_wall_array.map{ |i| i.bounding_rectangle.position.y},
+   #----------------------------------------------------------------Teleporters-------------------------------------------------------------------------------
+    "teleporter_names": current_teleporter_array.map{ |i| i.name},
+    "teleporter_ids": current_teleporter_array.map{ |i| i.length},
+    "teleporter_x_positions": current_teleporter_array.map{ |i| i.sprite.position.x},
+    "teleporter_y_positions": current_teleporter_array.map{ |i| i.sprite.position.y},
+    "teleporter_destination_map": current_teleporter_array.map{ |i| i.destination_map},
+    "teleporter_destination_area": current_teleporter_array.map{ |i| i.destination_area},
+    "teleporter_x_destination_positions": current_teleporter_array.map{ |i| i.destination_postion[0]},
+    "teleporter_y_destination_positions": current_teleporter_array.map{ |i| i.destination_postion[1]},
+   #--------------------------------------------------------------Crafting Tables-----------------------------------------------------------------------------
+    "crafting_table_ids": current_crafting_table_array.map{ |i| i.id},
+    "crafting_table_names": current_crafting_table_array.map{ |i| i.name},
+    "crafting_table_x_positions": current_crafting_table_array.map{ |i| i.rectangle.position.x},
+    "crafting_table_y_positions": current_crafting_table_array.map{ |i| i.rectangle.position.y},
+   #----------------------------------------------------------------Misc Decor--------------------------------------------------------------------------------
+    "misc_decor_ids": current_misc_object_array.map{ |i| i.id},
+    "misc_decor_names": current_misc_object_array.map{ |i| i.name},
+    "misc_decor_x_positions": current_misc_object_array.map{ |i| i.sprite.position.x},
+    "misc_decor_y_positions": current_misc_object_array.map{ |i| i.sprite.position.y},
+    "misc_decor_texture_rect": current_misc_object_array.map{ |i| i.texture_rect},
+    "misc_decor_width": current_misc_object_array.map{ |i| i.width},
+    "misc_decor_scale_x": scale_x_01, "misc_decor_scale_y": scale_y_01,
+    "misc_decor_rotation": current_misc_object_array.map{ |i| i.sprite.rotation},
+   #------------------------------------------------------------Misc Decor Overlay----------------------------------------------------------------------------
+    "misc_decor_overlay_ids": current_misc_object_overlay_array.map{ |i| i.id},
+    "misc_decor_overlay_names": current_misc_object_overlay_array.map{ |i| i.name},
+    "misc_decor_overlay_x_positions": current_misc_object_overlay_array.map{ |i| i.sprite.position.x},
+    "misc_decor_overlay_y_positions": current_misc_object_overlay_array.map{ |i| i.sprite.position.y},
+    "misc_decor_overlay_texture_rect": current_misc_object_overlay_array.map{ |i| i.texture_rect},
+    "misc_decor_overlay_width": current_misc_object_overlay_array.map{ |i| i.width},
+    "misc_decor_overlay_scale_x": scale_x_02, "misc_decor_overlay_scale_y": scale_y_02,
+    "misc_decor_overlay_rotation": current_misc_object_overlay_array.map{ |i| i.sprite.rotation},
+   #-------------------------------------------------------------Current Parallax-----------------------------------------------------------------------------
+    "current_parallax": parallax.id,
+   #-------------------------------------------------------------------Ores-----------------------------------------------------------------------------------
+    "ore_ids": current_ore_array.map{ |i| i.id}, "ore_names": current_ore_array.map{ |i| i.name}, 
+    "ore_x_positions": current_ore_array.map{ |i| i.sprite.position.x}, "ore_y_positions": current_ore_array.map{ |i| i.sprite.position.y},
+    "ore_clocks": current_ore_array.map{ |i| i.clock.elapsed_time.as_seconds}, "ore_is_broken": current_ore_array.map{ |i| i.is_broke},
+   #-------------------------------------------------------------------Herbs----------------------------------------------------------------------------------
+    "herb_ids": current_herb_array.map{ |i| i.id}, "herb_names": current_herb_array.map{ |i| i.name}, 
+    "herb_x_positions": current_herb_array.map{ |i| i.sprite.position.x}, "herb_y_positions": current_herb_array.map{ |i| i.sprite.position.y},
+    "herb_clocks": current_herb_array.map{ |i| i.clock.elapsed_time.as_seconds}, "herb_is_broken": current_herb_array.map{ |i| i.is_broke},
+   #------------------------------------------------------------------Enemies------------------------------------------------------------------------------
+    "enemy_names": current_enemy_array.map{ |i| i.name}, "enemy_x_positions": current_enemy_array.map{ |i| i.sprite.position.x},
+    "enemy_y_positions": current_enemy_array.map{ |i| i.sprite.position.y}, "enemy_clocks": current_enemy_array.map{ |i| i.clock.elapsed_time.as_seconds},
+    "enemy_hp": current_enemy_array.map{ |i| i.hp}, "enemy_is_dead": current_enemy_array.map{ |i| i.is_dead}
+    }, f) }
+   end
    def Editor_Controls.choose_map_array
     current_teleporter = @@current_teleporter
     area = Teleporter.check_area(current_teleporter)
@@ -95,6 +258,10 @@ include Map_Geometry
       return @@current_misc_decor
      when "ore"
       return @@current_ore
+     when "herb"
+      return @@current_herb
+     when "enemy"
+      return @@current_enemy 
      end
      return @@current_platform_template 
     end
@@ -114,6 +281,10 @@ include Map_Geometry
       return @@current_misc_decor_template
      when "ore"
       return @@current_ore_template 
+     when "herb"
+      return @@current_herb_template
+     when "enemy"
+      return @@current_enemy_template 
      end
      return @@current_platform_template 
     end
@@ -154,6 +325,12 @@ include Map_Geometry
            when "ore"
             current_ore = @@current_ore
             Ore.level_editor_place(current_ore, x, y)
+           when "herb"
+            current_herb = @@current_herb
+            Herbs.level_editor_place(current_herb, x, y)
+           when "enemy"
+            current_enemy = @@current_enemy
+            Regular_Enemies.level_editor_place(current_enemy, x, y)
           end
      end
    end
@@ -220,6 +397,10 @@ include Map_Geometry
           current_ore = @@current_ore
           direction = "left"
           Ore.level_editor_precision_placement(current_ore, direction)
+         when "herb"
+          current_herb = @@current_herb
+          direction = "left"
+          Herbs.level_editor_precision_placement(current_herb, direction)
        end
        when SF::Keyboard::Right
         case @@current_category
@@ -251,6 +432,10 @@ include Map_Geometry
            current_ore = @@current_ore
            direction = "right"
            Ore.level_editor_precision_placement(current_ore, direction)
+         when "herb"
+           current_herb = @@current_herb
+           direction = "right"
+           Herbs.level_editor_precision_placement(current_herb, direction)
        end
        when SF::Keyboard::Up
         case @@current_category
@@ -282,6 +467,10 @@ include Map_Geometry
            current_ore = @@current_ore
            direction = "up"
            Ore.level_editor_precision_placement(current_ore, direction)
+         when "herb"
+           current_herb = @@current_herb
+           direction = "up"
+           Herbs.level_editor_precision_placement(current_herb, direction)
        end
        when SF::Keyboard::Down
         case @@current_category
@@ -313,6 +502,10 @@ include Map_Geometry
            current_ore = @@current_ore
            direction = "down"
            Ore.level_editor_precision_placement(current_ore, direction)
+         when "herb"
+           current_herb = @@current_herb
+           direction = "down"
+           Herbs.level_editor_precision_placement(current_herb, direction)
        end
   #----------------------------------------------------Change Texture/Y--------------------------------------------------- 
        when SF::Keyboard::T
@@ -491,9 +684,15 @@ include Map_Geometry
         when "ore"
           current_ore = @@current_ore 
           Ore.initialize_current(current_ore)
+        when "herb"
+          current_herb = @@current_herb 
+          Herbs.initialize_current(current_herb)
+        when "enemy"
+          current_enemy = @@current_enemy 
+          Regular_Enemies.initialize_current(current_enemy)
         end
        when SF::Keyboard::V
-        Map_Geometry.level_editor_save_map(current_file)
+        Editor_Controls.level_editor_save_map(current_file)
        when SF::Keyboard::B
          Map_Geometry::Platform.load_map_platform_settings(current_file)
          Map_Geometry::Ladder.load_map_ladder_settings(current_file)
@@ -504,6 +703,8 @@ include Map_Geometry
          Map_Geometry::Misc_Decor.load_map_overlay_settings(current_file)
          Map_Geometry::Parallax.load_map_settings(current_file)
          Ore.load_map_ore_settings(current_file)
+         Herbs.load_map_ore_settings(current_file)
+         Regular_Enemies.load_map_ladder_settings(current_file)
   #-------------------------------------------------------Zoom View------------------------------------------------------- 
        when SF::Keyboard::Add
          zoom = -1
@@ -578,6 +779,24 @@ include Map_Geometry
           end
           template_id = @@template_id
           @@current_ore_template = Ore.level_editor_change_template(template_id)
+        when "herb"
+          s = Herbs.get_template_array_size
+          if @@template_id < s
+           @@template_id += 1
+          else 
+           @@template_id = -1
+          end
+          template_id = @@template_id
+          @@current_herb_template = Herbs.level_editor_change_template(template_id)
+        when "enemy"
+          s = Regular_Enemies.get_template_array_size
+          if @@template_id < s
+           @@template_id += 1
+          else 
+           @@template_id = -1
+          end
+          template_id = @@template_id
+          @@current_enemy_template = Regular_Enemies.level_editor_change_template(template_id)
          end
        when SF::Keyboard::L
         case @@current_category
@@ -633,6 +852,22 @@ include Map_Geometry
            end
            template_id = @@template_id
            @@current_ore_template = Map_Geometry::Ore.level_editor_change_template(template_id)
+        when "herb"
+          if @@template_id > 0
+            @@template_id -= 1
+           else 
+            @@template_id = -1
+           end
+           template_id = @@template_id
+           @@current_herb_template = Herbs.level_editor_change_template(template_id)
+        when "enemy"
+          if @@template_id > 0
+            @@template_id -= 1
+           else 
+            @@template_id = -1
+           end
+           template_id = @@template_id
+           @@current_enemy_template = Regular_Enemies.level_editor_change_template(template_id)
         end
   #----------------------------------------------------Choose Objects----------------------------------------------------- 
        when SF::Keyboard::O
@@ -714,6 +949,28 @@ include Map_Geometry
           id = @@id
           @@current_ore = Ore.level_editor_change_ore(id)
          end
+        when "herb"
+          s = Herbs.get_created_array_size
+          if s > 0
+          if @@id < s
+          @@id += 1
+          else 
+          @@id = 0
+         end
+          id = @@id
+          @@current_herb = Herbs.level_editor_change_herbs(id)
+         end
+        when "enemy"
+          s = Regular_Enemies.get_created_array_size
+          if s > 0
+          if @@id < s
+          @@id += 1
+          else 
+          @@id = 0
+         end
+          id = @@id
+          @@current_enemy = Regular_Enemies.level_editor_change_enemy(id)
+         end
       end
        when SF::Keyboard::P
         case @@current_category
@@ -773,6 +1030,22 @@ include Map_Geometry
            end
             id = @@id
             @@current_ore = Map_Geometry::Ore.level_editor_change_ore(id)
+        when "herb"
+          if @@id < 0
+            @@id -= 1
+          else 
+            @@id = 0
+           end
+            id = @@id
+            @@current_herb = Herbs.level_editor_change_herbs(id)
+        when "enemy"
+          if @@id < 0
+            @@id -= 1
+          else 
+            @@id = 0
+           end
+            id = @@id
+            @@current_enemy = Regular_Enemies.level_editor_change_enemy(id)
         end
   #--------------------------------------------------Create New Objects---------------------------------------------------  
        when SF::Keyboard::N
@@ -805,6 +1078,14 @@ include Map_Geometry
           ore = @@current_ore_template
           current_ore = Ore.level_editor_create_ore(ore)
           @@current_ore = current_ore
+        when "herb"
+          herb = @@current_herb_template
+          current_herb = Herbs.level_editor_create_ore(herb)
+          @@current_herb = current_herb
+        when "enemy"
+          enemy = @@current_enemy_template
+          current_enemy = Regular_Enemies.level_editor_create(enemy)
+          @@current_enemy = current_enemy
         end
   #----------------------------------------------------Initialize Map----------------------------------------------------- 
        when SF::Keyboard::Backspace
@@ -812,6 +1093,8 @@ include Map_Geometry
          Teleporter.initialize_teleporters
          Ladder.initialize_ladders
          Ore.initialize_all
+         Herbs.initialize
+         Regular_Enemies.initialize_all
   #---------------------------------------------------Change Categories--------------------------------------------------- 
        when SF::Keyboard::Num1
          @@current_category = "platform"
@@ -827,6 +1110,10 @@ include Map_Geometry
          @@current_category = "misc_decor"
        when SF::Keyboard::Num7
          @@current_category = "ore"
+       when SF::Keyboard::Num8
+         @@current_category = "herb"
+       when SF::Keyboard::Num9
+         @@current_category = "enemy"
        end; end; end; end
  end
  class Editor_UI < Editor_Controls

@@ -129,10 +129,10 @@ ore_ids:
 - 15
 - 24
 ore_names:
-- Smoky Quartz1
-- Smoky Quartz2
-- Moonstone3
-- Howlite4
+- Smoky Quartz
+- Smoky Quartz
+- Moonstone
+- Howlite
 ore_x_positions:
 - -1226.9791
 - -761.875
@@ -144,12 +144,66 @@ ore_y_positions:
 - 704.0305
 - 706.3181
 ore_clocks:
-- 69.766975
-- 69.766975
-- 69.766975
-- 69.766975
+- 31.161654
+- 31.161654
+- 31.161654
+- 31.161654
 ore_is_broken:
 - false
+- false
+- false
+- false
+herb_ids:
+- 106
+- 303
+- 303
+- 1
+herb_names:
+- Peanut Butter Fruit Tree
+- Wheat Crop
+- Wheat Crop
+- Raspberry Bush
+herb_x_positions:
+- -905.2084
+- -190.72916
+- 183.64589
+- 2272.8125
+herb_y_positions:
+- 602.7233
+- 703.3769
+- 704.902
+- 703.3769
+herb_clocks:
+- 31.161633
+- 31.161633
+- 31.161633
+- 31.161633
+herb_is_broken:
+- false
+- false
+- false
+- false
+enemy_names:
+- Broken Doll1
+- Broken Doll2
+- Broken Doll3
+enemy_x_positions:
+- 3520.3645
+- 4047.8125
+- 3048.3333
+enemy_y_positions:
+- 311.76474
+- 312.52722
+- 311.76474
+enemy_clocks:
+- 31.160748
+- 31.160748
+- 31.160748
+enemy_hp:
+- 50.1
+- 50.1
+- 50.1
+enemy_is_dead:
 - false
 - false
 - false

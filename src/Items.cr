@@ -4822,11 +4822,10 @@ include Use
          x = yaml["ore_x_positions"][i].as_f32
          y = yaml["ore_y_positions"][i].as_f32
          this.sprite.position = SF.vector2(x, y)
-         puts this.sprite
          Current_Map_Ore_Array.push(this)
          i += 1
         end
-     end
+      end
     #..............................................................Animations...............................................................................
      def Ore.animation_harvest(this, ore)
       Ore_Clock_Break.restart
@@ -4865,15 +4864,15 @@ include Use
         if ore.hp >= 0
 
          end; end; end; end
-      def Ore.respawn
-        Current_Map_Ore_Array.map{ |i| 
-          if i.is_broke == true && i.clock.elapsed_time > SF.seconds(1800)
-            this = i.max_hp
-            i.hp_set(this)
-            i.is_broke = false
-            a = 0; b = 0; x = 100; y = 100
-            i.sprite_change_square(a, b, x, y)
-          end}
+     def Ore.respawn
+       Current_Map_Ore_Array.map{ |i| 
+         if i.is_broke == true && i.clock.elapsed_time > SF.seconds(1800)
+           this = i.max_hp
+           i.hp_set(this)
+           i.is_broke = false
+           a = 0; b = 0; x = 100; y = 100
+           i.sprite_change_square(a, b, x, y)
+         end}
       end
       def Ore.break(broken)
         amount = rand(1..3)
@@ -5217,13 +5216,13 @@ include Use
   #++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
    @@current_plant_attacked : Herbs; @@current_plant_attacked = @@blackberry_bush; @@is_plant_attacked : Bool; @@is_plant_attacked = false; 
    @@attack_strength : Float64; @@attack_strength = 10; @@plant_reset : Int32; @@plant_reset = 0; @@plant_animation_frame : Int32;
-   @@plant_animation_frame = 0
+   @@plant_animation_frame = 0; @@herb_name_iterator = 0; Herb_Respawn_Clock = SF::Clock.new
   #________________________________________________________________________________________________________________________________________________________
   #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   #!                                                              Initialize                                                                              !
   #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-   def initialize(name : String, id : Int32, color : String, hp : Float64, max_hp : Float64, drop_item : Ingredients, sprite : SF::Sprite, is_broke : Bool, 
-     kind : String, amount_owned : Int32, effects : Array(String))
+   def initialize(name : String, id : Int32, color : String, hp : Float64 | Int32, max_hp : Float64 | Int32, drop_item : Ingredients, sprite : SF::Sprite, is_broke : Bool, 
+     kind : String, amount_owned : Int32, effects : Array(String), clock : SF::Clock)
      @name = name
      @id = id
      @color = color
@@ -5235,6 +5234,7 @@ include Use
      @kind = kind
      @amount_owned = amount_owned
      @effects = effects
+     @clock = clock
    end
    def name
      @name
@@ -5269,11 +5269,132 @@ include Use
    def effects
      @effects
    end
+   def clock
+    @clock
+   end
+
+   def name=(this)
+    @name = this
+   end
+   def id=(this)
+    @id = this
+   end
+   def sprite=(this)
+    @sprite = this
+   end 
+   def is_broke=(this)
+    @is_broke = this
+   end
+   def clock=(this)
+    @clock = this
+   end
   #________________________________________________________________________________________________________________________________________________________
   #????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
   #?                                                               Methods                                                                                ?
   #????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
    Plant_Clock_01 = SF::Clock.new; Plant_Animation_Clock_01 = SF::Clock.new; Plant_Clock_Break = SF::Clock.new
+    #-------------------------------------------------------------Level Editor------------------------------------------------------------------------------
+    #...........................................................Initialization.............................................................................
+      def Herbs.level_editor_initial_herb
+       current_herb = @@blackberry_bush
+       end
+      def Herbs.initialize_all
+        Current_Map_Herb_Array.map{ |i| i.sprite.position = SF.vector2(0, 40000)}
+        Current_Map_Herb_Array.clear
+       end
+    #.......................................................Initialize Current Herb........................................................................
+     def Herbs.initialize_current(current_herb)
+      current_herb.sprite.position = SF.vector2(0, 40000)
+      Current_Map_Herb_Array.delete(current_herb)
+      end
+    #...........................................................Get Array Size.............................................................................
+      def Herbs.get_template_array_size
+        return Herb_Array.size
+       end
+      def Herbs.get_created_array_size
+        return Current_Map_Herb_Array.size
+       end
+    #.............................................................Get Arrays...............................................................................
+     def Herbs.get_created_array
+      return Current_Map_Herb_Array
+     end
+    #..............................................................Display.................................................................................
+     def Herbs.level_editor_display(window)
+      if Current_Map_Herb_Array.size > 0
+        Current_Map_Herb_Array.map{ |i| window.draw(i.sprite)}
+      end
+      end
+    #...............................................................Place..................................................................................
+     def Herbs.level_editor_place(current_herb, x, y)
+       current_herb.sprite.position = SF.vector2(x, y)
+      end
+     def Herbs.level_editor_precision_placement(current_herb, direction)
+      case direction
+        when "left"
+          current_herb.sprite.position -= SF.vector2(10, 0)
+        when "right"
+          current_herb.sprite.position += SF.vector2(10, 0)
+        when "up"
+          current_herb.sprite.position -= SF.vector2(0, 10)
+        when "down"
+          current_herb.sprite.position += SF.vector2(0, 10)
+       end
+      end
+    #............................................................Scroll Arrays.............................................................................
+     def Herbs.level_editor_change_template(template_id)
+      if Herb_Array.size > template_id && template_id > -1
+      else
+        template_id = -1
+      end
+      current_template = Herb_Array[template_id]
+      current_template
+     end
+ 
+     def Herbs.level_editor_change_herbs(id)
+      if id < Current_Map_Herb_Array.size && id > -1
+      else
+        id = -1
+      end
+      current_herb = Current_Map_Herb_Array[id]
+      current_herb
+     end
+    #..........................................................Create New Object...........................................................................
+     def Herbs.level_editor_create_ore(herb)
+       @@herb_name_iterator += 1
+       current_herb = herb.dup
+       current_herb.name = herb.name + @@herb_name_iterator.to_s
+       current_herb.sprite = herb.sprite.dup
+       current_herb.clock = herb.clock.dup
+       Current_Map_Herb_Array.push(current_herb)
+      current_herb
+     end
+    #------------------------------------------------------------Load Map File-----------------------------------------------------------------------------
+     def Herbs.load_map_ore_settings(current_file)
+      Current_Map_Herb_Array.clear
+      Herbs.initialize
+      yaml = File.open(current_file) { |file| YAML.parse(file) }
+        s = yaml["herb_ids"].as_a.size
+        i = 0
+        while s > i
+        this = @@blackberry_bush.dup
+        this.name = yaml["herb_names"][i].as_s
+        this.id = yaml["herb_ids"][i].as_i
+        Herb_Array.map{ |a| 
+         if this.id == a.id
+           this = a.dup
+           this.sprite = a.sprite.dup
+           end}
+        this.is_broke = yaml["herb_is_broken"][i].as_bool
+        time = yaml["herb_clocks"][i].as_f
+        this.clock.elapsed_time = time
+       # this.name = yaml["ore_names"][i].as_s
+        x = yaml["herb_x_positions"][i].as_f32
+        y = yaml["herb_y_positions"][i].as_f32
+        this.sprite.position = SF.vector2(x, y)
+        Current_Map_Herb_Array.push(this)
+        i += 1
+       end
+     end
    #..........................................................HP Class Functions...........................................................................
     def Herbs.set_attack_strength(attack_strength)
      @@attack_strength = attack_strength
@@ -5309,6 +5430,16 @@ include Use
        Plant_Animation_Clock_01.restart
        Plant_Clock_01.restart
      end; end; end; end
+    def Herbs.respawn
+      Current_Map_Herb_Array.map{ |i| 
+        if i.is_broke == true && i.clock.elapsed_time > SF.seconds(1800)
+          this = i.max_hp
+          i.hp_set(this)
+          i.is_broke = false
+          a = 0; b = 0; x = 100; y = 100
+          i.sprite_change_square(a, b, x, y)
+        end}
+    end
    #.......................................................Animation Class Functions.......................................................................
       def sprite_change_square(a, b, x, y)
        @sprite.texture_rect = SF.int_rect(a, b, x, y)
@@ -5642,128 +5773,153 @@ include Use
   #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   #/                                                               Entities                                                                               /
   #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-     #................................................................Bushes.................................................................................
-      #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Blackberry Bush''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-       @@blackberry_bush = Herbs.new("Blackberry Bush", 0, "black", 100, 100, @@blackberries, Blackberry_Bush, false, "bush", 0, ["Hp+", "Mp+"])
-       Herb_Array.push(@@blackberry_bush)
-      #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Raspberry Bush'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-       @@raspberry_bush = Herbs.new("Raspberry Bush", 1, "red", 100, 100, @@raspberries, Raspberry_Bush, false, "bush", 0, ["Hp+", "Str+"])
-       Herb_Array.push(@@raspberry_bush)
-      #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Elderberry Bush''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-       @@elderberry_bush = Herbs.new("Elderberry Bush", 2, "black", 100, 100, @@elderberries, Elderberry_Bush, false, "bush", 0, ["Hp+", "Remove Poison"])
-       Herb_Array.push(@@elderberry_bush)
-      #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''Black Currant Bush'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-       @@black_currant_bush = Herbs.new("Black Currant Bush", 3, "black", 100, 100, @@black_currants, Black_Currant_Bush, false, "bush", 0, ["Hp+", "Luk+"])
-       Herb_Array.push(@@black_currant_bush)
-      #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Blueberry Bush'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-       @@blueberry_bush = Herbs.new("Blueberry Bush", 4, "blue", 100, 100, @@blueberries, Blueberry_Bush, false, "bush", 0, ["Mp+", "Int+"])
-       Herb_Array.push(@@blueberry_bush)
-      #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''Lemonade Berry Bush''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-       @@lemonade_berry_bush = Herbs.new("Lemonade Berry Bush", 5, "red", 100, 100, @@lemonade_berries, Lemonade_Berry_Bush, false, "bush", 0, ["Hp+", "Dex+"])
-       Herb_Array.push(@@lemonade_berry_bush)
-      #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Gooseberry Bush''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-       @@gooseberry_bush = Herbs.new("Gooseberry Bush", 6, "yellow", 100, 100, @@gooseberries, Gooseberry_Bush, false, "bush", 0, ["Hp+", "Dex+"])
-       Herb_Array.push(@@gooseberry_bush)
-      #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Hagberry Bush'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-       @@hagberry_bush = Herbs.new("Hagberry Bush", 7, "black", 100, 100, @@hagberries, Hagberry_Bush, false, "bush", 0, ["Hp+", "Dex+"])
-       Herb_Array.push(@@hagberry_bush)
-      #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Red Currant Bush''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-       @@red_currant_bush = Herbs.new("Red Currant Bush", 8, "red", 100, 100, @@red_currants, Red_Currant_Bush, false, "bush", 0, ["Hp+", "Dex+"])
-       Herb_Array.push(@@red_currant_bush)
-      #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Pomegranite Bush''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-       @@pomegranite_bush = Herbs.new("Pomegranite Bush", 9, "red", 100, 100, @@pomegranites, Pomegranite_Bush, false, "bush", 0, ["Hp+", "Dex+"])
-       Herb_Array.push(@@pomegranite_bush)
-      #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Dragonfruit Bush''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-       @@dragonfruit_bush = Herbs.new("Dragonfruit Bush", 10, "pink", 100, 100, @@dragonfruit, Dragonfruit_Bush, false, "bush", 0, ["Hp+", "Dex+"])
-       Herb_Array.push(@@dragonfruit_bush)
-      #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Strawberry Bush'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-       @@strawberry_bush = Herbs.new("Strawberry Bush", 11, "red", 100, 100, @@strawberries, Strawberry_Bush, false, "bush", 0, ["Hp+", "Dex+"])
-       Herb_Array.push(@@strawberry_bush)
-      #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''pineapple Bush''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-       @@pineapple_bush = Herbs.new("Pineapple Bush", 12, "yellow", 100, 100, @@pineapples, Pineapple_Bush, false, "bush", 0, ["Hp+", "Dex+"])
-       Herb_Array.push(@@pineapple_bush)
-     #................................................................Trees..................................................................................
-      #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Snow Pear Tree'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-       @@snow_pear_tree = Herbs.new("Snow Pear Tree", 100, "yellow", 100, 100, @@snow_pears, Snow_Pear_Tree, false, "tree", 0, ["Mp+", "Int+"])
-       Herb_Array.push(@@snow_pear_tree)
-      #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Quince Tree'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-       @@quince_tree = Herbs.new("Quince Tree", 101, "yellow", 100, 100, @@quince, Quince_Tree, false, "tree", 0, ["Hp+", "Dex+"])
-       Herb_Array.push(@@quince_tree)
-      #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Butterfruit Tree''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-       @@butterfruit_tree = Herbs.new("Butterfruit Tree", 102, "purple", 100, 100, @@butterfruit, Butterfruit_Tree, false, "tree", 0, ["Hp++", "Dex+"])
-       Herb_Array.push(@@butterfruit_tree)
-      #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Dusky Pear Tree'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-       @@dusky_pear_tree = Herbs.new("Dusky Pear Tree", 103, "orange", 100, 100, @@dusky_pear, Dusky_Pear_Tree, false, "tree", 0, ["Mp+", "Int+"])
-       Herb_Array.push(@@dusky_pear_tree)
-      #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Date Tree'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-       @@date_tree = Herbs.new("Date Tree", 104, "brown", 100, 100, @@dates, Date_Tree, false, "tree", 0, ["Hp+", "Dex+"])
-       Herb_Array.push(@@date_tree)
-      #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Coconut Tree'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-       @@coconut_tree = Herbs.new("Coconut Tree", 105, "brown", 100, 100, @@coconuts, Coconut_Tree, false, "tree", 0, ["Hp+", "Str+"])
-       Herb_Array.push(@@coconut_tree)
-      #'''''''''''''''''''''''''''''''''''''''''''''''''''''Peanut Butter Fruit Tree'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-       @@peanut_butter_fruit_tree = Herbs.new("Peanut Butter Fruit Tree", 106, "red", 100, 100, @@peanut_butter_fruit, Peanut_Butter_Fruit_Tree, false, "tree", 0, ["Hp+", "Luk+"])
-       Herb_Array.push(@@peanut_butter_fruit_tree)
-      #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Lychee Tree''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-       @@lychee_tree = Herbs.new("Lychee Tree", 107, "red", 100, 100, @@lychee, Lychee_Tree, false, "tree", 0, ["Hp+", "Luk+"])
-       Herb_Array.push(@@lychee_tree)
-      #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''Black Cherry Tree''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-       @@black_cherry_tree = Herbs.new("Black Cherry Tree", 108, "black", 100, 100, @@black_cherry, Black_Cherry_Tree, false, "tree", 0, ["Hp+", "Luk+"])
-       Herb_Array.push(@@black_cherry_tree)
-      #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Red Cherry Tree'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-       @@red_cherry_tree = Herbs.new("Red Cherry Tree", 109, "red", 100, 100, @@red_cherry, Red_Cherry_Tree, false, "tree", 0, ["Hp+", "Luk+"])
-       Herb_Array.push(@@red_cherry_tree)
-      #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Apricot Tree''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-       @@apricot_tree = Herbs.new("Apricot Tree", 110, "yellow", 100, 100, @@apricot, Apricot_Tree, false, "tree", 0, ["Hp+", "Luk+"])
-       Herb_Array.push(@@apricot_tree)
-      #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Acai Tree''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-       @@acai_tree = Herbs.new("Acai Tree", 111, "purple", 100, 100, @@acai, Acai_Tree, false, "tree", 0, ["Hp+", "Luk+"])
-       Herb_Array.push(@@acai_tree)
-      #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Peach Tree'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-       @@peach_tree = Herbs.new("Peach Tree", 112, "pink", 100, 100, @@peaches, Peach_Tree, false, "tree", 0, ["Hp+", "Luk+"])
-       Herb_Array.push(@@peach_tree)
-      #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Mango Tree'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-       @@mango_tree = Herbs.new("Mango Tree", 113, "orange", 100, 100, @@mangoes, Mango_Tree, false, "tree", 0, ["Hp+", "Luk+"])
-       Herb_Array.push(@@mango_tree)
-      #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Lime Tree''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-       @@lime_tree = Herbs.new("Lime Tree", 114, "green", 100, 100, @@limes, Lime_Tree, false, "tree", 0, ["Hp+", "Luk+"])
-       Herb_Array.push(@@lime_tree)
-      #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Blood Lime Tree'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-       @@blood_lime_tree = Herbs.new("Blood Lime Tree", 115, "red", 100, 100, @@blood_limes, Blood_Lime_Tree, false, "tree", 0, ["Hp+", "Luk+"])
-       Herb_Array.push(@@blood_lime_tree)
-      #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Lemon Tree''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-       @@lemon_tree = Herbs.new("Lemon Tree", 116, "yellow", 100, 100, @@lemons, Lemon_Tree, false, "tree", 0, ["Hp+", "Luk+"])
-       Herb_Array.push(@@lemon_tree)
-      #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Orange Tree'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-       @@orange_tree = Herbs.new("Orange Tree", 117, "orange", 100, 100, @@oranges, Orange_Tree, false, "tree", 0, ["Hp+", "Luk+"])
-       Herb_Array.push(@@orange_tree)
-      #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Banana Tree'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-       @@banana_tree = Herbs.new("Banana Tree", 118, "yellow", 100, 100, @@bananas, Banana_Tree, false, "tree", 0, ["Hp+", "Luk+"])
-       Herb_Array.push(@@banana_tree)
-     #................................................................Vines..................................................................................
-      #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Red Grape Vine''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-       @@red_grape_vine = Herbs.new("Red Grape Vine", 200, "red", 100, 100, @@red_grapes, Red_Grape_Vine, false, "vine", 0, ["Hp+", "Luk+"])
-       Herb_Array.push(@@red_grape_vine)
-      #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''Purple Grape Vine''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-       @@purple_grape_vine = Herbs.new("Purple Grape Vine", 201, "purple", 100, 100, @@purple_grapes, Purple_Grape_Vine, false, "vine", 0, ["Hp+", "Luk+"])
-       Herb_Array.push(@@purple_grape_vine)
-      #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''Green Grape Vine'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-       @@green_grape_vine = Herbs.new("Green Grape Vine", 202, "green", 100, 100, @@green_grapes, Green_Grape_Vine, false, "vine", 0, ["Hp+", "Luk+"])
-       Herb_Array.push(@@green_grape_vine)
-     #................................................................Crops..................................................................................
-      #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Corn Crop''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-       @@corn_crop = Herbs.new("Corn Crop", 300, "yellow", 100, 100, @@corn, Corn_Crop, false, "crop", 0, ["Hp+", "Luk+"])
-       Herb_Array.push(@@corn_crop)
-      #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Rice Crop''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-       @@rice_crop = Herbs.new("Rice Crop", 301, "white", 100, 100, @@rice, Rice_Crop, false, "crop", 0, ["Hp+", "Luk+"])
-       Herb_Array.push(@@rice_crop)
-      #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Oats Crop''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-       @@oats_crop = Herbs.new("Oats Crop", 302, "brown", 100, 100, @@oats, Oats_Crop, false, "crop", 0, ["Hp+", "Luk+"])
-       Herb_Array.push(@@oats_crop)
-      #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Wheat Crop''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-       @@wheat_crop = Herbs.new("Wheat Crop", 303, "yellow", 100, 100, @@wheat, Wheat_Crop, false, "crop", 0, ["Hp+", "Luk+"])
-       Herb_Array.push(@@wheat_crop)
-    #________________________________________________________________________________________________________________________________________________________
+   #................................................................Bushes.................................................................................
+    #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Blackberry Bush''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     @@blackberry_bush = Herbs.new("Blackberry Bush", 0, "black", 100, 100, @@blackberries, Blackberry_Bush, false, "bush", 0, ["Hp+", "Mp+"], 
+     Herb_Respawn_Clock.dup)
+     Herb_Array.push(@@blackberry_bush)
+    #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Raspberry Bush'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     @@raspberry_bush = Herbs.new("Raspberry Bush", 1, "red", 100, 100, @@raspberries, Raspberry_Bush, false, "bush", 0, ["Hp+", "Str+"],
+     Herb_Respawn_Clock.dup)
+     Herb_Array.push(@@raspberry_bush)
+    #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Elderberry Bush''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     @@elderberry_bush = Herbs.new("Elderberry Bush", 2, "black", 100, 100, @@elderberries, Elderberry_Bush, false, "bush", 0, ["Hp+", "Remove Poison"],
+     Herb_Respawn_Clock.dup)
+     Herb_Array.push(@@elderberry_bush)
+    #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''Black Currant Bush'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     @@black_currant_bush = Herbs.new("Black Currant Bush", 3, "black", 100, 100, @@black_currants, Black_Currant_Bush, false, "bush", 0, ["Hp+", "Luk+"],
+     Herb_Respawn_Clock.dup)
+     Herb_Array.push(@@black_currant_bush)
+    #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Blueberry Bush'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     @@blueberry_bush = Herbs.new("Blueberry Bush", 4, "blue", 100, 100, @@blueberries, Blueberry_Bush, false, "bush", 0, ["Mp+", "Int+"],
+     Herb_Respawn_Clock.dup)
+     Herb_Array.push(@@blueberry_bush)
+    #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''Lemonade Berry Bush''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     @@lemonade_berry_bush = Herbs.new("Lemonade Berry Bush", 5, "red", 100, 100, @@lemonade_berries, Lemonade_Berry_Bush, false, "bush", 0, ["Hp+", "Dex+"],
+     Herb_Respawn_Clock.dup)
+     Herb_Array.push(@@lemonade_berry_bush)
+    #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Gooseberry Bush''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     @@gooseberry_bush = Herbs.new("Gooseberry Bush", 6, "yellow", 100, 100, @@gooseberries, Gooseberry_Bush, false, "bush", 0, ["Hp+", "Dex+"], 
+     Herb_Respawn_Clock.dup)
+     Herb_Array.push(@@gooseberry_bush)
+    #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Hagberry Bush'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     @@hagberry_bush = Herbs.new("Hagberry Bush", 7, "black", 100, 100, @@hagberries, Hagberry_Bush, false, "bush", 0, ["Hp+", "Dex+"],
+     Herb_Respawn_Clock.dup)
+     Herb_Array.push(@@hagberry_bush)
+    #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Red Currant Bush''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     @@red_currant_bush = Herbs.new("Red Currant Bush", 8, "red", 100, 100, @@red_currants, Red_Currant_Bush, false, "bush", 0, ["Hp+", "Dex+"],
+     Herb_Respawn_Clock.dup)
+     Herb_Array.push(@@red_currant_bush)
+    #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Pomegranite Bush''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     @@pomegranite_bush = Herbs.new("Pomegranite Bush", 9, "red", 100, 100, @@pomegranites, Pomegranite_Bush, false, "bush", 0, ["Hp+", "Dex+"],
+     Herb_Respawn_Clock.dup)
+     Herb_Array.push(@@pomegranite_bush)
+    #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Dragonfruit Bush''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     @@dragonfruit_bush = Herbs.new("Dragonfruit Bush", 10, "pink", 100, 100, @@dragonfruit, Dragonfruit_Bush, false, "bush", 0, ["Hp+", "Dex+"],
+     Herb_Respawn_Clock.dup)
+     Herb_Array.push(@@dragonfruit_bush)
+    #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Strawberry Bush'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     @@strawberry_bush = Herbs.new("Strawberry Bush", 11, "red", 100, 100, @@strawberries, Strawberry_Bush, false, "bush", 0, ["Hp+", "Dex+"],
+     Herb_Respawn_Clock.dup)
+     Herb_Array.push(@@strawberry_bush)
+    #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''pineapple Bush''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     @@pineapple_bush = Herbs.new("Pineapple Bush", 12, "yellow", 100, 100, @@pineapples, Pineapple_Bush, false, "bush", 0, ["Hp+", "Dex+"],
+     Herb_Respawn_Clock.dup)
+     Herb_Array.push(@@pineapple_bush)
+   #................................................................Trees..................................................................................
+    #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Snow Pear Tree'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     @@snow_pear_tree = Herbs.new("Snow Pear Tree", 100, "yellow", 100, 100, @@snow_pears, Snow_Pear_Tree, false, "tree", 0, ["Mp+", "Int+"],
+     Herb_Respawn_Clock.dup)
+     Herb_Array.push(@@snow_pear_tree)
+    #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Quince Tree'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     @@quince_tree = Herbs.new("Quince Tree", 101, "yellow", 100, 100, @@quince, Quince_Tree, false, "tree", 0, ["Hp+", "Dex+"], Herb_Respawn_Clock.dup)
+     Herb_Array.push(@@quince_tree)
+    #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Butterfruit Tree''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     @@butterfruit_tree = Herbs.new("Butterfruit Tree", 102, "purple", 100, 100, @@butterfruit, Butterfruit_Tree, false, "tree", 0, ["Hp++", "Dex+"],
+     Herb_Respawn_Clock.dup)
+     Herb_Array.push(@@butterfruit_tree)
+    #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Dusky Pear Tree'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     @@dusky_pear_tree = Herbs.new("Dusky Pear Tree", 103, "orange", 100, 100, @@dusky_pear, Dusky_Pear_Tree, false, "tree", 0, ["Mp+", "Int+"],
+     Herb_Respawn_Clock.dup)
+     Herb_Array.push(@@dusky_pear_tree)
+    #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Date Tree'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     @@date_tree = Herbs.new("Date Tree", 104, "brown", 100, 100, @@dates, Date_Tree, false, "tree", 0, ["Hp+", "Dex+"], Herb_Respawn_Clock.dup)
+     Herb_Array.push(@@date_tree)
+    #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Coconut Tree'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     @@coconut_tree = Herbs.new("Coconut Tree", 105, "brown", 100, 100, @@coconuts, Coconut_Tree, false, "tree", 0, ["Hp+", "Str+"], Herb_Respawn_Clock.dup)
+     Herb_Array.push(@@coconut_tree)
+    #'''''''''''''''''''''''''''''''''''''''''''''''''''''Peanut Butter Fruit Tree'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     @@peanut_butter_fruit_tree = Herbs.new("Peanut Butter Fruit Tree", 106, "red", 100, 100, @@peanut_butter_fruit, Peanut_Butter_Fruit_Tree, false, 
+     "tree", 0, ["Hp+", "Luk+"], Herb_Respawn_Clock.dup)
+     Herb_Array.push(@@peanut_butter_fruit_tree)
+    #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Lychee Tree''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     @@lychee_tree = Herbs.new("Lychee Tree", 107, "red", 100, 100, @@lychee, Lychee_Tree, false, "tree", 0, ["Hp+", "Luk+"], Herb_Respawn_Clock.dup)
+     Herb_Array.push(@@lychee_tree)
+    #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''Black Cherry Tree''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     @@black_cherry_tree = Herbs.new("Black Cherry Tree", 108, "black", 100, 100, @@black_cherry, Black_Cherry_Tree, false, "tree", 0, ["Hp+", "Luk+"],
+     Herb_Respawn_Clock.dup)
+     Herb_Array.push(@@black_cherry_tree)
+    #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Red Cherry Tree'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     @@red_cherry_tree = Herbs.new("Red Cherry Tree", 109, "red", 100, 100, @@red_cherry, Red_Cherry_Tree, false, "tree", 0, ["Hp+", "Luk+"],
+     Herb_Respawn_Clock.dup)
+     Herb_Array.push(@@red_cherry_tree)
+    #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Apricot Tree''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     @@apricot_tree = Herbs.new("Apricot Tree", 110, "yellow", 100, 100, @@apricot, Apricot_Tree, false, "tree", 0, ["Hp+", "Luk+"], Herb_Respawn_Clock.dup)
+     Herb_Array.push(@@apricot_tree)
+    #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Acai Tree''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     @@acai_tree = Herbs.new("Acai Tree", 111, "purple", 100, 100, @@acai, Acai_Tree, false, "tree", 0, ["Hp+", "Luk+"], Herb_Respawn_Clock.dup)
+     Herb_Array.push(@@acai_tree)
+    #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Peach Tree'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     @@peach_tree = Herbs.new("Peach Tree", 112, "pink", 100, 100, @@peaches, Peach_Tree, false, "tree", 0, ["Hp+", "Luk+"], Herb_Respawn_Clock.dup)
+     Herb_Array.push(@@peach_tree)
+    #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Mango Tree'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     @@mango_tree = Herbs.new("Mango Tree", 113, "orange", 100, 100, @@mangoes, Mango_Tree, false, "tree", 0, ["Hp+", "Luk+"], Herb_Respawn_Clock.dup)
+     Herb_Array.push(@@mango_tree)
+    #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Lime Tree''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     @@lime_tree = Herbs.new("Lime Tree", 114, "green", 100, 100, @@limes, Lime_Tree, false, "tree", 0, ["Hp+", "Luk+"], Herb_Respawn_Clock.dup)
+     Herb_Array.push(@@lime_tree)
+    #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Blood Lime Tree'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     @@blood_lime_tree = Herbs.new("Blood Lime Tree", 115, "red", 100, 100, @@blood_limes, Blood_Lime_Tree, false, "tree", 0, ["Hp+", "Luk+"],
+     Herb_Respawn_Clock.dup)
+     Herb_Array.push(@@blood_lime_tree)
+    #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Lemon Tree''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     @@lemon_tree = Herbs.new("Lemon Tree", 116, "yellow", 100, 100, @@lemons, Lemon_Tree, false, "tree", 0, ["Hp+", "Luk+"], Herb_Respawn_Clock.dup)
+     Herb_Array.push(@@lemon_tree)
+    #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Orange Tree'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     @@orange_tree = Herbs.new("Orange Tree", 117, "orange", 100, 100, @@oranges, Orange_Tree, false, "tree", 0, ["Hp+", "Luk+"],
+     Herb_Respawn_Clock.dup)
+     Herb_Array.push(@@orange_tree)
+    #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Banana Tree'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     @@banana_tree = Herbs.new("Banana Tree", 118, "yellow", 100, 100, @@bananas, Banana_Tree, false, "tree", 0, ["Hp+", "Luk+"],
+     Herb_Respawn_Clock.dup)
+     Herb_Array.push(@@banana_tree)
+   #................................................................Vines..................................................................................
+    #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Red Grape Vine''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     @@red_grape_vine = Herbs.new("Red Grape Vine", 200, "red", 100, 100, @@red_grapes, Red_Grape_Vine, false, "vine", 0, ["Hp+", "Luk+"],
+     Herb_Respawn_Clock.dup)
+     Herb_Array.push(@@red_grape_vine)
+    #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''Purple Grape Vine''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     @@purple_grape_vine = Herbs.new("Purple Grape Vine", 201, "purple", 100, 100, @@purple_grapes, Purple_Grape_Vine, false, "vine", 0, ["Hp+", "Luk+"],
+     Herb_Respawn_Clock.dup)
+     Herb_Array.push(@@purple_grape_vine)
+    #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''Green Grape Vine'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     @@green_grape_vine = Herbs.new("Green Grape Vine", 202, "green", 100, 100, @@green_grapes, Green_Grape_Vine, false, "vine", 0, ["Hp+", "Luk+"],
+     Herb_Respawn_Clock.dup)
+     Herb_Array.push(@@green_grape_vine)
+   #................................................................Crops..................................................................................
+    #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Corn Crop''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     @@corn_crop = Herbs.new("Corn Crop", 300, "yellow", 100, 100, @@corn, Corn_Crop, false, "crop", 0, ["Hp+", "Luk+"], Herb_Respawn_Clock.dup)
+     Herb_Array.push(@@corn_crop)
+    #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Rice Crop''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     @@rice_crop = Herbs.new("Rice Crop", 301, "white", 100, 100, @@rice, Rice_Crop, false, "crop", 0, ["Hp+", "Luk+"], Herb_Respawn_Clock.dup)
+     Herb_Array.push(@@rice_crop)
+    #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Oats Crop''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     @@oats_crop = Herbs.new("Oats Crop", 302, "brown", 100, 100, @@oats, Oats_Crop, false, "crop", 0, ["Hp+", "Luk+"], Herb_Respawn_Clock.dup)
+     Herb_Array.push(@@oats_crop)
+    #''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Wheat Crop''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+     @@wheat_crop = Herbs.new("Wheat Crop", 303, "yellow", 100, 100, @@wheat, Wheat_Crop, false, "crop", 0, ["Hp+", "Luk+"], Herb_Respawn_Clock.dup)
+     Herb_Array.push(@@wheat_crop)
+  #________________________________________________________________________________________________________________________________________________________
     end
    end
 #==========================================================================================================================================================
@@ -6823,139 +6979,7 @@ module Crafted_Items
 #===========================================================================================================================================================
  module Map_Geometry
  include Harvestables
- #save fields
- #------------------------------------------------------------------Ladders---------------------------------------------------------------------------------
-  @[YAML::Field(key: "ladder_lengths")]
-  @[YAML::Field(key: "ladder_names")]
-  @[YAML::Field(key: "ladder_textures")]
-  @[YAML::Field(key: "ladder_x_positions")]
-  @[YAML::Field(key: "ladder_y_positions")]
- #-----------------------------------------------------------------Platforms--------------------------------------------------------------------------------
-  @[YAML::Field(key: "platform_ids")]
-  @[YAML::Field(key: "platform_names")]
-  @[YAML::Field(key: "platform_textures")]
-  @[YAML::Field(key: "platform_x_positions")]
-  @[YAML::Field(key: "platform_y_positions")]
- #-------------------------------------------------------------------Walls----------------------------------------------------------------------------------
-  @[YAML::Field(key: "wall_ids")]
-  @[YAML::Field(key: "wall_names")]
-  @[YAML::Field(key: "wall_textures")]
-  @[YAML::Field(key: "wall_x_positions")]
-  @[YAML::Field(key: "wall_y_positions")]
- #----------------------------------------------------------------Teleporters-------------------------------------------------------------------------------
-  @[YAML::Field(key: "teleporter_names")]
-  @[YAML::Field(key: "teleporter_ids")]
-  @[YAML::Field(key: "teleporter_x_positions")]
-  @[YAML::Field(key: "teleporter_y_positions")]
-  @[YAML::Field(key: "teleporter_destination_map")]
-  @[YAML::Field(key: "teleporter_destination_area")]
-  @[YAML::Field(key: "teleporter_x_destination_positions")]
-  @[YAML::Field(key: "teleporter_y_destination_positions")]
- #--------------------------------------------------------------Crafting Tables-----------------------------------------------------------------------------
-  @[YAML::Field(key: "crafting_table_ids")]
-  @[YAML::Field(key: "crafting_table_names")]
-  @[YAML::Field(key: "crafting_table_x_positions")]
-  @[YAML::Field(key: "crafting_table_y_positions")]
- #----------------------------------------------------------------Misc Decor--------------------------------------------------------------------------------
-  @[YAML::Field(key: "misc_decor_ids")]
-  @[YAML::Field(key: "misc_decor_names")]
-  @[YAML::Field(key: "misc_decor_x_positions")]
-  @[YAML::Field(key: "misc_decor_y_positions")]
-  @[YAML::Field(key: "misc_decor_texture_rect")]
-  @[YAML::Field(key: "misc_decor_width")]
-  @[YAML::Field(key: "misc_decor_scale_x")]
-  @[YAML::Field(key: "misc_decor_scale_y")]
-  @[YAML::Field(key: "misc_decor_rotation")]
- #------------------------------------------------------------Misc Decor Overlay----------------------------------------------------------------------------
-  @[YAML::Field(key: "misc_decor_overlay_ids")]
-  @[YAML::Field(key: "misc_decor_overlay_names")]
-  @[YAML::Field(key: "misc_decor_overlay_x_positions")]
-  @[YAML::Field(key: "misc_decor_overlay_y_positions")]
-  @[YAML::Field(key: "misc_decor_overlay_texture_rect")]
-  @[YAML::Field(key: "misc_decor_overlay_width")]
-  @[YAML::Field(key: "misc_decor_overlay_scale_x")]
-  @[YAML::Field(key: "misc_decor_overlay_scale_y")]
-  @[YAML::Field(key: "misc_decor_overlay_rotation")]
- #-------------------------------------------------------------Current Parallax-----------------------------------------------------------------------------
-  @[YAML::Field(key: "current_parallax")]
- #-------------------------------------------------------------------Ores-----------------------------------------------------------------------------------
-  @[YAML::Field(key: "ore_ids")]
-  @[YAML::Field(key: "ore_names")]
-  @[YAML::Field(key: "ore_x_positions")]
-  @[YAML::Field(key: "ore_y_positions")]
-  @[YAML::Field(key: "ore_clocks")]
-  @[YAML::Field(key: "ore_is_broken")]
-#save function
-  def Map_Geometry.level_editor_save_map(current_file)
-    current_ladder_array = Ladder.get_created_platform_array
-    current_platform_array = Platform.get_created_platform_array
-    current_wall_array = Wall.get_created_wall_array
-    current_teleporter_array = Teleporter.get_created_teleporter_array
-    current_crafting_table_array = Crafting_Station.get_created_crafting_station_array
-    current_misc_object_array = Misc_Decor.get_misc_decor_station_array
-    current_misc_object_overlay_array = Misc_Decor.get_misc_decor_overlay_array
-    parallax = Parallax.get_current_parallax
-    current_ore_array = Harvestables::Ore.get_created_ore_array
-    scale_x_01 = current_misc_object_array.map{ |i| i.sprite.scale[0]}
-    scale_y_01 = current_misc_object_array.map{ |i| i.sprite.scale[1]}
-    scale_x_02 = current_misc_object_overlay_array.map{ |i| i.sprite.scale[0]}
-    scale_y_02 = current_misc_object_overlay_array.map{ |i| i.sprite.scale[1]}
-   File.open(current_file, "w") { |f| YAML.dump({
-  #-----------------------------------------------------------------Platforms--------------------------------------------------------------------------------
-   "platform_names": current_platform_array.map{ |i| i.name},
-   "platform_ids": current_platform_array.map{ |i| i.id}, "platform_textures": current_platform_array.map{ |i| i.texture},
-   "platform_x_positions": current_platform_array.map{ |i| i.bounding_rectangle.position.x},
-   "platform_y_positions": current_platform_array.map{ |i| i.bounding_rectangle.position.y},
-  #------------------------------------------------------------------Ladders---------------------------------------------------------------------------------
-   "ladder_names": current_ladder_array.map{ |i| i.name},
-   "ladder_lengths": current_ladder_array.map{ |i| i.length}, "ladder_textures": current_ladder_array.map{ |i| i.texture},
-   "ladder_x_positions": current_ladder_array.map{ |i| i.sprite.position.x},
-   "ladder_y_positions": current_ladder_array.map{ |i| i.sprite.position.y},
-  #-------------------------------------------------------------------Walls----------------------------------------------------------------------------------
-   "wall_names": current_wall_array.map{ |i| i.name},
-   "wall_ids": current_wall_array.map{ |i| i.id}, "wall_textures": current_wall_array.map{ |i| i.texture},
-   "wall_x_positions": current_wall_array.map{ |i| i.bounding_rectangle.position.x},
-   "wall_y_positions": current_wall_array.map{ |i| i.bounding_rectangle.position.y},
-  #----------------------------------------------------------------Teleporters-------------------------------------------------------------------------------
-   "teleporter_names": current_teleporter_array.map{ |i| i.name},
-   "teleporter_ids": current_teleporter_array.map{ |i| i.length},
-   "teleporter_x_positions": current_teleporter_array.map{ |i| i.sprite.position.x},
-   "teleporter_y_positions": current_teleporter_array.map{ |i| i.sprite.position.y},
-   "teleporter_destination_map": current_teleporter_array.map{ |i| i.destination_map},
-   "teleporter_destination_area": current_teleporter_array.map{ |i| i.destination_area},
-   "teleporter_x_destination_positions": current_teleporter_array.map{ |i| i.destination_postion[0]},
-   "teleporter_y_destination_positions": current_teleporter_array.map{ |i| i.destination_postion[1]},
-  #--------------------------------------------------------------Crafting Tables-----------------------------------------------------------------------------
-   "crafting_table_ids": current_crafting_table_array.map{ |i| i.id},
-   "crafting_table_names": current_crafting_table_array.map{ |i| i.name},
-   "crafting_table_x_positions": current_crafting_table_array.map{ |i| i.rectangle.position.x},
-   "crafting_table_y_positions": current_crafting_table_array.map{ |i| i.rectangle.position.y},
-  #----------------------------------------------------------------Misc Decor--------------------------------------------------------------------------------
-   "misc_decor_ids": current_misc_object_array.map{ |i| i.id},
-   "misc_decor_names": current_misc_object_array.map{ |i| i.name},
-   "misc_decor_x_positions": current_misc_object_array.map{ |i| i.sprite.position.x},
-   "misc_decor_y_positions": current_misc_object_array.map{ |i| i.sprite.position.y},
-   "misc_decor_texture_rect": current_misc_object_array.map{ |i| i.texture_rect},
-   "misc_decor_width": current_misc_object_array.map{ |i| i.width},
-   "misc_decor_scale_x": scale_x_01, "misc_decor_scale_y": scale_y_01,
-   "misc_decor_rotation": current_misc_object_array.map{ |i| i.sprite.rotation},
-  #------------------------------------------------------------Misc Decor Overlay----------------------------------------------------------------------------
-   "misc_decor_overlay_ids": current_misc_object_overlay_array.map{ |i| i.id},
-   "misc_decor_overlay_names": current_misc_object_overlay_array.map{ |i| i.name},
-   "misc_decor_overlay_x_positions": current_misc_object_overlay_array.map{ |i| i.sprite.position.x},
-   "misc_decor_overlay_y_positions": current_misc_object_overlay_array.map{ |i| i.sprite.position.y},
-   "misc_decor_overlay_texture_rect": current_misc_object_overlay_array.map{ |i| i.texture_rect},
-   "misc_decor_overlay_width": current_misc_object_overlay_array.map{ |i| i.width},
-   "misc_decor_overlay_scale_x": scale_x_02, "misc_decor_overlay_scale_y": scale_y_02,
-   "misc_decor_overlay_rotation": current_misc_object_overlay_array.map{ |i| i.sprite.rotation},
-  #-------------------------------------------------------------Current Parallax-----------------------------------------------------------------------------
-   "current_parallax": parallax.id,
-  #-------------------------------------------------------------------Ores-----------------------------------------------------------------------------------
-   "ore_ids": current_ore_array.map{ |i| i.id}, "ore_names": current_ore_array.map{ |i| i.name}, 
-   "ore_x_positions": current_ore_array.map{ |i| i.sprite.position.x}, "ore_y_positions": current_ore_array.map{ |i| i.sprite.position.y},
-   "ore_clocks": current_ore_array.map{ |i| i.clock.elapsed_time.as_seconds}, "ore_is_broken": current_ore_array.map{ |i| i.is_broke}
-   }, f) }
-  end
+
   
  #LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLlLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
  #L                                                                  Ladder                                                                                L

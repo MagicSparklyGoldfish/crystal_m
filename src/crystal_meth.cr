@@ -490,14 +490,16 @@ extend self
      player = @@player_character_rendered_model
      Map_Geometry::Parallax.display(window, map, area, player)
      Window_Class.wall_collision
+     Regular_Enemies.level_editor_display(window)
      player = @@player_character_rendered_model.global_bounds
      Map_Geometry::Misc_Decor.display(window, area, map)
      Map_Geometry::Teleporter.display_teleporters(window, area, map)
      Map_Geometry::Platform.display(area, map, window)
      Map_Geometry::Wall.display(window, area, map)
      Map_Geometry::Ladder.display_ladders(window, map, area)
-     Map_Geometry::Ore.level_editor_display(window)
-     Harvestables::Herbs.display(window, map, area)
+     Ore.level_editor_display(window)
+     Herbs.level_editor_display(window)
+     #Harvestables::Herbs.display(window, map, area)
      if @@menu != "level_editor"
       window.draw(@@player_character_rendered_model) 
       end

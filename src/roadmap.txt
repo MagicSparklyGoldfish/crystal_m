@@ -11,6 +11,7 @@
  *add cooking
  *add player housing
  *add bosses
+ *add weather
 
 --------------------------------------------------------------------------------------------------------------------------------------------------------------
 -                                                              Low Priority                                                                                  -
@@ -18,4 +19,7 @@
  *maybe add ability to make custom clothes?  
  *add ability to make towns  
  *ponies?
- *maybe unicorns?         
+ *maybe unicorns?    
+ *add day/night cycle
+ *add seasons  
+ *maybe make seasons, weather, and time of day effect enemies?   

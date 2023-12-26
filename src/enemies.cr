@@ -145,6 +145,108 @@ include Use
   def Regular_Enemies.attack(attack)
     Regular_Enemies::Humanoids.attack(attack)
   end
+  #------------------------------------------------------------Level Editor-------------------------------------------------------------------------------
+   @@current_enemy_name_iterator = 0
+
+   #............................................................Initialize................................................................................
+     def Regular_Enemies.initialize_all
+       array = Humanoids.get_current_array
+       array.map { |i| i.sprite.position = SF.vector2(100, 20005)}
+       array.clear
+      end
+    def Regular_Enemies.initialize_current(current_enemy)
+      current_enemy.sprite.position = SF.vector2(100, 20005)
+      array = Humanoids.get_current_array
+      array.delete(current_enemy)
+     end
+    def Regular_Enemies.initial_enemy
+      enemy = Humanoids.get_initial_enemy
+      return enemy
+     end
+   #...........................................................Get Array Size.............................................................................
+    def Regular_Enemies.get_template_array_size
+     array = Humanoids.get_all_array
+     return array.size
+     end
+    def Regular_Enemies.get_created_array_size
+      array = Humanoids.get_current_array
+      return array.size
+     end
+   #..............................................................Display.................................................................................
+    def Regular_Enemies.level_editor_display(window)
+      array = Humanoids.get_current_array
+      array.map{ |i| window.draw(i.sprite)}
+     end
+   #...............................................................Place..................................................................................
+    def Regular_Enemies.level_editor_place(current_enemy, x, y)
+     current_enemy.sprite.position = SF.vector2(x, y)
+    end
+    def Regular_Enemies.level_editor_precision_placement(current_enemy, direction)
+     case direction
+      when "left"
+        current_enemy.sprite.position -= SF.vector2(10, 0)
+      when "right"
+        current_enemy.sprite.position += SF.vector2(10, 0)
+      when "up"
+        current_enemy.sprite.position -= SF.vector2(0, 10)
+      when "down"
+        current_enemy.sprite.position += SF.vector2(0, 10)
+     end
+    end
+   #............................................................Scroll Arrays.............................................................................
+    def Regular_Enemies.level_editor_change_template(template_id)
+      array = Humanoids.get_all_array
+     if array.size > template_id && template_id > -1
+     else
+       template_id = -1
+     end
+     current_template = array[template_id]
+     current_template
+    end
+    def Regular_Enemies.level_editor_change_enemy(id)
+      array = Humanoids.get_current_array
+     if id < array.size && id > -1
+     else
+       id = -1
+     end
+     current_enemy = array[id]
+     current_enemy
+    end
+   #..........................................................Create New Object...........................................................................
+    def Regular_Enemies.level_editor_create(enemy)
+     @@current_enemy_name_iterator += 1
+     current_enemy = enemy.dup
+     current_enemy.sprite = enemy.sprite.dup
+     current_enemy.name = enemy.name + @@current_enemy_name_iterator.to_s
+     Humanoids.push_to_current_array(current_enemy)
+     current_enemy
+    end
+   #------------------------------------------------------------Load Map File-----------------------------------------------------------------------------
+    def Regular_Enemies.load_map_ladder_settings(current_file)
+     template_array = Regular_Enemies::Humanoids.get_current_array
+     Humanoids.clear_current_array
+     Regular_Enemies.initialize_all
+     yaml = File.open(current_file) { |file| YAML.parse(file) }
+       enemy = Regular_Enemies.initial_enemy
+       s = yaml["enemy_names"].as_a.size
+       i = 0
+       while s > i
+       this = enemy.dup
+       this.name = yaml["enemy_names"][i].as_s
+       this.sprite = this.sprite.dup
+       this.hp = yaml["enemy_hp"][i].as_f32
+       this.is_dead = yaml["enemy_is_dead"][i].as_bool
+       this.name = yaml["enemy_names"][i].as_s
+       x = yaml["enemy_x_positions"][i].as_f32
+       y = yaml["enemy_y_positions"][i].as_f32
+       time = yaml["enemy_clocks"][i].as_f
+       this.clock.elapsed_time = time
+       this.sprite.position = SF.vector2(x, y)
+       current_enemy = this
+       Humanoids.push_to_current_array(current_enemy)
+       i += 1
+      end
+    end
  #HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH
  #H                                                                 Humanoids                                                                              H
  #HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH
@@ -221,6 +323,12 @@ include Use
     def health_bar
         @health_bar
      end
+    def hp=(this)
+      @hp = this
+     end
+    def name=(this)
+      @name = this
+     end
     def is_dead=(this)
         @is_dead = this
      end
@@ -251,6 +359,23 @@ include Use
    #????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
    #?                                                               Methods                                                                                ?
    #????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
+    #-------------------------------------------------------------Get Arrays--------------------------------------------------------------------------------
+     def Humanoids.get_all_array
+       return All_Humanoid_Enemy_Array
+      end
+     def Humanoids.get_current_array
+      return Current_Map_Humanoid_Array
+     end
+     def Humanoids.get_initial_enemy
+      return @@broken_doll
+     end
+     def Humanoids.push_to_current_array(current_enemy)
+      Current_Map_Humanoid_Array.push(current_enemy)
+      puts Current_Map_Humanoid_Array
+     end
+     def Humanoids.clear_current_array
+      Current_Map_Humanoid_Array.clear
+     end
     #---------------------------------------------------------------Combat----------------------------------------------------------------------------------
      def hp_subtract(damage)
         @hp -= damage
