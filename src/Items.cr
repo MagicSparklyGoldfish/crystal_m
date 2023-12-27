@@ -4748,10 +4748,12 @@ include Use
      #..............................................................Display.................................................................................
       def Ore.level_editor_display(window)
        if Current_Map_Ore_Array.size > 0
-       Current_Map_Ore_Array.map{ |i| window.draw(i.sprite)}
-       end
+        Current_Map_Ore_Array.each do |ore|
+          window.draw(ore.sprite)
+        end
        Ore.hit_animation(window)
        Ore.respawn
+       end
        end
      #...............................................................Place..................................................................................
       def Ore.level_editor_place(current_ore, x, y)
@@ -4802,8 +4804,11 @@ include Use
         Current_Map_Ore_Array.clear
         Ore.initialize_all
        yaml = File.open(current_file) { |file| YAML.parse(file) }
-         s = yaml["ore_ids"].as_a.size
+         a = yaml["ore_ids"].as_a
+         s = a.size
          i = 0
+         if a.nil? || a.empty?
+         else if i < s && s > 0
          while s > i
          this = @@bloodstone.dup
          this.name = yaml["ore_names"][i].as_s
@@ -4816,12 +4821,12 @@ include Use
          this.is_broke = yaml["ore_is_broken"][i].as_bool
          time = yaml["ore_clocks"][i].as_f
          this.clock.elapsed_time = time
-        # this.name = yaml["ore_names"][i].as_s
          x = yaml["ore_x_positions"][i].as_f32
          y = yaml["ore_y_positions"][i].as_f32
          this.sprite.position = SF.vector2(x, y)
          Current_Map_Ore_Array.push(this)
          i += 1
+          end; end
         end
       end
     #..............................................................Animations...............................................................................
@@ -5271,9 +5276,10 @@ include Use
     #..............................................................Display.................................................................................
      def Herbs.level_editor_display(window)
       if Current_Map_Herb_Array.size > 0
-        Current_Map_Herb_Array.map{ |i| window.draw(i.sprite)}
+        Current_Map_Herb_Array.each do |herb|
+        window.draw(herb.sprite)
         Herbs.animate(window)
-      end
+      end; end
       end
     #...............................................................Place..................................................................................
      def Herbs.level_editor_place(current_herb, x, y)
@@ -5327,6 +5333,7 @@ include Use
         s = yaml["herb_ids"].as_a.size
         i = 0
         while s > i
+          if s > i
         this = @@blackberry_bush.dup
         this.name = yaml["herb_names"][i].as_s
         this.id = yaml["herb_ids"][i].as_i
@@ -5338,12 +5345,12 @@ include Use
         this.is_broke = yaml["herb_is_broken"][i].as_bool
         time = yaml["herb_clocks"][i].as_f
         this.clock.elapsed_time = time
-       # this.name = yaml["ore_names"][i].as_s
         x = yaml["herb_x_positions"][i].as_f32
         y = yaml["herb_y_positions"][i].as_f32
         this.sprite.position = SF.vector2(x, y)
         Current_Map_Herb_Array.push(this)
         i += 1
+          end
        end
      end
    #..........................................................HP Class Functions...........................................................................
@@ -7154,6 +7161,7 @@ module Crafted_Items
          s = yaml["ladder_lengths"].as_a.size
          i = 0
          while s > i
+          if s > i
          this = @@long_ladder_01.dup
          this.sprite = @@long_ladder_01.sprite.dup
          this.length = yaml["ladder_lengths"][i].as_i
@@ -7166,6 +7174,7 @@ module Crafted_Items
          this.sprite.position = SF.vector2(x, y)
          Current_Ladder_Array.push(this)
          i += 1
+          end
         end
      end
    #________________________________________________________________________________________________________________________________________________________
@@ -8016,9 +8025,12 @@ module Crafted_Items
       Created_Teleporter_Array.clear
       Teleporter.initialize_teleporters
       yaml = File.open(current_file) { |file| YAML.parse(file) }
-        s = yaml["teleporter_names"].as_a.size
+        a = yaml["teleporter_names"].as_a
+        s = a.size
         i = 0
+        if s > 0
         while s > i
+        if s > i #< this seems redundant, but the array overflows without it for some fucking reason 
         this = @@teleporter_01.dup
         this.sprite = @@teleporter_01.sprite.dup 
         this.id = yaml["teleporter_ids"][i].as_i
@@ -8033,7 +8045,9 @@ module Crafted_Items
         this.sprite.position = SF.vector2(x, y)
         Created_Teleporter_Array.push(this)
         i += 1
+        end
        end
+      end
     end
   #________________________________________________________________________________________________________________________________________________________
   #-----------------------------------------------------------Animate Teleporters--------------------------------------------------------------------------
@@ -8371,10 +8385,12 @@ module Crafted_Items
       end
     #..............................................................Display.................................................................................
      def Misc_Decor.level_editor_display_misc_decor(window)
-       Created_Misc_Object_Array.map{ |i| window.draw(i.sprite)}
+       Created_Misc_Object_Array.each do |i| window.draw(i.sprite)
+       end
       end
      def Misc_Decor.level_editor_display_misc_decor_overlay(window)
-       Created_Misc_Object_Overlay_Array.map{ |i| window.draw(i.sprite)}
+       Created_Misc_Object_Overlay_Array.each do |i| window.draw(i.sprite)
+       end
       end
     #.............................................................Initialize................................................................................
      def Misc_Decor.initialize_current_misc_decor(current_misc_decor)
@@ -8522,6 +8538,7 @@ module Crafted_Items
         i = 0
         s = yaml["misc_decor_ids"].as_a.size
         while i < s 
+          if i < s 
          if yaml["misc_decor_ids"][i] == 1
           this = @@concrete_pillar_01.dup
           this.sprite = @@concrete_pillar_01.sprite.dup
@@ -8556,6 +8573,7 @@ module Crafted_Items
          Created_Misc_Object_Array.uniq!
          i += 1
         end
+        end
       end
       def Misc_Decor.load_map_overlay_settings(current_file)
         Created_Misc_Object_Overlay_Array.clear
@@ -8567,6 +8585,7 @@ module Crafted_Items
         i = 0
         s = yaml["misc_decor_overlay_ids"].as_a.size
         while i < s 
+          if i < s 
          if yaml["misc_decor_overlay_ids"][i] == 1
           this = @@concrete_pillar_01.dup
           this.sprite = @@concrete_pillar_01.sprite.dup
@@ -8600,6 +8619,7 @@ module Crafted_Items
          Created_Misc_Object_Overlay_Array.push(this)
          Created_Misc_Object_Overlay_Array.uniq!
          i += 1
+        end
         end
       end
   #________________________________________________________________________________________________________________________________________________________

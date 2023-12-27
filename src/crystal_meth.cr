@@ -511,7 +511,8 @@ extend self
     end
  #-------------------------------------------------------teleporters---------------------------------------------------------------------
   def Window_Class.teleport(window, map, area)
-    Teleporter_Array.map { |i| bounding_box1 = @@player_character_rendered_model.global_bounds
+    if Created_Teleporter_Array.size > 0
+    Created_Teleporter_Array.map { |i| bounding_box1 = @@player_character_rendered_model.global_bounds
     bounding_box2 = i.sprite.global_bounds
     if bounding_box1.intersects? bounding_box2
       @@area = i.destination_area
@@ -521,14 +522,15 @@ extend self
       @@player_character_rendered_model.position = SF.vector2(x, y)
       Window_Class.initialize_map(window, map, area)
     end}
+  end
    end 
    def Window_Class.initialize_map(window, map, area)
     map = @@map
     area = @@area
     if @@map == "factory_home"
-      file = "maps/doll_factory_home.yml"
-      Level_Editor::Editor_Controls.change_current_file(file)
-      Level_Editor::Editor_Controls.load
+       file = "maps/doll_factory_home.yml"
+       Level_Editor::Editor_Controls.change_current_file(file)
+       Level_Editor::Editor_Controls.load
     else if @@map == "test"
       file = "maps/test.yml"
       Level_Editor::Editor_Controls.change_current_file(file)
@@ -2426,93 +2428,6 @@ def Window_Class.hud_keypresses(window)
          end
       end
      #--------------------------------------------------------Other------------------------------------------------------------------------
-      when "Salon" #-------------------------------------------------------------Salon clicks   
-        if (x >= 750 && x <= 900) && (y >= 530 && y <= 600) && @@tab == "salon_confirm" #yes
-          All_Audio::SFX.select_2
-          hair_slot = @@hair_choice
-          Player_Data::Clothing_Outfit_Slot.change_hair(hair_slot, window)
-          @@popup = "none"
-          @@tab = "none"
-          Player_Data::Player_Physics.mobilize_player
-          NPCS::Test_Npcs.nullify_npc_scene
-          Player_Data::Player_Physics.nullify_quest
-         end
-        if (x >= 1020 && x <= 1170) && (y >= 530 && y <= 600) && @@tab == "salon_confirm" #no
-          All_Audio::SFX.select_2
-          NPCS::Test_Npcs.revert_hair(window)
-          @@tab = "none"
-         end
-        if (x >= 1320 && x <= 1370) && (y >= 200 && y <= 250) && @@tab != "salon_confirm" #exit salon
-          @@popup = "none"
-          @@tab = "none"
-          Player_Data::Player_Physics.mobilize_player
-          NPCS::Test_Npcs.nullify_npc_scene
-          Player_Data::Player_Physics.nullify_quest
-          NPCS::Test_Npcs.revert_hair(window)
-         end
-        if (x >= 745 && x <= 845) && (y >= 350 && y <= 400) && @@tab != "salon_confirm" #confirm button
-          @@tab = "salon_confirm"
-         end
-        if (x >= 640 && x <= 760) && (y >= 420 && y <= 540) && @@tab != "salon_confirm" #hair 0
-          @@hair_choice = 0
-          All_Audio::SFX.cursor2
-          hair_slot = @@hair_choice
-          Player_Data::Clothing_Outfit_Slot.change_hair(hair_slot, window)
-         end
-        if (x >= 790 && x <= 910) && (y >= 420 && y <= 540) && @@tab != "salon_confirm" #hair 1
-          @@hair_choice = 1
-          All_Audio::SFX.cursor2
-          hair_slot = @@hair_choice
-          Player_Data::Clothing_Outfit_Slot.change_hair(hair_slot, window)
-         end
-        if (x >= 940 && x <= 1060) && (y >= 420 && y <= 540) && @@tab != "salon_confirm" #hair 2
-          @@hair_choice = 2
-          All_Audio::SFX.cursor2
-          hair_slot = @@hair_choice
-          Player_Data::Clothing_Outfit_Slot.change_hair(hair_slot, window)
-         end
-        if (x >= 1090 && x <= 1200) && (y >= 420 && y <= 540) && @@tab != "salon_confirm" #hair 3
-          @@hair_choice = 3
-          All_Audio::SFX.cursor2
-          hair_slot = @@hair_choice
-          Player_Data::Clothing_Outfit_Slot.change_hair(hair_slot, window)
-         end
-        if (x >= 1240 && x <= 1330) && (y >= 420 && y <= 540) && @@tab != "salon_confirm" #hair 4
-          @@hair_choice = 4
-          All_Audio::SFX.cursor2
-          hair_slot = @@hair_choice
-          Player_Data::Clothing_Outfit_Slot.change_hair(hair_slot, window)
-         end
-        if (x >= 640 && x <= 760) && (y >= 570 && y <= 720) && @@tab != "salon_confirm" #hair 5
-          @@hair_choice = 5
-          All_Audio::SFX.cursor2
-          hair_slot = @@hair_choice
-          Player_Data::Clothing_Outfit_Slot.change_hair(hair_slot, window)
-         end
-        if (x >= 790 && x <= 910) && (y >= 570 && y <= 720) && @@tab != "salon_confirm" #hair 6
-          @@hair_choice = 6
-          All_Audio::SFX.cursor2
-          hair_slot = @@hair_choice
-          Player_Data::Clothing_Outfit_Slot.change_hair(hair_slot, window)
-         end
-        if (x >= 940 && x <= 1060) && (y >= 570 && y <= 720) && @@tab != "salon_confirm" #hair 7
-          @@hair_choice = 7
-          All_Audio::SFX.cursor2
-          hair_slot = @@hair_choice
-          Player_Data::Clothing_Outfit_Slot.change_hair(hair_slot, window)
-         end
-        if (x >= 1090 && x <= 1200) && (y >= 570 && y <= 720) && @@tab != "salon_confirm" #hair 8
-          @@hair_choice = 8
-          All_Audio::SFX.cursor2
-          hair_slot = @@hair_choice
-          Player_Data::Clothing_Outfit_Slot.change_hair(hair_slot, window)
-         end
-        if (x >= 1240 && x <= 1330) && (y >= 570 && y <= 720) && @@tab != "salon_confirm" #hair 9
-          @@hair_choice = 9
-          All_Audio::SFX.cursor2
-          hair_slot = @@hair_choice
-          Player_Data::Clothing_Outfit_Slot.change_hair(hair_slot, window)
-         end
       when "none"  #--------------------------------------------------------------none clicks
         if (x >= 1730 && x <= 1880) && (y >= 930 && y <= 990)
            All_Audio::SFX.char_create_down; @@popup = "System_Popup_Menu"
@@ -3947,7 +3862,6 @@ def Window_Class.hud_keypresses(window)
     when SF::Keyboard::Enter
       @@attacking = true
       @@idleframes = 0
-      Player_Data::Stats.check_attack
       atk_type = "physical"
       Player_Info::Player.get_atk
       if @@has_weapon == true && Weapon_Template_Array[@@current_weapon].weapon_motion == "Swing"
@@ -4319,40 +4233,7 @@ end; end; end; end; end; end
       @@player_character_model.draw(HAIR_ARRAY[@@current_hair])
       window.draw(HAIR_ARRAY[@@current_hair])
      end
-  class Consumables_Slot
-   end
-  class Equipment_Slot
-   end
-  class Quest_Item_Slot
-   end                  
-  class Stats < Window_Class
-   #----------------------------------------------Class Variables------------------------------------------------------------------------- 
-    @@name : (String); @@name = "Some Rando"
-    @@lvl : (Int32); @@exp : (Int32); @@exp_scale : (Int32 | Float64); @@exp_cap : (Int32 | Float64); @@lvl_points : (Int32)
-    @@lvl_hp : (Int32); @@equip_hp : (Int32); @@current_max_hp : (Int32); @@current_hp : (Int32)
-    @@lvl_mp : (Int32); @@equip_mp : (Int32); @@current_max_mp : (Int32); @@current_mp : (Int32)
-    @@lvl_str : (Int32); @@equip_str : (Int32); @@current_str : (Int32); @@lvl_dex : (Int32); @@equip_dex : (Int32); @@current_dex : (Int32)
-    @@lvl_luk : (Int32); @@equip_luk : (Int32); @@current_luk : (Int32); @@lvl_int : (Int32); @@equip_int : (Int32); @@current_int : (Int32)
-    Base_HP = 100; Base_MP = 100; Base_Str = 1; Base_Dex = 1; Base_Luk = 1; Base_Int = 1
-    @@lvl_hp = @@lvl; @@lvl_mp = @@lvl; @@lvl_str = 0; @@lvl_dex = 0; @@lvl_luk = 0; @@lvl_int = 0; @@lvl_points = 0
-    @@equip_hp = 0; @@equip_mp = 0; @@equip_str = 0; @@equip_dex = 0; @@equip_luk = 0; @@equip_int = 0
-    @@current_max_hp = Base_HP + @@lvl_hp + @@equip_hp; @@current_hp = 100
-    @@current_max_mp = Base_MP + @@lvl_mp + @@equip_mp; @@current_mp = 100
-    @@current_str = Base_Str + @@lvl_str + @@equip_str; @@current_dex = Base_Dex + @@lvl_dex + @@equip_dex 
-    @@current_luk = Base_Luk + @@lvl_luk + @@equip_luk; @@current_int = Base_Int + @@lvl_int + @@equip_int
-    @@lvl = 1; @@exp = 0; @@exp_cap = @@lvl * Math.sqrt(100) ; @@exp_scale = @@exp / @@exp_cap
-    @@speed : Int32; @@speed = @@current_dex + @@equip_speed + 3; @@equip_speed : Int32; @@equip_speed = 0
-
-   def Stats.increase_exp(exp)
-    @@exp += exp
-    end
-
-   def Stats.check_attack
-    base_attack = 10 + @@current_str
-    Crafted_Items::Weapon.attack_strength(base_attack)
-   end
-   end
-  class Player_Physics < Stats
+  class Player_Physics < Window_Class
    #==========================================Class Variables=========================================================================+
     @@is_player_airborne : Bool; @@is_player_airborne = false; @@fall_rate : Int32 | Nil; @@fallrate = 0
     @@player_bounding_box : SF::Rect(Float32); @@player_bounding_box = @@player_character_rendered_model.global_bounds
@@ -4487,7 +4368,6 @@ end; end; end; end; end; end
       else if @@current_quest != "none"
         case @@current_quest
          when "test"
-          NPCS::Test_Npcs.dialogue_menu_left
          end; end
        end
      end
@@ -4503,7 +4383,6 @@ end; end; end; end; end; end
     else if @@current_quest != "none"
       case @@current_quest
        when "test"
-        NPCS::Test_Npcs.dialogue_menu_right
        end; end
        end
      end
@@ -4552,163 +4431,6 @@ end; end; end; end; end; end
     #---------------------------------------------------------------------------------------------------------------------------------+ 
  end
  end
-
-
-#////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-#\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-#|                                                         @note  NPCs                                                                      |
-#\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-#////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-module NPCS 
-  include Player_Data
-  include Gui
-  extend self
-  # -----------------------------------------------------------------------------------------------------------------------------------------
-  #|                                                          Test Npcs                                                                      |
-  # -----------------------------------------------------------------------------------------------------------------------------------------
-   class Test_Npcs < Window_Class; Player_Physics
-    include Player_Data
-    include Gui
-   #**********************************************************Variables***********************************************************************
-    #........................................................NPC Models......................................................................
-     @@test_npcs_model_01 = SF::RenderTexture.new(672, 512)
-     @@test_npc_rendered_model_01 = SF::Sprite.new(@@test_npcs_model_01.texture)
-    #----------------------------------------------------------------------------------------------------------------------------------------
-    #......................................................Scene_Variables...................................................................
-     @@test_npc_scene : String; @@test_npc_scene = "none"; @@test_scene_option : Int32; @@test_scene_option = 0; @@saved_hair : Int32;
-     @@saved_hair = 0; property = @@saved_hair 
-    #----------------------------------------------------------------------------------------------------------------------------------------
-    #.......................................................Dialogue Box.....................................................................
-     @@test_dialogue_box_01 : SF::RectangleShape; @@test_dialogue_box_01 = Dialog_Box.dup
-     @@test_dialogue_box_01.position = SF.vector2(950, 580); @@npc_frame : Int32; @@npc_frame = 0; @@test_dialogue_box_text_01 : SF::Text
-     @@test_dialogue_box_text_01 = Dialog_Box_Text.dup; @@test_dialogue_box_text_01.string = "Oh, hello! Do\n you need a haircut?"
-     @@test_dialogue_box_text_01.position = SF.vector2(960, 600)
-    #----------------------------------------------------------------------------------------------------------------------------------------
-    #........................................................Choice Box......................................................................
-     @@choice_01 = Choice_Box_Option.dup; @@choice_01 : SF::RectangleShape;
-     @@choice_01.position = SF.vector2(622, 570); @@choice_02 = Choice_Box_Option.dup; @@choice_02 : SF::RectangleShape;
-     @@choice_02.position = SF.vector2(780, 570); @@choice_box_text : SF::Text
-     @@choice_box_text = Dialog_Box_Text.dup; @@choice_box_text.string = "Would you like a haircut for 1000\nShards?"
-     @@choice_box_text.position = SF.vector2(622, 490); @@choice_box_choice_text_01 = Dialog_Box_Text.dup; @@choice_box_choice_text_01 : SF::Text
-     @@choice_box_choice_text_01.position = SF.vector2(622, 570); @@choice_box_choice_text_01.string = "  Yes           No"; 
-     @@choice_box_choice_text_01.character_size = 30
-   #__________________________________________________________________________________________________________________________________________ 
-   #***********************************************************Methods************************************************************************
-    def Test_Npcs.test_npc_initialize
-      @@test_npcs_model_01.clear(SF::Color::Transparent)
-      @@test_npcs_model_01.draw(SKIN_ARRAY[0])
-      @@test_npcs_model_01.draw(SHOES_ARRAY[2])
-      @@test_npcs_model_01.draw(FACE_ARRAY[7])
-      @@test_npcs_model_01.draw(HAIR_ARRAY[3])
-      @@test_npcs_model_01.draw(PANTS_ARRAY[18])
-      @@test_npcs_model_01.draw(SHIRT_ARRAY[8])
-      @@test_npcs_model_01.draw(GLOVE_ARRAY[2])
-      @@test_npcs_model_01.create(672, 512, false)
-      @@test_npcs_model_01.display
-      @@test_npc_rendered_model_01.texture_rect = SF.int_rect(0, 128, 96, 128)
-      @@test_npc_rendered_model_01.position = SF.vector2(1002, 680)
-      @@test_npc_rendered_model_01.scale = SF.vector2(1.0, 1.0)
-     end
-     def Test_Npcs.nullify_npc_scene
-      @@test_npc_scene = "none"
-     end
-     def Test_Npcs.dialogue_menu_select(window)
-      All_Audio::SFX.light_bonk
-      case @@test_scene_option 
-      when 0
-        All_Audio::SFX.light_bonk
-      when 1
-        @@test_npc_scene = "test_quest_1_stage_4"
-        @@saved_hair = @@hair_slot
-        puts @@saved_hair
-        this = "Salon"
-        Gui::Window_Class.change_popup(this)
-        this = "test"
-        Gui::Window_Class.change_salon(this)
-      when 2
-        @@test_npc_scene = "none"
-        quest = "none"
-        Player_Data::Player_Physics.get_quest_movement(quest)
-        Player_Data::Player_Physics.mobilize_player
-      end
-    end
-     def Test_Npcs.revert_hair(window)
-      hair_slot = @@saved_hair
-      Clothing_Outfit_Slot.change_hair(hair_slot, window)
-     end
-     def Test_Npcs.dialogue_menu_left
-      All_Audio::SFX.light_bonk
-      @@choice_02.fill_color = SF.color(155, 155, 255)
-      @@choice_01.fill_color = SF.color(100, 100, 255)
-      @@test_scene_option = 1
-      end
-     def Test_Npcs.dialogue_menu_right
-        All_Audio::SFX.light_bonk
-        @@choice_01.fill_color = SF.color(155, 155, 255)
-        @@choice_02.fill_color = SF.color(100, 100, 255)
-        @@test_scene_option = 2
-      end
-    def Test_Npcs.test_npc_maintain(window)
-    #  npc_bounding_01 = Bounding_Box.dup
-    #  npc_bounding_01.position = @@test_npc_rendered_model_01.position
-    #  window.draw(npc_bounding_01)
-     window.draw(@@test_npc_rendered_model_01) 
-      case @@test_npc_scene
-        when "none"
-          window.draw(@@test_npc_rendered_model_01)
-        when "test_quest_1_stage_1"
-            window.draw(@@test_dialogue_box_01)
-           if @@npc_frame  > -1 && @@npc_frame  < 1200
-            @@test_dialogue_box_01.texture_rect = SF.int_rect(0, 200, 150, 100);           @@npc_frame += 1
-           else if @@npc_frame  >= 1200 && @@npc_frame  < 1800
-            @@test_dialogue_box_01.texture_rect = SF.int_rect(0, 100, 150, 100);           @@npc_frame += 1
-           else if @@npc_frame  >= 1800 #&& @@npc_frame  < 210000
-            @@test_dialogue_box_01.texture_rect = SF.int_rect(0, 0, 150, 100);
-            @@test_npc_scene = "test_quest_1_stage_2"
-           end; end; end
-         when "test_quest_1_stage_2"
-           @@npc_frame = 0
-           @@test_dialogue_box_text_01.string = "  Oh, hello! Do \n   you need a \n    haircut?"
-           window.draw(@@test_dialogue_box_01)
-           window.draw(@@test_dialogue_box_text_01)  
-           Choice_Box.position = SF.vector2(602, 480)
-           @@test_npc_scene = "test_quest_1_stage_3"
-         when "test_quest_1_stage_3"
-         if @@npc_frame  > -1 && @@npc_frame  < 1200 @@npc_frame += 1
-          window.draw(@@test_dialogue_box_01)
-          window.draw(@@test_dialogue_box_text_01) 
-        else if @@npc_frame  >= 1200
-          window.draw(@@test_dialogue_box_01)
-          window.draw(@@test_dialogue_box_text_01) 
-          window.draw(Choice_Box); window.draw(@@choice_01)
-          window.draw(@@choice_02); window.draw(@@choice_box_text)
-          window.draw(@@choice_box_choice_text_01) 
-        end; end; end; end
-           end
-          end
-    def NPCS::Test_Npcs.click(window, @@player_character_rendered_model)
-     # npc_bounding_01 = Bounding_Box.dup
-     # npc_bounding_01.position = @@test_npc_rendered_model_01.position
-     # window.draw(npc_bounding_01)
-      bounding_box1 = @@player_character_rendered_model.global_bounds
-      bounding_box2 = @@test_npc_rendered_model_01.global_bounds
-       if bounding_box1.intersects? bounding_box2
-         if @@test_npc_scene == "none" 
-          Player_Data::Player_Physics.immobilize_player
-          quest = "test"
-          Player_Data::Player_Physics.get_quest_movement(quest)
-          All_Audio::SFX.light_bonk
-          @@test_npc_scene = "test_quest_1_stage_1"
-         end
-        if @@test_npc_scene == "test_quest_1_stage_3" 
-          Test_Npcs.dialogue_menu_select(window)
-       end
-
-    end #test npc class end
-  end #module end
-
-
-
    
 module Data_Manager 
 extend self

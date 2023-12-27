@@ -231,6 +231,7 @@ include Use
        s = yaml["enemy_names"].as_a.size
        i = 0
        while s > i
+        if s > i
        this = enemy.dup
        this.name = yaml["enemy_names"][i].as_s
        this.sprite = this.sprite.dup
@@ -245,6 +246,7 @@ include Use
        current_enemy = this
        Humanoids.push_to_current_array(current_enemy)
        i += 1
+        end
       end
     end
  #HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH
@@ -444,9 +446,9 @@ include Use
      def Humanoids.display_doll_factory(window, map, player)
         case map
         when "factory_map_01"
-            Enemy_Blocking_Wall_Array.map { |i| window.draw(i)}
+           # Enemy_Blocking_Wall_Array.map { |i| window.draw(i)}
             Enemy_Blocking_Wall_01.position = SF.vector2(100, 205)
-            Current_Map_Humanoid_Array.map { |i| 
+            Current_Map_Humanoid_Array.each do  |i| 
                 if i.hp > 0 && player.intersects? i.sprite.global_bounds  
                 Humanoids.get_hit(player, i)
                 else if i.hp > 0
@@ -472,7 +474,7 @@ include Use
             i.health_bar.origin = SF.vector2(x / 2, 0)
             window.draw(i.sprite); window.draw(i.health_bar)
             window.draw(Damage_Text); window.draw(Name_Text)
-           }end
+          end; end
       end
     #---------------------------------------------------------------Logic-----------------------------------------------------------------------------------
      def Humanoids.wander(humanoid)
