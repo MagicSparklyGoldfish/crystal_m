@@ -61,6 +61,8 @@ include Map_Geometry
   #---------------------------------------------------------------Enemies---------------------------------------------------------------------------------
    @@current_enemy : Regular_Enemies::Humanoids; @@current_enemy = Regular_Enemies.initial_enemy
    @@current_enemy_template : Regular_Enemies::Humanoids; @@current_enemy_template = Regular_Enemies.initial_enemy
+  #-----------------------------------------------------------------NPCs----------------------------------------------------------------------------------
+   @@current_hairdresser : Shopkeepers::Hairdresser; @@current_hairdresser = Shopkeepers::Hairdresser.get_initial_value
   #-----------------------------------------------------------------Misc----------------------------------------------------------------------------------
    @@id : Int32; @@id = 1; @@template_id : Int32; @@template_id = 1
    @@zoom = 1; @@texture = 0; @@parallax_iterator = 0

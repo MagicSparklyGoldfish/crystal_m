@@ -3880,3 +3880,11 @@ Testing_Text.character_size = 20; Testing_Text.color = SF::Color::White; Testing
 
    Enemy_Health_Bar = SF::RectangleShape.new(SF.vector2(5, 5)); Enemy_Health_Bar.fill_color = SF.color(255, 50, 50, 125)
    Enemy_Health_Bar.position = SF.vector2(0, 400); Enemy_Health_Bar.origin = SF.vector2(32, 0)
+#--------------------------------------------------------------------------------------------------------------------------------------
+#                                                        NPCs
+#-------------------------------------------------------------------------------------------------------------------------------------- 
+ NPC_Name_Text = SF::Text.new; NPC_Name_Text.font = FONT_PIXEL; NPC_Name_Text.character_size = 15
+ NPC_Name_Text.color = SF::Color::White
+#----------------------------------------------------Hairdressers----------------------------------------------------------------------
+ HAIR_DRESSER_TEXTURE_01 = SF::Texture.from_file("graphics/NPCs/Shopkeepers_01.png")
+ Hair_Dresser_01 = SF::Sprite.new(HAIR_DRESSER_TEXTURE_01); Hair_Dresser_01.texture_rect = SF.int_rect(0, 0, 96, 128)

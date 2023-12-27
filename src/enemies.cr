@@ -371,7 +371,6 @@ include Use
      end
      def Humanoids.push_to_current_array(current_enemy)
       Current_Map_Humanoid_Array.push(current_enemy)
-      puts Current_Map_Humanoid_Array
      end
      def Humanoids.clear_current_array
       Current_Map_Humanoid_Array.clear

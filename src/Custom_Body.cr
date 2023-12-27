@@ -57,9 +57,17 @@ require "file_utils"
   # =========================================================================================================================================================
     @@offered_hair = [] of Hair; @@all_hair : Array(Hair); @@all_hair = [@@shounen_hair_white, @@shounen_hair_green, @@shounen_hair_blue, @@shounen_hair_red,
     @@shounen_hair_yellow, @@shounen_hair_purple, @@shounen_hair_orange, @@shounen_hair_black, @@shounen_hair_brown, @@shounen_hair_pink]
+    White_Shounen_Tuple = {@@shounen_hair_white, 100, 200}
   # =========================================================================================================================================================
   #|                                                                   Methods                                                                               |
   # =========================================================================================================================================================
+    def Hair.return_tuple(hair)
+     case hair
+      when "white shounen"
+        return White_Shounen_Tuple
+     end
+     return White_Shounen_Tuple
+    end
     def Hair.display_offered_hair(this, window) "x = + 150 per entry"
         case this
       when "test"
