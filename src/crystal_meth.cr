@@ -495,7 +495,10 @@ extend self
      player = @@player_character_rendered_model.global_bounds
      Map_Geometry::Misc_Decor.display(window, area, map)
      Map_Geometry::Teleporter.display_teleporters(window, area, map)
-     Map_Geometry::Platform.display(area, map, window)
+     Map_Geometry::Teleporter.level_editor_display_teleporters(window)
+     Map_Geometry::Teleporter.animate_teleporters(window)
+     #Map_Geometry::Platform.display(area, map, window)
+     Map_Geometry::Platform.level_editor_display_platforms(window)
      Map_Geometry::Wall.display(window, area, map)
      Map_Geometry::Ladder.display_ladders(window, map, area)
      Ore.level_editor_display(window)
@@ -513,9 +516,7 @@ extend self
     bounding_box2 = i.sprite.global_bounds
     if bounding_box1.intersects? bounding_box2
       @@area = i.destination_area
-      puts @@area
       @@map = i.destination_map 
-      puts @@map
       x = i.destination_postion[0]
       y = i.destination_postion[1]
       @@player_character_rendered_model.position = SF.vector2(x, y)
@@ -525,6 +526,15 @@ extend self
    def Window_Class.initialize_map(window, map, area)
     map = @@map
     area = @@area
+    if @@map == "factory_home"
+      file = "maps/doll_factory_home.yml"
+      Level_Editor::Editor_Controls.change_current_file(file)
+      Level_Editor::Editor_Controls.load
+    else if @@map == "test"
+      file = "maps/test.yml"
+      Level_Editor::Editor_Controls.change_current_file(file)
+      Level_Editor::Editor_Controls.load
+    else
     Harvestables::Herbs.initialize
     Harvestables::Herbs.position(window, map, area)
     Map_Geometry::Ladder.position(map, area)
@@ -534,7 +544,7 @@ extend self
     Map_Geometry::Ladder.position(map, area)
     Map_Geometry::Platform.set_positions(area, map)
     Regular_Enemies::Humanoids.initialize_humanoids(window, map, area)
-   end
+   end; end; end
  #-----------------------------------------------------------Walls----------------------------------------------------------------------
   def Window_Class.wall_collision
     if @@menu != "level_editor"
@@ -881,10 +891,11 @@ def Window_Class.main_menu_keypresses(window)
     @@area = "test"
     area = @@area
     map = @@map
+    Window_Class.initialize_map(window, map, area)
     @@player_character_rendered_model.position = SF.vector2(0, 600)
-    Map_Geometry::Teleporter.position_teleporters(area, map)
-    Map_Geometry::Ladder.position(map, area)
-    Map_Geometry::Platform.set_positions(area, map)
+    # Map_Geometry::Teleporter.position_teleporters(area, map)
+    # Map_Geometry::Ladder.position(map, area)
+    # Map_Geometry::Platform.set_positions(area, map)
     @@player_character_rendered_model.scale = SF.vector2(1.0, 1.0)
     All_Audio::MUSIC.test_song
     #view2 = SF::View.new(SF.vector2(350, 300), SF.vector2(300, 200))

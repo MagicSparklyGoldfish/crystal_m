@@ -29,7 +29,11 @@ include Map_Geometry
    #............................................................Doll Factory..............................................................................
     Doll_Factory_Map_Array = ["factory_map_01", "factory_home"]
   #-------------------------------------------------------------Current File------------------------------------------------------------------------------
-   @@current_file : String; @@current_file = "maps/current_file.yml"
+  #"maps/doll_factory_home.yml"
+   @@current_file : String; @@current_file = "maps/test.yml"
+   def Editor_Controls.change_current_file(file)
+    @@current_file = file
+   end
   #---------------------------------------------------------------Category--------------------------------------------------------------------------------
    @@current_category : String; @@current_category = "platform"
   #---------------------------------------------------------------Platform--------------------------------------------------------------------------------
@@ -70,6 +74,20 @@ include Map_Geometry
  #????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
  #?                                                               Methods                                                                                ?
  #????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
+  def Editor_Controls.load
+    current_file = @@current_file 
+    Map_Geometry::Platform.load_map_platform_settings(current_file)
+    Map_Geometry::Ladder.load_map_ladder_settings(current_file)
+    Map_Geometry::Wall.load_map_platform_settings(current_file)
+    Map_Geometry::Teleporter.load_map_teleporter_settings(current_file)
+    Map_Geometry::Crafting_Station.load_map_platform_settings(current_file)
+    Map_Geometry::Misc_Decor.load_map_settings(current_file)
+    Map_Geometry::Misc_Decor.load_map_overlay_settings(current_file)
+    Map_Geometry::Parallax.load_map_settings(current_file)
+    Ore.load_map_ore_settings(current_file)
+    Herbs.load_map_ore_settings(current_file)
+    Regular_Enemies.load_map_ladder_settings(current_file)
+  end
   #save fields
   #------------------------------------------------------------------Ladders------------------------------------------------------------------------------
    @[YAML::Field(key: "ladder_lengths")]
@@ -696,17 +714,18 @@ include Map_Geometry
        when SF::Keyboard::V
         Editor_Controls.level_editor_save_map(current_file)
        when SF::Keyboard::B
-         Map_Geometry::Platform.load_map_platform_settings(current_file)
-         Map_Geometry::Ladder.load_map_ladder_settings(current_file)
-         Map_Geometry::Wall.load_map_platform_settings(current_file)
-         Map_Geometry::Teleporter.load_map_teleporter_settings(current_file)
-         Map_Geometry::Crafting_Station.load_map_platform_settings(current_file)
-         Map_Geometry::Misc_Decor.load_map_settings(current_file)
-         Map_Geometry::Misc_Decor.load_map_overlay_settings(current_file)
-         Map_Geometry::Parallax.load_map_settings(current_file)
-         Ore.load_map_ore_settings(current_file)
-         Herbs.load_map_ore_settings(current_file)
-         Regular_Enemies.load_map_ladder_settings(current_file)
+        Editor_Controls.load
+        #  Map_Geometry::Platform.load_map_platform_settings(current_file)
+        #  Map_Geometry::Ladder.load_map_ladder_settings(current_file)
+        #  Map_Geometry::Wall.load_map_platform_settings(current_file)
+        #  Map_Geometry::Teleporter.load_map_teleporter_settings(current_file)
+        #  Map_Geometry::Crafting_Station.load_map_platform_settings(current_file)
+        #  Map_Geometry::Misc_Decor.load_map_settings(current_file)
+        #  Map_Geometry::Misc_Decor.load_map_overlay_settings(current_file)
+        #  Map_Geometry::Parallax.load_map_settings(current_file)
+        #  Ore.load_map_ore_settings(current_file)
+        #  Herbs.load_map_ore_settings(current_file)
+        #  Regular_Enemies.load_map_ladder_settings(current_file)
   #-------------------------------------------------------Zoom View------------------------------------------------------- 
        when SF::Keyboard::Add
          zoom = -1

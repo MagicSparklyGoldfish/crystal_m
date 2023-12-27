@@ -7290,7 +7290,7 @@ module Crafted_Items
    #?                                                               Methods                                                                                ?
    #????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
      def Platform.check_array
-      platform_array = Platform_Array
+      platform_array = Current_Platform_Array#.concat(Platform_Array)
      end
      def Platform.initialize_platform_positions
       Platform_Array.map{ |i| 
@@ -7410,7 +7410,11 @@ module Crafted_Items
         i = 0
         s = yaml["platform_ids"].as_a.size
         while i < s 
-         if yaml["platform_ids"][i] == 1
+        if yaml["platform_ids"][i] == 0
+          this = @@ground
+          this.bounding_rectangle = @@ground.bounding_rectangle
+          this.display_rectangle = @@ground.display_rectangle
+        else if yaml["platform_ids"][i] == 1
           this = @@medium_platform_01.dup
           this.bounding_rectangle = @@medium_platform_01.bounding_rectangle.dup
           this.display_rectangle = @@medium_platform_01.display_rectangle.dup
@@ -7425,7 +7429,7 @@ module Crafted_Items
         else
           puts "error!" + ["platform_ids"][i].to_s + " is an invalid id!" 
           i += 1
-         end; end; end
+         end; end; end; end
          this.id = yaml["platform_ids"][i].as_i
          this.texture = yaml["platform_textures"][i].as_i
          this.display_rectangle.set_texture(Platform_Texture_Array[this.texture], reset_rect: false)
@@ -7542,6 +7546,8 @@ module Crafted_Items
     Platform_Template_Array = [] of Platform
     Current_Platform_Array = [] of Platform
     @@ground = Platform.new(0, "ground", 0, Ground, Ground)
+    Platform_Template_Array.push(@@ground)
+    Current_Platform_Array.push(@@ground)
     Platform_Array.push(@@ground)
     @@medium_platform_01 = Platform.new(1, "medium_large_platform", 0, Test_Platform_01, Test_Platform_Cover_01); 
     Platform_Array.push(@@medium_platform_01); Platform_Template_Array.push(@@medium_platform_01)
@@ -7918,8 +7924,8 @@ module Crafted_Items
         @@teleporter_03.destination_map = "factory_map_01"
         @@teleporter_01.destination_area = "test" 
         @@teleporter_02.destination_area = "test" 
-        @@teleporter_03.destination_area = "doll factory"
-        @@teleporter_03.destination_postion = [0.0, -300.0]
+        @@teleporter_03.destination_area = "factory_home"#"doll factory"
+        @@teleporter_03.destination_postion = [3000.0, 600.0]
       end
      end
      def Teleporter.position_doll_factory_teleporters(area, map)
@@ -8081,7 +8087,7 @@ module Crafted_Items
   #________________________________________________________________________________________________________________________________________________________
   #-----------------------------------------------------------Animate Teleporters--------------------------------------------------------------------------
    def Teleporter.animate_teleporters(window)
-    Teleporter_Array.map{ |i|   
+    Created_Teleporter_Array.map{ |i|   
     if Teleporter_Animation.elapsed_time >= SF.milliseconds(0) && Teleporter_Animation.elapsed_time <= SF.milliseconds(15)
       i.sprite.texture_rect = SF.int_rect(0, 0, 100, 80)
     end

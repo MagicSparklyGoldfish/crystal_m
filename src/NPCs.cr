@@ -90,25 +90,36 @@ require "file_utils"
     #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     #+                                                          Variables                                                                                +
     #+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+     Hairdresser_Array = [] of Hairdresser
     #_____________________________________________________________________________________________________________________________________________________
     #?????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
     #?                                                           Methods                                                                                 ?
     #?????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
-    def Hairdresser.get_white_shounen_hair_tuple
-     hair = "white shounen"
-     return Hair.return_tuple(hair)
-    end
-     def Hairdresser.routine_meth_addict_01
-     end
-     def Hairdresser.get_initial_value
-        return @@hairdresser_01
-     end
+      def Hairdresser.get_white_shounen_hair_tuple
+        hair = "white shounen"
+        return Hair.return_tuple(hair)
+       end
+      def Hairdresser.routine_meth_addict_01
+      end
+      def Hairdresser.get_initial_value
+         return @@hairdresser_01
+      end
+     #--------------------------------------------------------Level Editor--------------------------------------------------------------------------------
+      #........................................................Get Arrays.................................................................................
+       def Hairdresser.get_array
+         return Hairdresser_Array
+        end
+      
     #_____________________________________________________________________________________________________________________________________________________
     #/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     #/                                                          Entities                                                                                 /
     #/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-     @@hairdresser_01 = Hairdresser.new("Pookie", 0, 200.0, 200.0, Hair_Dresser_01, [Hairdresser.get_white_shounen_hair_tuple], false, 
+     @@hairdresser_01 = Hairdresser.new("Pookie", 0, 200.0, 200.0, Hair_Dresser_01.dup, [Hairdresser.get_white_shounen_hair_tuple], false, 
      "routine_meth_addict_01", 2, ["I like meth"])
+     Hairdresser_Array.push(@@hairdresser_01)
+     @@hairdresser_02 = Hairdresser.new("Chalk", 1, 300.0, 300.0, Hair_Dresser_01, [Hairdresser.get_white_shounen_hair_tuple], false, 
+     "routine_meth_addict_01", 3, ["I've seen some shit'"])
+     Hairdresser_Array.push(@@hairdresser_02)
     #_____________________________________________________________________________________________________________________________________________________
    end
  end

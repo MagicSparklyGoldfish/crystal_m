@@ -1,0 +1,369 @@
+---
+platform_names:
+- ground
+- medium_large_platform1
+- medium_large_platform2
+- medium_large_platform3
+- medium_platform1
+platform_ids:
+- 0
+- 1
+- 1
+- 1
+- 4
+platform_textures:
+- 0
+- 0
+- 0
+- 0
+- 0
+platform_x_positions:
+- -5000.0
+- -976.875
+- -5970.0
+- -977.03125
+- 1895.9375
+platform_y_positions:
+- 800.0
+- 410.65363
+- 409.80392
+- 16.993439
+- -209.3682
+ladder_names:
+- Long Ladder
+- Long Ladder1
+- Long Ladder2
+ladder_lengths:
+- 400
+- 400
+- 400
+ladder_textures:
+- 0
+- 0
+- 0
+ladder_x_positions:
+- 0.0
+- 1849.375
+- 1975.3125
+ladder_y_positions:
+- 40000.0
+- 409.80392
+- 14.052277
+wall_names:
+- Boundary Wall 01
+- Boundary Wall 02
+wall_ids:
+- 1
+- 1
+wall_textures:
+- 2
+- 2
+wall_x_positions:
+- 4019.1675
+- -4999.8965
+wall_y_positions:
+- -3699.8916
+- -3689.216
+teleporter_names:
+- Teleporter1
+teleporter_ids:
+- 0
+teleporter_x_positions:
+- 1386.875
+teleporter_y_positions:
+- 723.5294
+teleporter_destination_map:
+- factory_home
+teleporter_destination_area:
+- doll factory
+teleporter_x_destination_positions:
+- 490.0
+teleporter_y_destination_positions:
+- 800.0
+crafting_table_ids: []
+crafting_table_names: []
+crafting_table_x_positions: []
+crafting_table_y_positions: []
+misc_decor_ids:
+- 500
+misc_decor_names:
+- Hanging Wires1
+misc_decor_x_positions:
+- 1885.7812
+misc_decor_y_positions:
+- 404.6841
+misc_decor_texture_rect:
+- - 100
+  - 0
+  - 100
+  - 200
+misc_decor_width:
+- 100
+misc_decor_scale_x:
+- 1.0
+misc_decor_scale_y:
+- 1.0
+misc_decor_rotation:
+- 0.0
+misc_decor_overlay_ids: []
+misc_decor_overlay_names: []
+misc_decor_overlay_x_positions: []
+misc_decor_overlay_y_positions: []
+misc_decor_overlay_texture_rect: []
+misc_decor_overlay_width: []
+misc_decor_overlay_scale_x: []
+misc_decor_overlay_scale_y: []
+misc_decor_overlay_rotation: []
+current_parallax: 1
+ore_ids: []
+ore_names: []
+ore_x_positions: []
+ore_y_positions: []
+ore_clocks: []
+ore_is_broken: []
+herb_ids:
+- 0
+- 1
+- 2
+- 3
+- 4
+- 5
+- 6
+- 7
+- 8
+- 9
+- 10
+- 11
+- 12
+- 100
+- 101
+- 102
+- 103
+- 104
+- 105
+- 106
+- 107
+- 108
+- 109
+- 110
+- 111
+- 112
+- 113
+- 114
+- 115
+- 116
+- 117
+- 118
+- 200
+- 201
+- 202
+- 300
+- 301
+- 302
+- 303
+herb_names:
+- Blackberry Bush1
+- Raspberry Bush2
+- Elderberry Bush3
+- Black Currant Bush4
+- Blueberry Bush5
+- Lemonade Berry Bush6
+- Gooseberry Bush7
+- Hagberry Bush8
+- Red Currant Bush9
+- Pomegranite Bush10
+- Dragonfruit Bush11
+- Strawberry Bush12
+- Pineapple Bush13
+- Snow Pear Tree14
+- Quince Tree15
+- Butterfruit Tree16
+- Dusky Pear Tree17
+- Date Tree18
+- Coconut Tree19
+- Peanut Butter Fruit Tree20
+- Lychee Tree21
+- Black Cherry Tree22
+- Red Cherry Tree23
+- Apricot Tree24
+- Acai Tree25
+- Peach Tree26
+- Mango Tree27
+- Lime Tree28
+- Blood Lime Tree29
+- Lemon Tree30
+- Orange Tree31
+- Banana Tree32
+- Red Grape Vine33
+- Purple Grape Vine34
+- Green Grape Vine35
+- Corn Crop36
+- Rice Crop37
+- Oats Crop38
+- Wheat Crop39
+herb_x_positions:
+- 3879.0105
+- 3714.7395
+- 3586.0938
+- 3449.5312
+- 3321.875
+- 3163.5417
+- 2983.7498
+- 2781.8748
+- 2592.8643
+- 2415.8855
+- 2221.927
+- 1473.8542
+- 1300.0
+- 2006.7708
+- 2169.8438
+- 2334.1145
+- 2499.375
+- 2665.625
+- 2799.2188
+- 2934.2188
+- 3110.3645
+- 3283.5415
+- 3424.0625
+- 3601.4583
+- 3781.5625
+- 1598.9583
+- 1073.3334
+- 885.3125
+- 700.5209
+- 511.51044
+- 263.125
+- 53.333313
+- 2105.1042
+- 2249.5833
+- 2391.0938
+- 1790.0521
+- 1641.6146
+- 1506.0417
+- 1355.625
+herb_y_positions:
+- 311.76474
+- 312.52722
+- 311.76474
+- 312.52722
+- 311.76474
+- 311.0022
+- 311.76474
+- 311.0022
+- 311.76474
+- 311.0022
+- 311.0022
+- 312.52722
+- 311.0022
+- 604.902
+- 602.6144
+- 602.6144
+- 603.3769
+- 603.3769
+- 602.6144
+- 602.6144
+- 602.6144
+- 604.902
+- 603.3769
+- 602.6144
+- 602.6144
+- 602.6144
+- 605.6645
+- 602.6144
+- 604.1394
+- 602.6144
+- 601.08936
+- 602.6144
+- -160.56645
+- -161.32898
+- -162.09149
+- -81.2636
+- -80.50109
+- -81.2636
+- -82.02614
+herb_clocks:
+- 709.48584
+- 709.48584
+- 709.48584
+- 709.48584
+- 709.48584
+- 709.48584
+- 709.48584
+- 709.48584
+- 709.48584
+- 709.48584
+- 709.48584
+- 709.48584
+- 709.48584
+- 709.48584
+- 709.48584
+- 709.48584
+- 709.48584
+- 709.48584
+- 709.48584
+- 709.48584
+- 709.48584
+- 709.48584
+- 709.48584
+- 709.48584
+- 709.48584
+- 709.48584
+- 709.48584
+- 709.48584
+- 709.48584
+- 709.48584
+- 709.48584
+- 709.48584
+- 709.48584
+- 709.48584
+- 709.48584
+- 709.48584
+- 709.48584
+- 709.48584
+- 709.48584
+herb_is_broken:
+- false
+- false
+- false
+- false
+- false
+- false
+- false
+- false
+- false
+- false
+- false
+- false
+- false
+- false
+- false
+- false
+- false
+- false
+- false
+- false
+- false
+- false
+- false
+- false
+- false
+- false
+- false
+- false
+- false
+- false
+- false
+- false
+- false
+- false
+- false
+- false
+- false
+- false
+- false
+enemy_names: []
+enemy_x_positions: []
+enemy_y_positions: []
+enemy_clocks: []
+enemy_hp: []
+enemy_is_dead: []

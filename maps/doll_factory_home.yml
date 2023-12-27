@@ -1,0 +1,132 @@
+---
+platform_names:
+- medium_large_platform1
+- medium_large_platform2
+- ground
+platform_ids:
+- 1
+- 1
+- 0
+platform_textures:
+- 1
+- 1
+- 1
+platform_x_positions:
+- -81.71875
+- 687.9166
+- -4996.25
+platform_y_positions:
+- 407.1896
+- -219.28107
+- 799.4553
+ladder_names:
+- Long Ladder
+- Long Ladder1
+ladder_lengths:
+- 400
+- 400
+ladder_textures:
+- 0
+- 0
+ladder_x_positions:
+- 0.0
+- 1590.625
+ladder_y_positions:
+- 40000.0
+- 404.5752
+wall_names:
+- Boundary Wall 01
+- Boundary Wall 02
+wall_ids:
+- 1
+- 1
+wall_textures:
+- 0
+- 0
+wall_x_positions:
+- 4185.625
+- -89.375
+wall_y_positions:
+- -3550.0
+- -3550.0
+teleporter_names:
+- Teleporter1
+teleporter_ids:
+- 0
+teleporter_x_positions:
+- 4027.9688
+teleporter_y_positions:
+- 718.9543
+teleporter_destination_map:
+- factory_map_01
+teleporter_destination_area:
+- doll factory
+teleporter_x_destination_positions:
+- 0.0
+teleporter_y_destination_positions:
+- 800.0
+crafting_table_ids: []
+crafting_table_names: []
+crafting_table_x_positions: []
+crafting_table_y_positions: []
+misc_decor_ids:
+- 1
+- 1
+misc_decor_names:
+- Concrete Pillar1
+- Concrete Pillar2
+misc_decor_x_positions:
+- 2717.3438
+- 2797.5
+misc_decor_y_positions:
+- 602.2876
+- 609.1503
+misc_decor_texture_rect:
+- - 0
+  - 0
+  - 80
+  - 200
+- - 0
+  - 0
+  - 80
+  - 200
+misc_decor_width:
+- 80
+- 80
+misc_decor_scale_x:
+- 1.0
+- -1.0
+misc_decor_scale_y:
+- 1.0
+- -1.0
+misc_decor_rotation:
+- 0.0
+- 0.0
+misc_decor_overlay_ids: []
+misc_decor_overlay_names: []
+misc_decor_overlay_x_positions: []
+misc_decor_overlay_y_positions: []
+misc_decor_overlay_texture_rect: []
+misc_decor_overlay_width: []
+misc_decor_overlay_scale_x: []
+misc_decor_overlay_scale_y: []
+misc_decor_overlay_rotation: []
+current_parallax: 2
+ore_ids: []
+ore_names: []
+ore_x_positions: []
+ore_y_positions: []
+ore_clocks: []
+ore_is_broken: []
+herb_ids: []
+herb_names: []
+herb_x_positions: []
+herb_y_positions: []
+herb_clocks: []
+herb_is_broken: []
+enemy_names: []
+enemy_x_positions: []
+enemy_y_positions: []
+enemy_clocks: []
+enemy_hp: []
+enemy_is_dead: []

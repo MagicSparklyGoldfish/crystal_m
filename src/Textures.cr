@@ -3887,4 +3887,6 @@ Testing_Text.character_size = 20; Testing_Text.color = SF::Color::White; Testing
  NPC_Name_Text.color = SF::Color::White
 #----------------------------------------------------Hairdressers----------------------------------------------------------------------
  HAIR_DRESSER_TEXTURE_01 = SF::Texture.from_file("graphics/NPCs/Shopkeepers_01.png")
+ HAIR_DRESSER_TEXTURE_02 = SF::Texture.from_file("graphics/NPCs/Shopkeepers_02.png")
  Hair_Dresser_01 = SF::Sprite.new(HAIR_DRESSER_TEXTURE_01); Hair_Dresser_01.texture_rect = SF.int_rect(0, 0, 96, 128)
+ Hair_Dresser_02 = SF::Sprite.new(HAIR_DRESSER_TEXTURE_02); Hair_Dresser_02.texture_rect = SF.int_rect(0, 0, 96, 128)
