@@ -5,13 +5,25 @@ platform_names:
 - medium_large_platform2
 - medium_large_platform3
 - medium_platform1
+- medium_platform1
+- medium_large_platform1
+- short_platform1
+- medium_large_platform2
 platform_ids:
 - 0
 - 1
 - 1
 - 1
 - 4
+- 4
+- 1
+- 3
+- 1
 platform_textures:
+- 0
+- 0
+- 0
+- 0
 - 0
 - 0
 - 0
@@ -23,21 +35,35 @@ platform_x_positions:
 - -5970.0
 - -977.03125
 - 1895.9375
+- -650.7291
+- -972.39575
+- -1012.3958
+- -6000.0
 platform_y_positions:
 - 800.0
 - 410.65363
 - 409.80392
 - 16.993439
 - -209.3682
+- -278.64926
+- -475.3813
+- -524.50977
+- -574.0741
 ladder_names:
 - Long Ladder
 - Long Ladder1
 - Long Ladder2
+- Medium Ladder1
+- Short Ladder1
 ladder_lengths:
 - 400
 - 400
 - 400
+- 300
+- 200
 ladder_textures:
+- 0
+- 0
 - 0
 - 0
 - 0
@@ -45,10 +71,14 @@ ladder_x_positions:
 - 0.0
 - 1849.375
 - 1975.3125
+- 1189.1146
+- -598.38544
 ladder_y_positions:
 - 40000.0
 - 409.80392
 - 14.052277
+- -280.1743
+- -475.3813
 wall_names:
 - Boundary Wall 01
 - Boundary Wall 02
@@ -115,12 +145,18 @@ misc_decor_overlay_scale_x: []
 misc_decor_overlay_scale_y: []
 misc_decor_overlay_rotation: []
 current_parallax: 1
-ore_ids: []
-ore_names: []
-ore_x_positions: []
-ore_y_positions: []
-ore_clocks: []
-ore_is_broken: []
+ore_ids:
+- 0
+ore_names:
+- Bloodstone1
+ore_x_positions:
+- 1255.9896
+ore_y_positions:
+- -377.77777
+ore_clocks:
+- 223.42831
+ore_is_broken:
+- false
 herb_ids:
 - 0
 - 1
@@ -162,45 +198,45 @@ herb_ids:
 - 302
 - 303
 herb_names:
-- Blackberry Bush1
-- Raspberry Bush2
-- Elderberry Bush3
-- Black Currant Bush4
-- Blueberry Bush5
-- Lemonade Berry Bush6
-- Gooseberry Bush7
-- Hagberry Bush8
-- Red Currant Bush9
-- Pomegranite Bush10
-- Dragonfruit Bush11
-- Strawberry Bush12
-- Pineapple Bush13
-- Snow Pear Tree14
-- Quince Tree15
-- Butterfruit Tree16
-- Dusky Pear Tree17
-- Date Tree18
-- Coconut Tree19
-- Peanut Butter Fruit Tree20
-- Lychee Tree21
-- Black Cherry Tree22
-- Red Cherry Tree23
-- Apricot Tree24
-- Acai Tree25
-- Peach Tree26
-- Mango Tree27
-- Lime Tree28
-- Blood Lime Tree29
-- Lemon Tree30
-- Orange Tree31
-- Banana Tree32
-- Red Grape Vine33
-- Purple Grape Vine34
-- Green Grape Vine35
-- Corn Crop36
-- Rice Crop37
-- Oats Crop38
-- Wheat Crop39
+- Blackberry Bush
+- Raspberry Bush
+- Elderberry Bush
+- Black Currant Bush
+- Blueberry Bush
+- Lemonade Berry Bush
+- Gooseberry Bush
+- Hagberry Bush
+- Red Currant Bush
+- Pomegranite Bush
+- Dragonfruit Bush
+- Strawberry Bush
+- Pineapple Bush
+- Snow Pear Tree
+- Quince Tree
+- Butterfruit Tree
+- Dusky Pear Tree
+- Date Tree
+- Coconut Tree
+- Peanut Butter Fruit Tree
+- Lychee Tree
+- Black Cherry Tree
+- Red Cherry Tree
+- Apricot Tree
+- Acai Tree
+- Peach Tree
+- Mango Tree
+- Lime Tree
+- Blood Lime Tree
+- Lemon Tree
+- Orange Tree
+- Banana Tree
+- Red Grape Vine
+- Purple Grape Vine
+- Green Grape Vine
+- Corn Crop
+- Rice Crop
+- Oats Crop
+- Wheat Crop
 herb_x_positions:
 - 3879.0105
 - 3714.7395
@@ -282,45 +318,45 @@ herb_y_positions:
 - -81.2636
 - -82.02614
 herb_clocks:
-- 709.48584
-- 709.48584
-- 709.48584
-- 709.48584
-- 709.48584
-- 709.48584
-- 709.48584
-- 709.48584
-- 709.48584
-- 709.48584
-- 709.48584
-- 709.48584
-- 709.48584
-- 709.48584
-- 709.48584
-- 709.48584
-- 709.48584
-- 709.48584
-- 709.48584
-- 709.48584
-- 709.48584
-- 709.48584
-- 709.48584
-- 709.48584
-- 709.48584
-- 709.48584
-- 709.48584
-- 709.48584
-- 709.48584
-- 709.48584
-- 709.48584
-- 709.48584
-- 709.48584
-- 709.48584
-- 709.48584
-- 709.48584
-- 709.48584
-- 709.48584
-- 709.48584
+- 223.4283
+- 223.4283
+- 223.4283
+- 223.4283
+- 223.4283
+- 223.4283
+- 223.4283
+- 223.4283
+- 223.4283
+- 223.4283
+- 223.4283
+- 223.4283
+- 223.4283
+- 223.4283
+- 223.4283
+- 223.4283
+- 223.4283
+- 223.4283
+- 223.4283
+- 223.4283
+- 223.4283
+- 223.4283
+- 223.4283
+- 223.4283
+- 223.4283
+- 223.4283
+- 223.4283
+- 223.4283
+- 223.4283
+- 223.4283
+- 223.4283
+- 223.4283
+- 223.4283
+- 223.4283
+- 223.4283
+- 223.4283
+- 223.4283
+- 223.4283
+- 223.4283
 herb_is_broken:
 - false
 - false

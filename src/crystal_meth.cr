@@ -497,13 +497,11 @@ extend self
      Map_Geometry::Teleporter.display_teleporters(window, area, map)
      Map_Geometry::Teleporter.level_editor_display_teleporters(window)
      Map_Geometry::Teleporter.animate_teleporters(window)
-     #Map_Geometry::Platform.display(area, map, window)
      Map_Geometry::Platform.level_editor_display_platforms(window)
      Map_Geometry::Wall.display(window, area, map)
-     Map_Geometry::Ladder.display_ladders(window, map, area)
+     Map_Geometry::Ladder.level_editor_display_ladder(window)
      Ore.level_editor_display(window)
      Herbs.level_editor_display(window)
-     #Harvestables::Herbs.display(window, map, area)
      if @@menu != "level_editor"
       window.draw(@@player_character_rendered_model) 
       end
@@ -4036,7 +4034,7 @@ def Window_Class.hud_keypresses(window)
         if @@is_on_ladder == false
           walking = false
           Gui::Window_Class.is_walking(walking)
-          Ladder_Array.map { |i| if @@player_character_rendered_model.global_bounds.intersects? i.sprite.global_bounds
+          Current_Ladder_Array.map { |i| if @@player_character_rendered_model.global_bounds.intersects? i.sprite.global_bounds
           @@is_on_ladder = true
           gravity_bool = false
           Player_Data::Player_Physics.gravity_toggle(gravity_bool)
@@ -4520,14 +4518,6 @@ end; end; end; end; end; end
             @@player_character_rendered_model.position -= SF.vector2(0, jump_height)
             @@player_jumped = true
           end
-    #      if SF::Keyboard.key_pressed?(SF::Keyboard::A)
-    #       @@player_character_rendered_model.position -= SF.vector2(5, 0)
-    #      end
-    #      if SF::Keyboard.key_pressed?(SF::Keyboard::D)
-    #       @@player_character_rendered_model.position += SF.vector2(5, 0)
-    #      end
-    #    window.draw(@@player_character_rendered_model)
-    #     end; end
        if SF::Keyboard.key_pressed?(SF::Keyboard::A)
          IDLE_TIMER.restart
          Player_Physics.wasd_left(@@player_character_rendered_model)
@@ -4738,38 +4728,11 @@ def Data_Manager.create_new_savegame(@@outfit_array)
  end
 end
 
-  #  data = File.read ("Saves/Slot1/save01.yml")
-  #  parsed_data = YAML.parse(data)
-  #  puts parsed_data
 #-----------------------------------------------------------------------------------------------------------------------------------------------+
 #                         Runs the program
 #-----------------------------------------------------------------------------------------------------------------------------------------------+
 Gui::Window_Class.run
 
-
-#=================================================================================================================================================
-#                                                           Clothing                                                                          #
-#=================================================================================================================================================
- 
-#  module Skin
-#   #properties
-#    property is_owned : Bool
-#    property char_sprite : SF::Sprite
-#    property display_sprite : SF::Sprite
-#    property id : String
-#    property name : String
-#   class Human
-#      Light = new.Human(false, PLAYER_CHAR, PLAYER_CHAR_DISPLAY, "SH001", "Light") 
-#      Tan = new.Human(false, PLAYER_CHAR_2, PLAYER_CHAR_DISPLAY_2, "SH002", "Tan")
-#      Dark = new.Human(false, PLAYER_CHAR_3, PLAYER_CHAR_DISPLAY_3, "SH003", "Dark")
-#      Jaundiced = new.Human(false, PLAYER_CHAR_7, PLAYER_CHAR_DISPLAY_7, "SH004", "Jaundiced")
-#    end
-#   class Spooky
-  #   Ghostly = new.Spooky(false, PLAYER_CHAR_4, PLAYER_CHAR_DISPLAY_4, "SS001", "Ghostly")
-  #   Blue = new.Spooky(false, PLAYER_CHAR_5, PLAYER_CHAR_DISPLAY_5, "SS002", "Blue")
-  #   Purple = new.Spooky(false, PLAYER_CHAR_6, PLAYER_CHAR_DISPLAY_6, "SS003", "Purple")
-  #  end
-  #  end
 #HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH 
 #H                                                           Hair                                                                            H
 #HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH

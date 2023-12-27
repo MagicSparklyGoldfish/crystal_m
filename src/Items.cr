@@ -7105,7 +7105,7 @@ module Crafted_Items
        end
     #================================================================Logic==================================================================================
      def Ladder.climb_ladder(map, player)
-         Ladder_Array.map { |i| if player.global_bounds.intersects? i.sprite.global_bounds
+      Current_Ladder_Array.map { |i| if player.global_bounds.intersects? i.sprite.global_bounds
          @@is_on_ladder = true
         else
           @@is_on_ladder = false
