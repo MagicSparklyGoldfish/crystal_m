@@ -5322,6 +5322,7 @@ include Use
      def Herbs.level_editor_display(window)
       if Current_Map_Herb_Array.size > 0
         Current_Map_Herb_Array.map{ |i| window.draw(i.sprite)}
+        Herbs.animate(window)
       end
       end
     #...............................................................Place..................................................................................
@@ -5411,7 +5412,7 @@ include Use
    #---------------------------------------------------------------Harvest---------------------------------------------------------------------------------
     def Herbs.harvest(attack)
       b = Player_Attack_Bounding_Box.global_bounds
-      Herb_Array.map { |i| if b.intersects? i.sprite.global_bounds
+      Current_Map_Herb_Array.map { |i| if b.intersects? i.sprite.global_bounds
       this = i.sprite.global_bounds
       plant = i
       Herbs.harvest2(attack, this, plant)
@@ -5574,7 +5575,7 @@ include Use
           end
          end
          #'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''Animations'''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-          def Herbs.animate(window, map, area)
+          def Herbs.animate(window)
           if @@is_plant_attacked == true
             if Plant_Animation_Clock_01.elapsed_time >= SF.seconds(0.05) && Plant_Animation_Clock_01.elapsed_time <= SF.seconds(0.1) && @@current_plant_attacked.hp > @@current_plant_attacked.max_hp/2
              a = 100; b = 0; x = 100; y = 100
@@ -5714,7 +5715,7 @@ include Use
                @@current_plant_attacked.sprite_change_square(a, b, x, y)
              end; end
           end
-          Herb_Array.map { |i| if i.hp <= 0 && i.is_broke == false
+          Current_Map_Herb_Array.map { |i| if i.hp <= 0 && i.is_broke == false
           broken = i
           Herbs.break(broken)
         end} end
@@ -5758,7 +5759,7 @@ include Use
           when "ore_test"
           when "test_garden"
            Herb_Array.map { |i| window.draw(i.sprite)}
-           Herbs.animate(window, map, area)
+           Herbs.animate(window)
           end
         end
       #..........................................................Doll Factory..............................................................................
@@ -5766,7 +5767,7 @@ include Use
           case map
            when "factory_map_01"
             Current_Map_Herb_Array.map { |i| window.draw(i.sprite)}
-            Herbs.animate(window, map, area)
+            Herbs.animate(window)
           end
          end
   #________________________________________________________________________________________________________________________________________________________
