@@ -499,6 +499,7 @@ extend self
      Map_Geometry::Teleporter.animate_teleporters(window)
      Map_Geometry::Platform.level_editor_display_platforms(window)
      Map_Geometry::Wall.display(window, area, map)
+     Map_Geometry::Wall.level_editor_display_walls(window)
      Map_Geometry::Ladder.level_editor_display_ladder(window)
      Ore.level_editor_display(window)
      Herbs.level_editor_display(window)
@@ -546,7 +547,7 @@ extend self
  #-----------------------------------------------------------Walls----------------------------------------------------------------------
   def Window_Class.wall_collision
     if @@menu != "level_editor"
-    Wall_Array.map { |i| bounding_box1 = @@player_character_rendered_model.global_bounds
+      Current_Wall_Array.map { |i| bounding_box1 = @@player_character_rendered_model.global_bounds
     bounding_box2 = i.bounding_rectangle.global_bounds
     if bounding_box1.intersects? bounding_box2
      if @@player_character_rendered_model.position.x > i.bounding_rectangle.position.x
