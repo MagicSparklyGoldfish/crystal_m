@@ -4750,7 +4750,8 @@ include Use
        if Current_Map_Ore_Array.size > 0
        Current_Map_Ore_Array.map{ |i| window.draw(i.sprite)}
        end
-       Ore.draw_ores(window)
+       Ore.hit_animation(window)
+       Ore.respawn
        end
      #...............................................................Place..................................................................................
       def Ore.level_editor_place(current_ore, x, y)
@@ -4850,80 +4851,74 @@ include Use
             All_Audio::SFX.dig_02
            a = 0; b = 200; x = 100; y = 100
            broken.sprite_change_square(a, b, x, y)
-     else if time >= SF.seconds(0.5) && time < SF.seconds(0.75)
-           a = 100; b = 200; x = 100; y = 100
-           broken.sprite_change_square(a, b, x, y)
-     else if time >= SF.seconds(0.75) && time < SF.seconds(1)
-           a = 200; b = 200; x = 100; y = 100
-           broken.sprite_change_square(a, b, x, y)
-     else if time >= SF.seconds(1) && time < SF.seconds(1.25)
-           a = 300; b = 200; x = 100; y = 100
-           broken.sprite_change_square(a, b, x, y)
-     else if time >= SF.seconds(1.25) && time < SF.seconds(1.5)
-            a = 400; b = 200; x = 100; y = 100
-            broken.sprite_change_square(a, b, x, y)
-     else if time >= SF.seconds(1.5) && time < SF.seconds(1.75)
-      broken.is_broke_toggle   
-      @@ore_reset = 0
-       end; end; end; end; end; end; end
-    #-------------------------------------------------------------------------------------------------------------------------------------------------------     
-     def Ore.draw_ores(window)
-      if @@is_ore_attacked == true
-       if @@ore_hit_animation_clock.elapsed_time >= SF.seconds(0.05) && @@ore_hit_animation_clock.elapsed_time <= SF.seconds(0.1) && @@ore.hp > @@ore.max_hp/2
-         a = 100; b = 0; x = 100; y = 100
-         @@ore.sprite_change_square(a, b, x, y)
-       else if @@ore_hit_animation_clock.elapsed_time >= SF.seconds(0.01) && @@ore_hit_animation_clock.elapsed_time <= SF.seconds(0.1) && @@ore.hp < @@ore.max_hp/2
-        a = 100; b = 100; x = 100; y = 100
-        @@ore.sprite_change_square(a, b, x, y)
-        end; end
-       if @@ore_hit_animation_clock.elapsed_time >= SF.seconds(0.1) && @@ore_hit_animation_clock.elapsed_time <= SF.seconds(0.2) && @@ore.hp > @@ore.max_hp/2
-         a = 200; b = 0; x = 100; y = 100
-         @@ore.sprite_change_square(a, b, x, y)
-       else if @@ore_hit_animation_clock.elapsed_time >= SF.seconds(0.1) && @@ore_hit_animation_clock.elapsed_time <= SF.seconds(0.2) && @@ore.hp < @@ore.max_hp/2
-        a = 200; b = 100; x = 100; y = 100
-        @@ore.sprite_change_square(a, b, x, y)
-        end; end
-       if @@ore_hit_animation_clock.elapsed_time >= SF.seconds(0.2) && @@ore_hit_animation_clock.elapsed_time <= SF.seconds(0.3) && @@ore.hp > @@ore.max_hp/2
-         a = 300; b = 0; x = 100; y = 100
-         @@ore.sprite_change_square(a, b, x, y)
-       else if @@ore_hit_animation_clock.elapsed_time >= SF.seconds(0.2) && @@ore_hit_animation_clock.elapsed_time <= SF.seconds(0.3) && @@ore.hp < @@ore.max_hp/2
-        a = 300; b = 100; x = 100; y = 100
-        @@ore.sprite_change_square(a, b, x, y)
-        end; end
-       if @@ore_hit_animation_clock.elapsed_time >= SF.seconds(0.3) && @@ore_hit_animation_clock.elapsed_time <= SF.seconds(0.4) && @@ore.hp > @@ore.max_hp/2
-         a = 400; b = 0; x = 100; y = 100
-         @@ore.sprite_change_square(a, b, x, y)
-       else if @@ore_hit_animation_clock.elapsed_time >= SF.seconds(0.3) && @@ore_hit_animation_clock.elapsed_time <= SF.seconds(0.4) && @@ore.hp < @@ore.max_hp/2
-        a = 400; b = 100; x = 100; y = 100
-        @@ore.sprite_change_square(a, b, x, y)
-        end; end
-      end
-      if @@is_ore_attacked == false
-        if @@ore.hp > @@ore.max_hp/2
-          a = 0; b = 0; x = 100; y = 100
-          @@ore.sprite_change_square(a, b, x, y)
-        else if @@ore.hp < @@ore.max_hp/2 && @@ore.hp > 0
-          a = 0; b = 100; x = 100; y = 100
-          @@ore.sprite_change_square(a, b, x, y)
-        end; end
-      end
-      s = Current_Map_Ore_Array.size - 1
-      if Current_Map_Ore_Array[@@ore_break_iterator].hp <= 0 && Current_Map_Ore_Array[@@ore_break_iterator].is_broke == false
-        broken = Current_Map_Ore_Array[@@ore_break_iterator]
-        Ore.break(broken)
-      end
-      if @@ore_break_iterator < s
-        @@ore_break_iterator += 1
-      else
-        @@ore_break_iterator = 0
-      end
+       else if time >= SF.seconds(0.5) && time < SF.seconds(0.75)
+             a = 100; b = 200; x = 100; y = 100
+             broken.sprite_change_square(a, b, x, y)
+       else if time >= SF.seconds(0.75) && time < SF.seconds(1)
+             a = 200; b = 200; x = 100; y = 100
+             broken.sprite_change_square(a, b, x, y)
+       else if time >= SF.seconds(1) && time < SF.seconds(1.25)
+             a = 300; b = 200; x = 100; y = 100
+             broken.sprite_change_square(a, b, x, y)
+       else if time >= SF.seconds(1.25) && time < SF.seconds(1.5)
+              a = 400; b = 200; x = 100; y = 100
+              broken.sprite_change_square(a, b, x, y)
+       else if time >= SF.seconds(1.5) && time < SF.seconds(1.75)
+        broken.is_broke_toggle   
+        @@ore_reset = 0
+         end; end; end; end; end; end; end
 
-      if @@is_smelting == true
-        page = 1
-        window.draw(Test_Smelter_Menu); Etc::Inventory_Ore.update_ore_inventory; Etc::Inventory_Ore.display_metal_smelter(window)  
-      end
-      Ore.respawn
-    end
+      def Ore.hit_animation(window)
+        if @@is_ore_attacked == true
+          if @@ore_hit_animation_clock.elapsed_time >= SF.seconds(0.05) && @@ore_hit_animation_clock.elapsed_time <= SF.seconds(0.1) && @@ore.hp > @@ore.max_hp/2
+            a = 100; b = 0; x = 100; y = 100
+            @@ore.sprite_change_square(a, b, x, y)
+          else if @@ore_hit_animation_clock.elapsed_time >= SF.seconds(0.01) && @@ore_hit_animation_clock.elapsed_time <= SF.seconds(0.1) && @@ore.hp < @@ore.max_hp/2
+           a = 100; b = 100; x = 100; y = 100
+           @@ore.sprite_change_square(a, b, x, y)
+           end; end
+          if @@ore_hit_animation_clock.elapsed_time >= SF.seconds(0.1) && @@ore_hit_animation_clock.elapsed_time <= SF.seconds(0.2) && @@ore.hp > @@ore.max_hp/2
+            a = 200; b = 0; x = 100; y = 100
+            @@ore.sprite_change_square(a, b, x, y)
+          else if @@ore_hit_animation_clock.elapsed_time >= SF.seconds(0.1) && @@ore_hit_animation_clock.elapsed_time <= SF.seconds(0.2) && @@ore.hp < @@ore.max_hp/2
+           a = 200; b = 100; x = 100; y = 100
+           @@ore.sprite_change_square(a, b, x, y)
+           end; end
+          if @@ore_hit_animation_clock.elapsed_time >= SF.seconds(0.2) && @@ore_hit_animation_clock.elapsed_time <= SF.seconds(0.3) && @@ore.hp > @@ore.max_hp/2
+            a = 300; b = 0; x = 100; y = 100
+            @@ore.sprite_change_square(a, b, x, y)
+          else if @@ore_hit_animation_clock.elapsed_time >= SF.seconds(0.2) && @@ore_hit_animation_clock.elapsed_time <= SF.seconds(0.3) && @@ore.hp < @@ore.max_hp/2
+           a = 300; b = 100; x = 100; y = 100
+           @@ore.sprite_change_square(a, b, x, y)
+           end; end
+          if @@ore_hit_animation_clock.elapsed_time >= SF.seconds(0.3) && @@ore_hit_animation_clock.elapsed_time <= SF.seconds(0.4) && @@ore.hp > @@ore.max_hp/2
+            a = 400; b = 0; x = 100; y = 100
+            @@ore.sprite_change_square(a, b, x, y)
+          else if @@ore_hit_animation_clock.elapsed_time >= SF.seconds(0.3) && @@ore_hit_animation_clock.elapsed_time <= SF.seconds(0.4) && @@ore.hp < @@ore.max_hp/2
+           a = 400; b = 100; x = 100; y = 100
+           @@ore.sprite_change_square(a, b, x, y)
+           end; end
+         end
+         if @@is_ore_attacked == false
+           if @@ore.hp > @@ore.max_hp/2
+             a = 0; b = 0; x = 100; y = 100
+             @@ore.sprite_change_square(a, b, x, y)
+           else if @@ore.hp < @@ore.max_hp/2 && @@ore.hp > 0
+             a = 0; b = 100; x = 100; y = 100
+             @@ore.sprite_change_square(a, b, x, y)
+           end; end
+         end
+         s = Current_Map_Ore_Array.size - 1
+         if Current_Map_Ore_Array[@@ore_break_iterator].hp <= 0 && Current_Map_Ore_Array[@@ore_break_iterator].is_broke == false
+           broken = Current_Map_Ore_Array[@@ore_break_iterator]
+           Ore.break(broken)
+         end
+         if @@ore_break_iterator < s
+           @@ore_break_iterator += 1
+         else
+           @@ore_break_iterator = 0
+         end
+      end   
    #________________________________________________________________________________________________________________________________________________________
    #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
    #/                                                               Entities                                                                               /
@@ -8110,6 +8105,10 @@ module Crafted_Items
   #????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
   #?                                                               Methods                                                                                ?
   #????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
+   #--------------------------------------------------------------Crafting UIs-----------------------------------------------------------------------------
+    def Crafting_Station.draw_smelter_ui(window)
+       window.draw(Test_Smelter_Menu); Etc::Inventory_Ore.update_ore_inventory; Etc::Inventory_Ore.display_metal_smelter(window)    
+    end
    #--------------------------------------------------------------Level Editor-----------------------------------------------------------------------------
     #..........................................................Set Initial Object..........................................................................
       def Crafting_Station.level_editor_initial_crafting_station
