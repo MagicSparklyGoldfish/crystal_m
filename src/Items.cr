@@ -4682,7 +4682,6 @@ include Use
          @@ore = ore
          @@is_ore_attacked = true
          @@ore_hit_animation_clock.restart
-         #Ore.animation_harvest(this, ore)
          Ore_Clock_01.restart
         end; end; end
 
@@ -4700,12 +4699,12 @@ include Use
       @@is_ore_attacked = false
     end
     def Ore.harvest(attack)
-      x = 0; y = All_Ore_Array.size - 1
+      x = 0; y = Current_Map_Ore_Array.size - 1
       while x <= y
-        All_Ore_Array[x]
-      ore = All_Ore_Array[x]
-      All_Ore_Array[x].sprite.global_bounds
-      this = All_Ore_Array[x].sprite.global_bounds
+        Current_Map_Ore_Array[x]
+      ore = Current_Map_Ore_Array[x]
+      Current_Map_Ore_Array[x].sprite.global_bounds
+      this = Current_Map_Ore_Array[x].sprite.global_bounds
       Ore.harvest2(attack, this, ore)
       if x <= y
         x += 1
@@ -4721,9 +4720,6 @@ include Use
     def Ore.stop_smelt
       @@is_smelting = false
      end
-    # def Ore.initialize_ore_positions
-    #   All_Ore_Array.map{ |i| i.sprite.position = }
-    #  end
     #-------------------------------------------------------------Level Editor------------------------------------------------------------------------------
      #...........................................................Initialization.............................................................................
       def Ore.level_editor_initial_ore
@@ -4754,6 +4750,7 @@ include Use
        if Current_Map_Ore_Array.size > 0
        Current_Map_Ore_Array.map{ |i| window.draw(i.sprite)}
        end
+       Ore.draw_ores(window)
        end
      #...............................................................Place..................................................................................
       def Ore.level_editor_place(current_ore, x, y)
@@ -4827,43 +4824,6 @@ include Use
         end
       end
     #..............................................................Animations...............................................................................
-     def Ore.animation_harvest(this, ore)
-      Ore_Clock_Break.restart
-       if @@ore_animation_frame == 1 && ore.hp >= 200
-       a = 100; b = 0; x = 100; y = 100
-       ore.sprite_change_square(a, b, x, y)
-       end
-       if @@ore_animation_frame == 2
-         a = 200; b = 0; x = 100; y = 100
-         ore.sprite_change_square(a, b, x, y)
-       end
-       if @@ore_animation_frame == 3
-         a = 300; b = 0; x = 100; y = 100
-         ore.sprite_change_square(a, b, x, y)
-       end
-       if @@ore_animation_frame == 4
-         a = 400; b = 0; x = 100; y = 100
-         ore.sprite_change_square(a, b, x, y)
-         @@ore_animation_frame = 0
-       end
-       @@ore_animation_frame += 1
-       if ore.hp < ore.max_hp/2 # && ore.hp > 0
-         case @@ore_animation_frame 
-         when 1
-          a = 100; b = 100; x = 100; y = 100
-          ore.sprite_change_square(a, b, x, y)
-         when 2
-          a = 200; b = 100; x = 100; y = 100
-          ore.sprite_change_square(a, b, x, y)
-         when 3
-           a = 300; b = 100; x = 100; y = 100
-           ore.sprite_change_square(a, b, x, y)
-         when 4
-           a = 400; b = 100; x = 100; y = 100
-           ore.sprite_change_square(a, b, x, y)
-        if ore.hp >= 0
-
-         end; end; end; end
      def Ore.respawn
        Current_Map_Ore_Array.map{ |i| 
          if i.is_broke == true && i.clock.elapsed_time > SF.seconds(1800)
@@ -4907,7 +4867,7 @@ include Use
       @@ore_reset = 0
        end; end; end; end; end; end; end
     #-------------------------------------------------------------------------------------------------------------------------------------------------------     
-     def Ore.draw_ores(window, map, area)
+     def Ore.draw_ores(window)
       if @@is_ore_attacked == true
        if @@ore_hit_animation_clock.elapsed_time >= SF.seconds(0.05) && @@ore_hit_animation_clock.elapsed_time <= SF.seconds(0.1) && @@ore.hp > @@ore.max_hp/2
          a = 100; b = 0; x = 100; y = 100
@@ -4957,11 +4917,6 @@ include Use
       else
         @@ore_break_iterator = 0
       end
-      #Current_Map_Ore_Array.map{ |i| i.sprite.position = SF.vector2(0, 10000)}
-       case area 
-       when "test"
-       when "doll factory"
-       end
 
       if @@is_smelting == true
         page = 1
