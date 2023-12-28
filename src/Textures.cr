@@ -3503,6 +3503,9 @@ Testing_Text.character_size = 20; Testing_Text.color = SF::Color::White; Testing
   Short_Wall_01 = SF::RectangleShape.new(SF.vector2(75, 300)); Short_Wall_01.set_texture(CONCRETE_TEXTURE_1, reset_rect: false)
   Short_Wall_01.position = SF.vector2(-50000, 600)
 
+  Medium_Wall_01 = SF::RectangleShape.new(SF.vector2(75, 600)); Medium_Wall_01.set_texture(CONCRETE_TEXTURE_1, reset_rect: false)
+  Medium_Wall_01.position = SF.vector2(-50000, 600)
+
   Enemy_Blocking_Wall_01 = SF::RectangleShape.new(SF.vector2(50, 250)); Enemy_Blocking_Wall_01.fill_color = SF.color(0, 255, 100, 0)
   Enemy_Blocking_Wall_01.position = SF.vector2(-50000, 600)
  #------------------------------------------------------Platforms----------------------------------------------------------------------
@@ -3888,6 +3891,9 @@ Testing_Text.character_size = 20; Testing_Text.color = SF::Color::White; Testing
 #-------------------------------------------------------------------------------------------------------------------------------------- 
  NPC_Name_Text = SF::Text.new; NPC_Name_Text.font = FONT_PIXEL; NPC_Name_Text.character_size = 15
  NPC_Name_Text.color = SF::Color::White
+#-----------------------------------------------------Tutorials------------------------------------------------------------------------
+ MR_FIREFLY_TEXTURE_01 = SF::Texture.from_file("graphics/NPCs/Mr_Firefly.png")
+ Mr_Firefly = SF::Sprite.new(MR_FIREFLY_TEXTURE_01); Mr_Firefly.texture_rect = SF.int_rect(0, 0, 50, 50)
 #----------------------------------------------------Hairdressers----------------------------------------------------------------------
  HAIR_DRESSER_TEXTURE_01 = SF::Texture.from_file("graphics/NPCs/Shopkeepers_01.png")
  HAIR_DRESSER_TEXTURE_02 = SF::Texture.from_file("graphics/NPCs/Shopkeepers_02.png")

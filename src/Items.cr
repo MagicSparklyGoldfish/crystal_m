@@ -6940,7 +6940,7 @@ module Crafted_Items
 
   
  #LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLlLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
- #L                                                                  Ladder                                                                                L
+ #L                                                                 Ladder                                                                                 L
  #LLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLlLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLL
   class Ladder
    #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -7769,6 +7769,8 @@ module Crafted_Items
    Wall_Array.push(@@map_boundary_wall_02); Wall_Template_Array.push(@@map_boundary_wall_02)
    @@short_wall_01 = Wall.new("Short Wall", 2, 0, Short_Wall_01.dup, Short_Wall_01.dup, Concrete_Pillar_01, 300)
    Wall_Template_Array.push(@@short_wall_01)
+   @@medium_wall_01 = Wall.new("Medium Wall", 2, 0, Medium_Wall_01.dup, Medium_Wall_01.dup, Concrete_Pillar_01, 300)
+   Wall_Template_Array.push(@@medium_wall_01)
   #________________________________________________________________________________________________________________________________________________________
     end
  #__________________________________________________________________________________________________________________________________________________________
@@ -8461,7 +8463,7 @@ module Crafted_Items
           this = @@hanging_wires_01.dup
           this.sprite = @@hanging_wires_01.sprite.dup
          else
-          puts "error!" + ["misc_decor_ids"][i].to_s + " is an invalid id!" 
+          puts "error!" + this.name + " has an invalid id!" 
           i += 1
          end; end
          this.id = yaml["misc_decor_ids"][i].as_i
@@ -8508,7 +8510,7 @@ module Crafted_Items
           this = @@hanging_wires_01.dup
           this.sprite = @@hanging_wires_01.sprite.dup
          else
-          puts "error!" + ["misc_decor_overlay_ids"][i].to_s + " is an invalid id!" 
+          puts "error!" + this.name + " has an invalid id!" 
           i += 1
          end; end
          this.id = yaml["misc_decor_overlay_ids"][i].as_i

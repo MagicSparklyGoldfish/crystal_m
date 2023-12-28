@@ -400,7 +400,7 @@ include Use
         if time >= SF.seconds(0.35) && attack == true
           Crafted_Items::Weapon.play_hit_sound
           Enemy_Clock_02.restart
-          damage = @@attack_strength
+          damage = Player_Info::Player.get_atk#@@attack_strength
           Damage_Text.string = damage.to_s
           Damage_Text.position = enemy.sprite.position
           enemy.hp_subtract(damage)
@@ -444,8 +444,6 @@ include Use
      end
     #--------------------------------------------------------------Display----------------------------------------------------------------------------------
      def Humanoids.display_doll_factory(window, map, player)
-        case map
-        when "factory_map_01"
            # Enemy_Blocking_Wall_Array.map { |i| window.draw(i)}
             Enemy_Blocking_Wall_01.position = SF.vector2(100, 205)
             Current_Map_Humanoid_Array.each do  |i| 
@@ -474,7 +472,7 @@ include Use
             i.health_bar.origin = SF.vector2(x / 2, 0)
             window.draw(i.sprite); window.draw(i.health_bar)
             window.draw(Damage_Text); window.draw(Name_Text)
-          end; end
+          end
       end
     #---------------------------------------------------------------Logic-----------------------------------------------------------------------------------
      def Humanoids.wander(humanoid)

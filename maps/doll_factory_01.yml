@@ -1,209 +1,100 @@
 ---
 platform_names:
+- ground
+- ground
 - medium_large_platform1
-- short_platform1
 platform_ids:
+- 0
+- 0
 - 1
-- 3
 platform_textures:
-- 2
-- 3
+- 1
+- 1
+- 1
 platform_x_positions:
-- -316.66666
-- 39.114574
+- -4938.021
+- -4938.021
+- -6938.646
 platform_y_positions:
-- 408.16992
-- 212.63617
-ladder_names:
-- Long Ladder1
-- Short Ladder1
-ladder_lengths:
-- 400
-- 200
-ladder_textures:
-- 0
-- 0
-ladder_x_positions:
-- -89.0625
-- 67.76044
-ladder_y_positions:
-- 404.3573
-- 210.67538
+- 810.4575
+- 810.4575
+- -2458.8237
+ladder_names: []
+ladder_lengths: []
+ladder_textures: []
+ladder_x_positions: []
+ladder_y_positions: []
 wall_names:
 - Boundary Wall 01
 - Boundary Wall 02
+- Medium Wall1
+- Medium Wall2
 wall_ids:
 - 1
 - 1
+- 2
+- 2
 wall_textures:
 - 0
 - 0
-wall_x_positions:
-- 4477.2915
-- -2273.7498
-wall_y_positions:
-- -3693.2246
-- -3690.0002
-teleporter_names:
-- Teleporter1
-teleporter_ids:
 - 0
-teleporter_x_positions:
-- 4369.2188
-teleporter_y_positions:
-- 722.22217
-teleporter_destination_map:
-- factory_home
-teleporter_destination_area:
-- doll factory
-teleporter_x_destination_positions:
-- 0.0
-teleporter_y_destination_positions:
-- 0.0
-crafting_table_ids:
-- 1
-crafting_table_names:
-- Smelter1
-crafting_table_x_positions:
-- 3859.0107
-crafting_table_y_positions:
-- 722.0044
-misc_decor_ids:
-- 1
-- 1
-misc_decor_names:
-- Concrete Pillar2
-- Concrete Pillar1
-misc_decor_x_positions:
-- -233.02081
-- -314.16666
-misc_decor_y_positions:
-- 610.6754
-- 609.1503
-misc_decor_texture_rect:
-- - 80
-  - 0
-  - 80
-  - 200
-- - 80
-  - 0
-  - 80
-  - 200
-misc_decor_width:
-- 80
-- 80
-misc_decor_scale_x:
-- -1.0
-- 1.0
-misc_decor_scale_y:
-- -1.0
-- 1.0
-misc_decor_rotation:
-- 0.0
-- 0.0
-misc_decor_overlay_ids:
-- 500
-misc_decor_overlay_names:
-- Hanging Wires1
-misc_decor_overlay_x_positions:
-- 262.23953
-misc_decor_overlay_y_positions:
-- 400.98038
-misc_decor_overlay_texture_rect:
-- - 100
-  - 0
-  - 100
-  - 200
-misc_decor_overlay_width:
-- 100
-misc_decor_overlay_scale_x:
-- 1.0
-misc_decor_overlay_scale_y:
-- 1.0
-misc_decor_overlay_rotation:
-- 0.0
-current_parallax: 1
-ore_ids:
-- 6
-- 6
-- 15
-- 24
-ore_names:
-- Smoky Quartz
-- Smoky Quartz
-- Moonstone
-- Howlite
-ore_x_positions:
-- -1226.9791
-- -761.875
-- 395.9896
-- 2930.7292
-ore_y_positions:
-- 706.3181
-- 709.36816
-- 704.0305
-- 706.3181
-ore_clocks:
-- 31.161654
-- 31.161654
-- 31.161654
-- 31.161654
-ore_is_broken:
-- false
-- false
-- false
-- false
-herb_ids:
-- 106
-- 303
-- 303
-- 1
-herb_names:
-- Peanut Butter Fruit Tree
-- Wheat Crop
-- Wheat Crop
-- Raspberry Bush
-herb_x_positions:
-- -905.2084
-- -190.72916
-- 183.64589
-- 2272.8125
-herb_y_positions:
-- 602.7233
-- 703.3769
-- 704.902
-- 703.3769
-herb_clocks:
-- 31.161633
-- 31.161633
-- 31.161633
-- 31.161633
-herb_is_broken:
-- false
-- false
-- false
-- false
-enemy_names:
-- Broken Doll1
-- Broken Doll2
-- Broken Doll3
-enemy_x_positions:
-- 3520.3645
-- 4047.8125
-- 3048.3333
-enemy_y_positions:
-- 311.76474
-- 312.52722
-- 311.76474
-enemy_clocks:
-- 31.160748
-- 31.160748
-- 31.160748
-enemy_hp:
-- 50.1
-- 50.1
-- 50.1
-enemy_is_dead:
-- false
-- false
-- false
+- 0
+wall_x_positions:
+- -5001.3545
+- 962.86505
+- -2009.8439
+- -2009.8439
+wall_y_positions:
+- -3700.0002
+- -3700.0002
+- -3258.17
+- -3788.889
+teleporter_names: []
+teleporter_ids: []
+teleporter_x_positions: []
+teleporter_y_positions: []
+teleporter_destination_map: []
+teleporter_destination_area: []
+teleporter_x_destination_positions: []
+teleporter_y_destination_positions: []
+crafting_table_ids: []
+crafting_table_names: []
+crafting_table_x_positions: []
+crafting_table_y_positions: []
+misc_decor_ids: []
+misc_decor_names: []
+misc_decor_x_positions: []
+misc_decor_y_positions: []
+misc_decor_texture_rect: []
+misc_decor_width: []
+misc_decor_scale_x: []
+misc_decor_scale_y: []
+misc_decor_rotation: []
+misc_decor_overlay_ids: []
+misc_decor_overlay_names: []
+misc_decor_overlay_x_positions: []
+misc_decor_overlay_y_positions: []
+misc_decor_overlay_texture_rect: []
+misc_decor_overlay_width: []
+misc_decor_overlay_scale_x: []
+misc_decor_overlay_scale_y: []
+misc_decor_overlay_rotation: []
+current_parallax: 2
+ore_ids: []
+ore_names: []
+ore_x_positions: []
+ore_y_positions: []
+ore_clocks: []
+ore_is_broken: []
+herb_ids: []
+herb_names: []
+herb_x_positions: []
+herb_y_positions: []
+herb_clocks: []
+herb_is_broken: []
+enemy_names: []
+enemy_x_positions: []
+enemy_y_positions: []
+enemy_clocks: []
+enemy_hp: []
+enemy_is_dead: []

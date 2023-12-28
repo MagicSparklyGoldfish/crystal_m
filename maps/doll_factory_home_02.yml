@@ -62,9 +62,9 @@ teleporter_destination_map:
 teleporter_destination_area:
 - doll factory
 teleporter_x_destination_positions:
-- 0.0
+- -3807.8433
 teleporter_y_destination_positions:
-- 0.0
+- -2668.8237
 crafting_table_ids:
 - 1
 - 2

@@ -29,8 +29,8 @@ include Map_Geometry
    #............................................................Doll Factory..............................................................................
     Doll_Factory_Map_Array = ["factory_map_01", "factory_home"]
   #-------------------------------------------------------------Current File------------------------------------------------------------------------------
-  #"maps/doll_factory_home.yml" , "maps/test.yml" , "maps/doll_factory_01.yml"
-   @@current_file : String; @@current_file = "maps/doll_factory_home_02.yml"
+  #"maps/doll_factory_home.yml" , "maps/test.yml" , "maps/doll_factory_01.yml" , "maps/doll_factory_home_02.yml"
+   @@current_file : String; @@current_file = "maps/doll_factory_01.yml"
    def Editor_Controls.change_current_file(file)
     @@current_file = file
    end
@@ -83,7 +83,7 @@ include Map_Geometry
     Map_Geometry::Crafting_Station.load_map_platform_settings(current_file)
     Map_Geometry::Teleporter.load_map_teleporter_settings(current_file)
     Map_Geometry::Misc_Decor.load_map_settings(current_file)
-    Map_Geometry::Misc_Decor.load_map_overlay_settings(current_file)
+    #Map_Geometry::Misc_Decor.load_map_overlay_settings(current_file)
     Map_Geometry::Parallax.load_map_settings(current_file)
     Ore.load_map_ore_settings(current_file)
     Herbs.load_map_ore_settings(current_file)
