@@ -494,7 +494,6 @@ extend self
      Regular_Enemies.level_editor_display(window)
      player = @@player_character_rendered_model.global_bounds
      Map_Geometry::Misc_Decor.display(window, area, map)
-     Map_Geometry::Teleporter.display_teleporters(window, area, map)
      Map_Geometry::Teleporter.level_editor_display_teleporters(window)
      Map_Geometry::Teleporter.animate_teleporters(window)
      Map_Geometry::Platform.level_editor_display_platforms(window)
@@ -512,7 +511,7 @@ extend self
  #-------------------------------------------------------teleporters---------------------------------------------------------------------
   def Window_Class.teleport(window, map, area)
     if Created_Teleporter_Array.size > 0
-    Created_Teleporter_Array.map { |i| bounding_box1 = @@player_character_rendered_model.global_bounds
+    Created_Teleporter_Array.each do  |i| bounding_box1 = @@player_character_rendered_model.global_bounds
     bounding_box2 = i.sprite.global_bounds
     if bounding_box1.intersects? bounding_box2
       @@area = i.destination_area
@@ -520,32 +519,36 @@ extend self
       x = i.destination_postion[0]
       y = i.destination_postion[1]
       @@player_character_rendered_model.position = SF.vector2(x, y)
-      Window_Class.initialize_map(window, map, area)
-    end}
+    end
   end
+  end
+  Window_Class.initialize_map(window, map, area)
    end 
    def Window_Class.initialize_map(window, map, area)
     map = @@map
     area = @@area
     if @@map == "factory_home"
-       file = "maps/doll_factory_home.yml"
+       file = "maps/doll_factory_home_02.yml"
        Level_Editor::Editor_Controls.change_current_file(file)
-       Level_Editor::Editor_Controls.load
+       Level_Editor::Editor_Controls.load(map)
     else if @@map == "test"
       file = "maps/test.yml"
       Level_Editor::Editor_Controls.change_current_file(file)
-      Level_Editor::Editor_Controls.load
+      Level_Editor::Editor_Controls.load(map)
+    else if @@map == "factory_map_01"
+      file = "maps/doll_factory_01.yml"
+      Level_Editor::Editor_Controls.change_current_file(file)
+      Level_Editor::Editor_Controls.load(map)
     else
     Harvestables::Herbs.initialize
     Harvestables::Herbs.position(window, map, area)
     Map_Geometry::Ladder.position(map, area)
     Map_Geometry::Wall.position(window, area, map)
     Map_Geometry::Misc_Decor.position(window, area, map)
-    Map_Geometry::Teleporter.position_teleporters(area, map)
     Map_Geometry::Ladder.position(map, area)
     Map_Geometry::Platform.set_positions(area, map)
     Regular_Enemies::Humanoids.initialize_humanoids(window, map, area)
-   end; end; end
+   end; end; end; end
  #-----------------------------------------------------------Walls----------------------------------------------------------------------
   def Window_Class.wall_collision
     if @@menu != "level_editor"
@@ -816,7 +819,8 @@ extend self
       Window_Class.char_creation_menu_keypresses(window)
     when "level_editor"
       zoom = @@level_editor_zoom
-      Level_Editor::Editor_Controls.level_editor_keypresses(window, player)
+      map = @@map
+      Level_Editor::Editor_Controls.level_editor_keypresses(window, player, map)
       Level_Editor::Editor_Controls.level_editor_mouse_clicks(window, player, zoom)
     when "HUD"
       Window_Class.hud_keypresses(window)
@@ -894,9 +898,6 @@ def Window_Class.main_menu_keypresses(window)
     map = @@map
     Window_Class.initialize_map(window, map, area)
     @@player_character_rendered_model.position = SF.vector2(0, 600)
-    # Map_Geometry::Teleporter.position_teleporters(area, map)
-    # Map_Geometry::Ladder.position(map, area)
-    # Map_Geometry::Platform.set_positions(area, map)
     @@player_character_rendered_model.scale = SF.vector2(1.0, 1.0)
     All_Audio::MUSIC.test_song
     #view2 = SF::View.new(SF.vector2(350, 300), SF.vector2(300, 200))
@@ -4316,9 +4317,12 @@ end; end; end; end; end; end
       Feet_Bounding_Box.position = @@player_character_rendered_model.position + SF.vector2(25, 120)
       test_platform_array = [ground_box, test_platform_box, test_platform_box_2, test_platform_box_3, test_platform_box_4, test_platform_box_5]
      #---------------------------------------------------------------------------------------------------------------------------------+
-       platform_array = Map_Geometry::Platform.check_array
+       platform_array = Platform.get_created_platform_array
        if @@player_bounding_box.intersects? platform_array[@@gravity_iterator].bounding_rectangle.global_bounds
+        if @@gravity_iterator < platform_array.size
        y = platform_array[@@gravity_iterator].bounding_rectangle.position.y - 125
+        else  y = platform_array[0].bounding_rectangle.position.y - 125
+        end
        x = @@player_character_rendered_model.position.x
        if @@player_character_rendered_model.position.y > y + 10
        @@player_character_rendered_model.position = SF.vector2(x, y)

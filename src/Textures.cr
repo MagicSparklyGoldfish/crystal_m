@@ -3464,6 +3464,7 @@ Testing_Text.character_size = 20; Testing_Text.color = SF::Color::White; Testing
    WOOD_TEXTURE_01 = SF::Texture.from_file("graphics/map objects/Wood_01.png")
    WOOD_TEXTURE_02 = SF::Texture.from_file("graphics/map objects/Wood_02.png")
    HANGING_DECOR_01 = SF::Texture.from_file("graphics/map objects/Hanging_Decor_01.png")
+   SMALL_DECOR_01 = SF::Texture.from_file("graphics/map objects/Small_Decor_01.png")
  #--------------------------------------------------------Test-------------------------------------------------------------------------
   Test_Teleporter = SF::RectangleShape.new(SF.vector2(100, 40)); Test_Teleporter.fill_color = SF.color(50, 150, 255)
   Test_Teleporter.position = SF.vector2(120, 762);
@@ -3535,6 +3536,8 @@ Testing_Text.character_size = 20; Testing_Text.color = SF::Color::White; Testing
  #----------------------------------------------------Hanging Decor--------------------------------------------------------------------
   Hanging_Wires_01 = SF::Sprite.new(HANGING_DECOR_01); Hanging_Wires_01.texture_rect = SF.int_rect(0, 0, 100, 200)
   Hanging_Wires_02 = SF::Sprite.new(HANGING_DECOR_01); Hanging_Wires_02.texture_rect = SF.int_rect(100, 0, 100, 200)
+ #-----------------------------------------------------Small Decor---------------------------------------------------------------------
+  Small_Decor_01 = SF::Sprite.new(SMALL_DECOR_01); Small_Decor_01.texture_rect = SF.int_rect(0, 0, 100, 100)
  #-----------------------------------------------------Parallaxes----------------------------------------------------------------------
    TEST_PARALLAX_TEXTURE = SF::Texture.from_file("graphics/map objects/Test_Parallax_01.png")
    Test_Parallax = SF::Sprite.new(TEST_PARALLAX_TEXTURE); Test_Parallax.origin = SF.vector2(1000, 1000)

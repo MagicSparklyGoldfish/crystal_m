@@ -794,4 +794,6 @@ require "file_utils"
   end
   class Skill
    end
+  class Controls
+  end
  end

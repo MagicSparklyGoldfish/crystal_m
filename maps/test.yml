@@ -96,20 +96,28 @@ wall_y_positions:
 - -3689.216
 teleporter_names:
 - Teleporter1
+- Teleporter2
 teleporter_ids:
+- 0
 - 0
 teleporter_x_positions:
 - 1386.875
+- 1640.5728
 teleporter_y_positions:
 - 723.5294
+- 331.37253
 teleporter_destination_map:
 - factory_home
+- factory_map_01
 teleporter_destination_area:
 - doll factory
+- doll factory
 teleporter_x_destination_positions:
-- 490.0
+- 0.0
+- 0.0
 teleporter_y_destination_positions:
-- 800.0
+- 700.0
+- 700.0
 crafting_table_ids: []
 crafting_table_names: []
 crafting_table_x_positions: []
@@ -148,13 +156,13 @@ current_parallax: 1
 ore_ids:
 - 0
 ore_names:
-- Bloodstone1
+- Bloodstone
 ore_x_positions:
 - 1255.9896
 ore_y_positions:
 - -377.77777
 ore_clocks:
-- 223.42831
+- 83.57896
 ore_is_broken:
 - false
 herb_ids:
@@ -318,45 +326,45 @@ herb_y_positions:
 - -81.2636
 - -82.02614
 herb_clocks:
-- 223.4283
-- 223.4283
-- 223.4283
-- 223.4283
-- 223.4283
-- 223.4283
-- 223.4283
-- 223.4283
-- 223.4283
-- 223.4283
-- 223.4283
-- 223.4283
-- 223.4283
-- 223.4283
-- 223.4283
-- 223.4283
-- 223.4283
-- 223.4283
-- 223.4283
-- 223.4283
-- 223.4283
-- 223.4283
-- 223.4283
-- 223.4283
-- 223.4283
-- 223.4283
-- 223.4283
-- 223.4283
-- 223.4283
-- 223.4283
-- 223.4283
-- 223.4283
-- 223.4283
-- 223.4283
-- 223.4283
-- 223.4283
-- 223.4283
-- 223.4283
-- 223.4283
+- 83.57893
+- 83.57893
+- 83.57893
+- 83.57893
+- 83.57893
+- 83.57893
+- 83.57893
+- 83.57893
+- 83.57893
+- 83.57893
+- 83.57893
+- 83.57893
+- 83.57893
+- 83.57893
+- 83.57893
+- 83.57893
+- 83.57893
+- 83.57893
+- 83.57893
+- 83.57893
+- 83.57893
+- 83.57893
+- 83.57893
+- 83.57893
+- 83.57893
+- 83.57893
+- 83.57893
+- 83.57893
+- 83.57893
+- 83.57893
+- 83.57893
+- 83.57893
+- 83.57894
+- 83.57894
+- 83.57894
+- 83.57894
+- 83.57894
+- 83.57894
+- 83.57894
 herb_is_broken:
 - false
 - false

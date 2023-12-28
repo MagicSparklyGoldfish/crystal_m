@@ -7401,15 +7401,11 @@ module Crafted_Items
          Current_Platform_Array.push(this)
          i += 1
         end
-       # yaml["platform_ids"].as_a.map{ |i| puts i} 
-       # yaml["platform_names"].as_a.map{ |i| puts i} 
-       # yaml["platform_bounding_boxes"].as_a.map{ |i| puts i} 
-       # yaml["platform_x_positions"].as_a.map{ |i| puts i} 
-       # yaml["platform_y_positions"].as_a.map{ |i| puts i} 
       end
      #.............................................................Display..................................................................................
       def Platform.level_editor_display_platforms(window)
-        Current_Platform_Array.map{ |i| window.draw(i.display_rectangle)}
+        Current_Platform_Array.each do |i| window.draw(i.display_rectangle)
+        end
       end
      #............................................................Initialize................................................................................
       def Platform.initialize_current_platform(current_platform)
@@ -7847,95 +7843,9 @@ module Crafted_Items
   #????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
    #---------------------------------------------------------Initialize Teleporters-------------------------------------------------------------------------
      def Teleporter.initialize_teleporters
-       Created_Teleporter_Array.map{ |i| i.sprite.position = SF.vector2(0, 99999)
-       i.destination_map = ""; i.destination_area = ""; i.destination_postion = [0.0, 800.0]}
+       Created_Teleporter_Array.each do |i| i.sprite.position = SF.vector2(0, 99999)
+       i.destination_map = ""; i.destination_area = ""; i.destination_postion = [0.0, 800.0]
        Created_Teleporter_Array.clear
-       @@teleporter_01.sprite.position = SF.vector2(0, 99999)
-       @@teleporter_02.sprite.position = SF.vector2(0, 99999)
-       @@teleporter_03.sprite.position = SF.vector2(0, 99999)
-       @@teleporter_01.destination_map = ""
-       @@teleporter_02.destination_map = ""
-       @@teleporter_03.destination_map = ""
-       @@teleporter_01.destination_area = "" 
-       @@teleporter_02.destination_area = "" 
-       @@teleporter_03.destination_area = ""
-       @@teleporter_01.destination_postion = [0.0, 800.0]
-       @@teleporter_02.destination_postion = [0.0, 800.0]
-       @@teleporter_03.destination_postion = [0.0, 800.0]
-     end
-   #----------------------------------------------------------Position Teleporters--------------------------------------------------------------------------
-     def Teleporter.position_teleporters(area, map)
-       Teleporter.initialize_teleporters
-       case area
-       when "test"
-         Teleporter.position_test_teleporters(area, map)
-       when "doll factory"
-         Teleporter.position_doll_factory_teleporters(area, map)
-       end
-      end
-     def Teleporter.position_test_teleporters(area, map)
-      case map
-       when "test"
-        @@teleporter_01.sprite.position = SF.vector2(120, 762)
-        @@teleporter_02.sprite.position = SF.vector2(-120, 762)
-        @@teleporter_03.sprite.position = SF.vector2(-320, 762)
-        @@teleporter_01.destination_map = "test_ore"
-        @@teleporter_02.destination_map = "test_garden"
-        @@teleporter_03.destination_map = "factory_map_01"
-        @@teleporter_01.destination_area = "test" 
-        @@teleporter_02.destination_area = "test" 
-        @@teleporter_03.destination_area = "factory_home"#"doll factory"
-        @@teleporter_03.destination_postion = [3000.0, 600.0]
-      end
-     end
-     def Teleporter.position_doll_factory_teleporters(area, map)
-       case map
-        when "factory_map_01"
-         @@teleporter_01.sprite.position = SF.vector2(120, 762)
-         @@teleporter_01.destination_map = "test"
-         @@teleporter_01.destination_area = "test" 
-         @@teleporter_02.sprite.position = SF.vector2(0, -380)
-         @@teleporter_02.destination_map = "factory_home"
-         @@teleporter_02.destination_area = "doll factory"
-         @@teleporter_02.destination_postion = [0.0, 800.0]
-         @@teleporter_03.sprite.position = SF.vector2(32000, 762)
-       when "factory_home"
-         @@teleporter_01.sprite.position = SF.vector2(120, 762)
-         @@teleporter_01.destination_map = "factory_map_01"
-         @@teleporter_01.destination_area = "doll factory" 
-         @@teleporter_01.destination_postion = [100.0, -400.0]
-       end
-      end
-   #-----------------------------------------------------------Display Teleporters--------------------------------------------------------------------------
-     def Teleporter.display_teleporters(window, area, map)
-      case area
-       when "test"
-        Teleporter.display_teleporters_test(window, area, map)
-      when "doll factory"
-        Teleporter.display_teleporters_doll_factory(window, area, map)
-       end
-     end
-    #.................................................................Test..................................................................................
-     def Teleporter.display_teleporters_test(window, area, map)
-      case map
-       when "test"
-        Map_Geometry::Teleporter.animate_teleporters(window)
-        window.draw(@@teleporter_01.sprite)
-        window.draw(@@teleporter_02.sprite)
-        window.draw(@@teleporter_03.sprite)
-       end
-     end
-    #..............................................................Doll Factory..............................................................................
-     def Teleporter.display_teleporters_doll_factory(window, area, map)
-      case map
-       when "factory_map_01"
-        Map_Geometry::Teleporter.animate_teleporters(window)
-        window.draw(@@teleporter_01.sprite)
-        window.draw(@@teleporter_02.sprite)
-        #window.draw(@@teleporter_03.sprite)
-       when "factory_home"
-        Map_Geometry::Teleporter.animate_teleporters(window)
-        window.draw(@@teleporter_01.sprite)
        end
      end
    #--------------------------------------------------------------Level Editor------------------------------------------------------------------------------
@@ -7945,7 +7855,8 @@ module Crafted_Items
      end
    #...............................................................Display.................................................................................
     def Teleporter.level_editor_display_teleporters(window)
-      Created_Teleporter_Array.map{ |i| window.draw(i.sprite)}
+      Created_Teleporter_Array.each do |i| window.draw(i.sprite)
+      end
      end
    #.............................................................Initialize................................................................................
     def Teleporter.initialize_current_teleporter(current_teleporter)
@@ -7962,7 +7873,6 @@ module Crafted_Items
      @@teleporter_name_iterator += 1
      current_teleporter.name += @@teleporter_name_iterator.to_s
      current_teleporter.sprite = teleporter.sprite.dup
-     Teleporter_Array.push(current_teleporter)
      Created_Teleporter_Array.push(current_teleporter)
      current_teleporter
     end
@@ -8032,17 +7942,17 @@ module Crafted_Items
         while s > i
         if s > i #< this seems redundant, but the array overflows without it for some fucking reason 
         this = @@teleporter_01.dup
-        this.sprite = @@teleporter_01.sprite.dup 
-        this.id = yaml["teleporter_ids"][i].as_i
-        this.destination_area = yaml["teleporter_destination_area"][i].as_s
-        this.destination_map = yaml["teleporter_destination_map"][i].as_s
-        this.destination_postion[0] = yaml["teleporter_x_destination_positions"][i].as_f32
-        this.destination_postion[1] = yaml["teleporter_y_destination_positions"][i].as_f32
-        current_teleporter = this
-        this.name = yaml["teleporter_names"][i].as_s
-        x = yaml["teleporter_x_positions"][i].as_f32
-        y = yaml["teleporter_y_positions"][i].as_f32
-        this.sprite.position = SF.vector2(x, y)
+         this.sprite = @@teleporter_01.sprite.dup 
+         this.id = yaml["teleporter_ids"][i].as_i
+         this.destination_area = yaml["teleporter_destination_area"][i].as_s
+         this.destination_map = yaml["teleporter_destination_map"][i].as_s
+         this.destination_postion[0] = yaml["teleporter_x_destination_positions"][i].as_f32
+         this.destination_postion[1] = yaml["teleporter_y_destination_positions"][i].as_f32
+         current_teleporter = this
+         this.name = yaml["teleporter_names"][i].as_s
+         x = yaml["teleporter_x_positions"][i].as_f32
+         y = yaml["teleporter_y_positions"][i].as_f32
+         this.sprite.position = SF.vector2(x, y)
         Created_Teleporter_Array.push(this)
         i += 1
         end
@@ -8052,7 +7962,7 @@ module Crafted_Items
   #________________________________________________________________________________________________________________________________________________________
   #-----------------------------------------------------------Animate Teleporters--------------------------------------------------------------------------
    def Teleporter.animate_teleporters(window)
-    Created_Teleporter_Array.map{ |i|   
+    Created_Teleporter_Array.each do |i|   
     if Teleporter_Animation.elapsed_time >= SF.milliseconds(0) && Teleporter_Animation.elapsed_time <= SF.milliseconds(15)
       i.sprite.texture_rect = SF.int_rect(0, 0, 100, 80)
     end
@@ -8065,17 +7975,14 @@ module Crafted_Items
     if Teleporter_Animation.elapsed_time >= SF.milliseconds(45) 
       i.sprite.texture_rect = SF.int_rect(300, 0, 100, 80)
       Teleporter_Animation.restart
-    end}
+    end
+    end
    end
   #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   #/                                                               Entities                                                                               /
   #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
    @@teleporter_01 = Teleporter.new("Teleporter", 1, "test", "test", [0.0, 0.0], Teleporter_01.dup, 0, Map_Boundary_Wall_01, Map_Boundary_Wall_01, 0)
    Teleporter_Array.push(@@teleporter_01)
-   @@teleporter_02 = Teleporter.new("Teleporter", 2, "test", "test", [0.0, 0.0], Teleporter_01.dup, 0, Map_Boundary_Wall_01, Map_Boundary_Wall_01, 0)
-   Teleporter_Array.push(@@teleporter_02)
-   @@teleporter_03 = Teleporter.new("Teleporter", 3, "test", "test", [0.0, 0.0], Teleporter_01.dup, 0, Map_Boundary_Wall_01, Map_Boundary_Wall_01, 0)
-   Teleporter_Array.push(@@teleporter_03)
   #________________________________________________________________________________________________________________________________________________________
   end
  #CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
@@ -8130,7 +8037,8 @@ module Crafted_Items
       end
     #...............................................................Display................................................................................
      def Crafting_Station.level_editor_display_crafting_stations(window)
-      Created_Crafting_Station_Array.map{ |i| window.draw(i.rectangle)}
+      Created_Crafting_Station_Array.each do |i| window.draw(i.rectangle)
+      end
      end
     #.............................................................Initialize................................................................................
      def Crafting_Station.initialize_current_crafting_stations(current_crafting_station)
@@ -8266,12 +8174,13 @@ module Crafted_Items
   #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   #!                                                              Initialize                                                                              !
   #!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    def initialize(name : String, id : Int32, sprite : SF::Sprite, texture_rect : Array(Int32), width : Int32)
+    def initialize(name : String, id : Int32, sprite : SF::Sprite, texture_rect : Array(Int32), width : Int32, height : Int32)
       @name = name
       @id = id
       @sprite = sprite
       @texture_rect = texture_rect
       @width = width
+      @height = height
      end
     def name
       @name
@@ -8288,6 +8197,9 @@ module Crafted_Items
     def width
       @width
      end
+    def height
+      @height
+     end
     def name=(this)
      @name = this
      end
@@ -8302,6 +8214,9 @@ module Crafted_Items
      end
     def width=(this)
      @width = this
+     end
+    def height=(this)
+      @height = this
      end
   #________________________________________________________________________________________________________________________________________________________
   #********************************************************************************************************************************************************
@@ -8517,14 +8432,14 @@ module Crafted_Items
     #........................................................Change Object Texture..........................................................................
       def Misc_Decor.change_texture(current_misc_decor, texture)
         if current_misc_decor.texture_rect[0] > 0
-        a = texture * current_misc_decor.texture_rect[0]
+        a = texture * current_misc_decor.width
         else if texture != 0
         a = current_misc_decor.width
         else
         a = 0
         end; end
         current_misc_decor.texture_rect[0] = a
-        current_misc_decor.sprite.texture_rect = SF.int_rect(a, 0, current_misc_decor.width, 200)
+        current_misc_decor.sprite.texture_rect = SF.int_rect(a, 0, current_misc_decor.width, current_misc_decor.height)
        end
     #------------------------------------------------------------Load Map File------------------------------------------------------------------------------
      #dear fucking god this is the most intense part of the map load operation holy shit aaaaaaaaah
@@ -8627,19 +8542,22 @@ module Crafted_Items
   #/                                                               Entities                                                                               /
   #////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
    #---------------------------------------------------------------Pillars---------------------------------------------------------------------------------
-    @@concrete_pillar_01 = Misc_Decor.new("Concrete Pillar", 1, Concrete_Pillar_01.dup, [0, 0, 80, 200], 80)
+    @@concrete_pillar_01 = Misc_Decor.new("Pillar", 1, Concrete_Pillar_01.dup, [0, 0, 80, 200], 80, 200)
     Created_Misc_Object_Template_Array.push(@@concrete_pillar_01)
-    @@concrete_pillar_02 = Misc_Decor.new("Concrete Pillar", 2, Concrete_Pillar_01.dup, [0, 0, 80, 200], 80)
-    @@concrete_pillar_03 = Misc_Decor.new("Concrete Pillar", 3, Concrete_Pillar_01.dup, [0, 0, 80, 200], 80)
-    @@concrete_pillar_04 = Misc_Decor.new("Concrete Pillar", 4, Concrete_Pillar_01.dup, [0, 0, 80, 200], 80)
+    @@concrete_pillar_02 = Misc_Decor.new("Concrete Pillar", 2, Concrete_Pillar_01.dup, [0, 0, 80, 200], 80, 200)
+    @@concrete_pillar_03 = Misc_Decor.new("Concrete Pillar", 3, Concrete_Pillar_01.dup, [0, 0, 80, 200], 80, 200)
+    @@concrete_pillar_04 = Misc_Decor.new("Concrete Pillar", 4, Concrete_Pillar_01.dup, [0, 0, 80, 200], 80, 200)
    #------------------------------------------------------------Hanging Decor------------------------------------------------------------------------------
     #...........................................................Hanging Wires..............................................................................
-     @@hanging_wires_01 = Misc_Decor.new("Hanging Wires", 500, Hanging_Wires_01.dup, [0, 0, 100, 200], 100)
+     @@hanging_wires_01 = Misc_Decor.new("Hanging Decor", 500, Hanging_Wires_01.dup, [0, 0, 100, 200], 100, 200)
      Created_Misc_Object_Template_Array.push(@@hanging_wires_01)
-     @@hanging_wires_02 = Misc_Decor.new("Hanging Wires", 501, Hanging_Wires_01.dup, [0, 0, 100, 200], 100)
-     @@hanging_wires_03 = Misc_Decor.new("Hanging Wires", 502, Hanging_Wires_01.dup, [0, 0, 100, 200], 100)
-     @@hanging_wires_04 = Misc_Decor.new("Hanging Wires", 503, Hanging_Wires_01.dup, [0, 0, 100, 200], 100)
-     @@hanging_wires_05 = Misc_Decor.new("Hanging Wires", 504, Hanging_Wires_02.dup, [0, 0, 100, 200], 100)
+     @@hanging_wires_02 = Misc_Decor.new("Hanging Wires", 501, Hanging_Wires_01.dup, [0, 0, 100, 200], 100, 200)
+     @@hanging_wires_03 = Misc_Decor.new("Hanging Wires", 502, Hanging_Wires_01.dup, [0, 0, 100, 200], 100, 200)
+     @@hanging_wires_04 = Misc_Decor.new("Hanging Wires", 503, Hanging_Wires_01.dup, [0, 0, 100, 200], 100, 200)
+     @@hanging_wires_05 = Misc_Decor.new("Hanging Wires", 504, Hanging_Wires_02.dup, [0, 0, 100, 200], 100, 200)
+   #-------------------------------------------------------------Small Decor-------------------------------------------------------------------------------
+    @@small_decor_01 = Misc_Decor.new("Small Decor", 500, Small_Decor_01.dup, [0, 0, 100, 100], 100, 100)
+    Created_Misc_Object_Template_Array.push(@@small_decor_01)
   #________________________________________________________________________________________________________________________________________________________
    end
  #PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPP

@@ -29,8 +29,8 @@ include Map_Geometry
    #............................................................Doll Factory..............................................................................
     Doll_Factory_Map_Array = ["factory_map_01", "factory_home"]
   #-------------------------------------------------------------Current File------------------------------------------------------------------------------
-  #"maps/doll_factory_home.yml"
-   @@current_file : String; @@current_file = "maps/test.yml"
+  #"maps/doll_factory_home.yml" , "maps/test.yml" , "maps/doll_factory_01.yml"
+   @@current_file : String; @@current_file = "maps/doll_factory_home_02.yml"
    def Editor_Controls.change_current_file(file)
     @@current_file = file
    end
@@ -74,19 +74,21 @@ include Map_Geometry
  #????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
  #?                                                               Methods                                                                                ?
  #????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????
-  def Editor_Controls.load
+  def Editor_Controls.load(map)
     current_file = @@current_file 
     Map_Geometry::Wall.load_map_platform_settings(current_file)
     Map_Geometry::Ladder.load_map_ladder_settings(current_file)
     Map_Geometry::Platform.load_map_platform_settings(current_file)
-    Map_Geometry::Teleporter.load_map_teleporter_settings(current_file)
+    if map == "test"
     Map_Geometry::Crafting_Station.load_map_platform_settings(current_file)
+    Map_Geometry::Teleporter.load_map_teleporter_settings(current_file)
     Map_Geometry::Misc_Decor.load_map_settings(current_file)
     Map_Geometry::Misc_Decor.load_map_overlay_settings(current_file)
     Map_Geometry::Parallax.load_map_settings(current_file)
     Ore.load_map_ore_settings(current_file)
     Herbs.load_map_ore_settings(current_file)
     Regular_Enemies.load_map_ladder_settings(current_file)
+    end
   end
   #save fields
   #------------------------------------------------------------------Ladders------------------------------------------------------------------------------
@@ -363,7 +365,7 @@ include Map_Geometry
  #$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
  #$                                                     Keypresses                                                        $
  #$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
-   def Editor_Controls.level_editor_keypresses(window, player)
+   def Editor_Controls.level_editor_keypresses(window, player, map)
     current_file = @@current_file
      while (event = window.poll_event)
       case event
@@ -714,7 +716,7 @@ include Map_Geometry
        when SF::Keyboard::V
         Editor_Controls.level_editor_save_map(current_file)
        when SF::Keyboard::B
-        Editor_Controls.load
+        Editor_Controls.load(map)
         #  Map_Geometry::Platform.load_map_platform_settings(current_file)
         #  Map_Geometry::Ladder.load_map_ladder_settings(current_file)
         #  Map_Geometry::Wall.load_map_platform_settings(current_file)
