@@ -79,7 +79,7 @@ include Map_Geometry
     Map_Geometry::Wall.load_map_platform_settings(current_file)
     Map_Geometry::Ladder.load_map_ladder_settings(current_file)
     Map_Geometry::Platform.load_map_platform_settings(current_file)
-    if map == "test"
+    #if map == "test"
     Map_Geometry::Crafting_Station.load_map_platform_settings(current_file)
     Map_Geometry::Teleporter.load_map_teleporter_settings(current_file)
     Map_Geometry::Misc_Decor.load_map_settings(current_file)
@@ -88,7 +88,7 @@ include Map_Geometry
     Ore.load_map_ore_settings(current_file)
     Herbs.load_map_ore_settings(current_file)
     Regular_Enemies.load_map_ladder_settings(current_file)
-    end
+    #end
   end
   #save fields
   #------------------------------------------------------------------Ladders------------------------------------------------------------------------------

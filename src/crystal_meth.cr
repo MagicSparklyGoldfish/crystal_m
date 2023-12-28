@@ -4318,6 +4318,8 @@ end; end; end; end; end; end
       test_platform_array = [ground_box, test_platform_box, test_platform_box_2, test_platform_box_3, test_platform_box_4, test_platform_box_5]
      #---------------------------------------------------------------------------------------------------------------------------------+
        platform_array = Platform.get_created_platform_array
+       if SF::Keyboard.key_pressed?(SF::Keyboard::S)
+       else
        if @@player_bounding_box.intersects? platform_array[@@gravity_iterator].bounding_rectangle.global_bounds
         if @@gravity_iterator < platform_array.size
        y = platform_array[@@gravity_iterator].bounding_rectangle.position.y - 125
@@ -4360,6 +4362,7 @@ end; end; end; end; end; end
         @@gravity_iterator += 1
        end
       end
+    end
    #==================================================================================================================================+
 
    #=============================================Movement=============================================================================+
