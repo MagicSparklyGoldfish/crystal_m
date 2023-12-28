@@ -4326,6 +4326,8 @@ end; end; end; end; end; end
        x = @@player_character_rendered_model.position.x
        if @@player_character_rendered_model.position.y > y + 10
        @@player_character_rendered_model.position = SF.vector2(x, y)
+       else
+        @@gravity_iterator -= 1
        end
        airborn = false
        Gui::Window_Class.is_airborn(airborn)
